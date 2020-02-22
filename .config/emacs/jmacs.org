@@ -1,68 +1,7 @@
 #+title: JMACS
-#+author: Jacob Hilker
+#+author: MEEEE
 #+PROPERTY: header-args :tangle yes
 #+TODO: TODO IN-PROGRESS | DONE
-* Table of Contents:TOC:
-- [[#introduction-to-jmacs][*Introduction to JMACS*]]
-      - [[#personal-info][Personal Info]]
-      - [[#agenda-file-setup][Agenda File Setup]]
-      - [[#setting-a-customize-file][Setting A Customize File]]
-      - [[#use-python-3-interpreter][Use Python 3 Interpreter]]
-      - [[#setting-notes-file][Setting Notes File]]
-      - [[#agenda-view][Agenda View]]
-- [[#package-initialization-and-bootstrapping][Package Initialization and Bootstrapping]]
-      - [[#package-initialization-and-extra-sources][Package Initialization and Extra Sources]]
-      - [[#bootstrapping][Bootstrapping]]
-- [[#packages][Packages]]
-      - [[#general-packages][General Packages]]
-      - [[#ui-packages][UI Packages]]
-      - [[#worldbuilding-packages][Worldbuilding Packages]]
-      - [[#writer-packages][Writer Packages]]
-      - [[#rpg-packages][RPG Packages]]
-      - [[#completion-packages][Completion Packages]]
-      - [[#programming-packages][Programming Packages]]
-      - [[#org-packages][Org Packages]]
-- [[#miscellaneous-formats][Miscellaneous Formats]]
-      - [[#title-format][Title Format]]
-      - [[#timestamp-formats][Timestamp Formats]]
-      - [[#one-group-for-centaur-tabs][One Group for Centaur Tabs]]
-- [[#specific-functions][Specific Functions]]
-      - [[#find-files][Find Files]]
-      - [[#use-yn-or-yn-for-yesno][Use Y/N or y/n for yes/no]]
-      - [[#auto-save-fix][Auto-Save Fix]]
-      - [[#resize-images][Resize Images]]
-      - [[#no-tabs-only-spaces][No Tabs, Only Spaces]]
-      - [[#one-group-for-centaur-tabs-1][One Group for Centaur Tabs]]
-      - [[#set-journal-header][Set Journal Header]]
-      - [[#find-modeline-segments][Find Modeline Segments]]
-      - [[#capture-at-point][Capture at Point]]
-- [[#hooks-and-general-non-ui-config][Hooks and General (Non-UI) Config]]
-      - [[#file-types-and-modes][File Types and Modes]]
-      - [[#elpy-for-python-and-bbc-mode-for-bbcode][ELPY for python and BBC-Mode for BBCode]]
-      - [[#markdown-and-toc-org-mode][Markdown and TOC-Org Mode]]
-      - [[#use-latex-snippets-in-org-mode][Use \LaTeX Snippets in Org Mode]]
-- [[#keybindings][Keybindings]]
-      - [[#general-keybindings][General Keybindings]]
-      - [[#tab-for-evil-org][TAB for Evil-Org]]
-      - [[#ui-keybindings][UI Keybindings]]
-      - [[#treemacs-and-imenu-list][Treemacs and Imenu-List]]
-      - [[#python][Python]]
-      - [[#decide-mode][Decide Mode]]
-      - [[#windmove][Windmove]]
-- [[#ui][UI]]
-      - [[#minimalistic-ui][Minimalistic UI]]
-      - [[#org-ui][Org UI]]
-      - [[#fonts-and-themes][Fonts and Themes]]
-- [[#headerlines-and-modelines][Headerlines and Modelines]]
-      - [[#headerline][Headerline]]
-      - [[#doom-modeline-configs][Doom Modeline Configs]]
-- [[#latex-classes][\(LaTeX\) Classes]]
-      - [[#novel][Novel]]
-- [[#capture-templates][Capture Templates]]
-- [[#notes-and-miscellaneous-things][Notes and Miscellaneous Things]]
-      - [[#notes][Notes]]
-      - [[#miscellaneous-things][Miscellaneous Things]]
-
 * *Introduction to JMACS*
 Welcome to JMacs! This is a my personal configuration of emacs, for
 solo RPG campaigns like [[https://www.ironswornrpg.com/][Ironsworn]], writing (both prose and code), and
@@ -70,8 +9,8 @@ for general use. I have organized this file into different sections,
 such as the functions I use, the UI settings, etc.
 ** Personal Info
 #+BEGIN_SRC emacs-lisp
-(setq user-full-name "Jacob Hilker"
-      user-mail-address "jacob.hilker2@gmail.com")
+(setq user-full-name "John Smith"
+      user-mail-address "hello_world@gmail.com")
 #+END_SRC
 ** Agenda File Setup
    Here I am setting up the agenda file.
