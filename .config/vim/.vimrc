@@ -124,4 +124,4 @@ autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 set hlsearch
 " Abbrevs
 "" Email Abbrevs
-iab <silent> sig Thanks,<CR> Jacob Hilker
+iab <silent> sig Thanks,<CR> My Name
