@@ -140,7 +140,7 @@ Dashboard lets me see recent files as well as projects.
   :ensure t
   :config
   (dashboard-setup-startup-hook))
-;  :after (org-super-agenda))
+  :after (org-super-agenda))
 #+END_SRC
 **** General.el
 
