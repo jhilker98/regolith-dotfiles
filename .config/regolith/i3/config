@@ -7,7 +7,7 @@
 set $mod Mod4
 set $alt Mod1
 
-# i3xrocks config file. Override this for custom status indicators on the bar.
+# i3xrocks config file. Override this for custom alacrittyatus indicators on the bar.
 set $i3xrocks_config /home/jhilker/.config/regolith/i3xrocks.config
 
 # path to terminal. Override this to specify a custom terminal.
@@ -40,75 +40,72 @@ floating_modifier $mod
 
 hide_edge_borders smart
 
-# start a terminal
+
+# Apps
+## Launch // Terminal // <Super> Enter ##
 bindsym $mod+Return exec alacritty
-
-# start a web browser
+## Launch // Firefox // <Super><Shift> Enter ##
 bindsym $mod+Shift+Return exec /usr/bin/firefox
+## Launch // GNOME Tweaks // <Super><Ctrl> t ##
+bindsym $mod+Ctrl+t exec gnome-tweaks 
+## Launch // App // <Super> Space ##
+bindsym $mod+space exec rofi -show drun -theme $rofiTheme
+## Launch // Command // <Super><Shift> Space ##
+bindsym $mod+Shift+space exec rofi -show run -theme $rofiTheme
+## Launch // Emacs // <Super> e ##
+bindsym $mod+e exec emacs
+## Launch // Vim // <Super> v ##
+bindsym $mod+v exec alacritty -e vim
+## Launch // Mail // <Super> m ##
+bindsym $mod+m exec alacritty -e neomutt      
+## Launch // Ranger // <Super><Shift> n ##
+bindsym $mod+Shift+n exec alacritty -e ranger
+## Launch // Notifications // <Super> n ##
+bindsym $mod+n exec /usr/share/rofication/rofication-gui.py
+## Launch // GUI File Mng // <Super><Ctrl> n ##
+bindsym $mod+Ctrl+n exec nautilus
 
-# kill focused window
-bindsym $mod+Shift+q kill
+
+
+## Settings // Open Settings // <Super> c ##
+bindsym $mod+c exec gnome-control-center
+## Settings // Display Settings // <Super> d ##
+bindsym $mod+d exec gnome-control-center display
+## Settings // Wifi Settings // <Super> w ##
+bindsym $mod+w exec gnome-control-center wifi
+
+
+
 
 set_from_resource $rofiTheme rofi.theme "regolith-theme"
 
-# rofi app and window launchers
-bindsym $mod+space exec rofi -show drun -theme $rofiTheme
-bindsym $mod+Shift+space exec rofi -show run -theme $rofiTheme
+
+# Navigation
+## Navigate // Window by Name // <Super><Ctrl> Space ##
 bindsym $mod+Ctrl+space exec rofi -show window -theme $rofiTheme
 
-# change focus
+## Navigate // Relative Window // <Super> ↑ ↓ ← → ##
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
-
+## Navigate // Relative Window // <Super> h j k l ##
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-
-# move windows in workspaces
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
-
-# move workspaces to outputs
-bindsym $mod+Ctrl+Shift+Left move workspace to output left
-bindsym $mod+Ctrl+Shift+Down move workspace to output down
-bindsym $mod+Ctrl+Shift+Up move workspace to output up
-bindsym $mod+Ctrl+Shift+Right move workspace to output right
-
-# toggle split orientation
-bindsym $mod+BackSpace split toggle
-
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
-
-# show/hide keybindings
-bindsym $mod+Shift+question exec --no-startup-id /usr/bin/remontoire-toggle
-
-# toggle tiling / floating
-bindsym $mod+Shift+f floating toggle
-bindsym $mod+Ctrl+m move to scratchpad
+## Navigate // Scratchpad // <Super><Ctrl> a ##
 bindsym $mod+Ctrl+a scratchpad show
 
-# change focus between tiling / floating windows
+## Navigate // Tile/Float Focus Toggle // <Super><Shift> t ##
 bindsym $mod+Shift+t focus mode_toggle
 
-
-# lanch Tweak Tool
-bindsym $mod+Ctrl+t exec gnome-tweaks 
-
-# toggle tabbed mode
+## Modify // Window Layout Mode // <Super> t ##
 bindsym $mod+t layout toggle tabbed splith splitv
 
 # switch to workspace
+
+## Navigate // Workspace // <Super> 0..9 ##
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
 bindsym $mod+3 workspace number $ws3
@@ -119,6 +116,7 @@ bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
+## Navigate // Workspace // <Super><Ctrl> 0..9 ##
 bindsym $mod+Ctrl+1 workspace number $ws11
 bindsym $mod+Ctrl+2 workspace number $ws12
 bindsym $mod+Ctrl+3 workspace number $ws13
@@ -129,11 +127,12 @@ bindsym $mod+Ctrl+7 workspace number $ws17
 bindsym $mod+Ctrl+8 workspace number $ws18
 bindsym $mod+Ctrl+9 workspace number $ws19
 
-# cycle across workspaces
+## Navigate // Next Workspace // <Super> Tab ##
 bindsym $mod+Tab workspace next
+## Navigate // Previous Workspace // <Super><Shift> Tab ##
 bindsym $mod+Shift+Tab workspace prev
 
-# move focused container to workspace
+## Modify // Move Window to Workspace // <Super><Shift> 0..9 ##
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
 bindsym $mod+Shift+3 move container to workspace number $ws3
@@ -144,6 +143,7 @@ bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
+## Modify // Move Window to Workspace // <Super><Ctrl><Shift> 0..9 ##
 bindsym $mod+Shift+Ctrl+1 move container to workspace number $ws11
 bindsym $mod+Shift+Ctrl+2 move container to workspace number $ws12
 bindsym $mod+Shift+Ctrl+3 move container to workspace number $ws13
@@ -155,6 +155,7 @@ bindsym $mod+Shift+Ctrl+8 move container to workspace number $ws18
 bindsym $mod+Shift+Ctrl+9 move container to workspace number $ws19
 
 # move focused container to workspace, move to workspace
+## Modify // Take Window to Workspace // <Super><Alt> 0..9 ##
 bindsym $mod+$alt+1 move container to workspace number $ws1; workspace number $ws1  
 bindsym $mod+$alt+2 move container to workspace number $ws2; workspace number $ws2
 bindsym $mod+$alt+3 move container to workspace number $ws3; workspace number $ws3
@@ -165,6 +166,7 @@ bindsym $mod+$alt+7 move container to workspace number $ws7; workspace number $w
 bindsym $mod+$alt+8 move container to workspace number $ws8; workspace number $ws8
 bindsym $mod+$alt+9 move container to workspace number $ws9; workspace number $ws9
 bindsym $mod+$alt+0 move container to workspace number $ws10; workspace number $ws10
+## Modify // Take Window to Workspace // <Super><Alt><Ctrl> 0..9 ##
 bindsym $mod+$alt+Ctrl+1 move container to workspace number $ws11; workspace number $ws11
 bindsym $mod+$alt+Ctrl+2 move container to workspace number $ws12; workspace number $ws12
 bindsym $mod+$alt+Ctrl+3 move container to workspace number $ws13; workspace number $ws13
@@ -175,44 +177,75 @@ bindsym $mod+$alt+Ctrl+7 move container to workspace number $ws17; workspace num
 bindsym $mod+$alt+Ctrl+8 move container to workspace number $ws18; workspace number $ws18
 bindsym $mod+$alt+Ctrl+9 move container to workspace number $ws19; workspace number $ws19
 
-# reload the configuration file
+
+## Modify // Window Position // <Super><Shift> ↑ ↓ ← → ##
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+## Modify // Window Position // <Super><Shift> h j k l ##
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+## Modify // Containing Workspace // <Super><Ctrl><Shift> h j k l ##
+bindsym $mod+Ctrl+Shift+Left move workspace to output left
+bindsym $mod+Ctrl+Shift+Down move workspace to output down
+bindsym $mod+Ctrl+Shift+Up move workspace to output up
+bindsym $mod+Ctrl+Shift+Right move workspace to output right
+
+## Modify // Next Window Orientation // <Super> Backspace ##
+bindsym $mod+BackSpace split toggle
+
+## Modify // Fullscreen Toggle // <Super> f ##
+bindsym $mod+f fullscreen toggle
+
+## Launch // Keybindings // <Super><Shift> ? ##
+bindsym $mod+Shift+question exec --no-startup-id /usr/bin/remontoire-toggle
+
+## Modify // Window Floating Toggle // <Super><Shift> f ##
+bindsym $mod+Shift+f floating toggle
+## Modify // Move To Scratchpad // <Super><Ctrl> m ##
+bindsym $mod+Ctrl+m move to scratchpad
+
+## Session // Exit App // <Super><Shift> q ## 
+bindsym $mod+Shift+q kill
+
+## Session // Kill App // <Super><Alt> q ##
+bindsym $mod+$alt+q [con_id="__focused__"] exec --no-startup-id kill -9 $(xdotool getwindowfocus getwindowpid)
+
+## Session // Reload i3 Config // <Super><Shift> c ## 
 bindsym $mod+Shift+c reload
 
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+## Session // Restart i3 // <Super><Shift> r ##
 bindsym $mod+Shift+r restart
 
-# Logout of session
-bindsym $mod+Shift+e exec /usr/bin/gnome-session-quit --logout
 
-# Reboot computer
-bindsym $mod+Shift+b exec /usr/bin/gnome-session-quit --reboot
-
-# Power off computer
-bindsym $mod+Shift+p exec /usr/bin/gnome-session-quit --power-off
-
-# lock the screen
-bindsym $mod+Escape exec gnome-screensaver-command --lock
-
-# put the system to sleep
-bindsym $mod+Shift+s exec systemctl suspend
-
-# shortcuts for common system configuration tasks
-bindsym $mod+c exec gnome-control-center
-bindsym $mod+d exec gnome-control-center display
-bindsym $mod+w exec gnome-control-center wifi
-bindsym $mod+Shift+n exec alacritty -e ranger
-bindsym $mod+n exec /usr/share/rofication/rofication-gui.py
-bindsym $mod+Ctrl+n exec nautilus
 # i3-snapshot for load/save current layout
+## Modify // Save Window Layout // <Super> , ##
 bindsym $mod+comma  exec /usr/bin/i3-snapshot -o > /tmp/i3-snapshot 
+## Modify // Load Window Layout // <Super> . ##
 bindsym $mod+period exec /usr/bin/i3-snapshot -c < /tmp/i3-snapshot
 
 # Toggle bar visibility
 bindsym $mod+i bar mode toggle
 
-# Open editor of choice
-bindsym $mod+e exec emacs
-bindsym $mod+v exec alacritty -e vim
+## Power // Logout // <Super><Shift> e ##
+bindsym $mod+Shift+e exec /usr/bin/gnome-session-quit --logout
+
+## Power // Reboot // <Super><Shift> b ##
+bindsym $mod+Shift+b exec /usr/bin/gnome-session-quit --reboot
+
+## Power // Power Down // <Super><Shift> p ##
+bindsym $mod+Shift+p exec /usr/bin/gnome-session-quit --power-off
+
+## Power // Lock // <Super> Escape ##
+bindsym $mod+Escape exec gnome-screensaver-command --lock
+
+## Power // Sleep // <Super><Shift> s ##
+bindsym $mod+Shift+s exec systemctl suspend
+
 # bindsym $mod+Shift+v alacritty -e vim ~/.vimrc
 # Cause Settings app to float above tiled windows
 floating_maximum_size -1 x -1

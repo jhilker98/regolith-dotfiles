@@ -123,19 +123,19 @@ alias Linux="cd ~/LinuxConfig; ls -alh"
 alias dynworld="cd /home/jhilker/Documents/RPGs/dynasticworld; emacs dynastic-world.org"
 alias mkdir="mkdir -p"
 alias cp="cp -r"
-alias cl='[ $[$RANDOM % 10] = 0 ] && timeout 6 cbeams -o; clear || clear'
+alias cl='[ $[$RANDOM % 100] = 0 ] && timeout 6 cbeams -o; clear || clear'
 # alias clear='[ $[$RANDOM % 10] = 0 ] && timeout 6 cbeams -o; clear || clear'
 
 #alias cl="clear"
 #alias rm="rm -rfi"
 alias clock="clear; echo -e 'It is $(date +%I:%M) $(date +%p) on $(date +%a), $(date '+%e %b').'"
 alias font="fc-cache -f -v"
-alias mutt="mbsync -a && neomutt"
+alias mutt="mbsync -a && neomutt; ref"
 alias proc="ytop -m"
-alias ref="source ~/.bashrc; cl"
+alias ref="source ~/.bashrc"
 alias wx="curl wttr.in?format=3"
+alias neomutt="neomutt; cl; ref"
 
-alias dots="cd ~/Documents/dotfiles"
 #alias wxm="curl wttr.in?format=3"
 ## Updating Aliases
 alias update="sudo apt update"
@@ -158,6 +158,7 @@ alias study="tizonia --spotify-playlist-id https://open.spotify.com/playlist/37i
 alias lmus="tizonia -rs ~/Music"
 alias shp="tizonia --spotify-album-id https://open.spotify.com/album/7hgb44Kiav8NRoa26nuus5 --spotify-allow-explicit-tracks"
 alias coheed="tizonia --spotify-artist coheed --spotify-allow-explicit-tracks -s"
+alias cava="cava; cl; ref"
 ## Navigation Aliases
 alias desktop="cd ~/Desktop"
 alias documents="cd ~/Documents"
@@ -166,6 +167,8 @@ alias pictures="cd ~/Pictures"
 alias download="cd ~/Downloads"
 alias tunes="cd ~/Music"
 alias conf="cd ~/.config"
+alias cache="cd ~/.cache"
+alias dots="cd ~/Documents/dotfiles"
 ## Programming and Git Aliases
 alias jdcomp=" sudo javadoc -d directory (/var/www/html) -private *.java"
 alias push="git push"
@@ -209,6 +212,8 @@ export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
 if [ -f ~/.dir_colors/dircolors ]
   then eval `dircolors ~/.dir_colors/dircolors`
 fi
+
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/jhilker/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
@@ -229,8 +234,7 @@ unset __conda_setup
 
 wal -Rq
 source "$HOME/.cache/wal/colors.sh"
-export color0_alpha="#CC${color0/'#'}"
-
+export C0A="#CC${color0/'#'}"
 set -o vi
 
 pfetch
