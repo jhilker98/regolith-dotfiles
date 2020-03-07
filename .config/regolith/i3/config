@@ -64,8 +64,8 @@ bindsym $mod+Shift+n exec alacritty -e ranger
 bindsym $mod+n exec /usr/share/rofication/rofication-gui.py
 ## Launch // GUI File Mng // <Super><Ctrl> n ##
 bindsym $mod+Ctrl+n exec nautilus
-
-
+## Launch // News // <Super><Alt>n
+bindsym $mod+$alt+n exec alacritty -e /home/jhilker/bin/news
 
 ## Settings // Open Settings // <Super> c ##
 bindsym $mod+c exec gnome-control-center
