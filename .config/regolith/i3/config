@@ -11,15 +11,15 @@ set $alt Mod1
 set $i3xrocks_config /home/jhilker/.config/regolith/i3xrocks.config
 
 # path to terminal. Override this to specify a custom terminal.
-set $terminal_path /usr/bin/st
+set $terminal_path /usr/bin/alacritty
 
 # Color values are defined in ~/.Xresources-regolith
 # These are the labels which define each i3 workspace.
-set_from_resource $ws1  i3-wm.workspace.01.name "Notes"
-set_from_resource $ws2  i3-wm.workspace.02.name "Chat"
-set_from_resource $ws3  i3-wm.workspace.03.name "Music"
-set_from_resource $ws4  i3-wm.workspace.04.name "Terminal"
-set_from_resource $ws5  i3-wm.workspace.05.name "Settings"
+set_from_resource $ws1  i3-wm.workspace.01.name "1"
+set_from_resource $ws2  i3-wm.workspace.02.name "2"
+set_from_resource $ws3  i3-wm.workspace.03.name "3"
+set_from_resource $ws4  i3-wm.workspace.04.name "4"
+set_from_resource $ws5  i3-wm.workspace.05.name "5"
 set_from_resource $ws6  i3-wm.workspace.06.name "6"
 set_from_resource $ws7  i3-wm.workspace.07.name "7"
 set_from_resource $ws8  i3-wm.workspace.08.name "8"
@@ -100,6 +100,10 @@ bindsym $mod+Ctrl+a scratchpad show
 
 # change focus between tiling / floating windows
 bindsym $mod+Shift+t focus mode_toggle
+
+
+# lanch Tweak Tool
+bindsym $mod+Ctrl+t exec gnome-tweaks 
 
 # toggle tabbed mode
 bindsym $mod+t layout toggle tabbed splith splitv
@@ -198,7 +202,7 @@ bindsym $mod+d exec gnome-control-center display
 bindsym $mod+w exec gnome-control-center wifi
 bindsym $mod+Shift+n exec alacritty -e ranger
 bindsym $mod+n exec /usr/share/rofication/rofication-gui.py
-
+bindsym $mod+Ctrl+n exec nautilus
 # i3-snapshot for load/save current layout
 bindsym $mod+comma  exec /usr/bin/i3-snapshot -o > /tmp/i3-snapshot 
 bindsym $mod+period exec /usr/bin/i3-snapshot -c < /tmp/i3-snapshot
@@ -206,6 +210,10 @@ bindsym $mod+period exec /usr/bin/i3-snapshot -c < /tmp/i3-snapshot
 # Toggle bar visibility
 bindsym $mod+i bar mode toggle
 
+# Open editor of choice
+bindsym $mod+e exec emacs
+bindsym $mod+v exec alacritty -e vim
+# bindsym $mod+Shift+v alacritty -e vim ~/.vimrc
 # Cause Settings app to float above tiled windows
 floating_maximum_size -1 x -1
 for_window [class="Gnome-control-center"] floating enable
@@ -321,27 +329,11 @@ set_from_resource $i3-wm.bar.font i3-wm.bar.font "pango:Source Code Pro Medium 1
 font $i3-wm.bar.font
 
 # The bar configuration
-bar {
-  font $i3-wm.bar.font
-  separator_symbol " "
-  status_command i3xrocks -c $i3xrocks_config
-  tray_output none
-  strip_workspace_numbers yes
 
-  colors {
-      background $i3-wm.bar.background.color
-      statusline $i3-wm.bar.statusline.color
-      separator  $i3-wm.bar.separator.color
-
-#                        BORDER  BACKGROUND TEXT
-      focused_workspace  $i3-wm.bar.workspace.focused.border.color      $i3-wm.bar.workspace.focused.background.color   $i3-wm.bar.workspace.focused.text.color
-      active_workspace   $i3-wm.bar.workspace.active.border.color       $i3-wm.bar.workspace.active.background.color    $i3-wm.bar.workspace.active.text.color
-      inactive_workspace $i3-wm.bar.workspace.inactive.border.color     $i3-wm.bar.workspace.inactive.background.color  $i3-wm.bar.workspace.inactive.text.color
-      urgent_workspace   $i3-wm.bar.workspace.urgent.border.color       $i3-wm.bar.workspace.urgent.background.color    $i3-wm.bar.workspace.urgent.text.color
-  }
-}
 
 # The following exec calls run programs in the background when i3 starts.
+
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Start the installed regolith-compositor
 exec --no-startup-id /usr/share/regolith-compositor/init

@@ -117,21 +117,26 @@ if ! shopt -oq posix; then
 fi
 #Aliases
 ## General Aliases
-alias home="cd /home/jhilker; pwd"
+alias home="cd /home/jhilker"
 alias rm="rm -rfi"
 alias Linux="cd ~/LinuxConfig; ls -alh"
 alias dynworld="cd /home/jhilker/Documents/RPGs/dynasticworld; emacs dynastic-world.org"
 alias mkdir="mkdir -p"
 alias cp="cp -r"
-alias cl="clear"
+alias cl='[ $[$RANDOM % 10] = 0 ] && timeout 6 cbeams -o; clear || clear'
+# alias clear='[ $[$RANDOM % 10] = 0 ] && timeout 6 cbeams -o; clear || clear'
 
+#alias cl="clear"
 #alias rm="rm -rfi"
 alias clock="clear; echo -e 'It is $(date +%I:%M) $(date +%p) on $(date +%a), $(date '+%e %b').'"
 alias font="fc-cache -f -v"
-alias mutt="mbsync jhilker2 && neomutt"
-alias proc="ytop -c solarized_dark -m"
-alias vim="vim -u ~/.config/vim/.vimrc"
-alias ref="source ~/.bashrc"
+alias mutt="mbsync -a && neomutt"
+alias proc="ytop -m"
+alias ref="source ~/.bashrc; cl"
+alias wx="curl wttr.in?format=3"
+
+alias dots="cd ~/Documents/dotfiles"
+#alias wxm="curl wttr.in?format=3"
 ## Updating Aliases
 alias update="sudo apt update"
 alias upgrade="sudo apt update && sudo apt upgrade"
@@ -140,19 +145,27 @@ alias autoremove="sudo apt autoremove -y"
 
 
 ## Music
-alias music="tizonia --spotify-playlist-id https://open.spotify.com/playlist/10SB2EQKsfZxw7gHOAdhQ3?si=7Px7MuMISCGJiAFqFAK0_g -s --spotify-allow-explicit-tracks"
-alias study="tizonia --spotify-playlist-id https://open.spotify.com/playlist/0sSrQJpH4B00xG7bPDrJXp?si=Oegt3L11R9mabcKDh2jNDQ -s --spotify-allow-explicit-tracks"
+alias music="tizonia --spotify-playlist-id https://open.spotify.com/playlist/69uvLQBtqvAMoyNFPy7ErL -s --spotify-allow-explicit-tracks"
+
+alias code="tizonia --spotify-playlist-id https://open.spotify.com/playlist/0sSrQJpH4B00xG7bPDrJXp?si=Oegt3L11R9mabcKDh2jNDQ -s --spotify-allow-explicit-tracks"
 alias erb="tizonia --spotify-playlist-id https://open.spotify.com/playlist/0tpXl15JsHSKrHx4TgSbOy?si=3PYrD5EkSxOT4B6PcbUxNQ -s --spotify-allow-explicit-tracks" 
-alias geb="tizonia --spotify-playlist-id https://open.spotify.com/playlist/3iSNMhp2CnftVz43VA5lwP?si=UHrfcD8gR0KXqkqonzBpgg -s --spotify.allow_explicit_tracks"
+alias geb="tizonia --spotify-playlist-id https://open.spotify.com/playlist/3iSNMhp2CnftVz43VA5lwP?si=UHrfcD8gR0KXqkqonzBpgg -s"
 alias iks="tizonia --spotify-album 'In Keeping Secrets of Silent Earth 3' --spotify-allow-explicit-tracks"
 alias ga4="tizonia --spotify-album-id https://open.spotify.com/album/4nYsnQpTAQaPzrPc6rOsBN --spotify-allow-explicit-tracks" 
 alias nwft="tizonia --spotify-album 'No World For Tomorrow' --spotify-allow-explicit-tracks" 
+
+alias study="tizonia --spotify-playlist-id https://open.spotify.com/playlist/37i9dQZF1DX8Uebhn9wzrS -s --spotify-allow-explicit-tracks"
+alias lmus="tizonia -rs ~/Music"
+alias shp="tizonia --spotify-album-id https://open.spotify.com/album/7hgb44Kiav8NRoa26nuus5 --spotify-allow-explicit-tracks"
+alias coheed="tizonia --spotify-artist coheed --spotify-allow-explicit-tracks -s"
 ## Navigation Aliases
 alias desktop="cd ~/Desktop"
 alias documents="cd ~/Documents"
 alias dropbox="cd ~/Dropbox"
 alias pictures="cd ~/Pictures"
 alias download="cd ~/Downloads"
+alias tunes="cd ~/Music"
+alias conf="cd ~/.config"
 ## Programming and Git Aliases
 alias jdcomp=" sudo javadoc -d directory (/var/www/html) -private *.java"
 alias push="git push"
@@ -160,6 +173,9 @@ alias pull="git pull"
 alias commit="git add *; git commit -a"
 alias commitm="git add *; git commit -am"
 alias clone="git clone"
+
+# alias vim="vim -u ~/.config/vim/vimrc"
+
 #alias python="python3.8"
 #writing, worldbuilding, and rpg aliases
 ##alias Ashes="cd ~/Ashes-World; ls -alh"
@@ -172,9 +188,13 @@ alias clone="git clone"
 ##alias KidalLore="emacs ~/Kidal/lore/lore.org"
 ##alias hunt="emacs ~/Ashes-World/campaigns/the-great-hunt/greatHunt.org"
 ##alias campaign="cd ~/solo-campaigns; ls -alh"
-echo "Welcome back, $USER."
-#echo -e "It is $(date +%I:%M) $(date +%p) on $(date +%a), $(date '+%e %b')."
-export PS1="\u@\W: \$ "
+
+
+# echo "Welcome back, $USER."
+# echo -e "It is $(date +%I:%M) $(date +%p) on $(date +%a), $(date '+%e %b')."
+# export PS1="\033[34m\]\u\[\033[m\]@\[\033[31m\]\W\[\033[m\]:\[\033[m\] \$ "
+
+# export PS1="\u@\W: \$ "
 export EDITOR=vim
 export MAIL=/home/jhilker/Mail
 #use 16 for solarized, change to 256 for other themes
@@ -182,9 +202,42 @@ export TERM=xterm-256color
 export EMAIL="jacob.hilker2@gmail.com"
 export NAME="Jacob Hilker"
 export PATH="/home/jhilker/bin:/usr/local/texlive/2019/bin/x86_64-linux:$PATH"
+export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
+
 
 
 if [ -f ~/.dir_colors/dircolors ]
   then eval `dircolors ~/.dir_colors/dircolors`
 fi
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/jhilker/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/jhilker/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/jhilker/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/jhilker/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+wal -Rq
+source "$HOME/.cache/wal/colors.sh"
+export color0_alpha="#CC${color0/'#'}"
+
+set -o vi
+
+pfetch
+function _update_ps1() {
+    PS1=$(powerline-shell $?)
+}
+
+if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
+    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+fi
