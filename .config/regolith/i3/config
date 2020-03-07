@@ -366,6 +366,9 @@ font $i3-wm.bar.font
 
 # The following exec calls run programs in the background when i3 starts.
 
+# Reload color scheme
+exec --no-startup-id wal -R"
+
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Start the installed regolith-compositor

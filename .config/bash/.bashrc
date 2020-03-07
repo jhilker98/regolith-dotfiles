@@ -134,8 +134,9 @@ alias mutt="mbsync -a && neomutt; ref"
 alias proc="ytop -m"
 alias ref="source ~/.bashrc"
 alias wx="curl wttr.in?format=3"
-alias neomutt="neomutt; cl; ref"
-
+#alias neomutt="neomutt; cl; ref"
+#alias newsboat="newsboat; cl; ref"
+alias news="newsboat -r; ref"
 #alias wxm="curl wttr.in?format=3"
 ## Updating Aliases
 alias update="sudo apt update"
@@ -232,10 +233,6 @@ unset __conda_setup
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-wal -Rq
-source "$HOME/.cache/wal/colors.sh"
-export C0A="#CC${color0/'#'}"
-set -o vi
 
 pfetch
 function _update_ps1() {
@@ -245,3 +242,9 @@ function _update_ps1() {
 if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
+
+wal -Rq
+source "$HOME/.cache/wal/colors.sh"
+export C0A="#CC${color0/'#'}"
+set -o vi
+cat ~/.cache/wal/sequences &
