@@ -1,3 +1,26 @@
+
+
 * My dotfiles
 
 These are my personal configurations for various applications. I will keep this as up-to-date as I can.
+
+
+* Table of Contents
+
+* Installation :TOC: 
+For most of these programs, the installation is quite simple - copy the =.config= folder into your =~/.config= folder. For bash, I do have conda installed for my data science class, but don't feel like you have to use it - you are free to delete that section from the bashrc. You will need to install [[https://regolith-linux.org/][Regolith Linux]] for the window manager - I highly recommend it for someone new to tiling WMs.  
+
+ 
+* Notes
+ The color scheme is from pywal.
+* Bugs
+ - TOC-Org is unavailable
+   While I haven't been able to fix this yet, I am trying to fix this. I have had no luck so far with it being installed from the =jmacs.org= file.
+
+* FAQ
+ - Why no =.vimrc=?
+   - For vim, I personally use a symlink to the =~/.config/vim/vimrc= file, and the link is called =~/.vimrc= - this way I can keep my home folder cleaner.
+ * Why no Mutt config?
+   - I used Luke Smith's [[https://github.com/LukeSmithxyz/mutt-wizard][Mutt Wizard]] for configuring my mutt.
+ * What music player are you using?
+   - Tizonia. I'm not sharing the config because that config is mostly passwords and such - very easy to configure IMO.
