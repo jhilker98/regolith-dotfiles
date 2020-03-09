@@ -54,8 +54,6 @@ bindsym $mod+space exec rofi -show drun -theme $rofiTheme
 bindsym $mod+Shift+space exec rofi -show run -theme $rofiTheme
 ## Launch // Emacs // <Super> e ##
 bindsym $mod+e exec emacs
-## Launch // Vim // <Super> v ##
-bindsym $mod+v exec alacritty -e vim
 ## Launch // Mail // <Super> m ##
 bindsym $mod+m exec alacritty -e neomutt      
 ## Launch // Ranger // <Super><Shift> n ##
@@ -64,8 +62,10 @@ bindsym $mod+Shift+n exec alacritty -e ranger
 bindsym $mod+n exec /usr/share/rofication/rofication-gui.py
 ## Launch // GUI File Mng // <Super><Ctrl> n ##
 bindsym $mod+Ctrl+n exec nautilus
-## Launch // News // <Super><Alt>n
+## Launch // News // <Super><Alt> n ##
 bindsym $mod+$alt+n exec alacritty -e /home/jhilker/bin/news
+## Launch // Zathura // <Super> z ##
+bindsym $mod+z exec zathura
 
 ## Settings // Open Settings // <Super> c ##
 bindsym $mod+c exec gnome-control-center
