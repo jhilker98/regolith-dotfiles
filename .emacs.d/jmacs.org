@@ -201,6 +201,14 @@ If I am using csv files I want a csv package.
 :after magit treemacs
 :ensure t)
 #+END_SRC
+**** Linum-relative 
+#+BEGIN_SRC emacs-lisp
+(use-package linum-relative
+:ensure t
+:config
+(setq linum-relative-current-symbol "")
+)
+#+END_SRC
 ** UI Packages
 *** Themes
 **** Doom Themes
@@ -584,6 +592,7 @@ Here is a way I can use "y" or "n" to answer yes or no.
 *** Default Scratch Buffer is Org Mode
     #+BEGIN_SRC emacs-lisp
     (setq-default initial-major-mode 'org-mode)
+    (setq initial-scratch-message nil)
     #+END_SRC
 *** File Types
 **** Org Mode File Types
@@ -649,14 +658,6 @@ I want to display battery in the modeline.
    (add-to-list 'auto-mode-alist '("\\.bbc\\'" . bbcode-mode)) 
  #+END_SRC
 ** Markdown and TOC-Org Mode
-** Use \LaTeX Snippets in Org Mode
- #+BEGIN_SRC emacs-lisp
-; (defun org-latex-yas ()
- ; "Activate org and LaTeX yas expansion in org-mode buffers."
-  ;(yas-activate-extra-mode 'latex-mode))
-
-;(add-hook 'org-mode-hook #'org-latex-yas)
- #+END_SRC
 * Keybindings
   Here is a list of all keybindings in JMacs.
 ** General Keybindings
@@ -869,7 +870,8 @@ Here is a list of general purpose keybindings using General.el.
    "t" '(:ignore t :which-key "Toggle")
    "tw" 'toggle-word-wrap
    "tf" 'unfill-toggle
-   "tn" 'display-line-numbers-mode)
+   "tn" 'linum-relative-toggle
+   "tN" 'display-line-numbers-mode)
    #+END_src
 ** General Mode Toggles
 #+BEGIN_SRC emacs-lisp
@@ -1016,13 +1018,41 @@ like in regular org mode.
    :non-normal-prefix "C-SPC"
    
    "d" '(:ignore t :which-key "Decide")
-   "dd" 'decide-mode
-   "d2" 'decide-roll-2d6)
+   "dd" 'decide-roll-dice
+   "d+" 'decide-for-me-likely
+   "d-" 'decide-for-me-unlikely
+   "d1" '(:ignore t :which-key "1 die")
+   "d10" 'decide-roll-1d10
+   "d12" 'decide-roll-1d12 
+   "d2" '(:ignore t :which-key "2 dice")
+   "d26" 'decide-roll-2d6
+   "d2a" 'decide-roll-2dA
+   "d3" 'decide-roll-1d3
+   "d4" 'decide-roll-1d4
+   "d5" 'decide-roll-1d5
+   "d6" 'decide-roll-1d6
+   "d7" 'decide-roll-1d7
+   "d8" 'decide-roll-1d8
+   "d9" 'decide-roll-1d9
+   "df" 'decide-roll-fate
+   "d%" 'decide-roll-1d100 
+   "d?" 'decide-dwim-insert
+   "dr" '(:ignore t :which-key "Relative Locations")
+   "dr2" 'decide-whereto-relative-2
+   "dr3" 'decide-whereto-relative-3
+   "dr4" 'decide-whereto-relative-4
+   "dr6" 'decide-whereto-relative-6
+   "dw" '(:ignore t :which-key "Where")
+   "dw4" 'decide-whereto-compass-4
+   "dw6" 'decide-whereto-compass-6
+   "dw8" 'decide-whereto-compass-8
+   "dw0" 'decide-whereto-compass-10
+)
 
 #+END_SRC
 ** Windmove
 #+BEGIN_SRC emacs-lisp
-(windmove-default-keybindings 'shift)
+(windmove-default-keybindings 'ctrl)
 (add-hook 'org-shiftup-final-hook 'windmove-up)
 (add-hook 'org-shiftleft-final-hook 'windmove-left)
 (add-hook 'org-shiftdown-final-hook 'windmove-down)
@@ -1030,7 +1060,14 @@ like in regular org mode.
   (setq windmove-wrap-around t)
 #+END_SRC
 
-#+END_SRC
+*** Vim Keybindings
+    #+BEGIN_SRC emacs-lisp
+    (global-set-key (kbd "C-c h")  'windmove-left)
+    (global-set-key (kbd "C-c l") 'windmove-right)
+    (global-set-key (kbd "C-c k")    'windmove-up)
+    (global-set-key (kbd "C-c j")  'windmove-down)
+
+    #+END_SRC
 ** Misc Keybindings
    #+BEGIN_SRC emacs-lisp
    (general-define-key
