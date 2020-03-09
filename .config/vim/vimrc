@@ -36,7 +36,7 @@ Plugin 'honza/vim-snippets'
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
+letvimrc g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
@@ -76,15 +76,13 @@ hi SpellBad cterm=bold
 autocmd FileType html,tex,nvl set spell let g:airline_section_error='' let g:airline_section_warning=''
 " Tagbar Config
 let g:tagbar_left=1
-
+set nu rnu
 " Keybindings
 set backspace=indent,eol,start
 "" Toggles
 """ switches between light and dark solarized
 call togglebg#map("<F5>") 
 
-""" toggles line number
-nnoremap <F6> :set invnumber<CR> 
 
 """ toggle Nerdtree
 nnoremap <F7> :NERDTreeToggle<CR>
@@ -128,3 +126,13 @@ set hlsearch
 " Abbrevs
 "" Email Abbrevs
 iab <silent> sig Thanks,<CR> Jacob Hilker
+
+"" Programming Abbrevs
+"""" Bash Abbrev
+iab <silent> shbg #!/bin/bash <CR>
+
+"Move with C-h, C-j, etc.
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
