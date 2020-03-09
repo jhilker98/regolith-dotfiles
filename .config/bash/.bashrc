@@ -139,12 +139,12 @@ alias wx="curl wttr.in?format=3"
 alias news="newsboat -r; ref"
 #alias wxm="curl wttr.in?format=3"
 ## Updating Aliases
-alias update="sudo apt update"
-alias upgrade="sudo apt update && sudo apt upgrade"
-alias install="sudo apt install"
+alias update="sudo apt update -y"
+alias upgrade="sudo apt update && sudo apt upgrade -y"
+alias install="sudo apt install -y"
 alias autoremove="sudo apt autoremove -y"
-
-
+alias purge="sudo apt purge -y"
+alias fix="sudo dpkg --configure -a"
 ## Music
 alias music="tizonia --spotify-playlist-id https://open.spotify.com/playlist/69uvLQBtqvAMoyNFPy7ErL -s --spotify-allow-explicit-tracks"
 
@@ -170,6 +170,8 @@ alias tunes="cd ~/Music"
 alias conf="cd ~/.config"
 alias cache="cd ~/.cache"
 alias dots="cd ~/Documents/dotfiles"
+alias asgn="cd ~/Documents/assignments; ls -ash"
+
 ## Programming and Git Aliases
 alias jdcomp=" sudo javadoc -d directory (/var/www/html) -private *.java"
 alias push="git push"
@@ -247,4 +249,4 @@ wal -Rq
 source "$HOME/.cache/wal/colors.sh"
 export C0A="#CC${color0/'#'}"
 set -o vi
-cat ~/.cache/wal/sequences &
+(cat ~/.cache/wal/sequences &)
