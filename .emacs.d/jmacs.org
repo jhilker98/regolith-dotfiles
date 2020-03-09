@@ -403,7 +403,8 @@ Allows for a TOC to be generated in an org file.
 (setq org-super-agenda-groups
 '((:name "Today"
    :discard (:todo "DONE")
-   :date today)
+   :scheduled today
+   :deadline today)
    
    (:name "Exams"
     :tag "EXAM")
@@ -658,6 +659,10 @@ I want to display battery in the modeline.
    (add-to-list 'auto-mode-alist '("\\.bbc\\'" . bbcode-mode)) 
  #+END_SRC
 ** Markdown and TOC-Org Mode
+** Use Line Numbers in Prog Mode
+#+BEGIN_SRC emacs-lisp
+(add-hook 'prog-mode-hook 'linum-relative-mode)
+#+END_SRC
 * Keybindings
   Here is a list of all keybindings in JMacs.
 ** General Keybindings
@@ -1052,7 +1057,7 @@ like in regular org mode.
 #+END_SRC
 ** Windmove
 #+BEGIN_SRC emacs-lisp
-(windmove-default-keybindings 'ctrl)
+(windmove-default-keybindings 'shift)
 (add-hook 'org-shiftup-final-hook 'windmove-up)
 (add-hook 'org-shiftleft-final-hook 'windmove-left)
 (add-hook 'org-shiftdown-final-hook 'windmove-down)
