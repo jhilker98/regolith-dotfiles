@@ -80,6 +80,13 @@ plugins=(git zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+export EDITOR=vim
+export TERM=xterm-kitty
+export MAIL=/home/jhilker/Mail
+export EMAIL="jacob.hilker2@gmail.com"
+export NAME="Jacob Hilker"
+export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
+
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -200,3 +207,7 @@ unset __conda_setup
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+neofetch
+set -o vi
+source ~/.profile
