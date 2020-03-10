@@ -18,7 +18,6 @@ export ZSH="/home/jhilker/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
-
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -77,7 +76,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting rand-quote)
+plugins=(git zsh-syntax-highlighting rand-quote zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -161,7 +160,7 @@ alias tunes="cd ~/Music"
 alias conf="cd ~/.config"
 alias cache="cd ~/.cache"
 alias dots="cd ~/Documents/dotfiles"
-alias asgn="cd ~/Documents/assignments; ls -ash"
+alias asgn="cd ~/Documents/assignments; exa -ash"
 alias jdcomp=" sudo javadoc -d directory (/var/www/html) -private *.java"
 alias push="git push"
 alias pull="git pull"
@@ -171,16 +170,16 @@ alias clone="git clone"
 # alias vim="vim -u ~/.config/vim/vimrc"
 #alias python="python3.8"
 #writing, worldbuilding, and rpg aliases
-##alias Ashes="cd ~/Ashes-World; ls -alh"
-##alias AshesWrite="cd ~/Ashes-World/writing; ls -alh"
-##alias AshesCampaign="cd ~/Ashes-World/campaigns; ls -alh"
-##alias Aurea="cd ~/Aurea-World; ls -alh"
-##alias AureaCampaign="cd ~/Aurea-World/campaigns; ls -alh"
+alias Ashes="cd ~/Documents/Ashes-World; exa -alh"
+##alias AshesWrite="cd ~/Ashes-World/writing; exa -alh"
+##alias AshesCampaign="cd ~/Ashes-World/campaigns; exa -alh"
+alias Aurea="cd ~/DOcumentsAurea-World; exa -alh"
+##alias AureaCampaign="cd ~/Aurea-World/campaigns; exa -alh"
 ##alias AureaLore="emacs ~/Aurea-World/lore/lore.org"
-##alias Kidal="cd ~/Kidal; ls -alh"
+alias Kidal="cd ~/Documents/Kidal; exa -alh"
 ##alias KidalLore="emacs ~/Kidal/lore/lore.org"
 ##alias hunt="emacs ~/Ashes-World/campaigns/the-great-hunt/greatHunt.org"
-##alias campaign="cd ~/solo-campaigns; ls -alh"
+##alias campaign="cd ~/solo-campaigns; exa -alh"
 #
 # # Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
