@@ -2,9 +2,9 @@
 ; COLORS ;
 ;--------;
 [colors]
-background = ${xrdb:color0:#222}
-;background = #CC${xrdb:color0:#222}
-;background = ${env:C0A}
+;background = ${xrdb:color0:#222}
+;background = #cc${xrdb:color0:#222}
+background = ${env:color0_alpha:#CC0c0807}
 ;background = #CC${color0/'#'}
 background-alt = #444
 foreground = ${xrdb:color7:#222}
