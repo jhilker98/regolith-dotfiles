@@ -42,11 +42,11 @@
     vi_mode
     # os_icon               # os identifier
     dir                     # current directory
-                         # git status
     # =========================[ Line #2 ]=========================
-    newline                 # \n
-    root_indicator
-    #  prompt_char             # prompt symbol
+    newline                 # \n    
+    # context                    # git status
+#    user
+#    prompt_char             # prompt symbol
   )
 
   # The list of segments shown on the right. Fill it with less important segments.
@@ -109,6 +109,7 @@
     # time                  # current time
     # =========================[ Line #2 ]=========================
     # newline
+    user
     vcs
     # ip                    # ip address and bandwidth usage for a specified network interface
     # public_ip             # public IP address
@@ -235,9 +236,9 @@
   # Transparent background.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_BACKGROUND=
   # Green prompt symbol if the last command succeeded.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=76
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=4
   # Red prompt symbol if the last command failed.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=196
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=2
   # Default prompt symbol.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_{OK,ERROR}_VIINS_CONTENT_EXPANSION='❯'
   # Prompt symbol in command vi mode.
@@ -382,8 +383,8 @@
 
   # Untracked files icon. It's really a question mark, your font isn't broken.
   # Change the value of this parameter to show a different icon.
-  typeset -g POWERLEVEL9K_VCS_UNTRACKED_ICON='?'
-  POWERLEVEL9K_VCS_UNTRACKED_ICON=${(g::)POWERLEVEL9K_VCS_UNTRACKED_ICON}
+ # typeset -g POWERLEVEL9K_VCS_UNTRACKED_ICON='?'
+ # POWERLEVEL9K_VCS_UNTRACKED_ICON=${(g::)POWERLEVEL9K_VCS_UNTRACKED_ICON}
 
   # Formatter for Git status.
   #
@@ -510,7 +511,7 @@
   typeset -g POWERLEVEL9K_STATUS_OK=true
   typeset -g POWERLEVEL9K_STATUS_OK_VISUAL_IDENTIFIER_EXPANSION='✔'
   typeset -g POWERLEVEL9K_STATUS_OK_FOREGROUND=0
-  typeset -g POWERLEVEL9K_STATUS_OK_BACKGROUND=2
+  typeset -g POWERLEVEL9K_STATUS_OK_BACKGROUND=4
 
   # Status when some part of a pipe command fails but the overall exit status is zero. It may look
   # like this: 1|0.
@@ -892,16 +893,23 @@
   # Custom icon.
   # typeset -g POWERLEVEL9K_TASKWARRIOR_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
+
+
+  #################################[user: user]#################################################
+  typeset -g POWERLEVEL9K_USER_BACKGROUND=2
+  typeset -g POWERLEVEL9K_USER_FOREGROUND=0
   ##################################[ context: user@hostname ]##################################
   # Context color when running with privileges.
-  typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=1
-  typeset -g POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND=0
+  typeset -g POWERLEVEL9K_ALWAYS_SHOW_USER=true
+  typeset -g POWERLEVEL9K_ALWAYS_SHOW_CONTEXT=true
+  typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=0
+  typeset -g POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND=4
   # Context color in SSH without privileges.
-  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_FOREGROUND=3
-  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_BACKGROUND=0
+  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_FOREGROUND=0
+  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_BACKGROUND=4
   # Default context color (no privileges, no SSH).
-  typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=3
-  typeset -g POWERLEVEL9K_CONTEXT_BACKGROUND=0
+  typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=0
+  typeset -g POWERLEVEL9K_CONTEXT_BACKGROUND=4
 
   # Context format when running with privileges: user@hostname.
   typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE='%n@%m'
@@ -1301,7 +1309,8 @@
   # Append the current context's namespace if it's not "default".
   POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION+='${${:-/$P9K_KUBECONTEXT_NAMESPACE}:#/default}'
 
-  # Custom prefix.
+
+# Custom prefix.
   # typeset -g POWERLEVEL9K_KUBECONTEXT_PREFIX='at '
 
   #[ aws: aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html) ]#
@@ -1596,7 +1605,7 @@
   #   - verbose: Enable instant prompt and print a warning when detecting console output during
   #              zsh initialization. Choose this if you've never tried instant prompt, haven't
   #              seen the warning, or if you are unsure what this all means.
-  typeset -g POWERLEVEL9K_INSTANT_PROMPT=verbose
+  typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
   # Hot reload allows you to change POWERLEVEL9K options after Powerlevel10k has been initialized.
   # For example, you can type POWERLEVEL9K_BACKGROUND=red and see your prompt turn red. Hot reload
