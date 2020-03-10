@@ -1,4 +1,7 @@
 neofetch
+wal -Rq
+source ~/.cache/wal/colors.sh
+export C0A=#CC{color0/'#'}
 #source ~/.profile
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -16,8 +19,8 @@ export ZSH="/home/jhilker/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-#ZSH_THEME="powerlevel10k/powerlevel10k"
-ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="robbyrussell"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -88,7 +91,7 @@ export EMAIL="jacob.hilker2@gmail.com"
 export NAME="Jacob Hilker"
 export PATH="/home/jhilker/bin:/usr/local/texlive/2019/bin/x86_64-linux:$PATH"
 export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
-
+export MYVIMRC="~/.config/vim/vimrc"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -123,6 +126,7 @@ alias cl='[ $[$RANDOM % 100] = 0 ] && timeout 6 cbeams -o; clear || clear'
 # alias clear='[ $[$RANDOM % 10] = 0 ] && timeout 6 cbeams -o; clear || clear'
 #alias cl="clear"
 #alias rm="rm -rfi"
+alias lsr="exa -alhrs modified"
 alias clock="clear; echo -e 'It is $(date +%I:%M) $(date +%p) on $(date +%a), $(date '+%e %b').'"
 alias font="fc-cache -f -v"
 alias mutt="mbsync -a && neomutt; ref"
@@ -140,9 +144,9 @@ alias autoremove="sudo apt autoremove -y"
 alias purge="sudo apt purge -y"
 alias fix="sudo dpkg --configure -a"
 alias music="tizonia --spotify-playlist-id https://open.spotify.com/playlist/69uvLQBtqvAMoyNFPy7ErL -s --spotify-allow-explicit-tracks"
-alias code="tizonia --spotify-playlist-id https://open.spotify.com/playlist/0sSrQJpH4B00xG7bPDrJXp?si=Oegt3L11R9mabcKDh2jNDQ -s --spotify-allow-explicit-tracks"
-alias erb="tizonia --spotify-playlist-id https://open.spotify.com/playlist/0tpXl15JsHSKrHx4TgSbOy?si=3PYrD5EkSxOT4B6PcbUxNQ -s --spotify-allow-explicit-tracks"
-alias geb="tizonia --spotify-playlist-id https://open.spotify.com/playlist/3iSNMhp2CnftVz43VA5lwP?si=UHrfcD8gR0KXqkqonzBpgg -s"
+alias code="tizonia --spotify-playlist-id https://open.spotify.com/playlist/0sSrQJpH4B00xG7bPDrJXp -s --spotify-allow-explicit-tracks"
+alias erb="tizonia --spotify-playlist-id https://open.spotify.com/playlist/0tpXl15JsHSKrHx4TgSbOy -s --spotify-allow-explicit-tracks"
+alias geb="tizonia --spotify-playlist-id https://open.spotify.com/playlist/3iSNMhp2CnftVz43VA5lwP -s"
 alias iks="tizonia --spotify-album 'In Keeping Secrets of Silent Earth 3' --spotify-allow-explicit-tracks"
 alias ga4="tizonia --spotify-album-id https://open.spotify.com/album/4nYsnQpTAQaPzrPc6rOsBN --spotify-allow-explicit-tracks"
 alias nwft="tizonia --spotify-album 'No World For Tomorrow' --spotify-allow-explicit-tracks"
@@ -160,7 +164,7 @@ alias tunes="cd ~/Music"
 alias conf="cd ~/.config"
 alias cache="cd ~/.cache"
 alias dots="cd ~/Documents/dotfiles"
-alias asgn="cd ~/Documents/assignments; exa -ash"
+alias asgn="cd ~/Documents/assignments; exa -alhrs modified"
 alias jdcomp=" sudo javadoc -d directory (/var/www/html) -private *.java"
 alias push="git push"
 alias pull="git pull"
@@ -212,4 +216,8 @@ unset __conda_setup
 
 
 set -o vi
-PROMPT="[%F{4}%n%f @ %F{3}%~%f] $%b "
+#PROMPT="%F{4}%n%f @ %F{3}%~%f $%b "
+#PROMPT="%F{3}%~%f $%b "
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
