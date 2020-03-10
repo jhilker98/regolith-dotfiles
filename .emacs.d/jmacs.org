@@ -142,6 +142,17 @@ Projectile is a way of using projects in emacs.
 :ensure t)
 #+END_SRC
 
+**** Dashboard
+#+BEGIN_SRC emacs-lisp
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook)
+  (setq dashboard-startup-banner "~/.emacs.d/banner.png")
+  (setq dashboard-banner-logo-title "Man your own jackhammer!")
+  (setq dashboard-center-content t)
+)
+#+END_SRC
 **** Unfill
 For toggling fill and unfill.
 
