@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# gets my data science textbook and moves it to the right folder
-wget "http://stephendavies.org/data219/foundations.pdf" && mv foundations.pdf ~/Documents/assignments/ds219/;
