@@ -2,6 +2,7 @@ neofetch
 wal -Rq
 source ~/.cache/wal/colors.sh
 export color0_alpha="#CC${color0/'#'}"
+export BGCOLOR="##8C${color0/'#'}"
 #source ~/.profile
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -86,12 +87,13 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 export EDITOR=vim
 export TERM=xterm-kitty
+# export TERM=xterm-256color
 export MAIL=/home/jhilker/Mail
 export EMAIL="jacob.hilker2@gmail.com"
 export NAME="Jacob Hilker"
 export PATH="/home/jhilker/bin:/usr/local/texlive/2019/bin/x86_64-linux:$PATH"
 export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
-export MYVIMRC="~/.config/vim/vimrc"
+# export MYVIMRC="~/.config/vim/vimrc"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -173,7 +175,7 @@ alias pull="git pull"
 alias commit="git add *; git commit -a"
 alias commitm="git add *; git commit -am"
 alias clone="git clone"
-# alias vim="vim -u ~/.config/vim/vimrc"
+alias vim="vim -u ~/.config/vim/vimrc"
 #alias python="python3.8"
 #writing, worldbuilding, and rpg aliases
 alias Ashes="cd ~/Documents/Ashes-World; exa -alh"

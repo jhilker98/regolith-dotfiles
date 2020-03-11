@@ -4,9 +4,10 @@
 [colors]
 ;background = ${xrdb:color0:#222}
 ;background = #cc${xrdb:color0:#222}
-background = ${env:color0_alpha:#CC0c0807}
+background = ${env:color0_alpha:#CC0c0c0c}
 ;background = #CC${color0/'#'}
 background-alt = #444
+bbg = ${env:BGCOLOR:#8C0c0c0c}
 foreground = ${xrdb:color7:#222}
 foreground-alt = ${xrdb:color7:#222}
 primary = ${xrdb:color1:#222}
@@ -14,6 +15,7 @@ secondary = ${xrdb:color2:#222}
 alert = ${xrdb:color3:#222}
 tertiary = ${xrdb:color4:#222}
 
+border = #00000000
 ;---------;
 ; MODULES ;
 ;---------;
@@ -129,6 +131,8 @@ label-font = 2
 label-connected =  %essid% 
 label-disconnected =  Not Connected
 
+
+[module/notifs]
 ;-----;
 ; BAR ;
 ;-----;
@@ -152,3 +156,35 @@ modules-right = volume wlan battery
 padding = 1
 module-margin = 1
 
+
+
+[bar/lowbar]
+font-0 = "Iosevka:pixelsize=12;3"
+font-1 = "Material Icons:size=12;3"
+font-2 = "Weather Icons:size=12;0"
+font-3 = "FontAwesome:size=12;3"
+
+override-redirect = true
+wm-restack = i3
+
+; border-color = #00000000
+;border-bottom-size = 15  
+border-top-size = 10
+offset-x = 36
+offset-y = 7 
+line-size = 1.75
+bottom = true
+
+background = ${colors.bbg}
+foreground = ${colors.foreground}
+width = 96.4%
+
+
+
+height = 27
+radius = 4
+modules-left = i3
+modules-center = date
+modules-right = volume wlan battery 
+padding = 1
+module-margin = 1
