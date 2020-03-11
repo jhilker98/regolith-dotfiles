@@ -31,14 +31,15 @@ Plugin 'dylanaraps/wal.vim'
 Plugin 'mboughaba/i3config.vim'
 Plugin 'preservim/nerdcommenter'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'lervag/vimtex'
+
 
 " Track the engine.
 Plugin 'SirVer/ultisnips'
 
-" Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
+Plugin 'honza/vim-snippets'  " Snippets are separated from the engine. Add this if you want them. 
 
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" Trigger configuration. Do not use <tab> if you use "https://github.com/Valloric/YouCompleteMe.""
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
@@ -77,35 +78,11 @@ let g:airline_powerline_fonts = 1
 " make spelling errors bold insted of red
 hi clear SpellBad
 hi SpellBad cterm=bold
-" autocmd FileType html,tex,nvl set spell let g:airline_section_error='' let g:airline_section_warning=''
 
 
 " Tagbar Config
 " let g:tagbar_left=1
 set nu rnu
-" Keybindings
-"" General Keybindings
-set backspace=indent,eol,start
-
-"Use space as leader
-let mapleader=" "
-
-"" Plugin Keybindings
-map <silent> <leader>pi :PluginInstall<CR>
-map <silent> <leader>pu :PluginUpdate<CR> 
-
-
-"" Toggles
-nnoremap <F5> :TagbarToggle<CR>
-nnoremap <F6> :NERDTreeToggle<CR>
-"" Git Commands
-nnoremap <leader>gs :Gstatus<CR> 
-nnoremap <leader>gc :Gcommit<CR>
-nnoremap <leader>gp :Gpush<CR>
-
-"" Goyo
-nnoremap <leader>Gy :Goyo<CR>
-
 
 " don't search all included files for autocomplete, heavens
 set incsearch
@@ -123,11 +100,59 @@ au BufRead,BufNewFile *.py set autoindent nocindent
 
 "Disable autocomment
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 " Autosource on save
 autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
 " Always Highlight my search results
 set hlsearch
+
+
+" Keybindings
+
+"" General Keybindings
+set backspace=indent,eol,start
+
+"""Use space as leader
+let mapleader=" "
+
+"""Toggle Line Numbers
+nnoremap <silent> <leader>tn :set invnumber invrelativenumber<CR>
+
+"Movement Keybindings
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+map <C-Left> <C-w>h
+map <C-Down> <C-w>j
+map <C-Up> <C-w>k
+map <C-Right> <C-w>l
+
+
+"" Plugin Keybindings
+map <silent> <leader>pi :PluginInstall<CR>
+map <silent> <leader>pu :PluginUpdate<CR> 
+map <silent> <leader>ps :PluginSearch
+map <silent> <leader>pc :PluginClean<CR>
+
+
+"" Toggles
+nnoremap <F5> :TagbarToggle<CR>
+nnoremap <F6> :NERDTreeToggle<CR>
+
+"" Git Commands
+nnoremap <leader>gs :Gstatus<CR> 
+nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>gp :Gpush<CR>
+
+"" Goyo
+nnoremap <silent> <leader>Gy :Goyo<CR>
+
+
+
+
 " Abbrevs
 "" Email Abbrevs
 iab <silent> sig Thanks,<CR>Jacob Hilker<CR>
@@ -136,16 +161,6 @@ iab <silent> sig Thanks,<CR>Jacob Hilker<CR>
 """" Bash Abbrev
 iab <silent> shbg #!/bin/bash <CR>
 
-"Move with C-h, C-j, etc.
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-"Move with C-Left, etc.
-map <C-Left> <C-w>h
-map <C-Down> <C-w>j
-map <C-Up> <C-w>k
-map <C-Right> <C-w>l
 
 "Always load regolith i3 and i3 as i3 syntax files
 aug i3config_ft_detection
