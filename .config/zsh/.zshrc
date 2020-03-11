@@ -1,7 +1,7 @@
 neofetch
 wal -Rq
 source ~/.cache/wal/colors.sh
-export C0A=#CC{color0/'#'}
+export color0_alpha="#CC${color0/'#'}"
 #source ~/.profile
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -146,15 +146,17 @@ alias fix="sudo dpkg --configure -a"
 alias music="tizonia --spotify-playlist-id https://open.spotify.com/playlist/69uvLQBtqvAMoyNFPy7ErL -s --spotify-allow-explicit-tracks"
 alias code="tizonia --spotify-playlist-id https://open.spotify.com/playlist/0sSrQJpH4B00xG7bPDrJXp -s --spotify-allow-explicit-tracks"
 alias erb="tizonia --spotify-playlist-id https://open.spotify.com/playlist/0tpXl15JsHSKrHx4TgSbOy -s --spotify-allow-explicit-tracks"
-alias geb="tizonia --spotify-playlist-id https://open.spotify.com/playlist/3iSNMhp2CnftVz43VA5lwP -s"
+alias geb="tizonia --spotify-playlist-id 'https://open.spotify.com/playlist/3iSNMhp2CnftVz43VA5lwP' -s"
 alias iks="tizonia --spotify-album 'In Keeping Secrets of Silent Earth 3' --spotify-allow-explicit-tracks"
-alias ga4="tizonia --spotify-album-id https://open.spotify.com/album/4nYsnQpTAQaPzrPc6rOsBN --spotify-allow-explicit-tracks"
+alias ga4="tizonia --spotify-album-id 'https://open.spotify.com/album/4nYsnQpTAQaPzrPc6rOsBN' --spotify-allow-explicit-tracks"
 alias nwft="tizonia --spotify-album 'No World For Tomorrow' --spotify-allow-explicit-tracks"
-alias study="tizonia --spotify-playlist-id https://open.spotify.com/playlist/37i9dQZF1DX8Uebhn9wzrS -s --spotify-allow-explicit-tracks"
+alias study="tizonia --spotify-playlist-id 'https://open.spotify.com/playlist/37i9dQZF1DX8Uebhn9wzrS' -s --spotify-allow-explicit-tracks"
 alias lmus="tizonia -rs ~/Music"
-alias shp="tizonia --spotify-album-id https://open.spotify.com/album/7hgb44Kiav8NRoa26nuus5 --spotify-allow-explicit-tracks"
+alias shp="tizonia --spotify-album-id 'https://open.spotify.com/album/7hgb44Kiav8NRoa26nuus5' --spotify-allow-explicit-tracks"
 alias coheed="tizonia --spotify-artist coheed --spotify-allow-explicit-tracks -s"
-alias cava="cava; cl; ref"
+alias cs350="cd ~/Documents/assignments/cpsc350" 
+alias inquiryum="tizonia --youtube-audio-playlist 'https://www.youtube.com/playlist?list=PLuZfoSIficQvPRuNhFHPcFpYsWy9Wb3iQ'"
+# Navigation Aliases
 alias desktop="cd ~/Desktop"
 alias documents="cd ~/Documents"
 alias dropbox="cd ~/Dropbox"
@@ -184,6 +186,9 @@ alias Kidal="cd ~/Documents/Kidal; exa -alh"
 ##alias KidalLore="emacs ~/Kidal/lore/lore.org"
 ##alias hunt="emacs ~/Ashes-World/campaigns/the-great-hunt/greatHunt.org"
 ##alias campaign="cd ~/solo-campaigns; exa -alh"
+
+
+
 #
 # # Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
