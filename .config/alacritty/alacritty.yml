@@ -1,0 +1,12 @@
+# Fontd
+font:
+  normal:
+    family: Iosevka Medium
+    size: 12.0
+
+# Opacity
+background_opacity: 0.8
+
+# Blink Cursor
+cursor_blink_interval: 300
+cursor_blink: true

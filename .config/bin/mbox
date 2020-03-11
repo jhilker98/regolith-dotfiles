@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# syncs email when run
+mbsync jhilker2

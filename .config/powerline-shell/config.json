@@ -1,0 +1,21 @@
+{
+  "segments": [
+    "cwd",
+    "git",
+    "root"
+  ],
+
+  "cwd": {
+  "mode": "dironly"
+  },
+
+  "battery": {
+    "always_show_percentage": true,
+    "low_threshold": 20 
+  },
+ "time": {
+  "format": "%I:%M %p"
+ },
+
+ "theme": "~/.config/powerline-shell/themes/ck2_11.py"
+}
