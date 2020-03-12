@@ -49,9 +49,12 @@ bindsym $mod+Shift+Return exec /usr/bin/firefox
 ## Launch // GNOME Tweaks // <Super><Ctrl> t ##
 bindsym $mod+Ctrl+t exec gnome-tweaks 
 ## Launch // App // <Super> Space ##
-bindsym $mod+space exec rofi -show drun -theme $rofiTheme
+bindsym $mod+space exec rofi -show drun -display-drun "Launch" -theme $rofiTheme
 ## Launch // Command // <Super><Shift> Space ##
 bindsym $mod+Shift+space exec rofi -show run -theme $rofiTheme
+
+## Launch // Help // <Super><Ctrl> h ##
+bindsym $mod+Ctrl+h exec /home/jhilker/bin/mansplain
 ## Launch // Emacs // <Super> e ##
 bindsym $mod+e exec emacs
 ## Launch // Vim // <Super> v ##
