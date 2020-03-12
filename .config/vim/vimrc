@@ -159,6 +159,8 @@ nnoremap <silent> <leader>Gy :Goyo<CR>
 " Abbrevs
 "" Email Abbrevs
 iab <silent> sig Thanks,<CR>Jacob Hilker<CR>
+iab <silent> fsig Love,<CR>Jacob
+iab <silent> name Jacob Hilker
 
 "" Programming Abbrevs
 """" Bash Abbrev
