@@ -1,4 +1,6 @@
+xdg-settings set default-web-browser firefox.desktop
 neofetch
+# pfetch
 wal -Rq
 source ~/.cache/wal/colors.sh
 export color0_alpha="#CC${color0/'#'}"
@@ -80,7 +82,10 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting rand-quote zsh-autosuggestions)
+export FZF_BASE="/home/jhilker/.fzf/bin/fzf"
+export DISABLE_FZF_AUTO_COMPLETION="false"
+export DISABLE_FZF_KEY_BINDINGS="false"
+plugins=(git zsh-syntax-highlighting rand-quote fzf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -93,10 +98,12 @@ export EMAIL="jacob.hilker2@gmail.com"
 export NAME="Jacob Hilker"
 export PATH="/home/jhilker/bin:/usr/local/texlive/2019/bin/x86_64-linux:$PATH"
 export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
-# export MYVIMRC="~/.config/vim/vimrc"
-
+export MYVIMRC="/home/jhilker/.config/vim/vimrc"
+alias ls="exa --color=auto"
+alias la="exa -la"
+alias ll="exa -lah"
 # export MANPATH="/usr/local/man:$MANPATH"
-
+# export BROWSER="/usr/bin/firefox"
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -216,13 +223,14 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
 set -o vi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #PROMPT="%F{4}%n%f @ %F{3}%~%f $%b "
 #PROMPT="%F{3}%~%f $%b "
 
