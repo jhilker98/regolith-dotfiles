@@ -85,7 +85,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 export FZF_BASE="/home/jhilker/.fzf/bin/fzf"
 export DISABLE_FZF_AUTO_COMPLETION="false"
 export DISABLE_FZF_KEY_BINDINGS="false"
-plugins=(git zsh-syntax-highlighting rand-quote fzf)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions rand-quote fzf)
 
 source $ZSH/oh-my-zsh.sh
 
