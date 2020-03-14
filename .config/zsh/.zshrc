@@ -196,8 +196,9 @@ alias Kidal="cd ~/Documents/Kidal; exa -alh"
 ##alias hunt="emacs ~/Ashes-World/campaigns/the-great-hunt/greatHunt.org"
 ##alias campaign="cd ~/solo-campaigns; exa -alh"
 
-
-
+# Game Aliases
+alias els="rlwrap telnet elessar.mudhosting.net 7778"
+alias sol="rlwrap telnet Middle-earth.us 4500"
 #
 # # Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
