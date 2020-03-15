@@ -154,9 +154,13 @@ nnoremap <leader>gp :Gpush<CR>
 nnoremap <silent> <leader>Gy :Goyo<CR>
 
 
+""" File Commands
+nnoremap <silent> <leader>ff :e
+nnoremap <silent> <leader>feD :e ~/.config/vim/vimrc<CR>
+nnoremap <silent> <leader>fs :w<CR>
 
 
-" Abbrevs
+"Abbrevs
 "" Email Abbrevs
 iab <silent> sig Thanks,<CR>Jacob Hilker<CR>
 iab <silent> fsig Love,<CR>Jacob
