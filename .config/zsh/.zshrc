@@ -3,8 +3,8 @@ neofetch
 # pfetch
 wal -Rq
 source ~/.cache/wal/colors.sh
-export color0_alpha="#CC${color0/'#'}"
-export BGCOLOR="##8C${color0/'#'}"
+export color0_alpha="#D9${color0/'#'}"
+export BGCOLOR="#8C${color0/'#'}"
 #source ~/.profile
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -163,8 +163,10 @@ alias study="tizonia --spotify-playlist-id 'https://open.spotify.com/playlist/37
 alias lmus="tizonia -rs ~/Music"
 alias shp="tizonia --spotify-album-id 'https://open.spotify.com/album/7hgb44Kiav8NRoa26nuus5' --spotify-allow-explicit-tracks"
 alias coheed="tizonia --spotify-artist coheed --spotify-allow-explicit-tracks -s"
-alias cs350="cd ~/Documents/assignments/cpsc350" 
 alias inquiryum="tizonia --youtube-audio-playlist 'https://www.youtube.com/playlist?list=PLuZfoSIficQvPRuNhFHPcFpYsWy9Wb3iQ'"
+#alias swing="tizonia --youtube-audio-channel-uploads 'https://www.youtube.com/channel/UCqeHbI0rfexnHhhEgrg8Exg' -s"
+alias swing='tizonia --youtube-audio-playlist "https://www.youtube.com/playlist?list=PLVKACZpRqh76r-zJLvIvojhg4pudPnJcV" -s'
+
 # Navigation Aliases
 alias desktop="cd ~/Desktop"
 alias documents="cd ~/Documents"
@@ -176,6 +178,9 @@ alias conf="cd ~/.config"
 alias cache="cd ~/.cache"
 alias dots="cd ~/Documents/dotfiles"
 alias asgn="cd ~/Documents/assignments; exa -alhrs modified"
+
+alias cs350="cd ~/Documents/assignments/cpsc350" 
+# Programming Aliases
 alias jdcomp=" sudo javadoc -d directory (/var/www/html) -private *.java"
 alias push="git push"
 alias pull="git pull"
