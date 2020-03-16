@@ -151,7 +151,7 @@ nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gp :Gpush<CR>
 
 "" Goyo
-nnoremap <silent> <leader>Gy :Goyo<CR>
+nnoremap <silent> <leader>rr :Goyo<CR>
 
 
 """ File Commands
@@ -159,17 +159,29 @@ nnoremap <silent> <leader>ff :e
 nnoremap <silent> <leader>feD :e ~/.config/vim/vimrc<CR>
 nnoremap <silent> <leader>fs :w<CR>
 
+""" Quit Commands
+nnoremap <silent> <leader>qq :q<CR>
+nnoremap <silent> <leader>qs :w<CR>:q<CR>
+
+""" Source
+nnoremap <silent> <leader>vs :source ~/.config/vim/vimrc<CR>
 
 "Abbrevs
 "" Email Abbrevs
 iab <silent> sig Thanks,<CR>Jacob Hilker<CR>
 iab <silent> fsig Love,<CR>Jacob
-iab <silent> name Jacob Hilker
+iab <silent> rsig Best,<CR>Jacob Hilker
+iab <silent> mynm Jacob Hilker
 
 "" Programming Abbrevs
 """" Bash Abbrev
 iab <silent> shbg #!/bin/bash <CR>
 
+"Always load polybar config as ini file.
+aug polybar_ft_detection
+  au!
+  au BufNewFile,BufRead ~/.config/polybar/config set filetype=dosini
+aug end
 
 "Always load regolith i3 and i3 as i3 syntax files
 aug i3config_ft_detection
