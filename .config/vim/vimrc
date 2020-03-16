@@ -163,6 +163,8 @@ nnoremap <silent> <leader>fs :w<CR>
 nnoremap <silent> <leader>qq :q<CR>
 nnoremap <silent> <leader>qs :w<CR>:q<CR>
 
+
+
 """ Source
 nnoremap <silent> <leader>vs :source ~/.config/vim/vimrc<CR>
 
@@ -192,4 +194,4 @@ aug end
 
 
 
-
+set splitbelow splitright
