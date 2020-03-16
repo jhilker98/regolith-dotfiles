@@ -47,7 +47,8 @@
     # context                    # git status
 #    user
 #    prompt_char             # prompt symbol
-  )
+    root_indicator           # $ and #
+)
 
   # The list of segments shown on the right. Fill it with less important segments.
   # Right prompt on the last prompt line (where you are typing your commands) gets
@@ -898,6 +899,9 @@
   #################################[user: user]#################################################
   typeset -g POWERLEVEL9K_USER_BACKGROUND=2
   typeset -g POWERLEVEL9K_USER_FOREGROUND=0
+POWERLEVEL9K_USER_ROOT_BACKGROUND="52"
+POWERLEVEL9K_USER_ROOT_FOREGROUND="250"
+POWERLEVEL9K_ROOT_ICON=$'\uF198'	
   ##################################[ context: user@hostname ]##################################
   # Context color when running with privileges.
   typeset -g POWERLEVEL9K_ALWAYS_SHOW_USER=true
@@ -1309,6 +1313,11 @@
   # Append the current context's namespace if it's not "default".
   POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION+='${${:-/$P9K_KUBECONTEXT_NAMESPACE}:#/default}'
 
+
+# Root Config
+#POWERLEVEL9K_USER_DEFAULT_BACKGROUND="18"
+#POWERLEVEL9K_USER_DEFAULT_FOREGROUND="250"
+#POWERLEVEL9K_USER_ICON=$'\uF263'						
 
 # Custom prefix.
   # typeset -g POWERLEVEL9K_KUBECONTEXT_PREFIX='at '
