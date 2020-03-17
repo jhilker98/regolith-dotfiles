@@ -96,7 +96,7 @@ export TERM=xterm-kitty
 export MAIL=/home/jhilker/Mail
 export EMAIL="jacob.hilker2@gmail.com"
 export NAME="Jacob Hilker"
-export PATH="/home/jhilker/bin:/usr/local/texlive/2019/bin/x86_64-linux:$PATH"
+export PATH="/home/jhilker/.bin:/usr/local/texlive/2019/bin/x86_64-linux:$PATH"
 export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
 export MYVIMRC="/home/jhilker/.config/vim/vimrc"
 alias ls="exa --color=auto"
@@ -166,7 +166,7 @@ alias coheed="tizonia --spotify-artist coheed --spotify-allow-explicit-tracks -s
 alias inquiryum="tizonia --youtube-audio-playlist 'https://www.youtube.com/playlist?list=PLuZfoSIficQvPRuNhFHPcFpYsWy9Wb3iQ'"
 #alias swing="tizonia --youtube-audio-channel-uploads 'https://www.youtube.com/channel/UCqeHbI0rfexnHhhEgrg8Exg' -s"
 alias swing='tizonia --youtube-audio-playlist "https://www.youtube.com/playlist?list=PLVKACZpRqh76r-zJLvIvojhg4pudPnJcV" -s'
-
+alias jazz=" tizonia --youtube-audio-playlist 'https://www.youtube.com/playlist?list=PLc2FAW0Ie_V7q2mtrV-0xGDe3-G8d9YyP' -s"
 # Navigation Aliases
 alias desktop="cd ~/Desktop"
 alias documents="cd ~/Documents"
