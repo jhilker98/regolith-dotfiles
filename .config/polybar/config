@@ -16,6 +16,7 @@ secondary = ${xrdb:color2:#222}
 alert = ${xrdb:color3:#222}
 tertiary = ${xrdb:color4:#222}
 border = #00000000
+
 ;---------;
 ; MODULES ;
 ;---------;
@@ -28,6 +29,7 @@ label = %date% %time%
 label-font = 1
 label-padding = 2
 label-underline = ${colors.tertiary}
+
 [module/i3]
 type = internal/i3
 format = <label-state> <label-mode>
@@ -157,22 +159,34 @@ label-disconnected =  Not Connected
 label-connected-underline = ${colors.tertiary}
 label-disconnected-underline = ${colors.tertiary}
 
+
+; [module/news]
+include-file = ~/.config/polybar/scripts/news/module.conf
+
 [module/weather]
 type = custom/script
 interval = 5
- format-prefix = " "
+format-prefix = " "
 format-prefix-font = 4
 format-prefix-underline = ${colors.tertiary} 
 exec = ~/.config/polybar/wx.sh
 label-underline = ${colors.tertiary}
 
-; [module/news]
-include-file = ~/.config/polybar/scripts/news/module.conf
-
-
-;-----;
-; BAR ;
-;-----;
+[module/keyboard]
+type = internal/xkeyboard
+format = <label-indicator>
+indicator-icon-0 = caps lock;-CL;+CL
+indicator-icon-1 = scroll lock;;+SL
+indicator-icon-2 = num lock;-NL;+NL
+label-indicator-on-capslock = CAPS
+label-indicator-off-capslock =
+label-indicator-on-numlock = NUM
+label-indicator-off-numlock = 
+label-indicator-on-scrolllock = SCRL
+label-indicator-off-scrolllock = 
+;------;
+; BARS ;
+;------;
 
 
 [bar/mybar]
@@ -219,6 +233,7 @@ width = 100%
 
 height = 31
 radius = 4
+modules-left = keyboard
 modules-center = news
 modules-right = weather
 padding = 1
