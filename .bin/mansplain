@@ -1,0 +1,12 @@
+#!/bin/bash 
+# man -k . | dmenu -l 30 | awk '{print $1}' | xargs -r man -Tpdf | zathura -
+
+# man -k . | rofi -matching fuzzy -dmenu -show drun -display-drun "Help" -e "Help"  | awk '{print $1}' | xargs -r man -Tpdf | zathura  - 
+
+# man -k . | rofi -matching fuzzy -e "Help" -dmenu | awk '{print $1}' | xargs -r man -Tpdf | zathura  - 
+
+# man -k . | rofi -matching fuzzy -e "Help" -dmenu | awk '{print $1}' | xargs -r man -Tpdf | zathura  - 
+
+man -k . | rofi -dmenu -i -matching glob -sort | awk '{print $1}' | xargs -r man -Tpdf | zathura  - 
+
+# vi:set filetype=sh
