@@ -51,10 +51,10 @@ bindsym $mod+Ctrl+t exec gnome-tweaks
 ## Launch // App // <Super> Space ##
 bindsym $mod+space exec rofi -show drun -display-drun "Launch" -theme $rofiTheme
 ## Launch // Command // <Super><Shift> Space ##
-bindsym $mod+Shift+space exec rofi -show run -theme $rofiTheme
+bindsym $mod+Shift+space exec rofi -show run -display-run "Cmd" -theme $rofiTheme
 
 ## Launch // Help // <Super><Ctrl> h ##
-bindsym $mod+Ctrl+h exec /home/jhilker/bin/mansplain
+bindsym $mod+Ctrl+h exec /home/jhilker/.bin/mansplain
 ## Launch // Emacs // <Super> e ##
 bindsym $mod+e exec emacs
 ## Launch // Vim // <Super> v ##
@@ -68,7 +68,7 @@ bindsym $mod+n exec /usr/share/rofication/rofication-gui.py
 ## Launch // GUI File Mng // <Super><Alt> n ##
 bindsym $mod+$alt+n exec nautilus
 ## Launch // News // <Super><Ctrl> n ##
-bindsym $mod+Ctrl+n exec kitty -e newsboat -c ~/.config/newsboat/cache.db -C ~/.config/newsboat/config -u ~/.config/newsboat/urls -r
+bindsym $mod+Ctrl+n exec kitty -e newsboat -r -c ~/.config/newsboat/cache.db -C ~/.config/newsboat/config -u ~/.config/newsboat/urls 
 ## Launch // Zathura // <Super> z ##
 bindsym $mod+z exec zathura
 ## Launch // GIMP // <Super> g ##
@@ -77,6 +77,12 @@ bindsym $mod+g exec gimp
 bindsym $mod+d exec discord
 ## Launch // Discord PTB // <Super><Shift> d ##
 bindsym $mod+Shift+d exec discord-ptb
+## Launch // Oomox // <Super><Shift>o ##
+bindsym $mod+Shift+o exec oomox-gui
+## Launch // Zoom // <Super><Shift>z ##
+bindsym $mod+Shift+z exec zoom
+
+
 ## Settings // Open Settings // <Super><Ctrl> c ##
 bindsym $mod+Ctrl+c exec gnome-control-center
 ## Settings // Display Settings // <Super><Ctrl> d ##
