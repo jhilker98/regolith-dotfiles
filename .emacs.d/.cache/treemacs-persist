@@ -1,4 +1,12 @@
 * Default
+** dotfiles
+ - path :: ~/Documents/dotfiles
+** JMacs
+ - path :: ~/.emacs.d
+** Scripts
+ - path :: ~/.bin
+** Configs
+ - path :: ~/.config
 ** Notes
  - path :: ~/Dropbox/notes
 ** Assignments
@@ -9,24 +17,13 @@
  - path :: ~/Documents/Aurea-World
 ** Kidal
  - path :: ~/Documents/Kidal
-** JMacs
- - path :: ~/.emacs.d
 ** Writermacs
  - path :: ~/Documents/Writermacs
-** kspmacs
+** KSPmacs
  - path :: ~/Documents/kspmacs
-** LinuxConfig
- - path :: ~/LinuxConfig
 ** my-rpgs
  - path :: ~/Documents/RPGs
 ** rpgs
  - path :: ~/Documents/rpgs
-** dotfiles
- - path :: ~/Documents/dotfiles
-** Scripts
- - path :: ~/bin
 ** my_books
  - path :: ~/Documents/my_books
-* Configs
-** Configs
- - path :: ~/Configs

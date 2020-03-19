@@ -21,11 +21,11 @@ border = #00000000
 ; MODULES ;
 ;---------;
 
-[module/date]
+[module/time]
 type = internal/date
-date = %a, %d %b
-time = %I:%M %p
-label = %date% %time%
+;time = %I:%M %p ;; 12-Hour Time with AM/PM in caps
+time = %H:%M
+label = %time%
 label-font = 1
 label-padding = 2
 label-underline = ${colors.tertiary}
@@ -159,6 +159,13 @@ label-disconnected =  Not Connected
 label-connected-underline = ${colors.tertiary}
 label-disconnected-underline = ${colors.tertiary}
 
+[module/date]
+type = internal/date
+date = %a, %d %b
+label = %date%
+label-font = 1
+label-padding = 2
+label-underline = ${colors.tertiary}
 
 ; [module/news]
 include-file = ~/.config/polybar/scripts/news/module.conf
@@ -178,18 +185,18 @@ format = <label-indicator>
 indicator-icon-0 = caps lock;-CL;+CL
 indicator-icon-1 = scroll lock;;+SL
 indicator-icon-2 = num lock;-NL;+NL
-label-indicator-on-capslock = CAPS
+label-indicator-on-capslock = CAPS 
 label-indicator-off-capslock =
 label-indicator-on-numlock = NUM
 label-indicator-off-numlock = 
 label-indicator-on-scrolllock = SCRL
-label-indicator-off-scrolllock = 
+label-indicator-off-scrolllock =
 ;------;
 ; BARS ;
 ;------;
 
 
-[bar/mybar]
+[bar/top]
 font-0 = "Iosevka:pixelsize=12;3"
 font-1 = "Material Icons:size=12;3"
 font-2 = "Weather Icons:size=12;0"
@@ -202,14 +209,14 @@ width = 100%
 height = 27
 radius = 4
 modules-left = i3
-modules-center = date
+modules-center = time
 modules-right = volume wlan battery 
 padding = 1
 module-margin = 1
 
 
 
-[bar/lowbar]
+[bar/btm]
 font-0 = "Iosevka:pixelsize=12;3"
 font-1 = "Material Icons:size=12;3"
 font-2 = "Weather Icons:size=12;0"
@@ -233,9 +240,9 @@ width = 100%
 
 height = 31
 radius = 4
-modules-left = keyboard
+modules-left = date
 modules-center = news
-modules-right = weather
+modules-right = keyboard weather
 padding = 1
 module-margin = 1
 

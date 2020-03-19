@@ -687,6 +687,10 @@ I want to display battery in the modeline.
 #+BEGIN_SRC emacs-lisp
 (add-hook 'prog-mode-hook 'linum-relative-mode)
 #+END_SRC
+** Web Mode with JS2 Mode
+#+BEGIN_SRC emacs-lisp
+(add-hook 'js2-mode-hook 'web-mode)
+#+END_SRC
 * Keybindings
   Here is a list of all keybindings in JMacs.
 ** General Keybindings
