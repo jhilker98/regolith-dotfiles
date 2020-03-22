@@ -222,12 +222,6 @@ If I am using csv files I want a csv package.
 #+END_SRC
 ** UI Packages
 *** Themes
-**** Doom Themes
-Here is a package for Doom-Themes.
-#+BEGIN_SRC emacs-lisp
-(use-package doom-themes
-:ensure t)
-#+END_SRC
 **** Solarized
 Here is a package for using solarized.
 #+BEGIN_SRC emacs-lisp
@@ -272,6 +266,7 @@ Here is a package for using solarized.
               ewal-built-in-palette "sexy-material"
               ewal-json-file "~/.cache/wal/colors.json"))
 #+END_SRC
+
 ** Worldbuilding Packages
 *** Wordgen Mode
 #+BEGIN_SRC emacs-lisp
@@ -443,10 +438,13 @@ Allows for a TOC to be generated in an org file.
      :discard (:todo "DONE") 
      :deadline future 
      :scheduled future)
-
-   (:name "Writing"
-    :category "WRITING"))))
-#+END_SRC
+     
+     (:name "Overdue"
+      :discard (:todo "DONE")
+      :deadline past
+      :scheduled past))))
+     
+   #+END_SRC
 *** Org Export Backends
 **** Org Mediawiki
     #+BEGIN_SRC emacs-lisp
@@ -465,7 +463,7 @@ Allows for a TOC to be generated in an org file.
 :config
 (setq org-agenda-enable-journal-integration nil)
 :custom
-(org-journal-dir "~/Dropbox/org/journal/")
+(org-journal-dir "~/Dropbox/org/bullet/")
 (org-journal-time-format "%a, %d %b %Y")
 (org-journal-file-type 'monthly))
 #+END_SRC
@@ -484,6 +482,23 @@ If I find a recipe I want to try I want to save it easily.
 #+BEGIN_SRC elisp
 (use-package org-ql
 :ensure t)
+#+END_SRC
+
+#+END_SRC
+*** Org Gcal
+#+BEGIN_SRC emacs-lisp
+(use-package org-gcal
+:ensure t
+:config
+(setq org-gcal-client-id "77437659532-5n846pen5mktk4snbts8ctg8nss3a20u.apps.googleusercontent.com"
+      org-gcal-client-secret "VO9Tuh_FxGMMlB48yIYfuBqM"
+      org-gcal-file-alist '(("sb6hu4ke1c9hmom5204in3p8mc@group.calendar.google.com" . "~/Dropbox/notes/spring-2020.org")
+      ("bjmahvae7o24e03504bh14019g@group.calendar.google.com" . "~/Dropbox/org/agenda/agenda.org"))))
+#+END_SRC
+**** GCal Sync
+#+BEGIN_SRC emacs-lisp
+(add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
+(add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
 #+END_SRC
 * Miscellaneous Formats
 ** Title Format
@@ -1085,7 +1100,7 @@ like in regular org mode.
 #+END_SRC
 ** Windmove
 #+BEGIN_SRC emacs-lisp
-(windmove-default-keybindings 'shift)
+(windmove-default-keybindings 'ctrl)
 (add-hook 'org-shiftup-final-hook 'windmove-up)
 (add-hook 'org-shiftleft-final-hook 'windmove-left)
 (add-hook 'org-shiftdown-final-hook 'windmove-down)

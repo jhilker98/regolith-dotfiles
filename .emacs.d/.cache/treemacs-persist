@@ -21,9 +21,9 @@
  - path :: ~/Documents/Writermacs
 ** KSPmacs
  - path :: ~/Documents/kspmacs
-** my-rpgs
- - path :: ~/Documents/RPGs
+** My RPGs
+ - path :: ~/Documents/my_rpgs
 ** rpgs
  - path :: ~/Documents/rpgs
-** my_books
+** My Books
  - path :: ~/Documents/my_books
