@@ -485,21 +485,6 @@ If I find a recipe I want to try I want to save it easily.
 #+END_SRC
 
 #+END_SRC
-*** Org Gcal
-#+BEGIN_SRC emacs-lisp
-(use-package org-gcal
-:ensure t
-:config
-(setq org-gcal-client-id "77437659532-5n846pen5mktk4snbts8ctg8nss3a20u.apps.googleusercontent.com"
-      org-gcal-client-secret "VO9Tuh_FxGMMlB48yIYfuBqM"
-      org-gcal-file-alist '(("sb6hu4ke1c9hmom5204in3p8mc@group.calendar.google.com" . "~/Dropbox/notes/spring-2020.org")
-      ("bjmahvae7o24e03504bh14019g@group.calendar.google.com" . "~/Dropbox/org/agenda/agenda.org"))))
-#+END_SRC
-**** GCal Sync
-#+BEGIN_SRC emacs-lisp
-(add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
-(add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
-#+END_SRC
 * Miscellaneous Formats
 ** Title Format
 #+BEGIN_SRC emacs-lisp
