@@ -32,7 +32,7 @@ Plugin 'mboughaba/i3config.vim'
 Plugin 'preservim/nerdcommenter'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'lervag/vimtex'
-
+Plugin 'liuchengxu/vim-which-key'
 
 " Track the engine.
 Plugin 'SirVer/ultisnips'
@@ -109,6 +109,8 @@ autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
 " Always Highlight my search results
 set hlsearch
+" Spell-check set to <leader>o, 'o' for 'orthography':
+	map <leader>o :setlocal spell! spelllang=en_us<CR>
 
 
 " Keybindings
@@ -176,8 +178,8 @@ iab <silent> rsig Best,<CR>Jacob Hilker
 iab <silent> mynm Jacob Hilker
 
 "" Programming Abbrevs
-"""" Bash Abbrev
-iab <silent> shbg #!/bin/bash <CR>
+"""" Shebang Abbrev
+iab <silent> shbg #!/bin/sh <CR>
 
 "Always load polybar config as ini file.
 aug polybar_ft_detection
@@ -193,5 +195,5 @@ aug i3config_ft_detection
 aug end
 
 
-
+" Always split below and right rather than vim defaults 
 set splitbelow splitright
