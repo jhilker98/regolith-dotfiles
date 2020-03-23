@@ -151,7 +151,7 @@ Projectile is a way of using projects in emacs.
   (setq dashboard-startup-banner "~/.emacs.d/banner.png")
   (setq dashboard-banner-logo-title "Man your own jackhammer!")
   (setq dashboard-center-content t)
-)
+ )
 #+END_SRC
 **** Unfill
 For toggling fill and unfill.
@@ -267,6 +267,25 @@ Here is a package for using solarized.
               ewal-json-file "~/.cache/wal/colors.json"))
 #+END_SRC
 
+*** Centaur Tabs
+#+BEGIN_SRC emacs-lisp
+(use-package centaur-tabs
+:ensure t
+:config
+(centaur-tabs-mode t)
+
+   (setq centaur-tabs-set-modified-marker t)
+   (setq centaur-tabs-modified-marker "•")
+   (setq centaur-tabs-set-bar 'left) 
+   (setq centaur-tabs-set-icons t)
+   (setq centaur-tabs-set-close-button t)
+   (setq centaur-tabs-close-button "x")
+   (setq centaur-tabs-style "rounded")
+   (setq centaur-tabs-height 32)
+   (define-key evil-normal-state-map (kbd "g t") 'centaur-tabs-forward)
+   (define-key evil-normal-state-map (kbd "g T") 'centaur-tabs-backward)
+   (setq centaur-tabs-cycle-scope 'tabs))
+#+END_SRC
 ** Worldbuilding Packages
 *** Wordgen Mode
 #+BEGIN_SRC emacs-lisp
@@ -492,16 +511,6 @@ If I find a recipe I want to try I want to save it easily.
   (cdr (assoc key (json-read-file "~/.emacs.d/gcal-secret.json")))
   )
 
-(use-package org-gcal
-:ensure t
-:config
-(setq org-gcal-client-id (get-gcal-config-value 'org-gcal-client-id)
-      org-gcal-client-secret (get-gcal-config-value 'org-gcal-client-secret)
-      org-gcal-file-alist '(("bjmahvae7o24e03504bh14019g@group.calendar.google.com" . "~/Dropbox/notes/spring-2020.org")
-      ("bjmahvae7o24e03504bh14019g@group.calendar.google.com" . "~/Dropbox/org/agenda/agenda.org"))))
-
-(add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
-(add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
 
 
 #+END_SRC
@@ -1402,31 +1411,17 @@ Here are my org capture templates.
 **** One Group 
 #+BEGIN_SRC emacs-lisp :tangle no
  (defun centaur-tabs-buffer-groups ()
-      "`centaur-tabs-buffer-groups' control buffers' group rules.
+ "Use as few groups as possible."
+(list (cond ((string-equal "*" (substring (buffer-name) 0 1))
+                   "Tools")
+                   (cond ((string-equal "eglot" (downcase (substring (buffer-name) 1 6)))
+                          "Eglot")
+                         (t
+                          "Tools")))))
 
-    Group centaur-tabs with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
-    All buffer name start with * will group to \"Emacs\".
-    Other buffer group by `centaur-tabs-get-group-name' with project name."
-      (list
-	(cond
-	 ((or (string-equal "*" (substring (buffer-name) 0 1))
-	      (memq major-mode '(magit-process-mode
-				 magit-status-mode
-				 magit-diff-mode
-				 magit-log-mode
-				 magit-file-mode
-				 magit-blob-mode
-				 magit-blame-mode
-				 )))
-	  "Emacs")
-	 ((derived-mode-p 'prog-mode)
-	  "Editing")
-	 ((memq major-mode '(helpful-mode
-			     help-mode))
-	  "Help")
-	
-	 (t
-	  (centaur-tabs-get-group-name (current-buffer))))))
+
+
+
 #+END_SRC
  
 
@@ -1435,3 +1430,16 @@ Here are my org capture templates.
 
 
 /text/
+*** Old Gcal Config
+#+BEGIN_SRC emacs-lisp :tangle nil
+(use-package org-gcal
+:ensure t
+:config
+(setq org-gcal-client-id (get-gcal-config-value 'org-gcal-client-id)
+      org-gcal-client-secret (get-gcal-config-value 'org-gcal-client-secret)
+      org-gcal-file-alist '(("bjmahvae7o24e03504bh14019g@group.calendar.google.com" . "~/Dropbox/notes/spring-2020.org")
+      ("jacob.hilker2@gmail.com" . "~/Dropbox/org/agenda/agenda.org"))))
+
+(add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
+(add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
+#+END_SRC
