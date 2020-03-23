@@ -45,6 +45,10 @@ such as the functions I use, the UI settings, etc.
       org-agenda-compact-blocks t
       org-agenda-start-with-log-mode t)
 #+END_SRC
+** Syncing Bug Fix
+#+BEGIN_SRC emacs-lisp
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+#+END_SRC
 * Package Initialization and Bootstrapping
 ** Package Initialization and Extra Sources
 I am adding extra sources to my package archives here.
@@ -269,22 +273,35 @@ Here is a package for using solarized.
 
 *** Centaur Tabs
 #+BEGIN_SRC emacs-lisp :tangle nil
-;(use-package centaur-tabs
-;:ensure t
-;:config
-;(centaur-tabs-mode t)
+; (use-package centaur-tabs
+; :ensure t
+; :config
+; (centaur-tabs-mode t)
+; 
+;    (setq centaur-tabs-set-modified-marker t)
+;    (setq centaur-tabs-modified-marker "•")
+;    (setq centaur-tabs-set-bar 'left) 
+;    (setq centaur-tabs-set-icons t)
+;    (setq centaur-tabs-set-close-button t)
+;    (setq centaur-tabs-close-button "x")
+;    (setq centaur-tabs-style "rounded")
+;    (setq centaur-tabs-height 32)
+;    (define-key evil-normal-state-map (kbd "g t") 'centaur-tabs-forward)
+;    (define-key evil-normal-state-map (kbd "g T") 'centaur-tabs-backward)
+;    (setq centaur-tabs-cycle-scope 'tabs))
+; 
+; 
+; (defun centaur-tabs-buffer-groups ()
+;  "Use as few groups as possible."
+; (list (cond ((string-equal "*" (substring (buffer-name) 0 1))
+;                    "Tools")
+;                    (cond ((string-equal "eglot" (downcase (substring (buffer-name) 1 6)))
+;                           "Eglot")
+;                          (t
+;                           "Tools")))))
 
-;   (setq centaur-tabs-set-modified-marker t)
-;   (setq centaur-tabs-modified-marker "•")
-;   (setq centaur-tabs-set-bar 'left) 
-;   (setq centaur-tabs-set-icons t)
-;   (setq centaur-tabs-set-close-button t)
-;   (setq centaur-tabs-close-button "x")
-;   (setq centaur-tabs-style "rounded")
-;   (setq centaur-tabs-height 32)
-;   (define-key evil-normal-state-map (kbd "g t") 'centaur-tabs-forward)
-;   (define-key evil-normal-state-map (kbd "g T") 'centaur-tabs-backward)
-;   (setq centaur-tabs-cycle-scope 'tabs))
+
+
 #+END_SRC
 ** Worldbuilding Packages
 *** Wordgen Mode
@@ -504,16 +521,8 @@ If I find a recipe I want to try I want to save it easily.
 #+END_SRC
 
 #+END_SRC
-*** Org-Gcal
-#+BEGIN_SRC emacs-lisp
-(defun get-gcal-config-value (key)
-  "Return the value of the json file gcal_secret for key"
-  (cdr (assoc key (json-read-file "~/.emacs.d/gcal-secret.json")))
-  )
 
 
-
-#+END_SRC
 * Miscellaneous Formats
 ** Title Format
 #+BEGIN_SRC emacs-lisp
@@ -525,7 +534,7 @@ If I find a recipe I want to try I want to save it easily.
 (setq-default org-display-custom-times t)
 (setq org-time-stamp-custom-formats '("<%a, %d %h>" . "<%a, %d %h %I:%M %p>"))
 #+END_SRC  
-** One Group for Centaur Tabs
+** One Group for Centaur Tabs  
 * Specific Functions
 ** Find Files
 *** Find Config File
