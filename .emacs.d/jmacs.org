@@ -268,23 +268,23 @@ Here is a package for using solarized.
 #+END_SRC
 
 *** Centaur Tabs
-#+BEGIN_SRC emacs-lisp
-(use-package centaur-tabs
-:ensure t
-:config
-(centaur-tabs-mode t)
+#+BEGIN_SRC emacs-lisp :tangle nil
+;(use-package centaur-tabs
+;:ensure t
+;:config
+;(centaur-tabs-mode t)
 
-   (setq centaur-tabs-set-modified-marker t)
-   (setq centaur-tabs-modified-marker "•")
-   (setq centaur-tabs-set-bar 'left) 
-   (setq centaur-tabs-set-icons t)
-   (setq centaur-tabs-set-close-button t)
-   (setq centaur-tabs-close-button "x")
-   (setq centaur-tabs-style "rounded")
-   (setq centaur-tabs-height 32)
-   (define-key evil-normal-state-map (kbd "g t") 'centaur-tabs-forward)
-   (define-key evil-normal-state-map (kbd "g T") 'centaur-tabs-backward)
-   (setq centaur-tabs-cycle-scope 'tabs))
+;   (setq centaur-tabs-set-modified-marker t)
+;   (setq centaur-tabs-modified-marker "•")
+;   (setq centaur-tabs-set-bar 'left) 
+;   (setq centaur-tabs-set-icons t)
+;   (setq centaur-tabs-set-close-button t)
+;   (setq centaur-tabs-close-button "x")
+;   (setq centaur-tabs-style "rounded")
+;   (setq centaur-tabs-height 32)
+;   (define-key evil-normal-state-map (kbd "g t") 'centaur-tabs-forward)
+;   (define-key evil-normal-state-map (kbd "g T") 'centaur-tabs-backward)
+;   (setq centaur-tabs-cycle-scope 'tabs))
 #+END_SRC
 ** Worldbuilding Packages
 *** Wordgen Mode
@@ -1409,7 +1409,7 @@ Here are my org capture templates.
  #+END_SRC
  
 **** One Group 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp :tangle nil
  (defun centaur-tabs-buffer-groups ()
  "Use as few groups as possible."
 (list (cond ((string-equal "*" (substring (buffer-name) 0 1))
