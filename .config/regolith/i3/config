@@ -46,15 +46,15 @@ hide_edge_borders smart
 bindsym $mod+Return exec kitty
 ## Launch // Firefox // <Super><Shift> Enter ##
 bindsym $mod+Shift+Return exec /usr/bin/firefox
-## Launch // GNOME Tweaks // <Super><Ctrl> t ##
-bindsym $mod+Ctrl+t exec gnome-tweaks 
+## Launch // GNOME Tweaks // <Super><$alt> t ##
+bindsym $mod+$alt+t exec gnome-tweaks 
 ## Launch // App // <Super> Space ##
 bindsym $mod+space exec rofi -show drun -display-drun "Launch" -theme $rofiTheme
 ## Launch // Command // <Super><Shift> Space ##
 bindsym $mod+Shift+space exec rofi -show run -display-run "Cmd" -theme $rofiTheme
 
 ## Launch // Help // <Super><Ctrl> h ##
-bindsym $mod+Ctrl+h exec /home/jhilker/.bin/mansplain
+bindsym $mod+$alt+h exec /home/jhilker/.bin/mansplain
 ## Launch // Emacs // <Super> e ##
 bindsym $mod+e exec emacs
 ## Launch // Vim // <Super> v ##
@@ -82,17 +82,20 @@ bindsym $mod+Shift+o exec oomox-gui
 ## Launch // Zoom // <Super><Shift>z ##
 bindsym $mod+Shift+z exec zoom
 
+## Launch // Postman // <Super> p ## 
+bindsym $mod+p exec postman
 
-## Settings // Open Settings // <Super><Ctrl> c ##
-bindsym $mod+Ctrl+c exec gnome-control-center
-## Settings // Display Settings // <Super><Ctrl> d ##
-bindsym $mod+Ctrl+d exec gnome-control-center display
-## Settings // Wifi Settings // <Super><Ctrl> w ##
-bindsym $mod+Ctrl+w exec gnome-control-center wifi
-## Settings // Power // <Super><Ctrl>p ##
-bindsym $mod+Ctrl+p exec gnome-control-center power
+## Launch // LibreOffice // <Super><Ctrl> l ##
+bindsym $mod+Ctrl+l exec libreoffice
 
-
+## Settings // Open Settings // <Super><Alt> c ##
+bindsym $mod+$alt+c exec gnome-control-center
+## Settings // Display Settings // <Super><Alt> d ##
+bindsym $mod+$alt+d exec gnome-control-center display
+## Settings // Wifi Settings // <Super><Alt> w ##
+bindsym $mod+$alt+w exec gnome-control-center wifi
+## Settings // Power // <Super><Alt>p ##
+bindsym $mod+$alt+p exec gnome-control-center power
 set_from_resource $rofiTheme rofi.theme "regolith-theme"
 
 

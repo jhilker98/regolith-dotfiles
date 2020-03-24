@@ -9,9 +9,10 @@ export BGCOLOR="#8C${color0/'#'}"
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+
+ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -92,11 +93,11 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 export EDITOR=vim
 export TERM=xterm-kitty
-# export TERM=xterm-256color
-export MAIL=/home/jhilker/Mail
+ export TERM=xterm-256color
+# export MAIL=/home/jhilker/Mail
 export EMAIL="jacob.hilker2@gmail.com"
 export NAME="Jacob Hilker"
-export PATH="/home/jhilker/.bin:/usr/local/texlive/2019/bin/x86_64-linux:$PATH"
+export PATH="/usr/local/texlive/2019/bin/x86_64-linux:/home/jhilker/.bin:$PATH"
 export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
 export MYVIMRC="/home/jhilker/.config/vim/vimrc"
 #alias ls="exa --color=auto"
@@ -164,9 +165,10 @@ alias lmus="tizonia -rs ~/Music"
 alias shp="tizonia --spotify-album-id 'https://open.spotify.com/album/7hgb44Kiav8NRoa26nuus5' --spotify-allow-explicit-tracks"
 alias coheed="tizonia --spotify-artist coheed --spotify-allow-explicit-tracks -s"
 alias inquiryum="tizonia --youtube-audio-playlist 'https://www.youtube.com/playlist?list=PLuZfoSIficQvPRuNhFHPcFpYsWy9Wb3iQ'"
-#alias swing="tizonia --youtube-audio-channel-uploads 'https://www.youtube.com/channel/UCqeHbI0rfexnHhhEgrg8Exg' -s"
 alias swing='tizonia --youtube-audio-playlist "https://www.youtube.com/playlist?list=PLVKACZpRqh76r-zJLvIvojhg4pudPnJcV" -s'
-alias jazz=" tizonia --youtube-audio-playlist 'https://www.youtube.com/playlist?list=PLc2FAW0Ie_V7q2mtrV-0xGDe3-G8d9YyP' -s"
+alias jazz="tizonia --youtube-audio-playlist 'https://www.youtube.com/playlist?list=PLc2FAW0Ie_V7q2mtrV-0xGDe3-G8d9YyP' -s"
+alias doom="tizonia --spotify-album 'Doom (Original Game Soundtrack)' --spotify-allow-explicit-tracks"
+alias cuphead="tizonia --spotify-album 'Cuphead (Original Soundtrack)' --spotify-allow-explicit-tracks"
 # Navigation Aliases
 alias desktop="cd ~/Desktop"
 alias documents="cd ~/Documents"
@@ -238,7 +240,7 @@ set -o vi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #PROMPT="%F{4}%n%f @ %F{3}%~%f $%b "
-#PROMPT="%F{3}%~%f $%b "
+# PROMPT="%F{3}%~%f $%b "
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
