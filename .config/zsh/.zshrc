@@ -100,7 +100,7 @@ export NAME="Jacob Hilker"
 export PATH="/usr/local/texlive/2019/bin/x86_64-linux:/home/jhilker/.bin:$PATH"
 export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
 export MYVIMRC="/home/jhilker/.config/vim/vimrc"
-#alias ls="exa --color=auto"
+alias ls="exa --color=auto"
 alias la="exa -la"
 alias ll="exa -lah"
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -206,7 +206,12 @@ alias Kidal="cd ~/Documents/Kidal; exa -alh"
 # Game Aliases
 alias els="rlwrap telnet elessar.mudhosting.net 7778"
 alias sol="rlwrap telnet Middle-earth.us 4500"
-#
+alias 2048="~/2048"
+
+# Timer Aliases
+alias pom="termdown 25m -b -s"
+alias pos="termdown 5m -b -s"
+alias pol="termdown 20m -b -s"
 # # Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.
