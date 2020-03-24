@@ -77,5 +77,6 @@ input,
 }
 /* add and search server buttons */
 .circleIconButton-jET_ig.da-circleIconButton {
-  background-color: var(--foreground) !important;
+  background-color: var(--background) !important;
+  color: var(--color1) !important;
 }
