@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Spyder
+Exec=/home/jhilker/anaconda3/bin/spyder
+Terminal=false
+Icon=/home/jhilker/anaconda3/pkgs/spyder-4.0.1-py37_0/lib/python3.7/site-packages/spyder/images/spyder.png
+
