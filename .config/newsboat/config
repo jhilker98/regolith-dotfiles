@@ -20,14 +20,25 @@ color listfocus_unread blue default reverse bold
 text-width 80
 
 
-# -- navigation ----------------------------------------------------------------
+# -- navigation & browser --------------------------------------------------------
 
 goto-next-feed no
-
 browser "~/.bin/newsboat-browser.sh"
+
+# -- unbind keys  ---------------------------------------------------------------
+unbind-key ENTER
+unbind-key j
+unbind-key k
+unbind-key J
+unbind-key K
+
+unbind-key C feedlist
+
+# -- keybindings  ---------------------------------------------------------------
 
 bind-key j down feedlist
 bind-key k up feedlist
+bind-key l open
 bind-key j next articlelist
 bind-key k prev articlelist
 bind-key J next-feed articlelist
@@ -47,7 +58,6 @@ bookmark-autopilot yes
 
 # -- misc ----------------------------------------------------------------------
 
-unbind-key C feedlist
 confirm-exit no
 cleanup-on-quit no
 
@@ -59,3 +69,4 @@ feedlist-format "%11U %t"
 
 # -- sorts ----------------------------------------------------------------------
 feed-sort-order unreadarticlecount-asc
+

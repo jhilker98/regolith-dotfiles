@@ -33,6 +33,9 @@ Plugin 'preservim/nerdcommenter'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'lervag/vimtex'
 Plugin 'liuchengxu/vim-which-key'
+Plugin 'tpope/vim-surround'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'chrisbra/unicode.vim'
 
 " Track the engine.
 Plugin 'SirVer/ultisnips'
@@ -46,13 +49,8 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
-" All of your Plugins must be added before the following line
-Plugin 'tpope/vim-surround'
-
-Plugin 'ryanoasis/vim-devicons'
 
 
-Plugin 'chrisbra/unicode.vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -117,7 +115,15 @@ set hlsearch
 
 "" General Keybindings
 set backspace=indent,eol,start
-
+"""disable arrow keys
+nnoremap <up>    <nop>
+nnoremap <down>  <nop>
+nnoremap <left>  <nop>
+nnoremap <right> <nop>
+inoremap <up>    <nop>
+inoremap <down>  <nop>
+inoremap <left>  <nop>
+inoremap <right> <nop>
 """Use space as leader
 let mapleader=" "
 
@@ -180,6 +186,8 @@ iab <silent> mynm Jacob Hilker
 "" Programming Abbrevs
 """" Shebang Abbrev
 iab <silent> shbg #!/bin/sh <CR>
+
+
 
 "Always load polybar config as ini file.
 aug polybar_ft_detection
