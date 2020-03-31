@@ -19,6 +19,10 @@ For most of these programs, the installation is quite simple - copy the =.config
 * Notes :TOC:
  The color scheme is from pywal.
  For my word count format, you will have to manually change the format of the word count section in doom modeline from =%dW= to =%d words=.
+You will need to create a subdirectory in ~/Music and call it alerts. Find a
+wav file you like and save it as alert.wav in the alerts directory. I am
+using [[http://soundbible.com/2154-Text-Message-Alert-1.html][this]] as my
+alert sound, but use whatever you want.
 * Bugs :TOC:
  - TOC-Org is unavailable
    While I haven't been able to fix this yet, I am trying to fix this. I have had no luck so far with it being installed from the =jmacs.org= file.
