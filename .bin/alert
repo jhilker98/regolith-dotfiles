@@ -1,0 +1,4 @@
+#!/bin/sh 
+for sound in $(seq 1); 
+  do $(aplay ~/Music/alerts/alert.wav); 
+done

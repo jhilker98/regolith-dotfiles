@@ -1,0 +1,24 @@
+#!/bin/sh 
+#vi :set filetype=sh 
+if [ -z $1 ] 
+then
+  termdown 25m -B -s &&  ~/.bin/alert && notify-send -a "Pomodoro" "Timer done." "Take a break. You've earned it."
+
+elif [ $1 = "-s" ] || [ $1 = "--short" ]
+then
+ termdown 5m -Bs && ~/.bin/alert && notify-send -a "Pomodoro" 'Timer Done' 'Your break has ended. Back to work.'
+
+elif [ $1 = "-l" ] || [ $1 = "--long" ]
+then
+termdown 20m -Bs && ~/.bin/alert && notify-send 'Timer Done' 'Your break has ended. Back to work.'
+
+
+elif [ $1 = "-h" ]  || [ $1 = "--help" ] 
+then
+ echo "usage: pomo           25 minute timer"
+
+ echo "or:    pomo [options] see options below\n"
+ echo "-s, --short:     5 minute break timer"
+ echo "-l, --long:      20 minute break timer" 
+ echo "-h, --help:     view this help message"
+fi 
