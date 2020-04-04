@@ -46,6 +46,9 @@ alias swing='tizonia --youtube-audio-playlist "https://www.youtube.com/playlist?
 alias jazz="tizonia --youtube-audio-playlist 'https://www.youtube.com/playlist?list=PLc2FAW0Ie_V7q2mtrV-0xGDe3-G8d9YyP' -s"
 alias doom="tizonia --spotify-album 'Doom (Original Game Soundtrack)' --spotify-allow-explicit-tracks"
 alias cuphead="tizonia --spotify-album 'Cuphead (Original Soundtrack)' --spotify-allow-explicit-tracks"
+alias terraf="tizonia --spotify-album 'Terraformer' --spotify-allow-explicit-tracks"
+alias guard="tizonia --spotify-album-id 3KJ44LRyBaBsZi2eW79pCV --spotify-allow-explicit-tracks"
+
 alias desktop="cd ~/Desktop"
 alias documents="cd ~/Documents"
 alias dropbox="cd ~/Dropbox"
@@ -84,10 +87,8 @@ alias Kidal="cd ~/Documents/Kidal; exa -alh"
 alias els="rlwrap telnet elessar.mudhosting.net 7778"
 alias sol="rlwrap telnet Middle-earth.us 4500"
 alias bod="rlwrap telnet bod.westeros.org 3000"
+alias mume="rlwrap telnet mume.org 4242"
+alias t2t="rlwrap telnet t2tmud.org 9999"
 alias 2048="~/2048"
 
-# Timer Aliases
-alias pom="termdown 25m -Bs && ~/.bin/alert && notify-send 'Timer Done' 'Your timer is done.'"
-alias pos="termdown 5m -Bs && ~/.bin/alert && notify-send 'Timer Done' 'Your timer is done.' "
-alias pol="termdown 20m -Bs && ~/.bin/alert && notify-send 'Timer Done' 'Your timer is done.'"
 
