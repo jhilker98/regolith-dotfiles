@@ -1,0 +1,17 @@
+#!/home/jhilker/anaconda3/bin/python3.7
+#vi:set filetype=python
+import sys
+import pandas as pd
+import random
+towns = pd.read_csv('~/Documents/Ashes-World/resources/names/towns.csv')
+if len(sys.argv) < 2:
+    prefix = towns.iloc[random.randint(0,99)]['Prefixes']
+    suffix = towns.iloc[random.randint(0,99)]['Suffixes']
+    print(prefix+suffix)
+        
+else:
+    for num in range(0,int(sys.argv[1])):
+        prefix = towns.iloc[random.randint(0,99)]['Prefixes']
+        suffix = towns.iloc[random.randint(0,99)]['Suffixes']
+        print(prefix+suffix)
+
