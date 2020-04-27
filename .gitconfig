@@ -1,0 +1,25 @@
+[user]
+    email = jacob.hilker2@gmail.com
+    name = Jacob Hilker
+[push]
+    default = simple
+[format]
+[diff]
+[merge]
+    tool = vimdiff
+[core]
+    editor = vim
+[difftool]
+    prompt = false
+[alias]
+    beam = checkout
+    unstage = reset HEAD --
+    quick-stats = ! /usr/local/bin/git-quick-stats
+[diff]
+[format]
+    pretty = (%h) %Cblue%an%Creset: %Cgreen%s %Creset(%ad)
+[diff]
+    tool = vimdiff
+[log]
+    date = short
+
