@@ -7,7 +7,7 @@
 set $mod Mod4
 set $alt Mod1
 
-# i3xrocks config file. Override this for custom kittyatus indicators on the bar.
+# i3xrocks config file. Override this for custom status indicators on the bar.
 set $i3xrocks_config /home/jhilker/.config/regolith/i3xrocks.config
 
 # path to terminal. Override this to specify a custom terminal.
@@ -46,25 +46,25 @@ hide_edge_borders smart
 bindsym $mod+Return exec kitty
 ## Launch // Firefox // <Super><Shift> Enter ##
 bindsym $mod+Shift+Return exec /usr/bin/firefox
-## Launch // GNOME Tweaks // <Super><$alt> t ##
+## Launch // GNOME Tweaks // <Super><Alt> t ##
 bindsym $mod+$alt+t exec gnome-tweaks 
 ## Launch // App // <Super> Space ##
 bindsym $mod+space exec rofi -show drun -display-drun "Launch" -theme $rofiTheme
 ## Launch // Command // <Super><Shift> Space ##
 bindsym $mod+Shift+space exec rofi -show run -display-run "Cmd" -theme $rofiTheme
 
-## Launch // Help // <Super><Ctrl> h ##
-bindsym $mod+$alt+h exec /home/jhilker/.bin/mansplain
 ## Launch // Emacs // <Super> e ##
 bindsym $mod+e exec emacs
 ## Launch // Vim // <Super> v ##
 bindsym $mod+v exec kitty -e vim -u ~/.config/vim/vimrc
 ## Launch // Mail // <Super> m ##
 bindsym $mod+m exec kitty -e neomutt 
+
 ## Launch // Ranger // <Super><Shift> n ##
 bindsym $mod+Shift+n exec kitty -e ranger
 ## Launch // Notifications // <Super> n ##
-bindsym $mod+n exec /usr/share/rofication/rofication-gui.py
+set_from_resource $i3-wm.program.notification_ui i3-wm.program.notification_ui /usr/bin/rofication-gui
+bindsym $mod+n exec $i3-wm.program.notification_ui
 ## Launch // GUI File Mng // <Super><Alt> n ##
 bindsym $mod+$alt+n exec nautilus
 ## Launch // News // <Super><Ctrl> n ##
@@ -393,7 +393,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # Start the installed regolith-compositor
 exec --no-startup-id /usr/share/regolith-compositor/init
 # Start Rofication for notifications
-exec --no-startup-id /usr/share/rofication/rofication-daemon.py
+exec --no-startup-id /usr/bin/rofication-daemon
 
 # Launch first time user experience script
 exec --no-startup-id /usr/bin/regolith-ftue
