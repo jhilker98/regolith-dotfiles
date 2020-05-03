@@ -3,10 +3,10 @@
 ;--------;
 
 [colors]
-;background = ${xrdb:color0:#222}
-;background = #cc${xrdb:color0:#222}
+;background = ${xrdb:color0:;222}
+;background = ;cc${xrdb:color0:;222}
 background = ${env:color0_alpha:#CC0c0c0c}
-;background = #CC${color0/'#'}
+;background = ;CC${color0/';'}
 background-alt = #444
 bbg = ${env:BGCOLOR:#CC0c0c0c}
 foreground = ${xrdb:color7:#222}
@@ -45,7 +45,7 @@ wrapping-scroll = false
 ;pin-workspaces = true
 
 label-mode-padding = 1.75
-label-mode-foreground = #000
+label-mode-foreground = ;000
 label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
@@ -84,9 +84,12 @@ format-discharging = <ramp-capacity> <label-discharging>
 ;label-discharging = %percentage%% (%time%)
 label-discharging = %percentage%%
 format-full = <label-full>
-label-charging-underline = ${colors.tertiary}
-label-discharging-underline = ${colors.tertiary}
+;label-charging-underline = ${colors.tertiary}
+;label-discharging-underline = ${colors.tertiary}
 
+
+format-charging-underline = ${colors.tertiary}
+format-discharging-underline = ${colors.tertiary}
 format-full-prefix = " "
 ramp-capacity-0 = 
 ramp-capacity-1 = 
@@ -108,18 +111,17 @@ animation-charging-framerate = 750
 
 label-font = 1
 
-ramp-capacity-0-underline = ${colors.tertiary}
-ramp-capacity-1-underline = ${colors.tertiary}
-ramp-capacity-2-underline = ${colors.tertiary}
-ramp-capacity-3-underline = ${colors.tertiary}
-ramp-capacity-4-underline = ${colors.tertiary}
-
-animation-charging-0-underline = ${colors.tertiary}
-animation-charging-1-underline = ${colors.tertiary}
-animation-charging-2-underline = ${colors.tertiary}
-animation-charging-3-underline = ${colors.tertiary}
-animation-charging-4-underline = ${colors.tertiary}
-
+; ramp-capacity-0-underline = ${colors.tertiary}
+; ramp-capacity-1-underline = ${colors.tertiary}
+; ramp-capacity-2-underline = ${colors.tertiary}
+; ramp-capacity-3-underline = ${colors.tertiary}
+; ramp-capacity-4-underline = ${colors.tertiary}
+; 
+; animation-charging-0-underline = ${colors.tertiary}
+; animation-charging-1-underline = ${colors.tertiary}
+; animation-charging-2-underline = ${colors.tertiary}
+; animation-charging-3-underline = ${colors.tertiary}
+; animation-charging-4-underline = ${colors.tertiary}
 
 ; Uncomment these for anmated discharging battery underline
 ; ramp-capacity-0-underline = ${colors.primary}
@@ -248,7 +250,7 @@ font-3 = "FontAwesome:size=12;3"
 ; override-redirect = true
 ; wm-restack = i3
 
-; border-color = #00000000
+; border-color = ;00000000
 ; border-bottom-size = 5 
 border-top-size = 1 
 ; offset-x = 36
@@ -264,13 +266,13 @@ width = 100%
 height = 31
 radius = 4
 modules-left = date keyboard 
-#modules-center = news
-# when wttr.in isn't down 
+;modules-center = news
+; when wttr.in isn't down 
  modules-right = notifs weather
-# when wttr.in is down
-# modules-right = notifs  
+; when wttr.in is down
+; modules-right = notifs  
 padding = 1
 module-margin = 1
 
 
-# vi:set filetype=dosini
+; vi:set filetype=dosini
