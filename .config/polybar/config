@@ -71,6 +71,45 @@ label-urgent-padding = 1.75
 
 ; Separator in between workspaces
 ; label-separator = |
+
+[module/volume]
+type = internal/alsa
+;speaker-mixer = Speaker
+;headphone-mixer = Headphone
+;headphone-id = 16
+;mapped = true
+format-volume = <ramp-volume> <label-volume>   
+label-volume = %percentage%%
+format-muted =   <label-muted>
+label-muted = %percentage%%
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+ramp-volume-4 = 
+ramp-volume-5 = 
+ramp-volume-6 = 
+format-volume-underline = ${colors.tertiary}
+format-muted-underline = ${colors.tertiary}
+
+; Uncomment line below for different underline when muted.
+; format-muted-underline = ${colors.primary}
+
+[module/wlan]
+type = internal/network
+
+interface = wlp1s0
+
+interval = 5
+label-font = 2
+label-connected =  %essid% 
+label-disconnected =  Not Connected
+
+label-connected-underline = ${colors.tertiary}
+label-disconnected-underline = ${colors.tertiary}
+
+
 [module/battery]
 type = internal/battery
 full-at = 100
@@ -132,42 +171,6 @@ label-font = 1
 ; ramp-capacity-4-underline = ${colors.tertiary}
 
 
-[module/volume]
-type = internal/alsa
-;speaker-mixer = Speaker
-;headphone-mixer = Headphone
-;headphone-id = 16
-;mapped = true
-format-volume = <ramp-volume> <label-volume>   
-label-volume = %percentage%%
-format-muted =   <label-muted>
-label-muted = %percentage%%
-
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
-ramp-volume-3 = 
-ramp-volume-4 = 
-ramp-volume-5 = 
-ramp-volume-6 = 
-format-volume-underline = ${colors.tertiary}
-format-muted-underline = ${colors.tertiary}
-
-; Uncomment line below for different underline when muted.
-; format-muted-underline = ${colors.primary}
-
-[module/wlan]
-type = internal/network
-
-interface = wlp1s0
-
-interval = 5
-label-font = 2
-label-connected =  %essid% 
-label-disconnected =  Not Connected
-
-label-connected-underline = ${colors.tertiary}
-label-disconnected-underline = ${colors.tertiary}
 
 [module/date]
 type = internal/date
@@ -199,7 +202,6 @@ include-file = ~/.config/polybar/scripts/news/module.conf
 [module/notifs]
 type = custom/script
 interval = 3
-format-suffix = " ● "
 format-underline = ${colors.tertiary}
 exec = ~/.config/polybar/scripts/notifs/rofication-status.py
 
@@ -207,8 +209,8 @@ exec = ~/.config/polybar/scripts/notifs/rofication-status.py
 [module/weather]
 type = custom/script
 interval = 3
-format-prefix = " "
-format-prefix-font = 4
+; format-prefix = " "
+; format-prefix-font = 4
 format-prefix-underline = ${colors.tertiary} 
 exec = ~/.config/polybar/scripts/weather/wx.sh
 label-underline = ${colors.tertiary}
@@ -269,10 +271,9 @@ radius = 4
 modules-left = date keyboard 
 ;modules-center = news
 ; when wttr.in isn't down 
-;; modules-right = notifs weather
+;;modules-right = notifs weather
 ; when wttr.in is down
-;; modules-right = notifs  
-modules-right = notifs
+ modules-right = notifs  
 padding = 1
 module-margin = 1
 

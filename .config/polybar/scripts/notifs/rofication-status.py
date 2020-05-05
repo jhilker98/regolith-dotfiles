@@ -32,4 +32,7 @@ if __name__ == '__main__':
         num = '?'
 
     # only fetch resources if needed
-    print("{}".format(num))
+    if num > 0:
+        print("{} {}".format(num, ""))
+    else:
+        print("{} {}".format(num, ""))
