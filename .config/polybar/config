@@ -86,8 +86,9 @@ label-discharging = %percentage%%
 format-full = <label-full>
 ;label-charging-underline = ${colors.tertiary}
 ;label-discharging-underline = ${colors.tertiary}
+;label-full-underline = ${colors.tertiary}
 
-
+format-full-underline = ${colors.tertiary}
 format-charging-underline = ${colors.tertiary}
 format-discharging-underline = ${colors.tertiary}
 format-full-prefix = " "
@@ -268,11 +269,13 @@ radius = 4
 modules-left = date keyboard 
 ;modules-center = news
 ; when wttr.in isn't down 
- modules-right = notifs weather
+;; modules-right = notifs weather
 ; when wttr.in is down
-; modules-right = notifs  
+;; modules-right = notifs  
+modules-right = notifs
 padding = 1
 module-margin = 1
 
 
 ; vi:set filetype=dosini
+
