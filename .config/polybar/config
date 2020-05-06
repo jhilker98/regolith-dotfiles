@@ -252,37 +252,30 @@ module-margin = 1
 
 
 [bar/btm]
+bottom = true
 font-0 = "Iosevka:pixelsize=12;3"
 font-1 = "Material Icons:size=12;3"
 font-2 = "Weather Icons:size=12;0"
 font-3 = "FontAwesome:size=12;3"
+font-4 = "Symbola:size=12;0"
+line-size = 2.75
 
 ; override-redirect = true
 ; wm-restack = i3
-
-; border-color = ;00000000
-; border-bottom-size = 5 
-border-top-size = 1 
-; offset-x = 36
-; offset-y = 8 
-line-size = 2.75
-bottom = true
+; width = 90%
+; offset-x = 10
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 width = 100%
-
-
-height = 27 
+height = 27
 radius = 4
-modules-left = date keyboard 
-;modules-center = news
-; when wttr.in isn't down 
-;;modules-right = notifs weather
-; when wttr.in is down
-modules-right = notifs  
+modules-left = date
+modules-right = notifs weather
 padding = 1
 module-margin = 1
+
+
 
 
 ; vi:set filetype=dosini
