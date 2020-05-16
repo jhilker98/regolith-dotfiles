@@ -1,5 +1,5 @@
 xdg-settings set default-web-browser firefox.desktop
-neofetch
+#neofetch
 # pfetch
 wal -Rq
 source ~/.cache/wal/colors.sh
@@ -157,6 +157,6 @@ set -o vi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #PROMPT="%F{4}%n%f @ %F{3}%~%f $%b "
 # PROMPT="%F{3}%~%f $%b "
-
+#PROMPT="%f %~ $%b "
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
