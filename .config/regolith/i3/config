@@ -11,8 +11,8 @@ set $alt Mod1
 set $i3xrocks_config /home/jhilker/.config/regolith/i3xrocks.config
 
 # path to terminal. Override this to specify a custom terminal.
-set $terminal_path /home/jhilker/.local/bin/kitty
-
+# set $terminal_path /home/jhilker/.local/bin/kitty
+set $terminal_path /usr/bin/alacritty
 # Color values are defined in ~/.Xresources-regolith
 # These are the labels which define each i3 workspace.
 set_from_resource $ws1  i3-wm.workspace.01.name "1"
@@ -43,7 +43,7 @@ hide_edge_borders smart
 
 # Apps
 ## Launch // Terminal // <> Enter ##
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec alacritty
 ## Launch // Firefox // <><Shift> Enter ##
 bindsym $mod+Shift+Return exec /usr/bin/firefox
 ## Launch // GNOME Tweaks // <><Alt> t ##
@@ -56,19 +56,19 @@ bindsym $mod+Shift+space exec rofi -show run -display-run "Cmd" -theme $rofiThem
 ## Launch // Emacs // <> e ##
 bindsym $mod+e exec emacs
 ## Launch // Vim // <> v ##
-bindsym $mod+v exec kitty -e vim -u ~/.config/vim/vimrc
+bindsym $mod+v exec alacritty -e vim -u ~/.config/vim/vimrc
 ## Launch // Mail // <> m ##
-bindsym $mod+m exec kitty -e neomutt 
+bindsym $mod+m exec alacritty -e neomutt 
 
 ## Launch // Ranger // <><Shift> n ##
-bindsym $mod+Shift+n exec kitty -e ranger
+bindsym $mod+Shift+n exec alacritty -e ranger
 ## Launch // Notifications // <> n ##
 set_from_resource $i3-wm.program.notification_ui i3-wm.program.notification_ui /usr/bin/rofication-gui
 bindsym $mod+n exec $i3-wm.program.notification_ui
 ## Launch // GUI File Mng // <><Alt> n ##
 bindsym $mod+$alt+n exec nautilus
 ## Launch // News // <><Ctrl> n ##
-bindsym $mod+Ctrl+n exec kitty -e newsboat -r -c ~/.config/newsboat/cache.db -C ~/.config/newsboat/config -u ~/.config/newsboat/urls 
+bindsym $mod+Ctrl+n exec alacritty -e newsboat -r -c ~/.config/newsboat/cache.db -C ~/.config/newsboat/config -u ~/.config/newsboat/urls 
 ## Launch // Zathura // <> z ##
 bindsym $mod+z exec zathura
 ## Launch // GIMP // <> g ##
@@ -82,8 +82,8 @@ bindsym $mod+Shift+o exec oomox-gui
 ## Launch // Zoom // <><Shift>z ##
 bindsym $mod+Shift+z exec zoom
 
-## Launch // Postman // <> p ## 
-bindsym $mod+p exec postman
+## Launch // Spotify // <> s ## 
+bindsym $mod+s exec alacritty -e ncspot
 
 ## Launch // LibreOffice // <><Ctrl> l ##
 bindsym $mod+Ctrl+l exec libreoffice
@@ -265,7 +265,7 @@ bindsym $mod+Escape exec gnome-screensaver-command --lock
 ## Power // Sleep // <><Shift> s ##
 bindsym $mod+Shift+s exec systemctl suspend
 
-# bindsym $mod+Shift+v kitty -e vim ~/.vimrc
+# bindsym $mod+Shift+v alacritty -e vim ~/.vimrc
 # Cause Settings app to float above tiled windows
 floating_maximum_size -1 x -1
 for_window [class="Gnome-control-center"] floating enable
