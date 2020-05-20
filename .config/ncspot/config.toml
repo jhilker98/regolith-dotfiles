@@ -1,0 +1,4 @@
+[keybindings]
+" " = "playpause"
+"n" = "next"
+"p" = "previous"
