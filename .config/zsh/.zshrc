@@ -5,6 +5,7 @@ wal -Rq
 source ~/.cache/wal/colors.sh
 export color0_alpha="#D9${color0/'#'}"
 export BGCOLOR="#8C${color0/'#'}"
+autoload -U colors && colors
 #source ~/.profile
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -23,8 +24,8 @@ export ZSH="/home/jhilker/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
-# ZSH_THEME="robbyrussell"
+#ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="robbyrussell"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -92,8 +93,8 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 export EDITOR=vim
-export TERM=xterm-kitty
- export TERM=xterm-256color
+#export TERM=xterm-kitty
+export TERM=xterm-256color
 # export MAIL=/home/jhilker/Mail
 export EMAIL="jacob.hilker2@gmail.com"
 export NAME="Jacob Hilker"
@@ -152,11 +153,33 @@ unset __conda_setup
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
-set -o vi
+#set -o vi
+bindkey -v
+
+
+
+
+vim_ins_mode="%{$fg[red]%}[%{$fg[cyan]%}INS%{$fg[red]%}]%{$reset_color%}"
+# vim_cmd_mode="%{$fg[green]%}[CMD]%{$reset_color%}"
+vim_cmd_mode="%{$fg[red]%}[%{$fg[blue]%}NML%{$fg[red]%}]%{$reset_color%}"
+# vim_cmd_mode="%{$fg[green]%}[CMD]%{$reset_color%}"
+vim_mode=$vim_ins_mode
+
+function zle-keymap-select {
+  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+  zle reset-prompt
+}
+zle -N zle-keymap-select
+
+function zle-line-finish {
+  vim_mode=$vim_ins_mode
+}
+zle -N zle-line-finish
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #PROMPT="%F{4}%n%f @ %F{3}%~%f $%b "
-# PROMPT="%F{3}%~%f $%b "
-#PROMPT="%f %~ $%b "
+#PROMPT="%F{3}%~%f $%b "
+PROMPT="%{$fg[red]%}[%{$fg[blue]%}%n%{$reset_color%} @ %{$fg[yellow]%}%~%{$reset_color%}%{$fg[red]%}]%{$reset_color%}$%b "
+RPROMPT='${vim_mode}'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+#[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
