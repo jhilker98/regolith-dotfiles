@@ -179,7 +179,7 @@ zle -N zle-line-finish
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #PROMPT="%F{4}%n%f @ %F{3}%~%f $%b "
 #PROMPT="%F{3}%~%f $%b "
-PROMPT="${vim_mode} %{$fg[red]%}[%{$fg[blue]%}%n%{$reset_color%} @ %{$fg[yellow]%}%~%{$reset_color%}%{$fg[red]%}]%{$reset_color%}$%b "
+PROMPT='${vim_mode} %{$fg[red]%}[%{$fg[blue]%}%n%{$reset_color%} @ %{$fg[yellow]%}%~%{$reset_color%}%{$fg[red]%}]%{$reset_color%}$%b '
 #RPROMPT='${vim_mode}'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
