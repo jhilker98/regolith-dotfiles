@@ -1,6 +1,6 @@
 #!/bin/bash 
  
-rofi -no-lazy-grab -sep "|" -dmenu -i -p 'System :' \
+MENU="$(rofi -no-lazy-grab -sep "|" -dmenu -i -p 'System :' \
 -hide-scrollbar true \
 -bw 0 \
 -lines 5 \
@@ -12,11 +12,11 @@ rofi -no-lazy-grab -sep "|" -dmenu -i -p 'System :' \
 -columns 1 \
 \
 -font "Iosevka 12" \
-<<< "Sleep  |Lock  |Logout  |Reboot  |Shutdown "
+<<< "Sleep |Lock |Logout |Reboot |Shutdown ")"
 case "$MENU" in
-  *Sleep) systemctl suspend ;;
-  *Lock) gnome-scrensaver-command --lock ;;
-  *Logout) /usr/bin/gnome-session-quit --logout ;;
-  *Reboot) /usr/bin/gnome-session-quit --reboot ;;
-  *Shutdown) /usr/bin/gnome-session-quit --power-off ;;
+  *Sleep*) systemctl suspend ;;
+  *Lock*) gnome-scrensaver-command --lock ;;
+  *Logout*) /usr/bin/gnome-session-quit --logout ;;
+  *Reboot*) /usr/bin/gnome-session-quit --reboot ;;
+  *Shutdown*) /usr/bin/gnome-session-quit --power-off ;;
 esac

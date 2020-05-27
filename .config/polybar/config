@@ -215,15 +215,24 @@ type = custom/script
 interval = 3
 ; format-prefix = " "
 ; format-prefix-font = 4
+; format-prefix-underline = ${colors.tertiary} 
+
+format-prefix = " "
+format-prefix-font = 4
 format-prefix-underline = ${colors.tertiary} 
+
 exec = ~/.config/polybar/scripts/weather/wx.sh
 label-underline = ${colors.tertiary}
 
 
-
-[module/pmenu]
-type = custom/menu
-
+[module/powermenu]
+type = custom/text
+content = 
+content-padding = 2
+content-background = ${colors.tertiary}
+content-foreground = ${colors.foreground}
+click-left = $HOME/.config/polybar/scripts/sysmenu
+click-right = $HOME/.config/polybar/scripts/sysmenu
 
 ;------;
 ; BARS ;
@@ -271,7 +280,11 @@ width = 100%
 height = 27
 radius = 4
 modules-left = date
-modules-right = notifs weather
+; when wttr.in is down
+modules-right = notifs weather powermenu 
+
+;  when wttr.in isn't down
+;; modules-right = notifs
 padding = 1
 module-margin = 1
 
