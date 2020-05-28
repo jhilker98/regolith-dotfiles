@@ -441,6 +441,11 @@ functions with richer versions. Let’s install it!
 :config
 (tagedit-add-experimental-features))
 #+END_SRC
+*** YAML Mode
+#+BEGIN_SRC emacs-lisp
+(use-package yaml-mode
+:ensure t)
+#+END_SRC 
 ** Org Packages
 *** Org Bullets
 This allows for better org-mode bullets.
