@@ -36,6 +36,7 @@ Plugin 'liuchengxu/vim-which-key'
 Plugin 'tpope/vim-surround'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'chrisbra/unicode.vim'
+Plugin 'lilydjwg/colorizer'
 
 " Track the engine.
 Plugin 'SirVer/ultisnips'
@@ -76,6 +77,9 @@ let g:AirlineTheme='solarized'
 let g:airline_solarized_bg='dark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+
+let g:cssColorVimDoNotMessMyUpdatetime = 1
+
 " make spelling errors bold insted of red
 hi clear SpellBad
 hi SpellBad cterm=bold
@@ -108,22 +112,17 @@ autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 " Always Highlight my search results
 set hlsearch
 " Spell-check set to <leader>o, 'o' for 'orthography':
-	map <leader>o :setlocal spell! spelllang=en_us<CR>
+	map <leader>sb :setlocal spell! spelllang=en_us<CR>
 
 
 " Keybindings
-
-"" General Keybindings
+"" Disable Arrow Keys
+" nnoremap <up>    <nop>
+" nnoremap <down>  <nop>
+" nnoremap <left>  <nop>
+" nnoremap <right> <nop>
+" General Keybindings
 set backspace=indent,eol,start
-"""disable arrow keys
-nnoremap <up>    <nop>
-nnoremap <down>  <nop>
-nnoremap <left>  <nop>
-nnoremap <right> <nop>
-inoremap <up>    <nop>
-inoremap <down>  <nop>
-inoremap <left>  <nop>
-inoremap <right> <nop>
 """Use space as leader
 let mapleader=" "
 
@@ -205,3 +204,5 @@ aug end
 
 " Always split below and right rather than vim defaults 
 set splitbelow splitright
+
+highlight Comment cterm=italic
