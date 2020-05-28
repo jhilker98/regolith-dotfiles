@@ -14,9 +14,15 @@ such as the functions I use, the UI settings, etc.
 #+END_SRC
 ** Agenda File Setup
    Here I am setting up the agenda file.
+*** During the School Year
 #+BEGIN_SRC emacs-lisp
-(setq org-agenda-files (list "~/Dropbox/notes/spring-2020.org" "~/Dropbox/org/agenda/agenda.org"))
+;(setq org-agenda-files (list "~/Dropbox/notes/spring-2020.org" "~/Dropbox/org/agenda/agenda.org"))
+#+END_SRC
 
+*** During The Summer
+#+BEGIN_SRC emacs-lisp
+
+(setq org-agenda-files (list "~/Dropbox/org/agenda/agenda.org"))
 #+END_SRC
 ** Setting A Customize File
 #+BEGIN_SRC emacs-lisp
@@ -44,10 +50,6 @@ such as the functions I use, the UI settings, etc.
       org-agenda-block-separator nil
       org-agenda-compact-blocks t
       org-agenda-start-with-log-mode t)
-#+END_SRC
-** Syncing Bug Fix
-#+BEGIN_SRC emacs-lisp
-(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 #+END_SRC
 * Package Initialization and Bootstrapping
 ** Package Initialization and Extra Sources
@@ -170,6 +172,7 @@ For toggling fill and unfill.
 :ensure t
 :config
 (yas-global-mode t))
+
 (use-package yasnippet-snippets
 :ensure t)
 #+END_SRC
@@ -307,6 +310,12 @@ Here is a package for using solarized.
 *** Wordgen Mode
 #+BEGIN_SRC emacs-lisp
 (use-package wordgen
+:ensure t)
+#+END_SRC
+*** Mediawiki
+This package lets me use wikipedia syntax highlighting.
+#+BEGIN_SRC emacs-lisp
+(use-package mediawiki
 :ensure t)
 #+END_SRC
 ** Writer Packages
@@ -522,7 +531,6 @@ If I find a recipe I want to try I want to save it easily.
 
 #+END_SRC
 
-
 * Miscellaneous Formats
 ** Title Format
 #+BEGIN_SRC emacs-lisp
@@ -724,10 +732,6 @@ I want to display battery in the modeline.
 ** Use Line Numbers in Prog Mode
 #+BEGIN_SRC emacs-lisp
 (add-hook 'prog-mode-hook 'linum-relative-mode)
-#+END_SRC
-** Web Mode with JS2 Mode
-#+BEGIN_SRC emacs-lisp
-(add-hook 'js2-mode-hook 'web-mode)
 #+END_SRC
 * Keybindings
   Here is a list of all keybindings in JMacs.
