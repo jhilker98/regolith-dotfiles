@@ -1,8 +1,13 @@
 # ls aliases
-alias ls="exa --color=auto"
-alias la="exa -la"
-alias ll="exa -lah"
-alias lsr="exa -alhrs modified"
+#alias ls="exa --color=auto"
+#alias la="exa -la"
+#alias ll="exa -lah"
+#alias lsr="exa -alhrs modified"
+alias ls="ls --color=auto"
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
 #Navigation and Clearing Aliases
 alias home="cd /home/jhilker"
 alias rm="rm -rfi"
@@ -10,7 +15,7 @@ alias Linux="cd ~/LinuxConfig; exa -alh"
 alias dynworld="cd /home/jhilker/Documents/RPGs/dynasticworld; emacs dynastic-world.org"
 alias mkdir="mkdir -p"
 alias cp="cp -r"
-alias cl='[ $[$RANDOM % 100] = 0 ] && timeout 6 cbeams -o; clear || clear'
+alias cl='[ $[$RANDOM % 10] = 0 ] && timeout 6 cbeams -o; clear || clear'
 # alias clear='[ $[$RANDOM % 10] = 0 ] && timeout 6 cbeams -o; clear || clear'
 #alias cl="clear"
 #alias rm="rm -rfi"
@@ -18,7 +23,7 @@ alias clock="clear; echo -e 'It is $(date +%I:%M) $(date +%p) on $(date +%a), $(
 alias font="fc-cache -f -v"
 alias mutt="mbsync -a && neomutt; ref"
 alias proc="ytop -m"
-alias ref="source ~/.bashrc"
+alias ref="source ~/.zshrc"
 alias wx="curl 'wttr.in?format=3'"
 #alias neomutt="neomutt; cl; ref"
 #alias newsboat="newsboat; cl; ref"
@@ -30,7 +35,7 @@ alias upgrade="sudo apt update && sudo apt upgrade -y"
 alias autoremove="sudo apt autoremove -y"
 alias purge="sudo apt purge -y"
 alias fix="sudo dpkg --configure -a"
-alias music="tizonia --spotify-playlist-id https://open.spotify.com/playlist/69uvLQBtqvAMoyNFPy7ErL -s --spotify-allow-explicit-tracks"
+alias music="tizonia --spotify-playlist-id  https://open.spotify.com/playlist/69uvLQBtqvAMoyNFPy7ErL -s --spotify-allow-explicit-tracks"
 alias code="tizonia --spotify-playlist-id https://open.spotify.com/playlist/0sSrQJpH4B00xG7bPDrJXp -s --spotify-allow-explicit-tracks"
 alias erb="tizonia --spotify-playlist-id https://open.spotify.com/playlist/0tpXl15JsHSKrHx4TgSbOy -s --spotify-allow-explicit-tracks"
 alias geb="tizonia --spotify-playlist-id 'https://open.spotify.com/playlist/3iSNMhp2CnftVz43VA5lwP' -s"
@@ -46,6 +51,10 @@ alias swing='tizonia --youtube-audio-playlist "https://www.youtube.com/playlist?
 alias jazz="tizonia --youtube-audio-playlist 'https://www.youtube.com/playlist?list=PLc2FAW0Ie_V7q2mtrV-0xGDe3-G8d9YyP' -s"
 alias doom="tizonia --spotify-album 'Doom (Original Game Soundtrack)' --spotify-allow-explicit-tracks"
 alias cuphead="tizonia --spotify-album 'Cuphead (Original Soundtrack)' --spotify-allow-explicit-tracks"
+alias terraf="tizonia --spotify-album 'Terraformer' --spotify-allow-explicit-tracks"
+alias guard="tizonia --spotify-album-id 3KJ44LRyBaBsZi2eW79pCV --spotify-allow-explicit-tracks"
+alias ratm='tizonia --spotify-album-id "4LaRYkT4oy47wEuQgkLBul" --spotify-allow-explicit-tracks'
+alias atl="tizonia --youtube-audio-stream 'https://www.youtube.com/watch?v=4ck4BkrUFzk'"
 alias desktop="cd ~/Desktop"
 alias documents="cd ~/Documents"
 alias dropbox="cd ~/Dropbox"
@@ -69,13 +78,13 @@ alias clone="git clone"
 alias vim="vim -u ~/.config/vim/vimrc"
 #alias python="python3.8"
 #writing, worldbuilding, and rpg aliases
-alias Ashes="cd ~/Documents/Ashes-World; exa -alh"
+alias broken="cd ~/Documents/broken-thrones; exa -alh"
 ##alias AshesWrite="cd ~/Ashes-World/writing; exa -alh"
 ##alias AshesCampaign="cd ~/Ashes-World/campaigns; exa -alh"
-alias Aurea="cd ~/DOcumentsAurea-World; exa -alh"
+alias Aurea="cd ~/Documents/Aurea; exa -alh"
 ##alias AureaCampaign="cd ~/Aurea-World/campaigns; exa -alh"
 ##alias AureaLore="emacs ~/Aurea-World/lore/lore.org"
-alias Kidal="cd ~/Documents/Kidal; exa -alh"
+alias shatter="cd ~/Documents/shattered-skies; exa -alh"
 ##alias KidalLore="emacs ~/Kidal/lore/lore.org"
 ##alias hunt="emacs ~/Ashes-World/campaigns/the-great-hunt/greatHunt.org"
 ##alias campaign="cd ~/solo-campaigns; exa -alh"
@@ -84,10 +93,11 @@ alias Kidal="cd ~/Documents/Kidal; exa -alh"
 alias els="rlwrap telnet elessar.mudhosting.net 7778"
 alias sol="rlwrap telnet Middle-earth.us 4500"
 alias bod="rlwrap telnet bod.westeros.org 3000"
+alias mume="rlwrap telnet mume.org 4242"
+alias t2t="rlwrap telnet t2tmud.org 9999"
+alias mord="rlwrap telnet www.mordormud.net 4000"
+alias loe="rlwrap telnet lofe.org 8000"
 alias 2048="~/2048"
 
-# Timer Aliases
-alias pom="termdown 25m -b -s && notify-send 'Timer Done' 'Your timer is done.'"
-alias pos="termdown 5m -b -s && notify-send 'Timer Done' 'Your timer is done.' "
-alias pol="termdown 20m -b -s && notify-send 'Timer Done' 'Your timer is done.'"
 
+alias gocl="ssh jacob.hilker2@35.196.197.239"
