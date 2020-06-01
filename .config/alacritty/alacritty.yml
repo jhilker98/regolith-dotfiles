@@ -1,12 +1,60 @@
-# Fontd
 font:
   normal:
+        family: Iosevka Medium
+        size: 12.0
+        style: Regular
+  italic:
     family: Iosevka Medium
     size: 12.0
+    style: Italic
+  bold:
+    family: Iosevka Medium
+    size: 12.0
+    style: Bold
 
 # Opacity
 background_opacity: 0.8
 
-# Blink Cursor
-cursor_blink_interval: 300
-cursor_blink: true
+#colors:
+#  primary:
+#    background: "#0c0807"
+#    foreground: "#dcdad3"
+#    cursor: "#dcdad3"
+#  normal:
+#   black: "#0c0807"
+#   red: "#AB1817"
+#   green: "#8B745D"
+#   yellow: "#9D8A71"
+#   blue: "#5064A3"
+#   magenta: "#ABA59A"
+#   cyan: "#C3BBAC"
+#   white: "#dcdad3"
+   
+# BEGIN ACE
+colors:
+  primary:
+    background: '0x0c0807'
+    foreground: '0xdcdad3'
+  cursor:
+    text:       '0x0c0807'
+    cursor:     '0xdcdad3'
+  normal:
+    black:      '0x0c0807'
+    red:        '0xAB1817'
+    green:      '0x8B745D'
+    yellow:     '0x9D8A71'
+    blue:       '0x5064A3'
+    magenta:    '0xABA59A'
+    cyan:       '0xC3BBAC'
+    white:      '0xdcdad3'
+  bright:
+    black:      '0x9a9893'
+    red:        '0xAB1817'
+    green:      '0x8B745D'
+    yellow:     '0x9D8A71'
+    blue:       '0x5064A3'
+    magenta:    '0xABA59A'
+    cyan:       '0xC3BBAC'
+    white:      '0xdcdad3'
+
+# END ACE
