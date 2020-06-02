@@ -2,3 +2,10 @@
 " " = "playpause"
 "n" = "next"
 "p" = "previous"
+
+[saved_state]
+volume = 75
+
+[theme]
+playing_selected = "light white"
+title = "light white"
