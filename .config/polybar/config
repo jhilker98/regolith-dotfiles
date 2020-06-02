@@ -1,3 +1,5 @@
+; vi:set filetype=dosini
+
 ;--------;
 ; COLORS ;
 ;--------;
@@ -54,7 +56,10 @@ label-mode-background = ${colors.primary}
 ; focused = Active workspace on focused monitor
 label-focused = %index%
 label-focused-background = ${colors.background}
-label-focused-underline= ${colors.tertiary}
+;; red underline
+label-focused-underline = ${colors.primary}
+;; blue underline
+;;label-focused-underline = ${colors.tertiary} 
 label-focused-padding = 1.75
 
 ; unfocused = Inactive workspace on any monitor
@@ -252,7 +257,7 @@ foreground = ${colors.foreground}
 width = 100%
 height = 27
 radius = 4
-modules-left = i3
+modules-left = i3 
 modules-center = time
 modules-right = volume wlan battery 
 padding = 1
@@ -279,17 +284,16 @@ foreground = ${colors.foreground}
 width = 100%
 height = 27
 radius = 4
-modules-left = date
-; when wttr.in is down
+modules-left = date keyboard
+; when wttr.in isn't down
 modules-right = notifs weather powermenu 
 
-;  when wttr.in isn't down
-;; modules-right = notifs
+;  when wttr.in is down
+;; modules-right = notifs powermenu
 padding = 1
 module-margin = 1
 
 
 
 
-; vi:set filetype=dosini
 
