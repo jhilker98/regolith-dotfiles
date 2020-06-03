@@ -56,12 +56,17 @@ bindsym $mod+Shift+space exec rofi -show run -display-run "Cmd" -theme $rofiThem
 ## Launch // Emacs // <> e ##
 bindsym $mod+e exec emacs
 ## Launch // Vim // <> v ##
-bindsym $mod+v exec alacritty -e vim -u ~/.config/vim/vimrc
-## Launch // Mail // <> m ##
-bindsym $mod+m exec alacritty -e neomutt 
+#bindsym $mod+v exec alacritty -e vim -u ~/.config/vim/vimrc
+#bindsym $mod+v exec kitty -e vim -u ~/.config/vim/vimrc
 
+bindsym $mod+v exec alacritty -e nvim
+#bindsym $mod+v exec kitty -e nvim 
+## Launch // Mail // <> m ##
+#bindsym $mod+m exec alacritty -e neomutt 
+bindsym $mod+m exec kitty -e neomutt
 ## Launch // Ranger // <><Shift> n ##
 bindsym $mod+Shift+n exec alacritty -e ranger
+#bindsym $mod+Shift+n exec kitty -e ranger
 ## Launch // Notifications // <> n ##
 set_from_resource $i3-wm.program.notification_ui i3-wm.program.notification_ui /usr/bin/rofication-gui
 bindsym $mod+n exec $i3-wm.program.notification_ui
@@ -69,6 +74,7 @@ bindsym $mod+n exec $i3-wm.program.notification_ui
 bindsym $mod+$alt+n exec nautilus
 ## Launch // News // <><Ctrl> n ##
 bindsym $mod+Ctrl+n exec alacritty -e newsboat -r -c ~/.config/newsboat/cache.db -C ~/.config/newsboat/config -u ~/.config/newsboat/urls 
+#bindsym $mod+Ctrl+n exec kitty -e newsboat -r -c ~/.config/newsboat/cache.db -C ~/.config/newsboat/config -u ~/.config/newsboat/urls 
 ## Launch // Zathura // <> z ##
 bindsym $mod+z exec zathura
 ## Launch // GIMP // <> g ##
@@ -81,13 +87,13 @@ bindsym $mod+Shift+d exec discord-ptb
 bindsym $mod+Shift+o exec oomox-gui
 ## Launch // Zoom // <><Shift>z ##
 bindsym $mod+Shift+z exec zoom
-
 ## Launch // Spotify // <> s ## 
 bindsym $mod+s exec alacritty -e ncspot
-
+#bindsym $mod+s exec kitty -e ncspot
 ## Launch // LibreOffice // <><Ctrl> l ##
 bindsym $mod+Ctrl+l exec libreoffice
-
+## Launch // LibreOffice // <><Shift> m ##
+bindsym $mod+Shift+m exec manuskript
 ## Settings // Open Settings // <><Alt> c ##
 bindsym $mod+$alt+c exec gnome-control-center
 ## Settings // Display Settings // <><Alt> d ##
