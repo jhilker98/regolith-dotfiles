@@ -227,8 +227,8 @@ format-prefix-font = 4
 format-prefix-underline = ${colors.tertiary} 
 
 exec = ~/.config/polybar/scripts/weather/wx.sh
+click-left = alacritty -e $HOME/.config/polybar/scripts/weather/wtr.sh & 
 label-underline = ${colors.tertiary}
-
 
 [module/powermenu]
 type = custom/text
