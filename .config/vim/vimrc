@@ -37,7 +37,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'chrisbra/unicode.vim'
 Plugin 'lilydjwg/colorizer'
-
+Plugin 'suan/vim-instant-markdown'
 " Track the engine.
 Plugin 'SirVer/ultisnips'
 
