@@ -54,6 +54,7 @@ label-focused = %index%
 label-focused-background = ${colors.background}
 ;; red underline
 label-focused-underline = ${colors.primary}
+label-focused-overline = ${colors.primary}
 ;; blue underline
 ;;label-focused-underline = ${colors.tertiary} 
 label-focused-padding = 1.75
@@ -77,7 +78,8 @@ label-urgent-padding = 1.75
 ; label-separator = |
 
 [module/volume]
-type = internal/alsa
+;type = internal/alsa
+type = internal/pulseaudio
 interval = 10
 ;speaker-mixer = Speaker
 ;headphone-mixer = Headphone
@@ -198,8 +200,6 @@ label-indicator-on-numlock = NUM
 label-indicator-off-numlock = 
 label-indicator-on-scrolllock = SCRL
 label-indicator-off-scrolllock =
-
-
 
 ; [module/news]
 include-file = ~/.config/polybar/scripts/news/module.conf
