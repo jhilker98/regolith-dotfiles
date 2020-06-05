@@ -9,14 +9,14 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-speeddating'
+Plugin 'tpope/vim-fugitive' "git in vim
+Plugin 'tpope/vim-speeddating' "dates in vim
 Plugin 'tpope/vim-markdown'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'preservim/nerdtree'
-"Plugin 'ervandew/supertab' "autocompleting code and such
+Plugin 'altercation/vim-colors-solarized' "solarized color scheme
+Plugin 'vim-airline/vim-airline' "top and bottom status bars
+Plugin 'vim-airline/vim-airline-themes' "bar themes
+Plugin 'preservim/nerdtree' "file manager in vim
+Plugin 'ervandew/supertab' "autocompleting code and such
 Plugin 'junegunn/limelight.vim' " Highlights only active paragraph
 Plugin 'junegunn/goyo.vim' " Full screen writing mode
 Plugin 'reedes/vim-lexical' " Better spellcheck mappings
@@ -38,7 +38,7 @@ Plugin 'lilydjwg/colorizer'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'neoclide/coc.nvim'
 Plugin 'jiangmiao/auto-pairs'
-
+Plugin 'vimwiki/vimwiki'
 " Track the engine.
 Plugin 'SirVer/ultisnips'
 
@@ -52,7 +52,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-
+Plugin 'mhinz/vim-startify' "start menu for vim
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -70,12 +70,12 @@ filetype plugin indent on    " required
 
 "Theme Config
 syntax on
-" set background="dark"
+set background="dark"
 
 """ Use red underline for spell check.
 augroup my_colours
   autocmd!
-  autocmd ColorScheme wal hi SpellBad cterm=underline
+  autocmd ColorScheme solarized hi SpellBad cterm=underline
 augroup END
 
 colorscheme wal
@@ -120,8 +120,8 @@ autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
 " Always Highlight my search results
 set hlsearch
-" Spell-check set to <leader>o, 'o' for 'orthography':
-	map <leader>o :setlocal spell!<CR> 
+" Spell-check set to <leader>sb, 'sb' for 'spellcheck buffer':
+	map <leader>sb :setlocal spell!<CR> 
   set spelllang=en_us
 
 " Keybindings
