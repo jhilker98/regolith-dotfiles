@@ -25,12 +25,10 @@ Plugin 'reedes/vim-textobj-sentence' " Treat sentences as text objects
 Plugin 'reedes/vim-wordy' " Weasel words and passive voice
 Plugin 'universal-ctags/ctags'
 Plugin 'majutsushi/tagbar'
-Plugin 'ajh17/VimCompletesMe'
 Plugin 'jceb/vim-orgmode'
 Plugin 'dylanaraps/wal.vim'
 Plugin 'mboughaba/i3config.vim'
 Plugin 'preservim/nerdcommenter'
-Plugin 'jiangmiao/auto-pairs'
 Plugin 'lervag/vimtex'
 Plugin 'liuchengxu/vim-which-key'
 Plugin 'tpope/vim-surround'
@@ -38,6 +36,7 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'chrisbra/unicode.vim'
 Plugin 'lilydjwg/colorizer'
 Plugin 'suan/vim-instant-markdown'
+Plugin 'neoclide/coc.nvim'
 " Track the engine.
 Plugin 'SirVer/ultisnips'
 
@@ -79,6 +78,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
 let g:cssColorVimDoNotMessMyUpdatetime = 1
+let g:coc_disable_startup_warning = 1
 
 " make spelling errors bold insted of red
 hi clear SpellBad
