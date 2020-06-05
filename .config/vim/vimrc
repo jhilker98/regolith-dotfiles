@@ -16,7 +16,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'preservim/nerdtree'
-Plugin 'ervandew/supertab' "autocompleting code and such
+"Plugin 'ervandew/supertab' "autocompleting code and such
 Plugin 'junegunn/limelight.vim' " Highlights only active paragraph
 Plugin 'junegunn/goyo.vim' " Full screen writing mode
 Plugin 'reedes/vim-lexical' " Better spellcheck mappings
@@ -38,6 +38,7 @@ Plugin 'lilydjwg/colorizer'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'neoclide/coc.nvim'
 Plugin 'jiangmiao/auto-pairs'
+
 " Track the engine.
 Plugin 'SirVer/ultisnips'
 
@@ -70,6 +71,13 @@ filetype plugin indent on    " required
 "Theme Config
 syntax on
 " set background="dark"
+
+""" Use red underline for spell check.
+augroup my_colours
+  autocmd!
+  autocmd ColorScheme wal hi SpellBad cterm=underline
+augroup END
+
 colorscheme wal
 set encoding=UTF-8
 " Airline Config
@@ -82,8 +90,8 @@ let g:cssColorVimDoNotMessMyUpdatetime = 1
 let g:coc_disable_startup_warning = 1
 
 " make spelling errors bold insted of red
-hi clear SpellBad
-hi SpellBad cterm=bold
+"hi clear SpellBad
+"hi SpellBad cterm=bold
 
 
 " Tagbar Config
@@ -113,8 +121,8 @@ autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 " Always Highlight my search results
 set hlsearch
 " Spell-check set to <leader>o, 'o' for 'orthography':
-	map <leader>sb :setlocal spell! spelllang=en_us<CR>
-
+	map <leader>o :setlocal spell!<CR> 
+  set spelllang=en_us
 
 " Keybindings
 "" Disable Arrow Keys
