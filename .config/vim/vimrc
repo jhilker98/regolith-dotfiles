@@ -120,9 +120,7 @@ autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
 " Always Highlight my search results
 set hlsearch
-" Spell-check set to <leader>sb, 'sb' for 'spellcheck buffer':
-	map <leader>sb :setlocal spell!<CR> 
-  set spelllang=en_us
+set spelllang=en_us
 
 " Keybindings
 "" Disable Arrow Keys
@@ -135,6 +133,8 @@ set backspace=indent,eol,start
 """Use space as leader
 let mapleader=" "
 
+" Spell-check set to <leader>sb, 'sb' for 'spellcheck buffer':
+map <leader>sb :setlocal spell!<CR> 
 """Toggle Line Numbers
 nnoremap <silent> <leader>tn :set invnumber invrelativenumber<CR>
 
