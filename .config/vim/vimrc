@@ -53,6 +53,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 
 Plugin 'mhinz/vim-startify' "start menu for vim
+Plugin 'morhetz/gruvbox'
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -69,19 +70,19 @@ filetype plugin indent on    " required
 
 
 "Theme Config
-syntax on
-set background="dark"
-
 """ Use red underline for spell check.
 augroup my_colours
   autocmd!
   autocmd ColorScheme solarized hi SpellBad cterm=underline
 augroup END
 
-colorscheme wal
+syntax enable
+set background=dark
+colorscheme gruvbox
 set encoding=UTF-8
+
 " Airline Config
-let g:AirlineTheme='solarized'
+let g:AirlineTheme='gruvbox'
 let g:airline_solarized_bg='dark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
