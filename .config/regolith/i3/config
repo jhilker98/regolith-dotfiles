@@ -58,9 +58,8 @@ bindsym $mod+e exec emacs
 ## Launch // Vim // <> v ##
 #bindsym $mod+v exec alacritty -e vim -u ~/.config/vim/vimrc
 #bindsym $mod+v exec kitty -e vim -u ~/.config/vim/vimrc
-
-bindsym $mod+v exec alacritty -e nvim
-#bindsym $mod+v exec kitty -e nvim 
+bindsym $mod+v exec alacritty -e ~/Downloads/nvim/bin/nvim
+#bindsym $mod+v exec kitty -e vim 
 ## Launch // Mail // <> m ##
 #bindsym $mod+m exec alacritty -e neomutt 
 bindsym $mod+m exec kitty -e neomutt
@@ -103,8 +102,8 @@ bindsym $mod+$alt+w exec gnome-control-center wifi
 ## Settings // Power // <><Alt>p ##
 bindsym $mod+$alt+p exec gnome-control-center power
 set_from_resource $rofiTheme rofi.theme "regolith-theme"
-
-
+## Launch // Calendar // <> c ##
+bindsym $mod+c exec alacritty -e calcurse
 # Navigation
 ## Navigate // Window by Name // <><Ctrl> Space ##
 bindsym $mod+Ctrl+space exec rofi -show window -theme $rofiTheme
