@@ -1,6 +1,5 @@
 #+title: JMACS
 #+author: Jacob Hilker
-#+PROPERTY: header-args :tangle yes
 #+TODO: TODO IN-PROGRESS | DONE
 * *Introduction to JMACS*
 Welcome to JMacs! This is a my personal configuration of emacs, for
@@ -16,13 +15,13 @@ such as the functions I use, the UI settings, etc.
    Here I am setting up the agenda file.
 *** During the School Year
 #+BEGIN_SRC emacs-lisp
-;(setq org-agenda-files (list "~/Dropbox/notes/spring-2020.org" "~/Dropbox/org/agenda/agenda.org"))
+;;(setq org-agenda-files (list "~/Dropbox/notes/spring-2020.org" "~/Dropbox/org/agenda/agenda.org"))
 #+END_SRC
 
 *** During The Summer
 #+BEGIN_SRC emacs-lisp
 
-(setq org-agenda-files (list "~/Dropbox/org/agenda/agenda.org"))
+(setq-default org-agenda-files (list "~/Dropbox/org/agenda/agenda.org"))
 #+END_SRC
 ** Setting A Customize File
 #+BEGIN_SRC emacs-lisp
@@ -467,7 +466,7 @@ Allows for a TOC to be generated in an org file.
 :ensure t
 :config
 (add-hook 'org-mode-hook 'org-super-agenda-mode)
-(setq org-agenda-span 'day)
+(setq org-agenda-span 'week)
 
 (setq org-super-agenda-groups
 '((:name "Today"
@@ -481,8 +480,8 @@ Allows for a TOC to be generated in an org file.
   ;  (:name "Speeches"
    ;  :tag "SPEECH")
      
-    ; (:name "Appointments"
-     ; :category "APPT")
+     (:name "Appointments"
+      :category "APPT")
      
      (:name "Coming Up Soon"
      :discard (:todo "DONE") 
@@ -547,7 +546,6 @@ If I find a recipe I want to try I want to save it easily.
 (setq-default org-display-custom-times t)
 (setq org-time-stamp-custom-formats '("<%a, %d %h>" . "<%a, %d %h %I:%M %p>"))
 #+END_SRC  
-** One Group for Centaur Tabs  
 * Specific Functions
 ** Find Files
 *** Find Config File
