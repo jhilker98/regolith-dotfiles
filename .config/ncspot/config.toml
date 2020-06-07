@@ -2,6 +2,7 @@
 " " = "playpause"
 "n" = "next"
 "p" = "previous"
+"Esc" = "back"
 
 [saved_state]
 volume = 75
