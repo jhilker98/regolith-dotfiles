@@ -78,7 +78,7 @@ augroup END
 
 syntax enable
 set background=dark
-colorscheme gruvbox
+colorscheme wal
 set encoding=UTF-8
 
 " Airline Config
@@ -215,4 +215,9 @@ aug end
 " Always split below and right rather than vim defaults 
 set splitbelow splitright
 
+" Use italic for comments
 highlight Comment cterm=italic
+
+autocmd FileType groff,markdown,org set spell
+autocmd BufNewFile BufRead /tmp/neomutt*,/tmp/calcurse*,~/.calcurse/notes/*
+set spell
