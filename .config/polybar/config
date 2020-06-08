@@ -182,17 +182,12 @@ label-font = 1
 
 
 [module/date]
-;type = internal/date
-;date = %a, %d %b
-;label = %date%
-;label-font = 1
-;label-padding = 2
-;label-underline = ${colors.tertiary}
 type = custom/script
 exec = date +'%a, %b %d'
 label-font = 1
 label-padding = 2
 label-underline = ${colors.tertiary}
+; click-left = alacritty -e calcurse -D ~/Dropbox/calcurse &
 click-left = alacritty -e calcurse &
 [module/keyboard]
 type = internal/xkeyboard
