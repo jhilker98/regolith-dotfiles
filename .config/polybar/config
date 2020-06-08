@@ -187,7 +187,6 @@ exec = date +'%a, %b %d'
 label-font = 1
 label-padding = 2
 label-underline = ${colors.tertiary}
-; click-left = alacritty -e calcurse -D ~/Dropbox/calcurse &
 click-left = alacritty -e calcurse &
 [module/keyboard]
 type = internal/xkeyboard
@@ -203,8 +202,16 @@ label-indicator-off-numlock =
 label-indicator-on-scrolllock = SCRL
 label-indicator-off-scrolllock =
 
-; [module/news]
-include-file = ~/.config/polybar/scripts/news/module.conf
+[module/todo]
+type = custom/script
+exec = ~/.config/polybar/scripts/todo/todo.sh
+format-underline = ${colors.tertiary}
+click-left = alacritty -e ~/.config/polybar/scripts/todo/list.sh &
+
+[module/appts]
+type = custom/script
+exec = ~/.config/polybar/scripts/todo/appt-bar.sh
+format-underline = ${colors.tertiary}
 
 [module/notifs]
 type = custom/script
@@ -256,7 +263,7 @@ foreground = ${colors.foreground}
 width = 100%
 height = 27
 radius = 4
-modules-left = i3 larrow 
+modules-left = i3 
 modules-center = time
 modules-right = volume wlan battery 
 padding = 1
@@ -283,8 +290,9 @@ foreground = ${colors.foreground}
 width = 100%
 height = 27
 radius = 4
-modules-left = date keyboard
+modules-left = date keyboard todo
 
+modules-center = appts
 ; when wttr.in isn't down
 modules-right = notifs weather powermenu 
 
