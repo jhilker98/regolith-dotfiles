@@ -219,5 +219,4 @@ set splitbelow splitright
 highlight Comment cterm=italic
 
 autocmd FileType groff,markdown,org set spell
-autocmd BufNewFile BufRead /tmp/neomutt*,/tmp/calcurse*,~/.calcurse/notes/*
-set spell
+autocmd BufNewFile BufRead /tmp/neomutt*,/tmp/calcurse*,~/.calcurse/notes/* set spell
