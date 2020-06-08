@@ -23,7 +23,8 @@ For most of these programs, the installation is quite simple - copy the =.config
 wav file you like and save it as alert.wav in the alerts directory. I am
 using [[http://soundbible.com/2154-Text-Message-Alert-1.html][this]] as my alert sound, but use whatever you want.
  - Since I installed NCspot as a snap app, my config file goes in
- =snap/ncspot/17/.config/ncspot=.
+ =~/snap/ncspot/17/.config/ncspot=.
+- the dictionary goes in =~/.vim/spell/=
 * Bugs :TOC:
  - TOC-Org is unavailable
    - While I haven't been able to fix this yet, I am trying to fix this. I have had no luck so far with it being installed from the =jmacs.org= file.
