@@ -220,37 +220,6 @@ interval = 3
 format-underline = ${colors.tertiary}
 exec = ~/.config/polybar/scripts/notifs/rofication-status.py
 
-[module/prev]
-type = custom/script
-interval = 86400
-format = "%{T3}<label>"
-exec = echo ""
-#exec-if = "pgrep ncspot"
-click-left = "playerctl previous"
-format-underline = ${colors.tertiary}
-
-[module/playpause]
-type = custom/ipc
-; Default
-hook-0 = echo ""
-; Playing
-hook-1 = echo ""
-; Paused
-hook-2 = echo ""
-initial = 1
-format-underline = ${colors.tertiary}
-click-left = "playerctl playpause"
-
-
-[module/next]
-type = custom/script
-interval = 86400
-format = "%{T3}<label>"
-exec = echo ""
-#exec-if = "pgrep ncspot"
-click-left = "playerctl next"
-format-underline = ${colors.tertiary}
-
 [module/spotify]
 type = custom/script
 #exec-if = "pgrep ncspot"
@@ -258,6 +227,8 @@ exec = /home/$USER/.config/polybar/scripts/spotify/music.sh
 format-underline = ${colors.tertiary}
 format-padding-underline = ${colors.tertiary}
 click-left = alacritty -e ncspot &
+format-prefix = " " 
+
 [module/weather]
 type = custom/script
 interval = 3
@@ -303,7 +274,7 @@ height = 27
 radius = 4
 modules-left = i3 
 modules-center = time 
-modules-right = spotify volume wlan battery 
+modules-right = volume wlan battery 
 padding = 1
 module-margin = 1
 
@@ -331,7 +302,7 @@ radius = 4
 modules-left = date keyboard todo 
 ; modules-center = appts
 
-modules-center = prev playpause next
+modules-center = spotify 
 module-margin-underline = ${colors.tertiary}
 ; when wttr.in isn't down
 modules-right = notifs weather powermenu 
