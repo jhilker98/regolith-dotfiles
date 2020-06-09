@@ -105,7 +105,7 @@ format-muted-underline = ${colors.tertiary}
 ; Uncomment line below for different underline when muted.
 ; format-muted-underline = ${colors.primary}
 
-[module/wlan]
+[module/wifi]
 type = internal/network
 
 interface = wlp1s0
@@ -274,7 +274,7 @@ height = 27
 radius = 4
 modules-left = i3 
 modules-center = time 
-modules-right = volume wlan battery 
+modules-right = volume wifi battery 
 padding = 1
 module-margin = 1
 
