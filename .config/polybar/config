@@ -80,8 +80,8 @@ label-urgent-padding = 1.75
 ; label-separator = |
 
 [module/volume]
-;type = internal/alsa
-type = internal/pulseaudio
+type = internal/alsa
+;type = internal/pulseaudio
 interval = 10
 ;speaker-mixer = Speaker
 ;headphone-mixer = Headphone
@@ -229,6 +229,21 @@ format-padding-underline = ${colors.tertiary}
 click-left = alacritty -e ncspot &
 format-prefix = " " 
 
+[module/playpause]
+type = custom/ipc
+; Default
+hook-0 = echo ""
+; Playing
+hook-1 = echo ""
+; Paused
+hook-2 = echo ""
+initial = 1
+format-underline = #1db954
+line-size = 1
+click-left = "playerctl play-pause"
+
+
+
 [module/weather]
 type = custom/script
 interval = 3
@@ -302,7 +317,7 @@ radius = 4
 modules-left = date keyboard todo 
 ; modules-center = appts
 
-modules-center = spotify 
+modules-center = spotify playpause 
 module-margin-underline = ${colors.tertiary}
 ; when wttr.in isn't down
 modules-right = notifs weather powermenu 
