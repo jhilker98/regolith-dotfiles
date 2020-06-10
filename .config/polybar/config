@@ -227,18 +227,19 @@ exec = /home/$USER/.config/polybar/scripts/spotify/music.sh
 format-underline = ${colors.tertiary}
 format-padding-underline = ${colors.tertiary}
 click-left = alacritty -e ncspot &
-format-prefix = " " 
+;format-prefix = " "
+tail = true
 
 [module/playpause]
 type = custom/ipc
 ; Default
-hook-0 = echo ""
+hook-0 = echo ""
 ; Playing
 hook-1 = echo ""
 ; Paused
 hook-2 = echo ""
 initial = 1
-format-underline = #1db954
+format-underline = ${colors.tertiary}
 line-size = 1
 click-left = "playerctl play-pause"
 
@@ -317,7 +318,8 @@ radius = 4
 modules-left = date keyboard todo 
 ; modules-center = appts
 
-modules-center = spotify playpause 
+modules-center = playpause spotify 
+format-modules-center-underline=${colors.tertiary} 
 module-margin-underline = ${colors.tertiary}
 ; when wttr.in isn't down
 modules-right = notifs weather powermenu 
