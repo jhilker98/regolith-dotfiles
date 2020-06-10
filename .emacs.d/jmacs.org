@@ -466,7 +466,7 @@ Allows for a TOC to be generated in an org file.
 :ensure t
 :config
 (add-hook 'org-mode-hook 'org-super-agenda-mode)
-(setq org-agenda-span 'week)
+(setq org-agenda-span 'day)
 
 (setq org-super-agenda-groups
 '((:name "Today"
