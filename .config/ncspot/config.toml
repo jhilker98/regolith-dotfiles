@@ -6,9 +6,11 @@
 
 [saved_state]
 volume = 75
+repeat = "playlist"
 
 [theme]
 playing_selected = "light white"
 title = "light white"
 highlight = "light white"
 highlight_bg = "blue"
+
