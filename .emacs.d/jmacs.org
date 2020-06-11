@@ -240,9 +240,9 @@ Here is a package for using solarized.
 (use-package atom-one-dark-theme
 :ensure t)
 #+END_SRC
-**** XResources-theme
+**** Gruvbox
 #+BEGIN_SRC emacs-lisp
-(use-package xresources-theme
+(use-package gruvbox-theme
 :ensure t)
 #+END_SRC
 *** Doom Modeline
