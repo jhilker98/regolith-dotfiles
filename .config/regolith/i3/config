@@ -104,6 +104,10 @@ bindsym $mod+$alt+p exec gnome-control-center power
 set_from_resource $rofiTheme rofi.theme "regolith-theme"
 ## Launch // Calendar // <> c ##
 bindsym $mod+c exec alacritty -e calcurse
+
+## Launch // VSCode // <><Shift>v ##
+bindsym $mod+Shift+v exec code
+
 # Navigation
 ## Navigate // Window by Name // <><Ctrl> Space ##
 bindsym $mod+Ctrl+space exec rofi -show window -theme $rofiTheme
@@ -270,7 +274,6 @@ bindsym $mod+Escape exec gnome-screensaver-command --lock
 ## Power // Sleep // <><Shift> s ##
 bindsym $mod+Shift+s exec systemctl suspend
 
-# bindsym $mod+Shift+v alacritty -e vim ~/.vimrc
 # Cause Settings app to float above tiled windows
 floating_maximum_size -1 x -1
 for_window [class="Gnome-control-center"] floating enable
