@@ -5,16 +5,41 @@
 ;--------;
 
 [colors]
-background = ${env:color0_alpha:#CC0c0c0c}
-background-alt = #444
-foreground = ${xrdb:color7:#222}
-foreground-alt = ${xrdb:color7:#222}
-primary = ${xrdb:color1:#222}
-secondary = ${xrdb:color2:#222}
-alert = ${xrdb:color3:#222}
-tertiary = ${xrdb:color4:#222}
-border = #00000000
+bg = #282828
+bg-soft = #1D2021 
+bg-hard = #32302f 
 
+fg = #EBDBB2
+fg-alt = #d5c4a1
+mf = #d5c4a1
+ac = #d65d0e
+
+bn = #308634
+bm = #E57C46
+bd = #E24C49
+text = #282828
+trans = #00000000
+white = #FFFFFF
+black = #000000
+
+;; Colors
+
+aqua = #8ec07c
+red = #cc241d
+pink = #d3869
+purple = #b16286
+blue = #458588
+darkblue = #076678
+cyan = #8ec07c
+teal = #689d6a
+green = 98971a
+lime = #98971a
+yellow = #fabd2f
+amber = #83a598
+orange = #d65d0e
+brown = #504945
+grey = #928374
+indigo = #458858
 
 ;-------;
 ; FONTS ;
@@ -23,6 +48,42 @@ border = #00000000
 ;---------;
 ; MODULES ;
 ;---------;
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+;pin-workspaces = true
+
+label-mode-padding = 1.75
+label-mode-fg = ${colors.text}
+label-mode-background = ${colors.red}
+
+; focused = Active workspace on focused monitor
+label-focused = %index%
+label-focused-background = ${colors.blue}
+label-focused-padding = 1.75
+label-focused-foreground = ${colors.fg}
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-padding = 1.75
+label-unfocused-background = ${colors.bg-hard}
+label-unfocused-foreground = ${colors.fg}
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-background = ${self.label-focused-background}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-background = ${colors.red}
+label-urgent-padding = 1.75
+
+; Separator in between workspaces
+; label-separator = |
+
 
 [module/time]
 type = internal/date
@@ -34,151 +95,110 @@ time = %I:%M %p
 time-alt = %H:%M 
 label = %time%
 label-font = 1
-label-padding = 2
-label-underline = ${colors.tertiary}
-
-[module/i3]
-type = internal/i3
-format = <label-state> <label-mode>
-index-sort = true
-wrapping-scroll = false
-
-; Only show workspaces on the same output as the bar
-;pin-workspaces = true
-
-label-mode-padding = 1.75
-label-mode-foreground = ;000
-label-mode-background = ${colors.primary}
-
-; focused = Active workspace on focused monitor
-label-focused = %index%
-label-focused-background = ${colors.background}
-;; red underline and overline
-;label-focused-underline = ${colors.primary}
-;label-focused-overline = ${colors.primary}
-;; blue underline
-label-focused-underline = ${colors.tertiary} 
-
-label-focused-padding = 1.75
-
-; unfocused = Inactive workspace on any monitor
-label-unfocused = %index%
-label-unfocused-padding = 1.75
-
-; visible = Active workspace on unfocused monitor
-label-visible = %index%
-label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
-
-; urgent = Workspace with urgency hint set
-label-urgent = %index%
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 1.75
-
-; Separator in between workspaces
-; label-separator = |
+label-padding = 1
+;label-background = ${colors.fg}
+;label-foreground = ${colors.text}
+label-background = ${colors.bg-hard}
+label-foreground = ${colors.fg}
+;label-underline = ${colors.orange}
+format-prefix = ""
+format-prefix-background = ${colors.orange}
+format-prefix-foreground = ${colors.fg}
+format-prefix-padding = 1
 
 [module/volume]
 type = internal/alsa
-;type = internal/pulseaudio
 interval = 10
-;speaker-mixer = Speaker
-;headphone-mixer = Headphone
-;headphone-id = 16
-;mapped = true
-format-volume = <ramp-volume> <label-volume>   
-label-volume = %percentage%%
-format-muted =   <label-muted>
-label-muted = %percentage%%
 
+format-volume = <ramp-volume><label-volume>
 ramp-volume-0 = 
-ramp-volume-1 =  
-ramp-volume-2 =  
-ramp-volume-3 =  
+ramp-volume-1 =   
+ramp-volume-2 =   
+ramp-volume-3 = 
 ramp-volume-4 = 
 ramp-volume-5 =  
-ramp-volume-6 = 
-format-volume-underline = ${colors.tertiary}
-format-muted-underline = ${colors.tertiary}
+ramp-volume-6 =  
+label-volume = %percentage%%
+label-volume-padding = 1
+ramp-volume-padding = 1
+ramp-volume-background = ${colors.green}
+label-volume-background = ${colors.bg-hard}
 
-; Uncomment line below for different underline when muted.
-; format-muted-underline = ${colors.primary}
+format-muted = <label-muted>
+label-muted = %percentage%%
+format-muted-prefix =   
+format-muted-prefix-background = ${colors.red}
+label-muted-background = ${colors.bg-hard}
+label-muted-padding = 1
+format-muted-prefix-padding = 1
 
 [module/wifi]
 type = internal/network
-
 interface = wlp1s0
+interval = 3.0
 
-interval = 5
-label-font = 2
-label-connected =  %essid% 
-label-disconnected =  Not Connected
+format-connected = <label-connected>
+label-connected = %essid%
+format-connected-prefix =  
+format-connected-prefix-padding = 1
+label-connected-padding = 1
+;format-connected-prefix-margin = 1
+format-connected-prefix-background = ${colors.blue}
+label-connected-background = ${colors.bg-hard}
 
-label-connected-underline = ${colors.tertiary}
-label-disconnected-underline = ${colors.tertiary}
+format-disconnected =  Not Connected
+format-disconnected-prefix = 
+format-disconnected-prefix-padding = 1
+format-disconnected-prefix-background = ${colors.red}
+format-disconnected-background = ${colors.bg-hard}
 
 
 [module/battery]
 type = internal/battery
-full-at = 100
+full-at = 99
 time-format = %H:%M
 battery = BAT0
 adapter = ADP0
-format-charging = <animation-charging> <label-charging>
-;label-charging = %percentage%% (%time%)
-label-charging = %percentage%%
-format-discharging = <ramp-capacity> <label-discharging>
-;label-discharging = %percentage%% (%time%)
-label-discharging = %percentage%%
-format-full = <label-full>
-;label-charging-underline = ${colors.tertiary}
-;label-discharging-underline = ${colors.tertiary}
-;label-full-underline = ${colors.tertiary}
 
-format-full-underline = ${colors.tertiary}
-format-charging-underline = ${colors.tertiary}
-format-discharging-underline = ${colors.tertiary}
-format-full-prefix = " "
+;; Discharging formatting and colors
+format-discharging = <ramp-capacity><label-discharging>
 ramp-capacity-0 = 
 ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
 
-ramp-capacity-0-foreground = ${colors.primary}
-ramp-capacity-foreground   = ${colors.foreground}
-bar-capacity-width = 10
-
+ramp-capacity-0-background = ${colors.red}
+ramp-capacity-1-background = ${colors.red}
+ramp-capacity-2-background = ${colors.orange}
+ramp-capacity-3-background = ${colors.orange}
+ramp-capacity-4-background = ${colors.green}
+ramp-capacity-padding = 1
+label-discharging-padding = 1
+label-discharging-background = ${colors.bg-hard}
+;; Charging formatting and colors
+format-charging = <animation-charging><label-charging>
+label-charging = %percentage%%
 animation-charging-0 = ""
 animation-charging-1 = ""
 animation-charging-2 = ""
 animation-charging-3 = ""
 animation-charging-4 = ""
-
 animation-charging-framerate = 750
+animation-charging-padding = 1
+animation-charging-background = ${colors.blue}
+label-charging-padding = 1
+label-charging-background = ${colors.bg-hard}
 
-label-font = 1
 
-; ramp-capacity-0-underline = ${colors.tertiary}
-; ramp-capacity-1-underline = ${colors.tertiary}
-; ramp-capacity-2-underline = ${colors.tertiary}
-; ramp-capacity-3-underline = ${colors.tertiary}
-; ramp-capacity-4-underline = ${colors.tertiary}
-; 
-; animation-charging-0-underline = ${colors.tertiary}
-; animation-charging-1-underline = ${colors.tertiary}
-; animation-charging-2-underline = ${colors.tertiary}
-; animation-charging-3-underline = ${colors.tertiary}
-; animation-charging-4-underline = ${colors.tertiary}
-
-; Uncomment these for anmated discharging battery underline
-; ramp-capacity-0-underline = ${colors.primary}
-; ramp-capacity-1-underline = ${colors.primary}
-; ramp-capacity-2-underline = ${colors.tertiary}
-; ramp-capacity-3-underline = ${colors.tertiary}
-; ramp-capacity-4-underline = ${colors.tertiary}
-
+;; full formatting and colors
+format-full = <label-full>
+label-full = %percentage%%
+label-full-padding = 1
+label-full-background = ${colors.bg-hard}
+format-full-prefix = 
+format-full-prefix-padding = 1
+format-full-prefix-background = ${colors.green}
 
 
 [module/date]
@@ -186,13 +206,19 @@ type = custom/script
 exec = date +'%a, %b %d'
 label-font = 1
 label-padding = 2
-label-underline = ${colors.tertiary}
+label-background = ${colors.bg-hard}
 click-left = alacritty -e calcurse &
 click-right = alacritty -e ~/.config/polybar/scripts/todo/appt-bar.sh &
+; format-prefix = 󰸗    
+format-prefix =  
+format-prefix-background = ${colors.blue}
+format-prefix-padding = 1
+module-padding = 2
+
 [module/keyboard]
 type = internal/xkeyboard
 format = <label-indicator>
-format-underline = ${colors.tertiary}
+format-underline = ${colors.blue}
 indicator-icon-0 = caps lock;-CL;+CL
 indicator-icon-1 = scroll lock;;+SL
 indicator-icon-2 = num lock;-NL;+NL
@@ -203,33 +229,53 @@ label-indicator-off-numlock =
 label-indicator-on-scrolllock = SCRL
 label-indicator-off-scrolllock =
 
+format-module-margin = 2
+
 [module/todo]
 type = custom/script
 exec = ~/.config/polybar/scripts/todo/todo.sh
-format-underline = ${colors.tertiary}
+format-prefix = 
+format-prefix-background = ${colors.purple}
 click-left = alacritty -e ~/.config/polybar/scripts/todo/list.sh &
+format-prefix-padding = 1
+label-padding = 1
+label-background = ${colors.bg-hard}
 
 [module/appts]
 type = custom/script
 exec = ~/.config/polybar/scripts/todo/appt-bar.sh
-format-underline = ${colors.tertiary}
+format-underline = ${colors.blue}
+
+
 
 [module/notifs]
 type = custom/script
 interval = 3
-format-underline = ${colors.tertiary}
 exec = ~/.config/polybar/scripts/notifs/rofication-status.py
+
+format-prefix =  
+format-prefix-background = ${colors.purple}
+format-prefix-foreground = ${colors.fg}
+format-prefix-padding = 1
+;exec-padding = 1
+;format-padding = 1
+;format-exec-padding = 1
+label-padding = 1
+format-background = ${colors.bg-hard}
 
 [module/spotify]
 type = custom/script
 #exec-if = "pgrep ncspot"
 exec = /home/$USER/.config/polybar/scripts/spotify/music.sh
-format-underline = ${colors.tertiary}
-format-padding-underline = ${colors.tertiary}
+; format-underline = ${colors.blue}
+; format-padding-underline = ${colors.blue}
 click-left = alacritty -e ncspot &
 ;format-prefix = " "
 tail = true
+format-background = ${colors.bg-hard}
+format-padding = 1
 
+# format-prefix = ${playpause}
 [module/playpause]
 type = custom/ipc
 ; Default
@@ -239,33 +285,35 @@ hook-1 = echo ""
 ; Paused
 hook-2 = echo ""
 initial = 1
-format-underline = ${colors.tertiary}
+; format-underline = ${colors.blue}
 line-size = 1
 click-left = "playerctl play-pause"
-
-
+format-background = ${colors.blue}
+format-padding = 1
 
 [module/weather]
 type = custom/script
 interval = 3
 ; format-prefix = " "
 ; format-prefix-font = 4
-; format-prefix-underline = ${colors.tertiary} 
+; format-prefix-underline = ${colors.blue} 
 
-format-prefix = " "
-format-prefix-font = 4
-format-prefix-underline = ${colors.tertiary} 
-
+format-prefix = ""
+format-prefix-font = 3
+format-prefix-padding = 1
+format-prefix-background = ${colors.orange} 
+format-prefix-foreground = ${colors.fg}
 click-left = alacritty -e /home/$USER/.config/polybar/scripts/weather/wtr.sh &
 exec = ~/.config/polybar/scripts/weather/wtr-bar.sh
-label-underline = ${colors.tertiary}
+label-background = ${colors.bg-hard}
+label-padding = 1
 
 [module/powermenu]
 type = custom/text
 content = 
-content-padding = 2
-content-background = ${colors.tertiary}
-content-foreground = ${colors.foreground}
+content-padding = 1
+content-background = ${colors.darkblue}
+content-fg = ${colors.fg}
 click-left = $HOME/.config/polybar/scripts/sysmenu
 click-right = $HOME/.config/polybar/scripts/sysmenu
 
@@ -283,8 +331,8 @@ font-3 = "FontAwesome:size=12;3"
 font-4 = "Symbola:size=12;0"
 line-size = 2.75
 
-background = ${colors.background}
-foreground = ${colors.foreground}
+background = ${colors.bg}
+fg = ${colors.fg}
 width = 100%
 height = 27
 radius = 4
@@ -303,6 +351,7 @@ font-1 = "Material Icons:size=12;3"
 font-2 = "Weather Icons:size=12;0"
 font-3 = "FontAwesome:size=12;3"
 font-4 = "Symbola:size=12;0"
+font-5 = "Material Design Icons Desktop:size=12;3"
 line-size = 2.75
 enable-ipc = true
 ; override-redirect = true
@@ -310,8 +359,8 @@ enable-ipc = true
 ; width = 90%
 ; offset-x = 10
 
-background = ${colors.background}
-foreground = ${colors.foreground}
+background = ${colors.bg}
+fg = ${colors.fg}
 width = 100%
 height = 27
 radius = 4
@@ -319,16 +368,14 @@ modules-left = date keyboard todo
 ; modules-center = appts
 
 modules-center = playpause spotify 
-format-modules-center-underline=${colors.tertiary} 
-module-margin-underline = ${colors.tertiary}
 ; when wttr.in isn't down
-modules-right = notifs weather powermenu 
+modules-right = bell notifs weather powermenu 
 
 ;  when wttr.in is down
 ;; modules-right = notifs powermenu
 padding = 1
+;format-module-left-margin = 1
 module-margin = 1
-
 
 
 

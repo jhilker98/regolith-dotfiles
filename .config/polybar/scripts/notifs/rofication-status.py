@@ -33,9 +33,13 @@ if __name__ == '__main__':
 
     # only fetch resources if needed
     if num > 0:
-        #     print("{} {}".format(num, ""))
-              print("{} {}".format(num,""))
+        icon =  ""
+        #    print(" {}  {}".format(icon, num))
+        #      print("{} {}".format(num,""))
+        print(num)
     else:
-        #     print("{} {}".format(num, ""))
+        icon =  ""
+        #     print(" {}  {}".format(icon, num))
         #     print("{} {}".format(num, ""))
-        print("")
+        print(num)
+

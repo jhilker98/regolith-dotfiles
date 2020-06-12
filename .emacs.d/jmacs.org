@@ -245,6 +245,11 @@ Here is a package for using solarized.
 (use-package gruvbox-theme
 :ensure t)
 #+END_SRC
+**** Doom Themes
+#+BEGIN_SRC emacs-lisp
+(use-package doom-themes
+:ensure t)
+#+END_SRC
 *** Doom Modeline
 
    #+BEGIN_SRC emacs-lisp 
@@ -1192,10 +1197,7 @@ Here is where I disable the leading headers in org-bullets-mode.
 #+END_SRC
 ** Fonts and Themes
 *** Theme
-I am doing something extremely similar to the function above, but with
-themes. By default I want to use doom-gruvbox with the font colors of
-doom-material.
-
+I am doing something extremely similar to the function above, but with themes. By default I want to use doom-gruvbox.
 #+BEGIN_SRC emacs-lisp
 ;(load-theme 'gruvbox-dark-hard t)
  ; (load-theme 'sanityinc-solarized-dark t)

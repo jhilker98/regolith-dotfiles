@@ -114,17 +114,25 @@
 # Colors can be one of seven predefined: black, blue, cyan, green, magenta, red, white, yellow.
 # Or defined by hex code '#xxxxxx' (hex code must be within ''). User defined colors requires a
 # terminal that can change color definitions such as Gnome-terminal or rxvt.
-; background = black
-; foreground = cyan
+# background = black
+# foreground = yellow
 
 # Gradient mode, only hex defined colors are supported, background must also be defined in hex
 # or remain commented out. 1 = on, 0 = off. Warning: for certain terminal emulators cava will
 # not able to restore color definitions on exit, simply restart your terminal to restore colors.
- gradient = 1
- gradient_count = 2
- gradient_color_1 = '#8b745d'
- gradient_color_2 = '#5064a3'
+gradient = 1
+gradient_count = 2
+#gradient_color_1 = '#d65d0e'
+gradient_color_1 = '#b16286'
+gradient_color_2 = '#458588'
+# gradient_color_1 = '#8b745d'
+ # gradient_color_2 = '#5064a3'
 
+# gradient_color_1 = '#898771'
+# gradient_color_2 = '#7b858e' 
+
+#gradient_color_1 = '#9a5e84'
+ #gradient_color_2 = '#6e9acc'
 
 
 [smoothing]
@@ -156,3 +164,6 @@
 ; 3 = 1 # midtone
 ; 4 = 1
 ; 5 = 1 # treble
+
+
+# vi:set filetype=dosini

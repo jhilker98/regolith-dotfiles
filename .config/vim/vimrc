@@ -78,7 +78,7 @@ augroup END
 
 syntax enable
 set background=dark
-colorscheme wal
+colorscheme gruvbox
 set encoding=UTF-8
 
 " Airline Config
@@ -172,16 +172,17 @@ nnoremap <silent> <leader>rr :Goyo<CR>
 
 
 """ File Commands
-nnoremap <silent> <leader>ff :e
+nnoremap <silent> <leader>e :e
 nnoremap <silent> <leader>feD :e ~/.config/vim/vimrc<CR>
-nnoremap <silent> <leader>fs :w<CR>
+nnoremap <silent> <leader>w :w<CR>
 
 """ Quit Commands
 nnoremap <silent> <leader>qq :q<CR>
-nnoremap <silent> <leader>qs :w<CR>:q<CR>
+nnoremap <silent> <leader>qs :wq<CR>
 
-
-
+""" Splits
+nnoremap <silent> <leader>wh :sp<CR>
+nnoremap <silent> <leader>wv :vsp<CR>
 """ Source
 nnoremap <silent> <leader>vs :source ~/.config/vim/vimrc<CR>
 
@@ -219,4 +220,5 @@ set splitbelow splitright
 highlight Comment cterm=italic
 
 autocmd FileType groff,markdown,org set spell
-autocmd BufNewFile BufRead /tmp/neomutt*,/tmp/calcurse*,~/.calcurse/notes/* set spell
+autocmd BufNewFile,BufRead /tmp/neomutt*,/tmp/calcurse*,~/.calcurse/notes/* set spell
+autocmd FileType gitcommit setlocal spell

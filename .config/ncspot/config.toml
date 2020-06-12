@@ -9,8 +9,7 @@ volume = 75
 repeat = "playlist"
 
 [theme]
-playing_selected = "light white"
-title = "light white"
-highlight = "light white"
-highlight_bg = "blue"
-
+playing_selected = "#ffffff"
+title = "black"
+highlight = "black"
+highlight_bg = "dark magenta"
