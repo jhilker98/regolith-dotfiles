@@ -218,18 +218,30 @@ module-padding = 2
 [module/keyboard]
 type = internal/xkeyboard
 format = <label-indicator>
-format-underline = ${colors.blue}
+format-prefix = 󰳡
+format-background = ${colors.bg-hard}
+format-prefix-background = ${colors.red}
+format-prefix-padding = 1
+
 indicator-icon-0 = caps lock;-CL;+CL
 indicator-icon-1 = scroll lock;;+SL
 indicator-icon-2 = num lock;-NL;+NL
-label-indicator-on-capslock = CAPS 
+
+label-indicator-on-capslock = " %name% "
+label-indicator-on-numlock = " %name% "
+label-indicator-on-scrolllock = " %name% "
 label-indicator-off-capslock =
-label-indicator-on-numlock = NUM
 label-indicator-off-numlock = 
-label-indicator-on-scrolllock = SCRL
 label-indicator-off-scrolllock =
 
-format-module-margin = 2
+; label-indicator-on-capslock = " CAPS "
+; label-indicator-on-numlock = " NUM "
+; label-indicator-on-scrolllock = " SCRL "
+; label-indicator-off-capslock =
+; label-indicator-off-numlock = 
+; label-indicator-off-scrolllock =
+
+
 
 [module/todo]
 type = custom/script
@@ -369,7 +381,7 @@ modules-left = date keyboard todo
 
 modules-center = playpause spotify 
 ; when wttr.in isn't down
-modules-right = bell notifs weather powermenu 
+modules-right = l notifs weather powermenu 
 
 ;  when wttr.in is down
 ;; modules-right = notifs powermenu
