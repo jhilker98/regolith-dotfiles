@@ -29,9 +29,7 @@ For most of these programs, the installation is quite simple - copy the =.config
  - Why no Mutt config?
    - I used Luke Smith's [[https://github.com/LukeSmithxyz/mutt-wizard][Mutt Wizard]] for configuring my mutt.
  - What music player are you using?
-   - Primarily NCSpot, though I do use Tizonia as well if I need something
-   even more minimalist, such as when I'm studying. I'm not sharing the
-   Tizonia config because that config is mostly passwords and such - very easy to configure IMO.
+   - Primarily NCSpot, though I do use Tizonia as well if I need something even more minimalist, such as when I'm studying. I'm not sharing the Tizonia config because that config is mostly passwords and such - very easy to configure IMO.
 
 
 

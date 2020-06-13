@@ -1,30 +1,41 @@
 --------------------------------
 ----------CLASSES---------------
 --------------------------------
-http://stephendavies.org/data219/index.php/feed/ classes
-http://stephendavies.org/cpsc326/index.php/feed/ classes
 
 ------------------------------------
 ----------------NEWS----------------
 ------------------------------------
 
-http://feeds.reuters.com/reuters/domesticNews news
-http://feeds.reuters.com/reuters/worldNews news 
+http://feeds.reuters.com/reuters/domesticNews news "!~Reuters US" us
+http://rss.time.com/web/time/rss/nation/index.xml news "!~Time US" us
+
+http://feeds.reuters.com/reuters/worldNews news "!~Reuters World" world 
+http://rss.time.com/web/time/rss/world/index.xml news "!~Time World" world
+
+http://www.dailyprogress.com/search/?mode=article&q=&t=article&l=10&d=&d1=1+year+ago&d2=&s=&sd=desc&c[]=news/local*&f=atom&fulltext=dpmobile&altf=mrss news "!~Local News" local
+https://fredericksburgva.gov/RSSFeed.aspx?ModID=1&CID=Fredericksburg-News-1 news "!~Local News" local
 
 -----------------------------------------
 ---------------CAMPAIGNS-----------------
 -----------------------------------------
-https://rpggeek.com/rss/thread/1724354 rpgs "~Knights of Salisbury" ooc
-https://rpggeek.com/rss/thread/2344531 rpgs "~Knights of Salisbury" ic
-https://rpggeek.com/rss/thread/2388799 rpgs "~Knights of Salisbury" ic
+https://rpggeek.com/rss/thread/1724354 rpgs "!~Knights of Salisbury" ooc pendragon
+https://rpggeek.com/rss/thread/2344531 rpgs "!~Knights of Salisbury" ic pendragon
+https://rpggeek.com/rss/thread/2388799 rpgs "!~Knights of Salisbury" ic pendragon
+https://rpggeek.com/rss/thread/2431371 rpgs "!~Knights of Salisbury" ooc pendragon
 
-https://rpggeek.com/rss/thread/2371283 rpgs "~AIME: The Fellowship of Five" ooc
-https://rpggeek.com/rss/thread/2382018 rpgs "~AIME: The Fellowship of Five" ic
+https://rpggeek.com/rss/thread/2371283 rpgs "!~AIME: The Fellowship of Five" ooc aime
+https://rpggeek.com/rss/thread/2382018 rpgs "!~AIME: The Fellowship of Five" ic aime
 
-https://rpggeek.com/rss/thread/2352712 rpgs "Honor and Intrigue: The Banners of Shalott" ooc
-https://rpggeek.com/rss/thread/2357495 rpgs "Honor and Intrigue: The Banners of Shalott" ic
+https://rpggeek.com/rss/thread/2352712 rpgs "!~Honor and Intrigue: The Banners of Shalott" ooc honorintrigue
+https://rpggeek.com/rss/thread/2357495 rpgs "!~Honor and Intrigue: The Banners of Shalott" ic honorintrigue
+https://rpol.net/feeds.cgi?q=2CEMCCmJ9dwpwGwAsehU rpgs "!~RPOL" rpol
 
 -----------------------------------------
--------------------LOCAL-----------------
+----------------QUERIES------------------
 -----------------------------------------
-http://www.dailyprogress.com/search/?mode=article&q=&t=article&l=10&d=&d1=1+year+ago&d2=&s=&sd=desc&c[]=news/local*&f=atom&fulltext=dpmobile&altf=mrss news "~Local News"
+
+"query:Local News:tags # \"local\""
+"query:World News:tags # \"local\""
+"query:The Fellowship of Five:tags # \"aime\""
+"query:Knights of Salisbury:tags # \"pendragon\""
+
