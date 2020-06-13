@@ -44,6 +44,12 @@ indigo = #458858
 ;-------;
 ; FONTS ;
 ;-------;
+[fonts]
+text = "Iosevka:pixelsize=12;3"
+icons-1 = "Material Icons:size=12;3"
+weather = "Weather Icons:size=12;0"
+icons-2 = "FontAwesome:size=12;3"
+icons-3 = "Symbola:size=12;0"
 
 ;---------;
 ; MODULES ;
@@ -160,7 +166,8 @@ format-disconnected-prefix-background = ${colors.red}
 format-disconnected-background = ${colors.bg-hard}
 format-disconnected-foreground = ${colors.fg}
 format-disconnected-prefix-foreground = ${colors.fg}
-
+format-connected-margin = 1
+format-disconnected-margin = 1
 [module/battery]
 type = internal/battery
 full-at = 99
@@ -218,19 +225,20 @@ label-full-foreground = ${colors.fg}
 type = custom/script
 exec = date +'%a, %b %d'
 label-font = 1
-label-padding = 2
+label-padding = 1
 label-background = ${colors.bg-hard}
 click-left = alacritty -e calcurse &
-click-right = alacritty -e ~/.config/polybar/scripts/todo/appt-bar.sh &
+click-right = alacritty -e ~/.config/polybar/scripts/todo/appts.sh &
 ; format-prefix = 󰸗    
 format-prefix =  
 format-prefix-background = ${colors.blue}
 
 format-prefix-padding = 1
-module-padding = 2
+;module-padding = 2
 prefix-foreground = ${colors.fg}
 format-foreground = ${colors.fg}
-
+format-margin = 1
+;format-margin = 1
 
 [module/keyboard]
 type = internal/xkeyboard
@@ -243,7 +251,7 @@ format-prefix-padding = 1
 indicator-icon-0 = caps lock;-CL;+CL
 indicator-icon-1 = scroll lock;;+SL
 indicator-icon-2 = num lock;-NL;+NL
-
+format-label-padding = 1
 label-indicator-on-capslock = " %name% "
 label-indicator-on-numlock = " %name% "
 label-indicator-on-scrolllock = " %name% "
@@ -258,9 +266,11 @@ format-label-foreground = ${colors.fg}
 ; label-indicator-off-capslock =
 ; label-indicator-off-numlock = 
 ; label-indicator-off-scrolllock =
-
-
-
+format-label-indicator-on-capslock-margin = 1
+;format-prefix-margin = 1
+;format-label-margin = 0
+;format-prefix-margin = 1
+;format-margin = 1
 [module/todo]
 type = custom/script
 exec = ~/.config/polybar/scripts/todo/todo.sh
@@ -272,6 +282,9 @@ label-padding = 1
 label-background = ${colors.bg-hard}
 label-foreground = ${colors.fg}
 format-prefix-foreground = ${colors.fg}
+;format-prefix-margin = 1
+;format-margin = 1
+
 [module/appts]
 type = custom/script
 exec = ~/.config/polybar/scripts/todo/appt-bar.sh
@@ -294,6 +307,8 @@ format-prefix-padding = 1
 label-padding = 1
 format-background = ${colors.bg-hard}
 format-foreground = ${colors.fg}
+format-margin = 1
+
 [module/spotify]
 type = custom/script
 #exec-if = "pgrep ncspot"
@@ -307,6 +322,8 @@ format-background = ${colors.bg-hard}
 format-padding = 1
 format-foreground = ${colors.fg}
 # format-prefix = ${playpause}
+format-margin = 0
+
 [module/playpause]
 type = custom/ipc
 ; Default
@@ -322,6 +339,7 @@ click-left = "playerctl play-pause"
 format-background = ${colors.blue}
 format-foreground = ${colors.fg}
 format-padding = 1
+format-margin = 0
 
 [module/weather]
 type = custom/script
@@ -340,6 +358,8 @@ exec = ~/.config/polybar/scripts/weather/wtr-bar.sh
 label-background = ${colors.bg-hard}
 label-padding = 1
 format-foreground = ${colors.fg}
+;format-margin-right = 1
+
 [module/powermenu]
 type = custom/text
 content = 
@@ -348,7 +368,7 @@ content-background = ${colors.darkblue}
 content-fg = ${colors.fg}
 click-left = $HOME/.config/polybar/scripts/sysmenu
 click-right = $HOME/.config/polybar/scripts/sysmenu
-
+content-margin = 1
 
 ;------;
 ; BARS ;
@@ -356,23 +376,23 @@ click-right = $HOME/.config/polybar/scripts/sysmenu
 
 
 [bar/top]
-font-0 = "Iosevka:pixelsize=12;3"
-font-1 = "Material Icons:size=12;3"
-font-2 = "Weather Icons:size=12;0"
-font-3 = "FontAwesome:size=12;3"
-font-4 = "Symbola:size=12;0"
 line-size = 2.75
+font-0 = ${fonts.text}
+font-1 = ${fonts.icons-1} 
+font-2 = ${fonts.weather} 
+font-3 = ${fonts.icons-2} 
+font-4 = ${fonts.icons-3} 
 
 background = ${colors.bg}
 fg = ${colors.fg}
 width = 100%
 height = 27
-radius = 4
+;radius = 4
 modules-left = i3 
 modules-center = time 
 modules-right = volume wifi battery 
-padding = 1
-module-margin = 1
+;padding = 1
+;module-margin = 1
 
 
 
@@ -384,6 +404,7 @@ font-2 = "Weather Icons:size=12;0"
 font-3 = "FontAwesome:size=12;3"
 font-4 = "Symbola:size=12;0"
 font-5 = "Material Design Icons Desktop:size=12;3"
+
 line-size = 2.75
 enable-ipc = true
 ; override-redirect = true
@@ -395,7 +416,7 @@ background = ${colors.bg}
 fg = ${colors.fg}
 width = 100%
 height = 27
-radius = 4
+;radius = 4
 modules-left = date keyboard todo 
 ; modules-center = appts
 
@@ -405,10 +426,6 @@ modules-right = l notifs weather powermenu
 
 ;  when wttr.in is down
 ;; modules-right = notifs powermenu
-padding = 1
-;format-module-left-margin = 1
-module-margin = 1
-
-
+;padding = 1
 
 
