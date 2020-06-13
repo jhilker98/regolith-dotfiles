@@ -183,8 +183,7 @@ nnoremap <silent> <leader>qs :wq<CR>
 """ Splits
 nnoremap <silent> <leader>wh :sp<CR>
 nnoremap <silent> <leader>wv :vsp<CR>
-""" Source
-nnoremap <silent> <leader>vs :source ~/.config/vim/vimrc<CR>
+nnoremap <silent> <leader>wd :q<CR>
 
 "Abbrevs
 "" Email Abbrevs

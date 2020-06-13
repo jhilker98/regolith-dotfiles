@@ -10,13 +10,12 @@ These are my personal configurations for various applications. I will keep this 
 - [[#installation][Installation]]
 - [[#notes][Notes]]
 - [[#bugs][Bugs]]
-- [[#faq][FAQ]]
 
 * Installation :TOC: 
 For most of these programs, the installation is quite simple - copy the =.config= folder into your =~/.config= folder. For bash, I do have conda installed for my data science class, but don't feel like you have to use it - you are free to delete that section from the bashrc. You will need to install [[https://regolith-linux.org/][Regolith Linux]] for the window manager - I highly recommend it for someone new to tiling WMs.  
 
  
-* Notes											:TOC:
+* Notes :TOC:
  - The color scheme is from pywal.
  - For my word count format, you will have to manually change the format of the word count section in doom modeline from =%dW= to =%d words=.
  - You will need to create a subdirectory in ~/Music and call it alerts. Find a wav file you like and save it as alert.wav in the alerts directory. I am using [[http://soundbible.com/2154-Text-Message-Alert-1.html][this]] as my alert sound, but use whatever you want.
@@ -27,8 +26,6 @@ For most of these programs, the installation is quite simple - copy the =.config
    - While I haven't been able to fix this yet, I am trying to fix this. I have had no luck so far with it being installed from the =jmacs.org= file.
 
   * FAQ :TOC:
- - Why no =.vimrc=?
-   - For vim, I personally use a symlink to the =~/.config/vim/vimrc= file, and the link is called =~/.vimrc= - this way I can keep my home folder cleaner.
  - Why no Mutt config?
    - I used Luke Smith's [[https://github.com/LukeSmithxyz/mutt-wizard][Mutt Wizard]] for configuring my mutt.
  - What music player are you using?
