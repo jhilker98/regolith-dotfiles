@@ -123,6 +123,8 @@ label-volume-padding = 1
 ramp-volume-padding = 1
 ramp-volume-background = ${colors.green}
 label-volume-background = ${colors.bg-hard}
+label-volume-foreground = ${colors.fg}
+ramp-volume-foreground = ${colors.fg}
 
 format-muted = <label-muted>
 label-muted = %percentage%%
@@ -131,6 +133,9 @@ format-muted-prefix-background = ${colors.red}
 label-muted-background = ${colors.bg-hard}
 label-muted-padding = 1
 format-muted-prefix-padding = 1
+
+format-muted-prefix-foreground = ${colors.fg}
+label-muted-foreground = ${colors.fg}
 
 [module/wifi]
 type = internal/network
@@ -145,13 +150,16 @@ label-connected-padding = 1
 ;format-connected-prefix-margin = 1
 format-connected-prefix-background = ${colors.blue}
 label-connected-background = ${colors.bg-hard}
+format-connected-foreground = ${colors.fg}
+format-connected-prefix-foreground = ${colors.fg}
 
 format-disconnected =  Not Connected
 format-disconnected-prefix = 
 format-disconnected-prefix-padding = 1
 format-disconnected-prefix-background = ${colors.red}
 format-disconnected-background = ${colors.bg-hard}
-
+format-disconnected-foreground = ${colors.fg}
+format-disconnected-prefix-foreground = ${colors.fg}
 
 [module/battery]
 type = internal/battery
@@ -176,6 +184,9 @@ ramp-capacity-4-background = ${colors.green}
 ramp-capacity-padding = 1
 label-discharging-padding = 1
 label-discharging-background = ${colors.bg-hard}
+ramp-capacity-foreground = ${colors.fg}
+label-discharging-foreground = ${colors.fg}
+
 ;; Charging formatting and colors
 format-charging = <animation-charging><label-charging>
 label-charging = %percentage%%
@@ -189,7 +200,8 @@ animation-charging-padding = 1
 animation-charging-background = ${colors.blue}
 label-charging-padding = 1
 label-charging-background = ${colors.bg-hard}
-
+format-animation-charging-foreground = ${colors.fg}
+format-label-charging-foreground = ${colors.fg}
 
 ;; full formatting and colors
 format-full = <label-full>
@@ -199,7 +211,8 @@ label-full-background = ${colors.bg-hard}
 format-full-prefix = 
 format-full-prefix-padding = 1
 format-full-prefix-background = ${colors.green}
-
+format-full-prefix-foreground = ${colors.fg}
+label-full-foreground = ${colors.fg}
 
 [module/date]
 type = custom/script
@@ -212,8 +225,12 @@ click-right = alacritty -e ~/.config/polybar/scripts/todo/appt-bar.sh &
 ; format-prefix = 󰸗    
 format-prefix =  
 format-prefix-background = ${colors.blue}
+
 format-prefix-padding = 1
 module-padding = 2
+prefix-foreground = ${colors.fg}
+format-foreground = ${colors.fg}
+
 
 [module/keyboard]
 type = internal/xkeyboard
@@ -233,7 +250,8 @@ label-indicator-on-scrolllock = " %name% "
 label-indicator-off-capslock =
 label-indicator-off-numlock = 
 label-indicator-off-scrolllock =
-
+format-prefix-foreground = ${colors.fg}
+format-label-foreground = ${colors.fg}
 ; label-indicator-on-capslock = " CAPS "
 ; label-indicator-on-numlock = " NUM "
 ; label-indicator-on-scrolllock = " SCRL "
@@ -252,7 +270,8 @@ click-left = alacritty -e ~/.config/polybar/scripts/todo/list.sh &
 format-prefix-padding = 1
 label-padding = 1
 label-background = ${colors.bg-hard}
-
+label-foreground = ${colors.fg}
+format-prefix-foreground = ${colors.fg}
 [module/appts]
 type = custom/script
 exec = ~/.config/polybar/scripts/todo/appt-bar.sh
@@ -274,7 +293,7 @@ format-prefix-padding = 1
 ;format-exec-padding = 1
 label-padding = 1
 format-background = ${colors.bg-hard}
-
+format-foreground = ${colors.fg}
 [module/spotify]
 type = custom/script
 #exec-if = "pgrep ncspot"
@@ -286,7 +305,7 @@ click-left = alacritty -e ncspot &
 tail = true
 format-background = ${colors.bg-hard}
 format-padding = 1
-
+format-foreground = ${colors.fg}
 # format-prefix = ${playpause}
 [module/playpause]
 type = custom/ipc
@@ -301,6 +320,7 @@ initial = 1
 line-size = 1
 click-left = "playerctl play-pause"
 format-background = ${colors.blue}
+format-foreground = ${colors.fg}
 format-padding = 1
 
 [module/weather]
@@ -319,7 +339,7 @@ click-left = alacritty -e /home/$USER/.config/polybar/scripts/weather/wtr.sh &
 exec = ~/.config/polybar/scripts/weather/wtr-bar.sh
 label-background = ${colors.bg-hard}
 label-padding = 1
-
+format-foreground = ${colors.fg}
 [module/powermenu]
 type = custom/text
 content = 
