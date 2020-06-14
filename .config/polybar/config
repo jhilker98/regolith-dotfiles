@@ -436,10 +436,10 @@ modules-left = date keyboard todo
 
 modules-center = playpause spotify 
 ; when wttr.in isn't down
-;modules-right = notifs news weather
+modules-right = notifs news weather
 
 ;  when wttr.in is down
-modules-right = notifs news
+;;modules-right = notifs news
 ;padding = 1
 
 

@@ -7,8 +7,12 @@
 ------------------------------------
 
 http://feeds.reuters.com/reuters/domesticNews news "!Reuters US" us
+http://feeds.washingtonpost.com/rss/rss_morning-mix?itid=lk_inline_manual_42 news us "!WaPo US" 
+http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml?edition=int news us "!BBC US"
 
 http://feeds.reuters.com/reuters/worldNews news "!Reuters World" world 
+http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml?edition=int news "!BBC World" us
+https://feeds.npr.org/1001/rss.xml news world "!NPR World"
 
 http://www.dailyprogress.com/search/?mode=article&q=&t=article&l=10&d=&d1=1+year+ago&d2=&s=&sd=desc&c[]=news/local*&f=atom&fulltext=dpmobile&altf=mrss news "!Local News" local
 https://fredericksburgva.gov/RSSFeed.aspx?ModID=1&CID=Fredericksburg-News-1 news "!Local News" local
