@@ -271,6 +271,7 @@ format-label-indicator-on-capslock-margin = 1
 ;format-label-margin = 0
 ;format-prefix-margin = 1
 ;format-margin = 1
+;module-margin = 1
 [module/todo]
 type = custom/script
 exec = ~/.config/polybar/scripts/todo/todo.sh
@@ -283,7 +284,7 @@ label-background = ${colors.bg-hard}
 label-foreground = ${colors.fg}
 format-prefix-foreground = ${colors.fg}
 ;format-prefix-margin = 1
-;format-margin = 1
+format-margin = 1
 
 [module/appts]
 type = custom/script

@@ -35,7 +35,7 @@ https://rpol.net/feeds.cgi?q=2CEMCCmJ9dwpwGwAsehU rpgs "!~RPOL" rpol
 -----------------------------------------
 
 "query:Local News:tags # \"local\""
-"query:World News:tags # \"local\""
-"query:The Fellowship of Five:tags # \"aime\""
+"query:World News:tags # \"world\""
+"query:AIME - The Fellowship of Five:tags # \"aime\""
 "query:Knights of Salisbury:tags # \"pendragon\""
-
+"query:Honor and Intrigue - The Banners of Shallot:tags # \"honorintrigue\""
