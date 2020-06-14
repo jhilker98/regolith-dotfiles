@@ -5,3 +5,4 @@ DATE=$(calcurse --appointment -d 3 | sed -n 1p | sed 's/://g')
 
 # echo "Next Appt: $APPT at $TIME on $DATE" | xargs
 echo "Next Appt: $APPT - $TIME, $DATE" | xargs
+sleep 10
