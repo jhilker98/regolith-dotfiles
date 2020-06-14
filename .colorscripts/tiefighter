@@ -1,0 +1,17 @@
+#!/bin/bash
+
+for (( i = 30; i < 38; i++ )); do
+  echo -ne "\033["$i"m|-o-| "
+  if [[ $i -eq 37 ]]; then
+    echo -ne "\n"
+  fi
+done
+
+
+for (( i = 30; i < 38; i++ )); do
+  echo -ne "\033["$i";1m|-o-| "
+  if [[ $i -eq 37 ]]; then
+    echo -ne "\n"
+  fi
+done
+
