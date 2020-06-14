@@ -10,6 +10,6 @@ repeat = "playlist"
 
 [theme]
 playing_selected = "#ffffff"
-title = "black"
-highlight = "black"
-highlight_bg = "dark magenta"
+title = "white"
+highlight = "light white"
+highlight_bg = "blue"
