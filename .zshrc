@@ -1,5 +1,5 @@
 xdg-settings set default-web-browser firefox.desktop
-feh --bg-fill /home/jhilker/Pictures/Wallpapers/scheme-based/gruvbox/dark/pacman.png
+#feh --bg-fill /home/jhilker/Pictures/Wallpapers/scheme-based/gruvbox/dark/pacman.png
 #neofetch
 # pfetch
 autoload -U colors && colors
@@ -95,9 +95,8 @@ export TERM=xterm-256color
 # export MAIL=/home/jhilker/Mail
 export EMAIL="jacob.hilker2@gmail.com"
 export NAME="Jacob Hilker"
-export PATH="/usr/local/texlive/2019/bin/x86_64-linux:/home/jhilker/.bin:/home/jhilker/Downloads/nvim/bin:$PATH"
+export PATH="/usr/local/texlive/2019/bin/x86_64-linux:/home/jhilker/.bin:/home/jhilker/Downloads/nvim/bin:/home/jhilker/.colorscripts:$PATH"
 export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
-export MYVIMRC="/home/jhilker/.config/vim/vimrc"
 # export MANPATH="/usr/local/man:$MANPATH"
 # export BROWSER="/usr/bin/firefox"
 # You may need to manually set your language environment
@@ -172,3 +171,9 @@ PROMPT='${vim_mode} %{$fg[red]%}[%{$fg[blue]%}%n%{$reset_color%} @ %{$fg[yellow]
 #RPROMPT='${vim_mode}'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+#COLORSCRIPTS="/home/jhilker/.colorscripts"
+#SCRIPT=$(ls $COLORSCRIPTS | shuf -n 1)
+#$SCRIPT
+
