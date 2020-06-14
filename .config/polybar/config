@@ -272,6 +272,7 @@ format-label-indicator-on-capslock-margin = 1
 ;format-prefix-margin = 1
 ;format-margin = 1
 ;module-margin = 1
+format-foreground = ${colors.fg}
 [module/todo]
 type = custom/script
 exec = ~/.config/polybar/scripts/todo/todo.sh
@@ -310,21 +311,6 @@ format-background = ${colors.bg-hard}
 format-foreground = ${colors.fg}
 format-margin = 1
 
-[module/spotify]
-type = custom/script
-#exec-if = "pgrep ncspot"
-exec = /home/$USER/.config/polybar/scripts/spotify/music.sh
-; format-underline = ${colors.blue}
-; format-padding-underline = ${colors.blue}
-click-left = alacritty -e ncspot &
-;format-prefix = " "
-tail = true
-format-background = ${colors.bg-hard}
-format-padding = 1
-format-foreground = ${colors.fg}
-# format-prefix = ${playpause}
-format-margin = 0
-
 [module/playpause]
 type = custom/ipc
 ; Default
@@ -341,6 +327,33 @@ format-background = ${colors.blue}
 format-foreground = ${colors.fg}
 format-padding = 1
 format-margin = 0
+
+[module/spotify]
+type = custom/script
+#exec-if = "pgrep ncspot"
+exec = /home/$USER/.config/polybar/scripts/spotify/music.sh
+; format-underline = ${colors.blue}
+; format-padding-underline = ${colors.blue}
+click-left = alacritty -e ncspot &
+;format-prefix = " "
+tail = true
+format-background = ${colors.bg-hard}
+format-padding = 1
+format-foreground = ${colors.fg}
+# format-prefix = ${playpause}
+format-margin = 0
+
+[module/news]
+type = custom/text
+content = " News "
+content-background = ${colors.bg-hard}
+content-prefix = 󰞎
+content-prefix-padding = 1
+content-prefix-background = ${colors.red}
+;content-padding = 1
+content-margin = 0
+click-left = alacritty -e newsboat -r &
+content-foreground = ${colors.fg}
 
 [module/weather]
 type = custom/script
@@ -360,7 +373,7 @@ label-background = ${colors.bg-hard}
 label-padding = 1
 format-foreground = ${colors.fg}
 ;format-margin-right = 1
-
+format-margin = 1
 [module/powermenu]
 type = custom/text
 content = 
@@ -423,7 +436,7 @@ modules-left = date keyboard todo
 
 modules-center = playpause spotify 
 ; when wttr.in isn't down
-modules-right = l notifs weather powermenu 
+modules-right = notifs news weather
 
 ;  when wttr.in is down
 ;; modules-right = notifs powermenu
