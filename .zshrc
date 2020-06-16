@@ -95,7 +95,7 @@ export TERM=xterm-256color
 # export MAIL=/home/jhilker/Mail
 export EMAIL="jacob.hilker2@gmail.com"
 export NAME="Jacob Hilker"
-export PATH="/usr/local/texlive/2019/bin/x86_64-linux:/home/jhilker/.bin:/home/jhilker/Downloads/nvim/bin:/home/jhilker/.colorscripts:/home/jhilker/repos/shell-color-scripts:$PATH"
+export PATH="/usr/local/texlive/2019/bin/x86_64-linux:/home/jhilker/.bin:/home/jhilker/Downloads/nvim/bin:/home/jhilker/Downloads/bibisco-linux-x64-2.2.0-CE:$PATH"
 export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
 # export MANPATH="/usr/local/man:$MANPATH"
 # export BROWSER="/usr/bin/firefox"
@@ -173,4 +173,4 @@ PROMPT='${vim_mode} %{$fg[red]%}[%{$fg[blue]%}%n%{$reset_color%} @ %{$fg[yellow]
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
-colorscript.sh -r
+#colorscript.sh -r
