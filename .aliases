@@ -74,7 +74,7 @@ alias gcln="git clone"
 alias commit="git add *; git commit -a"
 alias commitm="git add *; git commit -am"
 alias clone="git clone"
-alias vim="nvim -u ~/.config/vim/vimrc"
+#alias vim="nvim -u ~/.config/vim/vimrc"
 
 #writing, worldbuilding, and rpg aliases
 alias broken="cd ~/Documents/broken-thrones; exa -alh"
@@ -100,7 +100,8 @@ alias 2048="~/2048"
 
 
 alias gocl="ssh jacob.hilker2@35.196.197.239"
-alias calc="python3 -ic 'import math'"
+alias math="python3 -ic 'import math'"
 alias calcurse="calcurse -D ~/Dropbox/calcurse"
-#alias vim="nvim"
+alias vim="nvim"
 alias vscode="code"
+alias gtheme='bash -c  "$(wget -qO- https://git.io/vQgMr)"'

@@ -72,8 +72,14 @@ bindsym $mod+n exec $i3-wm.program.notification_ui
 ## Launch // GUI File Mng // <><Alt> n ##
 bindsym $mod+$alt+n exec nautilus
 ## Launch // News // <><Ctrl> n ##
-bindsym $mod+Ctrl+n exec alacritty -e newsboat -r -c ~/.config/newsboat/cache.db -C ~/.config/newsboat/config -u ~/.config/newsboat/urls 
+#bindsym $mod+Ctrl+n exec alacritty -e newsboat -r -c ~/.config/newsboat/cache.db -C ~/.config/newsboat/config -u ~/.config/newsboat/urls 
 #bindsym $mod+Ctrl+n exec kitty -e newsboat -r -c ~/.config/newsboat/cache.db -C ~/.config/newsboat/config -u ~/.config/newsboat/urls 
+
+
+bindsym $mod+Ctrl+n exec alacritty -e newsboat -r 
+#bindsym $mod+Ctrl+n exec kitty -e newsboat -r -c ~/.config/newsboat/cache.db -C ~/.config/newsboat/config -u ~/.config/newsboat/urls 
+
+
 ## Launch // Zathura // <> z ##
 bindsym $mod+z exec zathura
 ## Launch // GIMP // <> g ##
@@ -107,6 +113,9 @@ bindsym $mod+c exec alacritty -e calcurse
 
 ## Launch // VSCode // <><Shift>v ##
 bindsym $mod+Shift+v exec code
+
+## Launch // Gnome Terminal // <><Ctrl>Enter ##
+bindsym $mod+Ctrl+Return exec gnome-terminal
 
 # Navigation
 ## Navigate // Window by Name // <><Ctrl> Space ##
