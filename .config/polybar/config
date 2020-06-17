@@ -285,7 +285,6 @@ label-background = ${colors.bg-hard}
 label-foreground = ${colors.fg}
 format-prefix-foreground = ${colors.fg}
 ;format-prefix-margin = 1
-format-margin = 1
 click-right = alacritty -e ~/.config/polybar/scripts/todo/appts.sh &
 
 [module/appts]
@@ -355,6 +354,7 @@ content-prefix-background = ${colors.red}
 content-margin = 0
 click-left = alacritty -e newsboat -r &
 content-foreground = ${colors.fg}
+
 
 [module/weather]
 type = custom/script
@@ -432,7 +432,7 @@ fg = ${colors.fg}
 width = 100%
 height = 27
 ;radius = 4
-modules-left = date keyboard todo 
+modules-left = keyboard date todo 
 ; modules-center = appts
 
 modules-center = playpause spotify 
