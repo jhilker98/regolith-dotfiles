@@ -10,7 +10,9 @@
 configuration {
     drun-display-format: "{icon} {name}";
     display-drun: "Applications:";
-	show-icons: true;
+    display-window: "Switch Window:";
+    display-run: "Run Cmd:";
+show-icons: true;
 	icon-theme: "Paper";
 	location: 0;
 	yoffset: 0;
@@ -21,7 +23,7 @@ configuration {
 	bw: 0;
     fullscreen: false;
     show-icons: true;
-	terminal: "termite";
+	terminal: "alacritty";
 	sidebar-mode: false;
 }
 
@@ -42,11 +44,10 @@ configuration {
 
 #window {
   width: 50%;
-  height: 70%;
+  height: 60%;
   padding: 30px 30px 20px 30px;
   border: 2px;
-  border-color: @foreground;
-  border-radius: 5px;
+  border-color: @background-light;
 }
 
 * {
