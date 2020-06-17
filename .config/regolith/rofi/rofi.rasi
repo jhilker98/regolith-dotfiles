@@ -44,13 +44,15 @@ configuration {
   width: 50%;
   height: 70%;
   padding: 30px 30px 20px 30px;
+  border: 2px;
+  border-color: @foreground;
+  border-radius: 5px;
 }
 
 * {
   background-color: @background;
   text-color: @foreground;
   font: @text-font;
-  border-color: @foreground;
 }
 
 inputbar,
@@ -95,4 +97,5 @@ entry {
   text-color: @accent;
   border-color: @accent-dark;
 }
+
 
