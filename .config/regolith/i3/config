@@ -49,9 +49,9 @@ bindsym $mod+Shift+Return exec /usr/bin/firefox
 ## Launch // GNOME Tweaks // <><Alt> t ##
 bindsym $mod+$alt+t exec gnome-tweaks 
 ## Launch // App // <> Space ##
-bindsym $mod+space exec rofi -show drun -display-drun "Launch" -theme $rofiTheme
+bindsym $mod+space exec rofi -show drun 
 ## Launch // Command // <><Shift> Space ##
-bindsym $mod+Shift+space exec rofi -show run -display-run "Cmd" -theme $rofiTheme
+bindsym $mod+Shift+space exec rofi -show run 
 
 ## Launch // Emacs // <> e ##
 bindsym $mod+e exec emacs
@@ -107,7 +107,7 @@ bindsym $mod+$alt+d exec gnome-control-center display
 bindsym $mod+$alt+w exec gnome-control-center wifi
 ## Settings // Power // <><Alt>p ##
 bindsym $mod+$alt+p exec gnome-control-center power
-set_from_resource $rofiTheme rofi.theme "regolith-theme"
+set_from_resource $rofiTheme rofi.theme "gruvbox-grid"
 ## Launch // Calendar // <> c ##
 bindsym $mod+c exec alacritty -e calcurse
 
@@ -119,7 +119,7 @@ bindsym $mod+Ctrl+Return exec gnome-terminal
 
 # Navigation
 ## Navigate // Window by Name // <><Ctrl> Space ##
-bindsym $mod+Ctrl+space exec rofi -show window -theme $rofiTheme
+bindsym $mod+Ctrl+space exec rofi -show window 
 
 ## Navigate // Relative Window // <> ↑ ↓ ← → ##
 bindsym $mod+Left focus left
