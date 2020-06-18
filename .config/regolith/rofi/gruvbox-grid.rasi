@@ -13,7 +13,7 @@ configuration {
     display-window: "Switch Window:";
     display-run: "Run Cmd:";
 show-icons: true;
-	icon-theme: "Paper";
+    icon-theme: "Papirus";
 	location: 0;
 	yoffset: 0;
     xoffset: 0;
