@@ -11,5 +11,10 @@ macro index A \
     "mark all new as read"
 macro index <Esc>U "<source> /home/jhilker/.config/mutt/muttrc<enter>" "source config folder"
 
-set editor="/usr/bin/vim"
+#set editor="/usr/bin/vim"
+set editor="/home/jhilker/Downloads/nvim/bin/nvim"
 alias Mom Jen <jhilker3@gmail.com>
+
+color indicator black brightwhite
+color index_subject brightblue default '.*'
+color sidebar_flagged brightblue default

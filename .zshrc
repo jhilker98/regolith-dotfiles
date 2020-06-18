@@ -95,7 +95,7 @@ export TERM=xterm-256color
 # export MAIL=/home/jhilker/Mail
 export EMAIL="jacob.hilker2@gmail.com"
 export NAME="Jacob Hilker"
-export PATH="/usr/local/texlive/2019/bin/x86_64-linux:/home/jhilker/.bin:/home/jhilker/Downloads/nvim/bin:/home/jhilker/Downloads/bibisco-linux-x64-2.2.0-CE:$PATH"
+export PATH="/usr/local/texlive/2019/bin/x86_64-linux:/home/jhilker/.bin:/home/jhilker/Downloads/nvim/bin::$PATH"
 export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
 # export MANPATH="/usr/local/man:$MANPATH"
 # export BROWSER="/usr/bin/firefox"
@@ -147,9 +147,9 @@ bindkey -v
 
 
 
-vim_ins_mode="%{$fg[red]%}[%{$fg[yellow]%}INS%{$fg[red]%}]%{$reset_color%}"
+vim_ins_mode="%{$fg[red]%}[%{$fg[magenta]%}INS%{$fg[red]%}]%{$reset_color%}"
 # vim_cmd_mode="%{$fg[green]%}[CMD]%{$reset_color%}"
-vim_cmd_mode="%{$fg[red]%}[%{$fg[yellow]%}NML%{$fg[red]%}]%{$reset_color%}"
+vim_cmd_mode="%{$fg[red]%}[%{$fg[magenta]%}NML%{$fg[red]%}]%{$reset_color%}"
 # vim_cmd_mode="%{$fg[green]%}[CMD]%{$reset_color%}"
 vim_mode=$vim_ins_mode
 
@@ -167,7 +167,8 @@ zle -N zle-line-finish
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #PROMPT="%F{4}%n%f @ %F{3}%~%f $%b "
 #PROMPT="%F{3}%~%f $%b "
-PROMPT='${vim_mode} %{$fg[red]%}[%{$fg[blue]%}%n%{$reset_color%} @ %{$fg[yellow]%}%~%{$reset_color%}%{$fg[red]%}]%{$reset_color%}$%b '
+#PROMPT="${vim_mode} %{$fg[red]%}[%F{12}%n %F{15}@ %F{yellow}%~%{$fg[red]%}] %F{15}$%b " 
+PROMPT='${vim_mode} %{$fg[red]%}[%F{12}%n%{$reset_color%} @ %{$fg[yellow]%}%~%{$reset_color%}%{$fg[red]%}]%{$reset_color%} $%b '
 #RPROMPT='${vim_mode}'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
