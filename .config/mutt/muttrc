@@ -18,3 +18,7 @@ alias Mom Jen <jhilker3@gmail.com>
 color indicator black brightwhite
 color index_subject brightblue default '.*'
 color sidebar_flagged brightblue default
+color index_number brightblue default
+color sidebar_highlight magenta default
+color sidebar_new brightmagenta default
+set date_format="%d %b"
