@@ -6,8 +6,8 @@
 
 [colors]
 bg = #282828
-bg-soft = #1D2021 
-bg-hard = #32302f 
+bg-hard= #1D2021 
+bg-soft= #32302f 
 
 fg = #EBDBB2
 fg-alt = #d5c4a1
@@ -75,7 +75,7 @@ label-focused-foreground = ${colors.fg}
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
 label-unfocused-padding = 1.75
-label-unfocused-background = ${colors.bg-hard}
+label-unfocused-background = ${colors.bg-soft}
 label-unfocused-foreground = ${colors.fg}
 ; visible = Active workspace on unfocused monitor
 label-visible = %index%
@@ -104,7 +104,7 @@ label-font = 1
 label-padding = 1
 ;label-background = ${colors.fg}
 ;label-foreground = ${colors.text}
-label-background = ${colors.bg-hard}
+label-background = ${colors.bg-soft}
 label-foreground = ${colors.fg}
 ;label-underline = ${colors.orange}
 format-prefix = ""
@@ -128,7 +128,7 @@ label-volume = %percentage%%
 label-volume-padding = 1
 ramp-volume-padding = 1
 ramp-volume-background = ${colors.green}
-label-volume-background = ${colors.bg-hard}
+label-volume-background = ${colors.bg-soft}
 label-volume-foreground = ${colors.fg}
 ramp-volume-foreground = ${colors.fg}
 
@@ -136,7 +136,7 @@ format-muted = <label-muted>
 label-muted = %percentage%%
 format-muted-prefix =   
 format-muted-prefix-background = ${colors.red}
-label-muted-background = ${colors.bg-hard}
+label-muted-background = ${colors.bg-soft}
 label-muted-padding = 1
 format-muted-prefix-padding = 1
 
@@ -155,7 +155,7 @@ format-connected-prefix-padding = 1
 label-connected-padding = 1
 ;format-connected-prefix-margin = 1
 format-connected-prefix-background = ${colors.blue}
-label-connected-background = ${colors.bg-hard}
+label-connected-background = ${colors.bg-soft}
 format-connected-foreground = ${colors.fg}
 format-connected-prefix-foreground = ${colors.fg}
 
@@ -163,7 +163,7 @@ format-disconnected =  Not Connected
 format-disconnected-prefix = 
 format-disconnected-prefix-padding = 1
 format-disconnected-prefix-background = ${colors.red}
-format-disconnected-background = ${colors.bg-hard}
+format-disconnected-background = ${colors.bg-soft}
 format-disconnected-foreground = ${colors.fg}
 format-disconnected-prefix-foreground = ${colors.fg}
 format-connected-margin = 1
@@ -177,7 +177,7 @@ battery = BAT0
 adapter = ADP0
 
 ;; Discharging formatting and colors
-forma-discharging = <ramp-capacity><label-discharging>
+format-discharging = <ramp-capacity><label-discharging>
 ramp-capacity-0 = 
 ramp-capacity-1 = 
 ramp-capacity-2 = 
@@ -191,7 +191,7 @@ ramp-capacity-3-background = ${colors.orange}
 ramp-capacity-4-background = ${colors.green}
 ramp-capacity-padding = 1
 label-discharging-padding = 1
-label-discharging-background = ${colors.bg-hard}
+label-discharging-background = ${colors.bg-soft}
 ramp-capacity-foreground = ${colors.fg}
 label-discharging-foreground = ${colors.fg}
 
@@ -207,7 +207,7 @@ animation-charging-framerate = 750
 animation-charging-padding = 1
 animation-charging-background = ${colors.blue}
 label-charging-padding = 1
-label-charging-background = ${colors.bg-hard}
+label-charging-background = ${colors.bg-soft}
 format-animation-charging-foreground = ${colors.fg}
 format-label-charging-foreground = ${colors.fg}
 
@@ -215,7 +215,7 @@ format-label-charging-foreground = ${colors.fg}
 format-full = <label-full>
 label-full = %percentage%%
 label-full-padding = 1
-label-full-background = ${colors.bg-hard}
+label-full-background = ${colors.bg-soft}
 format-full-prefix = 
 format-full-prefix-padding = 1
 format-full-prefix-background = ${colors.green}
@@ -234,7 +234,7 @@ ramp-2 = 
 ramp-3 = 
 ramp-4 = 
 format-margin = 1
-format-background = ${colors.bg-hard}
+format-background = ${colors.bg-soft}
 ramp-background = ${colors.purple}
 ramp-padding = 1
 format-foreground = ${colors.fg}
@@ -245,7 +245,7 @@ type = custom/script
 exec = date +'%a, %b %d'
 label-font = 1
 label-padding = 1
-label-background = ${colors.bg-hard}
+label-background = ${colors.bg-soft}
 click-left = alacritty -e calcurse &
 ; format-prefix = 󰸗    
 format-prefix =  
@@ -262,7 +262,7 @@ format-margin = 1
 type = internal/xkeyboard
 format = <label-indicator>
 format-prefix = 󰳡
-format-background = ${colors.bg-hard}
+format-background = ${colors.bg-soft}
 format-prefix-background = ${colors.darkblue}
 format-prefix-padding = 1
 
@@ -299,11 +299,22 @@ format-prefix-background = ${colors.purple}
 click-left = alacritty -e ~/.config/polybar/scripts/todo/list.sh &
 format-prefix-padding = 1
 label-padding = 1
-label-background = ${colors.bg-hard}
+label-background = ${colors.bg-soft}
 label-foreground = ${colors.fg}
 format-prefix-foreground = ${colors.fg}
 ;format-prefix-margin = 1
 click-right = alacritty -e ~/.config/polybar/scripts/todo/appts.sh &
+
+[module/previous]
+type = custom/script
+exec = "echo "
+click-left = "playerctl previous"
+format-background = ${colors.blue}
+format-foreground = ${colors.fg}
+format-padding = 1
+format-margin = 0
+
+
 
 [module/playpause]
 type = custom/ipc
@@ -322,6 +333,15 @@ format-foreground = ${colors.fg}
 format-padding = 1
 format-margin = 0
 
+[module/next]
+type = custom/script
+exec = "echo "
+click-left = "playerctl next"
+format-background = ${colors.blue}
+format-foreground = ${colors.fg}
+format-padding = 1
+format-margin = 0
+
 [module/spotify]
 type = custom/script
 #exec-if = "pgrep ncspot"
@@ -331,7 +351,7 @@ exec = /home/$USER/.config/polybar/scripts/spotify/music.sh
 click-left = alacritty -e ncspot &
 ;format-prefix = " "
 tail = true
-format-background = ${colors.bg-hard}
+format-background = ${colors.bg-soft}
 format-padding = 1
 format-foreground = ${colors.fg}
 # format-prefix = ${playpause}
@@ -351,7 +371,7 @@ format-prefix-padding = 1
 ;format-padding = 1
 ;format-exec-padding = 1
 label-padding = 1
-format-background = ${colors.bg-hard}
+format-background = ${colors.bg-soft}
 format-foreground = ${colors.fg}
 format-margin = 1
 
@@ -359,7 +379,7 @@ format-margin = 1
 [module/news]
 type = custom/text
 content = " News "
-content-background = ${colors.bg-hard}
+content-background = ${colors.bg-soft}
 content-prefix = 󰎕
 content-prefix-padding = 1
 content-prefix-background = ${colors.red}
@@ -383,7 +403,7 @@ format-prefix-background = ${colors.orange}
 format-prefix-foreground = ${colors.fg}
 click-left = alacritty -e /home/$USER/.config/polybar/scripts/weather/wtr.sh &
 exec = ~/.config/polybar/scripts/weather/wtr-bar.sh
-label-background = ${colors.bg-hard}
+label-background = ${colors.bg-soft}
 label-padding = 1
 format-foreground = ${colors.fg}
 ;format-margin-right = 1
@@ -449,7 +469,7 @@ height = 27
 modules-left =  date todo 
 ; modules-center = appts
 
-modules-center = playpause spotify 
+modules-center = previous playpause next 
 ; when wttr.in isn't down
 modules-right = notifs news weather  keyboard  
 
