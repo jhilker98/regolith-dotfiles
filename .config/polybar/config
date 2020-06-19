@@ -177,7 +177,7 @@ battery = BAT0
 adapter = ADP0
 
 ;; Discharging formatting and colors
-format-discharging = <ramp-capacity><label-discharging>
+formatdischarging = <ramp-capacity><label-discharging>
 ramp-capacity-0 = 
 ramp-capacity-1 = 
 ramp-capacity-2 = 
@@ -479,3 +479,4 @@ modules-right = notifs news weather  keyboard
 
 
 
+-

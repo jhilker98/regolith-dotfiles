@@ -7,7 +7,8 @@ zscroll -l 20 \
         --match-command "playerctl status ncspot" \
         --match-text "Playing" "--scroll 1" \
         --match-text "Paused" "--scroll 0" \
-        --update-check true '/home/jhilker/.config/polybar/scripts/spotify/get_spotify_status.sh' &
+        --update-check true '/home/jhilker/.config/polybar/scripts/spotify/get_spotify_status.sh' 
         # --update-check true 'playerctl metadata artist' &
        #  --update-check true 'playerctl metadata title' &
 wait
+
