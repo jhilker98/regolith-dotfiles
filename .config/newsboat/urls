@@ -1,10 +1,4 @@
---------------------------------
-----------CLASSES---------------
---------------------------------
 
-------------------------------------
-----------------NEWS----------------
-------------------------------------
 
 http://feeds.reuters.com/reuters/domesticNews news "!Reuters US" us
 http://feeds.washingtonpost.com/rss/rss_morning-mix?itid=lk_inline_manual_42 news us "!WaPo US" 
@@ -16,29 +10,27 @@ https://feeds.npr.org/1001/rss.xml news world "!NPR World"
 http://www.dailyprogress.com/search/?mode=article&q=&t=article&l=10&d=&d1=1+year+ago&d2=&s=&sd=desc&c[]=news/local*&f=atom&fulltext=dpmobile&altf=mrss news "!Local News" local
 https://fredericksburgva.gov/RSSFeed.aspx?ModID=1&CID=Fredericksburg-News-1 news "!Local News" local
 
------------------------------------------
----------------CAMPAIGNS-----------------
------------------------------------------
-https://rpggeek.com/rss/thread/1724354 rpgs "!Knights of Salisbury" ooc pendragon
-https://rpggeek.com/rss/thread/2344531 rpgs "!Knights of Salisbury" ic pendragon
-https://rpggeek.com/rss/thread/2388799 rpgs "!Knights of Salisbury" ic pendragon
-https://rpggeek.com/rss/thread/2431371 rpgs "!Knights of Salisbury" ic pendragon
+https://rpggeek.com/rss/thread/1724354 campaigns "!Knights of Salisbury" ooc pendragon
+https://rpggeek.com/rss/thread/2344531 campaigns "!Knights of Salisbury" ic pendragon
+https://rpggeek.com/rss/thread/2388799 campaigns "!Knights of Salisbury" ic pendragon
+https://rpggeek.com/rss/thread/2431371 campaigns "!Knights of Salisbury" ic pendragon
 
-https://rpggeek.com/rss/thread/2371283 rpgs "!AIME: The Fellowship of Five" ooc aime
-https://rpggeek.com/rss/thread/2382018 rpgs "!AIME: The Fellowship of Five" ic aime
+https://rpggeek.com/rss/thread/2371283 campaigns "!AIME: The Fellowship of Five" ooc aime
+https://rpggeek.com/rss/thread/2382018 campaigns "!AIME: The Fellowship of Five" ic aime
 
-https://rpggeek.com/rss/thread/2352712 rpgs "!Honor and Intrigue: The Banners of Shalott" ooc honorintrigue
-https://rpggeek.com/rss/thread/2357495 rpgs "!Honor and Intrigue: The Banners of Shalott" ic honorintrigue
+https://rpggeek.com/rss/thread/2352712 campaigns "!Honor and Intrigue: The Banners of Shalott" ooc honorintrigue
+https://rpggeek.com/rss/thread/2357495 campaigns "!Honor and Intrigue: The Banners of Shalott" ic honorintrigue
 
-https://rpggeek.com/rss/thread/2410450 rgps "The One Ring: Fellowship of the 1PG (OOC)" ooc tor
-https://rpggeek.com/rss/thread/2420789 rpgs "!The One Ring: Across the Great Forest" ic tor
-https://rpggeek.com/rss/thread/2416498 rpgs "!The One Ring: A Few Meetings (IC)" ic tor
+https://rpggeek.com/rss/thread/2410450 rgps "!The One Ring: Fellowship of the 1PG (OOC)" ooc tor
+https://rpggeek.com/rss/thread/2420789 campaigns "!The One Ring: Across the Great Forest" ic tor
+https://rpggeek.com/rss/thread/2416498 campaigns "!The One Ring: A Few Meetings (IC)" ic tor
 
-https://rpol.net/feeds.cgi?q=2CEMCCmJ9dwpwGwAsehU rpgs "RPOL" rpol
+https://rpol.net/feeds.cgi?q=2CEMCCmJ9dwpwGwAsehU campaigns "!RPOL" rpol
 
------------------------------------------
-----------------QUERIES------------------
------------------------------------------
+
+https://normancenturies.com/rss.xml podcasts history "!Norman Centuries" brokenthrones
+https://feeds.simplecast.com/uEJ9fA2K "!The Broman Podcast" podcasts gaming misc
+
 
 "query:Local News:tags # \"local\""
 "query:US News:tags # \"us\""
@@ -47,3 +39,5 @@ https://rpol.net/feeds.cgi?q=2CEMCCmJ9dwpwGwAsehU rpgs "RPOL" rpol
 "query:Knights of Salisbury:tags # \"pendragon\""
 "query:Honor and Intrigue - The Banners of Shallot:tags # \"honorintrigue\""
 "query:The One Ring - Fellowship of the 1PG:tags # \"tor\""
+"query:Podcasts:tags # \"podcasts\""
+"query:Norman Centuries:rssurl=~\"normancenturies\.com\""
