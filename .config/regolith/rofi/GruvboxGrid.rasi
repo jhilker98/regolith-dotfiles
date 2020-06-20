@@ -25,6 +25,9 @@ show-icons: true;
     show-icons: true;
 	terminal: "alacritty";
 	sidebar-mode: false;
+
+  sort: true;
+  matching: "fuzzy";
 }
 
 @import "colors.rasi"
