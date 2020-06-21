@@ -1,14 +1,7 @@
-"query:Reddit:tags # \"reddit\""
-"query:Local News:tags # \"local\"" 
-"query:US News:tags # \"us\""
-"query:World News:tags # \"world\""
-"query:AIME - The Fellowship of Five:tags # \"aime\""
-"query:Knights of Salisbury:tags # \"pendragon\""
-"query:Honor and Intrigue - The Banners of Shallot:tags # \"honorintrigue\""
-"query:The One Ring - Fellowship of the 1PG:tags # \"tor\""
+"query:News:tags # \"news\""
+"query:Campaigns:tags # \"campaigns\" and tags !# \"rpol\"" 
 "query:Podcasts:tags # \"podcasts\""
-"query:Norman Centuries:rssurl=~\"normancenturies\.com\"" "!Norman Centuries" "history"
-
+"query:YouTube:tags # \"youtube\""
 
 
 http://feeds.reuters.com/reuters/domesticNews news "!Reuters" us
@@ -18,32 +11,40 @@ http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml?edition=int news us "!B
 http://feeds.reuters.com/reuters/worldNews news "!Reuters" world 
 https://feeds.npr.org/1001/rss.xml news world "!NPR"
 
-http://www.dailyprogress.com/search/?mode=article&q=&t=article&l=10&d=&d1=1+year+ago&d2=&s=&sd=desc&c[]=news/local*&f=atom&fulltext=dpmobile&altf=mrss news "!Cville News" local
-https://fredericksburgva.gov/RSSFeed.aspx?ModID=1&CID=Fredericksburg-News-1 news "!Fredb. News" local
+http://www.dailyprogress.com/search/?mode=article&q=&t=article&l=10&d=&d1=1+year+ago&d2=&s=&sd=desc&c[]=news/local*&f=atom&fulltext=dpmobile&altf=mrss news "!Cville News" local cville
+https://fredericksburgva.gov/RSSFeed.aspx?ModID=1&CID=Fredericksburg-News-1 news "!Fredb. News" local fburg
 
-https://rpggeek.com/rss/thread/1724354 campaigns "!Knights of Salisbury" ooc pendragon
-https://rpggeek.com/rss/thread/2344531 campaigns "!Knights of Salisbury" ic pendragon
-https://rpggeek.com/rss/thread/2388799 campaigns "!Knights of Salisbury" ic pendragon
-https://rpggeek.com/rss/thread/2431371 campaigns "!Knights of Salisbury" ic pendragon
+https://rpggeek.com/rss/thread/1724354 campaigns "!Knights of Salisbury" ooc pendragon rpgs kos
+https://rpggeek.com/rss/thread/2344531 campaigns "!Knights of Salisbury" ic pendragon  rpgs kos
+https://rpggeek.com/rss/thread/2388799 campaigns "!Knights of Salisbury" ic pendragon  rpgs kos
+https://rpggeek.com/rss/thread/2431371 campaigns "!Knights of Salisbury" ic pendragon  rpgs kos
 
-https://rpggeek.com/rss/thread/2371283 campaigns "!AIME: The Fellowship of Five" ooc aime
-https://rpggeek.com/rss/thread/2382018 campaigns "!AIME: The Fellowship of Five" ic aime
+https://rpggeek.com/rss/thread/2371283 campaigns "!AIME: The Fellowship of Five" ooc aime rpgs fo5
+
+https://rpggeek.com/rss/thread/2382018 campaigns "!AIME: The Fellowship of Five" ic aime rpgs fo5
 
 https://rpggeek.com/rss/thread/2352712 campaigns "!Honor and Intrigue: The Banners of Shalott" ooc honorintrigue
-https://rpggeek.com/rss/thread/2357495 campaigns "!Honor and Intrigue: The Banners of Shalott" ic honorintrigue
+https://rpggeek.com/rss/thread/2357495 campaigns "!Honor and Intrigue: The Banners of Shalott" ic honorintrigue 
 
-https://rpggeek.com/rss/thread/2410450 rgps "!The One Ring: Fellowship of the 1PG (OOC)" ooc tor
-https://rpggeek.com/rss/thread/2420789 campaigns "!The One Ring: Across the Great Forest" ic tor
-https://rpggeek.com/rss/thread/2416498 campaigns "!The One Ring: A Few Meetings (IC)" ic tor
+https://rpggeek.com/rss/thread/2410450 campaigns "!The One Ring: Fellowship of the 1PG (OOC)" ooc tor rpgs fot1pg
+https://rpggeek.com/rss/thread/2420789 campaigns "!The One Ring: Across the Great Forest" ic tor rpgs fot1pg
+https://rpggeek.com/rss/thread/2416498 campaigns "!The One Ring: A Few Meetings (IC)" ic tor rpgs  fot1pg
 
-https://rpol.net/feeds.cgi?q=2CEMCCmJ9dwpwGwAsehU campaigns "!RPOL" rpol
+https://rpol.net/feeds.cgi?q=2CEMCCmJ9dwpwGwAsehU campaigns "~RPOL.net" rpol
 
 
-https://normancenturies.com/rss.xml podcasts history "!Norman Centuries" brokenthrones
+https://normancenturies.com/rss.xml podcasts history "!Norman Centuries" brokenthrones norman
 https://anchor.fm/s/182b418/podcast/rss broman podcasts gaming "!The Broman Podcast"
 
 
-https://old.reddit.com/r/DestinyLore.rss "!r/DestinyLore" "reddit"
- https://old.reddit.com/r/CrusaderKings/search.rss?q=self%3Ayes&restrict_sr=on&include_over_18=on&sort=new&t=all "!CrusaderKings" "reddit" 
+https://old.reddit.com/r/DestinyLore.rss "~r/DestinyLore" "reddit" "destiny" "destinylore"
+ https://old.reddit.com/r/CrusaderKings/search.rss?q=self%3Ayes&restrict_sr=on&include_over_18=on&sort=new&t=all "~CrusaderKings" "reddit" 
+
+https://www.youtube.com/feeds/videos.xml?channel_id=UClbllR4Tx-lhYJyrpu1sA4A youtube destiny "!Aztecross Gaming" aztecross
+https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg youtube linux "!DistroTube" distrotube
+https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA youtube linux "!Luke Smith" lukesmith
+
+https://www.youtube.com/feeds/videos.xml?channel_id=UCkmAjbIecTIjTQctolYeuDw youtube destiny datto "!Datto"
 
 
+   

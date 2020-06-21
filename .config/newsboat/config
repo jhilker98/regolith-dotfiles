@@ -45,7 +45,9 @@ bind-key K prev-feed articlelist
 bind-key j down article
 bind-key k up article
 bind-key L toggle-show-read-feeds
-
+unbind-key ,
+unbind-key SPACE
+bind-key SPACE macro-prefix
 # -- bookmarks -----------------------------------------------------------------
 
 bookmark-cmd ~/.newsbeuter/bookmark.sh
@@ -62,6 +64,8 @@ cleanup-on-quit no
 # -- ui -------------------------------------------------------------------------
 datetime-format "%d %b"
 feedlist-format "%3>%4i %3>%U %n %3>%t"
+#articlelist-format "%3>%4i %2>%f %D %a %3>%t" -- if you really want the author, uncomment this line
+
 articlelist-format "%3>%4i %2>%f %D %3>%t"
 
 
@@ -79,7 +83,7 @@ article-sort-order date-asc
 # -- macros ---------------------------------------------------------------------  
 macro i set browser "feh %u"; open-in-browser ; set browser "elinks %u"
 
-macro m set browser "mpv --force-window=immediate %u"; open-in-browser ; set browser "xdg-open %u"
+macro m set browser "mpv --force-window=immediate %u "; open-in-browser ; set browser "xdg-open %u"
 
 # -- filters --------------------------------------------------------------------
 
@@ -105,3 +109,9 @@ define-filter "Reddit" "tags # \"reddit\""
 # Podcast Filters
 define-filter "The Broman Podcast" "tags # \"broman\""
 define-filter "Norman Centuries" "tags # \"norman\""
+
+# Youtube
+define-filter "Aztecross Gaming" "tags # \"aztecross\""
+define-filter "DistroTube" "tags # \"distrotube\""
+define-filter "Luke Smith" "tags # \"lukesmith\""
+define-filter "Datto" "tags # \"datto\""
