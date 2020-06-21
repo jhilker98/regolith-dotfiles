@@ -32,12 +32,15 @@ https://rpggeek.com/rss/thread/2416498 campaigns "!The One Ring: A Few Meetings 
 https://rpol.net/feeds.cgi?q=2CEMCCmJ9dwpwGwAsehU campaigns "~RPOL.net" rpol
 
 
-https://normancenturies.com/rss.xml podcasts history "!Norman Centuries" brokenthrones norman
+https://normancenturies.com/rss.xml podcasts history "!Norman Centuries" brokenthrones norman medieval
 https://anchor.fm/s/182b418/podcast/rss broman podcasts gaming "!The Broman Podcast"
 
 
 https://old.reddit.com/r/DestinyLore.rss "~r/DestinyLore" "reddit" "destiny" "destinylore"
- https://old.reddit.com/r/CrusaderKings/search.rss?q=self%3Ayes&restrict_sr=on&include_over_18=on&sort=new&t=all "~CrusaderKings" "reddit" 
+https://old.reddit.com/r/CrusaderKings/search.rss?q=self%3Ayes&restrict_sr=on&include_over_18=on&sort=new&t=all "~CrusaderKings" "reddit" 
+https://old.reddit.com/r/sca/search.rss?q=self%3Ayes&restrict_sr=on&sort=relevance&t=all reddit sca "~Reddit SCA" medieval
+https://old.reddit.com/r/MedievalHistory/search.rss?q=self%3Ayes&include_over_18=on&restrict_sr=on&t=all&sort=new reddit sca history medieval "~MedievalHistory"
+
 
 https://www.youtube.com/feeds/videos.xml?channel_id=UClbllR4Tx-lhYJyrpu1sA4A youtube destiny "~Aztecross" aztecross
 https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg youtube linux  distrotube
