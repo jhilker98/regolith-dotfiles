@@ -12,10 +12,6 @@ prepopulate-query-feeds yes
 
 show-read-feeds no
 show-read-articles no
-color info default default reverse
-color listnormal_unread yellow default
-color listfocus blue default reverse bold
-color listfocus_unread blue default reverse bold
 
 text-width 80
 
@@ -25,7 +21,7 @@ text-width 80
 goto-next-feed no
 browser "~/.bin/newsboat-browser.sh"
 
-# unbind-key ENTER
+# -- keybindings  ---------------------------------------------------------------
 unbind-key j
 unbind-key k
 unbind-key J
@@ -33,7 +29,11 @@ unbind-key K
 
 unbind-key C feedlist
 
-# -- keybindings  ---------------------------------------------------------------
+unbind-key a
+unbind-key A
+
+bind-key A mark-all-feeds-read
+bind-key a mark-feed-read
 
 bind-key j down feedlist
 bind-key k up feedlist
@@ -60,13 +60,21 @@ cleanup-on-quit no
 
 
 # -- ui -------------------------------------------------------------------------
+datetime-format "%d %b"
+feedlist-format "%3>%4i %3>%U %n %3>%t"
+articlelist-format "%3>%4i %2>%f %D %3>%T %3>%t"
 
-articlelist-format "%3f %D %t"
-feedlist-format "%11U %t"
+
+# -- colors ---------------------------------------------------------------------
+color info default default reverse
+color listnormal_unread yellow default bold
+color listfocus magenta default reverse bold 
+color listfocus_unread magenta default reverse bold
+color info white blue bold
 
 # -- sorts ----------------------------------------------------------------------
 feed-sort-order unreadarticlecount-asc
-
+article-sort-order date-asc
 
 # -- macros ---------------------------------------------------------------------
 macro i set browser "feh %u"; open-in-browser ; set browser "elinks %u"

@@ -1,12 +1,25 @@
-http://feeds.reuters.com/reuters/domesticNews news "!Reuters US" us
+"query:Reddit:tags # \"reddit\""
+"query:Local News:tags # \"local\"" 
+"query:US News:tags # \"us\""
+"query:World News:tags # \"world\""
+"query:AIME - The Fellowship of Five:tags # \"aime\""
+"query:Knights of Salisbury:tags # \"pendragon\""
+"query:Honor and Intrigue - The Banners of Shallot:tags # \"honorintrigue\""
+"query:The One Ring - Fellowship of the 1PG:tags # \"tor\""
+"query:Podcasts:tags # \"podcasts\""
+"query:Norman Centuries:rssurl=~\"normancenturies\.com\"" "!Norman Centuries" "history"
+
+
+
+http://feeds.reuters.com/reuters/domesticNews news "!Reuters" us
 http://feeds.washingtonpost.com/rss/rss_morning-mix?itid=lk_inline_manual_42 news us "!WaPo US" 
 http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml?edition=int news us "!BBC US"
 
-http://feeds.reuters.com/reuters/worldNews news "!Reuters World" world 
-https://feeds.npr.org/1001/rss.xml news world "!NPR World"
+http://feeds.reuters.com/reuters/worldNews news "!Reuters" world 
+https://feeds.npr.org/1001/rss.xml news world "!NPR"
 
-http://www.dailyprogress.com/search/?mode=article&q=&t=article&l=10&d=&d1=1+year+ago&d2=&s=&sd=desc&c[]=news/local*&f=atom&fulltext=dpmobile&altf=mrss news "!Local News" local
-https://fredericksburgva.gov/RSSFeed.aspx?ModID=1&CID=Fredericksburg-News-1 news "!Local News" local
+http://www.dailyprogress.com/search/?mode=article&q=&t=article&l=10&d=&d1=1+year+ago&d2=&s=&sd=desc&c[]=news/local*&f=atom&fulltext=dpmobile&altf=mrss news "!Cville News" local
+https://fredericksburgva.gov/RSSFeed.aspx?ModID=1&CID=Fredericksburg-News-1 news "!Fredb. News" local
 
 https://rpggeek.com/rss/thread/1724354 campaigns "!Knights of Salisbury" ooc pendragon
 https://rpggeek.com/rss/thread/2344531 campaigns "!Knights of Salisbury" ic pendragon
@@ -27,18 +40,10 @@ https://rpol.net/feeds.cgi?q=2CEMCCmJ9dwpwGwAsehU campaigns "!RPOL" rpol
 
 
 https://normancenturies.com/rss.xml podcasts history "!Norman Centuries" brokenthrones
-https://anchor.fm/s/182b418/podcast/rss
+https://anchor.fm/s/182b418/podcast/rss broman podcasts gaming "!The Broman Podcast"
 
 
-https://old.reddit.com/r/DestinyLore.rss
-https://old.reddit.com/r/CrusaderKings.rss
+https://old.reddit.com/r/DestinyLore.rss "!r/DestinyLore" "reddit"
+ https://old.reddit.com/r/CrusaderKings/search.rss?q=self%3Ayes&restrict_sr=on&include_over_18=on&sort=new&t=all "!CrusaderKings" "reddit" 
 
-"query:Local News:tags # \"local\""
-"query:US News:tags # \"us\""
-"query:World News:tags # \"world\""
-"query:AIME - The Fellowship of Five:tags # \"aime\""
-"query:Knights of Salisbury:tags # \"pendragon\""
-"query:Honor and Intrigue - The Banners of Shallot:tags # \"honorintrigue\""
-"query:The One Ring - Fellowship of the 1PG:tags # \"tor\""
-"query:Podcasts:tags # \"podcasts\""
-"query:Norman Centuries:rssurl=~\"normancenturies\.com\""
+
