@@ -1,7 +1,6 @@
 "query:News:tags # \"news\""
 "query:Campaigns:tags # \"campaigns\" and tags !# \"rpol\"" 
 "query:Podcasts:tags # \"podcasts\""
-"query:YouTube:tags # \"youtube\""
 
 
 http://feeds.reuters.com/reuters/domesticNews news "!Reuters" us
@@ -40,11 +39,11 @@ https://anchor.fm/s/182b418/podcast/rss broman podcasts gaming "!The Broman Podc
 https://old.reddit.com/r/DestinyLore.rss "~r/DestinyLore" "reddit" "destiny" "destinylore"
  https://old.reddit.com/r/CrusaderKings/search.rss?q=self%3Ayes&restrict_sr=on&include_over_18=on&sort=new&t=all "~CrusaderKings" "reddit" 
 
-https://www.youtube.com/feeds/videos.xml?channel_id=UClbllR4Tx-lhYJyrpu1sA4A youtube destiny "!Aztecross Gaming" aztecross
-https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg youtube linux "!DistroTube" distrotube
-https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA youtube linux "!Luke Smith" lukesmith
+https://www.youtube.com/feeds/videos.xml?channel_id=UClbllR4Tx-lhYJyrpu1sA4A youtube destiny "~Aztecross" aztecross
+https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg youtube linux  distrotube
+https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA youtube linux lukesmith
 
-https://www.youtube.com/feeds/videos.xml?channel_id=UCkmAjbIecTIjTQctolYeuDw youtube destiny datto "!Datto"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCkmAjbIecTIjTQctolYeuDw youtube destiny datto  
 
 
    

@@ -45,9 +45,11 @@ bind-key K prev-feed articlelist
 bind-key j down article
 bind-key k up article
 bind-key L toggle-show-read-feeds
-unbind-key ,
-unbind-key SPACE
-bind-key SPACE macro-prefix
+
+# ONLY INCOMMENT IF YOU WANT SPACE AS MACRO
+## unbind-key ,
+## unbind-key SPACE
+## bind-key SPACE macro-prefix
 # -- bookmarks -----------------------------------------------------------------
 
 bookmark-cmd ~/.newsbeuter/bookmark.sh
@@ -103,15 +105,14 @@ define-filter "Fellowship of the 1PG" "tags # \"fot1pg\" and rssurl =~ \"rpggeek
 define-filter "Knights of Salisbury" "tags # \"kos\" and rssurl =~ \"rpggeek\""
 define-filter "Honor and Intrigue: The Banners of Shalott" "tags # \"honorintrigue\" and rssurl =~ \"rpggeek\""
 
-# A general reddit filter
+# General Social Media filters
+## Reddit
 define-filter "Reddit" "tags # \"reddit\""
+
+## Youtube
+define-filter "YouTube" "tags # \"youtube\""
 
 # Podcast Filters
 define-filter "The Broman Podcast" "tags # \"broman\""
 define-filter "Norman Centuries" "tags # \"norman\""
 
-# Youtube
-define-filter "Aztecross Gaming" "tags # \"aztecross\""
-define-filter "DistroTube" "tags # \"distrotube\""
-define-filter "Luke Smith" "tags # \"lukesmith\""
-define-filter "Datto" "tags # \"datto\""
