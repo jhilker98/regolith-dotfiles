@@ -100,10 +100,10 @@ define-filter "World News" "tags # \"world\" and tags # \"news\""
 ## define-filter "DestinyLore" "tags # \"destinylore\""
 
 # Campaign filters
-define-filter "AIME: The Fellowship of Five" "tags # \"fo5\" and rssurl =~ \"rpggeek\""
-define-filter "Fellowship of the 1PG" "tags # \"fot1pg\" and rssurl =~ \"rpggeek\""
-define-filter "Knights of Salisbury" "tags # \"kos\" and rssurl =~ \"rpggeek\""
-define-filter "Honor and Intrigue: The Banners of Shalott" "tags # \"honorintrigue\" and rssurl =~ \"rpggeek\""
+define-filter "AIME: The Fellowship of Five" "tags # \"fo5\" and rssurl =~ \"rpggeek\" and unread = \"yes\""
+define-filter "Fellowship of the 1PG" "tags # \"fot1pg\" and rssurl =~ \"rpggeek\" and unread = \"yes\""
+define-filter "Knights of Salisbury" "tags # \"kos\" and rssurl =~ \"rpggeek\" and unread = \"yes\""
+define-filter "Honor and Intrigue: The Banners of Shalott" "tags # \"honorintrigue\" and rssurl =~ \"rpggeek\" and unread = \"yes\""
 
 # General Social Media filters
 ## Reddit
