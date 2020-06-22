@@ -54,6 +54,7 @@ let g:UltiSnipsEditSplit="vertical"
 
 Plugin 'mhinz/vim-startify' "start menu for vim
 Plugin 'morhetz/gruvbox'
+Plugin 'sainnhe/gruvbox-material' 
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -74,6 +75,7 @@ filetype plugin indent on    " required
 augroup my_colours
   autocmd!
   autocmd ColorScheme gruvbox hi SpellBad cterm=underline ctermfg=red
+  autocmd ColorScheme gruvbox hi SpellCap cterm=underline ctermfg=blue
 augroup END
 
 syntax enable
@@ -97,8 +99,11 @@ let g:coc_disable_startup_warning = 1
 
 " Tagbar Config
 " let g:tagbar_left=1
+
+" Dynamic Line Numbers
 set nu rnu
 
+" set nu
 " don't search all included files for autocomplete, heavens
 set incsearch
 set complete-=i
@@ -123,12 +128,17 @@ autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 set hlsearch
 set spelllang=en_us
 
+
+
 " Keybindings
+
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+
 "" Disable Arrow Keys
-" nnoremap <up>    <nop>
-" nnoremap <down>  <nop>
-" nnoremap <left>  <nop>
-" nnoremap <right> <nop>
+nnoremap <up>    <nop>
+nnoremap <down>  <nop>
+nnoremap <left>  <nop>
+nnoremap <right> <nop>
 " General Keybindings
 set backspace=indent,eol,start
 """Use space as leader
@@ -194,9 +204,10 @@ iab <silent> mynm Jacob Hilker
 
 "" Programming Abbrevs
 """" Shebang Abbrev
+
 iab <silent> shbg #!/bin/sh <CR>
-
-
+iab <silent> bash #!/bin/bash<CR>
+iab <silent> psh #!/usr/bin/env python3<CR>
 
 "Always load polybar config as ini file.
 aug polybar_ft_detection
@@ -218,6 +229,11 @@ set splitbelow splitright
 " Use italic for comments
 highlight Comment cterm=italic
 
-autocmd FileType groff,markdown,org set spell
+autocmd FileType groff,markdown,org,plaintex,nroff set spell
 autocmd BufNewFile,BufRead /tmp/neomutt*,/tmp/calcurse*,~/.calcurse/notes/* set spell
 autocmd FileType gitcommit setlocal spell
+
+
+
+" Load ms files as groff
+autocmd BufNewFile,BufRead *.ms,*.mm set filetype=groff
