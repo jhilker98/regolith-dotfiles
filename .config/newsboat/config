@@ -88,16 +88,15 @@ macro i set browser "feh %u"; open-in-browser ; set browser "elinks %u"
 macro m set browser "mpv --force-window=immediate %u "; open-in-browser ; set browser "xdg-open %u"
 
 # -- filters --------------------------------------------------------------------
+# Filters for classes
+define-filter "Technical Writing" "tags # \"technicalwriting\""
+
 
 # Filters for news by location
 define-filter "Charlottesville News" "tags # \"cville\" and tags # \"news\" and unread = \"yes\""
 define-filter "Fredericksburg News" "tags # \"fburg\" and tags # \"news\" and unread = \"yes\""
 define-filter "US News" "tags # \"us\" and tags # \"news\" and unread = \"yes\""
 define-filter "World News" "tags # \"world\" and tags # \"news\" and unread = \"yes\""
-
-# Old subreddit filters
-## define-filter "CrusaderKings" "feedtitle # \"CrusaderKings\""
-## define-filter "DestinyLore" "tags # \"destinylore\""
 
 # Campaign filters
 define-filter "AIME: The Fellowship of Five" "tags # \"fo5\" and rssurl =~ \"rpggeek\" and unread = \"yes\""
@@ -107,8 +106,12 @@ define-filter "Honor and Intrigue: The Banners of Shalott" "tags # \"honorintrig
 
 # General Social Media filters
 ## Reddit
-define-filter "Reddit" "tags # \"reddit\" and unread = \"yes\""
-
+#define-filter "Reddit" "tags # \"reddit\" and unread = \"yes\""
+# Old subreddit filters
+define-filter "CrusaderKings" "feedtitle # \"CrusaderKings\"" 
+define-filter "DestinyLore" "tags # \"destinylore\""
+define-filter "SCA" "tags # \"sca\""
+define-filter "MedievalHistory" "tags # \"MedievalHistory\""
 ## Youtube
 define-filter "YouTube" "tags # \"youtube\" and unread = \"yes\""
 
