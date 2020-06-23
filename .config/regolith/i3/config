@@ -46,7 +46,7 @@ hide_edge_borders smart
 bindsym $mod+Return exec alacritty
 ## Launch // Firefox // <><Shift> Enter ##
 bindsym $mod+Shift+Return exec /usr/bin/firefox
-## Launch // GNOME Tweaks // <><Alt> t ##
+## Configure // GNOME Tweaks // <><Alt> t ##
 bindsym $mod+$alt+t exec gnome-tweaks 
 ## Launch // App // <> Space ##
 bindsym $mod+space exec rofi -show drun 
@@ -61,25 +61,16 @@ bindsym $mod+e exec emacs
 bindsym $mod+v exec alacritty -e ~/Downloads/nvim/bin/nvim
 #bindsym $mod+v exec kitty -e vim 
 ## Launch // Mail // <> m ##
-#bindsym $mod+m exec alacritty -e neomutt 
-bindsym $mod+m exec kitty -e neomutt
+bindsym $mod+m exec alacritty -e neomutt 
+#bindsym $mod+m exec kitty -e neomutt
 ## Launch // Ranger // <><Shift> n ##
 bindsym $mod+Shift+n exec alacritty -e ranger
 #bindsym $mod+Shift+n exec kitty -e ranger
 ## Launch // Notifications // <> n ##
 set_from_resource $i3-wm.program.notification_ui i3-wm.program.notification_ui /usr/bin/rofication-gui
 bindsym $mod+n exec $i3-wm.program.notification_ui
-## Launch // GUI File Mng // <><Alt> n ##
-bindsym $mod+$alt+n exec nautilus
 ## Launch // News // <><Ctrl> n ##
-#bindsym $mod+Ctrl+n exec alacritty -e newsboat -r -c ~/.config/newsboat/cache.db -C ~/.config/newsboat/config -u ~/.config/newsboat/urls 
-#bindsym $mod+Ctrl+n exec kitty -e newsboat -r -c ~/.config/newsboat/cache.db -C ~/.config/newsboat/config -u ~/.config/newsboat/urls 
-
-
 bindsym $mod+Ctrl+n exec alacritty -e newsboat -r 
-#bindsym $mod+Ctrl+n exec kitty -e newsboat -r -c ~/.config/newsboat/cache.db -C ~/.config/newsboat/config -u ~/.config/newsboat/urls 
-
-
 ## Launch // Zathura // <> z ##
 bindsym $mod+z exec zathura
 ## Launch // GIMP // <> g ##
@@ -97,25 +88,22 @@ bindsym $mod+s exec alacritty -e ncspot
 #bindsym $mod+s exec kitty -e ncspot
 ## Launch // LibreOffice // <><Ctrl> l ##
 bindsym $mod+Ctrl+l exec libreoffice
-## Launch // LibreOffice // <><Shift> m ##
+## Launch // Manuskript // <><Shift> m ##
 bindsym $mod+Shift+m exec manuskript
-## Settings // Open Settings // <><Alt> c ##
+## Configure // Open Settings // <><Alt> c ##
 bindsym $mod+$alt+c exec gnome-control-center
-## Settings // Display Settings // <><Alt> d ##
+## Configure // Display Settings // <><Alt> d ##
 bindsym $mod+$alt+d exec gnome-control-center display
-## Settings // Wifi Settings // <><Alt> w ##
+## Configure // Wifi Settings // <><Alt> w ##
 bindsym $mod+$alt+w exec gnome-control-center wifi
-## Settings // Power // <><Alt>p ##
+## Configure // Power // <><Alt>p ##
 bindsym $mod+$alt+p exec gnome-control-center power
-set_from_resource $rofiTheme rofi.theme "gruvbox-grid"
+set_from_resource $rofiTheme rofi.theme "GruvboxGrid"
 ## Launch // Calendar // <> c ##
 bindsym $mod+c exec alacritty -e calcurse
 
 ## Launch // VSCode // <><Shift>v ##
 bindsym $mod+Shift+v exec code
-
-## Launch // Gnome Terminal // <><Ctrl>Enter ##
-bindsym $mod+Ctrl+Return exec gnome-terminal
 
 # Navigation
 ## Navigate // Window by Name // <><Ctrl> Space ##
@@ -403,7 +391,7 @@ font $i3-wm.bar.font
 # The following exec calls run programs in the background when i3 starts.
 
 # Reload color scheme
-exec --no-startup-id wal -R"
+#exec --no-startup-id wal -R"
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 #exec_always --no-startup-id polybar mybar &
