@@ -1,0 +1,18 @@
+colors:
+  body: none
+  date: none
+  tags: none
+  title: none
+default_hour: 9
+default_minute: 0
+editor: vim
+encrypt: false 
+highlight: true
+indent_character: '|'
+journals:
+  default: /home/jhilker/Dropbox/journal/journal.txt
+linewrap: 79
+tagsymbols: '@'
+template: false
+timeformat: '%d %b %H:%M'
+version: v2.4.3
