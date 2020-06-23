@@ -8,6 +8,6 @@ data = json.loads(file.read())
 for _, v in data.items():
     if v['_isTask']:
         if v['isComplete']:
-            print(f'  {v["_id"]} {v["description"]}')
+            print(f'🗹  {v["_id"]} {v["description"]}')
         else:
-            print(f'󰄰  {v["_id"]} {v["description"]}')
+            print(f'☐  {v["_id"]} {v["description"]}')
