@@ -93,7 +93,7 @@ label-urgent-padding = 1.75
 ; label-separator = |
 
 
-[module/time]
+[module/clock]
 type = internal/date
 
 ;;12-Hour Time with AM/PM in caps
@@ -265,7 +265,7 @@ type = internal/xkeyboard
 format = <label-indicator>
 format-prefix = 󰳡
 format-background = ${colors.bg-soft}
-format-prefix-background = ${colors.darkblue}
+format-prefix-background = ${colors.red}
 format-prefix-padding = 1
 
 indicator-icon-0 = caps lock;-CL;+CL
@@ -306,6 +306,7 @@ label-foreground = ${colors.fg}
 format-prefix-foreground = ${colors.fg}
 ;format-prefix-margin = 1
 click-right = alacritty -e ~/.config/polybar/scripts/todo/appts.sh &
+enable-tail= true
 
 [module/previous]
 type = custom/script
@@ -346,9 +347,9 @@ format-margin = 0
 
 [module/polypomo]
 type = custom/script
-
 exec = /home/$USER/.config/polybar/scripts/polypomo
 tail = true
+enable-scroll = true
 
 label = %output%
 click-left = /home/$USER/.config/polybar/scripts/polypomo toggle
@@ -356,10 +357,11 @@ click-middle =/home/$USER/.config/polybar/scripts/polypomo lock
 click-right =  /home/$USER/.config/polybar/scripts/polypomo end
 scroll-up = home/$USER/.config/polybar/scripts/polypomo time +60
 scroll-down = home/$USER/.config/polybar/scripts/polypomo time -60
+
 format-prefix = ""
 format-prefix-background = ${colors.darkblue}
 format-background = ${colors.bg-soft}
-format-margin = 1
+format-foreground = ${colors.fg}
 format-prefix-padding = 1
 label-padding-right = 1
 
@@ -429,6 +431,8 @@ label-padding = 1
 format-foreground = ${colors.fg}
 ;format-margin-right = 1
 format-margin = 1
+
+
 [module/powermenu]
 type = custom/text
 content = 
@@ -438,6 +442,8 @@ content-fg = ${colors.fg}
 click-left = $HOME/.config/polybar/scripts/sysmenu
 click-right = $HOME/.config/polybar/scripts/sysmenu
 content-margin = 1
+
+
 
 ;------;
 ; BARS ;
@@ -458,7 +464,7 @@ width = 100%
 height = 27
 ;radius = 4
 modules-left = i3 
-modules-center = time 
+modules-center = clock 
 modules-right = volume wifi battery backlight 
 ;padding = 1
 ;module-margin = 1
@@ -486,10 +492,10 @@ fg = ${colors.fg}
 width = 100%
 height = 27
 ;radius = 4
-modules-left =  date todo keyboard
+modules-left =  date polypomo keyboard
 ; modules-center = appts
 
-modules-center = previous playpause next polypomo
+modules-center = previous playpause next 
 ; when wttr.in isn't down
 modules-right = notifs news weather 
 
