@@ -46,10 +46,13 @@ bind-key j down article
 bind-key k up article
 bind-key L toggle-show-read-feeds
 
-# ONLY INCOMMENT IF YOU WANT SPACE AS MACRO
+# ONLY UNCOMMENT IF YOU WANT SPACE AS MACRO
 ## unbind-key ,
 ## unbind-key SPACE
 ## bind-key SPACE macro-prefix
+
+bind-key N next
+bind-key P prev
 # -- bookmarks -----------------------------------------------------------------
 
 bookmark-cmd ~/.newsbeuter/bookmark.sh
