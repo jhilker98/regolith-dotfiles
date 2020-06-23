@@ -50,7 +50,7 @@ icons-1 = "Material Icons:size=12;3"
 weather = "Weather Icons:size=12;0"
 icons-2 = "FontAwesome:size=12;3"
 icons-3 = "Symbola:size=12;0"
-
+icons4 = "Material Design Icons Desktop:size=12;3"
 ;---------;
 ; MODULES ;
 ;---------;
@@ -446,13 +446,12 @@ modules-right = volume wifi battery backlight
 
 [bar/btm]
 bottom = true
-font-0 = "Iosevka:pixelsize=12;3"
-font-1 = "Material Icons:size=12;3"
-font-2 = "Weather Icons:size=12;0"
-font-3 = "FontAwesome:size=12;3"
-font-4 = "Symbola:size=12;0"
-font-5 = "Material Design Icons Desktop:size=12;3"
-
+font-0 = ${fonts.text} 
+font-1 = ${fonts.icons-1} 
+font-2 = ${fonts.weather} 
+font-3 = ${fonts.icons-2} 
+font-4 = ${fonts.icons-3}
+font-5 = ${fonts.icons4}
 
 line-size = 2.75
 enable-ipc = true
@@ -466,12 +465,12 @@ fg = ${colors.fg}
 width = 100%
 height = 27
 ;radius = 4
-modules-left =  date todo 
+modules-left =  keyboard  date todo 
 ; modules-center = appts
 
 modules-center = previous playpause next 
 ; when wttr.in isn't down
-modules-right = notifs news weather  keyboard  
+modules-right = notifs news weather 
 
 ;  when wttr.in is down
 ;;modules-right = notifs news
