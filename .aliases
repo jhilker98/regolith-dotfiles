@@ -1,12 +1,12 @@
 # ls aliases
-alias ls="exa --color=auto"
-alias la="exa -la"
-alias ll="exa -lah"
-alias lsr="exa -alhrs modified"
-#alias ls="ls --color=auto"
-#alias ll='ls -alF'
-#alias la='ls -A'
-#alias l='ls -CF'
+#alias ls="exa --color=auto"
+#alias la="exa -la"
+#alias ll="exa -lah"
+#alias lsr="exa -alhrs modified"
+alias ls="ls --color=auto"
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 
 #Navigation and Clearing Aliases
 alias home="cd /home/jhilker"
@@ -33,16 +33,14 @@ alias update="sudo apt update -y"
 alias upgrade="sudo apt update && sudo apt upgrade -y"
 #alias install="sudo apt install -y"
 alias autoremove="sudo apt autoremove -y"
-alias purge="sudo apt purge -y"
-alias fix="sudo dpkg --configure -a"
-alias music="tizonia --spotify-playlist-id  https://open.spotify.com/playlist/69uvLQBtqvAMoyNFPy7ErL -s --spotify-allow-explicit-tracks"
+alias jams="tizonia --spotify-playlist-id  https://open.spotify.com/playlist/69uvLQBtqvAMoyNFPy7ErL -s --spotify-allow-explicit-tracks"
 alias coding="tizonia --spotify-playlist-id https://open.spotify.com/playlist/0sSrQJpH4B00xG7bPDrJXp -s --spotify-allow-explicit-tracks"
 alias erb="tizonia --spotify-playlist-id https://open.spotify.com/playlist/0tpXl15JsHSKrHx4TgSbOy -s --spotify-allow-explicit-tracks"
 alias geb="tizonia --spotify-playlist-id 'https://open.spotify.com/playlist/3iSNMhp2CnftVz43VA5lwP' -s"
 alias iks="tizonia --spotify-album 'In Keeping Secrets of Silent Earth 3' --spotify-allow-explicit-tracks"
 alias ga4="tizonia --spotify-album-id 'https://open.spotify.com/album/4nYsnQpTAQaPzrPc6rOsBN' --spotify-allow-explicit-tracks"
 alias nwft="tizonia --spotify-album 'No World For Tomorrow' --spotify-allow-explicit-tracks"
-alias study="tizonia --spotify-playlist-id 'https://open.spotify.com/playlist/37i9dQZF1DX8Uebhn9wzrS' -s --spotify-allow-explicit-tracks"
+alias lofi="tizonia --spotify-playlist-id 'https://open.spotify.com/playlist/37i9dQZF1DX8Uebhn9wzrS' -s --spotify-allow-explicit-tracks"
 alias lmus="tizonia -rs ~/Music/playlist"
 alias shp="tizonia --spotify-album-id 'https://open.spotify.com/album/7hgb44Kiav8NRoa26nuus5' --spotify-allow-explicit-tracks"
 alias coheed="tizonia --spotify-artist coheed --spotify-allow-explicit-tracks -s"
@@ -87,7 +85,7 @@ alias shatter="cd ~/Documents/shattered-skies; exa -alh"
 ##alias KidalLore="emacs ~/Kidal/lore/lore.org"
 ##alias hunt="emacs ~/Ashes-World/campaigns/the-great-hunt/greatHunt.org"
 ##alias campaign="cd ~/solo-campaigns; exa -alh"
-alias byrne-
+alias byrne="cd ~/Documents/Byrne-World"
 # Game Aliases
 alias els="rlwrap telnet elessar.mudhosting.net 7778"
 alias sol="rlwrap telnet Middle-earth.us 4500"
@@ -105,3 +103,4 @@ alias calcurse="calcurse -D ~/Dropbox/calcurse"
 alias vim="nvim"
 alias vscode="code"
 alias gtheme='bash -c  "$(wget -qO- https://git.io/vQgMr)"'
+alias zpdf="zathura & disown"

@@ -84,8 +84,8 @@ ZSH_THEME="robbyrussell"
 export FZF_BASE="/home/jhilker/.fzf/bin/fzf"
 export DISABLE_FZF_AUTO_COMPLETION="false"
 export DISABLE_FZF_KEY_BINDINGS="false"
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions rand-quote fzf)
-
+plugins=(git zsh-syntax-highlighting rand-quote fzf)
+source $ZSH/custom/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -100,7 +100,7 @@ export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
 # export MANPATH="/usr/local/man:$MANPATH"
 # export BROWSER="/usr/bin/firefox"
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+ export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -172,6 +172,5 @@ PROMPT='${vim_mode} %{$fg[red]%}[%F{12}%n%{$reset_color%} @ %{$fg[yellow]%}%~%{$
 #RPROMPT='${vim_mode}'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 
 #colorscript.sh -r
