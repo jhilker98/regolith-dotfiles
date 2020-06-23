@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Go ahead and get the colorscheme
-wal -Rq
 # Terminate already running bar instances
 killall -q polybar
 
@@ -13,3 +11,4 @@ polybar top &
 polybar btm &
 echo "Polybar launched..."
 
+~/.config/polybar/scripts/spotify/launchlistener.sh

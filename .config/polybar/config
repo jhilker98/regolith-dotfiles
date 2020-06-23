@@ -50,7 +50,9 @@ icons-1 = "Material Icons:size=12;3"
 weather = "Weather Icons:size=12;0"
 icons-2 = "FontAwesome:size=12;3"
 icons-3 = "Symbola:size=12;0"
-icons4 = "Material Design Icons Desktop:size=12;3"
+icons-4 = "Material Design Icons Desktop:size=12;3"
+text-2 = "Iosevka Medium:pixelsize=12;3"
+text-3 = "Roboto Mono for Powerline:pixelsize=12;3"
 ;---------;
 ; MODULES ;
 ;---------;
@@ -290,7 +292,7 @@ format-label-indicator-on-capslock-margin = 1
 ;format-prefix-margin = 1
 ;module-margin = 1
 format-foreground = ${colors.fg}
-
+format-margin = 1
 [module/todo]
 type = custom/script
 exec = ~/.config/polybar/scripts/todo/todo.sh
@@ -341,6 +343,25 @@ format-background = ${colors.blue}
 format-foreground = ${colors.fg}
 format-padding = 1
 format-margin = 0
+
+[module/polypomo]
+type = custom/script
+
+exec = /home/$USER/.config/polybar/scripts/polypomo
+tail = true
+
+label = %output%
+click-left = /home/$USER/.config/polybar/scripts/polypomo toggle
+click-middle =/home/$USER/.config/polybar/scripts/polypomo lock
+click-right =  /home/$USER/.config/polybar/scripts/polypomo end
+scroll-up = home/$USER/.config/polybar/scripts/polypomo time +60
+scroll-down = home/$USER/.config/polybar/scripts/polypomo time -60
+format-prefix = ""
+format-prefix-background = ${colors.darkblue}
+format-background = ${colors.bg-soft}
+format-margin = 1
+format-prefix-padding = 1
+label-padding-right = 1
 
 [module/spotify]
 type = custom/script
@@ -451,7 +472,7 @@ font-1 = ${fonts.icons-1}
 font-2 = ${fonts.weather} 
 font-3 = ${fonts.icons-2} 
 font-4 = ${fonts.icons-3}
-font-5 = ${fonts.icons4}
+font-5 = ${fonts.icons-4}
 
 line-size = 2.75
 enable-ipc = true
@@ -465,10 +486,10 @@ fg = ${colors.fg}
 width = 100%
 height = 27
 ;radius = 4
-modules-left =  keyboard  date todo 
+modules-left =  date todo keyboard
 ; modules-center = appts
 
-modules-center = previous playpause next 
+modules-center = previous playpause next polypomo
 ; when wttr.in isn't down
 modules-right = notifs news weather 
 
