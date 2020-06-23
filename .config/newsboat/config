@@ -93,29 +93,29 @@ define-filter "Technical Writing" "tags # \"technicalwriting\""
 
 
 # Filters for news by location
-define-filter "Charlottesville News" "tags # \"cville\" and tags # \"news\" and unread = \"yes\""
-define-filter "Fredericksburg News" "tags # \"fburg\" and tags # \"news\" and unread = \"yes\""
-define-filter "US News" "tags # \"us\" and tags # \"news\" and unread = \"yes\""
-define-filter "World News" "tags # \"world\" and tags # \"news\" and unread = \"yes\""
+define-filter "Charlottesville News" "tags # \"cville\" and tags # \"news\""
+define-filter "Fredericksburg News" "tags # \"fburg\" and tags # \"news\""
+define-filter "US News" "tags # \"us\" and tags # \"news\""
+define-filter "World News" "tags # \"world\" and tags # \"news\""
 
 # Campaign filters
-define-filter "AIME: The Fellowship of Five" "tags # \"fo5\" and rssurl =~ \"rpggeek\" and unread = \"yes\""
-define-filter "Fellowship of the 1PG" "tags # \"fot1pg\" and rssurl =~ \"rpggeek\" and unread = \"yes\""
-define-filter "Knights of Salisbury" "tags # \"kos\" and rssurl =~ \"rpggeek\" and unread = \"yes\""
-define-filter "Honor and Intrigue: The Banners of Shalott" "tags # \"honorintrigue\" and rssurl =~ \"rpggeek\" and unread = \"yes\""
+define-filter "AIME: The Fellowship of Five" "tags # \"fo5\" and rssurl =~ \"rpggeek\""
+define-filter "Fellowship of the 1PG" "tags # \"fot1pg\" and rssurl =~ \"rpggeek\""
+define-filter "Knights of Salisbury" "tags # \"kos\" and rssurl =~ \"rpggeek\""
+define-filter "Honor and Intrigue: The Banners of Shalott" "tags # \"honorintrigue\" and rssurl =~ \"rpggeek\""
 
 # General Social Media filters
 ## Reddit
-#define-filter "Reddit" "tags # \"reddit\" and unread = \"yes\""
+#define-filter "Reddit" "tags # \"reddit\""
 # Old subreddit filters
 define-filter "CrusaderKings" "feedtitle # \"CrusaderKings\"" 
 define-filter "DestinyLore" "tags # \"destinylore\""
 define-filter "SCA" "tags # \"sca\""
 define-filter "MedievalHistory" "tags # \"MedievalHistory\""
 ## Youtube
-define-filter "YouTube" "tags # \"youtube\" and unread = \"yes\""
+define-filter "YouTube" "tags # \"youtube\""
 
 # Podcast Filters
-define-filter "The Broman Podcast" "tags # \"broman\" and unread = \"yes\""
-define-filter "Norman Centuries" "tags # \"norman\" and unread = \"yes\""
+define-filter "The Broman Podcast" "tags # \"broman\""
+define-filter "Norman Centuries" "tags # \"norman\""
 
