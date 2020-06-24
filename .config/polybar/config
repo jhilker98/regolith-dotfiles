@@ -96,11 +96,11 @@ label-urgent-padding = 1.75
 [module/clock]
 type = internal/date
 
-;;12-Hour Time with AM/PM in caps
-time = %I:%M %p 
-
 ;; 24-Hour Time
-time-alt = %H:%M 
+time = %H:%M
+
+;;12-Hour Time with AM/PM in caps
+time-alt = %I:%M %p 
 label = %time%
 label-font = 1
 label-padding = 1
@@ -497,10 +497,10 @@ modules-left =  date polypomo keyboard
 
 modules-center = previous playpause next 
 ; when wttr.in isn't down
-modules-right = notifs news weather 
+;modules-right = notifs news weather 
 
 ;  when wttr.in is down
-;;modules-right = notifs news
+modules-right = notifs news
 ;padding = 1
 
 
