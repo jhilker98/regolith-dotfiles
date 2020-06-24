@@ -16,5 +16,5 @@ for board in boards:
     for _, v in data.items():
         if v['boards'][0] == board:
             if v['_isTask']:
-                is_complete = ['    ' if v['isComplete'] else '   ' if v['inProgress']else '   ']
+                is_complete = ['   ' if v['isComplete'] else '   ' if v['inProgress']else '   ']
                 print(f'{is_complete[0]} {v["description"]}')
