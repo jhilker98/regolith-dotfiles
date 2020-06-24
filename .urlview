@@ -1,1 +1,1 @@
-COMMAND firefox %s
+COMMAND ~/.bin/urlview_wrapper.sh
