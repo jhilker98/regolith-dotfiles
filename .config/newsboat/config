@@ -19,7 +19,7 @@ text-width 80
 # -- navigation & browser --------------------------------------------------------
 
 goto-next-feed no
-browser "~/.bin/newsboat-browser.sh"
+external-url-viewer "urlview"
 
 # -- keybindings  ---------------------------------------------------------------
 unbind-key j
@@ -53,6 +53,9 @@ bind-key L toggle-show-read-feeds
 
 bind-key N next
 bind-key P prev
+
+unbind-key o
+bind-key U show-urls
 # -- bookmarks -----------------------------------------------------------------
 
 bookmark-cmd ~/.newsbeuter/bookmark.sh
@@ -121,4 +124,5 @@ define-filter "YouTube" "tags # \"youtube\""
 # Podcast Filters
 define-filter "The Broman Podcast" "tags # \"broman\""
 define-filter "Norman Centuries" "tags # \"norman\""
+
 
