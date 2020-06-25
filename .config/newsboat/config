@@ -1,12 +1,83 @@
+# -- feeds ---------------------------------------------------------------------
 auto-reload yes
 max-items 100
 
-color listnormal default default
-color listfocus default default reverse
-color listnormal_unread default default bold
-color listfocus_unread default default bold underline
-color info red black bold
-color article default default
+
+
+# -- display ------------------------------------------------------------------
+
+show-read-feeds yes
+show-read-articles no
+text-width 80
+
+# -- navigation & browser ----------------------------------------------------
+
+goto-next-feed no
+external-url-viewer "urlview"
+
+# -- ui ----------------------------------------------------------------------
+feedlist-format "%?T?║%4i %n %8u (%T) %t &╠═════════════════════════════════════════════════════%t?"
+#feedlist-format "%?T?║%4i %n %8u (%T) %t &╠%=═0%t?"
+#feedlist-format "%?T?║%4i %n %8u (%T) %t &%==11first%=x16SECOND%=~13third?"
+#articlelist-format "%3>%4i %2>%f %D %3>%t"
+datetime-format "%d %b"
+
+
+# -- keybindings  ---------------------------------------------------------------
+unbind-key j
+unbind-key k
+unbind-key J
+unbind-key K
+
+unbind-key C feedlist
+
+unbind-key a
+unbind-key A
+
+bind-key A mark-all-feeds-read
+bind-key a mark-feed-read
+
+bind-key j down feedlist
+bind-key k up feedlist
+bind-key l open
+bind-key j next articlelist
+bind-key k prev articlelist
+bind-key J next-feed articlelist
+bind-key K prev-feed articlelist
+bind-key j down article
+bind-key k up article
+bind-key L toggle-show-read-feeds
+
+# ONLY UNCOMMENT IF YOU WANT SPACE INSTEAD OF COMMA AS MACRO
+## unbind-key ,
+## unbind-key SPACE
+## bind-key SPACE macro-prefix
+
+bind-key N next
+bind-key P prev
+
+unbind-key o
+bind-key U show-urls
+
+# -- bookmarks -----------------------------------------------------------------
+
+bookmark-cmd ~/.newsbeuter/bookmark.sh
+bookmark-interactive no
+bookmark-autopilot yes
+
+
+
+
+# -- colors ------------------------------------------------------------------
+
+color info blue black bold 
+
+
+
+# Uncomment these for only an underline for the current feed.
+## color listfocus white default bold underline 
+## color listfocus_unread white default bold underline
+
 
 highlight article "^Feed:.*" magenta default 
 highlight article "^Title:.*" yellow default bold
@@ -28,22 +99,21 @@ highlight feedlist "\\(Local News\\) .*" red
 highlight feedlist "\\(US News\\) .*" red
 highlight feedlist "\\(World News\\) .*" red
 
-highlight feedlist "\\(Twitter\\) .*" blue
+highlight feedlist "\\(Campaign\\) .*" blue default bold
+
+
 highlight feedlist "\\(Reddit\\) .*" green
 highlight feedlist "\\(Podcast\\) .*" magenta
-#highlight feedlist "\\(Reddit\\) .*" color166 
-
-feedlist-format "%?T?║%4i %n %8u (%T) %t &╠═════════════════════════════════════════════════════%t?"
-#feedlist-format "%?T?║%4i %n %8u (%T) %t &╠%=═0%t?"
-#feedlist-format "%?T?║%4i %n %8u (%T) %t &%==11first%=x16SECOND%=~13third?"
-
-browser brave
-macro w set browser "w3m %u"; open-in-browser ; set browser "brave %u"
-macro m set browser "mpv %u"; open-in-browser ; set browser "brave %u"
+highlight feedlist "\\(Blog\\) .*" color166 
 
 
-macro t pipe-to openreddit.sh
-macro y pipe-to newsboat-youtube.sh
-macro p pipe-to newsboat-podcast.sh
+# -- sorts ----------------------------------------------------------------------
+article-sort-order date-asc
+
+# -- macros ---------------------------------------------------------------------  
+macro i set browser "feh %u"; open-in-browser ; set browser "elinks %u"
+
+macro m set browser "mpv --force-window=immediate %u "; open-in-browser ; set browser "xdg-open %u"
+
 
 
