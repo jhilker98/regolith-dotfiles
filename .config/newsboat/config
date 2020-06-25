@@ -1,128 +1,49 @@
-# -- feeds ---------------------------------------------------------------------
-
 auto-reload yes
-reload-time 10
-reload-threads 4
-download-retries 4
-download-timeout 10
-prepopulate-query-feeds yes
+max-items 100
+
+color listnormal default default
+color listfocus default default reverse
+color listnormal_unread default default bold
+color listfocus_unread default default bold underline
+color info red black bold
+color article default default
+
+highlight article "^Feed:.*" magenta default 
+highlight article "^Title:.*" yellow default bold
+highlight article "^Author:.*" green default
+highlight article "^Date:.*" color223 default
+highlight article "^Link:.*" blue default
+highlight article "^Flags:.*" color9 default
+highlight article "\\[[0-9][0-9]*\\]" color66 default bold
+highlight article "\\[image [0-9][0-9]*\\]" color109 default bold
+highlight article "\\[embedded flash: [0-9][0-9]*\\]" color66 default bold
+
+#highlight feedlist "[╒╘╞]═.*═[╛╕╡]" yellow default bold
+highlight feedlist "[║│]" yellow default bold
+highlight feedlist "╠═.*" yellow default bold
+
+highlight feedlist "\\(Classes\\) .*" cyan
+
+highlight feedlist "\\(Local News\\) .*" red
+highlight feedlist "\\(US News\\) .*" red
+highlight feedlist "\\(World News\\) .*" red
+
+highlight feedlist "\\(Twitter\\) .*" blue
+highlight feedlist "\\(Reddit\\) .*" green
+highlight feedlist "\\(Podcast\\) .*" magenta
+#highlight feedlist "\\(Reddit\\) .*" color166 
+
+feedlist-format "%?T?║%4i %n %8u (%T) %t &╠═════════════════════════════════════════════════════%t?"
+#feedlist-format "%?T?║%4i %n %8u (%T) %t &╠%=═0%t?"
+#feedlist-format "%?T?║%4i %n %8u (%T) %t &%==11first%=x16SECOND%=~13third?"
+
+browser brave
+macro w set browser "w3m %u"; open-in-browser ; set browser "brave %u"
+macro m set browser "mpv %u"; open-in-browser ; set browser "brave %u"
 
 
-# -- display -------------------------------------------------------------------
-
-show-read-feeds no
-show-read-articles no
-
-text-width 80
-
-
-# -- navigation & browser --------------------------------------------------------
-
-goto-next-feed no
-external-url-viewer "urlview"
-
-# -- keybindings  ---------------------------------------------------------------
-unbind-key j
-unbind-key k
-unbind-key J
-unbind-key K
-
-unbind-key C feedlist
-
-unbind-key a
-unbind-key A
-
-bind-key A mark-all-feeds-read
-bind-key a mark-feed-read
-
-bind-key j down feedlist
-bind-key k up feedlist
-bind-key l open
-bind-key j next articlelist
-bind-key k prev articlelist
-bind-key J next-feed articlelist
-bind-key K prev-feed articlelist
-bind-key j down article
-bind-key k up article
-bind-key L toggle-show-read-feeds
-
-# ONLY UNCOMMENT IF YOU WANT SPACE AS MACRO
-## unbind-key ,
-## unbind-key SPACE
-
-bind-key N next
-bind-key P prev
-
-unbind-key o
-bind-key U show-urls
-bind-key o show-urls
-bind-key SPACE macro-prefix
-# -- bookmarks -----------------------------------------------------------------
-
-bookmark-cmd ~/.newsbeuter/bookmark.sh
-bookmark-interactive no
-bookmark-autopilot yes
-
-
-# -- misc ----------------------------------------------------------------------
-
-confirm-exit no
-cleanup-on-quit no
-
-
-# -- ui -------------------------------------------------------------------------
-datetime-format "%d %b"
-feedlist-format "%3>%4i %3>%U %n %3>%t"
-#articlelist-format "%3>%4i %2>%f %D %a %3>%t" -- if you really want the author, uncomment this line
-
-articlelist-format "%3>%4i %2>%f %D %3>%t"
-
-
-# -- colors ---------------------------------------------------------------------
-color info default default reverse
-color listnormal_unread yellow default bold
-color listfocus magenta default reverse bold 
-color listfocus_unread magenta default reverse bold
-color info white blue bold
-
-# -- sorts ----------------------------------------------------------------------
-feed-sort-order unreadarticlecount-asc
-article-sort-order date-asc
-
-# -- macros ---------------------------------------------------------------------  
-macro i set browser "feh %u"; open-in-browser ; set browser "elinks %u"
-
-macro v set browser "mpv --force-window=immediate %u "; open-in-browser ; set browser "xdg-open %u"
-
-# -- filters --------------------------------------------------------------------
-# Filters for classes
-
-
-# Filters for news by location
-define-filter "Local News" "feedtitle = \"Cville News\" or tags # \"Fredb. News\" and tags # \"news\""
-define-filter "US News" "tags # \"us\" and tags # \"news\""
-define-filter "World News" "tags # \"world\" and tags # \"news\""
-
-# Campaign filters
-define-filter "AIME: The Fellowship of Five" "tags # \"fo5\" and rssurl =~ \"rpggeek\""
-define-filter "Fellowship of the 1PG" "tags # \"fot1pg\" and rssurl =~ \"rpggeek\""
-define-filter "Knights of Salisbury" "tags # \"kos\" and rssurl =~ \"rpggeek\""
-define-filter "Honor and Intrigue: The Banners of Shalott" "tags # \"honorintrigue\" and rssurl =~ \"rpggeek\""
-
-# General Social Media filters
-## Reddit
-#define-filter "Reddit" "tags # \"reddit\""
-# Old subreddit filters
-define-filter "CrusaderKings" "feedtitle # \"CrusaderKings\"" 
-define-filter "DestinyLore" "tags # \"destinylore\""
-define-filter "SCA" "tags # \"sca\""
-define-filter "MedievalHistory" "tags # \"MedievalHistory\""
-## Youtube
-define-filter "YouTube" "tags # \"youtube\""
-
-# Podcast Filters
-define-filter "The Broman Podcast" "tags # \"broman\""
-define-filter "Norman Centuries" "tags # \"norman\""
-
+macro t pipe-to openreddit.sh
+macro y pipe-to newsboat-youtube.sh
+macro p pipe-to newsboat-podcast.sh
 
 

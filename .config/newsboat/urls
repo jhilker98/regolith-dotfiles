@@ -1,52 +1,66 @@
-"query:News:tags # \"news\""
-"query:Campaigns:tags # \"campaigns\" and tags !# \"rpol\"" 
-"query:History: tags # \"history\" and tags !# \"reddit\""
-"query:Podcasts:tags # \"podcasts\""
+Classes
+https://canvas.umw.edu/feeds/announcements/enrollment_CPuY3z72SHPTjpPoqIzjZ53M3cI1yWf2WIhQEC4F.atom Classes "~Technical Writing"  technicalwriting
 
-https://canvas.umw.edu/feeds/announcements/enrollment_CPuY3z72SHPTjpPoqIzjZ53M3cI1yWf2WIhQEC4F.atom "!Technical Writing" classes technicalwriting
+News
+http://www.dailyprogress.com/search/?mode=article&q=&t=article&l=10&d=&d1=1+year+ago&d2=&s=&sd=desc&c[]=news/local*&f=atom&fulltext=dpmobile&altf=mrss "Local News"
 
-http://feeds.washingtonpost.com/rss/rss_morning-mix?itid=lk_inline_manual_42 news us "!WaPo US" 
-http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml?edition=int news us "!BBC US"
-
-https://feeds.npr.org/1001/rss.xml news world "!NPR"
-
-http://www.dailyprogress.com/search/?mode=article&q=&t=article&l=10&d=&d1=1+year+ago&d2=&s=&sd=desc&c[]=news/local*&f=atom&fulltext=dpmobile&altf=mrss news "!Cville News" local cville
-https://fredericksburgva.gov/RSSFeed.aspx?ModID=1&CID=Fredericksburg-News-1 news "!Fredb. News" local fburg
-
-https://rpggeek.com/rss/thread/1724354 campaigns "!Knights of Salisbury" ooc pendragon rpgs kos
-https://rpggeek.com/rss/thread/2344531 campaigns "!Knights of Salisbury" ic pendragon  rpgs kos
-https://rpggeek.com/rss/thread/2388799 campaigns "!Knights of Salisbury" ic pendragon  rpgs kos
-https://rpggeek.com/rss/thread/2431371 campaigns "!Knights of Salisbury" ic pendragon  rpgs kos
-
-https://rpggeek.com/rss/thread/2371283 campaigns "!AIME: The Fellowship of Five" ooc aime rpgs fo5
-
-https://rpggeek.com/rss/thread/2382018 campaigns "!AIME: The Fellowship of Five" ic aime rpgs fo5
-
-https://rpggeek.com/rss/thread/2352712 campaigns "!Honor and Intrigue: The Banners of Shalott" ooc honorintrigue
-https://rpggeek.com/rss/thread/2357495 campaigns "!Honor and Intrigue: The Banners of Shalott" ic honorintrigue 
-
-https://rpggeek.com/rss/thread/2410450 campaigns "!The One Ring: Fellowship of the 1PG (OOC)" ooc tor rpgs fot1pg
-https://rpggeek.com/rss/thread/2420789 campaigns "!The One Ring: Across the Great Forest" ic tor rpgs fot1pg
-https://rpggeek.com/rss/thread/2416498 campaigns "!The One Ring: A Few Meetings (IC)" ic tor rpgs  fot1pg
-
-https://rpol.net/feeds.cgi?q=2CEMCCmJ9dwpwGwAsehU campaigns "~RPOL.net" rpol
+https://fredericksburgva.gov/RSSFeed.aspx?ModID=1&CID=Fredericksburg-News-1 "Local News" "~Fredericksburg News"
 
 
-https://normancenturies.com/rss.xml podcasts history "!Norman Centuries" brokenthrones norman medieval
-https://anchor.fm/s/182b418/podcast/rss broman podcasts gaming "!The Broman Podcast"
+http://feeds.washingtonpost.com/rss/rss_morning-mix?itid=lk_inline_manual_42 "US News" "~Washington Post"
+http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml?edition=int "US News" "~BBC News" 
+
+https://feeds.npr.org/1001/rss.xml "World News" "~NPR"
+
+Campaigns
+"query:Knights of Salisbury:tags # \"kos\"" RPGGeek
+"query:AIME - The Fellowship of Five: tags # \"fo5\"" RPGGeek
+"query:The One Ring - Fellowship of the 1PG: tags # \"fot1pg\"" RPGGeek
+"query:Honor and Intrigue - The Banners of Shalott: tags # \"honorintrigue\"" RPGGeek
+https://rpol.net/feeds.cgi?q=2CEMCCmJ9dwpwGwAsehU  "RPOL" "~RPOL.net" 
+
+Podcasts
+https://normancenturies.com/rss.xml Podcast history "~Norman Centuries" brokenthrones norman medieval
+https://anchor.fm/s/182b418/podcast/rss Podcast gaming "~The Broman Podcast"
+
+Reddit
+https://old.reddit.com/r/DestinyLore.rss Reddit "~r/DestinyLore" "reddit" "destiny" "destinylore"
+https://old.reddit.com/r/CrusaderKings/search.rss?q=self%3Ayes&restrict_sr=on&include_over_18=on&sort=new&t=all Reddit "~CrusaderKings" 
+https://old.reddit.com/r/sca/search.rss?q=self%3Ayes&restrict_sr=on&sort=relevance&t=all Reddit sca "~Reddit SCA" medieval
+https://old.reddit.com/r/MedievalHistory/new.rss Reddit sca history medieval "~MedievalHistory" MedievalHistory
+
+Blogs
+http://drcallumwatson.blogspot.com/feeds/posts/default Blog history "~Knight of the Two Ls"
+
+YouTube
+https://www.youtube.com/feeds/videos.xml?channel_id=UClbllR4Tx-lhYJyrpu1sA4A Youtube destiny "~Aztecross" 
+https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg  Youtube tech 
+https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA Youtube tech 
+
+https://www.youtube.com/feeds/videos.xml?channel_id=UCkmAjbIecTIjTQctolYeuDw Youtube destiny 
 
 
-https://old.reddit.com/r/DestinyLore.rss "!r/DestinyLore" "reddit" "destiny" "destinylore"
-https://old.reddit.com/r/CrusaderKings/search.rss?q=self%3Ayes&restrict_sr=on&include_over_18=on&sort=new&t=all "~CrusaderKings" "reddit" 
-https://old.reddit.com/r/sca/search.rss?q=self%3Ayes&restrict_sr=on&sort=relevance&t=all reddit sca "~Reddit SCA" medieval
-https://old.reddit.com/r/MedievalHistory/new.rss reddit sca history medieval "~MedievalHistory" MedievalHistory
 
 
-http://drcallumwatson.blogspot.com/feeds/posts/default history "!Knight of the Two Ls"
 
-https://www.youtube.com/feeds/videos.xml?channel_id=UClbllR4Tx-lhYJyrpu1sA4A youtube destiny "!Aztecross" aztecross
-https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg  youtube linux  distrotube "!DistroTube"
-https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA youtube linux lukesmith "!Luke Smith"
 
-https://www.youtube.com/feeds/videos.xml?channel_id=UCkmAjbIecTIjTQctolYeuDw youtube destiny datto "!Datto"
+
+
+https://rpggeek.com/rss/thread/1724354  "RPGGeek" "!Knights of Salisbury" ooc pendragon rpgs kos
+https://rpggeek.com/rss/thread/2344531 "RPGGeek" "!Knights of Salisbury" ic pendragon  rpgs kos
+https://rpggeek.com/rss/thread/2388799 "RPGGeek" "!Knights of Salisbury" ic pendragon  rpgs kos
+https://rpggeek.com/rss/thread/2431371 "RPGGeek" "!Knights of Salisbury" ic pendragon  rpgs kos
+
+https://rpggeek.com/rss/thread/2371283 "RPGGeek" "!AIME: The Fellowship of Five" ooc aime rpgs fo5
+https://rpggeek.com/rss/thread/2382018 "RPGGeek" "!AIME: The Fellowship of Five" ic aime rpgs fo5
+
+https://rpggeek.com/rss/thread/2352712 "RPGGeek" "!Honor and Intrigue: The Banners of Shalott" ooc honorintrigue
+https://rpggeek.com/rss/thread/2357495 "RPGGeek" "!Honor and Intrigue: The Banners of Shalott" ic honorintrigue 
+
+https://rpggeek.com/rss/thread/2410450 "RPGGeek" "!The One Ring: Fellowship of the 1PG (OOC)" ooc tor rpgs fot1pg
+https://rpggeek.com/rss/thread/2420789 "RPGGeek" "!The One Ring: Across the Great Forest" ic tor rpgs fot1pg
+https://rpggeek.com/rss/thread/2416498 "RPGGeek" "!The One Ring: A Few Meetings (IC)" ic tor rpgs  fot1pg
+
+
+
 
