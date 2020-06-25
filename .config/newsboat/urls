@@ -1,5 +1,6 @@
 "query:News:tags # \"news\""
 "query:Campaigns:tags # \"campaigns\" and tags !# \"rpol\"" 
+"query:History: tags # \"history\" and tags !# \"reddit\""
 "query:Podcasts:tags # \"podcasts\""
 
 https://canvas.umw.edu/feeds/announcements/enrollment_CPuY3z72SHPTjpPoqIzjZ53M3cI1yWf2WIhQEC4F.atom "!Technical Writing" classes technicalwriting
@@ -36,14 +37,15 @@ https://anchor.fm/s/182b418/podcast/rss broman podcasts gaming "!The Broman Podc
 
 
 https://old.reddit.com/r/DestinyLore.rss "!r/DestinyLore" "reddit" "destiny" "destinylore"
-https://old.reddit.com/r/CrusaderKings/search.rss?q=self%3Ayes&restrict_sr=on&include_over_18=on&sort=new&t=all "!CrusaderKings" "reddit" 
-https://old.reddit.com/r/sca/search.rss?q=self%3Ayes&restrict_sr=on&sort=relevance&t=all reddit sca "!Reddit SCA" medieval
-https://old.reddit.com/r/MedievalHistory/search.rss?q=self%3Ayes&include_over_18=on&restrict_sr=on&t=all&sort=new reddit sca history medieval "!MedievalHistory" MedievalHistory
+https://old.reddit.com/r/CrusaderKings/search.rss?q=self%3Ayes&restrict_sr=on&include_over_18=on&sort=new&t=all "~CrusaderKings" "reddit" 
+https://old.reddit.com/r/sca/search.rss?q=self%3Ayes&restrict_sr=on&sort=relevance&t=all reddit sca "~Reddit SCA" medieval
+https://old.reddit.com/r/MedievalHistory/new.rss reddit sca history medieval "~MedievalHistory" MedievalHistory
 
 
-https://www.youtube.com/feeds/videos.xml?channel_id=UClbllR4Tx-lhYJyrpu1sA4A youtube destiny "~Aztecross" aztecross
-https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg  youtube linux  distrotube
-https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA youtube linux lukesmith 
+http://drcallumwatson.blogspot.com/feeds/posts/default history "!Knight of the Two Ls"
 
-https://www.youtube.com/feeds/videos.xml?channel_id=UCkmAjbIecTIjTQctolYeuDw youtube destiny datto 
+https://www.youtube.com/feeds/videos.xml?channel_id=UClbllR4Tx-lhYJyrpu1sA4A youtube destiny "!Aztecross" aztecross
+https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg  youtube linux  distrotube "!DistroTube"
+https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA youtube linux lukesmith "!Luke Smith"
 
+https://www.youtube.com/feeds/videos.xml?channel_id=UCkmAjbIecTIjTQctolYeuDw youtube destiny datto "!Datto"
