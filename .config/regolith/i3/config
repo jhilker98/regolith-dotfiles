@@ -105,6 +105,11 @@ bindsym $mod+c exec alacritty -e calcurse
 ## Launch // VSCode // <><Shift>v ##
 bindsym $mod+Shift+v exec code
 
+## Launch // GUI File Mng // <><Alt> n ##
+bindsym $mod+$alt+n exec nautilus
+
+
+
 # Navigation
 ## Navigate // Window by Name // <><Ctrl> Space ##
 bindsym $mod+Ctrl+space exec rofi -show window 
@@ -390,13 +395,13 @@ font $i3-wm.bar.font
 
 # The following exec calls run programs in the background when i3 starts.
 
+# Start the installed regolith-compositor
+exec --no-startup-id /usr/share/regolith-compositor/init
 # Reload color scheme
 #exec --no-startup-id wal -R"
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 #exec_always --no-startup-id polybar mybar &
-# Start the installed regolith-compositor
-exec --no-startup-id /usr/share/regolith-compositor/init
 # Start Rofication for notifications
 exec --no-startup-id /usr/bin/rofication-daemon
 
