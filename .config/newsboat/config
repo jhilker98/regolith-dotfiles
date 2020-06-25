@@ -58,6 +58,7 @@ bind-key P prev
 
 unbind-key o
 bind-key U show-urls
+bind-key o show-urls
 
 # -- bookmarks -----------------------------------------------------------------
 
@@ -71,6 +72,11 @@ bookmark-autopilot yes
 # -- colors ------------------------------------------------------------------
 
 color info blue black bold 
+color listnormal default default
+color listfocus default default reverse
+color listnormal_unread default default bold
+color listfocus_unread default default bold underline
+color article default default
 
 
 
@@ -95,9 +101,9 @@ highlight feedlist "╠═.*" yellow default bold
 
 highlight feedlist "\\(Classes\\) .*" cyan
 
-highlight feedlist "\\(Local News\\) .*" red
-highlight feedlist "\\(US News\\) .*" red
-highlight feedlist "\\(World News\\) .*" red
+highlight feedlist "\\(Local News\\) .*" color134
+highlight feedlist "\\(US News\\) .*" color134 
+highlight feedlist "\\(World News\\) .*" color134 
 
 highlight feedlist "\\(Campaign\\) .*" blue default bold
 
@@ -105,6 +111,7 @@ highlight feedlist "\\(Campaign\\) .*" blue default bold
 highlight feedlist "\\(Reddit\\) .*" green
 highlight feedlist "\\(Podcast\\) .*" magenta
 highlight feedlist "\\(Blog\\) .*" color166 
+highlight feedlist "\\(Youtube\\) .*" red
 
 
 # -- sorts ----------------------------------------------------------------------
