@@ -161,7 +161,7 @@ label-connected-background = ${colors.bg-soft}
 format-connected-foreground = ${colors.fg}
 format-connected-prefix-foreground = ${colors.fg}
 
-format-disconnected =  Not Connected
+format-disconnected =  " Not Connected "
 format-disconnected-prefix = 
 format-disconnected-prefix-padding = 1
 format-disconnected-prefix-background = ${colors.red}
@@ -497,10 +497,10 @@ modules-left =  date polypomo keyboard
 
 modules-center = previous playpause next 
 ; when wttr.in isn't down
-;modules-right = notifs news weather 
+modules-right = notifs news weather 
 
 ;  when wttr.in is down
-modules-right = notifs news
+; modules-right = notifs news
 ;padding = 1
 
 
