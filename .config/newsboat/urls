@@ -9,15 +9,14 @@ https://fredericksburgva.gov/RSSFeed.aspx?ModID=1&CID=Fredericksburg-News-1 "Loc
 
 http://feeds.washingtonpost.com/rss/rss_morning-mix?itid=lk_inline_manual_42 "US News" "~Washington Post"
 http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml?edition=int "US News" "~BBC News" 
-
 https://feeds.npr.org/1001/rss.xml "World News" "~NPR"
 
 Campaigns
-"query:Knights of Salisbury:tags # \"kos\"" RPGGeek
-"query:AIME - The Fellowship of Five: tags # \"fo5\"" RPGGeek
-"query:The One Ring - Fellowship of the 1PG: tags # \"fot1pg\"" RPGGeek
-"query:Honor and Intrigue - The Banners of Shalott: tags # \"honorintrigue\"" RPGGeek
-https://rpol.net/feeds.cgi?q=2CEMCCmJ9dwpwGwAsehU  "RPOL" "~RPOL.net" 
+"query:Knights of Salisbury:tags # \"kos\"" Campaign
+"query:AIME - The Fellowship of Five: tags # \"fo5\"" Campaign
+"query:The One Ring - Fellowship of the 1PG: tags # \"fot1pg\"" Campaign
+"query:Honor and Intrigue - The Banners of Shalott: tags # \"honorintrigue\"" Campaign
+https://rpol.net/feeds.cgi?q=2CEMCCmJ9dwpwGwAsehU  Campaign "~RPOL.net" 
 
 Podcasts
 https://normancenturies.com/rss.xml Podcast history "~Norman Centuries" brokenthrones norman medieval
@@ -31,6 +30,7 @@ https://old.reddit.com/r/MedievalHistory/new.rss Reddit sca history medieval "~M
 
 Blogs
 http://drcallumwatson.blogspot.com/feeds/posts/default Blog history "~Knight of the Two Ls"
+https://lukesmith.xyz/rss.xml Blog
 
 YouTube
 https://www.youtube.com/feeds/videos.xml?channel_id=UClbllR4Tx-lhYJyrpu1sA4A Youtube destiny "~Aztecross" 
@@ -39,27 +39,28 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA You
 
 https://www.youtube.com/feeds/videos.xml?channel_id=UCkmAjbIecTIjTQctolYeuDw Youtube destiny 
 
+Serials
 
 
 
 
+Gaming
+https://www.bungie.net/en/Rss/NewsByCategory "Destiny"
 
+https://rpggeek.com/rss/thread/1724354  "Campaign" "!Knights of Salisbury" ooc pendragon rpgs kos
+https://rpggeek.com/rss/thread/2344531 "Campaign" "!Knights of Salisbury" ic pendragon  rpgs kos
+https://rpggeek.com/rss/thread/2388799 "Campaign" "!Knights of Salisbury" ic pendragon  rpgs kos
+https://rpggeek.com/rss/thread/2431371 "Campaign" "!Knights of Salisbury" ic pendragon  rpgs kos
 
+https://rpggeek.com/rss/thread/2371283 "Campaign" "!AIME: The Fellowship of Five" ooc aime rpgs fo5
+https://rpggeek.com/rss/thread/2382018 "Campaign" "!AIME: The Fellowship of Five" ic aime rpgs fo5
 
-https://rpggeek.com/rss/thread/1724354  "RPGGeek" "!Knights of Salisbury" ooc pendragon rpgs kos
-https://rpggeek.com/rss/thread/2344531 "RPGGeek" "!Knights of Salisbury" ic pendragon  rpgs kos
-https://rpggeek.com/rss/thread/2388799 "RPGGeek" "!Knights of Salisbury" ic pendragon  rpgs kos
-https://rpggeek.com/rss/thread/2431371 "RPGGeek" "!Knights of Salisbury" ic pendragon  rpgs kos
+https://rpggeek.com/rss/thread/2352712 "Campaign" "!Honor and Intrigue: The Banners of Shalott" ooc honorintrigue
+https://rpggeek.com/rss/thread/2357495 "Campaign" "!Honor and Intrigue: The Banners of Shalott" ic honorintrigue 
 
-https://rpggeek.com/rss/thread/2371283 "RPGGeek" "!AIME: The Fellowship of Five" ooc aime rpgs fo5
-https://rpggeek.com/rss/thread/2382018 "RPGGeek" "!AIME: The Fellowship of Five" ic aime rpgs fo5
-
-https://rpggeek.com/rss/thread/2352712 "RPGGeek" "!Honor and Intrigue: The Banners of Shalott" ooc honorintrigue
-https://rpggeek.com/rss/thread/2357495 "RPGGeek" "!Honor and Intrigue: The Banners of Shalott" ic honorintrigue 
-
-https://rpggeek.com/rss/thread/2410450 "RPGGeek" "!The One Ring: Fellowship of the 1PG (OOC)" ooc tor rpgs fot1pg
-https://rpggeek.com/rss/thread/2420789 "RPGGeek" "!The One Ring: Across the Great Forest" ic tor rpgs fot1pg
-https://rpggeek.com/rss/thread/2416498 "RPGGeek" "!The One Ring: A Few Meetings (IC)" ic tor rpgs  fot1pg
+https://rpggeek.com/rss/thread/2410450 "Campaign" "!The One Ring: Fellowship of the 1PG (OOC)" ooc tor rpgs fot1pg
+https://rpggeek.com/rss/thread/2420789 "Campaign" "!The One Ring: Across the Great Forest" ic tor rpgs fot1pg
+https://rpggeek.com/rss/thread/2416498 "Campaign" "!The One Ring: A Few Meetings (IC)" ic tor rpgs  fot1pg
 
 
 
