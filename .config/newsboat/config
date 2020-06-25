@@ -106,20 +106,26 @@ highlight article "\\[embedded flash: [0-9][0-9]*\\]" color66 default bold
 highlight feedlist "[║│]" yellow default bold
 highlight feedlist "╠═.*" yellow default bold
 
+# Highlights by Specific Tag
+
+# WIP Dynamic Coloring
+#highlight feedlist "\[0-9]*   \\(Classes\\) .*" cyan
+#highlight feedlist "\[0-9]*   \\(Local\\) .*" color134
+# highlight feedlist "\\(US News\\) .*" color134 
+# highlight feedlist "\\(World\\) .*" color134 
+
+## highlight feedlist "\\(US\\) .*" color134
+## highlight feedlist "\\World\\) .*" color134
+
+
 highlight feedlist "\\(Classes\\) .*" cyan
-
-highlight feedlist "\\(Local News\\) .*" color134
-highlight feedlist "\\(US News\\) .*" color134 
-highlight feedlist "\\(World News\\) .*" color134 
-
+highlight feedlist "\\(Local\\) .*" color134
 highlight feedlist "\\(Campaign\\) .*" blue default bold
-
-
 highlight feedlist "\\(Reddit\\) .*" green
 highlight feedlist "\\(Podcast\\) .*" magenta
 highlight feedlist "\\(Blog\\) .*" color166 
 highlight feedlist "\\(Youtube\\) .*" red
-
+highlight feedlist "[0-9]* N " yellow
 
 # -- sorts ----------------------------------------------------------------------
 article-sort-order date-asc
