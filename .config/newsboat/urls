@@ -2,14 +2,9 @@ Classes
 https://canvas.umw.edu/feeds/announcements/enrollment_CPuY3z72SHPTjpPoqIzjZ53M3cI1yWf2WIhQEC4F.atom Classes "~Technical Writing"  technicalwriting
 
 News
-http://www.dailyprogress.com/search/?mode=article&q=&t=article&l=10&d=&d1=1+year+ago&d2=&s=&sd=desc&c[]=news/local*&f=atom&fulltext=dpmobile&altf=mrss "Local News"
+http://www.dailyprogress.com/search/?mode=article&q=&t=article&l=10&d=&d1=1+year+ago&d2=&s=&sd=desc&c[]=news/local*&f=atom&fulltext=dpmobile&altf=mrss "Local"
 
-https://fredericksburgva.gov/RSSFeed.aspx?ModID=1&CID=Fredericksburg-News-1 "Local News" "~Fredericksburg News"
-
-
-http://feeds.washingtonpost.com/rss/rss_morning-mix?itid=lk_inline_manual_42 "US News" "~Washington Post"
-http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml?edition=int "US News" "~BBC News" 
-https://feeds.npr.org/1001/rss.xml "World News" "~NPR"
+https://fredericksburgva.gov/RSSFeed.aspx?ModID=1&CID=Fredericksburg-News-1 "Local" "~Fredericksburg News"
 
 Campaigns
 "query:Knights of Salisbury:tags # \"kos\"" Campaign
@@ -61,7 +56,5 @@ https://rpggeek.com/rss/thread/2357495 "Campaign" "!Honor and Intrigue: The Bann
 https://rpggeek.com/rss/thread/2410450 "Campaign" "!The One Ring: Fellowship of the 1PG (OOC)" ooc tor rpgs fot1pg
 https://rpggeek.com/rss/thread/2420789 "Campaign" "!The One Ring: Across the Great Forest" ic tor rpgs fot1pg
 https://rpggeek.com/rss/thread/2416498 "Campaign" "!The One Ring: A Few Meetings (IC)" ic tor rpgs  fot1pg
-
-
 
 

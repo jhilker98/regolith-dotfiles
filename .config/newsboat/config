@@ -80,7 +80,7 @@ bookmark-autopilot yes
 color info blue black bold 
 color listnormal default default
 color listfocus default default bold underline 
-color listnormal_unread default default bold
+color listnormal_unread yellow default bold
 color listfocus_unread default default bold underline
 color article default default
 
@@ -103,29 +103,34 @@ highlight article "\\[image [0-9][0-9]*\\]" color109 default bold
 highlight article "\\[embedded flash: [0-9][0-9]*\\]" color66 default bold
 
 #highlight feedlist "[╒╘╞]═.*═[╛╕╡]" yellow default bold
-highlight feedlist "[║│]" yellow default bold
-highlight feedlist "╠═.*" yellow default bold
+highlight feedlist "[║│]" yellow default  
+highlight feedlist "╠═.*" yellow default  
 
 # Highlights by Specific Tag
 
-# WIP Dynamic Coloring
-#highlight feedlist "\[0-9]*   \\(Classes\\) .*" cyan
-#highlight feedlist "\[0-9]*   \\(Local\\) .*" color134
-# highlight feedlist "\\(US News\\) .*" color134 
-# highlight feedlist "\\(World\\) .*" color134 
-
-## highlight feedlist "\\(US\\) .*" color134
-## highlight feedlist "\\World\\) .*" color134
-
+# Coloring when No new articles
+highlight feedlist "\[0-9]*   \\(Classes\\) .*" cyan
+highlight feedlist "\[0-9]*   \\(Local\\) .*" color134
+highlight feedlist "\[0-9]*   \\(US\\) .*" color134
+highlight feedlist "\[0-9]*   \\(World\\) .*" color134
+highlight feedlist "\[0-9]*   \\(Campaign\\) .*" blue default bold
+highlight feedlist "\[0-9]*   \\(Reddit\\) .*" green
+highlight feedlist "\[0-9]*   \\(Podcast\\) .*" magenta
+highlight feedlist "\[0-9]*   \\(Blog\\) .*" color166 
+highlight feedlist "\[0-9]*   \\(Youtube\\) .*" red
+highlight feedlist "\[0-9]*   \\(Destiny\\) .*" cyan
 
 highlight feedlist "\\(Classes\\) .*" cyan
 highlight feedlist "\\(Local\\) .*" color134
+highlight feedlist "\\(US\\) .*" color134
+highlight feedlist "\\(World\\) .*" color134
 highlight feedlist "\\(Campaign\\) .*" blue default bold
 highlight feedlist "\\(Reddit\\) .*" green
 highlight feedlist "\\(Podcast\\) .*" magenta
 highlight feedlist "\\(Blog\\) .*" color166 
 highlight feedlist "\\(Youtube\\) .*" red
-highlight feedlist "[0-9]* N " yellow
+highlight feedlist "\\(Destiny\\) .*" cyan
+highlight feedlist "[0-9]* N " yellow default 
 
 # -- sorts ----------------------------------------------------------------------
 article-sort-order date-asc
