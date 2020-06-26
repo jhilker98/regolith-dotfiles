@@ -77,9 +77,9 @@ bookmark-autopilot yes
 # -- colors ------------------------------------------------------------------
 
 
-color info blue black bold 
+color info blue black  
 color listnormal default default
-color listfocus default default bold underline 
+color listfocus default default  underline 
 color listnormal_unread yellow default 
 color listfocus_unread default default underline
 color article default default
@@ -88,21 +88,21 @@ color article default default
 
 
 # Uncomment these for only an underline for the current feed.
-## color listfocus white default bold underline 
-## color listfocus_unread white default bold underline
+## color listfocus white default  underline 
+## color listfocus_unread white default  underline
 
 
 highlight article "^Feed:.*" magenta default 
-highlight article "^Title:.*" yellow default bold
+highlight article "^Title:.*" yellow default 
 highlight article "^Author:.*" green default
 highlight article "^Date:.*" red default
 highlight article "^Link:.*" blue default
 highlight article "^Flags:.*" color9 default
-highlight article "\\[[0-9][0-9]*\\]" color66 default bold
-highlight article "\\[image [0-9][0-9]*\\]" color109 default bold
-highlight article "\\[embedded flash: [0-9][0-9]*\\]" color66 default bold
+highlight article "\\[[0-9][0-9]*\\]" color66 default 
+highlight article "\\[image [0-9][0-9]*\\]" color109 default 
+highlight article "\\[embedded flash: [0-9][0-9]*\\]" color66 default 
 
-#highlight feedlist "[╒╘╞]═.*═[╛╕╡]" yellow default bold
+#highlight feedlist "[╒╘╞]═.*═[╛╕╡]" yellow default 
 highlight feedlist "[║│]" yellow default  
 highlight feedlist "╠═.*" yellow default  
 
@@ -113,7 +113,7 @@ highlight feedlist "\[0-9]*   \\(Classes\\) .*" cyan
 highlight feedlist "\[0-9]*   \\(Local\\) .*" color134
 highlight feedlist "\[0-9]*   \\(US\\) .*" color134
 highlight feedlist "\[0-9]*   \\(World\\) .*" color134
-highlight feedlist "\[0-9]*   \\(Campaign\\) .*" blue default bold
+highlight feedlist "\[0-9]*   \\(Campaign\\) .*" blue default 
 highlight feedlist "\[0-9]*   \\(Reddit\\) .*" green
 highlight feedlist "\[0-9]*   \\(Podcast\\) .*" magenta
 highlight feedlist "\[0-9]*   \\(Blog\\) .*" color166 
@@ -125,7 +125,7 @@ highlight feedlist "\\(Classes\\) .*" cyan
 highlight feedlist "\\(Local\\) .*" color134
 highlight feedlist "\\(US\\) .*" color134
 highlight feedlist "\\(World\\) .*" color134
-highlight feedlist "\\(Campaign\\) .*" blue default bold
+highlight feedlist "\\(Campaign\\) .*" blue default 
 highlight feedlist "\\(Reddit\\) .*" green
 highlight feedlist "\\(Podcast\\) .*" magenta
 highlight feedlist "\\(Blog\\) .*" color166 
