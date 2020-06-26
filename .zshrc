@@ -8,9 +8,9 @@ autoload -U colors && colors
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 
- if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
- fi
+fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -56,7 +56,7 @@ ZSH_THEME="robbyrussell"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
- ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -133,7 +133,7 @@ export LESS_TERMCAP_me=$(tput sgr0)
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-  source $HOME/.aliases
+source $HOME/.aliases
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
@@ -142,13 +142,13 @@ export LESS_TERMCAP_me=$(tput sgr0)
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/jhilker/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
+  eval "$__conda_setup"
 else
-    if [ -f "/home/jhilker/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/jhilker/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/jhilker/anaconda3/bin:$PATH"
-    fi
+  if [ -f "/home/jhilker/anaconda3/etc/profile.d/conda.sh" ]; then
+    . "/home/jhilker/anaconda3/etc/profile.d/conda.sh"
+  else
+    export PATH="/home/jhilker/anaconda3/bin:$PATH"
+  fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
@@ -164,26 +164,29 @@ bindkey -v
 
 
 
-  vim_ins_mode="%{$fg[red]%}[%{$fg[magenta]%}INS%{$fg[red]%}]%{$reset_color%}"
-  vim_cmd_mode="%{$fg[red]%}[%{$fg[magenta]%}NML%{$fg[red]%}]%{$reset_color%}"
+vim_ins_mode="%{$fg[red]%}[%{$fg[magenta]%}INS%{$fg[red]%}]%{$reset_color%}"
+vim_cmd_mode="%{$fg[red]%}[%{$fg[magenta]%}NML%{$fg[red]%}]%{$reset_color%}"
+vim_mode=$vim_ins_mode
+
+function zle-keymap-select {
+  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+  zle reset-prompt
+}
+zle -N zle-keymap-select
+
+function zle-line-finish {
   vim_mode=$vim_ins_mode
-  
-  function zle-keymap-select {
-    vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
-    zle reset-prompt
-  }
-  zle -N zle-keymap-select
-  
-  function zle-line-finish {
-    vim_mode=$vim_ins_mode
-  }
-  zle -N zle-line-finish
+}
+zle -N zle-line-finish
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
 source $HOME/repos/zsh-git-prompt/zshrc.sh
-PROMPT="${vim_mode} %{$fg[red]%}[%{$fg[yellow]%}%3~%{$fg[red]%}]%{$reset_color%}"$'\n'"  $%b "
+
+PROMPT="${vim_mode} %{$fg_bold[yellow]%}%3~%{$reset_color%} $%b "
+
+
 #RPROMPT="$(git_super_status)"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
