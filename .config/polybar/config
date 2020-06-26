@@ -325,9 +325,9 @@ type = custom/ipc
 ; Default
 hook-0 = echo ""
 ; Playing
-hook-1 = echo ""
+hook-1 = echo ""
 ; Paused
-hook-2 = echo ""
+hook-2 = echo ""
 initial = 1
 ; format-underline = ${colors.blue}
 line-size = 1
