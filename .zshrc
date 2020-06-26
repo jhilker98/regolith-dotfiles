@@ -8,9 +8,9 @@ autoload -U colors && colors
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -22,7 +22,6 @@ export ZSH="/home/jhilker/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="powerlevel10k/powerlevel10k"
-#ZSH_THEME="spaceship"
 ZSH_THEME="robbyrussell"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -56,7 +55,7 @@ ZSH_THEME="robbyrussell"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+ ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -96,25 +95,9 @@ export TERM=xterm-256color
 # export MAIL=/home/jhilker/Mail
 export EMAIL="jacob.hilker2@gmail.com"
 export NAME="Jacob Hilker"
-export GEM_HOME=$HOME/gems
-export PATH="/usr/local/texlive/2019/bin/x86_64-linux:/home/jhilker/.bin:/home/jhilker/Downloads/nvim/bin:/home/jhilker/gems/bin:$PATH"
+export PATH="/usr/local/texlive/2019/bin/x86_64-linux:/home/jhilker/.bin:/home/jhilker/Downloads/nvim/bin::$PATH"
 export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
-# Start blinking
-export LESS_TERMCAP_mb=$(tput bold; tput setaf 12) # blue
-# Start bold
-export LESS_TERMCAP_md=$(tput bold; tput setaf 12) # blue
-# Start stand out
-export LESS_TERMCAP_so=$(tput bold; tput rev; tput setaf 5) # magenta
-# End standout
-export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
-# Start underline
-export LESS_TERMCAP_us=$(tput smul; tput sitm; tput setaf 1) # red
-# End Underline
-export LESS_TERMCAP_ue=$(tput sgr0)
-# End bold, blinking, standout, underline
-export LESS_TERMCAP_me=$(tput sgr0)
-# Make 
-# export MANPATH="/usr/localman:$MANPATH"
+# export MANPATH="/usr/localman:$MNPATH"
 # export BROWSER="/usr/bin/firefox"
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -133,7 +116,7 @@ export LESS_TERMCAP_me=$(tput sgr0)
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-source $HOME/.aliases
+  source $HOME/.aliases
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
@@ -142,41 +125,55 @@ source $HOME/.aliases
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/jhilker/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
-  eval "$__conda_setup"
+    eval "$__conda_setup"
 else
-  if [ -f "/home/jhilker/anaconda3/etc/profile.d/conda.sh" ]; then
-    . "/home/jhilker/anaconda3/etc/profile.d/conda.sh"
-  else
-    export PATH="/home/jhilker/anaconda3/bin:$PATH"
-  fi
+    if [ -f "/home/jhilker/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/jhilker/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/jhilker/anaconda3/bin:$PATH"
+    fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-bindkey -v
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
+#set -o vi
+bindkey -v
+
+
+
+
+vim_ins_mode="%{$fg[red]%}[%{$fg_bold[blue]%}INS%{$reset_color%}%{$fg[red]%}]%{$reset_color%}"
+# vim_cmd_mode="%{$fg[green]%}[CMD]%{$reset_color%}"
+vim_cmd_mode="%{$fg[red]%}[%{$fg[magenta]%}NML%{$fg[red]%}]%{$reset_color%}"
+# vim_cmd_mode="%{$fg[green]%}[CMD]%{$reset_color%}"
+vim_mode=$vim_ins_mode
+
+function zle-keymap-select {
+  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+  zle reset-prompt
+}
+zle -N zle-keymap-select
+
+function zle-line-finish {
+  vim_mode=$vim_ins_mode
+}
+zle -N zle-line-finish
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
-
 source $HOME/repos/zsh-git-prompt/zshrc.sh
+#PROMPT="%F{4}%n%f @ %F{3}%~%f $%b "
+#PROMPT="%F{3}%~%f $%b "
+#PROMPT="${vim_mode} %{$fg[red]%}[%F{12}%n %F{15}@ %F{yellow}%~%{$fg[red]%}] %F{15}$%b " 
+NEWLINE=$'\n'
+PS1='${vim_mode} $(git_super_status) %{$fg_bold[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
 
-function zle-line-init zle-keymap-select {
-    RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
-    RPS2=$RPS1
-    zle reset-prompt
-}
-
-zle -N zle-line-init
-zle -N zle-keymap-select
-
-zle -N zle-line-init
-zle -N zle-keymap-select
-PROMPT=" %{$fg_bold[yellow]%}%~%{$reset_color%} $(git_super_status)  $%b "
-
+#PS1='${vim_mode} $(git_super_status) %{$fg_bold[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
 
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -184,8 +181,4 @@ PROMPT=" %{$fg_bold[yellow]%}%~%{$reset_color%} $(git_super_status)  $%b "
 
 
 #colorscript.sh -r
-
-#setopt NULL_GLOB
-
-
 
