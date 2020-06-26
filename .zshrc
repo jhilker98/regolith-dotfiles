@@ -113,7 +113,7 @@ export LESS_TERMCAP_us=$(tput smul; tput sitm; tput setaf 1) # red
 export LESS_TERMCAP_ue=$(tput sgr0)
 # End bold, blinking, standout, underline
 export LESS_TERMCAP_me=$(tput sgr0)
-
+# Make 
 # export MANPATH="/usr/localman:$MANPATH"
 # export BROWSER="/usr/bin/firefox"
 # You may need to manually set your language environment
@@ -153,41 +153,32 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-
+bindkey -v
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
-#set -o vi
-bindkey -v
-
-
-
-
-vim_ins_mode="%{$fg[red]%}[%{$fg[magenta]%}INS%{$fg[red]%}]%{$reset_color%}"
-vim_cmd_mode="%{$fg[red]%}[%{$fg[magenta]%}NML%{$fg[red]%}]%{$reset_color%}"
-vim_mode=$vim_ins_mode
-
-function zle-keymap-select {
-  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
-  zle reset-prompt
-}
-zle -N zle-keymap-select
-
-function zle-line-finish {
-  vim_mode=$vim_ins_mode
-}
-zle -N zle-line-finish
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 
 
 source $HOME/repos/zsh-git-prompt/zshrc.sh
 
-PROMPT="${vim_mode} %{$fg_bold[yellow]%}%3~%{$reset_color%} $%b "
+function zle-line-init zle-keymap-select {
+    RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
+    RPS2=$RPS1
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+PROMPT=" %{$fg_bold[yellow]%}%~%{$reset_color%} $(git_super_status)  $%b "
 
 
-#RPROMPT="$(git_super_status)"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
