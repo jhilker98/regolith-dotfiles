@@ -22,6 +22,7 @@ export ZSH="/home/jhilker/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="powerlevel10k/powerlevel10k"
+#ZSH_THEME="spaceship"
 ZSH_THEME="robbyrussell"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -163,29 +164,27 @@ bindkey -v
 
 
 
-vim_ins_mode="%{$fg[red]%}[%{$fg[magenta]%}INS%{$fg[red]%}]%{$reset_color%}"
-# vim_cmd_mode="%{$fg[green]%}[CMD]%{$reset_color%}"
-vim_cmd_mode="%{$fg[red]%}[%{$fg[magenta]%}NML%{$fg[red]%}]%{$reset_color%}"
-# vim_cmd_mode="%{$fg[green]%}[CMD]%{$reset_color%}"
-vim_mode=$vim_ins_mode
-
-function zle-keymap-select {
-  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
-  zle reset-prompt
-}
-zle -N zle-keymap-select
-
-function zle-line-finish {
+  vim_ins_mode="%{$fg[red]%}[%{$fg[magenta]%}INS%{$fg[red]%}]%{$reset_color%}"
+  vim_cmd_mode="%{$fg[red]%}[%{$fg[magenta]%}NML%{$fg[red]%}]%{$reset_color%}"
   vim_mode=$vim_ins_mode
-}
-zle -N zle-line-finish
+  
+  function zle-keymap-select {
+    vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+    zle reset-prompt
+  }
+  zle -N zle-keymap-select
+  
+  function zle-line-finish {
+    vim_mode=$vim_ins_mode
+  }
+  zle -N zle-line-finish
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-#PROMPT="%F{4}%n%f @ %F{3}%~%f $%b "
-#PROMPT="%F{3}%~%f $%b "
-#PROMPT="${vim_mode} %{$fg[red]%}[%F{12}%n %F{15}@ %F{yellow}%~%{$fg[red]%}] %F{15}$%b " 
-PROMPT='${vim_mode} %{$fg[red]%}[%F{12}%n%{$reset_color%} @ %{$fg[yellow]%}%~%{$reset_color%}%{$fg[red]%}]%{$reset_color%} $%b '
-#RPROMPT='${vim_mode}'
+
+
+source $HOME/repos/zsh-git-prompt/zshrc.sh
+PROMPT="${vim_mode} %{$fg[red]%}[%{$fg[yellow]%}%3~%{$fg[red]%}]%{$reset_color%}"$'\n'"  $%b "
+#RPROMPT="$(git_super_status)"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -193,5 +192,6 @@ PROMPT='${vim_mode} %{$fg[red]%}[%F{12}%n%{$reset_color%} @ %{$fg[yellow]%}%~%{$
 #colorscript.sh -r
 
 #setopt NULL_GLOB
+
 
 
