@@ -43,5 +43,6 @@ set menu-complete-display-prefix on
 
 # Color Prompts
 set show-mode-in-prompt on
-set vi-ins-mode-string "\033[31m[\033[36mINS\033[31m]\e[0m\ "
-set vi-cmd-mode-string "\033[31m[\033[36mNML\033[31m]\e[0m\ "
+#set vi-cmd-mode-string "\1 "
+#set vi-ins-mode-string " "
+

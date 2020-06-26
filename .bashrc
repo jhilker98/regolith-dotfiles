@@ -124,8 +124,8 @@ fi
 # echo -e "It is $(date +%I:%M) $(date +%p) on $(date +%a), $(date '+%e %b')."
 # export PS1="\033[34m\]\u\[\033[m\]@\[\033[31m\]\W\[\033[m\]:\[\033[m\] \$ "
 
-# export PS1="\u@\W: \$ "
-export PS1="\033[31m[\033[34m\u\[\033[0m\] @ \033[33m\]\w\033[31m]\033[0m\$ "
+#export PS1="\u@\W: \$ "
+export PS1="\[\033[38;5;1m\][\[$(tput sgr0)\]\[\033[38;5;12m\]\u\[$(tput sgr0)\] @ \[$(tput sgr0)\]\[\033[38;5;3m\]\W\[$(tput sgr0)\]\[\033[38;5;1m\]]\[$(tput sgr0)\] \\$ \[$(tput sgr0)\]"
 export EDITOR=vim
 export MAIL=/home/jhilker/Mail
 #use 16 for solarized, change to 256 for other themes
@@ -134,7 +134,6 @@ export EMAIL="jacob.hilker2@gmail.com"
 export NAME="Jacob Hilker"
 export PATH="/home/jhilker/bin:/usr/local/texlive/2019/bin/x86_64-linux:$PATH"
 export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
-
 
 
 if [ -f ~/.dir_colors/dircolors ]
@@ -158,13 +157,10 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 
+
+
+
+set -o vi
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-
-neofetch
-
-wal -Rq
-source "$HOME/.cache/wal/colors.sh"
-export C0A="#CC${color0/'#'}"
-set -o vi
-(cat ~/.cache/wal/sequences &)
