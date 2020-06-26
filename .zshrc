@@ -192,6 +192,6 @@ PROMPT='${vim_mode} %{$fg[red]%}[%F{12}%n%{$reset_color%} @ %{$fg[yellow]%}%~%{$
 
 #colorscript.sh -r
 
-
+#setopt NULL_GLOB
 
 
