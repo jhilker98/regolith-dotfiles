@@ -11,7 +11,7 @@ boards = []
 boards.extend([v['boards'][0] for _, v in data.items() if v['boards'][0] not in boards])
 boards = sorted(set(boards))
 for board in boards:
-    print('${color4}' + f'\n{board}'.replace('@','') + '${color}')
+    print('${color9}' + f'\n{board}'.replace('@','') + '${color}')
     for _, v in data.items():
         timestamp = int(v['_timestamp']) / 1000
         date = datetime.fromtimestamp(timestamp).strftime('%Y%m%d')
