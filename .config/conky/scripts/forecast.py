@@ -76,8 +76,8 @@ ndct = np.argsort(-nd_cond_cnt)
 # print(f'{tomorrow}: {HIGH} {max_temp[1]}°F/{min_temp[1]}°F {LOW}, {tm_rc}% rain chance')
 # print(f'{next_day}: {HIGH} {max_temp[2]}°F/{min_temp[2]}°F {LOW}, {nd_rc}% rain chance')
 
-print(f'Currently it is {current_temp}°F and {current_condition}.')
-print(f'\n{today}:\n {tdcnd[tdct][0]}\n {HIGH} {max_temp[0]}°F/{min_temp[0]}°F {LOW}\n') 
-print(f'{tomorrow}:\n {tmcnd[tmct][0]}\n {HIGH} {max_temp[1]}°F/{min_temp[1]}°F {LOW}\n')
-print(f'{next_day}:\n {ndcnd[ndct][0]}\n {HIGH} {max_temp[2]}°F/{min_temp[2]}°F {LOW}')
+#print(f'Currently it is {current_temp}°F and {current_condition}.')
+print(f'{today}: {tdcnd[tdct][0]}, {HIGH} {max_temp[0]}°F/{min_temp[0]}°F {LOW}') 
+print(f'{tomorrow}: {tmcnd[tmct][0]}, {HIGH} {max_temp[1]}°F/{min_temp[1]}°F {LOW}')
+print(f'{next_day}: {ndcnd[ndct][0]}, {HIGH} {max_temp[2]}°F/{min_temp[2]}°F {LOW}')
 
