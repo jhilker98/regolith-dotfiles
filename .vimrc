@@ -8,7 +8,7 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim' " Vundle plugin manager
 Plugin 'tpope/vim-fugitive' "git in vim
 Plugin 'tpope/vim-speeddating' "dates in vim
 Plugin 'tpope/vim-markdown'
@@ -54,7 +54,9 @@ let g:UltiSnipsEditSplit="vertical"
 
 Plugin 'mhinz/vim-startify' "start menu for vim
 Plugin 'morhetz/gruvbox'
-Plugin 'sainnhe/gruvbox-material' 
+Plugin 'sainnhe/gruvbox-material'
+Plugin 'rhysd/vim-grammarous'
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -128,7 +130,7 @@ autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 set hlsearch
 set spelllang=en_us
 
-
+highlight Normal ctermbg=None
 
 " Keybindings
 
