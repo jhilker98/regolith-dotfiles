@@ -34,7 +34,7 @@ for _, v in data.items():
         if v["boards"][0] != board:
         
             board = v["boards"][0]
-            print('${color9}' + f'\n{board}'.replace('@','') + '${color}')
+            print('${font Iosevka:bold:italic:size=14}' + '${color9}' + f'\n{board}'.replace('@','') + '${color}' + '${font}')
         #board = v["boards"][0]
     
         #print("v boards 0 is {} and board is {}".format(v['boards'][0],board))
@@ -42,7 +42,7 @@ for _, v in data.items():
             check = '${color1}' + '' + '${color}'
             print(f'  {v["_id"]}. {check}  {v["description"]} {days_ago} {is_starred}')
         else:
-            ellips = '${color7}' + '' + '${color}'
+            ellips = '${color4}' + '' + '${color}'
             print(f'  {v["_id"]}. {ellips}  {v["description"]} {days_ago} {is_starred}')
     else:
         pass
