@@ -34,7 +34,7 @@ for _, v in data.items():
         if v["boards"][0] != board:
         
             board = v["boards"][0]
-            print('${font Iosevka:bold:italic:size=14}' + '${color9}' + f'\n{board}'.replace('@','') + '${color}' + '${font}')
+            print('${font Iosevka:bold:italic:size=12}' + '${color9}' + f'\n{board}'.replace('@','') + '${color}' + '${font}')
         #board = v["boards"][0]
     
         #print("v boards 0 is {} and board is {}".format(v['boards'][0],board))
