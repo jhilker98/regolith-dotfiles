@@ -39,8 +39,8 @@ set_from_resource $ws19 i3-wm.workspace.19.name "19"
 floating_modifier $mod
 
 hide_edge_borders smart
-
-bindsym $mod+Ctrl+Return exec /home/jhilker/.bin/conkytoggle.sh
+## Toggle // Sidebar // <Ctrl><Shift>Enter ##
+bindsym Ctrl+Shift+Return exec /home/jhilker/.bin/conkytoggle.sh
 
 # Apps
 ## Launch // Terminal // <> Enter ##
@@ -232,7 +232,7 @@ bindsym $mod+BackSpace split toggle
 ## Modify // Fullscreen Toggle // <> f ##
 bindsym $mod+f fullscreen toggle
 
-## Launch // Keybindings // <><Shift> ? ##
+## Toggle // Keybindings // <><Shift> ? ##
 bindsym $mod+Shift+question exec --no-startup-id /usr/bin/remontoire-toggle
 
 ## Modify // Window Floating Toggle // <><Shift> f ##
