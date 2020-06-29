@@ -55,7 +55,7 @@ ZSH_THEME="robbyrussell"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
- ENABLE_CORRECTION="true"
+ #ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -147,7 +147,7 @@ bindkey -v
 
 
 
-vim_ins_mode="%{$fg[red]%}[%{$fg_bold[blue]%}INS%{$reset_color%}%{$fg[red]%}]%{$reset_color%}"
+vim_ins_mode="%{$fg[red]%}[%{$fg_bold[yellow]%}INS%{$reset_color%}%{$fg[red]%}]%{$reset_color%}"
 # vim_cmd_mode="%{$fg[green]%}[CMD]%{$reset_color%}"
 vim_cmd_mode="%{$fg[red]%}[%{$fg[magenta]%}NML%{$fg[red]%}]%{$reset_color%}"
 # vim_cmd_mode="%{$fg[green]%}[CMD]%{$reset_color%}"
@@ -171,7 +171,7 @@ source $HOME/repos/zsh-git-prompt/zshrc.sh
 #PROMPT="%F{3}%~%f $%b "
 #PROMPT="${vim_mode} %{$fg[red]%}[%F{12}%n %F{15}@ %F{yellow}%~%{$fg[red]%}] %F{15}$%b " 
 NEWLINE=$'\n'
-PS1='${vim_mode} $(git_super_status) %{$fg_bold[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
+PS1='${vim_mode} $(git_super_status) %{$fg_bold[bold]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
 
 #PS1='${vim_mode} $(git_super_status) %{$fg_bold[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
 
