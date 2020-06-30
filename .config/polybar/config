@@ -354,6 +354,10 @@ tail=true
 format-prefix = 󰋋
 format-margin =1
 label-padding =1
+format-prefix-background = ${colors.darkblue}
+format-prefix-padding = 1
+format-background = ${colors.bg-soft}
+format-foreground = ${colors.fg}
 
 [module/polypomo]
 type = custom/script
