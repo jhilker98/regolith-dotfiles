@@ -203,13 +203,13 @@ iab <silent> sig Thanks,<CR>Jacob Hilker<CR>
 iab <silent> fsig Love,<CR>Jacob
 iab <silent> rsig Best,<CR>Jacob Hilker
 iab <silent> mynm Jacob Hilker
-
+iab <silent> mycontact Jaob Hilker<cr>5724 St George Ave.<cr>Crozet, VA 22932<cr>434-409-3789<cr>jacob.hilker2@gmail.com<cr>
 "" Programming Abbrevs
 """" Shebang Abbrev
 
-iab <silent> shbg #!/bin/sh <CR>
-iab <silent> bash #!/bin/bash<CR>
-iab <silent> psh #!/usr/bin/env python3<CR>
+iab <silent> shbg #!/bin/sh<CR><CR>
+iab <silent> bash #!/bin/bash<CR><CR>
+iab <silent> psh #!/usr/bin/env python3<CR><CR>
 
 "Always load polybar config as ini file.
 aug polybar_ft_detection
@@ -239,3 +239,5 @@ autocmd FileType gitcommit setlocal spell
 
 " Load ms files as groff
 autocmd BufNewFile,BufRead *.ms,*.mm set filetype=groff
+
+imap <c-space> <c-]>
