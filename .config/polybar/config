@@ -180,7 +180,7 @@ battery = BAT0
 adapter = ADP0
 
 ;; Discharging formatting and colors
-formatdischarging = <ramp-capacity><label-discharging>
+format-discharging = <ramp-capacity><label-discharging>
 ramp-capacity-0 = 
 ramp-capacity-1 = 
 ramp-capacity-2 = 
@@ -346,6 +346,15 @@ format-foreground = ${colors.fg}
 format-padding = 1
 format-margin = 0
 
+
+[module/progress]
+type = custom/script
+exec = "~/.config/polybar/scripts/spotify/musicProg.sh"
+tail=true
+format-prefix = 󰋋
+format-margin =1
+label-padding =1
+
 [module/polypomo]
 type = custom/script
 exec = /home/$USER/.config/polybar/scripts/polypomo
@@ -365,6 +374,7 @@ format-background = ${colors.bg-soft}
 format-foreground = ${colors.fg}
 format-prefix-padding = 1
 label-padding-right = 1
+
 
 [module/spotify]
 type = custom/script
@@ -411,6 +421,7 @@ content-prefix-background = ${colors.red}
 content-margin = 0
 click-left = alacritty -e newsboat -r &
 content-foreground = ${colors.fg}
+
 
 
 [module/weather]
@@ -496,7 +507,7 @@ height = 27
 modules-left =  date polypomo keyboard
 ; modules-center = appts
 
-modules-center = previous playpause next 
+modules-center = previous playpause next progress
 ; when wttr.in isn't down
 modules-right = notifs news weather 
 
@@ -506,4 +517,4 @@ modules-right = notifs news weather
 
 
 
--
+
