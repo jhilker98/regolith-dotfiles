@@ -43,6 +43,7 @@ hide_edge_borders smart
 bindsym Ctrl+Shift+Return exec /home/jhilker/.bin/conkytoggle.sh
 
 # Apps
+
 ## Launch // Terminal // <> Enter ##
 bindsym $mod+Return exec alacritty
 ## Launch // Firefox // <><Shift> Enter ##
@@ -53,7 +54,6 @@ bindsym $mod+$alt+t exec gnome-tweaks
 bindsym $mod+space exec rofi -show drun 
 ## Launch // Command // <><Shift> Space ##
 bindsym $mod+Shift+space exec rofi -show run 
-
 ## Launch // Emacs // <> e ##
 bindsym $mod+e exec emacs
 ## Launch // Vim // <> v ##
@@ -82,6 +82,8 @@ bindsym $mod+d exec discord
 bindsym $mod+Shift+d exec discord-ptb
 ## Launch // Oomox // <><Shift>o ##
 bindsym $mod+Shift+o exec oomox-gui
+## Launch // Reddit // <><Ctrl>t ##
+bindsym $mod+Ctrl+t exec alacritty -e /home/jhilker/anaconda3/bin/tuir --theme /home/jhilker/.config/tuir/themes/gruvbox
 ## Launch // Zoom // <><Shift>z ##
 bindsym $mod+Shift+z exec zoom
 ## Launch // Spotify // <> s ## 
