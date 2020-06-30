@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+ 
 import json
 import os
 from datetime import datetime, timedelta
@@ -18,43 +18,38 @@ def time_ago(date):
     return days, hours
 
 
-boards = []
-boards.extend([v['boards'][0] for _, v in data.items() if v['boards'][0] not in boards])
-boards = sorted(set(boards))
+dates = []
+dates.extend([v['_date'] for _, v in data.items() if v['_date'] not in dates])
+dates = sorted(set(dates))
 
-boards_count = 0
+date_count = 0
 tasks_count = 0
-for board in boards:
+for date in dates:
     tasks_count = 0
-    if boards_count < 4:
-        print('${font Iosevka:bold:italic:size=12}' + '${color9}' + f'\n{board}'.replace('@','') + '${color}' + '${font}')
-        boards_count += 1
+    day = '${font Iosevka:bold:italic:size=12}' + date + '${font}'
+    if date_count < 4:
+        print(f'\n{day}')
+        date_count += 1
         for _, v in data.items():
-            date = datetime.fromtimestamp(int(v['_timestamp']) / 1000)
-            days, hours = time_ago(date)
+            ts_date = datetime.fromtimestamp(int(v['_timestamp']) / 1000)
+            days, hours = time_ago(ts_date)
             days_ago = (
-                    '${color3}' + f'{days}d {hours}h' + '${color}'
-                    if days > 0
-                    else '${color3}today${color}'
-                    )
+                '${color3}' + f'{days}d {hours}h' + '${color}'
+                if days > 0
+                else '${color3}today${color}'
+            )
             if tasks_count < 2:
-                if v['boards'][0] == board:
+                if v['_date'] == date:
                     is_starred = '${color3}六${color}' if v['isStarred'] else ''
                     if v['_isTask']:
                         if not v['isComplete']:
                             if not v['inProgress']:
                                 print(
-                                        f'   {v["_id"]}. '
-                                        + '${color1}${color}  '
-                                        + f'{v["description"]} {days_ago} {is_starred}'
-                                        )
+                                        f'  {v["_id"]:02}. '
+                                    + '${color1}${color}  '
+                                    + f'{v["description"]} {days_ago} {is_starred}'
+                                )
                             if v['inProgress']:
-                                print(
-                                        f'   {v["_id"]}. '
-                                        + '${color4}${color}  '
-                                        + f'{v["description"]} {days_ago} {is_starred}'
-                                            )
+                                print(f'  {v["_id"]:02}. ' + '${color4}${color}  ' + f'{v["description"]} {days_ago} {is_starred}')
                             tasks_count += 1
 file.close()
-
-
