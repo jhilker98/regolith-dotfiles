@@ -6,10 +6,10 @@ http://www.dailyprogress.com/search/?mode=article&q=&t=article&l=10&d=&d1=1+year
 https://fredericksburgva.gov/RSSFeed.aspx?ModID=1&CID=Fredericksburg-News-1 "Local" "~Fredericksburg News"
 
 Campaigns
-"query:Knights of Salisbury:tags # \"kos\"" Campaign
-"query:The Fellowship of Five: tags # \"fo5\"" Campaign
+"query:Knights of Salisbury:tags # \"kos\" and author != \"WaitingCynicism\"" Campaign 
+"query:The Fellowship of Five: tags # \"fo5\"  and author != \"WaitingCynicism\"" Campaign
 "query:Fellowship of the 1PG: tags # \"fot1pg\"" Campaign
-"query:The Banners of Shalott: tags # \"honorintrigue\"" Campaign
+"query:The Banners of Shalott: tags # \"honorintrigue\" and author != \"WaitingCynicism\"" Campaign
 https://rpol.net/feeds.cgi?q=2CEMCCmJ9dwpwGwAsehU  Campaign "~RPOL.net" 
 
 Podcasts
