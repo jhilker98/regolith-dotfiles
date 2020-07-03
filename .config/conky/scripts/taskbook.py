@@ -53,3 +53,4 @@ for date in dates:
                                 print(f'  {v["_id"]:02}. ' + '${color4}${color}  ' + f'{v["description"]} {days_ago} {is_starred}')
                             tasks_count += 1
 file.close()
+

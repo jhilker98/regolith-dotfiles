@@ -92,3 +92,4 @@ print(f'{tab} Three Day Forecast')
 print(f'{tab}{today}: {HIGH} {max_temp[0]}°F/{min_temp[0]}°F {LOW}')
 print(f'{tab}{tomorrow}: {HIGH} {max_temp[1]}°F/{min_temp[1]}°F {LOW}')
 print(f'{tab}{next_day}: {HIGH} {max_temp[2]}°F/{min_temp[2]}°F {LOW}')
+

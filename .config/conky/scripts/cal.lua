@@ -50,3 +50,4 @@
             (conky_color):format(currentday)
       ) .. "\n"
  )
+
