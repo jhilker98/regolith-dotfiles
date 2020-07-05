@@ -1,0 +1,3 @@
+#!/bin/sh 
+ #vi:set filetype=sh
+curl -s -L covid19.trackercli.com/us
