@@ -1,9 +1,11 @@
 xdg-settings set default-web-browser firefox.desktop
 #feh --bg-fill /home/jhilker/Pictures/Wallpapers/scheme-based/gruvbox/dark/pacman.png
 #neofetch
-# pfetch
+#echo -e '\n'
 autoload -U colors && colors
 #source ~/.profile
+
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -97,11 +99,29 @@ export EMAIL="jacob.hilker2@gmail.com"
 export NAME="Jacob Hilker"
 export PATH="/usr/local/texlive/2019/bin/x86_64-linux:/home/jhilker/.bin:/home/jhilker/Downloads/nvim/bin::$PATH"
 export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
+export COWPATH='/usr/share/cowsay/cows/:/home/jhilker/.cows/'
+# Start blinking
+export LESS_TERMCAP_mb=$(tput bold; tput setaf 12) # blue
+# Start bold
+export LESS_TERMCAP_md=$(tput bold; tput setaf 12) # blue
+# Start stand out
+export LESS_TERMCAP_so=$(tput bold; tput rev; tput setaf 5) # magenta
+# End standout
+export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
+# Start underline
+export LESS_TERMCAP_us=$(tput smul; tput sitm; tput setaf 1) # red
+# End Underline
+export LESS_TERMCAP_ue=$(tput sgr0)
+# End bold, blinking, standout, underline
+export LESS_TERMCAP_me=$(tput sgr0)
+
+# Tuir editor
+export RTV_EDITOR=vim
 # export MANPATH="/usr/localman:$MNPATH"
 # export BROWSER="/usr/bin/firefox"
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
-
+export PF_ASCII="arch"
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
@@ -147,7 +167,7 @@ bindkey -v
 
 
 
-vim_ins_mode="%{$fg[red]%}[%{$fg_bold[yellow]%}INS%{$reset_color%}%{$fg[red]%}]%{$reset_color%}"
+vim_ins_mode="%{$fg[red]%}[%{$fg_bold[blue]%}INS%{$reset_color%}%{$fg[red]%}]%{$reset_color%}"
 # vim_cmd_mode="%{$fg[green]%}[CMD]%{$reset_color%}"
 vim_cmd_mode="%{$fg[red]%}[%{$fg[magenta]%}NML%{$fg[red]%}]%{$reset_color%}"
 # vim_cmd_mode="%{$fg[green]%}[CMD]%{$reset_color%}"
@@ -171,7 +191,7 @@ source $HOME/repos/zsh-git-prompt/zshrc.sh
 #PROMPT="%F{3}%~%f $%b "
 #PROMPT="${vim_mode} %{$fg[red]%}[%F{12}%n %F{15}@ %F{yellow}%~%{$fg[red]%}] %F{15}$%b " 
 NEWLINE=$'\n'
-PS1='${vim_mode} $(git_super_status) %{$fg_bold[bold]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
+PS1='${vim_mode} $(git_super_status) %{$fg[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
 
 #PS1='${vim_mode} $(git_super_status) %{$fg_bold[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
 
@@ -182,3 +202,7 @@ PS1='${vim_mode} $(git_super_status) %{$fg_bold[bold]%}%2~%{$reset_color%}%{$res
 
 #colorscript.sh -r
 
+# pfetch
+# colortest-256 | sed -n 2p
+# colortest-256 | sed -n 3p
+# echo -e '\n'
