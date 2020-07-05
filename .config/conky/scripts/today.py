@@ -16,13 +16,16 @@ tomorrow = datetime.strptime(weather[1]['date'], "%Y-%m-%d")
 next_day = datetime.strptime(weather[2]['date'], "%Y-%m-%d")
 
 # Get the current condition and what it feels like
-current_temp = forecast['current_condition'][0]['FeelsLikeF']
+## Celsius
+current_temp = forecast['current_condition'][0]['FeelsLikeC']
+## Fahrenheit
+#current_temp = forecast['current_condition'][0]['FeelsLikeF']
 # current_temp = '${color3}'+current_temp+'${color}'
 current_condition = forecast['current_condition'][0]['weatherDesc'][0]['value'].lower()
 
 # Get the max temp
-max_temp = [max_temp['maxtempF'] for max_temp in weather]
-min_temp = [min_temp['mintempF'] for min_temp in weather]
+max_temp = [max_temp['maxtempC'] for max_temp in weather]
+min_temp = [min_temp['mintempC'] for min_temp in weather]
 
 # Change the date format
 today = today.strftime("%d %b")
@@ -76,15 +79,16 @@ ndcnd, nd_cond_cnt = np.unique(td_cond, return_counts=True)
 ndct = np.argsort(-nd_cond_cnt)
 
 ## Print Info
-# print(f'{today}: {HIGH} {max_temp[0]}°F/{min_temp[0]}°F {LOW}, {td_rc}% rain chance')
-# print(f'{tomorrow}: {HIGH} {max_temp[1]}°F/{min_temp[1]}°F {LOW}, {tm_rc}% rain chance')
-# print(f'{next_day}: {HIGH} {max_temp[2]}°F/{min_temp[2]}°F {LOW}, {nd_rc}% rain chance')
+# print(f'{today}: {HIGH} {max_temp[0]}°C/{min_temp[0]}°C {LOW}, {td_rc}% rain chance')
+# print(f'{tomorrow}: {HIGH} {max_temp[1]}°C/{min_temp[1]}°C {LOW}, {tm_rc}% rain chance')
+# print(f'{next_day}: {HIGH} {max_temp[2]}°C/{min_temp[2]}°C {LOW}, {nd_rc}% rain chance')
 
-# print(f'Currently it is {current_temp}°F and {current_condition}.')
-# print(f'{today}: {tdcnd[tdct][0]}, {HIGH} {max_temp[0]}°F/{min_temp[0]}°F {LOW}')
-# print(f'{tomorrow}: {tmcnd[tmct][0]}, {HIGH} {max_temp[1]}°F/{min_temp[1]}°F {LOW}')
-# print(f'{next_day}: {ndcnd[ndct][0]}, {HIGH} {max_temp[2]}°F/{min_temp[2]}°F {LOW}')
+# print(f'Currently it is {current_temp}°C and {current_condition}.')
+# print(f'{today}: {tdcnd[tdct][0]}, {HIGH} {max_temp[0]}°C/{min_temp[0]}°C {LOW}')
+# print(f'{tomorrow}: {tmcnd[tmct][0]}, {HIGH} {max_temp[1]}°C/{min_temp[1]}°C {LOW}')
+# print(f'{next_day}: {ndcnd[ndct][0]}, {HIGH} {max_temp[2]}°C/{min_temp[2]}°C {LOW}')
 
 tab = '                                '
-print(f'{tab}{today}: {HIGH} {max_temp[0]}°F/{min_temp[0]}°F {LOW}')
+## Celsius  change C to F for Fahrenheit.
+print(f'{tab}{today}: {HIGH} {max_temp[0]}°C/{min_temp[0]}°C {LOW}')
 
