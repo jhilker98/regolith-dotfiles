@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# 1 - state index
+# 2 - state
+# 3 - total cases
+# 4 - new cases 
+# 5 - total deaths
+# 6 - new deaths
+# 7 - Active Cases 
+
+#grep "State\|Virginia" ~/.cache/corona | sed -n 1p | sed "s/\s*//g ; s/║//g ; s/│/;/g" |
+  awk -F';' '{print $4}'
+
+grep "State\|Virginia" ~/.cache/corona | sed -n 2p | sed "s/\s*//g ; s/║//g ; s/│/;/g" |
+  awk -F';' '{print "󰲇  "  $4  " (🕱 " $6 ")"}'  
+
+
