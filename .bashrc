@@ -125,17 +125,20 @@ fi
 # export PS1="\033[34m\]\u\[\033[m\]@\[\033[31m\]\W\[\033[m\]:\[\033[m\] \$ "
 
 #export PS1="\u@\W: \$ "
-export PS1="\[\033[38;5;1m\][\[$(tput sgr0)\]\[\033[38;5;12m\]\u\[$(tput sgr0)\] @ \[$(tput sgr0)\]\[\033[38;5;3m\]\W\[$(tput sgr0)\]\[\033[38;5;1m\]]\[$(tput sgr0)\] \\$ \[$(tput sgr0)\]"
+#export PS1="\[\033[38;5;1m\][\[$(tput sgr0)\]\[\033[38;5;12m\]\u\[$(tput sgr0)\] @ \[$(tput sgr0)\]\[\033[38;5;3m\]\W\[$(tput sgr0)\]\[\033[38;5;1m\]]\[$(tput sgr0)\] \\$ \[$(tput sgr0)\]"
+
+
+source ~/repos/gitstatus/gitstatus.prompt.sh
+
 export EDITOR=vim
 export MAIL=/home/jhilker/Mail
 #use 16 for solarized, change to 256 for other themes
 export TERM=xterm-256color
 export EMAIL="jacob.hilker2@gmail.com"
 export NAME="Jacob Hilker"
-export PATH="/home/jhilker/bin:/usr/local/texlive/2019/bin/x86_64-linux:$PATH"
+export PATH="/usr/local/texlive/2019/bin/x86_64-linux:/home/jhilker/.bin:/home/jhilker/Downloads/nvim/bin:/home/jhilker/gems/bin:$PATH"
 export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
-
-
+export PS1='(${GITSTATUS_PROMPT}) \[\e[0;33m\]\W\[\e[m\] \[\e[0m\]\$\[\e0 '
 if [ -f ~/.dir_colors/dircolors ]
   then eval `dircolors ~/.dir_colors/dircolors`
 fi
