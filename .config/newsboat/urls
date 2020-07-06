@@ -22,8 +22,9 @@ https://old.reddit.com/r/DestinyLore.rss Reddit "~r/DestinyLore" "reddit" "desti
 https://old.reddit.com/r/CrusaderKings/search.rss?q=self%3Ayes&restrict_sr=on&include_over_18=on&sort=new&t=all Reddit "~CrusaderKings" 
 https://old.reddit.com/r/sca/search.rss?q=self%3Ayes&restrict_sr=on&sort=relevance&t=all Reddit sca "~Reddit SCA" medieval
 https://old.reddit.com/r/MedievalHistory/new.rss Reddit sca history medieval "~MedievalHistory" MedievalHistory
- https://old.reddit.com/r/badhistory/search.rss?q=self%3Ayes&restrict_sr=on&include_over_18=on&sort=new&t=all Reddit "~BadHistory"
+https://old.reddit.com/r/badhistory/search.rss?q=self%3Ayes&restrict_sr=on&include_over_18=on&sort=new&t=all Reddit "~BadHistory"
 https://old.reddit.com/r/worldbuilding/search.rss?q=flair%3APrompt&restrict_sr=on&include_over_18=on&sort=new&t=all Reddit "~Worldbuilding"
+https://old.reddit.com/r/outside/new.rss Reddit "~Outside"
 Blogs
 http://drcallumwatson.blogspot.com/feeds/posts/default Blog history "~Knight of the Two Ls"
 https://lukesmith.xyz/rss.xml Blog
@@ -32,14 +33,14 @@ YouTube
 https://www.youtube.com/feeds/videos.xml?channel_id=UClbllR4Tx-lhYJyrpu1sA4A Youtube destiny "~Aztecross" 
 https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg  Youtube tech 
 https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA Youtube tech 
-
 https://www.youtube.com/feeds/videos.xml?channel_id=UCkmAjbIecTIjTQctolYeuDw Youtube destiny 
-
-Serials
-
+https://www.youtube.com/feeds/videos.xml?channel_id=UC2PA-AKmVpU6NKCGtZq_rKQ Youtube politics BreadTube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCNvsIonJdJ5E4EXMa65VYpA Youtube politics BreadTube
+https://www.youtube.com/feeds/videos.xml?channel_id=UCBa659QWEk1AI4Tg--mrJ2A Youtube tech linguistics
+https://www.youtube.com/feeds/videos.xml?channel_id=UC9-y-6csu5WGm29I7JiwpnA Youtube tech linguistics
 
 Gaming
-https://www.bungie.net/en/Rss/NewsByCategory "Destiny"
+https://www.bungie.net/en/Rss/NewsByCategory "Destiny" "~Bungie News"
 
 https://rpggeek.com/rss/thread/1724354  "Campaign" "!Knights of Salisbury" ooc pendragon rpgs kos
 https://rpggeek.com/rss/thread/2344531 "Campaign" "!Knights of Salisbury" ic pendragon  rpgs kos
