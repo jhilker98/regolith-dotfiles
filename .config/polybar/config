@@ -379,6 +379,23 @@ format-foreground = ${colors.fg}
 format-prefix-padding = 1
 label-padding-right = 1
 
+[module/apps]
+type = custom/menu
+label-open = ""
+label-close = ""
+label-separator = |
+format-spacing = 1
+format-padding = 2
+
+menu-0-0 = 󰶈
+menu-0-0-exec = alacritty -e neomutt
+menu-0-1 = 󰎕
+menu-0-1-exec = alacritty -e newsboat
+menu-0-2 = 󰑍
+menu-0-2-exec = alacritty -e $HOME/anaconda3/bin/tuir
+menu-0-3 = 󰎆
+menu-0-3-exec = alacritty -e ncspot
+
 
 [module/spotify]
 type = custom/script
@@ -511,7 +528,8 @@ height = 27
 modules-left =  date polypomo keyboard
 ; modules-center = appts
 
-modules-center = previous playpause next progress 
+;modules-center = previous playpause next progress 
+modules-center = apps
 ; when wttr.in isn't down
 modules-right = notifs news weather 
 
