@@ -176,6 +176,11 @@ vim_mode=$vim_ins_mode
 function zle-keymap-select {
   vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
   zle reset-prompt
+  if [ $KEYMAP = vicmd ]; then
+    echo -ne '\e[1 q'
+  else
+    echo -ne '\e[5 q'
+  fi
 }
 zle -N zle-keymap-select
 
