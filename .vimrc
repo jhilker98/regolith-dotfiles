@@ -1,4 +1,4 @@
-set nocompatible              " be iMproved, required
+"set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -35,7 +35,6 @@ Plugin 'tpope/vim-surround'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'chrisbra/unicode.vim'
 Plugin 'lilydjwg/colorizer'
-Plugin 'suan/vim-instant-markdown'
 Plugin 'neoclide/coc.nvim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'vimwiki/vimwiki'
@@ -152,10 +151,10 @@ map <leader>sb :setlocal spell!<CR>
 nnoremap <silent> <leader>tn :set invnumber invrelativenumber<CR>
 
 "Movement Keybindings
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+map <S-h> <C-w>h
+map <S-j> <C-w>j
+map <S-k> <C-w>k
+map <S-l> <C-w>l
 
 map <C-Left> <C-w>h
 map <C-Down> <C-w>j
@@ -255,3 +254,6 @@ nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
 nnoremap <leader>cr :CocRestart
 
 let g:SuperTabDefaultCompletionType = "<c-n>"
+set dictionary=/home/jhilker/.vim/spell/en.utf-8.add.spl 
+let g:coc_global_extensions = ['coc-emoji', 'coc-eslint', 'coc-prettier', 'coc-tsserver', 'coc-tslint', 'coc-tslint-plugin','coc-css', 'coc-json', 'coc-pyls', 'coc-yaml']
+"set viminfo='100,n$HOME/.vim/files/info/viminfo
