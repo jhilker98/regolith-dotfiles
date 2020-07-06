@@ -22,9 +22,9 @@ key_bindings:
 - { key: J, mods: Control|Shift, action: ScrollLineDown}
 - { key: PageUp, mods: Control|Shift, action: ScrollPageUp}
 - { key: PageDown, mods: Control|Shift, action: ScrollPageDown}
-- { key: J, mods: Shift, action: DecreaseFontSize}
-- { key: K, mods: Shift, action: IncreaseFontSize}
-- { key: Key0, mods: Shift, action: ResetFontSize  }
+- { key: J, mods: Alt, action: DecreaseFontSize}
+- { key: K, mods: Alt, action: IncreaseFontSize}
+- { key: Key0, mods: Alt, action: ResetFontSize  }
 # Opacity
 background_opacity: 0.75
 
