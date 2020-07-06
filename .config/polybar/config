@@ -262,6 +262,7 @@ format-margin = 1
 ;format-margin = 1
 
 [module/keyboard]
+[module/keyboard]
 type = internal/xkeyboard
 format = <label-indicator>
 format-prefix = 󰳡
@@ -396,6 +397,19 @@ menu-0-2-exec = alacritty -e $HOME/anaconda3/bin/tuir
 menu-0-3 = 󰎆
 menu-0-3-exec = alacritty -e ncspot
 
+[module/reddit]
+type = custom/text
+content = " Reddit "
+content-background = ${colors.bg-soft}
+content-prefix = 󰑍
+content-prefix-padding = 1
+content-prefix-background = ${colors.darkblue}
+;content-padding = 1
+content-margin = 0
+click-left = alacritty -e $HOME/anaconda3/bin/tuir &
+content-foreground = ${colors.fg}
+
+
 
 [module/spotify]
 type = custom/script
@@ -430,7 +444,6 @@ format-background = ${colors.bg-soft}
 format-foreground = ${colors.fg}
 format-margin = 1
 
-
 [module/news]
 type = custom/text
 content = " News "
@@ -439,11 +452,10 @@ content-prefix = 󰎕
 content-prefix-padding = 1
 content-prefix-background = ${colors.red}
 ;content-padding = 1
-content-margin = 0
+content-margin = 1
 click-left = alacritty -e newsboat -r &
 content-foreground = ${colors.fg}
-
-
+;format-margin = 1
 
 [module/weather]
 type = custom/script
@@ -463,7 +475,6 @@ label-background = ${colors.bg-soft}
 label-padding = 1
 format-foreground = ${colors.fg}
 ;format-margin-right = 1
-format-margin = 1
 
 
 [module/powermenu]
@@ -528,10 +539,10 @@ height = 27
 modules-left =  date polypomo keyboard
 ; modules-center = appts
 
-;modules-center = previous playpause next progress 
-modules-center = apps
+modules-center = previous playpause next progress 
+#modules-center = apps
 ; when wttr.in isn't down
-modules-right = notifs news weather 
+modules-right = notifs reddit news weather 
 
 ;  when wttr.in is down
 ; modules-right = notifs news
