@@ -170,7 +170,7 @@ format-disconnected-background = ${colors.bg-soft}
 format-disconnected-foreground = ${colors.fg}
 format-disconnected-prefix-foreground = ${colors.fg}
 format-connected-margin = 1
-format-disconnected-margin = 1
+format-disconnected-marin = 1
 
 [module/battery]
 type = internal/battery
@@ -244,12 +244,12 @@ format-foreground = ${colors.fg}
 
 
 [module/date]
-type = custom/script
-exec = date +'%a, %d %b'
+type = internal/date
+date = %a, %d %b
+label = %date%
 label-font = 1
 label-padding = 1
 label-background = ${colors.bg-soft}
-click-left = alacritty -e calcurse &
 ; format-prefix = 󰸗    
 format-prefix =  
 format-prefix-background = ${colors.blue}
@@ -518,7 +518,4 @@ modules-right = notifs news weather
 ;  when wttr.in is down
 ; modules-right = notifs news
 ;padding = 1
-
-
-
-
+g
