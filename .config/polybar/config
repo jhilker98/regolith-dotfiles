@@ -393,7 +393,7 @@ format-background = ${colors.bg-soft}
 format-padding = 1
 format-foreground = ${colors.fg}
 # format-prefix = ${playpause}
-format-margin = 0
+format-margin = 1
 
 
 [module/notifs]
@@ -511,7 +511,7 @@ height = 27
 modules-left =  date polypomo keyboard
 ; modules-center = appts
 
-modules-center = previous playpause next progress
+modules-center = previous playpause next progress 
 ; when wttr.in isn't down
 modules-right = notifs news weather 
 
