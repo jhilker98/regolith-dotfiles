@@ -74,8 +74,10 @@ bindsym $mod+n exec $i3-wm.program.notification_ui
 bindsym $mod+Ctrl+n exec alacritty -e newsboat -r 
 ## Launch // Zathura // <> z ##
 bindsym $mod+z exec zathura
-## Launch // GIMP // <> g ##
-bindsym $mod+g exec gimp
+## Launch // Geany // <>> g ##
+bindsym $mod+g exec geany
+## Launch // GIMP // <>><shift> g ##
+bindsym $mod+Shift+g exec gimp
 ## Launch // Discord // <> d ## 
 bindsym $mod+d exec discord
 ## Launch // Discord PTB // <><Shift> d ##
@@ -104,9 +106,6 @@ bindsym $mod+$alt+p exec gnome-control-center power
 set_from_resource $rofiTheme rofi.theme "GruvboxGrid"
 ## Launch // Calendar // <> c ##
 bindsym $mod+c exec alacritty -e calcurse
-
-## Launch // VSCode // <><Shift>v ##
-bindsym $mod+Shift+v exec code
 
 ## Launch // GUI File Mng // <><Alt> n ##
 bindsym $mod+$alt+n exec nautilus
