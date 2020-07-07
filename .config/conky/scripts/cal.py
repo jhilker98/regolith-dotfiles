@@ -14,7 +14,7 @@ wh = calendar.weekheader(2).split(' ')
 for i, h in enumerate(wh):
     print(
             '${font Iosevka Nerd Font:bold:size=12}${color3}' + h + '${color}${font}', end=' '
-    ) if i == weekday else print('${font}${color9}' + h + '${color}${font}', end=' ')
+    ) if i == weekday else print('${font}${color8}' + h + '${color}${font}', end=' ')
 
 for w in cal.monthdatescalendar(year, month):
     if today in w:
