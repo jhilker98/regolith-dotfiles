@@ -39,9 +39,12 @@ set_from_resource $ws19 i3-wm.workspace.19.name "19"
 floating_modifier $mod
 
 hide_edge_borders smart
-## Toggle // Sidebar // <Ctrl><Shift>Enter ##
-bindsym Ctrl+Return exec /home/jhilker/.bin/conkytoggle.sh
-
+## Toggle // To-Do List// <Ctrl>Enter ##
+bindsym Ctrl+Return exec /home/jhilker/.config/conky/scripts/todotoggle.sh
+## Toggle // Agenda // <Ctrl><Shift>Enter ##
+bindsym Ctrl+Shift+Return exec /home/jhilker/.config/conky/scripts/agendatoggle.sh
+# Toggle // Music Info // <Ctrl>M ##
+#bindsym Ctrl+m exec /home/jhilker/.config/conky/scripts/musictoggle.sh
 # Apps
 
 ## Launch // Terminal // <> Enter ##
