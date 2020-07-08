@@ -10,10 +10,12 @@ data = json.loads(file.read())
 quote = random.choice(data)
 author = quote['author']
 print('${font} '
-    + f'{textwrap.fill(quote["quote"], 52)} '
+        + '"'
+    + f'{textwrap.fill(quote["quote"], 50)}'
+    + '"\n'
     + '${font}'
-    + '\n   - ${font Iosevka Nerd Font:italic:size=11}'
-    + '${color7}'
+    + '\n ${alignr}${offset -20}  - '
+    + '${color}'
     + f'{author}'
     + '${font}'
     + '${color}'

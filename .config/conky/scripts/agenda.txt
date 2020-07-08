@@ -1,6 +1,10 @@
-${color yellow}
-Tue Jul 07${color}${color}  8:00pm             Dinner with Mom
-${color}${color yellow}          ${color}${color}  9:00pm             dinner with dad tonight
-${color}${color yellow}
-Wed Jul 08${color}${color}  8:00am             breakfast
-${color}
+#!/bin/bash
+if [[ $($HOME/anaconda3/bin/gcalcli --conky agenda --military --nostarted | sed -n 2p) != "No Events Found..."  ]]; then
+  $HOME/anaconda3/bin/gcalcli --conky agenda --military --nostarted | sed "s/{color yellow}/{color3}/g" | sed "s/\([0-9]\+:[0-9]\+\)/\${color7}\1\${color}/g"
+else
+#  $HOME/anaconda3/bin/gcalcli --conky agenda | sed "s/{color yellow}/{color8}/g"
+echo -e "\nNo events coming up.\n\n"
+fi
+
+
+
