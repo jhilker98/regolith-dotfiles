@@ -10,8 +10,8 @@ for _, v in data.items():
     if v['_isTask'] and v['boards'][0].replace('@','') == 'NaNoWriMo': 
         if not v['isComplete']:
             if v['inProgress']:
-                #print(f'  {v["_id"]:02}. ' + '${color4}${color}  ' + f'{v["description"]}')
-                print('  ${color4}${color}  ' + f'{v["description"]}.')
+                print(f'  {v["_id"]:02}. ' + '${color4}${color}  ' + f'{v["description"]}')
+                #print('  ${color4}${color}  ' + f'{v["description"]}.')
             else:
-                #print(f'  {v["_id"]:02}. ' + '${color1}☐${color} ' + f'{v["description"]}')
-                print('  ${color1}${color}  ' + f'{v["description"]}.')
+                print(f'  {v["_id"]:02}. ' + '${color1}${color}  ' + f'{v["description"]}')
+                #print('  ${color1}${color}  ' + f'{v["description"]}.')
