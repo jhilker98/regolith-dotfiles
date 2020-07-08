@@ -101,13 +101,13 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-# if [ -f ~/.bash_aliases ]; then
-#     . ~/.bash_aliases
-# fi
+ if [ -f ~/.bash_aliases ]; then
+     . ~/.bash_aliases
+ fi
 
-if [ -f ~/.aliases ]; then
-  . ~/.aliases
-fi
+#if [ -f ~/.aliases ]; then
+#  . ~/.aliases
+#fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -128,7 +128,7 @@ fi
 #export PS1="\[\033[38;5;1m\][\[$(tput sgr0)\]\[\033[38;5;12m\]\u\[$(tput sgr0)\] @ \[$(tput sgr0)\]\[\033[38;5;3m\]\W\[$(tput sgr0)\]\[\033[38;5;1m\]]\[$(tput sgr0)\] \\$ \[$(tput sgr0)\]"
 
 
-source ~/repos/gitstatus/gitstatus.prompt.sh
+source ~/.repos/gitstatus/gitstatus.prompt.sh
 
 export EDITOR=vim
 export MAIL=/home/jhilker/Mail

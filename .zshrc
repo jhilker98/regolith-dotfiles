@@ -191,7 +191,7 @@ zle -N zle-line-finish
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-source $HOME/repos/zsh-git-prompt/zshrc.sh
+source $HOME/.repos/zsh-git-prompt/zshrc.sh
 #PROMPT="%F{4}%n%f @ %F{3}%~%f $%b "
 #PROMPT="%F{3}%~%f $%b "
 #PROMPT="${vim_mode} %{$fg[red]%}[%F{12}%n %F{15}@ %F{yellow}%~%{$fg[red]%}] %F{15}$%b " 
@@ -211,3 +211,4 @@ PS1='${vim_mode} $(git_super_status) %{$fg[yellow]%}%2~%{$reset_color%}%{$reset_
 # colortest-256 | sed -n 2p
 # colortest-256 | sed -n 3p
 # echo -e '\n'
+bindkey -v '^?' backward-delete-char
