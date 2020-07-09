@@ -35,6 +35,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'chrisbra/unicode.vim'
 Plugin 'lilydjwg/colorizer'
+Plugin 'suan/vim-instant-markdown'
 Plugin 'neoclide/coc.nvim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'vimwiki/vimwiki'
@@ -256,7 +257,7 @@ imap <c-space> <c-]>
 let g:SuperTabDefaultCompletionType = "<c-n>"
 set dictionary=/home/jhilker/.vim/spell/en.utf-8.add.spl 
 let g:coc_global_extensions = ['coc-emoji', 'coc-eslint', 'coc-prettier', 'coc-tsserver', 'coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-pyls', 'coc-yaml', 'coc-vimtex', 'coc-snippets']
-set viminfo='100,n$HOME/.vim/files/info/viminfo
+"set viminfo='100,n$HOME/.vim/files/info/viminfo
 let g:UltiSnipsSnippetDirectories = ["/home/jhilker/.vim/bundle/vim-snippets/snippets/*"]
 
 
@@ -272,6 +273,5 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
-
-
+let g:instant_markdown_browser = "firefox -P default-release"
 let g:python3_host_prog = "/home/jhilker/anaconda3/bin/python"
