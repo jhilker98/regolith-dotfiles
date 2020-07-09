@@ -198,7 +198,7 @@ nnoremap <silent> <leader>wv :vsp<CR>
 nnoremap <silent> <leader>wd :q<CR>
 
 " Autocompile groff
-nmap <silent> <leader>cg :silent !groff -ms %:p -T pdf > %:r.pdf<cr>
+nmap <silent> <leader>cg :silent !groff -ms %:p -T pdf > %:r.pdf<cr><cr>
 
 
 "Abbrevs
