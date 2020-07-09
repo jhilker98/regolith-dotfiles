@@ -197,6 +197,10 @@ nnoremap <silent> <leader>wh :sp<CR>
 nnoremap <silent> <leader>wv :vsp<CR>
 nnoremap <silent> <leader>wd :q<CR>
 
+" Autocompile groff
+nmap <silent> <leader>cg :silent !groff -ms %:p -T pdf > %:r.pdf<cr>
+
+
 "Abbrevs
 "" Email Abbrevs
 iab <silent> sig Thanks,<CR>Jacob Hilker<CR>
@@ -242,17 +246,6 @@ autocmd BufNewFile,BufRead *.ms,*.mm set filetype=groff
 
 imap <c-space> <c-]>
 
-"nmap <leader>gd <Plug>(coc-definition)
-"nmap <leader>gy <Plug>(coc-type-definition)
-"nmap <leader>gi <Plug>(coc-implementation)
-"nmap <leader>gr <Plug>(coc-references)
-"nmap <leader>rr <Plug>(coc-rename)
-"nmap <leader>rpr :CocSearch <C-R>=expand("<cword>")<CR><CR>
-"nmap <leader>g[ <Plug>(coc-diagnostic-prev)
-"nmap <leader>g] <Plug>(coc-diagnostic-next)
-"nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
-"nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
-"nnoremap <leader>cr :CocRestart
 
 let g:SuperTabDefaultCompletionType = "<c-n>"
 set dictionary=/home/jhilker/.vim/spell/en.utf-8.add.spl 
