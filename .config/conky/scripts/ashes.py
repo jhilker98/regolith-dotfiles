@@ -15,3 +15,4 @@ for _, v in data.items():
             else:
                 print(f'  {v["_id"]:02}. ' + '${color1}${color}  ' + f'{v["description"]}')
                 #print('  ${color1}${color}  ' + f'{v["description"]}.')
+file.close()
