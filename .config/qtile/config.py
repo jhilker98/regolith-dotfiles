@@ -28,6 +28,11 @@ from libqtile.config import Key, Screen, Group, Drag, Click
 from libqtile.command import lazy
 from libqtile import layout, bar, widget
 
+import os
+import socket
+import re
+import subprocess
+##### DEFINING VARIABLES AND COLORS
 mod = "mod4"
 myTerm = "alacritty"
 myBrowser = "firefox"
@@ -50,8 +55,8 @@ Key([mod], "i", lazy.layout.grow()),
 Key([mod], "m", lazy.layout.shrink()),
 Key([mod], "n", lazy.layout.normalize()),
 Key([mod], "o", lazy.layout.maximize()),
-Key([mod, "shift"], "space", lazy.layout.flip()),
-
+Key([mod, "shift"], "space", lazy.spawn('rofi -show run')),
+Key([mod],"space", lazy.spawn('rofi -show drun')),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
@@ -84,19 +89,19 @@ layouts = [
     layout.MonadTall(**monadTheme),
     layout.Max(**monadTheme)
     ]
-colors = [["#282a36", "#282a36"], # panel background
-          ["#434758", "#434758"], # background for current screen tab
-          ["#ffffff", "#ffffff"], # font color for group names
+colors = [["#32302f", "#32302f"], # panel background
+          ["#3c3836", "#3c3836"], # background for current screen tab
+          ["#ebdbb2", "#ebdbb2"], # font color for group names
           ["#ff5555", "#ff5555"], # border line color for current tab
           ["#8d62a9", "#8d62a9"], # border line color for other tab and odd widgets
-          ["#668bd7", "#668bd7"], # color for the even widgets
+          ["#458588", "#458588"], # color for the even widgets
           ["#e1acff", "#e1acff"]] # window name
 
 
 widget_defaults = dict(
     font='Iosevka Nerd Font',
     fontsize=16,
-    padding=3,
+    padding=5,
 )
 
 screens = [
@@ -104,8 +109,13 @@ screens = [
         top=bar.Bar(
             [
             widget.GroupBox(
-                highlight_color=['000000','282828'],
-                highlight_method = 'block'
+                margin_x = -1,
+                active = colors[2],
+                inactive = colors[2],
+                rounded = True,
+                highlight_color = colors[1],
+                highlight_method = 'line',
+                this_current_screen_border = colors[5]
                 ),
             
                 ],
