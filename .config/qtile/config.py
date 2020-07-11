@@ -101,7 +101,7 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font='Arial',
+    font='Iosevka Nerd Font',
     fontsize=16,
     padding=3,
 )
