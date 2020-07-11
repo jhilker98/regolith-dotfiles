@@ -34,6 +34,10 @@ import re
 import subprocess
 
 
+@hook.subscribe.startup_once
+def autostart():
+    home = os.path.expanduser('~/.config/qtile/autostart.sh')
+    subprocess.call([home])
 
 
 
@@ -61,8 +65,8 @@ Key([mod, "shift"], "l", lazy.layout.swap_right()),
 Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
 Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
 Key([mod], "i", lazy.layout.grow()),
-Key([mod], "m", lazy.layout.shrink()),
-Key([mod], "n", lazy.layout.normalize()),
+Key([mod,"control"], "h", lazy.layout.shrink()),
+Key([mod, "control"], "l", lazy.layout.normalize()),
 Key([mod], "o", lazy.layout.maximize()),
 Key([mod, "shift"], "space", lazy.spawn('rofi -show run')),
 Key([mod],"space", lazy.spawn('rofi -show drun')),
@@ -84,7 +88,7 @@ Key([mod],"space", lazy.spawn('rofi -show drun')),
     Key([], "XF86AudioRaiseVolume",lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%")),
     Key([], "XF86AudioLowerVolume",lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%")),
     Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")),
-
+    Key([mod],"n", lazy.spawn("rofication-gui"))
 
 
 
@@ -122,9 +126,7 @@ widget_defaults = dict(
 
 screens = [
     Screen(
-        top=bar.Bar(
-            [
-            widget.GroupBox(
+        top=bar.Bar([widget.GroupBox(
                 margin_x = -1,
                 active = colors[2],
                 inactive = colors[2],
@@ -133,21 +135,9 @@ screens = [
                 highlight_method = 'line',
                 this_current_screen_border = colors[5],
                 ),
-     widget.CurrentLayoutIcon(
-                        custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],
-                        foreground = colors[2],
-                        background = colors[5],
-                        padding = 0,
-                        scale=0.7
-                        ),
-               widget.CurrentLayout(
-                        foreground = colors[2],
-                        background = colors[5],
-                        padding = 5
-                        ),
-                        ],
+                      ],
             30,
-        ),
+            background=colors[0]),
     ),
 ]
 
