@@ -29,12 +29,6 @@ from libqtile.command import lazy
 from libqtile import layout, bar, widget
 
 mod = "mod4"
-myTerm = "alacritty"
-monadTheme = {"margin": 15,
-              "border_width": 1,   
-              "border_focus": "458588",
-              "border_normal": "458588"
-              }
 
 keys = [
     # Switch between windows in current stack pane
@@ -77,7 +71,7 @@ keys = [
         [mod, "shift"], "Return",
         lazy.layout.toggle_split()
     ),
-    Key([mod], "Return", lazy.spawn(myTerm)),
+    Key([mod], "Return", lazy.spawn("xterm")),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout()),
@@ -88,7 +82,7 @@ keys = [
     Key([mod], "r", lazy.spawncmd()),
 ]
 
-groups = [Group(i) for i in "123456789"]
+groups = [Group(i) for i in "asdfuiop"]
 
 for i in groups:
     # mod1 + letter of group = switch to group
@@ -102,13 +96,12 @@ for i in groups:
     )
 
 layouts = [
-    layout.MonadTall(**monadTheme),
     layout.Max(),
     layout.Stack(num_stacks=2)
 ]
 
 widget_defaults = dict(
-    font='Iosevka Nerd Font',
+    font='Arial',
     fontsize=16,
     padding=3,
 )
@@ -120,6 +113,8 @@ screens = [
                 widget.GroupBox(),
                 widget.Prompt(),
                 widget.WindowName(),
+                widget.TextBox("default config", name="default"),
+                widget.Systray(),
                 widget.Clock(format='%Y-%m-%d %a %I:%M %p'),
             ],
             30,
