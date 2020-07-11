@@ -103,7 +103,10 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-            widget.GroupBox(),
+            widget.GroupBox(
+                highlight_color=['000000','282828'],
+                highlight_method = 'block'
+                ),
             
                 ],
             30,
