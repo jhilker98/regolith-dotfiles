@@ -37,7 +37,7 @@ mod = "mod4"
 myTerm = "alacritty"
 myBrowser = "firefox"
 monadTheme = {"margin": 10,
-              "border_width": 1,   
+              "border_width": 2,
               "border_focus": "458588"
               }
 
@@ -99,7 +99,7 @@ colors = [["#32302f", "#32302f"], # panel background
 
 
 widget_defaults = dict(
-    font='Iosevka Nerd Font',
+    font='Hack',
     fontsize=16,
     padding=5,
 )
@@ -116,9 +116,8 @@ screens = [
                 highlight_color = colors[1],
                 highlight_method = 'line',
                 this_current_screen_border = colors[5]
-                ),
-            
-                ],
+                )
+                                    ],
             30,
         ),
     ),
