@@ -99,7 +99,7 @@ colors = [["#32302f", "#32302f"], # panel background
 
 
 widget_defaults = dict(
-    font='Hack',
+    font='Iosevka Nerd Font',
     fontsize=16,
     padding=5,
 )
@@ -115,9 +115,21 @@ screens = [
                 rounded = True,
                 highlight_color = colors[1],
                 highlight_method = 'line',
-                this_current_screen_border = colors[5]
-                )
-                                    ],
+                this_current_screen_border = colors[5],
+                ),
+     widget.CurrentLayoutIcon(
+                        custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],
+                        foreground = colors[2],
+                        background = colors[5],
+                        padding = 0,
+                        scale=0.7
+                        ),
+               widget.CurrentLayout(
+                        foreground = colors[2],
+                        background = colors[5],
+                        padding = 5
+                        ),
+                        ],
             30,
         ),
     ),
