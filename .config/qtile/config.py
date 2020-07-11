@@ -30,7 +30,8 @@ from libqtile import layout, bar, widget
 
 mod = "mod4"
 myTerm = "alacritty"
-monadTheme = {"margin": 15,
+myBrowser = "firefox"
+monadTheme = {"margin": 10,
               "border_width": 1,   
               "border_focus": "458588"
               }
@@ -73,16 +74,14 @@ keys = [
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
     Key(
-        [mod, "shift"], "Return",
-        lazy.layout.toggle_split()
-    ),
+        [mod, "shift"], "Return", lazy.spawn(myBrowser)),
     Key([mod], "Return", lazy.spawn(myTerm)),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout()),
     Key([mod], "w", lazy.window.kill()),
 
-    Key([mod, "control"], "r", lazy.restart()),
+    Key([mod, "shift"], "r", lazy.restart()),
     Key([mod, "control"], "q", lazy.shutdown()),
     Key([mod], "r", lazy.spawncmd()),
 ]
@@ -96,15 +95,12 @@ for i in groups:
     )
 
     # mod1 + shift + letter of group = switch to & move focused window to group
-    keys.append(
-        Key([mod, "shift"], i.name, lazy.window.togroup(i.name))
-    )
+    keys.append(Key([mod, "shift"], i.name, lazy.window.togroup(i.name)))
 
 layouts = [
     layout.MonadTall(**monadTheme),
-    layout.Max(),
-    layout.Stack(num_stacks=2)
-]
+    layout.Max(**monadTheme)
+    ]
 
 widget_defaults = dict(
     font='Iosevka Nerd Font',
