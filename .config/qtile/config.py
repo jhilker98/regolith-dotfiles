@@ -23,17 +23,13 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-import os
-import re
-import socket
-import subprocess
+
 from libqtile.config import Key, Screen, Group, Drag, Click
 from libqtile.command import lazy
 from libqtile import layout, bar, widget
 
 mod = "mod4"
-myTerm = "alacritty"
-myConfig = "/home/jhilker/.config/qtile/config.py"
+
 keys = [
     # Switch between windows in current stack pane
     Key(
@@ -58,7 +54,7 @@ keys = [
     # Switch window focus to other pane(s) of stack
     Key(
         [mod], "space",
-        lazy.spawn("rofi -show drun")
+        lazy.layout.next()
     ),
 
     # Swap panes of split stack
@@ -73,13 +69,13 @@ keys = [
     # multiple stack panes
     Key(
         [mod, "shift"], "Return",
-        lazy.spawn('firefox')
-        ),
-    Key([mod], "Return", lazy.spawn(myTerm+" -e zsh")),
+        lazy.layout.toggle_split()
+    ),
+    Key([mod], "Return", lazy.spawn("xterm")),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout()),
-    Key([mod, "shift"], "q", lazy.window.kill()),
+    Key([mod], "w", lazy.window.kill()),
 
     Key([mod, "control"], "r", lazy.restart()),
     Key([mod, "control"], "q", lazy.shutdown()),
