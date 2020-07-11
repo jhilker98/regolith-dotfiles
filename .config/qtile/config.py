@@ -62,10 +62,10 @@ Key([mod, "shift"], "space", lazy.layout.flip()),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout()),
-    Key([mod], "w", lazy.window.kill()),
+    Key([mod, "shift"], "q", lazy.window.kill()),
 
     Key([mod, "shift"], "r", lazy.restart()),
-    Key([mod, "control"], "q", lazy.shutdown()),
+    Key([mod, "control"], "e", lazy.shutdown()),
     Key([mod], "r", lazy.spawncmd()),
 ]
 
@@ -84,6 +84,14 @@ layouts = [
     layout.MonadTall(**monadTheme),
     layout.Max(**monadTheme)
     ]
+colors = [["#282a36", "#282a36"], # panel background
+          ["#434758", "#434758"], # background for current screen tab
+          ["#ffffff", "#ffffff"], # font color for group names
+          ["#ff5555", "#ff5555"], # border line color for current tab
+          ["#8d62a9", "#8d62a9"], # border line color for other tab and odd widgets
+          ["#668bd7", "#668bd7"], # color for the even widgets
+          ["#e1acff", "#e1acff"]] # window name
+
 
 widget_defaults = dict(
     font='Iosevka Nerd Font',
@@ -93,17 +101,18 @@ widget_defaults = dict(
 
 screens = [
     Screen(
-        bottom=bar.Bar(
+        top=bar.Bar(
             [
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.Clock(format='%Y-%m-%d %a %I:%M %p'),
-            ],
+            widget.GroupBox(),
+            
+                ],
             30,
         ),
     ),
 ]
+        
+
+
 
 # Drag floating layouts.
 mouse = [
