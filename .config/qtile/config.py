@@ -81,6 +81,13 @@ Key([mod],"space", lazy.spawn('rofi -show drun')),
     Key([mod, "shift"], "r", lazy.restart()),
     Key([mod, "shift"], "e", lazy.shutdown()),
     Key([mod], "r", lazy.spawncmd()),
+    Key([], "XF86AudioRaiseVolume",lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%")),
+    Key([], "XF86AudioLowerVolume",lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%")),
+    Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")),
+
+
+
+
 ]
 
 groups = [Group(i) for i in "123456789"]
