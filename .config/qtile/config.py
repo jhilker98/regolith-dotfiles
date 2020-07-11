@@ -26,12 +26,21 @@
 
 from libqtile.config import Key, Screen, Group, Drag, Click
 from libqtile.command import lazy
-from libqtile import layout, bar, widget
+from libqtile import layout, bar, widget, hook
 
 import os
 import socket
 import re
 import subprocess
+
+
+
+
+
+
+
+
+
 ##### DEFINING VARIABLES AND COLORS
 mod = "mod4"
 myTerm = "alacritty"
@@ -70,7 +79,7 @@ Key([mod],"space", lazy.spawn('rofi -show drun')),
     Key([mod, "shift"], "q", lazy.window.kill()),
 
     Key([mod, "shift"], "r", lazy.restart()),
-    Key([mod, "control"], "e", lazy.shutdown()),
+    Key([mod, "shift"], "e", lazy.shutdown()),
     Key([mod], "r", lazy.spawncmd()),
 ]
 
@@ -134,7 +143,6 @@ screens = [
         ),
     ),
 ]
-        
 
 
 
