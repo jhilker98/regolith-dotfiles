@@ -32,8 +32,7 @@ mod = "mod4"
 myTerm = "alacritty"
 monadTheme = {"margin": 15,
               "border_width": 1,   
-              "border_focus": "458588",
-              "border_normal": "458588"
+              "border_focus": "458588"
               }
 
 keys = [
