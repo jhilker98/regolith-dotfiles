@@ -6,10 +6,10 @@ http://www.dailyprogress.com/search/?mode=article&q=&t=article&l=10&d=&d1=1+year
 https://fredericksburgva.gov/RSSFeed.aspx?ModID=1&CID=Fredericksburg-News-1 "Local" "~Fredericksburg News"
 
 Campaigns
-"query:Knights of Salisbury:tags # \"kos\" and author != \"WaitingCynicism\"" Campaign 
-"query:The Fellowship of Five: tags # \"fo5\"  and author != \"WaitingCynicism\"" Campaign
+"query:Knights of Salisbury:tags # \"kos\"" Campaign 
+"query:The Fellowship of Five: tags # \"fo5\""   Campaign
 "query:Fellowship of the 1PG: tags # \"fot1pg\"" Campaign
-"query:The Banners of Shalott: tags # \"honorintrigue\" and author != \"WaitingCynicism\"" Campaign
+"query:The Banners of Shalott: tags # \"honorintrigue\""  Campaign
 https://rpol.net/feeds.cgi?q=2CEMCCmJ9dwpwGwAsehU  Campaign "~RPOL.net" 
 
 Podcasts
@@ -25,6 +25,7 @@ https://old.reddit.com/r/MedievalHistory/new.rss Reddit sca history medieval "~M
 https://old.reddit.com/r/badhistory/search.rss?q=self%3Ayes&restrict_sr=on&include_over_18=on&sort=new&t=all Reddit "~BadHistory"
 https://old.reddit.com/r/worldbuilding/search.rss?q=flair%3APrompt&restrict_sr=on&include_over_18=on&sort=new&t=all Reddit "~Worldbuilding"
 https://old.reddit.com/r/outside/new.rss Reddit "~Outside"
+
 Blogs
 http://drcallumwatson.blogspot.com/feeds/posts/default Blog history "~Knight of the Two Ls"
 https://lukesmith.xyz/rss.xml Blog
@@ -38,9 +39,17 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UC2PA-AKmVpU6NKCGtZq_rKQ You
 https://www.youtube.com/feeds/videos.xml?channel_id=UCNvsIonJdJ5E4EXMa65VYpA Youtube politics BreadTube
 https://www.youtube.com/feeds/videos.xml?channel_id=UCBa659QWEk1AI4Tg--mrJ2A Youtube tech linguistics
 https://www.youtube.com/feeds/videos.xml?channel_id=UC9-y-6csu5WGm29I7JiwpnA Youtube tech linguistics
+https://youtube.com/feeds/videos.xml?channel_id=UCYJdpnjuSWVOLgGT9fIzL0g Youtube "Marble League"
+Serials
+
+
 
 Gaming
 https://www.bungie.net/en/Rss/NewsByCategory "Destiny" "~Bungie News"
+
+Git
+https://github.com/Murzchnvok/simple-conky/commits/master.atom GitHub "~recent simple-conky commits"
+
 
 https://rpggeek.com/rss/thread/1724354  "Campaign" "!Knights of Salisbury" ooc pendragon rpgs kos
 https://rpggeek.com/rss/thread/2344531 "Campaign" "!Knights of Salisbury" ic pendragon  rpgs kos
@@ -56,5 +65,4 @@ https://rpggeek.com/rss/thread/2357495 "Campaign" "!Honor and Intrigue: The Bann
 https://rpggeek.com/rss/thread/2410450 "Campaign" "!The One Ring: Fellowship of the 1PG (OOC)" ooc tor rpgs fot1pg
 https://rpggeek.com/rss/thread/2420789 "Campaign" "!The One Ring: Across the Great Forest" ic tor rpgs fot1pg
 https://rpggeek.com/rss/thread/2416498 "Campaign" "!The One Ring: A Few Meetings (IC)" ic tor rpgs  fot1pg
-
 
