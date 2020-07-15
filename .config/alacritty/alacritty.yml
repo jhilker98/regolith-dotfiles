@@ -1,4 +1,3 @@
-# Fonts
 font:
   normal:
     #family: Iosevka Medium
@@ -32,9 +31,10 @@ background_opacity: 0.75
 colors:
   # Default colors
   primary:
-    # hard contrast: background = '#1d2021'
-    background: '#282828'
-    # soft contrast: background = '#32302f'
+    # hard contrast: background: '#1d2021'
+    # medium contrastL background: '#282828'
+    # soft contrast: background: '#32302f'
+    background: '#32302f'
     foreground: '#ebdbb2'
 
   # Normal colors
@@ -58,5 +58,11 @@ colors:
     magenta: '#d3869b'
     cyan:    '#8ec07c'
     white:   '#ebdbb2'
+offset:
+  x: 1
+  y: 1
 
+padding:
+  x: 6
+  y: 6
 

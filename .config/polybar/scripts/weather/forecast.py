@@ -5,6 +5,7 @@ import json
 import requests
 from datetime import datetime
 import numpy as np
+from pprint import pprint
 
 
 # Go ahead and get the forecast.
@@ -17,6 +18,8 @@ today = datetime.strptime(weather[0]['date'], "%Y-%m-%d")
 tomorrow = datetime.strptime(weather[1]['date'], "%Y-%m-%d")
 next_day = datetime.strptime(weather[2]['date'], "%Y-%m-%d")
 
+# Get the current conditions and the feels-like temp.
+pprint(forecast['current_condition'])
 # Get the max temp
 max_temp = [max_temp['maxtempF'] for max_temp in weather]
 min_temp = [min_temp['mintempF'] for min_temp in weather]
@@ -73,6 +76,6 @@ ndct = np.argsort(-nd_cond_cnt)
 
 
 
-print(f'{today}: {tdcnd[tdct][0]};\n {HIGH} {max_temp[0]}°F/{min_temp[0]}°F {LOW}\n') 
-print(f'{tomorrow}: {tmcnd[tmct][0]};\n {HIGH} {max_temp[1]}°F/{min_temp[1]}°F {LOW}\n')
-print(f'{next_day}: {ndcnd[ndct][0]}\n {HIGH} {max_temp[2]}°F/{min_temp[2]}°F {LOW}')
+print(f'{today}: {tdcnd[tdct][0]};\n  {HIGH} {max_temp[0]}°F/{min_temp[0]}°F {LOW}\n') 
+print(f'{tomorrow}: {tmcnd[tmct][0]};\n  {HIGH} {max_temp[1]}°F/{min_temp[1]}°F {LOW}\n')
+print(f'{next_day}: {ndcnd[ndct][0]}\n  {HIGH} {max_temp[2]}°F/{min_temp[2]}°F {LOW}')

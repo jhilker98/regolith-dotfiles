@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/bash 
 
-NEWS=$(newsboat -x print-unread | sed -n 2p)
-echo " News: $NEWS" | zscroll -l 20
+NEWS="News $(newsboat -x print-unread | sed -n 2p)"
+echo $NEWS | zscroll -l 20

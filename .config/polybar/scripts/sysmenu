@@ -20,3 +20,4 @@ case "$MENU" in
   *Reboot*) /usr/bin/gnome-session-quit --reboot ;;
   *Shutdown*) /usr/bin/gnome-session-quit --power-off ;;
 esac
+

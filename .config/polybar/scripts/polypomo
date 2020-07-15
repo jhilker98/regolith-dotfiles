@@ -14,8 +14,8 @@ from subprocess import call, DEVNULL
 
 SOCKDIR = os.environ.get("XDG_RUNTIME_DIR", "/var/tmp")
 SOCKFILE = os.path.join(SOCKDIR, "polypomo.sock")
-# TOMATO = u"\U0001F345"
-# BREAK = u"\U0001F3D6"
+#TOMATO = u"\U0001F345"
+#BREAK = u"\U0001F3D6"
 TOMATO = "" 
 BREAK = ""
 class Timer:
