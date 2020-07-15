@@ -126,7 +126,9 @@ widget_defaults = dict(
 
 screens = [
     Screen(
-        top=bar.Bar([widget.GroupBox(
+        top=bar.Bar(
+            [
+                widget.GroupBox(
                 margin_x = -1,
                 active = colors[2],
                 inactive = colors[2],
@@ -134,12 +136,29 @@ screens = [
                 highlight_color = colors[1],
                 highlight_method = 'line',
                 this_current_screen_border = colors[5],
-                ),
-                      ],
+                    ),
+                widget.Prompt(),
+                widget.Spacer(length=640),
+                widget.Clock(format='%I:%M %p'),
+            ],
             30,
-            background=colors[0]),
+        ),
     ),
 ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
