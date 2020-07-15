@@ -44,7 +44,7 @@ bindsym Ctrl+Return exec /home/jhilker/.config/conky/scripts/todotoggle.sh
 ## Toggle // Agenda // <Ctrl><Shift>Enter ##
 bindsym Ctrl+Shift+Return exec /home/jhilker/.config/conky/scripts/agendatoggle.sh
 # Toggle // Music Info // <Ctrl>M ##
-#bindsym Ctrl+m exec /home/jhilker/.config/conky/scripts/musictoggle.sh
+bindsym Ctrl+m exec /home/jhilker/.config/conky/scripts/musictoggle.sh
 # Apps
 
 ## Launch // Terminal // <> Enter ##
@@ -57,13 +57,8 @@ bindsym $mod+$alt+t exec gnome-tweaks
 bindsym $mod+space exec rofi -show drun 
 ## Launch // Command // <><Shift> Space ##
 bindsym $mod+Shift+space exec rofi -show run 
-## Launch // Emacs // <> e ##
 bindsym $mod+e exec emacs
-## Launch // Vim // <> v ##
-#bindsym $mod+v exec alacritty -e vim -u ~/.config/vim/vimrc
-#bindsym $mod+v exec kitty -e vim -u ~/.config/vim/vimrc
 bindsym $mod+v exec alacritty -e ~/Downloads/nvim/bin/nvim
-#bindsym $mod+v exec kitty -e vim 
 ## Launch // Mail // <> m ##
 bindsym $mod+m exec alacritty -e neomutt 
 #bindsym $mod+m exec kitty -e neomutt
