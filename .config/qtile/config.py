@@ -140,8 +140,11 @@ screens = [
                 widget.Prompt(),
                 widget.Spacer(length=640),
                 widget.Clock(format='%I:%M %p'),
-            ],
+                widget.Spacer(length=640),
+                widget.Volume(get_volume_command = "pamixer --get-volume-human"),
+                ],
             30,
+            background = colors[0],
         ),
     ),
 ]
