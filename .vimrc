@@ -35,7 +35,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'chrisbra/unicode.vim'
 Plugin 'lilydjwg/colorizer'
-Plugin 'suan/vim-instant-markdown'
+"Plugin 'suan/vim-instant-markdown'
 Plugin 'neoclide/coc.nvim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'vimwiki/vimwiki'
@@ -43,7 +43,6 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'SirVer/ultisnips'
 
 Plugin 'honza/vim-snippets'  " Snippets are separated from the engine. Add this if you want them. 
-
 " Trigger configuration. Do not use <tab> if you use "https://github.com/Valloric/YouCompleteMe.""
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -56,7 +55,7 @@ Plugin 'mhinz/vim-startify' "start menu for vim
 Plugin 'morhetz/gruvbox'
 Plugin 'sainnhe/gruvbox-material'
 Plugin 'rhysd/vim-grammarous'
-
+Plugin 'mattn/emmet-vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -82,6 +81,7 @@ augroup END
 
 syntax enable
 set background=dark
+let g:gruvbox_contrast_dark='soft'
 colorscheme gruvbox
 set encoding=UTF-8
 
@@ -180,7 +180,7 @@ nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gp :Gpush<CR>
 
 "" Goyo
-nnoremap <silent> <leader>rr :Goyo<CR>
+nnoremap <silent> <leader>rr :Goyo<CR>:highlight Normal ctermbg=None<cr>
 
 
 """ File Commands
@@ -199,7 +199,7 @@ nnoremap <silent> <leader>wd :q<CR>
 
 " Autocompile groff
 nmap <silent> <leader>cg :silent !groff -ms %:p -T pdf > %:r.pdf<cr><cr>
-
+nmap <silent> <leader>cr :silent !refer -p bibrefer %:p > !groff -ms -T pdf > %:r.pdf<cr><cr>
 
 "Abbrevs
 "" Email Abbrevs
@@ -266,5 +266,6 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
-let g:instant_markdown_browser = "firefox -P default-release"
+"Remove new window for instance in existing browser
+"let g:instant_markdown_browser = "firefox -P default-release"
 let g:python3_host_prog = "/home/jhilker/anaconda3/bin/python"
