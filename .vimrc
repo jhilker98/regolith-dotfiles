@@ -35,7 +35,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'chrisbra/unicode.vim'
 Plugin 'lilydjwg/colorizer'
-"Plugin 'suan/vim-instant-markdown'
+Plugin 'suan/vim-instant-markdown'
 Plugin 'neoclide/coc.nvim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'vimwiki/vimwiki'
@@ -56,6 +56,7 @@ Plugin 'morhetz/gruvbox'
 Plugin 'sainnhe/gruvbox-material'
 Plugin 'rhysd/vim-grammarous'
 Plugin 'mattn/emmet-vim'
+"Plugin 'vim-pandoc/vim-markdownfootnotes'  
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -152,10 +153,10 @@ map <leader>sb :setlocal spell!<CR>
 nnoremap <silent> <leader>tn :set invnumber invrelativenumber<CR>
 
 "Movement Keybindings
-map <S-h> <C-w>h
-map <S-j> <C-w>j
-map <S-k> <C-w>k
-map <S-l> <C-w>l
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 
 map <C-Left> <C-w>h
 map <C-Down> <C-w>j
@@ -183,10 +184,6 @@ nnoremap <leader>gp :Gpush<CR>
 nnoremap <silent> <leader>rr :Goyo <bar> :highlight Normal ctermbg=None<cr>
 
 
-""" File Commands
-nnoremap <silent> <leader>e :e
-nnoremap <silent> <leader>feD :e ~/.config/vim/vimrc<CR>
-nnoremap <silent> <leader>w :w<CR>
 
 """ Quit Commands
 nnoremap <silent> <leader>qq :q<CR>
@@ -199,7 +196,7 @@ nnoremap <silent> <leader>wd :q<CR>
 
 " Autocompile groff
 nmap <silent> <leader>cg :silent !groff -ms %:p -T pdf > %:r.pdf<cr><cr>
-nmap <silent> <leader>cr :silent !refer -p bibrefer %:p \| !groff -ms -T pdf > %:r.pdf<cr><cr>
+nmap <silent> <leader>cr :silent !refer -PSe -p bibrefer %:p \| !groff -ms -T pdf > %:r.pdf<cr><cr>
 
 "Abbrevs
 "" Email Abbrevs
@@ -242,7 +239,7 @@ autocmd FileType gitcommit setlocal spell
 
 
 " Load ms files as groff
-autocmd BufNewFile,BufRead *.ms,*.mm set filetype=groff
+autocmd BufNewFile,BufRead *.ms,*.mm,*.mom set filetype=groff
 
 imap <c-space> <c-]>
 
@@ -267,5 +264,5 @@ endfunction
 
 let g:coc_snippet_next = '<tab>'
 "Remove new window for instance in existing browser
-"let g:instant_markdown_browser = "firefox -P default-release"
+let g:instant_markdown_browser = "firefox -P default-release"
 let g:python3_host_prog = "/home/jhilker/anaconda3/bin/python"
