@@ -391,13 +391,11 @@ set_from_resource $i3-wm.bar.workspace.urgent.text.color i3-wm.bar.workspace.urg
 set_from_resource $i3-wm.bar.font i3-wm.bar.font "pango:Source Code Pro Medium 13, FontAwesome 13"
 font $i3-wm.bar.font
 
-# The bar configuration
-
 
 # The following exec calls run programs in the background when i3 starts.
 
 # Start the installed regolith-compositor
-exec --no-startup-id /usr/share/regolith-compositor/init 
+exec --no-startup-id picom
 
 
 # Start the bar
