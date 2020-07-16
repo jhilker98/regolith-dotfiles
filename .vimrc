@@ -180,7 +180,7 @@ nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gp :Gpush<CR>
 
 "" Goyo
-nnoremap <silent> <leader>rr :Goyo<CR>:highlight Normal ctermbg=None<cr>
+nnoremap <silent> <leader>rr :Goyo <bar> :highlight Normal ctermbg=None<cr>
 
 
 """ File Commands
@@ -199,7 +199,7 @@ nnoremap <silent> <leader>wd :q<CR>
 
 " Autocompile groff
 nmap <silent> <leader>cg :silent !groff -ms %:p -T pdf > %:r.pdf<cr><cr>
-nmap <silent> <leader>cr :silent !refer -p bibrefer %:p > !groff -ms -T pdf > %:r.pdf<cr><cr>
+nmap <silent> <leader>cr :silent !refer -p bibrefer %:p \| !groff -ms -T pdf > %:r.pdf<cr><cr>
 
 "Abbrevs
 "" Email Abbrevs
