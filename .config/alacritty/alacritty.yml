@@ -14,6 +14,17 @@ font:
     family: Iosevka Nerd Font
     size: 12.0
     style: Bold
+  
+  bold_italic:
+    family: Iosevka Nerd Font
+    size: 12.0
+    style: Bold Italic
+  
+  offset:
+    x: 1
+    y: 3
+  glyph_offset:
+    x: 1
 
 # Keybindings for scrolling by line and page 
 key_bindings:
@@ -58,11 +69,5 @@ colors:
     magenta: '#d3869b'
     cyan:    '#8ec07c'
     white:   '#ebdbb2'
-offset:
-  x: 1
-  y: 1
-
-padding:
-  x: 6
-  y: 6
+    
 
