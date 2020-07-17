@@ -167,7 +167,7 @@ bindkey -v
 
 
 
-vim_ins_mode="%{$fg[red]%}[%F{12}INS%{$reset_color%}%{$fg[red]%}]%{$reset_color%}"
+vim_ins_mode="%{$fg[red]%}[%F{12}%BINS%B%{$reset_color%}%{$fg[red]%}]%{$reset_color%}"
 # vim_cmd_mode="%{$fg[green]%}[CMD]%{$reset_color%}"
 vim_cmd_mode="%{$fg[red]%}[%{$fg[magenta]%}NML%{$fg[red]%}]%{$reset_color%}"
 # vim_cmd_mode="%{$fg[green]%}[CMD]%{$reset_color%}"
