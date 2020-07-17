@@ -99,7 +99,7 @@ export EMAIL="jacob.hilker2@gmail.com"
 export NAME="Jacob Hilker"
 export PATH="/usr/local/texlive/2019/bin/x86_64-linux:/home/jhilker/.bin:/home/jhilker/Downloads/nvim/bin::$PATH"
 export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
-export COWPATH='/usr/share/cowsay/cows/:/home/jhilker/.cows/'
+export COWPATH='/usr/sharecowsay/cows/:/home/jhilker/.cows/'
 # Start blinking
 export LESS_TERMCAP_mb=$(tput bold; tput setaf 12) # blue
 # Start bold
@@ -167,7 +167,7 @@ bindkey -v
 
 
 
-vim_ins_mode="%{$fg[red]%}[%{$fg_bold[blue]%}INS%{$reset_color%}%{$fg[red]%}]%{$reset_color%}"
+vim_ins_mode="%{$fg[red]%}[%F{12}INS%{$reset_color%}%{$fg[red]%}]%{$reset_color%}"
 # vim_cmd_mode="%{$fg[green]%}[CMD]%{$reset_color%}"
 vim_cmd_mode="%{$fg[red]%}[%{$fg[magenta]%}NML%{$fg[red]%}]%{$reset_color%}"
 # vim_cmd_mode="%{$fg[green]%}[CMD]%{$reset_color%}"
@@ -196,6 +196,7 @@ source $HOME/.repos/zsh-git-prompt/zshrc.sh
 #PROMPT="%F{3}%~%f $%b "
 #PROMPT="${vim_mode} %{$fg[red]%}[%F{12}%n %F{15}@ %F{yellow}%~%{$fg[red]%}] %F{15}$%b " 
 NEWLINE=$'\n'
+echo -ne '\n'
 PS1='${vim_mode} $(git_super_status) %{$fg[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
 
 #PS1='${vim_mode} $(git_super_status) %{$fg_bold[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
