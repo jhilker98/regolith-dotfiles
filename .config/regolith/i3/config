@@ -277,10 +277,10 @@ bindsym $mod+Escape exec gnome-screensaver-command --lock
 ## Power // Sleep // <><Shift> s ##
 bindsym $mod+Shift+s exec systemctl suspend
 
+
 # Cause Settings app to float above tiled windows
 floating_maximum_size -1 x -1
 for_window [class="Gnome-control-center"] floating enable
-
 # resize window (you can also use the mouse for that)
 mode "Resize Mode" {
         # These bindings trigger as soon as you enter the resize mode
@@ -315,6 +315,8 @@ mode "Resize Mode" {
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
+
+
 bindsym $mod+r mode "Resize Mode"
 
 # Disable titlebar
@@ -395,8 +397,8 @@ font $i3-wm.bar.font
 # The following exec calls run programs in the background when i3 starts.
 
 # Start the installed regolith-compositor
-exec --no-startup-id picom
-
+#exec --no-startup-id picom -b
+exec --no-startup-id compton -b
 
 # Start the bar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
