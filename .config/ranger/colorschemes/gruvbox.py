@@ -31,7 +31,7 @@ class Default(ColorScheme):
                 fg = default
             if context.media:
                 if context.image:
-                    fg = cyan
+                    fg = yellow
                 else:
                     fg = blue
             if context.container:
@@ -92,7 +92,7 @@ class Default(ColorScheme):
         elif context.in_statusbar:
             if context.permissions:
                 if context.good:
-                    fg = magenta
+                    fg = yellow
                 elif context.bad:
                     fg = red
             if context.marked:
