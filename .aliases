@@ -1,12 +1,12 @@
 # ls aliases
-#alias ls="exa --color=auto"
-#alias la="exa -la"
-#alias ll="exa -lah"
-#alias lsr="exa -alhrs modified"
-alias ls="ls --color=auto"
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+alias ls="exa --color=auto"
+alias la="exa -la"
+alias ll="exa -lah"
+alias lsr="exa -alhrs modified"
+# alias ls="ls --color=auto"
+# alias ll='ls -alF --color=auto'
+# alias la='ls -A --color=auto'
+# alias l='ls -CF --color=auto'
 
 #Navigation and Clearing Aliases
 alias home="cd /home/jhilker"
@@ -21,7 +21,6 @@ alias cl='[ $[$RANDOM % 10] = 0 ] && timeout 6 cbeams -o; clear || clear'
 #alias rm="rm -rfi"
 alias clock="clear; echo -e 'It is $(date +%I:%M) $(date +%p) on $(date +%a), $(date '+%e %b').'"
 alias font="fc-cache -f -v"
-alias mutt="mbsync -a && neomutt; ref"
 alias proc="ytop -m"
 alias ref="source ~/.zshrc"
 alias wx="curl 'wttr.in?format=3'"
@@ -33,7 +32,7 @@ alias update="sudo apt update -y"
 alias upgrade="sudo apt update && sudo apt upgrade -y"
 #alias install="sudo apt install -y"
 alias autoremove="sudo apt autoremove -y"
-alias jams="tizonia --spotify-playlist-id  https://open.spotify.com/playlist/69uvLQBtqvAMoyNFPy7ErL -s --spotify-allow-explicit-tracks"
+alias music="tizonia --spotify-playlist-id  https://open.spotify.com/playlist/69uvLQBtqvAMoyNFPy7ErL -s --spotify-allow-explicit-tracks"
 alias coding="tizonia --spotify-playlist-id https://open.spotify.com/playlist/0sSrQJpH4B00xG7bPDrJXp -s --spotify-allow-explicit-tracks"
 alias erb="tizonia --spotify-playlist-id https://open.spotify.com/playlist/0tpXl15JsHSKrHx4TgSbOy -s --spotify-allow-explicit-tracks"
 alias geb="tizonia --spotify-playlist-id 'https://open.spotify.com/playlist/3iSNMhp2CnftVz43VA5lwP' -s"
@@ -100,7 +99,12 @@ alias 2048="~/2048"
 alias gocl="ssh jacob.hilker2@35.196.197.239"
 alias math="python3 -ic 'import math'"
 alias calcurse="calcurse -D ~/Dropbox/calcurse"
-alias vim="nvim"
 alias vscode="code"
 alias gtheme='bash -c  "$(wget -qO- https://git.io/vQgMr)"'
 alias zpdf="zathura & disown"
+alias vim="nvim"
+alias tuir="tuir --enable-media --theme ~/.config/tuir/themes/gruvbox"
+alias gcal="gcalcli"
+alias agenda="gcalcli agenda --military --nostarted"
+alias family="python3 ~/.repos/myrepos/FamilyTreeGen/src/Generator.py"
+alias neofetch="neofetch --ascii_distro regolith"
