@@ -19,12 +19,17 @@ set crypt_replysignencrypted = yes
 macro index A \
     "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" \
     "mark all new as read"
-macro index <Esc>U "<source> /home/jhilker/.config/mutt/muttrc<enter>" "source config folder"
 
 # FORMATS
-set index_format="%2C %zs %?X?A& ? %D %-15.15F %s (%-4.4c)"
+#set index_format="%2C %zs %?X?A& ? %D %-15.15F %s (%-4.4c)"
+set index_format="%2C %zs %?X?A& ? %D %-15.15F %s "
 set date_format="%d %b"
-
+set sidebar_format="%B%*  %N %n"
+## HEADER FORMAT
+ignore *
+unignore from date subject to cc
+#ignore organization organisation x-mailer: x-newsreader: x-mailing-list:
+#unignore posted-to:
 #set editor="/usr/bin/vim"
 set editor="/home/jhilker/Downloads/nvim/bin/nvim"
 alias Mom Jen <jhilker3@gmail.com>
@@ -35,6 +40,8 @@ color index_subject color12 default '.*'
 color sidebar_flagged color12 default
 color index_number color12 default
 color sidebar_highlight magenta default
-color sidebar_new brightmagenta default
+color sidebar_new brightyellow default
+color sidebar_ordinary color15 default
+color sidebar_indicator color12 default
 color index_subject brightcolor12 default '~N'
 color status yellow default
