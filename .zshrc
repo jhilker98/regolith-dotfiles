@@ -196,7 +196,8 @@ source $HOME/.repos/zsh-git-prompt/zshrc.sh
 #PROMPT="%F{3}%~%f $%b "
 #PROMPT="${vim_mode} %{$fg[red]%}[%F{12}%n %F{15}@ %F{yellow}%~%{$fg[red]%}] %F{15}$%b " 
 NEWLINE=$'\n'
-echo -ne '\n'
+echo -e '\n'
+clear
 PS1='${vim_mode} $(git_super_status) %{$fg[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
 
 #PS1='${vim_mode} $(git_super_status) %{$fg_bold[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
