@@ -6,7 +6,7 @@
 
 [colors]
 bg = #CC32302f 
-bg-bright = #3c3836
+bg-bright = #CC3c3836
 fg = #EBDBB2
 fg-alt = #d5c4a1
 mf = #d5c4a1
@@ -19,7 +19,7 @@ text = #282828
 trans = #00000000
 white = #FFFFFF
 black = #000000
-
+border = "#00000000"
 ;; Colors
 
 aqua = #8ec07c
@@ -70,9 +70,10 @@ label-mode-background = ${colors.red}
 
 ; focused = Active workspace on focused monitor
 label-focused = %index%
-label-focused-background = ${colors.blue}
+label-focused-background = ${colors.bg-bright}
 label-focused-padding = 1.75
 label-focused-foreground = ${colors.fg}
+label-focused-underline = ${colors.blue}
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
 label-unfocused-padding = 1.75
@@ -168,7 +169,7 @@ format-disconnected-background = ${colors.bg-bright}
 format-disconnected-foreground = ${colors.fg}
 format-disconnected-prefix-foreground = ${colors.fg}
 format-connected-margin = 1
-format-disconnected-marn = 1
+format-disconnected-margin = 1
 
 [module/battery]
 type = internal/battery
@@ -497,8 +498,9 @@ font-1 = ${fonts.icons-1}
 font-2 = ${fonts.weather} 
 font-3 = ${fonts.icons-2} 
 font-4 = ${fonts.icons-3} 
-
 background = ${colors.bg}
+border-color = ${colors.border}
+border-bottom-size = 5 
 fg = ${colors.fg}
 width = 100%
 height = 27
@@ -519,6 +521,8 @@ font-2 = ${fonts.weather}
 font-3 = ${fonts.icons-2} 
 font-4 = ${fonts.icons-3}
 font-5 = ${fonts.icons-4}
+border-color = ${colors.border}
+border-top-size = 6
 
 line-size = 2.75
 enable-ipc = true
@@ -539,7 +543,6 @@ modules-center = previous playpause next progress
 #modules-center = apps
 ; when wttr.in isn't down
 modules-right = notifs news weather 
-
-;  when wttr.in is down
-; modules-right = notifs news
+;when wttr.in is down
+;modules-right = notifs news
 ;padding = 1
