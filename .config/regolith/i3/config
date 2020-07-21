@@ -324,7 +324,7 @@ new_float pixel 1
 
 # Specify the distance between windows in pixels. (i3-gaps)
 gaps inner 15
-gaps outer 5
+gaps outer -3
 
 # Only enable gaps on a workspace when there is at least one container
 smart_gaps on
@@ -396,8 +396,8 @@ font $i3-wm.bar.font
 # The following exec calls run programs in the background when i3 starts.
 
 # Start the installed regolith-compositor
-#exec --no-startup-id picom -b
-exec --no-startup-id compton -b
+exec --no-startup-id picom -b -C
+#exec --no-startup-id compton -b -C
 
 # Start the bar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
