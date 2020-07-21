@@ -108,3 +108,8 @@ alias gcal="gcalcli"
 alias agenda="gcalcli agenda --military --nostarted"
 alias family="python3 ~/.repos/myrepos/FamilyTreeGen/src/Generator.py"
 alias neofetch="neofetch --ascii_distro regolith"
+
+# Swallow programs
+alias zathura="swallow zathura"
+alias sxiv="swallow sxiv"
+alias mpv="swallow mpv"
