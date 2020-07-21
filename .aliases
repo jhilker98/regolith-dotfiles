@@ -14,7 +14,7 @@ alias rm="rm -rfi"
 alias Linux="cd ~/LinuxConfig; exa -alh"
 alias dynworld="cd /home/jhilker/Documents/RPGs/dynasticworld; emacs dynastic-world.org"
 alias mkdir="mkdir -p"
-alias cp="cp -r"
+alias cp="cp -ir"
 alias cl='[ $[$RANDOM % 10] = 0 ] && timeout 6 cbeams -o; clear || clear'
 # alias clear='[ $[$RANDOM % 10] = 0 ] && timeout 6 cbeams -o; clear || clear'
 #alias cl="clear"

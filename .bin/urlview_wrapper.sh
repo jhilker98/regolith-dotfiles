@@ -1,22 +1,21 @@
 #!/bin/bash
-
-# Feed script a url
-# If an image, it will view in feh.
-# If a video or a gif, it will view in mpv
-# If music file or pdf it will download.
-# Otherwise opens link in browser.
-
 ext="${1##*.}"
-mpvFiles="mkv mp4 gif"
+mpvFiles="mkv mp4 avi mov wmv flv gif"
 fehFiles="png jpg jpeg jpe"
-wgetFiles="mp3 flac opus mp3?source=feed pdf shn ogg"
+wgetFiles="mp3 flac opus mp3?source=feed pdf"
 
-if echo $fehFiles |grep -w $ext > /dev/null; then
-		nohup feh "$1" > /dev/null &
-elif echo $mpvFiles |grep -w $ext > /dev/null; then
-		nohup mpv --loop --quiet "$1" > /dev/null &
-elif echo $wgetFiles |grep -w $ext > /dev/null; then
-		nohup wget "$1" > /dev/null &
+if echo $fehFiles | grep -w $ext > /dev/null; then
+	nohup swallow gpicview "$1" >/dev/null &
+elif echo $mpvFiles | grep -w $ext > /dev/null; then
+	nohup swallow mpv --loop --quiet "$1" > /dev/null &
+elif echo $wgetFiles | grep -w $ext > /dev/null; then
+	nohup wget "$1" >/dev/null &
+elif echo $1 | grep youtube > /dev/null; then
+	nohup swallow mpv "$1" > /dev/null &
+elif echo $1 | grep youtu.be > /dev/null; then
+	nohup swallow mpv "$1" > /dev/null &
+elif echo $1 | grep vimeo > /dev/null; then
+	nohup swallow mpv "$1" > /dev/null &
 else
-		nohup firefox "$1" > /dev/null &
+	nohup firefox "$1" >/dev/null &
 fi

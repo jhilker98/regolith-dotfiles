@@ -25,16 +25,16 @@
 # Feh is a simple and effective image viewer
 # Note that tuir returns a list of urls for imgur albums, so we don't put quotes
 # around the `%s`
-image/x-imgur-album; feh -g 640x480  -. %s; test=test -n "$DISPLAY"
-image/gif; mpv '%s' --autofit=640x480 --loop=inf; test=test -n "$DISPLAY"
-image/*; feh -g 640x480 -. '%s'; test=test -n "$DISPLAY"
+image/x-imgur-album; swallow feh -g 640x480  -. %s; test=test -n "$DISPLAY"
+image/gif; swallow mpv '%s' --autofit=640x480 --loop=inf; test=test -n "$DISPLAY"
+image/*; swallow feh -g 640x480 -. '%s'; test=test -n "$DISPLAY"
 
 # Youtube videos are assigned a custom mime-type, which can be streamed with
 # vlc or youtube-dl.
-video/x-youtube; mpv --ytdl-format=bestvideo+bestaudio/best '%s' --autofit=640x480; test=test -n "$DISPLAY"
+video/x-youtube; swallow mpv --ytdl-format=bestvideo+bestaudio/best '%s' --autofit=640x480; test=test -n "$DISPLAY"
 
 # Mpv is a simple and effective video streamer
-video/*; mpv '%s' --autofit=640x480 --loop=inf; test=test -n "$DISPLAY"
+video/*; swallow mpv '%s' --autofit=640x480 --loop=inf; test=test -n "$DISPLAY"
 
 ###############################################################################
 # Commands below this point will attempt to display media directly in the
@@ -61,8 +61,8 @@ image/*; curl -s '%s' | convert -resize 80x80 - jpg:/tmp/tuir.jpg && img2xterm /
 image/*; curl -s '%s' | convert - jpg:/tmp/tuir.jpg && img2txt -f utf8 /tmp/tuir.jpg; needsterminal; copiousoutput
 
 # Full motion videos - requires a framebuffer to view
-video/x-youtube; mpv -vo drm -quiet '%s'; needsterminal
-video/*; mpv -vo drm -quiet '%s'; needsterminal
+video/x-youtube; swallow mpv -vo drm -quiet '%s'; needsterminal
+video/*; swallow mpv -vo drm -quiet '%s'; needsterminal
 
 # Ascii videos
 # video/x-youtube; youtube-dl -q -o - '%s' | mplayer -cache 8192 -vo caca -quiet -; needsterminal
