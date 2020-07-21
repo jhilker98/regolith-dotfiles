@@ -11,7 +11,6 @@ set $alt Mod1
 set $i3xrocks_config /home/jhilker/.config/regolith/i3xrocks.config
 
 # path to terminal. Override this to specify a custom terminal.
-# set $terminal_path /home/jhilker/.local/bin/kitty
 set $terminal_path /usr/bin/alacritty
 # Color values are defined in ~/.Xresources-regolith
 # These are the labels which define each i3 workspace.
@@ -61,10 +60,10 @@ bindsym $mod+e exec emacs
 bindsym $mod+v exec alacritty -e ~/Downloads/nvim/bin/nvim
 ## Launch // Mail // <> m ##
 bindsym $mod+m exec alacritty -e neomutt 
-#bindsym $mod+m exec kitty -e neomutt
+#bindsym $mod+m exec alacritty -e neomutt
 ## Launch // Ranger // <><Shift> n ##
 bindsym $mod+Shift+n exec alacritty -e ranger
-#bindsym $mod+Shift+n exec kitty -e ranger
+#bindsym $mod+Shift+n exec alacritty -e ranger
 ## Launch // Notifications // <> n ##
 set_from_resource $i3-wm.program.notification_ui i3-wm.program.notification_ui /usr/bin/rofication-gui
 bindsym $mod+n exec $i3-wm.program.notification_ui
@@ -88,7 +87,7 @@ bindsym $mod+Ctrl+r exec alacritty -e /home/jhilker/anaconda3/bin/tuir --theme /
 bindsym $mod+Shift+z exec zoom
 ## Launch // Spotify // <> s ## 
 bindsym $mod+s exec alacritty -e ncspot
-#bindsym $mod+s exec kitty -e ncspot
+#bindsym $mod+s exec alacritty -e ncspot
 ## Launch // LibreOffice // <><Ctrl> l ##
 bindsym $mod+Ctrl+l exec libreoffice
 ## Launch // Manuskript // <><Shift> m ##
@@ -324,7 +323,7 @@ new_window pixel 1
 new_float pixel 1
 
 # Specify the distance between windows in pixels. (i3-gaps)
-gaps inner 5
+gaps inner 15
 gaps outer 5
 
 # Only enable gaps on a workspace when there is at least one container
