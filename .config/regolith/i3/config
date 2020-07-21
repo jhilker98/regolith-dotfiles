@@ -81,8 +81,6 @@ bindsym $mod+d exec discord
 bindsym $mod+Shift+d exec discord-ptb
 ## Launch // Oomox // <><Shift>o ##
 bindsym $mod+Shift+o exec oomox-gui
-## Launch // Reddit // <><Ctrl>t ##
-bindsym $mod+Ctrl+r exec alacritty -e /home/jhilker/anaconda3/bin/tuir --theme /home/jhilker/.config/tuir/themes/gruvbox
 ## Launch // Zoom // <><Shift>z ##
 bindsym $mod+Shift+z exec zoom
 ## Launch // Spotify // <> s ## 
@@ -396,8 +394,8 @@ font $i3-wm.bar.font
 # The following exec calls run programs in the background when i3 starts.
 
 # Start the installed regolith-compositor
-exec --no-startup-id picom -b -C
-#exec --no-startup-id compton -b -C
+#exec --no-startup-id picom -b -C
+exec --no-startup-id compton -b -C
 
 # Start the bar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
