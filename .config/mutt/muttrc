@@ -31,7 +31,7 @@ unignore from date subject to cc
 #ignore organization organisation x-mailer: x-newsreader: x-mailing-list:
 #unignore posted-to:
 #set editor="/usr/bin/vim"
-set editor="/home/jhilker/Downloads/nvim/bin/nvim"
+set editor="nvim"
 alias Mom Jen <jhilker3@gmail.com>
 
 # COLORS
