@@ -100,11 +100,29 @@ export NAME="Jacob Hilker"
 export PATH="/usr/local/texlive/2019/bin/x86_64-linux:/home/jhilker/.bin:/home/jhilker/Downloads/nvim/bin::$PATH"
 export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
 export COWPATH='/usr/sharecowsay/cows/:/home/jhilker/.cows/'
+export MANPAGER="less -isg"
+# Start blinking
+export LESS_TERMCAP_mb=$(tput bold; tput setaf 12) # blue
+# Start bold
+export LESS_TERMCAP_md=$(tput bold; tput setaf 12) # blue
+# Start stand out
+export LESS_TERMCAP_so=$(tput bold; tput rev; tput setaf 5) # magenta
+# End standout
+export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
+# Start underline
+export LESS_TERMCAP_us=$(tput smul; tput sitm; tput setaf 1) # red
+# End Underline
+export LESS_TERMCAP_ue=$(tput sgr0)
+# End bold, blinking, standout, underline
+export LESS_TERMCAP_me=$(tput sgr0)
 
 # Tuir editor
 export RTV_EDITOR=vim
 # export MANPATH="/usr/localman:$MNPATH"
 # export BROWSER="/usr/bin/firefox"
+
+
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 #export PF_ASCII="arch"
@@ -183,7 +201,7 @@ source $HOME/.repos/zsh-git-prompt/zshrc.sh
 #PROMPT="%F{3}%~%f $%b "
 #PROMPT="${vim_mode} %{$fg[red]%}[%F{12}%n %F{15}@ %F{yellow}%~%{$fg[red]%}] %F{15}$%b " 
 NEWLINE=$'\n'
-echo -ne '\n'
+#echo -ne '\n'
 #clear
 PS1='${vim_mode} $(git_super_status) %{$fg[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
 
