@@ -183,7 +183,10 @@ nnoremap <leader>gp :Gpush<CR>
 "" Goyo
 nnoremap <silent> <leader>rr :Goyo <bar> :highlight Normal ctermbg=None<cr>
 
-
+""" File Commands
+nnoremap <silent> <leader>e :e
+nnoremap <silent> <leader>feD :e ~/.vimrc<CR>
+nnoremap <silent> <leader>w :w<CR>
 
 """ Quit Commands
 nnoremap <silent> <leader>qq :q<CR>
@@ -196,7 +199,8 @@ nnoremap <silent> <leader>wd :q<CR>
 
 " Autocompile groff
 nmap <silent> <leader>cg :silent !groff -ms %:p -T pdf > %:r.pdf<cr><cr>
-nmap <silent> <leader>cr :silent !refer -PSe -p bibrefer %:p \| !groff -ms -T pdf > %:r.pdf<cr><cr>
+nmap <silent> <leader>cr :silent !refer %:p \| !groff -ms -T pdf > %:r.pdf<cr><cr>
+nmap <leader>wc :!wc -w %:p<cr>
 
 "Abbrevs
 "" Email Abbrevs
@@ -240,7 +244,6 @@ autocmd FileType gitcommit setlocal spell
 
 " Load ms files as groff
 autocmd BufNewFile,BufRead *.ms,*.mm,*.mom set filetype=groff
-
 imap <c-space> <c-]>
 
 
@@ -265,4 +268,8 @@ endfunction
 let g:coc_snippet_next = '<tab>'
 "Remove new window for instance in existing browser
 let g:instant_markdown_browser = "firefox -P default-release"
+"let g:instant_markdown_browser = 'firefox -P default-release --new-window'
 let g:python3_host_prog = "/home/jhilker/anaconda3/bin/python"
+
+
+let g:airline#extensions#wordcount#filetypes = ['asciidoc', 'help', 'mail', 'markdown', 'org', 'plaintex', 'rst', 'tex', 'text', 'groff', 'vimwiki']

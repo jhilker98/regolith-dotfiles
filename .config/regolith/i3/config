@@ -98,6 +98,10 @@ bindsym $mod+$alt+d exec gnome-control-center display
 bindsym $mod+$alt+w exec gnome-control-center wifi
 ## Configure // Power // <><Alt>p ##
 bindsym $mod+$alt+p exec gnome-control-center power
+
+## Configure // Bluetooth // <><Alt>b ##
+bindsym $mod+$alt+b exec gnome-control-center bluetooth
+
 set_from_resource $rofiTheme rofi.theme "GruvboxGrid"
 ## Launch // Calendar // <> c ##
 bindsym $mod+c exec alacritty -e calcurse
