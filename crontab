@@ -20,8 +20,4 @@
 # For more information see the manual pages of crontab(5) and cron(8)
 #
 # m h  dom mon dow   command
-*/10 * * * * /usr/bin/mbsync -a
-*/10 * * * * /usr/bin/newsboat -x reload
-*/10 * * * * /home/jhilker/.bin/newsalert.sh
-*/5 * * * * export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus; export DISPLAY=:0; . $HOME/.profile; /usr/local/bin/mailsync
-*/5 * * * * /usr/local/bin/calcurse-caldav
+*/1 * * * * export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus; export DISPLAY=:0; . $HOME/.profile; /usr/bin/notify-send "test" "This is a test"
