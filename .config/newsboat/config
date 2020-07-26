@@ -52,7 +52,11 @@ bind-key K prev-feed articlelist
 bind-key j down article
 bind-key k up article
 bind-key L toggle-show-read-feeds
-
+unbind-key g
+unbind-key G 
+bind-key g home
+bind-key G end
+#bind-key b toggle-article-read
 # ONLY UNCOMMENT IF YOU WANT SPACE INSTEAD OF COMMA AS MACRO
 ## unbind-key ,
 ## unbind-key SPACE
