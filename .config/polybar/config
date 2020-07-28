@@ -1,5 +1,15 @@
 ; vi:set filetype=dosini
 
+;                                                                               
+;        mmm  m    m    Jacob Hilker                                            
+;          #  #    #    gitlab.com/jhilker                                      
+;          #  #mmmm#    434-409-3789                                            
+;          #  #    #                                                            
+;      "mmm"  #    #                                                            
+;                                                                               
+;                                                                               
+
+
 ;--------;
 ; COLORS ;
 ;--------;
@@ -539,7 +549,7 @@ height = 27
 modules-left =  cal polypomo reddit keyboard
 ; modules-center = appts
 
-modules-center = previous playpause next progress 
+#modules-center = previous playpause next progress 
 #modules-center = apps
 ; when wttr.in isn't down
 modules-right = notifs news weather 

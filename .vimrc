@@ -1,3 +1,13 @@
+"                                                                             
+"       mmm  m    m    Jacob Hilker                                           
+"         #  #    #    jhilker.gitlab.io                                      
+"         #  #mmmm#    434-409-3789                                           
+"         #  #    #                                                           
+"     "mmm"  #    #                                                           
+"                                                                             
+"                                                                             
+
+
 "set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -56,6 +66,7 @@ Plugin 'morhetz/gruvbox'
 Plugin 'sainnhe/gruvbox-material'
 Plugin 'rhysd/vim-grammarous'
 Plugin 'mattn/emmet-vim'
+Plugin 'johannesthyssen/vim-signit'
 "Plugin 'vim-pandoc/vim-markdownfootnotes'  
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -273,3 +284,9 @@ let g:python3_host_prog = "/home/jhilker/anaconda3/bin/python"
 
 
 let g:airline#extensions#wordcount#filetypes = ['asciidoc', 'help', 'mail', 'markdown', 'org', 'plaintex', 'rst', 'tex', 'text', 'groff', 'vimwiki']
+
+
+let g:signit_initials = 'JH'
+let g:signit_name = 'Jacob Hilker'
+let g:signit_extra_1 = 'gitlab.com/jhilker'
+let g:signit_extra_2 = '434-409-3789'
