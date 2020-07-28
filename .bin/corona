@@ -8,8 +8,9 @@
 # 6 - new deaths
 # 7 - Active Cases 
 
+curl -sL "https://corona-stats.online/states/US" > ~/.cache/corona
 #grep "State\|Virginia" ~/.cache/corona | sed -n 1p | sed "s/\s*//g ; s/║//g ; s/│/;/g" |
-  awk -F';' '{print $4}'
+#  awk -F';' '{print $4}'
 
 grep "State\|Virginia" ~/.cache/corona | sed -n 2p | sed "s/\s*//g ; s/║//g ; s/│/;/g" |
   awk -F';' '{print "󰲇  "  $4  " (🕱 " $6 ")"}'  
