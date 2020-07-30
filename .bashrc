@@ -166,4 +166,4 @@ unset __conda_setup
 set -o vi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
+shopt -s autocd
