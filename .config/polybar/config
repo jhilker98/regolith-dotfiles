@@ -272,8 +272,11 @@ format-foreground = ${colors.fg}
 
 [module/keyboard]
 type = internal/xkeyboard
-format = <label-indicator>
-format-prefix = 󰳡
+format = <label-layout> <label-indicator>
+label-layout = %layout%
+label-layout-padding = 1
+#format-prefix = 󰳡
+format-prefix = ⌨
 format-background = ${colors.bg-bright}
 format-prefix-background = ${colors.red}
 format-prefix-padding = 1
@@ -296,7 +299,7 @@ format-label-foreground = ${colors.fg}
 ; label-indicator-off-capslock =
 ; label-indicator-off-numlock = 
 ; label-indicator-off-scrolllock =
-format-label-indicator-on-capslock-margin = 1
+#format-label-indicator-on-capslock-margin = 1
 ;format-prefix-margin = 1
 ;format-label-margin = 0
 ;format-prefix-margin = 1
