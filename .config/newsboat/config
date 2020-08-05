@@ -51,12 +51,15 @@ bind-key J next-feed articlelist
 bind-key K prev-feed articlelist
 bind-key j down article
 bind-key k up article
+bind-key h quit
 bind-key L toggle-show-read-feeds
+
 unbind-key g
 unbind-key G 
 bind-key g home
 bind-key G end
-#bind-key b toggle-article-read
+bind-key b toggle-article-read
+
 # ONLY UNCOMMENT IF YOU WANT SPACE INSTEAD OF COMMA AS MACRO
 ## unbind-key ,
 ## unbind-key SPACE
@@ -115,8 +118,6 @@ highlight feedlist "╠═.*" yellow default
 # Coloring when No new articles
 highlight feedlist "\[0-9]*   \\(Classes\\) .*" cyan
 highlight feedlist "\[0-9]*   \\(Local\\) .*" color134
-highlight feedlist "\[0-9]*   \\(US\\) .*" color134
-highlight feedlist "\[0-9]*   \\(World\\) .*" color134
 highlight feedlist "\[0-9]*   \\(Campaign\\) .*" color12 
 highlight feedlist "\[0-9]*   \\(Reddit\\) .*" green
 highlight feedlist "\[0-9]*   \\(Podcast\\) .*" magenta
@@ -124,11 +125,10 @@ highlight feedlist "\[0-9]*   \\(Blog\\) .*" color166
 highlight feedlist "\[0-9]*   \\(Youtube\\) .*" red
 highlight feedlist "\[0-9]*   \\(Serial\\) .*" cyan
 highlight feedlist "\[0-9]*   \\(Destiny\\) .*" color134
+highlight feedlist "\[0-9]*   \\(Satire\\) .*" color12 
 
 highlight feedlist "\\(Classes\\) .*" cyan
 highlight feedlist "\\(Local\\) .*" color134
-highlight feedlist "\\(US\\) .*" color134
-highlight feedlist "\\(World\\) .*" color134
 highlight feedlist "\\(Campaign\\) .*" color12 
 highlight feedlist "\\(Reddit\\) .*" green
 highlight feedlist "\\(Podcast\\) .*" magenta
@@ -136,6 +136,7 @@ highlight feedlist "\\(Blog\\) .*" color166
 highlight feedlist "\\(Youtube\\) .*" red
 highlight feedlist "\\(Serial\\) .*" cyan
 highlight feedlist "\\(Destiny\\) .*" color134
+highlight feedlist "\\(Satire\\) .*" color12 
 highlight feedlist "[0-9]* N " yellow default 
 
 # -- sorts ----------------------------------------------------------------------
