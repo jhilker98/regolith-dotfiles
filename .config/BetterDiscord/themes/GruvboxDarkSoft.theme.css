@@ -155,6 +155,7 @@ button[class*="lookLink"] {
 img[class*="avatar"] {
   filter: sepia(30%) !important;
   transition: filter 0.1s, transform 0.1s ease-in-out;
+  border-radius: 50%;
 }
 img[class*="avatar"]:hover {
   filter: sepia(0%) !important;
@@ -172,8 +173,8 @@ img[class*="avatar"]:hover {
   border-color: var(--red) !important;
 }
 
-[class*="unreadPill-"] {
-  backgroundcolor: var(--red);
+[class*="unreadPill-"]{
+  bckgroundcolor: var(--red);
 }
 
 [class*="unreadPillCap"] {
@@ -224,4 +225,4 @@ div[class*="chat"] div[class*="root"] {
 
 div[class*="chat"] div[class*="root"] canvas {
   /*border-radius: 20px;*/
-}
+} 
