@@ -61,7 +61,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-Plugin 'mhinz/vim-startify' "start menu for vim
+"Plugin 'mhinz/vim-startify' "start menu for vim
 Plugin 'morhetz/gruvbox'
 Plugin 'sainnhe/gruvbox-material'
 Plugin 'rhysd/vim-grammarous'
@@ -206,7 +206,7 @@ nnoremap <silent> <leader>qs :wq<CR>
 """ Splits
 nnoremap <silent> <leader>wh :sp<CR>
 nnoremap <silent> <leader>wv :vsp<CR>
-nnoremap <silent> <leader>wd :q<CR>
+nnoremap <silent> <leader>wd  <C-w>q<CR>
 
 " Autocompile groff
 nmap <silent> <leader>cg :silent !groff -ms %:p -T pdf > %:r.pdf<cr><cr>
