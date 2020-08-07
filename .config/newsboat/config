@@ -126,6 +126,7 @@ highlight feedlist "\[0-9]*   \\(Youtube\\) .*" red
 highlight feedlist "\[0-9]*   \\(Serial\\) .*" cyan
 highlight feedlist "\[0-9]*   \\(Destiny\\) .*" color134
 highlight feedlist "\[0-9]*   \\(Satire\\) .*" color12 
+highlight feedlist "\[0-9]*   \\(Forum\\) .*" magenta
 
 highlight feedlist "\\(Classes\\) .*" cyan
 highlight feedlist "\\(Local\\) .*" color134
@@ -138,7 +139,7 @@ highlight feedlist "\\(Serial\\) .*" cyan
 highlight feedlist "\\(Destiny\\) .*" color134
 highlight feedlist "\\(Satire\\) .*" color12 
 highlight feedlist "[0-9]* N " yellow default 
-
+highlight feedlist "\\(Forum\\) .*" magenta
 # -- sorts ----------------------------------------------------------------------
 article-sort-order date-asc
 
