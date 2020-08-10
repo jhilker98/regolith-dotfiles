@@ -278,8 +278,8 @@ endfunction
 
 let g:coc_snippet_next = '<tab>'
 "Remove new window for instance in existing browser
-let g:instant_markdown_browser = "firefox -P default-release"
-"let g:instant_markdown_browser = 'firefox -P default-release --new-window'
+"let g:instant_markdown_browser = "firefox -P default-release"
+let g:instant_markdown_browser = 'firefox -P default-release --new-window'
 let g:python3_host_prog = "/home/jhilker/anaconda3/bin/python"
 
 
