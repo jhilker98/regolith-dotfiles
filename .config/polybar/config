@@ -59,6 +59,7 @@ icons-4 = "Material Design Icons Desktop:size=12;3"
 
 [module/i3]
 type = internal/i3
+;; FOR ICONS
 index-sort = true
 wrapping-scroll = false
 format-padding = 1.75
@@ -74,6 +75,39 @@ label-unfocused = ○
 label-unfocused-foreground = ${colors.fg}
 label-unfocused-padding = 1
 label-urgent = %index%
+
+;; FOR WORKSPACE NAMES
+;format = <label-state> <label-mode>
+;index-sort = true
+;wrapping-scroll = false
+;
+; Only show workspaces on the same output as the bar
+;pin-workspaces = true
+
+;label-mode-padding = 1.75
+;label-mode-fg = ${colors.text}
+;label-mode-background = ${colors.red}
+;
+;; focused = Active workspace on focused monitor
+;label-focused = %index%
+;label-focused-background = ${colors.bg-bright}
+;label-focused-padding = 1.75
+;label-focused-foreground = ${colors.fg}
+;label-focused-underline = ${colors.blue}
+;; unfocused = Inactive workspace on any monitor
+;label-unfocused = %index%
+;label-unfocused-padding = 1.75
+;label-unfocused-background = ${colors.bg-bright}
+;label-unfocused-foreground = ${colors.fg}
+;; visible = Active workspace on unfocused monitor
+;label-visible = %index%
+;label-visible-background = ${self.label-focused-background}
+;label-visible-padding = ${self.label-focused-padding}
+;
+;; urgent = Workspace with urgency hint set
+;label-urgent = %index%
+;label-urgent-background = ${colors.red}
+;label-urgent-padding = 1.75
 
 
 
