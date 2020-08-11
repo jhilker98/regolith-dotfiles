@@ -62,7 +62,7 @@ type = internal/i3
 ;; FOR ICONS
 index-sort = true
 wrapping-scroll = false
-format-padding = 1.75
+format-padding = 1
 format-foreground = ${colors.fg}
 format-background = ${colors.bg}
 format = "<label-state> <label-mode>"
@@ -467,6 +467,16 @@ format-background = ${colors.bg-bright}
 format-foreground = ${colors.fg}
 
 [module/dunst]
+type = custom/ipc
+initial = 1
+format-foreground = ${colors.fg}
+hook-0 = echo "%{A1:notify-send "DUNST_COMMAND_PAUSE" && polybar-msg hook dunst 2:}%{A}" &
+hook-1 = echo "%{A1:notify-send "DUNST_COMMAND_RESUME" && polybar-msg hook dunst 1:}%{A}" &
+
+;format-margin =1
+label-padding =1
+format-background = ${colors.purple}
+format-padding = 1
 
 [module/news]
 type = custom/text
@@ -566,9 +576,15 @@ modules-left =  cal polypomo reddit keyboard
 ; modules-center = appts
 
 #modules-center = previous playpause next progress 
-#modules-center = apps
+#modules-center = progress
 ; when wttr.in isn't down and using rofication
-#modules-right = notifs news weather 
+;modules-right = notifs news weather 
 ;when wttr.in is down and using rofication
 ;modules-right = notifs news
+
+; when wttr.in isn't down and using dunst
+modules-right = dunst news weather 
+;when wttr.in is down and using dunst
+;modules-right = notifs news
+
 ;padding = 1
