@@ -66,15 +66,15 @@ bindsym $mod+Shift+n exec alacritty -e ranger
 #bindsym $mod+Shift+n exec alacritty -e ranger
 
 ## Only Use this if you are using rofication
-# Launch // Notifications // <> n #
-#set_from_resource $i3-wm.program.notification_ui i3-wm.program.notification_ui /usr/bin/rofication-gui
-#bindsym $mod+n exec $i3-wm.program.notification_ui
-# Launch // News // <><Ctrl> n ##
-#bindsym $mod+Ctrl+n exec alacritty -e newsboat -r 
+## Launch // Notifications // <> n #
+set_from_resource $i3-wm.program.notification_ui i3-wm.program.notification_ui /usr/bin/rofication-gui
+bindsym $mod+n exec $i3-wm.program.notification_ui
+## Launch // News // <><Ctrl> n ##
+bindsym $mod+Ctrl+n exec alacritty -e newsboat -r 
 
 # Only Use This if you are using Dunst
-## Launch // Newsboat // <> n ##
-bindsym $mod+n exec alacritty -e newsboat -r 
+# Launch // Newsboat // <> n ##
+#bindsym $mod+n exec alacritty -e newsboat -r 
 
 ## Launch // Zathura // <> z ##
 bindsym $mod+z exec zathura
@@ -417,8 +417,8 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 #exec_always --no-startup-id polybar mybar &
 # Start Rofication for notifications
-#exec --no-startup-id /usr/bin/rofication-daemon
-exec --no-startup-id /usr/bin/dunst
+exec --no-startup-id /usr/bin/rofication-daemon
+#exec --no-startup-id /usr/bin/dunst
 # Launch first time user experience script
 exec --no-startup-id /usr/bin/regolith-ftue
 

@@ -453,7 +453,7 @@ format-margin = 1
 [module/notifs]
 type = custom/script
 interval = 3
-;exec = ~/.config/polybar/scripts/notifs/rofication-status.py - use if you are using rofication-daemon for your notifications
+exec = ~/.config/polybar/scripts/notifs/rofication-status.py - use if you are using rofication-daemon for your notifications
 
 format-prefix =  
 format-prefix-background = ${colors.purple}
@@ -578,12 +578,12 @@ modules-left =  cal polypomo reddit keyboard
 #modules-center = previous playpause next progress 
 #modules-center = progress
 ; when wttr.in isn't down and using rofication
-;modules-right = notifs news weather 
+modules-right = notifs news weather 
 ;when wttr.in is down and using rofication
 ;modules-right = notifs news
 
 ; when wttr.in isn't down and using dunst
-modules-right = dunst news weather 
+;modules-right = dunst news weather 
 ;when wttr.in is down and using dunst
 ;modules-right = notifs news
 
