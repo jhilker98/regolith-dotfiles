@@ -1,0 +1,38 @@
+/* ==UserStyle==
+@name           Gruvbox Google Drive
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    A new userstyle
+@author         Me
+==/UserStyle== */
+
+@-moz-document domain("drive.google.com") {
+     :root {
+        --bg1: #32302f;
+        --bg2: #3c3836;
+        --bg3: #504945;
+        --bg4: #665c54;
+        --fg1: #ebdbb2;
+        --fg2: #d5c4a1;
+        --fg3: #a89984;
+        --col_blue: #83a598;
+    }
+
+    div {
+        background-color: var(--bg1) !important;
+        color: var(--fg1) !important;
+
+    }
+    
+    nav {
+        background-color: var(--bg2);
+    }
+    
+    svg {    
+        /*stroke: var(--fg3);*/ 
+        fill: var(--fg3);
+    } 
+    .a-Ng-c-ha svg{
+        fill: var(--col_blue);
+    }
+}
