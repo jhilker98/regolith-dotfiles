@@ -42,8 +42,8 @@ hide_edge_borders smart
 bindsym Ctrl+Return exec /home/jhilker/.config/conky/scripts/todotoggle.sh
 ## Toggle // Agenda // <Ctrl><Shift>Enter ##
 bindsym Ctrl+Shift+Return exec /home/jhilker/.config/conky/scripts/agendatoggle.sh
-# Toggle // Music Info // <Ctrl>M ##
-bindsym Ctrl+m exec /home/jhilker/.config/conky/scripts/musictoggle.sh
+# Toggle // Music Info // <Ctrl><Shift>M ##
+bindsym Ctrl+Shift+m exec /home/jhilker/.config/conky/scripts/musictoggle.sh
 # Apps
 
 ## Launch // Terminal // <> Enter ##
@@ -64,11 +64,18 @@ bindsym $mod+m exec alacritty -e neomutt
 ## Launch // Ranger // <><Shift> n ##
 bindsym $mod+Shift+n exec alacritty -e ranger
 #bindsym $mod+Shift+n exec alacritty -e ranger
-## Launch // Notifications // <> n ##
-set_from_resource $i3-wm.program.notification_ui i3-wm.program.notification_ui /usr/bin/rofication-gui
-bindsym $mod+n exec $i3-wm.program.notification_ui
-## Launch // News // <><Ctrl> n ##
-bindsym $mod+Ctrl+n exec alacritty -e newsboat -r 
+
+## Only Use this if you are using rofication
+# Launch // Notifications // <> n #
+#set_from_resource $i3-wm.program.notification_ui i3-wm.program.notification_ui /usr/bin/rofication-gui
+#bindsym $mod+n exec $i3-wm.program.notification_ui
+# Launch // News // <><Ctrl> n ##
+#bindsym $mod+Ctrl+n exec alacritty -e newsboat -r 
+
+# Only Use This if you are using Dunst
+## Launch // Newsboat // <> n ##
+bindsym $mod+n exec alacritty -e newsboat -r 
+
 ## Launch // Zathura // <> z ##
 bindsym $mod+z exec zathura
 ## Launch // Geany // <>> g ##
@@ -410,8 +417,8 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 #exec_always --no-startup-id polybar mybar &
 # Start Rofication for notifications
-exec --no-startup-id /usr/bin/rofication-daemon
-
+#exec --no-startup-id /usr/bin/rofication-daemon
+exec --no-startup-id /usr/bin/dunst
 # Launch first time user experience script
 exec --no-startup-id /usr/bin/regolith-ftue
 
