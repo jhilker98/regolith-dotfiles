@@ -26,32 +26,23 @@ bn = #308634
 bm = #E57C46
 bd = #E24C49
 text = #282828
-trans = #00000000
-white = #FFFFFF
-black = #000000
 border = "#00000000"
 ;; Colors
 
-aqua = #8ec07c
 red = #cc241d
-pink = #d3869
-purple = #b16286
+green = #98971a
+yellow = #d79921
 blue = #458588
 darkblue = #076678
-cyan = #8ec07c
-teal = #689d6a
-green = 98971a
-lime = #98971a
-yellow = #d79921
-amber = #83a598
+purple = #b16286
+cyan = #689d6a
+white = #a89984
 orange = #d65d0e
-brown = #504945
-grey = #928374
-indigo = #458858
 
 ;-------;
 ; FONTS ;
 ;-------;
+
 [fonts]
 text = "Iosevka Nerd Font:pixelsize=12;3"
 icons-1 = "Material Icons:size=12;3"
@@ -65,42 +56,26 @@ icons-4 = "Material Design Icons Desktop:size=12;3"
 ;---------;
 ; MODULES ;
 ;---------;
+
 [module/i3]
 type = internal/i3
-format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
-
-; Only show workspaces on the same output as the bar
-;pin-workspaces = true
-
-label-mode-padding = 1.75
-label-mode-fg = ${colors.text}
-label-mode-background = ${colors.red}
-
-; focused = Active workspace on focused monitor
-label-focused = %index%
-label-focused-background = ${colors.bg-bright}
-label-focused-padding = 1.75
+format-padding = 1.75
+format-foreground = ${colors.fg}
+format-background = ${colors.bg}
+format = "<label-state> <label-mode>"
+;label-focused = "%index%"
+label-focused = ●
 label-focused-foreground = ${colors.fg}
-label-focused-underline = ${colors.blue}
-; unfocused = Inactive workspace on any monitor
-label-unfocused = %index%
-label-unfocused-padding = 1.75
-label-unfocused-background = ${colors.bg-bright}
+label-focused-padding = 1
+;label-unfocused = "%index%"
+label-unfocused = ○
 label-unfocused-foreground = ${colors.fg}
-; visible = Active workspace on unfocused monitor
-label-visible = %index%
-label-visible-background = ${self.label-focused-background}
-label-visible-padding = ${self.label-focused-padding}
-
-; urgent = Workspace with urgency hint set
+label-unfocused-padding = 1
 label-urgent = %index%
-label-urgent-background = ${colors.red}
-label-urgent-padding = 1.75
 
-; Separator in between workspaces
-; label-separator = |
+
 
 
 [module/clock]
@@ -272,11 +247,12 @@ format-foreground = ${colors.fg}
 
 [module/keyboard]
 type = internal/xkeyboard
-format = <label-layout> <label-indicator>
-label-layout = %layout%
+#format = <label-layout> <label-indicator>
+#label-layout = %layout%
+format = <label-indicator>
 label-layout-padding = 1
-#format-prefix = 󰳡
-format-prefix = ⌨
+format-prefix = 󰳡
+#format-prefix = ⌨
 format-background = ${colors.bg-bright}
 format-prefix-background = ${colors.red}
 format-prefix-padding = 1
@@ -442,7 +418,7 @@ format-margin = 1
 [module/notifs]
 type = custom/script
 interval = 3
-exec = ~/.config/polybar/scripts/notifs/rofication-status.py
+exec = ~/.config/polybar/scripts/notifs/rofication-status.py - use if you are using rofication-daemon for your notifications
 
 format-prefix =  
 format-prefix-background = ${colors.purple}
@@ -454,6 +430,7 @@ format-prefix-padding = 1
 label-padding = 1
 format-background = ${colors.bg-bright}
 format-foreground = ${colors.fg}
+
 
 [module/news]
 type = custom/text
@@ -555,7 +532,8 @@ modules-left =  cal polypomo reddit keyboard
 #modules-center = previous playpause next progress 
 #modules-center = apps
 ; when wttr.in isn't down
-modules-right = notifs news weather 
+#modules-right = notifs news weather 
+modules-right = notifs news weather
 ;when wttr.in is down
 ;modules-right = notifs news
 ;padding = 1
