@@ -64,7 +64,7 @@ index-sort = true
 wrapping-scroll = false
 format-padding = 1
 format-foreground = ${colors.fg}
-format-background = ${colors.bg-bright}
+format-background = ${colors.bg}
 format = "<label-state> <label-mode>"
 ;; Index and bullet
 ;label-focused = "%index% ●"
