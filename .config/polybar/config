@@ -64,12 +64,15 @@ index-sort = true
 wrapping-scroll = false
 format-padding = 1
 format-foreground = ${colors.fg}
-format-background = ${colors.bg}
+format-background = ${colors.bg-bright}
 format = "<label-state> <label-mode>"
-;label-focused = "%index%"
+;; Index and bullet
+;label-focused = "%index% ●"
+;; Bullet
 label-focused = ●
 label-focused-foreground = ${colors.fg}
 label-focused-padding = 1
+;; Index
 ;label-unfocused = "%index%"
 label-unfocused = ○
 label-unfocused-foreground = ${colors.fg}
@@ -77,6 +80,7 @@ label-unfocused-padding = 1
 label-urgent = ${self.label-focused}
 label-urgent-padding = 1
 label-urgent-foreground = ${colors.red}
+
 ;; FOR WORKSPACE NAMES
 ;format = <label-state> <label-mode>
 ;index-sort = true
@@ -84,7 +88,7 @@ label-urgent-foreground = ${colors.red}
 ;
 ; Only show workspaces on the same output as the bar
 ;pin-workspaces = true
-
+;
 ;label-mode-padding = 1.75
 ;label-mode-fg = ${colors.text}
 ;label-mode-background = ${colors.red}
