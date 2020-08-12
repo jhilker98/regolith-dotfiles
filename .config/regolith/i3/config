@@ -58,6 +58,7 @@ bindsym $mod+space exec rofi -show drun
 bindsym $mod+Shift+space exec rofi -show run 
 bindsym $mod+e exec emacs
 bindsym $mod+v exec alacritty -e ~/Downloads/nvim/bin/nvim
+bindsym $mod+Ctrl+e exec alacritty -e ~/anaconda3/bin/epy
 ## Launch // Mail // <> m ##
 bindsym $mod+m exec alacritty -e neomutt 
 #bindsym $mod+m exec alacritty -e neomutt
