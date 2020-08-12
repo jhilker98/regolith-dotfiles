@@ -23,7 +23,7 @@ macro index A \
 # FORMATS
 #set index_format="%2C %zs %?X?A& ? %D %-15.15F %s (%-4.4c)"
 set index_format="%2C %zs %?X?A& ? %D %-15.15F %s "
-set date_format="%d %b"
+set date_format="%d %b %H:%M"
 set sidebar_format="%B%*  %N %n"
 ## HEADER FORMAT
 ignore *
