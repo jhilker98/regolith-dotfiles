@@ -439,24 +439,23 @@ content-foreground = ${colors.fg}
 
 [module/spotify]
 type = custom/script
-#exec-if = "pgrep ncspot"
-exec = /home/$USER/.config/polybar/scripts/spotify/music.sh
-; format-underline = ${colors.blue}
-; format-padding-underline = ${colors.blue}
-click-left = alacritty -e ncspot &
-;format-prefix = " "
-tail = true
+exec = "~/.config/polybar/scripts/spotify/music.sh"
+exec-if = "playerctl -l"
+tail=true
+format-prefix = 󰋋
+format-margin =1
+label-padding =1
+format-prefix-background = ${colors.yellow}
+format-prefix-padding = 1
 format-background = ${colors.bg-bright}
-format-padding = 1
 format-foreground = ${colors.fg}
-# format-prefix = ${playpause}
-format-margin = 1
 
 
 [module/notifs]
 type = custom/script
 interval = 3
-exec = ~/.config/polybar/scripts/notifs/rofication-status.py - use if you are using rofication-daemon for your notifications
+; use if you are using rofication-daemon for your notifications
+exec = ~/.config/polybar/scripts/notifs/rofication-status.py 
 
 format-prefix =  
 format-prefix-background = ${colors.purple}
@@ -576,6 +575,7 @@ width = 100%
 height = 27
 ;radius = 4
 modules-left =  cal polypomo reddit keyboard
+#modules-center = spotify
 ; modules-center = appts
 
 #modules-center = previous playpause next progress 
