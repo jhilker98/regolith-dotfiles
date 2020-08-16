@@ -15,13 +15,13 @@ such as the functions I use, the UI settings, etc.
    Here I am setting up the agenda file.
 *** During the School Year
 #+BEGIN_SRC emacs-lisp
-;;(setq org-agenda-files (list "~/Dropbox/notes/spring-2020.org" "~/Dropbox/org/agenda/agenda.org"))
+(setq org-agenda-files (list "~/Dropbox/notes/fall2020/notes.org" "~/Dropbox/org/agenda/agenda.org"))
 #+END_SRC
 
 *** During The Summer
 #+BEGIN_SRC emacs-lisp
 
-(setq-default org-agenda-files (list "~/Dropbox/org/agenda/agenda.org"))
+;(setq-default org-agenda-files (list "~/Dropbox/org/agenda/agenda.org"))
 #+END_SRC
 ** Setting A Customize File
 #+BEGIN_SRC emacs-lisp
@@ -35,7 +35,7 @@ such as the functions I use, the UI settings, etc.
 #+END_SRC
 ** Setting Notes File
 #+BEGIN_SRC emacs-lisp
-(setq org-default-notes-file "~/Dropbox/org/notes.org")
+(setq org-default-notes-file "~/Dropbox/notes/fall2020/notes.org")
 #+END_SRC
 ** Agenda View
 #+BEGIN_SRC emacs-lisp
@@ -226,6 +226,7 @@ If I am using csv files I want a csv package.
 (setq linum-relative-current-symbol "")
 )
 #+END_SRC
+
 ** UI Packages
 *** Themes
 **** Solarized
@@ -309,6 +310,12 @@ Here is a package for using solarized.
 
 
 
+#+END_SRC
+
+*** Solaire Mode
+#+BEGIN_SRC emacs-lisp
+;(use-package solaire-mode
+;  :hook (after-init . solaire-global-mode))
 #+END_SRC
 ** Worldbuilding Packages
 *** Wordgen Mode
@@ -549,7 +556,7 @@ If I find a recipe I want to try I want to save it easily.
 ** Timestamp Formats
 #+BEGIN_SRC emacs-lisp
 (setq-default org-display-custom-times t)
-(setq org-time-stamp-custom-formats '("<%a, %d %h>" . "<%a, %d %h %I:%M %p>"))
+(setq org-time-stamp-custom-formats '("<%a, %d %h>" . "<%a, %d %h %H:%M>"))
 #+END_SRC  
 * Specific Functions
 ** Find Files
@@ -1199,19 +1206,11 @@ Here is where I disable the leading headers in org-bullets-mode.
 *** Theme
 I am doing something extremely similar to the function above, but with themes. By default I want to use doom-gruvbox.
 #+BEGIN_SRC emacs-lisp
-;(load-theme 'gruvbox-dark-hard t)
- ; (load-theme 'sanityinc-solarized-dark t)
-;  (load-theme 'doom-solarized-dark t)
-;(load-theme 'doom-molokai t)
-;(load-theme 'doom-tomorrow-night t)
-;(load-theme 'doom-material t)
-;  (load-theme 'sanityinc-solarized-dark t)
-  ;(load-theme 'doom-solarized-light t)
-;  (load-theme 'doom-one t)
-;  (load-theme 'doom-gruvbox t)
-  ;(load-theme 'doom-material t)
-  ;(load-theme 'doom-nord t)
-;  (load-theme 'atom-one-dark t)
+;(load-theme 'doom-gruvbox t)
+;(setq doom-themes-enable-italic t)
+;(setq doom-themes-enable-bold t)
+
+(load-theme 'gruvbox-dark-medium t)
 #+END_SRC
 *** Fonts
 I often switch between DejaVu Sans Pro, Fira Code, Monaco, and Source
@@ -1287,7 +1286,7 @@ programming.
 **** Clock Section
 #+BEGIN_SRC emacs-lisp
 (doom-modeline-def-segment clock
-'(:eval (propertize (format-time-string " %I:%M %p ")
+'(:eval (propertize (format-time-string " %H:%M ")
 )))
 #+END_SRC
 **** Date 
