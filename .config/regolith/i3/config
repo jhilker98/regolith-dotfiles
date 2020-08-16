@@ -236,10 +236,10 @@ bindsym $mod+Ctrl+Shift+Up move workspace to output up
 bindsym $mod+Ctrl+Shift+Right move workspace to output right
 
 ## Modify // Next Window Orientation // <> Backspace ##
-#bindsym $mod+BackSpace split toggle
-bindsym $mod+BackSpace exec --no-startup-id $HOME/.config/regolith/i3/scripts/split_optimal.sh
-### Modify // Optimal Window Orientation // <><Shift> Backspace ##
-#bindsym $mod+Shift+BackSpace exec --no-startup-id $HOME/.config/regolith/i3/scripts/split_optimal.sh
+bindsym $mod+BackSpace split toggle
+#bindsym $mod+BackSpace exec --no-startup-id $HOME/.config/regolith/i3/scripts/split_optimal.sh
+## Modify // Optimal Window Orientation // <><Shift> Backspace ##
+bindsym $mod+Shift+BackSpace exec --no-startup-id $HOME/.config/regolith/i3/scripts/split_optimal.sh
 
 ## Modify // Fullscreen Toggle // <> f ##
 bindsym $mod+f fullscreen toggle
@@ -286,8 +286,8 @@ bindsym $mod+Shift+p exec /usr/bin/gnome-session-quit --power-off
 ## Power // Lock // <> Escape ##
 bindsym $mod+Escape exec gnome-screensaver-command --lock
 
-## Power // Sleep // <><Shift><Esc>  ##
-bindsym $mod+Shift+Escape exec systemctl suspend
+## Power // Sleep // <><Shift> s  ##
+bindsym $mod+Shift+s exec systemctl suspend
 
 
 # Cause Settings app to float above tiled windows
