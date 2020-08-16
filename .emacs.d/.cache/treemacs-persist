@@ -1,8 +1,8 @@
 * Default
-** dotfiles
- - path :: ~/Documents/dotfiles
 ** JMacs
  - path :: ~/.emacs.d
+** dotfiles
+ - path :: ~/Documents/dotfiles
 ** Scripts
  - path :: ~/.bin
 ** Configs
@@ -11,19 +11,13 @@
  - path :: ~/Dropbox/notes
 ** Assignments
  - path :: ~/Documents/assignments
-** Ashes
- - path :: ~/Documents/Ashes-World
-** Aurea
- - path :: ~/Documents/Aurea-World
-** Kidal
- - path :: ~/Documents/Kidal
-** Writermacs
- - path :: ~/Documents/Writermacs
-** KSPmacs
- - path :: ~/Documents/kspmacs
-** My RPGs
- - path :: ~/Documents/my_rpgs
-** rpgs
+** RPGs
  - path :: ~/Documents/rpgs
-** My Books
- - path :: ~/Documents/my_books
+** Broken Thrones
+ - path :: ~/Documents/broken-thrones
+** Byrne
+ - path :: ~/Documents/Byrne-World
+** Aurea
+ - path :: ~/Documents/Aurea
+** Shattered Skies
+ - path :: ~/Documents/shattered-skies
