@@ -407,8 +407,8 @@ font $i3-wm.bar.font
 
 # Start the installed regolith-compositor
 #exec --no-startup-id picom -b -C
-exec --no-startup-id compton -b -C
-
+exec --no-startup-id compton -b -C --opacity-rule "75:class_g *= 'XTerm'"
+exec --no-startup-id xrdb -load ~/.Xresources
 # Start the bar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
