@@ -101,7 +101,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
- if [ -f ~/.aliases]; then
+ if [ -f ~/.aliases ]; then
      . ~/.aliases
  fi
 alias ref="source ~/.bashrc"
@@ -125,7 +125,7 @@ fi
 # export PS1="\033[34m\]\u\[\033[m\]@\[\033[31m\]\W\[\033[m\]:\[\033[m\] \$ "
 
 #export PS1="\u@\W: \$ "
-#export PS1="\[\033[38;5;1m\][\[$(tput sgr0)\]\[\033[38;5;12m\]\u\[$(tput sgr0)\] @ \[$(tput sgr0)\]\[\033[38;5;3m\]\W\[$(tput sgr0)\]\[\033[38;5;1m\]]\[$(tput sgr0)\] \\$ \[$(tput sgr0)\]"
+#export PS1="\[\033[38;5;1m\][\[$(tput sgr0)\]\[\03338;5;12m\]\u\[$(tput sgr0)\] @ \[$(tput sgr0)\]\[\033[38;5;3m\]\W\[$(tput sgr0)\]\[\033[38;5;1m\]]\[$(tput sgr0)\] \\$ \[$(tput sgr0)\]"
 
 
 source ~/.repos/gitstatus/gitstatus.prompt.sh
@@ -138,7 +138,8 @@ export EMAIL="jacob.hilker2@gmail.com"
 export NAME="Jacob Hilker"
 export PATH="/usr/local/texlive/2019/bin/x86_64-linux:/home/jhilker/.bin:/home/jhilker/Downloads/nvim/bin:/home/jhilker/gems/bin:$PATH"
 export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
-export PS1='(${GITSTATUS_PROMPT}) \[\e[0;33m\]\W\[\e[m\] \[\e[0m\]\$\[\e0 '
+#export PS1='(${GITSTATUS_PROMPT}) \[\e[0;33m\]\W\[\e[m\] \[\e[0m\]\$\[\e0 '
+export PS1='\[\e[0;33m\]\W\[\e[m\] \[\e[0m\]\$\[\e0 '
 if [ -f ~/.dir_colors/dircolors ]
   then eval `dircolors ~/.dir_colors/dircolors`
 fi
