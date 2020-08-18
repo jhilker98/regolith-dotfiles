@@ -100,6 +100,10 @@ export NAME="Jacob Hilker"
 export PATH="/usr/local/texlive/2019/bin/x86_64-linux:/home/jhilker/.bin:/home/jhilker/Downloads/nvim/bin::$PATH"
 export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
 export COWPATH='/usr/sharecowsay/cows/:/home/jhilker/.cows/'
+# Tuir editor
+export RTV_EDITOR=vim
+# export MANPATH="/usr/localman:$MNPATH"
+# export BROWSER="/usr/bin/firefox"
 export MANPAGER="less -isg"
 # Start blinking
 export LESS_TERMCAP_mb=$(tput bold; tput setaf 12) # blue
@@ -116,10 +120,6 @@ export LESS_TERMCAP_ue=$(tput sgr0)
 # End bold, blinking, standout, underline
 export LESS_TERMCAP_me=$(tput sgr0)
 
-# Tuir editor
-export RTV_EDITOR=vim
-# export MANPATH="/usr/localman:$MNPATH"
-# export BROWSER="/usr/bin/firefox"
 
 
 
@@ -141,6 +141,7 @@ export RTV_EDITOR=vim
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
   source $HOME/.aliases
+  alias ref="source ~/.zshrc"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
@@ -199,8 +200,6 @@ zle -N zle-line-finish
 #PROMPT="%F{4}%n%f @ %F{3}%~%f $%b "
 #PROMPT="%F{3}%~%f $%b "
 #PROMPT="${vim_mode} %{$fg[red]%}[%F{12}%n %F{15}@ %F{yellow}%~%{$fg[red]%}] %F{15}$%b " 
-#echo -ne '\n'
-#clear
 #PS1='${vim_mode} $(git_super_status) %{$fg[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
 PS1='${vim_mode} %{$fg[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
 #PS1='${vim_mode} $(git_super_status) %{$fg_bold[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
