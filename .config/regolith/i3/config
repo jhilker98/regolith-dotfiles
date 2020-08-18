@@ -87,6 +87,8 @@ bindsym $mod+Shift+g exec gimp
 bindsym $mod+d exec discord
 ## Launch // Discord PTB // <><Shift> d ##
 bindsym $mod+Shift+d exec discord-ptb
+## Launch // Discord Canary // <><Ctrl> d ##
+bindsym $mod+Ctrl+d exec discord-canary
 ## Launch // Oomox // <><Shift>o ##
 bindsym $mod+Shift+o exec oomox-gui
 ## Launch // Zoom // <><Shift>z ##
@@ -238,8 +240,8 @@ bindsym $mod+Ctrl+Shift+Right move workspace to output right
 ## Modify // Next Window Orientation // <> Backspace ##
 bindsym $mod+BackSpace split toggle
 #bindsym $mod+BackSpace exec --no-startup-id $HOME/.config/regolith/i3/scripts/split_optimal.sh
-## Modify // Optimal Window Orientation // <><Shift> Backspace ##
-bindsym $mod+Shift+BackSpace exec --no-startup-id $HOME/.config/regolith/i3/scripts/split_optimal.sh
+## Modify // Optimal Window Orientation // <> Delete ##
+bindsym $mod+Delete exec --no-startup-id $HOME/.config/regolith/i3/scripts/split_optimal.sh
 
 ## Modify // Fullscreen Toggle // <> f ##
 bindsym $mod+f fullscreen toggle
