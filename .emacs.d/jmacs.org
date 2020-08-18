@@ -96,7 +96,6 @@ I am installing evil and evil-collection for vim keybindings in emacs.
   :config
   (evil-collection-init))
 #+END_SRC
-
 **** Imenu-List
 Imenu-list allows me to get an overview of my code or outline for an
 AAR/novel. Here I enable it and install it.
@@ -109,7 +108,6 @@ AAR/novel. Here I enable it and install it.
 
 ;(imenu-list-minor-mode t)
 #+END_SRC
-
 **** Which-Key
 Which-key enables me to see what keys I can use.
 #+BEGIN_SRC emacs-lisp
@@ -118,35 +116,30 @@ Which-key enables me to see what keys I can use.
 :config
 (which-key-mode 1))
 #+END_SRC
-
 **** Magit
 Magit enables me to use git while in emacs. I enable it and install it here.
 #+BEGIN_SRC emacs-lisp
 (use-package magit
 :ensure t)
 #+END_SRC
-
 **** All-The-Icons
 Here I enable all-the-icons.
 #+BEGIN_SRC emacs-lisp
 (use-package all-the-icons
 :ensure t)
 #+END_SRC
-
 **** Projectile
 Projectile is a way of using projects in emacs.
 #+BEGIN_SRC emacs-lisp
 (use-package projectile
 :ensure t)
 #+END_SRC
-
 **** General.el
 
 #+BEGIN_SRC emacs-lisp
 (use-package general
 :ensure t)
 #+END_SRC
-
 **** Dashboard
 #+BEGIN_SRC emacs-lisp
 (use-package dashboard
@@ -175,7 +168,6 @@ For toggling fill and unfill.
 (use-package yasnippet-snippets
 :ensure t)
 #+END_SRC
-
 **** Restart Emacs
      #+BEGIN_SRC emacs-lisp
      (use-package restart-emacs
@@ -188,7 +180,6 @@ If I am using csv files I want a csv package.
 :ensure t)
 (add-to-list 'auto-mode-alist '("\\.csv\\'" . csv-mode))
 #+END_SRC
-
 **** Smartparens and Evil-Smartparens
 #+BEGIN_SRC emacs-lisp
 (use-package smartparens
@@ -218,15 +209,14 @@ If I am using csv files I want a csv package.
 :after magit treemacs
 :ensure t)
 #+END_SRC
-**** Linum-relative 
+**** Linum-relative
 #+BEGIN_SRC emacs-lisp
 (use-package linum-relative
 :ensure t
 :config
-(setq linum-relative-current-symbol "")
+(setq linum-relative-backend 'display-line-numbers-mode)
 )
 #+END_SRC
-
 ** UI Packages
 *** Themes
 **** Solarized
@@ -278,7 +268,6 @@ Here is a package for using solarized.
               ewal-built-in-palette "sexy-material"
               ewal-json-file "~/.cache/wal/colors.json"))
 #+END_SRC
-
 *** Centaur Tabs
 #+BEGIN_SRC emacs-lisp :tangle nil
 ; (use-package centaur-tabs
@@ -311,7 +300,6 @@ Here is a package for using solarized.
 
 
 #+END_SRC
-
 *** Solaire Mode
 #+BEGIN_SRC emacs-lisp
 ;(use-package solaire-mode
@@ -361,7 +349,6 @@ This is useful for rolling dice.
 :config
 (ivy-mode 1))
 #+END_SRC
-
 *** Counsel
 Counsel allows us to utilize ivy by replacing many built-in and common
 functions with richer versions. Let’s install it!
@@ -371,7 +358,6 @@ functions with richer versions. Let’s install it!
 (use-package counsel
 :ensure t)
 #+END_SRC
-
 *** Swiper
 #+BEGIN_SRC emacs-lisp
 (use-package swiper
@@ -546,13 +532,11 @@ If I find a recipe I want to try I want to save it easily.
 #+END_SRC
 
 #+END_SRC
-
 * Miscellaneous Formats
 ** Title Format
 #+BEGIN_SRC emacs-lisp
 (setq-default frame-title-format '("" user-login-name " - " "%b"))
 #+END_SRC
-
 ** Timestamp Formats
 #+BEGIN_SRC emacs-lisp
 (setq-default org-display-custom-times t)
@@ -594,7 +578,6 @@ This function will find my notes for the current semester.
 (interactive)
 (find-file "~/Dropbox/org/agenda/agenda.org"))
 #+END_SRC
-
 ** Use Y/N or y/n for yes/no
 Here is a way I can use "y" or "n" to answer yes or no.
 #+BEGIN_SRC emacs-lisp
@@ -672,7 +655,6 @@ Here is a way I can use "y" or "n" to answer yes or no.
   (interactive)
   (org-capture 0))
 #+END_SRC
-
 * Hooks and General (Non-UI) Config
 ** File Types and Modes
 *** Default Scratch Buffer is Org Mode
@@ -827,7 +809,6 @@ Here is a list of general purpose keybindings using General.el.
 #+BEGIN_SRC emacs-lisp
 
 #+END_SRC
-
 ** Files
 #+BEGIN_SRC emacs-lisp
 (general-define-key
@@ -1026,8 +1007,7 @@ Here is a list of general purpose keybindings using General.el.
 "lp" 'lorem-ipsum-insert-paragraphs)
 
 #+END_SRC
-
-** TAB for Evil-Org 
+** TAB for Evil-Org
    This keybinding lets you use the Tab key to toggle folding headers,
 like in regular org mode.
 
@@ -1036,7 +1016,6 @@ like in regular org mode.
   :states 'normal
   "TAB" 'evil-toggle-fold)
 #+END_SRC 
-
 ** UI Keybindings
 #+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "C-+") 'text-scale-increase)
@@ -1181,7 +1160,6 @@ my toolbars, tooltip-mode, menu-bar, and scroll-bar modes here.
 (tooltip-mode    -1)
 (menu-bar-mode   -1)
 #+END_SRC
-
 ** Org UI
 Here is where I disable the leading headers in org-bullets-mode.
 #+BEGIN_SRC emacs-lisp 
@@ -1260,7 +1238,6 @@ switch between it by commenting out the other fonts.
 ;   (load-theme 'solarized-dark t)
 
 #+END_SRC 
-
 * Headerlines and Modelines
 Here is my modeline configuration. I need to add to it to figure out
 what the best configuration is, but I think two different
