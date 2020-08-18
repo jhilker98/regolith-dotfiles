@@ -36,5 +36,14 @@ set render-loading-fg           "#ebdbb2" # fg
 # Recolor book content's color
 set recolor-lightcolor          "#32302f" # bg
 set recolor-darkcolor           "#ebdbb2" # fg
-set recolor                     "true"
+set recolor                     "false"
 # set recolor-keephue             true      # keep original color
+
+map [fullscreen] a adjust_window best-fit
+map [fullscreen] s adjust_window width
+map [fullscreen] f follow
+map [fullscreen] <Tab> toggle_index
+
+map [fullscreen] j scroll down
+
+set selection-clipboard clipboard
