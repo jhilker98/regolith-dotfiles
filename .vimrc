@@ -1,4 +1,4 @@
-"                                                                             
+                                                                             
 "       mmm  m    m    Jacob Hilker                                           
 "         #  #    #    jhilker.gitlab.io                                      
 "         #  #mmmm#    434-409-3789                                           
@@ -45,7 +45,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'chrisbra/unicode.vim'
 Plugin 'lilydjwg/colorizer'
-Plugin 'suan/vim-instant-markdown'
+"Plugin 'suan/vim-instant-markdown'
 Plugin 'neoclide/coc.nvim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'vimwiki/vimwiki'
@@ -213,6 +213,7 @@ nmap <silent> <leader>cg :silent !groff -ms %:p -T pdf > %:r.pdf<cr><cr>
 nmap <silent> <leader>cr :silent !refer %:p \| !groff -ms -T pdf > %:r.pdf<cr><cr>
 nmap <leader>wc :!wc -w %:p<cr>
 
+nmap <silent> <leader>mp :vsp \| term glow %<cr>
 "Abbrevs
 "" Email Abbrevs
 iab <silent> sig Thanks,<CR>Jacob Hilker<CR>
@@ -290,3 +291,4 @@ let g:signit_initials = 'JH'
 let g:signit_name = 'Jacob Hilker'
 let g:signit_extra_1 = 'gitlab.com/jhilker'
 let g:signit_extra_2 = '434-409-3789'
+
