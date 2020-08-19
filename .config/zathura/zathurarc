@@ -39,11 +39,11 @@ set recolor-darkcolor           "#ebdbb2" # fg
 set recolor                     "false"
 # set recolor-keephue             true      # keep original color
 
-map [fullscreen] a adjust_window best-fit
-map [fullscreen] s adjust_window width
-map [fullscreen] f follow
-map [fullscreen] <Tab> toggle_index
+map a adjust_window best-fit
+map s adjust_window width
+map f follow
+map <Tab> toggle_index
 
-map [fullscreen] j scroll down
+map j scroll down
 
 set selection-clipboard clipboard
