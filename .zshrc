@@ -98,7 +98,6 @@ export TERM=xterm-256color
 export EMAIL="jacob.hilker2@gmail.com"
 export NAME="Jacob Hilker"
 export PATH="/usr/local/texlive/2019/bin/x86_64-linux:/home/jhilker/.bin:/home/jhilker/Downloads/nvim/bin:$PATH"
-export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
 export COWPATH='/usr/sharecowsay/cows/:/home/jhilker/.cows/'
 # Tuir editor
 export RTV_EDITOR=vim

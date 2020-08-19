@@ -137,7 +137,6 @@ export TERM=xterm-256color
 export EMAIL="jacob.hilker2@gmail.com"
 export NAME="Jacob Hilker"
 export PATH="/usr/local/texlive/2019/bin/x86_64-linux:/home/jhilker/.bin:/home/jhilker/Downloads/nvim/bin:/home/jhilker/gems/bin:$PATH"
-export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
 #export PS1='(${GITSTATUS_PROMPT}) \[\e[0;33m\]\W\[\e[m\] \[\e[0m\]\$\[\e0 '
 export PS1='\[\e[0;33m\]\W\[\e[m\] \[\e[0m\]\$\[\e0 '
 if [ -f ~/.dir_colors/dircolors ]
