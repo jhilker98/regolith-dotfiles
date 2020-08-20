@@ -18,7 +18,7 @@ general.confirmdelete=yes
 general.confirmquit=no
 general.firstdayofweek=monday
 general.periodicsave=5
-notification.command=notify-send "Event Soon" "$(calcurse -a --format-apt='%m at %S\n' | sed -n 2p)" 
+notification.command=~/.calcurse/alertMsg.sh
 notification.notifyall=all
 notification.warning=3600
 appearance.headerline=yes
