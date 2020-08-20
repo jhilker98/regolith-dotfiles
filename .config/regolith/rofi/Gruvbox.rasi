@@ -5,20 +5,20 @@
  * Mail : adi1090x@gmail.com
  * Github : @adi1090x
  * Reddit : @adi1090x
- *
+ * User: Jacob Hilker
  */
 
 configuration {
     drun-display-format: "{icon} {name}";
-    display-drun: "Launch";
+    display-drun: "Launch:";
     display-window: "Switch Window:";
-    display-run: "Run Cmd:";
+    display-run: "Execute:";
 show-icons: true;
     icon-theme: "Papirus";
 	location: 0;
 	yoffset: 0;
     xoffset: 0;
-	columns: 3;
+	columns: 1;
 	fake-transparency: false;
 	hide-scrollbar: true;
 	bw: 0;
@@ -111,7 +111,6 @@ entry {
 #element.selected {
   background-color: @background-light;
 
-  text-color: @accent;
   border-color: @blue;
 }
 
