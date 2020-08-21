@@ -53,7 +53,7 @@ bindsym $mod+Shift+Return exec /usr/bin/firefox
 ## Configure // GNOME Tweaks // <><Alt> t ##
 bindsym $mod+$alt+t exec gnome-tweaks 
 ## Launch // App // <> Space ##
-bindsym $mod+space exec rofi -show drun 
+bindsym $mod+space exec rofi -show drun -columns 3
 ## Launch // Command // <><Shift> Space ##
 bindsym $mod+Shift+space exec rofi -show run 
 bindsym $mod+e exec emacs
@@ -96,7 +96,7 @@ bindsym $mod+Shift+z exec zoom
 ## Launch // Spotify // <> s ## 
 bindsym $mod+s exec alacritty -e ncspot
 #bindsym $mod+s exec alacritty -e ncspot
-## Launch // LibreOffice // <><Ctrl> l ##
+## Launch // LibreOffice // ><Ctrl> l ##
 bindsym $mod+Ctrl+l exec libreoffice
 ## Launch // Manuskript // <><Shift> m ##
 bindsym $mod+Shift+m exec manuskript
@@ -142,9 +142,13 @@ bindsym $mod+Ctrl+a scratchpad show
 ## Navigate // Tile/Float Focus Toggle // <><Shift> t ##
 bindsym $mod+Shift+t focus mode_toggle
 
-## Modify // Window Layout Mode // <> t ##
-bindsym $mod+t layout toggle tabbed splith splitv
+#bindsym $mod+t layout toggle tabbed splith splitv
 
+## Launch // To-Do List // <><Shift> t ##
+bindsym $mod+t exec "~/.config/regolith/rofi/scripts/taskbook.py | sed '/^\s*$/d' | rofi -dmenu -markup-rows -config ~/.config/regolith/rofi/todo.rasi -levenshtein-sort -p 'To Do'"
+
+## Modify // Window Layout Mode // <><Ctrl> t ## 
+bindsym $mod+Ctrl+t layout toggle tabbed splith splitv 
 # switch to workspace
 
 ## Navigate // Workspace // <> 0..9 ##
@@ -429,4 +433,5 @@ exec --no-startup-id /usr/bin/regolith-ftue
 
 # Hide the mouse pointer if unused for a duration
 exec --no-startup-id /usr/bin/unclutter -b
+
 
