@@ -5,21 +5,32 @@
 # terminal emulator
 super + Return
 	alacritty
-
+# Browser
+super + shift + Return
+  firefox
 # program launcher
 super + @space
-  rofi -show drun
+  rofi -show drun -columns 3
 # make sxhkd reload its configuration files:
-super + Escape
-	pkill -USR1 -x sxhkd
+# super + Escape
+# 	pkill -USR1 -x sxhkd
 
 #
 # bspwm hotkeys
 #
-
+super + z
+  zathura
 # quit/restart bspwm
-super + shift + {e,r}
-	bspc {quit,wm -r}
+super + shift + e
+  ~/.bin/prompt "Quit?" "bspc quit"
+
+super + shift + r
+  pkill -USR1 -x sxhkd && bspc wm -r
+
+
+super + shift + p
+  prompt "Shutdown?" "shutdown -h now"
+
 
 # close and kill
 super + {_,shift + }q
@@ -121,4 +132,18 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+
+# Screen brightness control
+XF86MonBrightnessDown
+    sudo light -U 10
+XF86MonBrightnessUp
+    sudo light -A 10
+# Volume control
+XF86AudioRaiseVolume
+  pactl set-sink-volume @DEFAULT_SINK@ +5%
+XF86AudioLowerVolume
+    pactl set-sink-volume @DEFAULT_SINK@ -5%
+XF86AudioMute
+    pactl set-sink-mute 0 toggle
 
