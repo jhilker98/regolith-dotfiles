@@ -1,1 +1,17 @@
-/home/jhilker/snap/ncspot/17/.config/ncspot/config.toml
+[keybindings]
+" " = "playpause"
+"n" = "next"
+"p" = "previous"
+"Esc" = "back"
+"=" = "volup"
+
+[saved_state]
+volume = 75
+repeat = "playlist"
+
+[theme]
+playing_selected = "#ffffff"
+title = "white"
+highlight = "light white"
+highlight_bg = "blue"
+
