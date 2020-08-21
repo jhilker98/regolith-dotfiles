@@ -122,3 +122,5 @@ alias hex="colorscript -e 23"
 alias mutt="neomutt"
 alias Telegram="~/Telegram/Telegram"
 alias pfetch="PF_ASCII='arch' pfetch"
+alias todo="~/.config/regolith/rofi/scripts/taskbook.py | sed '/^\s*$/d' | rofi -dmenu -markup-rows -config ~/.config/regolith/rofi/todo.rasi -levenshtein-sort -p 'To Do'"
+
