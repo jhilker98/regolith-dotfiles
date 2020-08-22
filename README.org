@@ -1,8 +1,7 @@
 
 
 * My dotfiles
-
-These are my personal configurations for various applications. I will keep this as up-to-date as I can.
+These are my personal configurations for various applications. I will keep this as up-to-date as I can. Don't even try to understand these, they are kind of a mess tbh.
 
 
 * Table of Contents :TOC:
