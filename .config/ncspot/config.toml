@@ -7,7 +7,7 @@ repeat = "playlist"
 
 [theme]
 title = "#fbf1c7"
-playing = "#d79921"
+playing = "#b16286"
 playing_selected = "#ffffff"
 highlight = "#ebdbb2"
 highlight_bg = "#076678"
