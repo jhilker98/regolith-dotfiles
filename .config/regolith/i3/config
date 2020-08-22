@@ -6,7 +6,6 @@
 # Alt key is Mod1, and Windows key is Mod4
 set $mod Mod4
 set $alt Mod1
-
 # i3xrocks config file. Override this for custom status indicators on the bar.
 set $i3xrocks_config /home/jhilker/.config/regolith/i3xrocks.config
 
@@ -72,7 +71,7 @@ set_from_resource $i3-wm.program.notification_ui i3-wm.program.notification_ui /
 bindsym $mod+n exec $i3-wm.program.notification_ui
 ## Launch // News // <><Ctrl> n ##
 bindsym $mod+Ctrl+n exec alacritty -e newsboat -r 
-
+bindsym $alt+Ctrl+t exec ~/.config/regolith/rofi/scripts/taskbook.py | sort | rofi -dmenu -only-match -markup-rows -config ~/.config/regolith/rofi/todo.rasi -p "To Do"
 # Only Use This if you are using Dunst
 # Launch // Newsboat // <> n ##
 #bindsym $mod+n exec alacritty -e newsboat -r 
@@ -142,13 +141,12 @@ bindsym $mod+Ctrl+a scratchpad show
 ## Navigate // Tile/Float Focus Toggle // <><Shift> t ##
 bindsym $mod+Shift+t focus mode_toggle
 
-#bindsym $mod+t layout toggle tabbed splith splitv
 
-## Launch // To-Do List // <><Shift> t ##
-bindsym $mod+t exec "~/.config/regolith/rofi/scripts/taskbook.py | sed '/^\s*$/d' | rofi -dmenu -markup-rows -config ~/.config/regolith/rofi/todo.rasi -levenshtein-sort -p 'To Do'"
+# Launch // To-Do List // <> t ##
+#bindsym $mod+t exec "~/.config/regolith/rofi/scripts/taskbook.py | sed '/^\s*$/d' | rofi -dmenu -markup-rows -config ~/.config/regolith/rofi/todo.rasi -levenshtein-sort -p 'To Do'"
 
-## Modify // Window Layout Mode // <><Ctrl> t ## 
-bindsym $mod+Ctrl+t layout toggle tabbed splith splitv 
+## Modify // Window Layout Mode // <>  t ## 
+bindsym $mod+t layout toggle tabbed splith splitv
 # switch to workspace
 
 ## Navigate // Workspace // <> 0..9 ##
@@ -343,10 +341,10 @@ new_float pixel 1
 
 # Specify the distance between windows in pixels. (i3-gaps)
 gaps inner 15
-gaps outer -3
+gaps outer -5
 
 # Only enable gaps on a workspace when there is at least one container
-smart_gaps on
+#smart_gaps on
 
 # Create variables from Xresources for i3's look.
 set_from_resource $focused.color.border i3-wm.client.focused.color.border "#002b36"
@@ -414,8 +412,9 @@ font $i3-wm.bar.font
 # The following exec calls run programs in the background when i3 starts.
 
 # Start the installed regolith-compositor
-#exec --no-startup-id picom -b -C
-exec --no-startup-id compton -b -C --opacity-rule "75:class_g *= 'XTerm'"
+#exec --no-startup-id picom -b -C --opacity-rule "75:class_g *= 'XTerm'"
+
+exec --no-startup-id compton -b -C --opacity-rule "75:class_g *= 'XTerm'" 
 
 # Start the bar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
