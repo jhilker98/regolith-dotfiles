@@ -10,6 +10,7 @@
 
 configuration {
     drun-display-format: "{icon} {name}";
+    //drun-display-format: "{icon} {name} <span weight='light' size='small'><i>({generic})</i></span>";
     display-drun: "Launch:";
     display-window: "Switch Window:";
     display-run: "Execute:";
@@ -58,11 +59,11 @@ show-icons: true;
 
 #window {
   width: 55%; 
-  height: 70%;
+  height: 65%;
   padding: 20px 30px 0px 30px;
   border: 2px;
   border-color: @background-light;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
 * {
