@@ -107,7 +107,7 @@ alias vim="nvim"
 alias tuir="tuir --enable-media --theme ~/.config/tuir/themes/gruvbox"
 alias gcal="gcalcli"
 alias agenda="gcalcli agenda --military --nostarted"
-alias family="python3 ~/FamilyTreeGen/src/Generator.py"
+alias family="cd FamilyTreeGen/src;  python3 ./Generator.py"
 alias neofetch="neofetch --ascii_distro regolith"
 
 # Swallow programs
@@ -115,6 +115,13 @@ alias zathura="swallow zathura"
 alias sxiv="swallow sxiv"
 alias mpv="swallow mpv"
 alias feh="swallow feh"
+
+
+#alias zathura="devour zathura"
+#alias sxiv="devour sxiv"
+#alias mpv="devour mpv"
+#alias feh="devour feh"
+
 
 alias define="dict -d wn"
 alias rdate="rdate.py"
