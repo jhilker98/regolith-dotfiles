@@ -46,13 +46,15 @@ for board in boards:
                                 print(
                                         f'   {v["_id"]:02}. '
                                         + '${color1}${color}  '
-                                        + f'{v["description"]} {days_ago} {is_starred}'
+                                        #+ f'{v["description"]} {days_ago} {is_starred}'
+                                        + f'{v["description"]} {is_starred}'
                                         )
                             if v['inProgress']:
                                 print(
                                         f'   {v["_id"]:02}. '
                                         + '${color4}${color}  '
-                                        + f'{v["description"]} {days_ago} {is_starred}'
+                                        #+ f'{v["description"]} {days_ago} {is_starred}'
+                                        + f'{v["description"]} {is_starred}'
                                             )
                             tasks_count += 1
 file.close()
