@@ -1,17 +1,29 @@
-[keybindings]
-" " = "playpause"
-"n" = "next"
-"p" = "previous"
-"Esc" = "back"
-"=" = "volup"
+use_nerdfont=true
+notify=true
 
 [saved_state]
 volume = 75
 repeat = "playlist"
 
 [theme]
+title = "#fbf1c7"
+playing = "#d79921"
 playing_selected = "#ffffff"
-title = "white"
-highlight = "light white"
-highlight_bg = "blue"
+highlight = "#ebdbb2"
+highlight_bg = "#458588"
+statusbar_progress = "#458588"
+statusbar_bg = "black"
+cmdline = "light white"
+cmdline_bg = "black"
 
+
+[keybindings]
+" " = "playpause"
+"n" = "next"
+"p" = "previous"
+"Esc" = "back"
+"=" = "volup"
+"gg" = "move top"
+"Shift+g" = "move bottom"
+"q" = "back"
+"Shift+q" = "quit"
