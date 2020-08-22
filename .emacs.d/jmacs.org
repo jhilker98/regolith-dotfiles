@@ -1218,11 +1218,11 @@ Here is where I disable the leading headers in org-bullets-mode.
 *** Theme
 I am doing something extremely similar to the function above, but with themes. By default I want to use doom-gruvbox.
 #+BEGIN_SRC emacs-lisp
-;(load-theme 'doom-gruvbox t)
-;(setq doom-themes-enable-italic t)
-;(setq doom-themes-enable-bold t)
+(load-theme 'doom-gruvbox t)
+(setq doom-themes-enable-italic t)
+(setq doom-themes-enable-bold t)
 
-(load-theme 'gruvbox-dark-soft t)
+;(load-theme 'gruvbox-dark-soft t)
 #+END_SRC
 *** Fonts
 I often switch between DejaVu Sans Pro, Fira Code, Monaco, and Source
