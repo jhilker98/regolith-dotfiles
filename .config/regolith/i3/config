@@ -54,7 +54,7 @@ bindsym $mod+$alt+t exec gnome-tweaks
 ## Launch // App // <> Space ##
 bindsym $mod+space exec rofi -show drun -columns 3
 ## Launch // Command // <><Shift> Space ##
-bindsym $mod+Shift+space exec rofi -show run 
+bindsym $mod+Shift+space exec rofi -show run -columns 3
 bindsym $mod+e exec emacs
 bindsym $mod+v exec alacritty -e ~/Downloads/nvim/bin/nvim
 bindsym $mod+Ctrl+e exec alacritty -e ~/anaconda3/bin/epy
@@ -71,16 +71,16 @@ set_from_resource $i3-wm.program.notification_ui i3-wm.program.notification_ui /
 bindsym $mod+n exec $i3-wm.program.notification_ui
 ## Launch // News // <><Ctrl> n ##
 bindsym $mod+Ctrl+n exec alacritty -e newsboat -r 
-bindsym $alt+Ctrl+t exec ~/.config/regolith/rofi/scripts/taskbook.py | sort | rofi -dmenu -only-match -markup-rows -config ~/.config/regolith/rofi/todo.rasi -p "To Do"
+#bindsym $alt+Ctrl+t exec ~/.config/regolith/rofi/scripts/taskbook.py | sort | rofi -dmenu -only-match -markup-rows -config ~/.config/regolith/rofi/todo.rasi -p "To Do"
 # Only Use This if you are using Dunst
 # Launch // Newsboat // <> n ##
 #bindsym $mod+n exec alacritty -e newsboat -r 
 
 ## Launch // Zathura // <> z ##
 bindsym $mod+z exec zathura
-## Launch // Geany // <>> g ##
+## Launch // Geany // <> g ##
 bindsym $mod+g exec geany
-## Launch // GIMP // <>><shift> g ##
+## Launch // GIMP // <><shift> g ##
 bindsym $mod+Shift+g exec gimp
 ## Launch // Discord // <> d ## 
 bindsym $mod+d exec discord
@@ -95,10 +95,6 @@ bindsym $mod+Shift+z exec zoom
 ## Launch // Spotify // <> s ## 
 bindsym $mod+s exec alacritty -e ncspot
 #bindsym $mod+s exec alacritty -e ncspot
-## Launch // LibreOffice // ><Ctrl> l ##
-bindsym $mod+Ctrl+l exec libreoffice
-## Launch // Manuskript // <><Shift> m ##
-bindsym $mod+Shift+m exec manuskript
 ## Configure // Open Settings // <><Alt> c ##
 bindsym $mod+$alt+c exec gnome-control-center
 ## Configure // Display Settings // <><Alt> d ##
