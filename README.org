@@ -31,4 +31,3 @@ For most of these programs, the installation is quite simple - copy the =.config
    - Primarily NCSpot, though I do use Tizonia as well if I need something even more minimalist, such as when I'm studying. I'm not sharing the Tizonia config because that config is mostly passwords and such - very easy to configure IMO.
 
 
-
