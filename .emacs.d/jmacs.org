@@ -588,7 +588,7 @@ This function will find my notes for the current semester.
 #+BEGIN_SRC emacs-lisp
 (defun find-notes ()
 (interactive)
-(find-file "~/Dropbox/notes/spring-2020.org"))
+(find-file "~/Dropbox/notes/fall2020/notes.org"))
 #+END_SRC
 
 *** Find Agenda 
@@ -963,6 +963,7 @@ Here is a list of general purpose keybindings using General.el.
    "t" '(:ignore t :which-key "Toggle")
    "tw" 'toggle-word-wrap
    "tf" 'unfill-toggle
+;   "tf" '(xah-cycle-font-2 :which-key "toggle font")
    "tn" 'linum-relative-toggle
    "tN" 'display-line-numbers-mode)
    #+END_src
@@ -1218,11 +1219,12 @@ Here is where I disable the leading headers in org-bullets-mode.
 *** Theme
 I am doing something extremely similar to the function above, but with themes. By default I want to use doom-gruvbox.
 #+BEGIN_SRC emacs-lisp
+;(load-theme 'gruvbox-dark-soft t)
+
 (load-theme 'doom-gruvbox t)
 (setq doom-themes-enable-italic t)
 (setq doom-themes-enable-bold t)
 
-;(load-theme 'gruvbox-dark-soft t)
 #+END_SRC
 *** Fonts
 I often switch between DejaVu Sans Pro, Fira Code, Monaco, and Source
@@ -1233,25 +1235,26 @@ switch between it by commenting out the other fonts.
 
 
 #+BEGIN_SRC emacs-lisp
-;(set-default-font "DejaVu Sans Mono for Powerline-12" nil t)
-;(set-default-font "Monaco-12" nil t)
- (set-default-font "Iosevka Nerd Font-12" nil t)
-;(set-default-font "Iosevka Term-12" nil t)
-;(set-default-font "Source Code Pro-12" nil t)
-; (set-default-font "Inconsolata for Powerline-12" nil t)
-;(set-default-font "Fira Code-12" nil t)
-;(set-default-font "Hack-12" nil t)
-; (setq solarized-use-variable-pitch nil)
-;(set-default-font "Noto Sans Mono-12" nil t)
-;(set-face-attribute 'default nil :font "Hack")
- ;   (setq solarized-scale-org-headlines nil)
-;(set-default-font "Roboto Mono for Powerline-12" nil t)
-
-  ;  (setq solarized-height-minus-1 1)
-   ; (setq solarized-height-plus-1 1)
-    ;(setq solarized-height-plus-2 1)
-    ;(setq solarized-height-plus-3 1)
-    ;(setq solarized-height-plus-4 1) 
+(set-default-font "Iosevka Nerd Font-12" nil t)
+;(defun xah-cycle-font-2 (*n)
+;  "Change font in current window between 2 fonts.
+;URL `http://ergoemacs.org/emacs/emacs_switching_fonts.html'
+;Version 2015-09-21"
+;  (interactive "p")
+;  ;; this function sets a property “state”. It is a integer. Possible values are 0 to length of ξfontList
+;  (let (
+;        (-fontList '("Iosevka Nerd Font-12" "ETBembo-12"))
+;        -fontToUse
+;        -stateBefore
+;        -stateAfter)
+;
+;    (setq -stateBefore (if (get 'xah-cycle-font-2 'state) (get 'xah-cycle-font-2 'state) 0))
+;    (setq -stateAfter (% (+ -stateBefore (length -fontList) *n) (length -fontList)))
+;    (put 'xah-cycle-font-2 'state -stateAfter)
+;
+;    (setq -fontToUse (nth -stateAfter -fontList))
+;    (set-frame-parameter nil 'font -fontToUse)
+;    (message "Font set to: %s" -fontToUse)))
 
 #+END_SRC
 *** Solarized-Theme Config
