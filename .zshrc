@@ -172,28 +172,28 @@ bindkey -v
 
 
 
-# vim_ins_mode="%{$fg[red]%}[%F{12}%BINS%B%{$reset_color%}%{$fg[red]%}]%{$reset_color%}"
-# vim_cmd_mode="%{$fg[red]%}[%{$fg[magenta]%}NML%{$fg[red]%}]%{$reset_color%}"
-# vim_mode=$vim_ins_mode
-# 
-# function zle-keymap-select {
-#   vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
-#   zle reset-prompt
-#   if [ $KEYMAP = vicmd ]; then
-#     echo -ne '\e[1 q'
-#   else
-#     echo -ne '\e[5 q'
-#   fi
-# }
-# 
-# zle -N zle-keymap-select
-# 
-# function zle-line-finish {
-#   vim_mode=$vim_ins_mode
-# }
-# zle -N zle-line-finish
-# 
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+vim_ins_mode="%{$fg[red]%}[%F{12}%BINS%B%{$reset_color%}%{$fg[red]%}]%{$reset_color%}"
+vim_cmd_mode="%{$fg[red]%}[%{$fg[magenta]%}NML%{$fg[red]%}]%{$reset_color%}"
+vim_mode=$vim_ins_mode
+
+function zle-keymap-select {
+  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+  zle reset-prompt
+  if [ $KEYMAP = vicmd ]; then
+    echo -ne '\e[1 q'
+  else
+    echo -ne '\e[5 q'
+  fi
+}
+
+zle -N zle-keymap-select
+
+function zle-line-finish {
+  vim_mode=$vim_ins_mode
+}
+zle -N zle-line-finish
+
+ [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 #echo ""
 #PS1=' ${vim_mode} %{$fg[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
