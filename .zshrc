@@ -24,7 +24,8 @@ export ZSH="/home/jhilker/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="powerlevel10k/powerlevel10k"
-ZSH_THEME="robbyrussell"
+#ZSH_THEME="robbyrussell"
+ZSH_THEME="spaceship"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -171,41 +172,55 @@ bindkey -v
 
 
 
-vim_ins_mode="%{$fg[red]%}[%F{12}%BINS%B%{$reset_color%}%{$fg[red]%}]%{$reset_color%}"
-# vim_cmd_mode="%{$fg[green]%}[CMD]%{$reset_color%}"
-vim_cmd_mode="%{$fg[red]%}[%{$fg[magenta]%}NML%{$fg[red]%}]%{$reset_color%}"
-# vim_cmd_mode="%{$fg[green]%}[CMD]%{$reset_color%}"
-vim_mode=$vim_ins_mode
+# vim_ins_mode="%{$fg[red]%}[%F{12}%BINS%B%{$reset_color%}%{$fg[red]%}]%{$reset_color%}"
+# vim_cmd_mode="%{$fg[red]%}[%{$fg[magenta]%}NML%{$fg[red]%}]%{$reset_color%}"
+# vim_mode=$vim_ins_mode
+# 
+# function zle-keymap-select {
+#   vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+#   zle reset-prompt
+#   if [ $KEYMAP = vicmd ]; then
+#     echo -ne '\e[1 q'
+#   else
+#     echo -ne '\e[5 q'
+#   fi
+# }
+# 
+# zle -N zle-keymap-select
+# 
+# function zle-line-finish {
+#   vim_mode=$vim_ins_mode
+# }
+# zle -N zle-line-finish
+# 
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-function zle-keymap-select {
-  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
-  zle reset-prompt
-  if [ $KEYMAP = vicmd ]; then
-    echo -ne '\e[1 q'
-  else
-    echo -ne '\e[5 q'
-  fi
-}
-
-zle -N zle-keymap-select
-
-function zle-line-finish {
-  vim_mode=$vim_ins_mode
-}
-zle -N zle-line-finish
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-#PROMPT="%F{4}%n%f @ %F{3}%~%f $%b "
-#PROMPT="%F{3}%~%f $%b "
-#PROMPT="${vim_mode} %{$fg[red]%}[%F{12}%n %F{15}@ %F{yellow}%~%{$fg[red]%}] %F{15}$%b " 
-#PS1='${vim_mode} $(git_super_status) %{$fg[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
-echo ""
-PS1='${vim_mode} %{$fg[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
-#PS1='${vim_mode} $(git_super_status) %{$fg_bold[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
+#echo ""
+#PS1=' ${vim_mode} %{$fg[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
 
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 bindkey -v '^?' backward-delete-char
+
+## Spaceship Configuration
+ SPACESHIP_PROMPT_ADD_NEWLINE=false
+ SPACESHIP_PROMPT_SEPARATE_LINE=false
+ SPACESHIP_CHAR_SYMBOL=❯
+ SPACESHIP_CHAR_SUFFIX=" $ "
+ SPACESHIP_DIR_COLOR="yellow"
+ SPACESHIP_DIR_PREFIX=""
+ SPACESHIP_GIT_BRANCH_COLOR="12"
+ SPACESHIP_VI_MODE_NORMAL=" %{$fg[red]%}[%{$fg[magenta]%}NML%{$fg[red]%}]%{$reset_color%}"
+ SPACESHIP_VI_MODE_INSERT=" %{$fg[red]%}[%F{12}%BINS%B%{$reset_color%}%{$fg[red]%}]%{$reset_color%}"
+ SPACESHIP_CHAR_COLOR_SUCCESS="15"
+ 
+ SPACESHIP_PROMPT_ORDER=(
+   vi_mode 
+   dir
+   git
+   char
+   )
+ # Spaceship Prompt
+ autoload -U promptinit; promptinit
