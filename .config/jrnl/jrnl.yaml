@@ -15,6 +15,6 @@ journals:
   brokenthrones: ~/Dropbox/journal/brokenthrones.txt
 linewrap: 79
 tagsymbols: '@'
-template: false
+template: "/home/jhilker/Dropbox/journal/template.txt"
 timeformat: '%d %b %H:%M'
 version: v2.4.3
