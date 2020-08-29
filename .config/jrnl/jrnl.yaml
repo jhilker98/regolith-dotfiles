@@ -1,16 +1,18 @@
 colors:
   body: none
   date: none
-  tags: none
-  title: none
+  tags: YELLOW
+  title: BLUE
 default_hour: 9
 default_minute: 0
 editor: vim
-encrypt: false 
+encrypt: false
 highlight: true
 indent_character: '|'
 journals:
-  default: /home/jhilker/Dropbox/journal/journal.txt
+  default: ~/Dropbox/journal/journal.txt
+  notes: ~/Dropbox/journal/notes.txt
+  brokenthrones: ~/Dropbox/journal/brokenthrones.txt
 linewrap: 79
 tagsymbols: '@'
 template: false

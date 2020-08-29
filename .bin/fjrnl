@@ -1,0 +1,31 @@
+#!/bin/sh 
+#vi :set filetype=sh 
+
+if [ -z $1 ]
+then
+  NOTE=$(jrnl -ls | sed '/^\s*$/d' | awk 'NR>1' | awk '{print $2"   " $4}' | fzf --exact)
+  NB=$(echo $NOTE | awk '{print $1}')
+  jrnl $NB -n 10 | $PAGER
+  
+elif [ $1 = "-h" ] || [ $1 = "--help" ]
+then
+ echo "usage: fjrnl           read your jrnl notes"
+
+ echo "or:    fjrnl [options] see options below\n"
+ echo "-e, --edit:      edit your jrnl notes"
+ echo "-n, --new:       create a new note"
+ echo "-h, --help:      view this help message"
+
+elif [ $1 = "-e" ] || [ $1 = "--edit" ]
+then
+
+  NOTE=$(jrnl -ls | sed '/^\s*$/d' | awk 'NR>1' | awk '{print $2"   " $4}' | fzf --exact)
+  NB=$(echo $NOTE | awk '{print $1}')
+  jrnl $NB --edit
+
+elif [ $1 = "-n" ] || [ $1 = "--new" ]
+then 
+  NOTE=$(jrnl -ls | sed '/^\s*$/d' | awk 'NR>1' | awk '{print $2"   " $4}' | fzf --exact)
+  NB=$(echo $NOTE | awk '{print $1}')
+  jrnl $NB
+fi
