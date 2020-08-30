@@ -93,7 +93,7 @@ augroup END
 
 syntax enable
 set background=dark
-let g:gruvbox_contrast_dark='soft'
+"let g:gruvbox_contrast_dark='soft'
 colorscheme gruvbox
 set encoding=UTF-8
 
@@ -142,6 +142,7 @@ autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 set hlsearch
 set spelllang=en_us
 
+" Disable background
 highlight Normal ctermbg=None
 
 " Keybindings

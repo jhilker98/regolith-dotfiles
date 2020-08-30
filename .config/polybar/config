@@ -15,8 +15,11 @@
 ;--------;
 
 [colors]
-bg = #CC32302f 
-bg-bright = #CC3c3836
+;; soft contrast
+;; bg = #CC32302f 
+;; bg-bright = #CC3c3836
+bg = #CC282828
+bg-bright = #CC32302f
 fg = #EBDBB2
 fg-alt = #d5c4a1
 mf = #d5c4a1
@@ -38,6 +41,7 @@ purple = #b16286
 cyan = #689d6a
 white = #a89984
 orange = #d65d0e
+darkorange = #af3a03
 
 ;-------;
 ; FONTS ;
@@ -106,7 +110,7 @@ label-unfocused-foreground = ${colors.fg}
 label-visible = %index%
 label-visible-background = ${self.label-focused-background}
 label-visible-padding = ${self.label-focused-padding}
-;
+label-visible-foreground = ${self.label-focused-foreground}
 ;; urgent = Workspace with urgency hint set
 label-urgent = %index%
 label-urgent-background = ${colors.red}
@@ -114,7 +118,7 @@ label-urgent-padding = 1.75
 
 [module/bspwm]
 type = internal/bspwm
-pin-workspaces = false
+pin-workspaces = true
 label-focused = %index%
 label-focused-foreground = ${colors.fg}
 label-focused-background = ${colors.bg-bright}
@@ -128,7 +132,7 @@ label-occupied-padding = 1
 
 # Hide empty
 label-empty = %index%
-label-empty-padding = 0
+label-empty-padding = 1
 
 label-urgent = %index%!
 label-urgent-foreground = ${colors.fg}
@@ -529,7 +533,7 @@ interval = 3
 format-prefix = ""
 format-prefix-font = 3
 format-prefix-padding = 1
-format-prefix-background = ${colors.orange} 
+format-prefix-background = ${colors.darkorange} 
 format-prefix-foreground = ${colors.fg}
 click-left = alacritty -e /home/$USER/.config/polybar/scripts/weather/wtr.sh &
 exec = ~/.config/polybar/scripts/weather/wtr-bar.sh
@@ -609,12 +613,6 @@ modules-left =  cal polypomo reddit keyboard
 ; when wttr.in isn't down and using rofication
 modules-right = bell notifs news weather 
 ;when wttr.in is down and using rofication
-;modules-right = notifs news
+; modules-right = bell notifs news
 
-; when wttr.in isn't down and using dunst
-;modules-right = dunst news weather 
-;when wttr.in is down and using dunst
-;modules-right = notifs news
 
-;padding = 1
- 
