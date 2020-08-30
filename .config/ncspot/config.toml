@@ -1,12 +1,11 @@
-use_nerdfont=true
 notify=true
-
+use_nerdfont = true
 [saved_state]
 volume = 75
 repeat = "playlist"
 
 [theme]
-title = "#fbf1c7"
+title = "light blue"
 playing = "#b16286"
 playing_selected = "#ffffff"
 highlight = "#ebdbb2"
