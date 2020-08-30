@@ -59,7 +59,7 @@ fi
 if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -133,7 +133,6 @@ export TERM=xterm-256color
 export EMAIL="jacob.hilker2@gmail.com"
 export NAME="Jacob Hilker"
 export PATH="/home/jhilker/bin:/usr/local/texlive/2019/bin/x86_64-linux:$PATH"
-export OWM_API_KEY="3d1a3c45d2bd2c27f5ee8f15dc54b31d"
 
 
 
@@ -168,3 +167,4 @@ source "$HOME/.cache/wal/colors.sh"
 export C0A="#CC${color0/'#'}"
 set -o vi
 (cat ~/.cache/wal/sequences &)
+

@@ -1,5 +1,5 @@
 ! Gruvbox colors - https://github.com/morhetz/gruvbox
-#define color_base03   #32302f
+#define color_base03   #282828
 #define color_base02   #3c3836
 #define color_base01   #504945
 #define color_base00   #665c54
@@ -22,3 +22,4 @@
 #define color_magenta  #d3869b
 #define color_ltcyan   #8ec07c
 #define color_brown    #fe8019
+

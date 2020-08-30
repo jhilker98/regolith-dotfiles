@@ -126,7 +126,7 @@ alias cp="cp -r"
 alias cl="clear"
 
 #alias rm="rm -rfi"
-alias clock="clear; echo -e 'It is $(date +%I:%M) $(date +%p) on $(date +%a), $(date '+%e %b').'"
+alias clock="clear; echo -e It is $(date +%I:%M) $(date +%p) on $(date +%a), $(date '+%e %b').'"
 alias font="fc-cache -f -v"
 alias mutt="mbsync jhilker2 && neomutt"
 alias proc="ytop -c solarized_dark -m"
@@ -187,4 +187,5 @@ export PATH="/home/jhilker/bin:/usr/local/texlive/2019/bin/x86_64-linux:$PATH"
 if [ -f ~/.dir_colors/dircolors ]
   then eval `dircolors ~/.dir_colors/dircolors`
 fi
+
 

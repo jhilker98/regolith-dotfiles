@@ -74,7 +74,7 @@ alias gpull="git pull"
 alias gcln="git clone"
 alias commit="git add *; git commit -a"
 alias commitm="git add *; git commit -am"
-alias clone="git clone"
+alias clone=git clone"
 alias vim="vim -u ~/.config/vim/vimrc"
 #alias python="python3.8"
 #writing, worldbuilding, and rpg aliases
@@ -101,3 +101,4 @@ alias 2048="~/2048"
 
 
 alias gocl="ssh jacob.hilker2@35.196.197.239"
+
