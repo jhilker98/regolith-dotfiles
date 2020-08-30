@@ -111,17 +111,17 @@ alias family="cd FamilyTreeGen/src;  python3 ./Generator.py"
 alias neofetch="neofetch --ascii_distro regolith"
 
 # Swallow programs
-alias zathura="swallow zathura"
-alias sxiv="swallow sxiv"
-alias mpv="swallow mpv"
-alias feh="swallow feh"
-alias emacs="swallow emacs"
+#alias zathura="swallow zathura"
+#alias sxiv="swallow sxiv"
+#alias mpv="swallow mpv"
+#alias feh="swallow feh"
+#alias emacs="swallow emacs"
 
-#alias zathura="devour zathura"
-#alias sxiv="devour sxiv"
-#alias mpv="devour mpv"
-#alias feh="devour feh"
-
+alias zathura="devour zathura"
+alias sxiv="devour sxiv"
+alias mpv="devour mpv"
+alias feh="devour feh"
+alias emacs="devour emacs"
 
 alias define="dict -d wn"
 alias rdate="rdate.py"
