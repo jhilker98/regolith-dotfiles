@@ -186,6 +186,8 @@ super + ctrl + n
 super + shift + n
   alacritty -e ranger
 
+super + shift + z
+  zoom
 alt + t
   ~/.config/conky/scripts/todotoggle.sh
 
