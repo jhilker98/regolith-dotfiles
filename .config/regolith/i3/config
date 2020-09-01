@@ -43,6 +43,10 @@ bindsym $alt+t exec /home/jhilker/.config/conky/scripts/todotoggle.sh
 bindsym $alt+Shift+t exec /home/jhilker/.config/conky/scripts/agendatoggle.sh
 ## Toggle // Music Info // <Ctrl><Shift>M ##
 bindsym Ctrl+Shift+m exec /home/jhilker/.config/conky/scripts/musictoggle.sh
+
+## Toggle // Sidebar // <Ctrl>Enter ##
+
+#bindsym Ctrl+Return exec /home/jhilker/.config/conky/scripts/conkytoggle.sh
 # Apps
 
 ## Launch // Terminal // <> Enter ##
@@ -243,8 +247,8 @@ bindsym $mod+Ctrl+Shift+Right move workspace to output right
 ## Modify // Next Window Orientation // <> Backspace ##
 bindsym $mod+BackSpace split toggle
 #bindsym $mod+BackSpace exec --no-startup-id $HOME/.config/regolith/i3/scripts/split_optimal.sh
-## Modify // Optimal Window Orientation // <> Delete ##
-bindsym $mod+Delete exec --no-startup-id $HOME/.config/regolith/i3/scripts/split_optimal.sh
+# Modify // Optimal Window Orientation // <> Delete ##
+#bindsym $mod+Delete exec --no-startup-id $HOME/.config/regolith/i3/scripts/split_optimal.sh
 
 ## Modify // Fullscreen Toggle // <> f ##
 bindsym $mod+f fullscreen toggle
@@ -413,14 +417,15 @@ font $i3-wm.bar.font
 # The following exec calls run programs in the background when i3 starts.
 
 # Start the installed regolith-compositor
-#exec --no-startup-id picom -b -C --opacity-rule "75:class_g *= 'XTerm'"
+exec --no-startup-id picom -b -C --opacity-rule "75:class_g *= 'XTerm'"
 
-exec_always --no-startup-id compton -b -C --opacity-rule "75:class_g *= 'XTerm'" 
+#exec --no-startup-id compton -b -C --opacity-rule "75:class_g *= 'XTerm'" 
 
 # Start the bar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id xrandr --size 1360x768
 exec_always --no-startup-id xrdb -load ~/.Xresources
+exec_always --no-startup-id ~/anaconda3/bin/autotiling
 # Reload color scheme
 #exec --no-startup-id wal -R"
 
@@ -433,5 +438,9 @@ exec --no-startup-id /usr/bin/regolith-ftue
 
 # Hide the mouse pointer if unused for a duration
 exec --no-startup-id /usr/bin/unclutter -b
+
+
+
+default_border pixel 1
 
 
