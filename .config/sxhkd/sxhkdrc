@@ -197,3 +197,6 @@ alt + shift + t
 
 ctrl + shift + m
   ~/.config/conky/scripts/musictoggle.sh
+
+super + ctrl + r
+  alacritty -e ~/anaconda3/bin/tuir
