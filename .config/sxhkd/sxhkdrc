@@ -25,7 +25,7 @@ super + shift + e
   ~/.bin/prompt "Quit?" "bspc quit"
 
 super + shift + r
-  pkill -USR1 -x sxhkd && bspc wm -r
+  pkill -USR1 -x sxhkd;  bspc wm -r
 
 
 super + shift + p
@@ -53,8 +53,17 @@ super + g
 #
 
 # set the window state
-super + {t,shift + t,s,f}
-	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+super + f
+  bspc node -t fullscreen
+
+super + shift + f 
+  bspc node -t floating
+
+super + t 
+  bspc node -t tiled
+
+super + shift + t
+  bspc node -t pseudo_tiled
 
 # set the node flags
 super + ctrl + {m,x,y,z}
@@ -136,9 +145,9 @@ super + {Left,Down,Up,Right}
 
 # Screen brightness control
 XF86MonBrightnessDown
-    sudo light -U 10
+    light -U 5
 XF86MonBrightnessUp
-    sudo light -A 10
+    light -A 5
 # Volume control
 XF86AudioRaiseVolume
   pactl set-sink-volume @DEFAULT_SINK@ +5%
@@ -146,4 +155,11 @@ XF86AudioLowerVolume
     pactl set-sink-volume @DEFAULT_SINK@ -5%
 XF86AudioMute
     pactl set-sink-mute 0 toggle
+ctrl + shift + h
+  playerctl previous
 
+ctrl + shift + l
+  playerctl next
+
+ctrl + shift + space
+  playerctl play-pause
