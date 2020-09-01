@@ -157,9 +157,9 @@ XF86MonBrightnessUp
     light -A 5
 # Volume control
 XF86AudioRaiseVolume
-  pactl set-sink-volume @DEFAULT_SINK@ +5%
+  pactl set-sink-volume @DEFAULT_SINK@ +5% && aplay ~/Music/alerts/tick.wav
 XF86AudioLowerVolume
-    pactl set-sink-volume @DEFAULT_SINK@ -5%
+    pactl set-sink-volume @DEFAULT_SINK@ -5% && aplay ~/Music/alerts/tick.wav
 XF86AudioMute
     pactl set-sink-mute 0 toggle
 ctrl + shift + h
