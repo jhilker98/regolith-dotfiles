@@ -25,7 +25,7 @@ bspc rule --add mplayer2 state=floating
 bspc rule --add Kupfer.py focus=on
 bspc rule --add Screenkey manage=off
 bspc rule --add Zathura state=tiled
-
+bspc rule --add conky state=floating manage=off
 pgrep -x sxhkd > /dev/null || sxhkd &
 xrdb -load ~/.Xresources
 xrandr --size 1360x768

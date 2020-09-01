@@ -83,8 +83,8 @@ super + {p,b,comma,period}
 	bspc node -f @{parent,brother,first,second}
 
 # focus the next/previous node in the current desktop
-super + {_,shift + }c
-	bspc node -f {next,prev}.local
+#super + {_,shift + }c
+#	bspc node -f {next,prev}.local
 
 # focus the next/previous desktop in the current monitor
 super + bracket{left,right}
@@ -170,3 +170,28 @@ ctrl + shift + l
 
 ctrl + shift + space
   playerctl play-pause
+
+super + c 
+  alacritty -e calcurse
+super + d
+  discord
+super + shift + d 
+  discord-ptb
+super + ctrl + d
+  discord-canary
+
+super + ctrl + n
+  alacritty -e newsboat
+
+super + shift + n
+  alacritty -e ranger
+
+alt + t
+  ~/.config/conky/scripts/todotoggle.sh
+
+
+alt + shift + t
+  ~/.config/conky/scripts/agendatoggle.sh
+
+ctrl + shift + m
+  ~/.config/conky/scripts/musictoggle.sh
