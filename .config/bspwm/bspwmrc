@@ -15,7 +15,7 @@ bspc config focused_sticky_border_color '#83a598'
 bspc config urgent_border_color '#fb4934'
 
 bspc config border_radius 4
-
+bspc config external_rules_command "~/.config/bspwm/external_rules.sh"
 bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 
 
@@ -26,6 +26,8 @@ bspc rule --add Kupfer.py focus=on
 bspc rule --add Screenkey manage=off
 bspc rule --add Zathura state=tiled
 bspc rule --add conky state=floating manage=off
+
+
 pgrep -x sxhkd > /dev/null || sxhkd &
 xrdb -load ~/.Xresources
 xrandr --size 1360x768
