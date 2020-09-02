@@ -233,3 +233,5 @@ bindkey -v '^?' backward-delete-char
  autoload -U promptinit; promptinit
 
 ## FZF Configuration
+setopt autopushd 
+setopt pushdignoredups
