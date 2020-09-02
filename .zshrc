@@ -105,20 +105,22 @@ export RTV_EDITOR=vim
 # export MANPATH="/usr/localman:$MNPATH"
 # export BROWSER="/usr/bin/firefox"
 export MANPAGER="less -isg"
-# Start blinking
-export LESS_TERMCAP_mb=$(tput bold; tput setaf 12) # blue
-# Start bold
-export LESS_TERMCAP_md=$(tput bold; tput setaf 12) # blue
-# Start stand out
-export LESS_TERMCAP_so=$(tput bold; tput rev; tput setaf 5) # magenta
-# End standout
-export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
-# Start underline
-export LESS_TERMCAP_us=$(tput smul; tput sitm; tput setaf 1) # red
-# End Underline
-export LESS_TERMCAP_ue=$(tput sgr0)
-# End bold, blinking, standout, underline
-export LESS_TERMCAP_me=$(tput sgr0)
+#export PAGER="less -r"
+#export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+# # Start blinking
+ export LESS_TERMCAP_mb=$(tput bold; tput setaf 12) # blue
+# # Start bold
+ export LESS_TERMCAP_md=$(tput bold; tput setaf 12) # blue
+# # Start stand out
+ export LESS_TERMCAP_so=$(tput bold; tput rev; tput setaf 5) # magenta
+# # End standout
+ export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
+# # Start underline
+ export LESS_TERMCAP_us=$(tput smul; tput sitm; tput setaf 1) # red
+# # End Underline
+ export LESS_TERMCAP_ue=$(tput sgr0)
+# # End bold, blinking, standout, underline
+ export LESS_TERMCAP_me=$(tput sgr0)
 
 
 
@@ -194,6 +196,7 @@ function zle-line-finish {
 zle -N zle-line-finish
 
  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source ~/.repos/forgit/forgit.plugin.zsh
 
 #echo ""
 #PS1=' ${vim_mode} %{$fg[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
@@ -211,9 +214,11 @@ bindkey -v '^?' backward-delete-char
  SPACESHIP_CHAR_SUFFIX=" $ "
  SPACESHIP_DIR_COLOR="yellow"
  SPACESHIP_DIR_PREFIX=""
+ SPACESHIP_DIR_TRUNC="2"
+ SPACESHIP_DIR_TRUNC_REPO="false"
  SPACESHIP_GIT_BRANCH_COLOR="12"
- SPACESHIP_VI_MODE_NORMAL=" %{$fg[red]%}[%{$fg[magenta]%}NML%{$fg[red]%}]%{$reset_color%}"
- SPACESHIP_VI_MODE_INSERT=" %{$fg[red]%}[%F{12}%BINS%B%{$reset_color%}%{$fg[red]%}]%{$reset_color%}"
+ SPACESHIP_VI_MODE_NORMAL="%{$fg[red]%}[%{$fg[magenta]%}NML%{$fg[red]%}]%{$reset_color%}"
+ SPACESHIP_VI_MODE_INSERT="%{$fg[red]%}[%F{12}%BINS%B%{$reset_color%}%{$fg[red]%}]%{$reset_color%}"
  SPACESHIP_CHAR_COLOR_SUCCESS="15"
  
  SPACESHIP_PROMPT_ORDER=(
