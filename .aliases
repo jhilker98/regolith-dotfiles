@@ -133,4 +133,4 @@ alias pfetch="PF_ASCII='arch' pfetch"
 alias ly="lyrics"
 alias cv="cava"
 alias cat="bat"
-alias fcd='cd $(fd --type directory | fzf)'
+alias fcd='cd $(fd --type directory --type symlink -p --max-depth 2 -HI | fzf)'
