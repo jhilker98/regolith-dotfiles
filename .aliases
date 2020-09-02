@@ -132,3 +132,5 @@ alias pfetch="PF_ASCII='arch' pfetch"
 #alias todo="~/.config/regolith/rofi/scripts/taskbook.py | sed '/^\s*$/d' | rofi -dmenu -markup-rows -config ~/.config/regolith/rofi/todo.rasi -levenshtein-sort -p 'To Do'"
 alias ly="lyrics"
 alias cv="cava"
+alias cat="bat"
+alias fcd='cd $(fd --type directory | fzf)'
