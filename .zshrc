@@ -95,7 +95,7 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR=vim
 #export TERM=xterm-kitty
 export TERM=xterm-256color
-# export MAIL=/home/jhilker/Mail
+export MAIL=/home/jhilker/Mail
 export EMAIL="jacob.hilker2@gmail.com"
 export NAME="Jacob Hilker"
 export PATH="/usr/local/texlive/2019/bin/x86_64-linux:/home/jhilker/.bin:/home/jhilker/Downloads/nvim/bin:$PATH"
@@ -105,6 +105,8 @@ export RTV_EDITOR=vim
 # export MANPATH="/usr/localman:$MNPATH"
 # export BROWSER="/usr/bin/firefox"
 export MANPAGER="less -isg"
+
+export FZF_DEFAULT_OPTS='--height=30% --layout=reverse'
 #export PAGER="less -r"
 #export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 # # Start blinking
@@ -196,7 +198,7 @@ function zle-line-finish {
 zle -N zle-line-finish
 
  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-source ~/.repos/forgit/forgit.plugin.zsh
+#source ~/.repos/forgit/forgit.plugin.zsh
 
 #echo ""
 #PS1=' ${vim_mode} %{$fg[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
@@ -229,3 +231,5 @@ bindkey -v '^?' backward-delete-char
    )
  # Spaceship Prompt
  autoload -U promptinit; promptinit
+
+## FZF Configuration
