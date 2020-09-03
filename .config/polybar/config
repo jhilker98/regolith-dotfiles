@@ -113,7 +113,9 @@ label-visible-padding = ${self.label-focused-padding}
 label-visible-foreground = ${self.label-focused-foreground}
 ;; urgent = Workspace with urgency hint set
 label-urgent = %index%
-label-urgent-background = ${colors.red}
+label-urgent-underline = ${colors.red}
+label-urgent-foreground = ${colors.fg}
+label-urgent-background = ${colors.bg-bright}
 label-urgent-padding = 1.75
 
 [module/bspwm]
