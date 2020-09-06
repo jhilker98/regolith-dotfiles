@@ -83,7 +83,7 @@ bindsym $mod+Ctrl+n exec alacritty -e newsboat -r
 ## Launch // Zathura // <> z ##
 bindsym $mod+z exec zathura
 ## Launch // Geany // <> g ##
-bindsym $mod+g exec geany
+#bindsym $mod+g exec geany
 ## Launch // GIMP // <><shift> g ##
 bindsym $mod+Shift+g exec gimp
 ## Launch // Discord // <> d ## 
@@ -416,16 +416,22 @@ font $i3-wm.bar.font
 
 # The following exec calls run programs in the background when i3 starts.
 
+# Use if i want autotiling
+#exec_always --no-startup-id ~/anaconda3/bin/autotiling
+#exec --no-startup-id python3 $HOME/.config/regolith/i3/i3-master-stack/i3_master_layout.py
+
 # Start the installed regolith-compositor
+#exec --no-startup-id /usr/share/regolith-compositor/init
+
+# Start my personal compositor
 exec --no-startup-id picom -b -C --opacity-rule "75:class_g *= 'XTerm'"
 
-#exec --no-startup-id compton -b -C --opacity-rule "75:class_g *= 'XTerm'" 
 
 # Start the bar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id xrandr --size 1360x768
 exec_always --no-startup-id xrdb -load ~/.Xresources
-exec_always --no-startup-id ~/anaconda3/bin/autotiling
+
 # Reload color scheme
 #exec --no-startup-id wal -R"
 
@@ -439,8 +445,10 @@ exec --no-startup-id /usr/bin/regolith-ftue
 # Hide the mouse pointer if unused for a duration
 exec --no-startup-id /usr/bin/unclutter -b
 
-
+exec --no_startup_id ~/.bin/musicd.sh
 
 default_border pixel 1
+
+for_window [class="^.*"] border pixel 1
 
 
