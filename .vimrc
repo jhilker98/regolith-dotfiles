@@ -45,7 +45,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'chrisbra/unicode.vim'
 Plugin 'lilydjwg/colorizer'
-"Plugin 'suan/vim-instant-markdown'
+Plugin 'suan/vim-instant-markdown'
 Plugin 'neoclide/coc.nvim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'vimwiki/vimwiki'
@@ -138,6 +138,7 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Autosource on save
 autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
+
 " Always Highlight my search results
 set hlsearch
 set spelllang=en_us
@@ -211,8 +212,9 @@ nnoremap <silent> <leader>wd  <C-w>q<CR>
 
 " Autocompile groff
 nmap <silent> <leader>cg :silent !groff -ms %:p -T pdf > %:r.pdf<cr><cr>
-nmap <silent> <leader>cr :silent !refer %:p \| !groff -ms -T pdf > %:r.pdf<cr><cr>
-nmap <leader>wc :!wc -w %:p<cr>
+nmap <silent> <leader>cr :silent !refer -p $BIBLIOGRAPHY %:p \| !groff -ms -T pdf > %:r.pdf<cr><cr>
+"autocmd bufwritepost,BufNewFile *.ms :silent !groff -ms % -T pdf -rP12 -rVS=24> %:r.pdf<cr><cr>
+"nmap <leader>wc :!wc -w %:p<cr>
 
 nmap <silent> <leader>mp :vsp \| term glow %<cr>
 "Abbrevs
@@ -221,7 +223,7 @@ iab <silent> sig Thanks,<CR>Jacob Hilker<CR>
 iab <silent> fsig Love,<CR>Jacob
 iab <silent> rsig Best,<CR>Jacob Hilker
 iab <silent> mynm Jacob Hilker
-iab <silent> mycontact Jaob Hilker<cr>5724 St George Ave.<cr>Crozet, VA 22932<cr>434-409-3789<cr>jacob.hilker2@gmail.com<cr>
+iab <silent> mycontact Jacob <cr>5724 St George Ave.<cr>Crozet, VA 22932<cr>434-409-3789<cr>jacob.hilker2@gmail.com<cr>
 "" Programming Abbrevs
 """" Shebang Abbrev
 
@@ -282,6 +284,8 @@ let g:coc_snippet_next = '<tab>'
 "Remove new window for instance in existing browser
 "let g:instant_markdown_browser = "firefox -P default-release"
 let g:instant_markdown_browser = 'firefox -P default-release --new-window'
+let g:instant_markdown_mathjax = 1
+
 let g:python3_host_prog = "/home/jhilker/anaconda3/bin/python"
 
 
@@ -292,4 +296,4 @@ let g:signit_initials = 'JH'
 let g:signit_name = 'Jacob Hilker'
 let g:signit_extra_1 = 'gitlab.com/jhilker'
 let g:signit_extra_2 = '434-409-3789'
-
+let g:tex_flavor = 'latex'
