@@ -105,7 +105,7 @@ export RTV_EDITOR=vim
 # export MANPATH="/usr/localman:$MNPATH"
 # export BROWSER="/usr/bin/firefox"
 export MANPAGER="less -isg"
-
+export BIBLIOGRAPHY="/home/jhilker/Dropbox/bibliography/bibrefer"
 export FZF_DEFAULT_OPTS='--height=30% --layout=reverse'
 #export PAGER="less -r"
 #export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -198,8 +198,7 @@ function zle-line-finish {
 zle -N zle-line-finish
 
  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-#source ~/.repos/forgit/forgit.plugin.zsh
-
+source ~/.repos/forgit/forgit.plugin.zsh
 #echo ""
 #PS1=' ${vim_mode} %{$fg[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
 
@@ -212,8 +211,8 @@ bindkey -v '^?' backward-delete-char
 ## Spaceship Configuration
  SPACESHIP_PROMPT_ADD_NEWLINE=false
  SPACESHIP_PROMPT_SEPARATE_LINE=false
- SPACESHIP_CHAR_SYMBOL=❯
- SPACESHIP_CHAR_SUFFIX=" $ "
+ SPACESHIP_CHAR_SYMBOL="$ "
+ #SPACESHIP_CHAR_SUFFIX=" $ "
  SPACESHIP_DIR_COLOR="yellow"
  SPACESHIP_DIR_PREFIX=""
  SPACESHIP_DIR_TRUNC="2"
@@ -233,5 +232,5 @@ bindkey -v '^?' backward-delete-char
  autoload -U promptinit; promptinit
 
 ## FZF Configuration
-setopt autopushd 
-setopt pushdignoredups
+# setopt autopushd 
+# setopt pushdignoredups
