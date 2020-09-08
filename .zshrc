@@ -87,7 +87,7 @@ ZSH_THEME="spaceship"
 export FZF_BASE="/home/jhilker/.fzf/bin/fzf"
 export DISABLE_FZF_AUTO_COMPLETION="false"
 export DISABLE_FZF_KEY_BINDINGS="false"
-plugins=(git fast-syntax-highlighting zsh-autosuggestions rand-quote fzf)
+plugins=(git fast-syntax-highlighting zsh-autosuggestions rand-quote fzf vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -105,7 +105,7 @@ export RTV_EDITOR=vim
 # export MANPATH="/usr/localman:$MNPATH"
 # export BROWSER="/usr/bin/firefox"
 export MANPAGER="less -isg"
-export BIBLIOGRAPHY="/home/jhilker/Dropbox/bibliography/bibrefer"
+export BIBLIOGRAPHY="/home/jhilker/Dropbox/groff/bibrefer"
 export FZF_DEFAULT_OPTS='--height=30% --layout=reverse'
 #export PAGER="less -r"
 #export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -207,6 +207,14 @@ source ~/.repos/forgit/forgit.plugin.zsh
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 bindkey -v '^?' backward-delete-char
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'left' vi-backward-char
+bindkey -M menuselect 'down' vi-down-line-or-history
+bindkey -M menuselect 'up' vi-up-line-or-history
+bindkey -M menuselect 'right' vi-forward-char
 
 ## Spaceship Configuration
  SPACESHIP_PROMPT_ADD_NEWLINE=false
