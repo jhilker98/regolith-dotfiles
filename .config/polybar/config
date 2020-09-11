@@ -293,7 +293,14 @@ ramp-background = ${colors.purple}
 ramp-padding = 1
 format-foreground = ${colors.fg}
 
-
+[module/redshift]
+type = custom/script
+exec = "$HOME/.config/polybar/scripts/red.sh"
+interval = 3
+format-prefix = ""  
+format-prefix-background = ${colors.blue}
+format-prefix-padding =1
+format-prefix-margin = 1
 [module/cal]
 type = internal/date
 date = %a, %d %b
@@ -492,7 +499,9 @@ exec = ~/.config/polybar/scripts/notifs/rofication-status.py
 label-padding = 1
 format-background = ${colors.bg-bright}
 format-foreground = ${colors.fg}
-
+;format-prefix = ""
+;format-prefix-padding = 1
+;format-prefix-background = ${colors.purple}
 [module/bell]
 type=custom/script
 interval=3
@@ -578,7 +587,7 @@ height = 27
 ;radius = 4
 modules-left = i3 bspwm
 modules-center = clock 
-modules-right = volume wifi battery backlight
+modules-right = volume wifi battery backlight 
 ;padding = 1
 ;module-margin = 1
 
@@ -616,6 +625,6 @@ modules-left =  cal polypomo reddit keyboard
 ; when wttr.in isn't down and using rofication
 modules-right = bell notifs news weather 
 ;when wttr.in is down and using rofication
-; modules-right = bell notifs news
+# modules-right = bell notifs news
 
 
