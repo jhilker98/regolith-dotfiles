@@ -1,4 +1,3 @@
-                                                                             
 "       mmm  m    m    Jacob Hilker                                           
 "         #  #    #    jhilker.gitlab.io                                      
 "         #  #mmmm#    434-409-3789                                           
@@ -23,11 +22,13 @@ Plugin 'tpope/vim-fugitive' "git in vim
 Plugin 'tpope/vim-speeddating' "dates in vim
 Plugin 'tpope/vim-markdown'
 Plugin 'altercation/vim-colors-solarized' "solarized color scheme
-Plugin 'vim-airline/vim-airline' "top and bottom status bars
-Plugin 'vim-airline/vim-airline-themes' "bar themes
+"Plugin 'vim-airline/vim-airline' "top and bottom status bars
+"Plugin 'vim-airline/vim-airline-themes' "bar themes
 Plugin 'preservim/nerdtree' "file manager in vim
 Plugin 'ervandew/supertab' "autocompleting code and such
 Plugin 'junegunn/limelight.vim' " Highlights only active paragraph
+Plugin 'itchyny/lightline.vim'
+Plugin 'shinchu/lightline-gruvbox.vim'
 Plugin 'junegunn/goyo.vim' " Full screen writing mode
 Plugin 'reedes/vim-lexical' " Better spellcheck mappings
 Plugin 'reedes/vim-litecorrect' " Better autocorrections
@@ -45,13 +46,12 @@ Plugin 'tpope/vim-surround'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'chrisbra/unicode.vim'
 Plugin 'lilydjwg/colorizer'
-Plugin 'suan/vim-instant-markdown'
+"Plugin 'suan/vim-instant-markdown'
 Plugin 'neoclide/coc.nvim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'vimwiki/vimwiki'
 " Track the engine.
 Plugin 'SirVer/ultisnips'
-
 Plugin 'honza/vim-snippets'  " Snippets are separated from the engine. Add this if you want them. 
 " Trigger configuration. Do not use <tab> if you use "https://github.com/Valloric/YouCompleteMe.""
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -98,10 +98,14 @@ colorscheme gruvbox
 set encoding=UTF-8
 
 " Airline Config
-let g:AirlineTheme='gruvbox'
-let g:airline_solarized_bg='dark'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
+"let g:AirlineTheme='gruvbox'
+"let g:airline_solarized_bg='dark'
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline_powerline_fonts = 1
+
+" Lightline Config
+let g:lightline = {}
+let g:lightline.colorscheme = 'gruvbox'
 
 let g:cssColorVimDoNotMessMyUpdatetime = 1
 let g:coc_disable_startup_warning = 1
@@ -132,11 +136,13 @@ set laststatus=2
 " use python audoindent
 au BufRead,BufNewFile *.py set autoindent nocindent
 
+
+" Autosource on save
+"autocmd! bufwritepost $MYVIMRC source $MYVIMRC
+
 "Disable autocomment
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-" Autosource on save
-autocmd! bufwritepost $MYVIMRC source $MYVIMRC
 
 
 " Always Highlight my search results
@@ -211,15 +217,24 @@ nnoremap <silent> <leader>wv :vsp<CR>
 nnoremap <silent> <leader>wd  <C-w>q<CR>
 
 " Autocompile groff
-nmap <silent> <leader>cg :silent !groff -ms %:p -T pdf > %:r.pdf<cr><cr>
-nmap <silent> <leader>cr :silent !refer -p $BIBLIOGRAPHY %:p \| !groff -ms -T pdf > %:r.pdf<cr><cr>
+"nmap <silent> <leader>cg :silent !groff -ms %:p -T pdf > %:r.pdf<cr><cr>
+"nmap <silent> <leader>cr :silent !refer -p $BIBLIOGRAPHY %:p \| !groff -ms -T pdf > %:r.pdf<cr><cr>
+nmap <silent> <leader>cg :!refer -p $BIBLIOGRAPHY %:p \| groff -ms -T pdf > %:r.pdf<cr><cr>
+
 "autocmd bufwritepost,BufNewFile *.ms :silent !groff -ms % -T pdf -rP12 -rVS=24> %:r.pdf<cr><cr>
 "nmap <leader>wc :!wc -w %:p<cr>
 
-nmap <silent> <leader>mp :vsp \| term glow %<cr>
+"nmap <silent> <leader>mp :vsp \| term glow %<cr>
+
+func Eatchar(pat)
+   let c = nr2char(getchar(0))       
+   return (c =~ a:pat) ? '' : c      
+endfunc
+
+
 "Abbrevs
 "" Email Abbrevs
-iab <silent> sig Thanks,<CR>Jacob Hilker<CR>
+iab <silent> sig Thanks,<CR>Jacob Hilker<C-R>=Eatchar('\s')<CR>
 iab <silent> fsig Love,<CR>Jacob
 iab <silent> rsig Best,<CR>Jacob Hilker
 iab <silent> mynm Jacob Hilker
@@ -282,14 +297,14 @@ endfunction
 
 let g:coc_snippet_next = '<tab>'
 "Remove new window for instance in existing browser
-"let g:instant_markdown_browser = "firefox -P default-release"
-let g:instant_markdown_browser = 'firefox -P default-release --new-window'
+"let g:instant_markdown_browser = 'firefox -P default-release'
+"let g:instant_markdown_browser = 'firefox -P default-release --new-window'
 let g:instant_markdown_mathjax = 1
 
 let g:python3_host_prog = "/home/jhilker/anaconda3/bin/python"
 
 
-let g:airline#extensions#wordcount#filetypes = ['asciidoc', 'help', 'mail', 'markdown', 'org', 'plaintex', 'rst', 'tex', 'text', 'groff', 'vimwiki']
+"let g:airline#extensions#wordcount#filetypes = ['asciidoc', 'help', 'mail', 'markdown', 'org', 'plaintex', 'rst', 'tex', 'text', 'groff', 'vimwiki']
 
 
 let g:signit_initials = 'JH'
@@ -297,3 +312,49 @@ let g:signit_name = 'Jacob Hilker'
 let g:signit_extra_1 = 'gitlab.com/jhilker'
 let g:signit_extra_2 = '434-409-3789'
 let g:tex_flavor = 'latex'
+
+if !has('gui_running')
+  set t_Co=256
+endif
+
+function! WordCount()
+    let currentmode = mode()
+    if !exists("g:lastmode_wc")
+        let g:lastmode_wc = currentmode
+    endif
+    " if we modify file, open a new buffer, be in visual ever, or switch modes
+    " since last run, we recompute.
+    if &modified || !exists("b:wordcount") || currentmode =~? '\c.*v' || currentmode != g:lastmode_wc
+        let g:lastmode_wc = currentmode
+        let l:old_position = getpos('.')
+        let l:old_status = v:statusmsg
+        execute "silent normal g\<c-g>"
+        if v:statusmsg == "--No lines in buffer--"
+            let b:wordcount = 0
+        else
+            let s:split_wc = split(v:statusmsg)
+            if index(s:split_wc, "Selected") < 0
+                let b:wordcount = str2nr(s:split_wc[11])
+            else
+                let b:wordcount = str2nr(s:split_wc[5])
+            endif
+            let v:statusmsg = l:old_status
+        endif
+        call setpos('.', l:old_position)
+        return b:wordcount
+    else
+        return b:wordcount
+    endif
+endfunction
+
+let g:lightline = {
+      \ 'colorscheme' : 'gruvbox',
+      \ 'active': {
+      \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'wordcount', 'fileformat', 'fileencoding', 'filetype' ]]
+      \ },
+      \ 'component_function': {
+      \   'wordcount': 'WordCount',
+      \ },
+      \ }
+
+set noshowmode
