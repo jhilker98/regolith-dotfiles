@@ -57,15 +57,7 @@ class:
   instance: Alacritty
   general:  Alacritty
 
-cursor:
-  style: Underline
-
-  # If this is `true`, the cursor will be rendered as a hollow box when the
-  # window is not focused.
-  unfocused_hollow: true
-  vi_mode_style: Block
-
-  # Keybindings for scrolling by line and page 
+# Keybindings for scrolling by line and page 
 key_bindings:
 - { key: K, mods: Control, action: ScrollLineUp}
 - { key: J, mods: Control, action: ScrollLineDown}
@@ -121,6 +113,3 @@ key_bindings:
 - { key: Slash,  mods: Shift,         mode: Vi, action: SearchBackward          }
 - { key: N,                           mode: Vi, action: SearchNext              }
 - { key: N,      mods: Shift,         mode: Vi, action: SearchPrevious          }
-
-
-

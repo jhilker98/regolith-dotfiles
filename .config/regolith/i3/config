@@ -66,7 +66,7 @@ bindsym $mod+Ctrl+e exec alacritty -e ~/anaconda3/bin/epy
 bindsym $mod+m exec alacritty -e neomutt 
 #bindsym $mod+m exec alacritty -e neomutt
 ## Launch // Ranger // <><Shift> n ##
-bindsym $mod+Shift+n exec alacritty -e ranger
+bindsym $mod+Shift+n exec alacritty -e ranger 
 #bindsym $mod+Shift+n exec alacritty -e ranger
 
 ## Only Use this if you are using rofication
@@ -75,7 +75,6 @@ set_from_resource $i3-wm.program.notification_ui i3-wm.program.notification_ui /
 bindsym $mod+n exec $i3-wm.program.notification_ui
 ## Launch // News // <><Ctrl> n ##
 bindsym $mod+Ctrl+n exec alacritty -e newsboat -r 
-#bindsym $alt+Ctrl+t exec ~/.config/regolith/rofi/scripts/taskbook.py | sort | rofi -dmenu -only-match -markup-rows -config ~/.config/regolith/rofi/todo.rasi -p "To Do"
 # Only Use This if you are using Dunst
 # Launch // Newsboat // <> n ##
 #bindsym $mod+n exec alacritty -e newsboat -r 
@@ -98,7 +97,12 @@ bindsym $mod+Shift+o exec oomox-gui
 bindsym $mod+Shift+z exec zoom
 ## Launch // Spotify // <> s ## 
 bindsym $mod+s exec alacritty -e ncspot
-#bindsym $mod+s exec alacritty -e ncspot
+
+## Launch // Slack // <><Shift>s ##
+bindsym $mod+Shift+s exec slack
+## Launch // Telegram // <><Ctrl>t ##
+bindsym $mod+Ctrl+t exec /home/jhilker/Telegram/Telegram
+
 ## Configure // Open Settings // <><Alt> c ##
 bindsym $mod+$alt+c exec gnome-control-center
 ## Configure // Display Settings // <><Alt> d ##
@@ -295,8 +299,8 @@ bindsym $mod+Shift+p exec /usr/bin/gnome-session-quit --power-off
 ## Power // Lock // <> Escape ##
 bindsym $mod+Escape exec gnome-screensaver-command --lock
 
-## Power // Sleep // <><Shift> s  ##
-bindsym $mod+Shift+s exec systemctl suspend
+## Power // Sleep // <><Shift> Escape  ##
+bindsym $mod+Shift+Escape exec systemctl suspend
 
 
 # Cause Settings app to float above tiled windows
