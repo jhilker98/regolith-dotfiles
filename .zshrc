@@ -25,7 +25,7 @@ export ZSH="/home/jhilker/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="powerlevel10k/powerlevel10k"
 #ZSH_THEME="robbyrussell"
-#ZSH_THEME="spaceship"
+ZSH_THEME="spaceship"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -201,7 +201,9 @@ setopt vi
  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source ~/.repos/forgit/forgit.plugin.zsh
 #echo ""
-PS1='${vim_mode} %{$fg[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
+
+## My PS1
+#PS1='${vim_mode} %{$fg[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
 
 ## My version of Luke's Prompt
 #PS1="${vim_mode} %B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{%F{12}%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
@@ -218,25 +220,25 @@ bindkey -M menuselect 'down' vi-down-line-or-history
 bindkey -M menuselect 'up' vi-up-line-or-history
 bindkey -M menuselect 'right' vi-forward-char
 bindkey '^I' expand-or-complete
-### Spaceship Configuration
-# SPACESHIP_PROMPT_ADD_NEWLINE=false
-# SPACESHIP_PROMPT_SEPARATE_LINE=false
-# SPACESHIP_CHAR_SYMBOL="$ "
-# #SPACESHIP_CHAR_SUFFIX=" $ "
-# SPACESHIP_DIR_COLOR="yellow"
-# SPACESHIP_DIR_PREFIX=""
-# SPACESHIP_DIR_TRUNC="2"
-# SPACESHIP_DIR_TRUNC_REPO="false"
-# SPACESHIP_GIT_BRANCH_COLOR="12"
-# SPACESHIP_VI_MODE_NORMAL="%{$fg[red]%}[%{$fg[magenta]%}NML%{$fg[red]%}]%{$reset_color%}"
-# SPACESHIP_VI_MODE_INSERT="%{$fg[red]%}[%F{12}%BINS%B%{$reset_color%}%{$fg[red]%}]%{$reset_color%}"
-#SPACESHIP_CHAR_COLOR_SUCCESS="15"
-# SPACESHIP_PROMPT_ORDER=(
-#   vi_mode 
-#   dir
-#   git
-#   char
-#   )
+## Spaceship Configuration
+ SPACESHIP_PROMPT_ADD_NEWLINE=false
+ SPACESHIP_PROMPT_SEPARATE_LINE=false
+ SPACESHIP_CHAR_SYMBOL="$ "
+ #SPACESHIP_CHAR_SUFFIX=" $ "
+ SPACESHIP_DIR_COLOR="yellow"
+ SPACESHIP_DIR_PREFIX=""
+ SPACESHIP_DIR_TRUNC="2"
+ SPACESHIP_DIR_TRUNC_REPO="false"
+ SPACESHIP_GIT_BRANCH_COLOR="12"
+ SPACESHIP_VI_MODE_NORMAL="%{$fg[red]%}[%{$fg[magenta]%}NML%{$fg[red]%}]%{$reset_color%}"
+ SPACESHIP_VI_MODE_INSERT="%{$fg[red]%}[%F{12}%BINS%B%{$reset_color%}%{$fg[red]%}]%{$reset_color%}"
+SPACESHIP_CHAR_COLOR_SUCCESS="15"
+ SPACESHIP_PROMPT_ORDER=(
+   vi_mode 
+   dir
+   git
+   char
+   )
  # Spaceship Prompt
 # autoload -U promptinit; promptinit
 
