@@ -1,4 +1,5 @@
 xdg-settings set default-web-browser firefox.desktop
+bat cache --build>/dev/null
 #feh --bg-fill /home/jhilker/Pictures/Wallpapers/scheme-based/gruvbox/dark/pacman.png
 #neofetch
 #echo -e '\n'
@@ -18,14 +19,13 @@ autoload -U colors && colors
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/jhilker/.oh-my-zsh"
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="powerlevel10k/powerlevel10k"
 #ZSH_THEME="robbyrussell"
-ZSH_THEME="spaceship"
+#ZSH_THEME="spaceship"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -90,7 +90,6 @@ export DISABLE_FZF_KEY_BINDINGS="false"
 plugins=(git fast-syntax-highlighting zsh-autosuggestions rand-quote fzf vi-mode)
 
 source $ZSH/oh-my-zsh.sh
-
 # User configuration
 export EDITOR=vim
 #export TERM=xterm-kitty
@@ -98,14 +97,15 @@ export TERM=xterm-256color
 export MAIL=/home/jhilker/Mail
 export EMAIL="jacob.hilker2@gmail.com"
 export NAME="Jacob Hilker"
-export PATH="/usr/local/texlive/2019/bin/x86_64-linux:/home/jhilker/.bin:/home/jhilker/Downloads/nvim/bin:$PATH"
+export PATH="/usr/local/texlive/2019/bin/x86_64-linux:/home/jhilker/.bin:$PATH"
 export COWPATH='/usr/sharecowsay/cows/:/home/jhilker/.cows/'
 # Tuir editor
-export RTV_EDITOR=vim
+export RTV_EDITOR="nvim"
 # export MANPATH="/usr/localman:$MNPATH"
 # export BROWSER="/usr/bin/firefox"
 export MANPAGER="less -isg"
-export BIBLIOGRAPHY="/home/jhilker/Dropbox/groff/bibrefer"
+export REFERBIB="/home/jhilker/Dropbox/groff/bibrefer"
+export TEXBIB="/home/jhilker/Dropbox/latex/biblatex.bib"
 export FZF_DEFAULT_OPTS='--height=30% --layout=reverse'
 #export PAGER="less -r"
 #export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -123,7 +123,7 @@ export FZF_DEFAULT_OPTS='--height=30% --layout=reverse'
  export LESS_TERMCAP_ue=$(tput sgr0)
 # # End bold, blinking, standout, underline
  export LESS_TERMCAP_me=$(tput sgr0)
-
+export FZF_MARKS_FILE="/home/$USER/.fzf-marks"
 
 
 
@@ -170,9 +170,6 @@ unset __conda_setup
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
-#set -o vi
-bindkey -v
-
 
 
 
@@ -197,12 +194,17 @@ function zle-line-finish {
 }
 zle -N zle-line-finish
 
+
+#set -o vi
+#bindkey -v
+setopt vi
  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source ~/.repos/forgit/forgit.plugin.zsh
 #echo ""
-#PS1=' ${vim_mode} %{$fg[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
+PS1='${vim_mode} %{$fg[yellow]%}%2~%{$reset_color%}%{$reset_color%} $%b ' 
 
-
+## My version of Luke's Prompt
+#PS1="${vim_mode} %B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{%F{12}%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -215,30 +217,34 @@ bindkey -M menuselect 'left' vi-backward-char
 bindkey -M menuselect 'down' vi-down-line-or-history
 bindkey -M menuselect 'up' vi-up-line-or-history
 bindkey -M menuselect 'right' vi-forward-char
-
-## Spaceship Configuration
- SPACESHIP_PROMPT_ADD_NEWLINE=false
- SPACESHIP_PROMPT_SEPARATE_LINE=false
- SPACESHIP_CHAR_SYMBOL="$ "
- #SPACESHIP_CHAR_SUFFIX=" $ "
- SPACESHIP_DIR_COLOR="yellow"
- SPACESHIP_DIR_PREFIX=""
- SPACESHIP_DIR_TRUNC="2"
- SPACESHIP_DIR_TRUNC_REPO="false"
- SPACESHIP_GIT_BRANCH_COLOR="12"
- SPACESHIP_VI_MODE_NORMAL="%{$fg[red]%}[%{$fg[magenta]%}NML%{$fg[red]%}]%{$reset_color%}"
- SPACESHIP_VI_MODE_INSERT="%{$fg[red]%}[%F{12}%BINS%B%{$reset_color%}%{$fg[red]%}]%{$reset_color%}"
- SPACESHIP_CHAR_COLOR_SUCCESS="15"
- 
- SPACESHIP_PROMPT_ORDER=(
-   vi_mode 
-   dir
-   git
-   char
-   )
+bindkey '^I' expand-or-complete
+### Spaceship Configuration
+# SPACESHIP_PROMPT_ADD_NEWLINE=false
+# SPACESHIP_PROMPT_SEPARATE_LINE=false
+# SPACESHIP_CHAR_SYMBOL="$ "
+# #SPACESHIP_CHAR_SUFFIX=" $ "
+# SPACESHIP_DIR_COLOR="yellow"
+# SPACESHIP_DIR_PREFIX=""
+# SPACESHIP_DIR_TRUNC="2"
+# SPACESHIP_DIR_TRUNC_REPO="false"
+# SPACESHIP_GIT_BRANCH_COLOR="12"
+# SPACESHIP_VI_MODE_NORMAL="%{$fg[red]%}[%{$fg[magenta]%}NML%{$fg[red]%}]%{$reset_color%}"
+# SPACESHIP_VI_MODE_INSERT="%{$fg[red]%}[%F{12}%BINS%B%{$reset_color%}%{$fg[red]%}]%{$reset_color%}"
+#SPACESHIP_CHAR_COLOR_SUCCESS="15"
+# SPACESHIP_PROMPT_ORDER=(
+#   vi_mode 
+#   dir
+#   git
+#   char
+#   )
  # Spaceship Prompt
- autoload -U promptinit; promptinit
+# autoload -U promptinit; promptinit
 
+source /home/jhilker/.repos/fzf-marks/fzf-marks.plugin.zsh
 ## FZF Configuration
 # setopt autopushd 
 # setopt pushdignoredups
+
+## FZF Marks Configuration
+FZF_MARKS_COMMAND="fzf --height 40% --reverse -n 1 -d ' : '"
+FZF_MARKS_KEEP_ORDER=1
