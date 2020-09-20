@@ -60,8 +60,8 @@ bindsym $mod+space exec rofi -show drun -columns 3
 ## Launch // Command // <><Shift> Space ##
 bindsym $mod+Shift+space exec rofi -show run -columns 3
 bindsym $mod+e exec emacs
-bindsym $mod+v exec alacritty -e ~/Downloads/nvim/bin/nvim
-bindsym $mod+Ctrl+e exec alacritty -e ~/anaconda3/bin/epy
+bindsym $mod+v exec alacritty -e $SHELL -i -c ~/Downloads/nvim/bin/nvim
+bindsym $mod+Ctrl+e exec alacritty -e $SHELL -i -c epy
 ## Launch // Mail // <> m ##
 bindsym $mod+m exec alacritty -e neomutt 
 #bindsym $mod+m exec alacritty -e neomutt
@@ -95,11 +95,12 @@ bindsym $mod+Ctrl+d exec discord-canary
 bindsym $mod+Shift+o exec oomox-gui
 ## Launch // Zoom // <><Shift>z ##
 bindsym $mod+Shift+z exec zoom
-## Launch // Spotify // <> s ## 
-bindsym $mod+s exec alacritty -e ncspot
-
-## Launch // Slack // <><Shift>s ##
-bindsym $mod+Shift+s exec slack
+## Launch // NCSpot // <> s ## 
+bindsym $mod+s exec alacritty -e $SHELL -i -c ncspot
+## Launch // Spotify-TUI // <><Shift> s ## 
+bindsym $mod+Shift+s exec alacritty -e $SHELL -i -c spt
+## Launch // Slack // <><Ctrl>s ##
+bindsym $mod+Ctrl+s exec slack
 ## Launch // Telegram // <><Ctrl>t ##
 bindsym $mod+Ctrl+t exec /home/jhilker/Telegram/Telegram
 
@@ -123,7 +124,7 @@ bindsym $mod+c exec alacritty -e calcurse
 bindsym $mod+$alt+n exec nautilus
 
 ## Launch // Reddit // <><Ctrl> r ##
-bindsym $mod+Ctrl+r exec alacritty -e /home/jhilker/anaconda3/bin/tuir
+bindsym $mod+Ctrl+r exec alacritty -e $SHELL -i -c /home/jhilker/anaconda3/bin/tuir
 
 ## Launch // LibreOffice // <><Ctrl> l ##
 bindsym $mod+Ctrl+l exec libreoffice
