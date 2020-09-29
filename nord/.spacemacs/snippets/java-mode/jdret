@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name:jdret 
+# key:jdret
+# --
+@return $0

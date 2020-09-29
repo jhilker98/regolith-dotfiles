@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name:javao
+# key:javao
+# --
+$1 class $0 {
+
+public $0() {
+
+	 }
+
+}

@@ -1,0 +1,5 @@
+
+find 
+source ~/.config/ranger/rc.conf
+open_wit
+scout -ftsea rc

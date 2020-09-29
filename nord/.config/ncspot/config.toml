@@ -1,0 +1,28 @@
+notify=true
+use_nerdfont = true
+[saved_state]
+volume = 75
+repeat = "playlist"
+
+[theme]
+title = "light blue"
+playing = "#b16286"
+playing_selected = "#ffffff"
+highlight = "#ebdbb2"
+highlight_bg = "#076678"
+statusbar_progress = "#458588"
+statusbar_bg = "black"
+cmdline = "light white"
+cmdline_bg = "black"
+
+
+[keybindings]
+" " = "playpause"
+"n" = "next"
+"p" = "previous"
+"Esc" = "back"
+"=" = "volup"
+"gg" = "move top"
+"Shift+g" = "move bottom"
+"q" = "back"
+"Shift+q" = "quit"

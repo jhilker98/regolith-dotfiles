@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name:javasing
+# key:javasing
+# --
+public class $0 {
+  private static theInstance;
+  public static synchronized $0 instance() {
+    if (theInstance == null) {
+      theInstance = new $0();
+      }
+     \return theInstance;
+}
+
+  \private () {
+
+  }
+}
