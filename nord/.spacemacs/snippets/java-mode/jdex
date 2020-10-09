@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name:jdex 
-# key:jdex
-# --
-/**
-@throws ExcType desc
-*/

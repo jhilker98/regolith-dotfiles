@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name:jdmeth
-# key:jdmeth
-# --
-* @$0 $1 $2 
