@@ -97,15 +97,15 @@ export TERM=xterm-256color
 export MAIL=/home/jhilker/Mail
 export EMAIL="jacob.hilker2@gmail.com"
 export NAME="Jacob Hilker"
-export PATH="/usr/local/texlive/2019/bin/x86_64-linux:/home/jhilker/.bin:$PATH"
+export PATH="/usr/local/texlive/2019/bin/x86_64-linux:/home/jhilker/.bin:/home/jhilker/Downloads/nvim/bin/:$PATH"
 export COWPATH='/usr/sharecowsay/cows/:/home/jhilker/.cows/'
 # Tuir editor
 export RTV_EDITOR="nvim"
 # export MANPATH="/usr/localman:$MNPATH"
 # export BROWSER="/usr/bin/firefox"
 export MANPAGER="less -isg"
-export REFERBIB="/home/jhilker/Dropbox/groff/bibrefer"
-export TEXBIB="/home/jhilker/Dropbox/latex/biblatex.bib"
+export REFERBIB="/home/jhilker/Dropbox/bibliography/bibrefer.ref"
+export TEXBIB="/home/jhilker/Dropbox/bibliography/biblatex.bib"
 export FZF_DEFAULT_OPTS='--height=30% --layout=reverse'
 #export PAGER="less -r"
 #export MANPAGER="sh -c 'col -bx | bat -l man -p'"

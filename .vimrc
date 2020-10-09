@@ -46,20 +46,21 @@ Plugin 'tpope/vim-surround'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'chrisbra/unicode.vim'
 Plugin 'lilydjwg/colorizer'
-Plugin 'suan/vim-instant-markdown'
+"Plugin 'suan/vim-instant-markdown'
 Plugin 'neoclide/coc.nvim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'vimwiki/vimwiki'
 " Track the engine.
 Plugin 'SirVer/ultisnips'
-
-" Snippets are separated from the engine. Add this if you want them:
+"
+"" Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
-
+"
 " Trigger configuration. You need to change this to something else than <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<c-tab>"
+let g:UltiSnipsListSnippets="<c-l>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -67,9 +68,13 @@ let g:UltiSnipsEditSplit="vertical"
 "Plugin 'mhinz/vim-startify' "start menu for vim
 Plugin 'morhetz/gruvbox'
 Plugin 'sainnhe/gruvbox-material'
+Plugin 'arcticicestudio/nord-vim'
 Plugin 'rhysd/vim-grammarous'
 Plugin 'mattn/emmet-vim'
 Plugin 'johannesthyssen/vim-signit'
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'xuhdev/vim-latex-live-preview'
 "Plugin 'vim-pandoc/vim-markdownfootnotes'  
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -108,7 +113,7 @@ let g:airline_powerline_fonts = 1
 
 " Lightline Config
 let g:lightline = {}
-let g:lightline.colorscheme = 'gruvbox'
+let g:lightline.colorscheme = 'nord'
 
 let g:cssColorVimDoNotMessMyUpdatetime = 1
 let g:coc_disable_startup_warning = 1
@@ -203,8 +208,8 @@ nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gp :Gpush<CR>
 
 "" Goyo
-nnoremap <silent> <leader>rr :Goyo <bar> :highlight Normal ctermbg=None<cr>
-
+nnoremap <silent> <leader>rr :Goyo\|:highlight Normal ctermbg=None\|:set linebreak<cr>
+"nnoremap <silent> <leader>rr :Goyo<CR>
 """ File Commands
 nnoremap <silent> <leader>e :e
 nnoremap <silent> <leader>feD :e ~/.vimrc<CR>
@@ -229,6 +234,8 @@ nmap <silent> <leader>cg :!refer -p $REFERBIB %:p \| groff -ms -T pdf > %:r.pdf<
 
 "nmap <silent> <leader>mp :vsp \| term glow %<cr>
 
+"let localleader = ","
+nmap <silent> <leader>mm :silent !make<CR>
 func Eatchar(pat)
    let c = nr2char(getchar(0))       
    return (c =~ a:pat) ? '' : c      
@@ -249,7 +256,8 @@ iab <silent> bash #!/bin/bash<CR><CR>
 iab <silent> psh #!/usr/bin/env python3<CR><CR>
 
 """ LaTeX Abbrevs
-iab <silent> mlah \usepackage[american]{babel}<CR>\usepackage{csquotes}<CR>\usepackage[style=mla-new]{biblatex}<CR>\addglobalbib{~/Dropbox/latex/biblatex.bib}<CR><CR>
+iab <silent> mlah \usepackage[american]{babel}<CR>\usepackage{csquotes}<CR>\usepackage[style=mla-new]{biblatex}<CR>\addglobalbib{/home/jhilker/Dropbox/bibliography/biblatex.bib}<CR><CR>
+iab <silent> chih \usepackage[notes,backend=biber]{biblatex-chicago}<CR>\addglobalbib{/home/jhilker/Dropbox/bibliography/biblatex.bib}
 
 "Always load polybar config as ini file.
 aug polybar_ft_detection
@@ -275,11 +283,11 @@ autocmd FileType groff,markdown,org,plaintex,nroff set spell
 autocmd BufNewFile,BufRead /tmp/neomutt*,/tmp/calcurse*,~/.calcurse/notes/* set spell
 autocmd FileType gitcommit setlocal spell
 
-
-
+nmap <C-p> Pandoc pdf --pdf-engine="pdflatex" --mathjax<CR>
+nmap <C-m> :silent !make<CR>
 " Load ms files as groff
 autocmd BufNewFile,BufRead *.ms,*.mm,*.mom set filetype=groff
-imap <c-space> <c-]>
+"imap <c-space> <c-]>
 
 
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -303,8 +311,8 @@ endfunction
 let g:coc_snippet_next = '<tab>'
 "Remove new window for instance in existing browser
 "let g:instant_markdown_browser = 'firefox -P default-release'
-let g:instant_markdown_browser = 'firefox -P default-release --new-window'
-let g:instant_markdown_mathjax = 1
+"let g:instant_markdown_browser = 'firefox -P default-release --new-window'
+"let g:instant_markdown_mathjax = 1
 
 
 
@@ -321,3 +329,9 @@ if !has('gui_running')
   set t_Co=256
 endif
 
+let g:livepreview_use_biber = 1
+
+augroup pandoc_syntax
+    au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
+    autocmd! FileType vimwiki set syntax=markdown.pandoc
+augroup END
