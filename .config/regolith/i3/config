@@ -59,7 +59,7 @@ bindsym $mod+$alt+t exec gnome-tweaks
 bindsym $mod+space exec rofi -show drun -columns 3
 ## Launch // Command // <><Shift> Space ##
 bindsym $mod+Shift+space exec rofi -show run -columns 3
-bindsym $mod+e exec emacs
+bindsym $mod+e exec emacsclient --create-frame
 bindsym $mod+v exec alacritty -e $SHELL -i -c ~/Downloads/nvim/bin/nvim
 bindsym $mod+Ctrl+e exec alacritty -e $SHELL -i -c epy
 ## Launch // Mail // <> m ##
@@ -97,8 +97,8 @@ bindsym $mod+Shift+o exec oomox-gui
 bindsym $mod+Shift+z exec zoom
 ## Launch // NCSpot // <> s ## 
 bindsym $mod+s exec alacritty -e $SHELL -i -c ncspot
-## Launch // Spotify-TUI // <><Shift> s ## 
-bindsym $mod+Shift+s exec alacritty -e $SHELL -i -c spt
+# Launch // Spotify-TUI // <><Shift> s ## 
+#bindsym $mod+Shift+s exec alacritty -e $SHELL -i -c spt
 ## Launch // Slack // <><Ctrl>s ##
 bindsym $mod+Ctrl+s exec slack
 ## Launch // Telegram // <><Ctrl>t ##
@@ -352,9 +352,9 @@ new_float pixel 1
 # Specify the distance between windows in pixels. (i3-gaps)
 gaps inner 15
 gaps outer -5
+# smart_gaps on
 
 # Only enable gaps on a workspace when there is at least one container
-#smart_gaps on
 
 # Create variables from Xresources for i3's look.
 set_from_resource $focused.color.border i3-wm.client.focused.color.border "#002b36"
@@ -428,13 +428,14 @@ font $i3-wm.bar.font
 # Start the installed regolith-compositor
 #exec --no-startup-id /usr/share/regolith-compositor/init
 
+exec_always --no-startup-id xrandr --size 1360x768
+
 # Start my personal compositor
 exec --no-startup-id picom -b -C --opacity-rule "75:class_g *= 'XTerm'"
 
 
 # Start the bar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec_always --no-startup-id xrandr --size 1360x768
 exec_always --no-startup-id xrdb -load ~/.Xresources
 
 # Reload color scheme
