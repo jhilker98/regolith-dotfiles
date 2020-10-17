@@ -1,0 +1,23 @@
+* Default
+** JMacs
+ - path :: ~/.emacs.d
+** dotfiles
+ - path :: ~/Documents/dotfiles
+** Scripts
+ - path :: ~/.bin
+** Configs
+ - path :: ~/.config
+** Notes
+ - path :: ~/Dropbox/notes
+** Assignments
+ - path :: ~/Documents/assignments
+** RPGs
+ - path :: ~/Documents/rpgs
+** Broken Thrones
+ - path :: ~/Documents/broken-thrones
+** Byrne
+ - path :: ~/Documents/Byrne-World
+** Aurea
+ - path :: ~/Documents/Aurea
+** Shattered Skies
+ - path :: ~/Documents/shattered-skies
