@@ -99,6 +99,17 @@ I am installing evil and evil-collection for vim keybindings in emacs.
   :ensure t
   :config
   (evil-collection-init))
+
+(use-package evil-org
+  :ensure t
+  :after org
+  :config
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'evil-org-mode-hook
+            (lambda ()
+              (evil-org-set-key-theme)))
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
 #+END_SRC
 
 **** Imenu-List
@@ -230,7 +241,12 @@ If I am using csv files I want a csv package.
 (setq linum-relative-current-symbol "")
 )
 #+END_SRC
-
+**** Elcord
+Allows me to set my discord status in emacs.
+#+BEGIN_SRC emacs-lisp
+(use-package elcord
+:ensure t)
+#+END_SRC
 ** UI Packages
 *** Themes
 **** Solarized
@@ -493,27 +509,32 @@ Allows for a TOC to be generated in an org file.
 '((:name "Today"
    :discard (:todo "DONE")
    :scheduled today
-   :transformer (--> it
-       (propertize it 'face '(:foreground "red"))))
-;   :deadline today)
-
-;; If I wanted to color it
-   ;;   :not (:tag "APPT"))
+   :deadline today)
    
-    
-     
-    
-      
      (:name "Coming Up Soon"
      :discard (:todo "DONE") 
-     :date t)
-    
+     :scheduled future
+     :deadline future)
 
      (:name "Overdue"
       :discard (:todo "DONE")
       :deadline past
-      :scheduled past))))
-     
+      :scheduled past
+      :face '(:foreground "red")))))
+
+
+
+(setq org-agenda-sorting-strategy  '((agenda timestamp-up habit-down time-up priority-down category-keep)
+  (todo priority-down category-keep)
+  (tags priority-down category-keep)
+  (search category-keep)))
+
+; ((agenda habit-down time-up priority-down category-keep)
+;  (todo priority-down category-keep)
+;  (tags priority-down category-keep)
+;  (search category-keep))
+
+;(setq org-agenda-sorting-strategy-selected 'time-up)     
    #+END_SRC
 *** Org Export Backends
 **** Org Mediawiki
@@ -829,7 +850,7 @@ Here is a list of general purpose keybindings using General.el.
     "bs" 'switch-to-buffer)
 #+END_SRC
 ** Window Commands
-** Split and Delete Windows
+*** Split and Delete Windows
 #+BEGIN_SRC emacs-lisp 
    (general-define-key
    :states '(normal visual insert emacs)
@@ -907,15 +928,15 @@ Here is a list of general purpose keybindings using General.el.
    "oCa" 'org-cycle-agenda-files
    "oT" '(:ignore t :which-key "toggle")
    "oTi" 'org-toggle-inline-images 
-   "ot" 'org-todo
+   "ot" 'counsel-org-tag
    "oi" '(:ignore t :which-key "insert")
    "oiT" 'toc-org-insert-toc
-   "oit" 'org-time-stamp
+;   "oit" 'org-time-stamp
    "oe" 'org-export-dispatch
-   "oP" 'org-priority
-   "op" '(:ignore t :which-key "Pomodoro")
-   "ops" '(tomatinho :which-key "Start Pomodoro")
-   "opk" '(tomatinho-interactive-quit :which-key "Kill Timer")
+   "op" 'org-priority
+   "oP" '(:ignore t :which-key "Pomodoro")
+   "oPs" '(tomatinho :which-key "Start Pomodoro")
+   "oPk" '(tomatinho-interactive-quit :which-key "Kill Timer")
    "oj" '(:ignore t :which-key "Org Journal")
    "ojn" 'org-journal-new-entry)
 #+END_SRC
@@ -1055,7 +1076,7 @@ like in regular org mode.
 
 #+BEGIN_SRC emacs-lisp
   (general-define-key
-  :states 'normal
+  :states 'normal 
   "TAB" 'evil-toggle-fold)
 #+END_SRC 
 
@@ -1206,9 +1227,9 @@ my toolbars, tooltip-mode, menu-bar, and scroll-bar modes here.
 
 #+BEGIN_SRC emacs-lisp
 (scroll-bar-mode -1)
-(tool-bar-mode   -1)
-(tooltip-mode    -1)
-(menu-bar-mode   -1)
+(tool-bar-mode -1)
+(tooltip-mode -1)
+(menu-bar-mode -1)
 #+END_SRC
 
 ** Making Text Sexier
