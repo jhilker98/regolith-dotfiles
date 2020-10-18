@@ -53,6 +53,21 @@ such as the functions I use, the UI settings, etc.
       org-agenda-block-separator nil
       org-agenda-compact-blocks t
       org-agenda-start-with-log-mode t)
+
+(setq org-agenda-sorting-strategy
+  (quote
+   ((agenda deadline-up priority-down)
+    (todo priority-down category-keep)
+    (tags priority-down category-keep)
+    (search category-keep))))
+
+#+END_SRC
+Now, I want to hide the colons with tags. From StackOverflow.
+#+BEGIN_SRC emacs-lisp
+(font-lock-add-keywords 'org-mode
+  '(("^\\*+ "
+     ":" nil nil
+     (0 (put-text-property (match-beginning 0) (match-end 0) 'display " ")))))
 #+END_SRC
 * Package Initialization and Bootstrapping
 ** Package Initialization and Extra Sources
@@ -503,39 +518,28 @@ Allows for a TOC to be generated in an org file.
 :ensure t
 :config
 (add-hook 'org-mode-hook 'org-super-agenda-mode)
-(setq org-agenda-span 'day)
 
 (setq org-super-agenda-groups
+
 '((:name "Today"
-   :discard (:todo "DONE")
    :scheduled today
    :deadline today)
-   
-     (:name "Coming Up Soon"
-     :discard (:todo "DONE") 
-     :scheduled future
-     :deadline future)
 
-     (:name "Overdue"
+   (:name "Coming Up Soon"
+    :scheduled future
+    :deadline future)
+
+    (:name "Overdue"
       :discard (:todo "DONE")
-      :deadline past
       :scheduled past
-      :face '(:foreground "red")))))
+      :deadline past
+      :face '(:foreground "red"))
 
 
-
-(setq org-agenda-sorting-strategy  '((agenda timestamp-up habit-down time-up priority-down category-keep)
-  (todo priority-down category-keep)
-  (tags priority-down category-keep)
-  (search category-keep)))
-
-; ((agenda habit-down time-up priority-down category-keep)
-;  (todo priority-down category-keep)
-;  (tags priority-down category-keep)
-;  (search category-keep))
-
-;(setq org-agenda-sorting-strategy-selected 'time-up)     
-   #+END_SRC
+    (:name "Personal"
+     :category ("WRITING" "CAMPAIGN" "PERSONAL")
+     :tag ("CAMPAIGN" "WRITING" "PERSONAL")))))
+  #+END_SRC
 *** Org Export Backends
 **** Org Mediawiki
     #+BEGIN_SRC emacs-lisp
