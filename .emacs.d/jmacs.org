@@ -54,20 +54,26 @@ such as the functions I use, the UI settings, etc.
       org-agenda-compact-blocks t
       org-agenda-start-with-log-mode t)
 
-(setq org-agenda-sorting-strategy
-  (quote
-   ((agenda deadline-up priority-down)
-    (todo priority-down category-keep)
-    (tags priority-down category-keep)
-    (search category-keep))))
+#+END_SRC
+I want to sort in each category by the earliest timestamp.
+#+BEGIN_SRC emacs-lisp
+(setq org-agenda-sorting-strategy'((agenda timestamp-up habit-down time-up priority-down category-keep)
+  (todo priority-down category-keep)
+  (tags priority-down category-keep)
+  (search category-keep)))
 
+(setq org-agenda-start-on-weekday nil)
 #+END_SRC
 Now, I want to hide the colons with tags. From StackOverflow.
 #+BEGIN_SRC emacs-lisp
-(font-lock-add-keywords 'org-mode
-  '(("^\\*+ "
-     ":" nil nil
-     (0 (put-text-property (match-beginning 0) (match-end 0) 'display " ")))))
+; (font-lock-add-keywords 'org-mode
+;   '(("^\\*+ "
+;      ":" nil nil
+;      (0 (put-text-property (match-beginning 0) (match-end 0) 'display " ")))))
+#+END_SRC
+And now I want to try and hide the colons in the agenda view.
+#+BEGIN_SRC emacs-lisp
+; (setq org-agenda-hide-tags-regxp ":")
 #+END_SRC
 * Package Initialization and Bootstrapping
 ** Package Initialization and Extra Sources
@@ -519,26 +525,33 @@ Allows for a TOC to be generated in an org file.
 :config
 (add-hook 'org-mode-hook 'org-super-agenda-mode)
 
+(setq org-agenda-span 'day)
 (setq org-super-agenda-groups
 
+
 '((:name "Today"
-   :scheduled today
-   :deadline today)
+   :discard (:todo "DONE")
+  :date today)
+
+    (:name "Personal"
+    :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO")
+    :order 4)
 
    (:name "Coming Up Soon"
     :scheduled future
-    :deadline future)
+    :deadline future
+    :not (:date today :date nil))
+
+
 
     (:name "Overdue"
-      :discard (:todo "DONE")
-      :scheduled past
       :deadline past
       :face '(:foreground "red"))
+     
+      (:name "Some Day"
+       :todo "SOMEDAY"
+       :order 5))))
 
-
-    (:name "Personal"
-     :category ("WRITING" "CAMPAIGN" "PERSONAL")
-     :tag ("CAMPAIGN" "WRITING" "PERSONAL")))))
   #+END_SRC
 *** Org Export Backends
 **** Org Mediawiki
@@ -602,8 +615,8 @@ Org-ref allows me to do citations easily.
 
 ** Timestamp Formats
 #+BEGIN_SRC emacs-lisp
-(setq-default org-display-custom-times t)
-(setq org-time-stamp-custom-formats '("<%a, %d %h>" . "<%a, %d %h %H:%M>"))
+;(setq-default org-display-custom-times t)
+;(setq org-time-stamp-custom-formats '("<%a, %d %h>" . "<%a, %d %h %H:%M>"))
 #+END_SRC  
 * Specific Functions
 ** Find Files
@@ -1521,4 +1534,14 @@ Here are my org capture templates.
 
 (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
 (add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
+#+END_SRC
+* Agenda Custom Commands
+#+BEGIN_SRC emacs-lisp
+(setq org-agenda-custom-commands
+      '(("c" "Simple agenda view"
+         ((tags "PRIORITY=\"A\""
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                 (org-agenda-overriding-header "High-priority unfinished tasks:")))
+          (agenda "")
+          (alltodo "")))))
 #+END_SRC
