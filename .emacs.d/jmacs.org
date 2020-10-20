@@ -527,8 +527,6 @@ Allows for a TOC to be generated in an org file.
 
 (setq org-agenda-span 'day)
 (setq org-super-agenda-groups
-
-
 '((:name "Today"
    :discard (:todo "DONE")
   :date today)
@@ -546,12 +544,7 @@ Allows for a TOC to be generated in an org file.
 
     (:name "Overdue"
       :deadline past
-      :face '(:foreground "red"))
-     
-      (:name "Some Day"
-       :todo "SOMEDAY"
-       :order 5))))
-
+      :face '(:foreground "red"))))
   #+END_SRC
 *** Org Export Backends
 **** Org Mediawiki
@@ -1387,6 +1380,7 @@ Here is my prose configuration for doom modeline.
    (defun set-prose-modeline ()
      (doom-modeline-set-modeline 'prose-modeline))
    (add-hook 'org-mode-hook 'set-prose-modeline)
+   (add-hook 'markdown-mode-hook 'set-prose-modeline)
   #+END_SRC
 *** Programming Configuration
 Here is my programming configuration for doom modeline.
@@ -1537,11 +1531,11 @@ Here are my org capture templates.
 #+END_SRC
 * Agenda Custom Commands
 #+BEGIN_SRC emacs-lisp
-(setq org-agenda-custom-commands
-      '(("c" "Simple agenda view"
-         ((tags "PRIORITY=\"A\""
-                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
-                 (org-agenda-overriding-header "High-priority unfinished tasks:")))
-          (agenda "")
-          (alltodo "")))))
+;(setq org-agenda-custom-commands
+;      '(("p" "Planner"
+;         ((org-ql-block '(and (ts :from "today")
+;                              (ts :to "7")
+;                              (todo "TODO" "IN-PROGRESS" "SOMEDAY"))
+;                        ((org-ql-block-header "Coming Up Soon")))
+;         (todo)))))
 #+END_SRC
