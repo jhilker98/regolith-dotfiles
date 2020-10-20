@@ -620,8 +620,8 @@ Org-ref allows me to do citations easily.
 
 ** Timestamp Formats
 #+BEGIN_SRC emacs-lisp
-;(setq-default org-display-custom-times t)
-;(setq org-time-stamp-custom-formats '("<%a, %d %h>" . "<%a, %d %h %H:%M>"))
+(setq-default org-display-custom-times t)
+(setq org-time-stamp-custom-formats '("<%a, %d %h>" . "<%a, %d %h %H:%M>"))
 #+END_SRC  
 * Specific Functions
 ** Find Files
