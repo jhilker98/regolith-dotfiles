@@ -388,10 +388,17 @@ Writeroom-Mode is a minor mode for distraction-free writing.
 :ensure t)
 #+END_SRC
 *** Wordsmith Mode
+
     #+BEGIN_SRC emacs-lisp
     (use-package wordsmith-mode
     :ensure t)
     #+END_SRC
+***  Markdown Mode
+This allows me to use markdown mode.
+#+BEGIN_SRC emacs-lisp
+(use-package markdown-mode
+:ensure t)
+#+END_SRC 
 ** RPG Packages
 *** Decide-Mode
 This is useful for rolling dice.
@@ -526,10 +533,19 @@ Allows for a TOC to be generated in an org file.
 (add-hook 'org-mode-hook 'org-super-agenda-mode)
 
 (setq org-agenda-span 'day)
+
+
 (setq org-super-agenda-groups
 '((:name "Today"
    :discard (:todo "DONE")
   :date today)
+
+
+    (:name "Overdue"
+      :deadline past
+      :scheduled past
+      :face '(:foreground "red")
+      :order 3)
 
     (:name "Personal"
     :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO")
@@ -537,14 +553,10 @@ Allows for a TOC to be generated in an org file.
 
    (:name "Coming Up Soon"
     :scheduled future
-    :deadline future
-    :not (:date today :date nil))
+    :deadline future))))
 
 
 
-    (:name "Overdue"
-      :deadline past
-      :face '(:foreground "red"))))
   #+END_SRC
 *** Org Export Backends
 **** Org Mediawiki
