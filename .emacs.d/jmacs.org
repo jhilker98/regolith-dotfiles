@@ -31,8 +31,9 @@
 ;(setq-default org-agenda-files (list "~/Dropbox/org/agenda.org"))
     #+END_SRC
 *** Agenda Views
+    I am setting up my basic agenda view here before any custom commands. I will set up the way the groups look when I install =org-super-agenda=.
    #+BEGIN_SRC emacs-lisp
-(setq org-agenda-time-grid '((daily today require-timed)()() "----------------------" nil)
+   (setq org-agenda-time-grid '((daily today require-timed)()() "----------------------" nil)
       org-agenda-show-all-dates nil
       org-agenda-use-time-grid nil
       org-agenda-skip-scheduled-if-done t
@@ -67,31 +68,22 @@ This is one more way I am attempting to hide tags in the agenda view.
 #+BEGIN_SRC emacs-lisp
 (setq org-agenda-hide-tags-regexp ".*")
 #+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-(setq org-agenda-custom-commands
-      '(("p" "Planner"
-         ((org-ql-block '(and (ts :on "today")
-                          (not (done)))
-                        ((org-ql-block-header "Today")))))))
-#+END_SRC
 *** TO-DO Keywords
    Org-mode scheduling is probably the feature I use the most in org-mode. I want to set up my keywords here, so I don't need to do it in every file. I'm also setting up a 
 #+BEGIN_SRC emacs-lisp
 (setq org-todo-keywords '(
       (sequence "TODO" "NEXT" "INPROGRESS"  "|" "DONE" "CANCELED")
+      ;(sequence "WAITING" "|")
       (sequence "SOMEDAY" "|")))
 
 (setq org-todo-keyword-faces
  '(("TODO" . "red")
    ("NEXT" . "yellow")
-   ("INPROGRESS" . "brightblue")
-   ("DONE" . "blue")
+   ("INPROGRESS" . "#83a598")
+   ("DONE" . "#83a598")
    ("CANCELED" . (:foreground "blue" :weight bold))
    ("DONE" . "green")))
 #+END_SRC
-*** Agenda Views
-This is where I set up my agenda views. This is currently a WIP.
 ** Setting A Customize File
    #+BEGIN_SRC emacs-lisp
 (setq-default custom-file "~/.emacs.d/custom.el")
@@ -546,38 +538,45 @@ This is where I set up my agenda views. This is currently a WIP.
   :init (add-hook 'org-mode-hook #'toc-org-enable))
     #+END_SRC
 *** Org Super Agenda
-    #+BEGIN_SRC emacs-lisp
+
+I'm setting up my agenda with a few groups. I want things for today to show up first, followed by things coming up soon, overdue items, personal items, and things to do someday last.
+ #+BEGIN_SRC emacs-lisp
 (use-package org-super-agenda
 :ensure t
 :config
 (add-hook 'org-mode-hook 'org-super-agenda-mode)
 
-(setq org-agenda-span 'day))
+(setq org-agenda-span 3)
 
-;(setq org-super-agenda-groups
-;'((:name "Today"
-;   :discard (:todo "DONE")
-;  :date today)
-;
-;    (:name "Personal"
-;    :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO")
-;    :order 4)
-;
-;   (:name "Coming Up Soon"
-;    :scheduled future
-;    :deadline future)
-;
-;
-;
-;    (:name "Overdue"
-;      :deadline past
-;      :face '(:foreground "red")))))
+(setq org-super-agenda-groups
+'((:name "Today"
+   :discard (:todo "DONE")
+   :date today)
 
 
+    (:name "Overdue"
+      :deadline past
+      :scheduled past
+      :face '(:foreground "red")
+      :order 3)
+
+    (:name "Personal"
+    :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO")
+    :order 4)
+
+    (:name "Someday"
+     :todo "SOMEDAY")
+
+   (:name "Coming Up Soon"
+    :scheduled future
+    :deadline future
+    :date t))))
 
 
 
-    #+END_SRC
+;'((:auto-category t)))) - for automatically by category
+#+END_SRC
+
 *** Org Export Backends
 **** Org Mediawiki
      #+BEGIN_SRC emacs-lisp
