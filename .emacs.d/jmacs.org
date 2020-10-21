@@ -35,7 +35,7 @@
 
 ** Use Python 3 Interpreter 
    #+BEGIN_SRC emacs-lisp
-(setq python-shell-interpreter "python3.7")
+(setq python-shell-interpreter "python3")
    #+END_SRC
 ** Setting Notes File
    #+BEGIN_SRC emacs-lisp
@@ -55,11 +55,11 @@
       org-agenda-start-with-log-mode t)
 
 
-(setq org-agenda-prefix-format 
-'((agenda . " %i %-12:c%?-12t% s")
- (todo . " %i %-12:c")
- (tags . " %i %-12:c")
- (search . " %i %-12:c")))
+;(setq org-agenda-prefix-format
+;'((agenda . " %i %-12:c%?-12t% s")
+; (todo . " %i %-12:c%-12s")
+; (tags . " %i %-12:c")
+; (search . " %i %-12:c")))
 
    #+END_SRC
    I want to sort in each category by the earliest timestamp.
@@ -543,32 +543,28 @@ This is one more way I am attempting to hide tags in the agenda view.
 :config
 (add-hook 'org-mode-hook 'org-super-agenda-mode)
 
-(setq org-agenda-span 'day)
+(setq org-agenda-span 'day))
+
+;(setq org-super-agenda-groups
+;'((:name "Today"
+;   :discard (:todo "DONE")
+;  :date today)
+;
+;    (:name "Personal"
+;    :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO")
+;    :order 4)
+;
+;   (:name "Coming Up Soon"
+;    :scheduled future
+;    :deadline future)
+;
+;
+;
+;    (:name "Overdue"
+;      :deadline past
+;      :face '(:foreground "red")))))
 
 
-(setq org-super-agenda-groups
-'((:name "Today"
-   :discard (:todo "DONE")
-  :date today)
-
-
-    (:name "Overdue"
-      :deadline past
-      :scheduled past
-      :face '(:foreground "red")
-      :order 3)
-
-    (:name "Personal"
-    :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO")
-    :order 4)
-
-    (:name "Projects"
-     :category "PROJECT"
-     :order 5)
-
-   (:name "Coming Up Soon"
-    :scheduled future
-    :deadline future))))
 
 
 
@@ -972,7 +968,8 @@ This allows me to show other properties in the agenda view.
    "oCa" 'org-cycle-agenda-files
    "oT" '(:ignore t :which-key "toggle")
    "oTi" 'org-toggle-inline-images 
-   "ot" 'counsel-org-tag
+;   "ot" 'counsel-org-tag
+    "ot" 'org-time-stamp
    "oi" '(:ignore t :which-key "insert")
    "oiT" 'toc-org-insert-toc
 ;   "oit" 'org-time-stamp
@@ -1565,6 +1562,11 @@ This allows me to show other properties in the agenda view.
     #+END_SRC
 * Custom Agenda Views
   #+BEGIN_SRC emacs-lisp
+(setq org-agenda-custom-commands
+      '(("p" "Planner"
+         ((org-ql-block '(and (ts :from "1")
+                               (ts :to "7"))
+                               ((org-ql-block-header "Coming Up Soon")))))))
 
   #+END_SRC
 * Agenda Custom Commands
