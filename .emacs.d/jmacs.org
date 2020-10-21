@@ -11,37 +11,26 @@
 (setq user-full-name "Jacob Hilker"
       user-mail-address "jacob.hilker2@gmail.com")
    #+END_SRC
-** Agenda File & Synchronization Setup
+
+** Org Mode Config
+   This is where I am keeping most of my org mode config.
+*** Agenda File & Synchronization Setup
    Here I am setting up the agenda file. I'm also setting it up so that the UID is stored, and that the daemon can restore frames.
    #+BEGIN_SRC emacs-lisp
 (setq org-icalendar-store-UID t)
-(setq restart-emacs-restore-frames t)
+;(setq restart-emacs-restore-frames t)
    #+END_SRC
-*** During the School Year
+**** During the School Year
     #+BEGIN_SRC emacs-lisp
-(setq org-agenda-files (list "~/Dropbox/notes/fall2020/notes.org" "~/Dropbox/org/agenda/agenda.org"))
+(setq org-agenda-files (list "~/Dropbox/org/agenda.org" "~/Dropbox/notes/fall2020/notes.org" ))
     #+END_SRC
 
-*** During The Summer
+**** During The Summer
     #+BEGIN_SRC emacs-lisp
 
-;(setq-default org-agenda-files (list "~/Dropbox/org/agenda/agenda.org"))
+;(setq-default org-agenda-files (list "~/Dropbox/org/agenda.org"))
     #+END_SRC
-** Setting A Customize File
-   #+BEGIN_SRC emacs-lisp
-(setq-default custom-file "~/.emacs.d/custom.el")
-(load custom-file) 
-   #+END_SRC
-
-** Use Python 3 Interpreter 
-   #+BEGIN_SRC emacs-lisp
-(setq python-shell-interpreter "python3")
-   #+END_SRC
-** Setting Notes File
-   #+BEGIN_SRC emacs-lisp
-(setq org-default-notes-file "~/Dropbox/notes/fall2020/notes.org")
-   #+END_SRC
-** Agenda View
+*** Agenda Views
    #+BEGIN_SRC emacs-lisp
 (setq org-agenda-time-grid '((daily today require-timed)()() "----------------------" nil)
       org-agenda-show-all-dates nil
@@ -53,14 +42,6 @@
       org-agenda-block-separator nil
       org-agenda-compact-blocks t
       org-agenda-start-with-log-mode t)
-
-
-;(setq org-agenda-prefix-format
-;'((agenda . " %i %-12:c%?-12t% s")
-; (todo . " %i %-12:c%-12s")
-; (tags . " %i %-12:c")
-; (search . " %i %-12:c")))
-
    #+END_SRC
    I want to sort in each category by the earliest timestamp.
    #+BEGIN_SRC emacs-lisp
@@ -71,7 +52,7 @@
 
 (setq org-agenda-start-on-weekday nil)
    #+END_SRC
-   Now, I want to hide the colons with tags. From StackOverflow.
+   Now, I want to hide the colons in tags. From StackOverflow.
    #+BEGIN_SRC emacs-lisp
 ; (font-lock-add-keywords 'org-mode
 ;   '(("^\\*+ "
@@ -86,6 +67,47 @@ This is one more way I am attempting to hide tags in the agenda view.
 #+BEGIN_SRC emacs-lisp
 (setq org-agenda-hide-tags-regexp ".*")
 #+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq org-agenda-custom-commands
+      '(("p" "Planner"
+         ((org-ql-block '(and (ts :on "today")
+                          (not (done)))
+                        ((org-ql-block-header "Today")))))))
+#+END_SRC
+*** TO-DO Keywords
+   Org-mode scheduling is probably the feature I use the most in org-mode. I want to set up my keywords here, so I don't need to do it in every file. I'm also setting up a 
+#+BEGIN_SRC emacs-lisp
+(setq org-todo-keywords '(
+      (sequence "TODO" "NEXT" "INPROGRESS"  "|" "DONE" "CANCELED")
+      (sequence "SOMEDAY" "|")))
+
+(setq org-todo-keyword-faces
+ '(("TODO" . "red")
+   ("NEXT" . "yellow")
+   ("INPROGRESS" . "brightblue")
+   ("DONE" . "blue")
+   ("CANCELED" . (:foreground "blue" :weight bold))
+   ("DONE" . "green")))
+#+END_SRC
+*** Agenda Views
+This is where I set up my agenda views. This is currently a WIP.
+** Setting A Customize File
+   #+BEGIN_SRC emacs-lisp
+(setq-default custom-file "~/.emacs.d/custom.el")
+(load custom-file) 
+   #+END_SRC
+
+** Use Python 3 Interpreter 
+   #+BEGIN_SRC emacs-lisp
+(setq python-shell-interpreter "python3")
+   #+END_SRC
+** Setting Notes File
+
+
+   #+BEGIN_SRC emacs-lisp
+(setq org-default-notes-file "~/Dropbox/notes/fall2020/notes.org")
+   #+END_SRC
 * Package Initialization and Bootstrapping
 ** Package Initialization and Extra Sources
    I am adding extra sources to my package archives here.
@@ -115,8 +137,8 @@ This is one more way I am attempting to hide tags in the agenda view.
 **** EVIL and EVIL-ORG
      I am installing evil and evil-collection for vim keybindings in emacs.
      #+BEGIN_SRC emacs-lisp
-(use-package undo-tree
-:ensure t)
+     (use-package undo-tree
+     :ensure t)
 
 (use-package evil
   :ensure t
@@ -131,19 +153,7 @@ This is one more way I am attempting to hide tags in the agenda view.
   :ensure t
   :config
   (evil-collection-init))
-
-(use-package evil-org
-  :ensure t
-  :after org
-  :config
-  (add-hook 'org-mode-hook 'evil-org-mode)
-  (add-hook 'evil-org-mode-hook
-            (lambda ()
-              (evil-org-set-key-theme)))
-  (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys))
      #+END_SRC
-
 **** Imenu-List
      Imenu-list allows me to get an overview of my code or outline for an
      AAR/novel. Here I enable it and install it.
@@ -323,43 +333,42 @@ This is one more way I am attempting to hide tags in the agenda view.
     #+END_SRC
 *** Ewal
     #+BEGIN_SRC emacs-lisp
-(use-package ewal 
-:ensure t
-:init (setq ewal-use-built-in-always-p nil
-              ewal-use-built-in-on-failure-p t
-              ewal-built-in-palette "sexy-material"
-              ewal-json-file "~/.cache/wal/colors.json"))
+;(use-package ewal 
+;:ensure t
+;:init (setq ewal-use-built-in-always-p nil
+;              ewal-use-built-in-on-failure-p t
+;              ewal-built-in-palette "sexy-material"
+;              ewal-json-file "~/.cache/wal/colors.json"))
     #+END_SRC
 
 *** Centaur Tabs
-    #+BEGIN_SRC emacs-lisp :tangle nil
-; (use-package centaur-tabs
-; :ensure t
-; :config
-; (centaur-tabs-mode t)
-; 
-;    (setq centaur-tabs-set-modified-marker t)
-;    (setq centaur-tabs-modified-marker "•")
-;    (setq centaur-tabs-set-bar 'left) 
-;    (setq centaur-tabs-set-icons t)
-;    (setq centaur-tabs-set-close-button t)
-;    (setq centaur-tabs-close-button "x")
-;    (setq centaur-tabs-style "rounded")
-;    (setq centaur-tabs-height 32)
-;    (define-key evil-normal-state-map (kbd "g t") 'centaur-tabs-forward)
-;    (define-key evil-normal-state-map (kbd "g T") 'centaur-tabs-backward)
-;    (setq centaur-tabs-cycle-scope 'tabs))
-; 
-; 
-; (defun centaur-tabs-buffer-groups ()
-;  "Use as few groups as possible."
-; (list (cond ((string-equal "*" (substring (buffer-name) 0 1))
-;                    "Tools")
-;                    (cond ((string-equal "eglot" (downcase (substring (buffer-name) 1 6)))
-;                           "Eglot")
-;                          (t
-;                           "Tools")))))
-
+    #+BEGIN_SRC emacs-lisp 
+ (use-package centaur-tabs
+ :ensure t
+ :config
+ (centaur-tabs-mode t)
+ 
+    (setq centaur-tabs-set-modified-marker t)
+    (setq centaur-tabs-modified-marker "•")
+    (setq centaur-tabs-set-bar 'left) 
+    (setq centaur-tabs-set-icons t)
+    (setq centaur-tabs-set-close-button t)
+    (setq centaur-tabs-close-button "x")
+    (setq centaur-tabs-style "rounded")
+    (setq centaur-tabs-height 32)
+    (define-key evil-normal-state-map (kbd "g t") 'centaur-tabs-forward)
+    (define-key evil-normal-state-map (kbd "g T") 'centaur-tabs-backward)
+    (setq centaur-tabs-cycle-scope 'tabs))
+ 
+ 
+ (defun centaur-tabs-buffer-groups ()
+  "Use as few groups as possible."
+ (list (cond ((string-equal "*" (substring (buffer-name) 0 1))
+                    "Tools")
+                    (cond ((string-equal "eglot" (downcase (substring (buffer-name) 1 6)))
+                           "Eglot")
+                          (t
+                           "Tools")))))
 
 
     #+END_SRC
@@ -979,7 +988,10 @@ This allows me to show other properties in the agenda view.
    "oPs" '(tomatinho :which-key "Start Pomodoro")
    "oPk" '(tomatinho-interactive-quit :which-key "Kill Timer")
    "oj" '(:ignore t :which-key "Org Journal")
-   "ojn" 'org-journal-new-entry)
+   "ojn" 'org-journal-new-entry
+   "o/" 'org-ql-search)
+
+
    #+END_SRC
 ** More Org-Mode
    #+BEGIN_SRC emacs-lisp
@@ -1547,44 +1559,6 @@ This allows me to show other properties in the agenda view.
 
 
      /text/
-*** Old Gcal Config
-    #+BEGIN_SRC emacs-lisp :tangle nil
-(use-package org-gcal
-:ensure t
-:config
-(setq org-gcal-client-id (get-gcal-config-value 'org-gcal-client-id)
-      org-gcal-client-secret (get-gcal-config-value 'org-gcal-client-secret)
-      org-gcal-file-alist '(("bjmahvae7o24e03504bh14019g@group.calendar.google.com" . "~/Dropbox/notes/spring-2020.org")
-      ("jacob.hilker2@gmail.com" . "~/Dropbox/org/agenda/agenda.org"))))
-
-(add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync) ))
-(add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync) ))
-    #+END_SRC
-* Custom Agenda Views
-  #+BEGIN_SRC emacs-lisp
-(setq org-agenda-custom-commands
-      '(("p" "Planner"
-         ((org-ql-block '(and (ts :from "1")
-                               (ts :to "7"))
-                               ((org-ql-block-header "Coming Up Soon")))))))
-
-  #+END_SRC
-* Agenda Custom Commands
-  #+BEGIN_SRC emacs-lisp
-;(setq org-agenda-custom-commands
-;          (cons '("d" "Deadlines and scheduled work" alltodo ""
-;                  ((org-agenda-skip-function 'ots-org-entry-skip-non-deadline)
-;                   ;; Add code here to control deadline date display?
-;                   (org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t% s")
-;                                               (timeline . "  % s")
-;                                               (todo . " %i %-12:c %s")
-;                                               (tags . " %i %-12:c")
-;                                               (search . " %i %-12:c")))
-;                   (org-agenda-sorting-strategy '(deadline-up))))
-;                org-agenda-custom-commands))
-  #+END_SRC
-
-  #+END_SRC
 * Quick Test of Agenda Format
   #+BEGIN_SRC emacs-lisp
 ;(org-add-agenda-custom-command '("d" "Deadlines and scheduled work" alltodo "" ((org-agenda-skip-function '(org-agenda-skip-entry-if 'notdeadline)) (org-agenda-prefix-format '((todo . " %i %-22(org-entry-get nil \"DEADLINE\") %-12:c %s"))) (org-agenda-sorting-strategy '(deadline-up)))))

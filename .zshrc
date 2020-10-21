@@ -122,10 +122,11 @@ export FZF_DEFAULT_OPTS='--height=30% --layout=reverse'
 # # End Underline
  export LESS_TERMCAP_ue=$(tput sgr0)
 # # End bold, blinking, standout, underline
- export LESS_TERMCAP_me=$(tput sgr0)
+export LESS_TERMCAP_me=$(tput sgr0)
 export FZF_MARKS_FILE="/home/$USER/.fzf-marks"
 
-
+export NOTES="$HOME/Dropbox/notes/fall2020/notes.org"
+export AGENDA="$HOME/Dropbox/org/agenda.org"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
