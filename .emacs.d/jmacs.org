@@ -15,7 +15,7 @@
 ** Org Mode Config
    This is where I am keeping most of my org mode config.
 *** Agenda File & Synchronization Setup
-   Here I am setting up the agenda file. I'm also setting it up so that the UID is stored, and that the daemon can restore frames.
+   Here I am setting up the agenda files. During the school year, I want to have my notes as part of the agenda, but not in summer time, which is why I have both. I'm also setting it up so that the UID is stored, and that the daemon can restore frames. 
    #+BEGIN_SRC emacs-lisp
 (setq org-icalendar-store-UID t)
 ;(setq restart-emacs-restore-frames t)
@@ -46,8 +46,9 @@
    #+END_SRC
    I want to sort in each category by the earliest timestamp.
    #+BEGIN_SRC emacs-lisp
-(setq org-agenda-sorting-strategy'((agenda timestamp-up habit-down time-up priority-down category-keep)
-  (todo priority-down category-keep)
+(setq org-agenda-sorting-strategy
+ '((agenda timestamp-up habit-down time-up priority-down category-keep)
+  (todo todo-state-up priority-down category-keep)
   (tags priority-down category-keep)
   (search category-keep)))
 
@@ -69,20 +70,23 @@ This is one more way I am attempting to hide tags in the agenda view.
 (setq org-agenda-hide-tags-regexp ".*")
 #+END_SRC
 *** TO-DO Keywords
-   Org-mode scheduling is probably the feature I use the most in org-mode. I want to set up my keywords here, so I don't need to do it in every file. I'm also setting up a 
+   Org-mode scheduling is probably the feature I use the most in org-mode. I want to set up my keywords here, so I don't need to do it in every file. I'm also setting up the colors, and reducing the warning days to 0 days so I can see exactly when an assignment is due.
 #+BEGIN_SRC emacs-lisp
 (setq org-todo-keywords '(
-      (sequence "TODO" "NEXT" "INPROGRESS"  "|" "DONE" "CANCELED")
+      (sequence "TODO" "INPROGRESS" "SOMEDAY"  "|" "DONE" "CANCELED")))
       ;(sequence "WAITING" "|")
-      (sequence "SOMEDAY" "|")))
 
 (setq org-todo-keyword-faces
- '(("TODO" . "red")
-   ("NEXT" . "yellow")
+ '(("TODO" . (:foreground "#cc241d" :weight black))
    ("INPROGRESS" . "#83a598")
+   ("SOMEDAY" . (:foreground "#d3869b" :slant italic))
    ("DONE" . (:foreground "#83a598" :strike-through t))
-   ("CANCELED" . (:foreground "blue" :weight bold))
-   ("DONE" . "green")))
+   ("CANCELED" . (:foreground "cc241d" :weight bold))))
+;   ("DONE" . "green")
+
+(setq org-deadline-warning-days 0)
+(setq org-agenda-weekend-days nil)
+
 #+END_SRC
 ** Setting A Customize File
    #+BEGIN_SRC emacs-lisp
@@ -95,9 +99,7 @@ This is one more way I am attempting to hide tags in the agenda view.
 (setq python-shell-interpreter "python3")
    #+END_SRC
 ** Setting Notes File
-
-
-   #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
 (setq org-default-notes-file "~/Dropbox/notes/fall2020/notes.org")
    #+END_SRC
 * Package Initialization and Bootstrapping
@@ -156,6 +158,17 @@ This is one more way I am attempting to hide tags in the agenda view.
   :ensure t
   :config
   (evil-collection-init))
+
+(use-package evil-org
+  :ensure t
+  :after org
+  :config
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'evil-org-mode-hook
+            (lambda ()
+              (evil-org-set-key-theme)))
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
      #+END_SRC
 **** Imenu-List
      Imenu-list allows me to get an overview of my code or outline for an
@@ -305,6 +318,11 @@ This is one more way I am attempting to hide tags in the agenda view.
 (use-package elcord
 :ensure t)
      #+END_SRC
+**** BM
+#+BEGIN_SRC emacs-lisp
+(use-package bm
+:ensure t)
+#+END_SRC
 ** UI Packages
 *** Themes
 **** Solarized
@@ -458,7 +476,7 @@ This is one more way I am attempting to hide tags in the agenda view.
     (use-package wordsmith-mode
     :ensure t)
     #+END_SRC
-***  Markdown Mode
+*** Markdown Mode
     This allows me to use markdown mode.
     #+BEGIN_SRC emacs-lisp
 (use-package markdown-mode
@@ -599,13 +617,24 @@ I'm setting up my agenda with a few groups. I want things for today to show up f
 :config
 (add-hook 'org-mode-hook 'org-super-agenda-mode)
 
-(setq org-agenda-span 3)
+(setq org-agenda-span 5)
+
+
+
 
 (setq org-super-agenda-groups
 '((:name "Today"
-;   :discard (:todo "DONE")
+   :discard (:todo "DONE")
    :date today)
-
+   
+   (:name "Projects"
+    :category "PROJECT"
+    :order 5
+)
+    
+    (:name "Someday"
+     :todo "SOMEDAY"
+     :order 5)
 
     (:name "Overdue"
       :deadline past
@@ -617,8 +646,9 @@ I'm setting up my agenda with a few groups. I want things for today to show up f
     :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO")
     :order 4)
 
-    (:name "Someday"
-     :todo "SOMEDAY")
+    (:name "Classwork"
+     :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445"))
+
 
    (:name "Coming Up Soon"
     :scheduled future
@@ -626,7 +656,11 @@ I'm setting up my agenda with a few groups. I want things for today to show up f
     :date t))))
 
 
-
+;(setq org-agenda-prefix 
+;'((agenda . " %i %-12:c%?-12t% s")
+; (todo . " %i %-12:c")
+; (tags . " %i %-12:c")
+; (search . " %i %-12:c")))
 ;'((:auto-category t)))) - for automatically by category
 #+END_SRC
 
@@ -690,7 +724,8 @@ This allows me to show other properties in the agenda view.
 (use-package org-agenda-property
 :ensure t)
 #+END_SRC
-** Elfeed
+** News Packages
+*** Elfeed
    Elfeed is a feed reader. EMMS is a music player for podcasts.
 #+BEGIN_SRC emacs-lisp
 (use-package elfeed-org
@@ -733,7 +768,7 @@ This allows me to show other properties in the agenda view.
   :ensure t
   :bind (:map elfeed-search-mode-map
                ("C-g" . bookmark-jump)
-;              ("A" . bjm/elfeed-show-all)
+              ("a" . bjm/elfeed-show-all)
 ;              ("E" . bjm/elfeed-show-emacs)
 ;              ("D" . bjm/elfeed-show-daily)
               ("q" . bjm/elfeed-save-db-and-bury)))
@@ -744,8 +779,6 @@ This allows me to show other properties in the agenda view.
 
 (add-hook 'elfeed-new-entry-hook #'ime-elfeed-podcast-tagger)
 
-(use-package emms
-:ensure t)
 #+END_SRC
 * Miscellaneous Formats
 ** Title Format
@@ -755,10 +788,15 @@ This allows me to show other properties in the agenda view.
 
 ** Timestamp Formats
    #+BEGIN_SRC emacs-lisp
-(setq-default org-display-custom-times t)
-(setq org-time-stamp-custom-formats '("<%a, %d %h>" . "<%a, %d %h %H:%M>"))
+;(setq-default org-display-custom-times t)
+;(setq org-time-stamp-custom-formats '("<%a, %d %h>" . "<%a, %d %h %H:%M>"))
 ;(setq org-agenda-format-date "%d %h")
    #+END_SRC  
+** Agenda Date Format
+I don't like the default date format for the agenda. I'm going to make it a bit smaller here.
+#+BEGIN_SRC emacs-lisp
+(setq org-agenda-format-date "%a, %d %b.")
+#+END_SRC
 * Specific Functions
 ** Find Files
 *** Find Config File
@@ -1380,6 +1418,7 @@ This allows me to show other properties in the agenda view.
    "T" '(ansi-term :which-key "Terminal")
    "D" '(:ignore t :which-key "Describe")
    "Df" 'describe-font
+   "DF" 'counsel-describe-face
    "Dt" 'describe-theme) 
    #+END_SRC
 ** Start Server
