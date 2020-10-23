@@ -1722,8 +1722,7 @@ I don't like the default date format for the agenda. I'm going to make it a bit 
 
 
      #+END_SRC
-*** Centaur Tabs
-**** Use-Package
+*** Centaur Tabs**** Use-Package
      #+BEGIN_SRC emacs-lisp :tangle no
 (use-package centaur-tabs
 :ensure t
@@ -1765,6 +1764,15 @@ I don't like the default date format for the agenda. I'm going to make it a bit 
 
 
      /text/
+*** Org Mode Icons
+**** Personal Agenda
+ *  - writing
+ *  - writing
+**** School Agenda
+**** General for School
+    
+**** By Class
+    - CPSC419
 * Quick Test of Agenda Format
   #+BEGIN_SRC emacs-lisp
 ;(org-add-agenda-custom-command '("d" "Deadlines and scheduled work" alltodo "" ((org-agenda-skip-function '(org-agenda-skip-entry-if 'notdeadline)) (org-agenda-prefix-format '((todo . " %i %-22(org-entry-get nil \"DEADLINE\") %-12:c %s"))) (org-agenda-sorting-strategy '(deadline-up)))))
@@ -1772,12 +1780,3 @@ I don't like the default date format for the agenda. I'm going to make it a bit 
 
 
   #+END_SRC
-* Org Mode Icons
-** Personal Agenda
- *  - writing
- *  - writing
-** School Agenda
-*** General for School
-    
-*** By Class
-    - CPSC419
