@@ -1772,3 +1772,12 @@ I don't like the default date format for the agenda. I'm going to make it a bit 
 
 
   #+END_SRC
+* Org Mode Icons
+** Personal Agenda
+ *  - writing
+ *  - writing
+** School Agenda
+*** General for School
+    
+*** By Class
+    - CPSC419
