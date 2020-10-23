@@ -1,6 +1,5 @@
 #+title: JMACS
 #+author: Jacob Hilker
-#+TODO: TODO IN-PROGRESS | DONE
 * *Introduction to JMACS*
   Welcome to JMacs! This is a my personal configuration of emacs, for
   solo RPG campaigns like [[https://www.ironswornrpg.com/][Ironsworn]], writing (both prose and code), and
@@ -85,7 +84,7 @@ This is one more way I am attempting to hide tags in the agenda view.
 ;   ("DONE" . "green")
 
 (setq org-deadline-warning-days 0)
-(setq org-agenda-weekend-days nil)
+;(setq org-agenda-weekend-days nil)
 
 #+END_SRC
 *** Custom Agenda Commands
@@ -668,7 +667,9 @@ I'm setting up my agenda with a few groups. I want things for today to show up f
    :discard (:todo "DONE")
    :date today
    :scheduled today
-   :and (:date today :time-grid t))
+   :and (:date today :time-grid t)
+
+)
 
    
    (:name "Projects"
@@ -703,12 +704,11 @@ I'm setting up my agenda with a few groups. I want things for today to show up f
 
 ;(setq org-agenda-prefix 
 ;'((agenda . " %i %-12:c%?-12t% s")
-; (todo . " %i %-12:c")
+; (todo . " %i %-12:c%s")
 ; (tags . " %i %-12:c")
 ; (search . " %i %-12:c")))
 ;'((:auto-category t)))) - for automatically by category
 #+END_SRC
-
 *** Org Export Backends
 **** Org Mediawiki
      #+BEGIN_SRC emacs-lisp
@@ -840,7 +840,7 @@ This allows me to show other properties in the agenda view.
 ** Agenda Date Format
 I don't like the default date format for the agenda. I'm going to make it a bit smaller here.
 #+BEGIN_SRC emacs-lisp
-(setq org-agenda-format-date "%a, %d %b.")
+(setq org-agenda-format-date "\n%a, %d %b.")
 #+END_SRC
 * Specific Functions
 ** Find Files
@@ -1534,11 +1534,15 @@ I don't like the default date format for the agenda. I'm going to make it a bit 
     Code Pro for my fonts. Here I have created a list of fonts and I can
     switch between it by commenting out the other fonts. 
 
-    #+TODO: figure out font switching, and if using regular modeline enable the solarized section below.
+**** figure out font switching, and if using regular modeline enable the solarized section below.
 
 
     #+BEGIN_SRC emacs-lisp
-(set-default-font "Iosevka Nerd Font-12" nil t)
+     (set-default-font "Iosevka Nerd Font-12" nil t)
+;    (set-default-font "Roboto Mono-12" nil t)
+    #+END_SRC
+ 
+#+BEGIN_SRC emacs-lisp
 ;(defun xah-cycle-font-2 (*n)
 ;  "Change font in current window between 2 fonts.
 ;URL `http://ergoemacs.org/emacs/emacs_switching_fonts.html'

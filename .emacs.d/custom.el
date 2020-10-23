@@ -89,6 +89,7 @@
  ;; If there is more than one, they won't work right.
  '(default ((((class color) (min-colors 16777215)) (:background "#282828" :foreground "#fdf4c1")) (((class color) (min-colors 255)) (:background "#262626" :foreground "#ffffaf"))))
  '(italic ((t (:underline nil :slant italic))))
+ '(org-agenda-date ((t (:foreground "#d3869b" :underline nil :weight normal))))
  '(org-agenda-date-today ((t (:foreground "#83a598" :slant normal :weight bold))))
- '(org-agenda-date-weekend ((t (:foreground "#d3869b" :slant italic :weight normal))))
+ '(org-agenda-date-weekend ((t (:foreground "#fabd2f" :slant italic :weight semi-bold))))
  '(org-agenda-property-face ((t nil))))
