@@ -72,15 +72,16 @@ This is one more way I am attempting to hide tags in the agenda view.
    Org-mode scheduling is probably the feature I use the most in org-mode. I want to set up my keywords here, so I don't need to do it in every file. I'm also setting up the colors, and reducing the warning days to 0 days so I can see exactly when an assignment is due.
 #+BEGIN_SRC emacs-lisp
 (setq org-todo-keywords '(
-      (sequence "TODO" "INPROGRESS" "SOMEDAY"  "|" "DONE" "CANCELED")))
+      (sequence "TODO:" "NEXT" "INPROGRESS:" "SOMEDAY:"  "|" "DONE:" "CANCELED:")))
       ;(sequence "WAITING" "|")
 
 (setq org-todo-keyword-faces
- '(("TODO" . (:foreground "#cc241d" :weight black))
-   ("INPROGRESS" . "#83a598")
-   ("SOMEDAY" . (:foreground "#d3869b" :slant italic))
-   ("DONE" . (:foreground "#83a598" :strike-through t))
-   ("CANCELED" . (:foreground "cc241d" :weight bold))))
+ '(("TODO:" . (:foreground "#cc241d" :weight black :underline t))
+    ("NEXT" . (:foreground "#fabd2f" :weight black))
+   ("INPROGRESS:" . (:foreground "#fe8019" :weight bold))
+   ("SOMEDAY:" . (:foreground "#d3869b" :slant italic))
+   ("DONE:" . (:foreground "#83a598" :strike-through t))
+   ("CANCELED:" . (:foreground "cc241d" :strike-through t))))
 ;   ("DONE" . "green")
 
 (setq org-deadline-warning-days 0)
@@ -93,9 +94,8 @@ This is one more way I am attempting to hide tags in the agenda view.
       '(("p" "Planner"
          ((agenda "" ((org-agenda-span 'day)
                       (org-super-agenda-groups
-                       '((:name "Today"
-                       
-                                :discard (:todo "DONE")
+                       '((:name "Today"                       
+                                :discard (:todo "DONE:")
                                 :time-grid t
                                 :date today
                                 :scheduled today
@@ -176,7 +176,9 @@ This is one more way I am attempting to hide tags in the agenda view.
      I am installing evil and evil-collection for vim keybindings in emacs.
      #+BEGIN_SRC emacs-lisp
      (use-package undo-tree
-     :ensure t)
+     :ensure t
+     :config
+     (global-undo-tree-mode))
 
 (use-package evil
   :ensure t
@@ -664,7 +666,7 @@ I'm setting up my agenda with a few groups. I want things for today to show up f
 (setq org-super-agenda-fontify-whole-header-line t)
 (setq org-super-agenda-groups
 '((:name "Today"
-   :discard (:todo "DONE")
+   :discard (:todo "DONE:")
    :date today
    :scheduled today
    :and (:date today :time-grid t)
@@ -677,7 +679,7 @@ I'm setting up my agenda with a few groups. I want things for today to show up f
     :order 5)
     
     (:name "Someday"
-     :todo "SOMEDAY"
+     :todo "SOMEDAY:"
      :order 5)
 
     (:name "Overdue"
@@ -840,7 +842,8 @@ This allows me to show other properties in the agenda view.
 ** Agenda Date Format
 I don't like the default date format for the agenda. I'm going to make it a bit smaller here.
 #+BEGIN_SRC emacs-lisp
-(setq org-agenda-format-date "\n%a, %d %b.")
+(setq org-agenda-format-date "
+%a, %d %b.")
 #+END_SRC
 * Specific Functions
 ** Find Files

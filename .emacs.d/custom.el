@@ -26,6 +26,7 @@
      ("http://timharford.com/feed/" daily)
      ("http://xkcd.com/rss.xml" daily)
      ("http://telescoper.wordpress.com/feed/" daily))))
+ '(evil-undo-system (quote undo-tree))
  '(exec-path
    (quote
     ("/home/jhilker/.local/bin" "/home/jhilker/.bin" "/usr/local/sbin" "/usr/local/bin" "/usr/sbin" "/usr/bin" "/sbin" "/bin" "/usr/games" "/usr/local/games" "/snap/bin
@@ -91,5 +92,5 @@
  '(italic ((t (:underline nil :slant italic))))
  '(org-agenda-date ((t (:foreground "#d3869b" :underline nil :weight normal))))
  '(org-agenda-date-today ((t (:foreground "#83a598" :slant normal :weight bold))))
- '(org-agenda-date-weekend ((t (:foreground "#fabd2f" :slant italic :weight semi-bold))))
+ '(org-agenda-date-weekend ((t (:foreground "#fabd2f" :underline nil :slant italic :weight semi-bold))))
  '(org-agenda-property-face ((t nil))))
