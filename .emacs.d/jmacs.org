@@ -669,9 +669,10 @@
 :config
 (add-hook 'org-mode-hook 'org-super-agenda-mode)
 
-(setq org-agenda-span 3)
+(setq org-agenda-span 5)
 (setq org-super-agenda-fontify-whole-header-line t)
-(setq org-super-agenda-groups '((:name "Today"
+(setq org-super-agenda-groups 
+'((:name "Today"
    :discard (:todo "DONE:")
    :date today
    :scheduled today
@@ -852,13 +853,13 @@
 
    #+BEGIN_SRC emacs-lisp
 ;(setq org-agenda-format-date "%a, %d %b.")
-(setq org-agenda-format-date (lambda (date) (concat "\n"
+(setq org-agenda-format-date (concat "\n"
                                                     (make-string (window-width) 9472)
                                                     "\n"
-                                                    (org-agenda-format-date-aligned date)
+                                                    "%A, %d %b."
                                                     "\n"
                                                     (make-string (window-width) 9472)
-)))
+))
    #+END_SRC
 * Specific Functions
 ** Find Files
