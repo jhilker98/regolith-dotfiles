@@ -46,7 +46,7 @@
     I want to sort in each category by the earliest timestamp.
     #+BEGIN_SRC emacs-lisp
 (setq org-agenda-sorting-strategy
- '((agenda timestamp-up habit-down time-up priority-down category-keep)
+ '((agenda time-up  timestamp-up  habit-down priority-down category-keep)
   (todo timestamp-up todo-state-up priority-down category-keep)
   (tags priority-down category-keep)
   (search category-keep)))
@@ -669,7 +669,7 @@
 :config
 (add-hook 'org-mode-hook 'org-super-agenda-mode)
 
-(setq org-agenda-span 5)
+;(setq org-agenda-span 5)
 (setq org-super-agenda-fontify-whole-header-line t)
 (setq org-super-agenda-groups 
 '((:name "Today"
@@ -856,7 +856,7 @@
 (setq org-agenda-format-date (concat "\n"
                                                     (make-string (window-width) 9472)
                                                     "\n"
-                                                    "%A, %d %b."
+                                                    "%a, %d %b."
                                                     "\n"
                                                     (make-string (window-width) 9472)
 ))
