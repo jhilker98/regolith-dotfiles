@@ -99,7 +99,7 @@
                                 :discard (:todo "DONE:")
                                 :time-grid t
                                 :date today
-                                :scheduled today
+                               :scheduled today
                                 :order 1)))))
                           
           (alltodo "" ((org-agenda-overriding-header "")
@@ -679,6 +679,8 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
 
 ;(setq org-agenda-span 5)
 (setq org-super-agenda-fontify-whole-header-line t)
+;(setq org-super-agenda-header-separator (concat "\n" (make-string (window-width) 9472) "\n" ))
+
 (setq org-super-agenda-groups 
 '((:name "Today"
    :discard (:todo "DONE:")
@@ -828,12 +830,17 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
   (elfeed-db-save)
   (quit-window))
 
+(defun elfeed-mark-all-as-read ()
+      (interactive)
+      (mark-whole-buffer)
+      (elfeed-search-untag-all-unread))
+
 (use-package elfeed
   :ensure t
   :bind (:map elfeed-search-mode-map
                ("C-g" . bookmark-jump)
               ("a" . bjm/elfeed-show-all)
-;              ("E" . bjm/elfeed-show-emacs)
+              ("A" . elfeed-mark-all-as-read)
 ;              ("D" . bjm/elfeed-show-daily)
               ("q" . bjm/elfeed-save-db-and-bury)))
 
@@ -866,7 +873,7 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
                                                     "\n"
                                                     "%a, %d %b."
                                                     "\n"
-                                                    (make-string (window-width) 9472)
+                                                   (make-string (window-width) 9472)
 ))
    #+END_SRC
 * Specific Functions
@@ -1002,7 +1009,12 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
    (defun open-planner ()
     (interactive)
     (org-agenda nil "p"))
+
+    (defun open-weekly-agenda ()
+    (interactive)
+    (org-agenda nil "a"))
    #+end_src
+
 * Hooks and General (Non-UI) Config
 ** Delete Other Windows on Load
 I don't want spit windows when I load emacs.
@@ -1227,12 +1239,13 @@ I don't want spit windows when I load emacs.
    "oT" '(:ignore t :which-key "toggle")
    "oTi" 'org-toggle-inline-images 
 ;   "ot" 'counsel-org-tag
-    "ot" 'org-time-stamp
+   "ot" 'org-time-stamp
    "oi" '(:ignore t :which-key "insert")
    "oiT" 'toc-org-insert-toc
 ;   "oit" 'org-time-stamp
    "oe" 'org-export-dispatch
    "op" 'open-planner
+   "ow" 'open-weekly-agenda
 ;   "oP" '(:ignore t :which-key "Pomodoro")
 ;   "oPs" '(tomatinho :which-key "Start Pomodoro")
 ;   "oPk" '(tomatinho-interactive-quit :which-key "Kill Timer")
@@ -1533,6 +1546,8 @@ I don't want spit windows when I load emacs.
    :non-normal-prefix "C-SPC"
   
    "n" 'elfeed)
+(define-key elfeed-search-mode-map (kbd "A") 'elfeed-mark-all-as-read)
+
    #+END_SRC
 * UI
 ** Minimalistic UI
