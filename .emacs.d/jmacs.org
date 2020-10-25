@@ -14,24 +14,24 @@
 ** Org Mode Config
    This is where I am keeping most of my org mode config.
 *** Agenda File & Synchronization Setup
-   Here I am setting up the agenda files. During the school year, I want to have my notes as part of the agenda, but not in summer time, which is why I have both. I'm also setting it up so that the UID is stored, and that the daemon can restore frames. 
-   #+BEGIN_SRC emacs-lisp
+    Here I am setting up the agenda files. During the school year, I want to have my notes as part of the agenda, but not in summer time, which is why I have both. I'm also setting it up so that the UID is stored, and that the daemon can restore frames. 
+    #+BEGIN_SRC emacs-lisp
 (setq org-icalendar-store-UID t)
 ;(setq restart-emacs-restore-frames t)
-   #+END_SRC
-**** During the School Year
-    #+BEGIN_SRC emacs-lisp
-(setq org-agenda-files (list "~/Dropbox/org/agenda.org" "~/Dropbox/notes/fall2020/notes.org" ))
     #+END_SRC
+**** During the School Year
+     #+BEGIN_SRC emacs-lisp
+(setq org-agenda-files (list "~/Dropbox/org/agenda.org" "~/Dropbox/notes/fall2020/notes.org" ))
+     #+END_SRC
 
 **** During The Summer
-    #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp
 
 ;(setq-default org-agenda-files (list "~/Dropbox/org/agenda.org"))
-    #+END_SRC
+     #+END_SRC
 *** Agenda Views
     I am setting up my basic agenda view here before any custom commands. I will set up the way the groups look when I install =org-super-agenda=.
-   #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp
    (setq org-agenda-time-grid '((daily today weekly require-timed)()() "----------------------" nil)
       org-agenda-show-all-dates nil
       org-agenda-use-time-grid nil
@@ -42,35 +42,35 @@
       org-agenda-block-separator nil
       org-agenda-compact-blocks t
       org-agenda-start-with-log-mode t)
-   #+END_SRC
-   I want to sort in each category by the earliest timestamp.
-   #+BEGIN_SRC emacs-lisp
+    #+END_SRC
+    I want to sort in each category by the earliest timestamp.
+    #+BEGIN_SRC emacs-lisp
 (setq org-agenda-sorting-strategy
  '((agenda timestamp-up habit-down time-up priority-down category-keep)
-  (todo todo-state-up timestamp-up priority-down category-keep)
+  (todo timestamp-up todo-state-up priority-down category-keep)
   (tags priority-down category-keep)
   (search category-keep)))
 
 (setq org-agenda-start-on-weekday nil)
-   #+END_SRC
-   Now, I want to hide the colons in tags. From StackOverflow.
-   #+BEGIN_SRC emacs-lisp
+    #+END_SRC
+    Now, I want to hide the colons in tags. From StackOverflow.
+    #+BEGIN_SRC emacs-lisp
 ; (font-lock-add-keywords 'org-mode
 ;   '(("^\\*+ "
 ;      ":" nil nil
 ;      (0 (put-text-property (match-beginning 0) (match-end 0) 'display " ")))))
-   #+END_SRC
-   And now I want to try and hide the colons in the agenda view.
-   #+BEGIN_SRC emacs-lisp
+    #+END_SRC
+    And now I want to try and hide the colons in the agenda view.
+    #+BEGIN_SRC emacs-lisp
 ; (setq org-agenda-hide-tags-regxp ":")
-   #+END_SRC
-This is one more way I am attempting to hide tags in the agenda view.
-#+BEGIN_SRC emacs-lisp
+    #+END_SRC
+    This is one more way I am attempting to hide tags in the agenda view.
+    #+BEGIN_SRC emacs-lisp
 (setq org-agenda-hide-tags-regexp ".*")
-#+END_SRC
+    #+END_SRC
 *** TO-DO Keywords
-   Org-mode scheduling is probably the feature I use the most in org-mode. I want to set up my keywords here, so I don't need to do it in every file. I'm also setting up the colors, and reducing the warning days to 0 days so I can see exactly when an assignment is due.
-#+BEGIN_SRC emacs-lisp
+    Org-mode scheduling is probably the feature I use the most in org-mode. I want to set up my keywords here, so I don't need to do it in every file. I'm also setting up the colors, and reducing the warning days to 0 days so I can see exactly when an assignment is due.
+    #+BEGIN_SRC emacs-lisp
 (setq org-todo-keywords '(
       (sequence "TODO:" "NEXT" "INPROGRESS:" "SOMEDAY:"  "|" "DONE:" "CANCELED:")))
       ;(sequence "WAITING" "|")
@@ -87,12 +87,13 @@ This is one more way I am attempting to hide tags in the agenda view.
 (setq org-deadline-warning-days 0)
 ;(setq org-agenda-weekend-days nil)
 
-#+END_SRC
+    #+END_SRC
 *** Custom Agenda Commands
-#+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp
 (setq org-agenda-custom-commands
       '(("p" "Planner"
          ((agenda "" ((org-agenda-span 'day)
+                      (org-agenda-use-time-grid t)
                       (org-super-agenda-groups
                        '((:name "Today"                       
                                 :discard (:todo "DONE:")
@@ -100,6 +101,7 @@ This is one more way I am attempting to hide tags in the agenda view.
                                 :date today
                                 :scheduled today
                                 :order 1)))))
+                          
           (alltodo "" ((org-agenda-overriding-header "")
                       (org-super-agenda-groups
    
@@ -131,7 +133,13 @@ This is one more way I am attempting to hide tags in the agenda view.
     :scheduled future
     :deadline future
     :date t)))))))))
-#+END_SRC
+    #+END_SRC
+*** Export Process
+    This is how I'm setting up my export process. From [[https://www.fbxiang.com/blog/2017/11/01/write_papers_with_org_mode_and_spacemacs.html#title_9][here]].
+    #+BEGIN_SRC emacs-lisp
+(setq org-latex-pdf-process 
+     '("latexmk -pdflatex='xelatex -interaction nonstopmode' -pdf -bibtex -f %f"))
+    #+END_SRC
 ** Setting A Customize File
    #+BEGIN_SRC emacs-lisp
 (setq-default custom-file "~/.emacs.d/custom.el")
@@ -143,7 +151,7 @@ This is one more way I am attempting to hide tags in the agenda view.
 (setq python-shell-interpreter "python3")
    #+END_SRC
 ** Setting Notes File
-#+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp
 (setq org-default-notes-file "~/Dropbox/notes/fall2020/notes.org")
    #+END_SRC
 * Package Initialization and Bootstrapping
@@ -365,10 +373,10 @@ This is one more way I am attempting to hide tags in the agenda view.
 :ensure t)
      #+END_SRC
 **** BM
-#+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp
 (use-package bm
 :ensure t)
-#+END_SRC
+     #+END_SRC
 ** UI Packages
 *** Themes
 **** Solarized
@@ -477,11 +485,10 @@ This is one more way I am attempting to hide tags in the agenda view.
      (string-prefix-p "*Agenda Commands*" name)
      ;; Is not magit buffer.
      (and (string-prefix-p "magit" name)
-	  (not (file-name-extension name)))
+      (not (file-name-extension name)))
      )))
 (add-hook 'server-after-make-frame-hook 'centaur-tabs-mode)
     #+END_SRC
-
 *** Solaire Mode
     #+BEGIN_SRC emacs-lisp
 ;(use-package solaire-mode
@@ -655,23 +662,22 @@ This is one more way I am attempting to hide tags in the agenda view.
   :init (add-hook 'org-mode-hook #'toc-org-enable))
     #+END_SRC
 *** Org Super Agenda
-I'm setting up my agenda with a few groups. I want things for today to show up first, followed by things coming up soon, overdue items, personal items, and things to do someday last.
- #+BEGIN_SRC emacs-lisp
+    I'm setting up my agenda with a few groups. I want things for today to show up first, followed by things coming up soon, overdue items, personal items, and things to do someday last.
+    #+BEGIN_SRC emacs-lisp
 (use-package org-super-agenda
 :ensure t
 :config
 (add-hook 'org-mode-hook 'org-super-agenda-mode)
 
-(setq org-agenda-span '5)
+(setq org-agenda-span 3)
 (setq org-super-agenda-fontify-whole-header-line t)
-(setq org-super-agenda-groups
-'((:name "Today"
+(setq org-super-agenda-groups '((:name "Today"
    :discard (:todo "DONE:")
    :date today
    :scheduled today
-   :and (:date today :time-grid t)
+   :and (:date today :time-grid t))
 
-)
+                         
 
    
    (:name "Projects"
@@ -689,7 +695,7 @@ I'm setting up my agenda with a few groups. I want things for today to show up f
       :order 3)
 
     (:name "Personal"
-    :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO")
+    :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
     :order 4)
 
     (:name "Classwork"
@@ -700,17 +706,13 @@ I'm setting up my agenda with a few groups. I want things for today to show up f
     :scheduled future
     :deadline future
     :date t))))
-
-
-
-
 ;(setq org-agenda-prefix 
 ;'((agenda . " %i %-12:c%?-12t% s")
 ; (todo . " %i %-12:c%s")
 ; (tags . " %i %-12:c")
 ; (search . " %i %-12:c")))
 ;'((:auto-category t)))) - for automatically by category
-#+END_SRC
+    #+END_SRC
 *** Org Export Backends
 **** Org Mediawiki
      #+BEGIN_SRC emacs-lisp
@@ -720,6 +722,12 @@ I'm setting up my agenda with a few groups. I want things for today to show up f
 **** Org RST
      #+BEGIN_SRC emacs-lisp
 (use-package ox-rst
+:ensure t)
+     #+END_SRC
+**** Pandoc
+     Pandoc is just too damn good to give up.
+     #+BEGIN_SRC emacs-lisp
+(use-package ox-pandoc
 :ensure t)
      #+END_SRC
 *** Org Journal
@@ -766,15 +774,15 @@ I'm setting up my agenda with a few groups. I want things for today to show up f
 (setq org-ref-default-bibliography '("~/Dropbox/bibliography/biblatex.bib"))
     #+END_SRC
 *** Org Agenda Property
-This allows me to show other properties in the agenda view.
-#+BEGIN_SRC emacs-lisp
+    This allows me to show other properties in the agenda view.
+    #+BEGIN_SRC emacs-lisp
 (use-package org-agenda-property
 :ensure t)
-#+END_SRC
+    #+END_SRC
 ** News Packages
 *** Elfeed
-   Elfeed is a feed reader. EMMS is a music player for podcasts.
-#+BEGIN_SRC emacs-lisp
+    Elfeed is a feed reader. EMMS is a music player for podcasts.
+    #+BEGIN_SRC emacs-lisp
 (use-package elfeed-org
   :ensure t
   :config
@@ -826,7 +834,7 @@ This allows me to show other properties in the agenda view.
 
 (add-hook 'elfeed-new-entry-hook #'ime-elfeed-podcast-tagger)
 
-#+END_SRC
+    #+END_SRC
 * Miscellaneous Formats
 ** Title Format
    #+BEGIN_SRC emacs-lisp
@@ -840,11 +848,18 @@ This allows me to show other properties in the agenda view.
 ;(setq org-agenda-format-date "%d %h")
    #+END_SRC  
 ** Agenda Date Format
-I don't like the default date format for the agenda. I'm going to make it a bit smaller here.
-#+BEGIN_SRC emacs-lisp
-(setq org-agenda-format-date "
-%a, %d %b.")
-#+END_SRC
+   I don't like the default date format for the agenda. I'm going to make it a bit smaller here. I also found the separator lines on [[https://www.reddit.com/r/orgmode/comments/e4stk2/adding_a_separator_line_between_days_in_emacs/][r/orgmode]].
+
+   #+BEGIN_SRC emacs-lisp
+;(setq org-agenda-format-date "%a, %d %b.")
+(setq org-agenda-format-date (lambda (date) (concat "\n"
+                                                    (make-string (window-width) 9472)
+                                                    "\n"
+                                                    (org-agenda-format-date-aligned date)
+                                                    "\n"
+                                                    (make-string (window-width) 9472)
+)))
+   #+END_SRC
 * Specific Functions
 ** Find Files
 *** Find Config File
@@ -879,7 +894,7 @@ I don't like the default date format for the agenda. I'm going to make it a bit 
     #+BEGIN_SRC emacs-lisp
 (defun find-agenda ()
 (interactive)
-(find-file "~/Dropbox/org/agenda/agenda.org"))
+(find-file "~/Dropbox/org/agenda.org"))
     #+END_SRC
 
 ** Use Y/N or y/n for yes/no
@@ -1540,12 +1555,12 @@ I don't like the default date format for the agenda. I'm going to make it a bit 
 **** figure out font switching, and if using regular modeline enable the solarized section below.
 
 
-    #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp
      (set-default-font "Iosevka Nerd Font-12" nil t)
 ;    (set-default-font "Roboto Mono-12" nil t)
-    #+END_SRC
+     #+END_SRC
  
-#+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp
 ;(defun xah-cycle-font-2 (*n)
 ;  "Change font in current window between 2 fonts.
 ;URL `http://ergoemacs.org/emacs/emacs_switching_fonts.html'
@@ -1566,7 +1581,7 @@ I don't like the default date format for the agenda. I'm going to make it a bit 
 ;    (set-frame-parameter nil 'font -fontToUse)
 ;    (message "Font set to: %s" -fontToUse)))
 
-    #+END_SRC
+     #+END_SRC
 *** Solarized-Theme Config
     #+BEGIN_SRC emacs-lisp
 
@@ -1730,7 +1745,7 @@ I don't like the default date format for the agenda. I'm going to make it a bit 
 
      #+END_SRC
 *** Centaur Tabs**** Use-Package
-     #+BEGIN_SRC emacs-lisp :tangle no
+    #+BEGIN_SRC emacs-lisp :tangle no
 (use-package centaur-tabs
 :ensure t
 :config
@@ -1747,7 +1762,7 @@ I don't like the default date format for the agenda. I'm going to make it a bit 
    (define-key evil-normal-state-map (kbd "g t") 'centaur-tabs-forward)
    (define-key evil-normal-state-map (kbd "g T") 'centaur-tabs-backward)
    (setq centaur-tabs-cycle-scope 'tabs))
-     #+END_SRC
+    #+END_SRC
  
 **** One Group 
      #+BEGIN_SRC emacs-lisp :tangle nil
@@ -1773,17 +1788,24 @@ I don't like the default date format for the agenda. I'm going to make it a bit 
      /text/
 *** Org Mode Icons
 **** Personal Agenda
- *  - writing
- *  - writing
+     *  - writing
+     *  - writing
 **** School Agenda
 **** General for School
-    
+     
 **** By Class
-    - CPSC419
+      - CPSC419
 * Quick Test of Agenda Format
   #+BEGIN_SRC emacs-lisp
 ;(org-add-agenda-custom-command '("d" "Deadlines and scheduled work" alltodo "" ((org-agenda-skip-function '(org-agenda-skip-entry-if 'notdeadline)) (org-agenda-prefix-format '((todo . " %i %-22(org-entry-get nil \"DEADLINE\") %-12:c %s"))) (org-agenda-sorting-strategy '(deadline-up)))))
 
 
 
+  #+END_SRC
+
+  #+BEGIN_SRC emacs-lisp
+(org-ql-search (org-agenda-files)
+  '(ts :from 1 :to 7)
+  :title "Coming Up Soon"
+  :sort '(date priority todo))
   #+END_SRC
