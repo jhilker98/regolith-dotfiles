@@ -154,6 +154,12 @@
    #+BEGIN_SRC emacs-lisp
 (setq org-default-notes-file "~/Dropbox/notes/fall2020/notes.org")
    #+END_SRC
+** Quieting Package CL 
+I am working on upgrading to emacs 27. I kept getting a warning about cl being deprecated, so I'm quieting it with this.
+#+BEGIN_SRC emacs-lisp
+(setq byte-compile-warnings '(cl-functions))
+#+END_SRC
+
 * Package Initialization and Bootstrapping
 ** Package Initialization and Extra Sources
    I am adding extra sources to my package archives here.
@@ -405,7 +411,9 @@
 
     #+BEGIN_SRC emacs-lisp 
    (use-package doom-modeline
-   :ensure t)
+   :ensure t
+   :config
+   (setq doom-modeline-height 32))
     #+END_SRC
 *** Ace Window
     #+BEGIN_SRC emacs-lisp
@@ -862,6 +870,16 @@
 ))
    #+END_SRC
 * Specific Functions
+** Sidebar 
+   I'm testing this.
+** Hide Messages and QL View
+   #+begin_src emacs-lisp 
+(setq-default message-log-max nil)
+(kill-buffer "*Messages*")
+;(kill-buffer "*Org QL View: Coming Up Soon*")
+;(setq split-width-threshold 40)
+;(setq split-height-threshold nil)
+   #+end_src
 ** Find Files
 *** Find Config File
     This file lets me edit my configuration file.
@@ -975,7 +993,23 @@
   (interactive)
   (org-capture 0))
    #+END_SRC
+** Use Scratch Buffer as Default
+   #+begin_src emacs-lisp
+   (setq inhibit-splash-screen t)
+   #+end_src
+** Open Planner
+   #+begin_src emacs-lisp
+   (defun open-planner ()
+    (interactive)
+    (org-agenda nil "p"))
+   #+end_src
 * Hooks and General (Non-UI) Config
+** Delete Other Windows on Load
+I don't want spit windows when I load emacs.
+#+begin_src emacs-lisp
+(add-hook 'emacs-startup-hook
+          (lambda () (delete-other-windows)) t)
+#+end_src
 ** File Types and Modes
 *** Default Scratch Buffer is Org Mode
     #+BEGIN_SRC emacs-lisp
@@ -1198,10 +1232,10 @@
    "oiT" 'toc-org-insert-toc
 ;   "oit" 'org-time-stamp
    "oe" 'org-export-dispatch
-   "op" 'org-priority
-   "oP" '(:ignore t :which-key "Pomodoro")
-   "oPs" '(tomatinho :which-key "Start Pomodoro")
-   "oPk" '(tomatinho-interactive-quit :which-key "Kill Timer")
+   "op" 'open-planner
+;   "oP" '(:ignore t :which-key "Pomodoro")
+;   "oPs" '(tomatinho :which-key "Start Pomodoro")
+;   "oPk" '(tomatinho-interactive-quit :which-key "Kill Timer")
    "oj" '(:ignore t :which-key "Org Journal")
    "ojn" 'org-journal-new-entry
    "o/" 'org-ql-search)
@@ -1484,12 +1518,14 @@
    "Df" 'describe-font
    "DF" 'counsel-describe-face
    "Dt" 'describe-theme) 
+   
    #+END_SRC
 ** Start Server
    #+BEGIN_SRC emacs-lisp
 ; (global-set-key (kbd "C-x s")  'start-server)
    #+END_SRC
 ** Elfeed
+
    #+BEGIN_SRC emacs-lisp
    (general-define-key
    :states '(normal visual insert emacs) 
@@ -1557,8 +1593,8 @@
 
 
      #+BEGIN_SRC emacs-lisp
-     (set-default-font "Iosevka Nerd Font-12" nil t)
-;    (set-default-font "Roboto Mono-12" nil t)
+     (set-frame-font "Iosevka Nerd Font-12" nil t)
+;    (set-frame-font "Roboto Mono-12" nil t)
      #+END_SRC
  
      #+BEGIN_SRC emacs-lisp
