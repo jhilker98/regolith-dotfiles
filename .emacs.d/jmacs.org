@@ -1006,7 +1006,7 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
    #+end_src
 ** Open Planner
    #+begin_src emacs-lisp
-   (defun open-planner ()
+   (defun open-agenda ()
     (interactive)
     (org-agenda nil "p"))
 
@@ -1231,7 +1231,8 @@ I don't want spit windows when I load emacs.
    "o" '(:ignore t :which-key "Org Menu")
    "os" 'org-schedule
    "oS" 'org-save-all-org-buffers
-   "oa" 'org-agenda
+   "oa" 'open-agenda 
+   "oA" 'org-agenda
    "od" 'org-deadline
    "oc" 'org-capture-at-point
    "oC" '(:ignore t :which-key "cycle")
@@ -1244,7 +1245,6 @@ I don't want spit windows when I load emacs.
    "oiT" 'toc-org-insert-toc
 ;   "oit" 'org-time-stamp
    "oe" 'org-export-dispatch
-   "op" 'open-planner
    "ow" 'open-weekly-agenda
 ;   "oP" '(:ignore t :which-key "Pomodoro")
 ;   "oPs" '(tomatinho :which-key "Start Pomodoro")

@@ -86,4 +86,4 @@
  '(org-agenda-date-today ((t (:foreground "#83a598" :slant normal :weight bold))))
  '(org-agenda-date-weekend ((t (:foreground "#fabd2f" :underline nil :slant italic :weight semi-bold))))
  '(org-agenda-property-face ((t nil)))
- '(org-agenda-structure ((t (:foreground "#ebdbb2" :underline t)))))
+ '(org-agenda-structure ((t (:foreground "#ebdbb2" :underline t :weight ultra-bold)))))
