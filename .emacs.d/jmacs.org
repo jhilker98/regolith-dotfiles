@@ -69,20 +69,22 @@
     #+BEGIN_SRC emacs-lisp
 (setq org-agenda-hide-tags-regexp ".*")
     #+END_SRC
+    Finally, I want to have the agenda be smaller.
 *** TO-DO Keywords
     Org-mode scheduling is probably the feature I use the most in org-mode. I want to set up my keywords here, so I don't need to do it in every file. I'm also setting up the colors, and reducing the warning days to 0 days so I can see exactly when an assignment is due.
     #+BEGIN_SRC emacs-lisp
 (setq org-todo-keywords '(
-      (sequence "TODO:" "NEXT" "INPROGRESS:" "SOMEDAY:"  "|" "DONE:" "CANCELED:")))
+      (sequence "TODO" "INPROGRESS" "NEXT" "SOMEDAY"  "|" "DONE" "CANCELED")))
       ;(sequence "WAITING" "|")
 
 (setq org-todo-keyword-faces
- '(("TODO:" . (:foreground "#cc241d" :weight black :underline t))
+ '(("TODO" . (:foreground "#cc241d" :weight black :underline t))
+ 
+   ("INPROGRESS" . (:foreground "#fe8019" :weight bold))
     ("NEXT" . (:foreground "#fabd2f" :weight black))
-   ("INPROGRESS:" . (:foreground "#fe8019" :weight bold))
-   ("SOMEDAY:" . (:foreground "#d3869b" :slant italic))
-   ("DONE:" . (:foreground "#83a598" :strike-through t))
-   ("CANCELED:" . (:foreground "cc241d" :strike-through t))))
+   ("SOMEDAY" . (:foreground "#d3869b" :slant italic))
+   ("DONE" . (:foreground "#83a598" :strike-through t))
+   ("CANCELED" . (:foreground "cc241d" :strike-through t))))
 ;   ("DONE" . "green")
 
 (setq org-deadline-warning-days 0)
@@ -158,9 +160,8 @@
 ** Quieting Package CL 
 I am working on upgrading to emacs 27. I kept getting a warning about cl being deprecated, so I'm quieting it with this.
 #+BEGIN_SRC emacs-lisp
-(setq byte-compile-warnings '(cl-functions))
+;(setq byte-compile-warnings '(cl-functions))
 #+END_SRC
-
 * Package Initialization and Bootstrapping
 ** Package Initialization and Extra Sources
    I am adding extra sources to my package archives here.
@@ -230,6 +231,11 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
               (evil-org-set-key-theme)))
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
+
+(use-package evil-surround
+  :ensure t
+  :config
+  (global-evil-surround-mode 1))
      #+END_SRC
 **** Imenu-List
      Imenu-list allows me to get an overview of my code or outline for an
@@ -497,6 +503,8 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
       (not (file-name-extension name)))
      )))
 (add-hook 'server-after-make-frame-hook 'centaur-tabs-mode)
+
+   #+end_src
     #+END_SRC
 *** Solaire Mode
     #+BEGIN_SRC emacs-lisp
@@ -1097,6 +1105,7 @@ I don't want spit windows when I load emacs.
    #+BEGIN_SRC emacs-lisp
 (add-hook 'prog-mode-hook 'linum-relative-mode)
    #+END_SRC
+** Tabs
 * Keybindings
   Here is a list of all keybindings in JMacs.
 ** General Keybindings
@@ -1170,8 +1179,8 @@ I don't want spit windows when I load emacs.
 
 
    "w"  '(:ignore t :which-key "Windows")
-   "wh" 'split-window-right
-   "wb" 'split-window-below
+   "wh" '(split-window-right :which-key "Horizontal Split")
+   "wv" '(split-window-below :which-key "Vertical Split")
    "wd"  'delete-window
    "wD"  'delete-other-windows
    "wm" 'maximize-window)
