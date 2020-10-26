@@ -1023,7 +1023,6 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
     (interactive)
     (org-agenda nil "a"))
    #+end_src
-
 * Hooks and General (Non-UI) Config
 ** Delete Other Windows on Load
 I don't want spit windows when I load emacs.
@@ -1601,12 +1600,12 @@ I don't want spit windows when I load emacs.
 *** Theme
     I am doing something extremely similar to the function above, but with themes. By default I want to use doom-gruvbox.
     #+BEGIN_SRC emacs-lisp
-;(load-theme 'gruvbox-dark-soft t)
 ;(load-theme 'nord t)
 ;(load-theme 'doom-nord t)
 (load-theme 'doom-gruvbox t)
 (setq doom-themes-enable-italic t)
 (setq doom-themes-enable-bold t)
+;(load-theme 'gruvbox-dark-medium t)
 
     #+END_SRC
 *** Fonts
