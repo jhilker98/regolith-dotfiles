@@ -67,14 +67,14 @@
     #+END_SRC
     This is one more way I am attempting to hide tags in the agenda view.
     #+BEGIN_SRC emacs-lisp
-(setq org-agenda-hide-tags-regexp ".*")
+;(setq org-agenda-hide-tags-regexp ".*")
     #+END_SRC
     Finally, I want to have the agenda be smaller.
 *** TO-DO Keywords
     Org-mode scheduling is probably the feature I use the most in org-mode. I want to set up my keywords here, so I don't need to do it in every file. I'm also setting up the colors, and reducing the warning days to 0 days so I can see exactly when an assignment is due.
     #+BEGIN_SRC emacs-lisp
 (setq org-todo-keywords '(
-      (sequence "TODO" "INPROGRESS" "NEXT" "SOMEDAY"  "|" "DONE" "CANCELED")))
+      (sequence "TODO(t)" "INPROGRESS(i)" "NEXT(n)" "SOMEDAY(s)"  "|" "DONE(d)" "CANCELED(c)")))
       ;(sequence "WAITING" "|")
 
 (setq org-todo-keyword-faces
@@ -102,16 +102,18 @@
                                 :discard (:todo "DONE:")
                                 :time-grid t
                                 :date today
-                               :scheduled today
+                                :scheduled today
                                 :order 1)))))
                           
           (alltodo "" ((org-agenda-overriding-header "")
+                       (org-agenda-max-todos 10)
                        (org-super-agenda-groups
    
                       '(
                       (:name "Projects"
                       :category "PROJECT"
                       :order 5)
+                      
                      
     (:name "Personal"
     :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO")
@@ -119,6 +121,7 @@
     
     (:name "Someday"
      :todo "SOMEDAY"
+;     :and (:not (:category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO")))
      :order 5)
 
     (:name "Overdue"
@@ -160,7 +163,7 @@
 ** Quieting Package CL 
 I am working on upgrading to emacs 27. I kept getting a warning about cl being deprecated, so I'm quieting it with this.
 #+BEGIN_SRC emacs-lisp
-;(setq byte-compile-warnings '(cl-functions))
+(setq byte-compile-warnings '(cl-functions))
 #+END_SRC
 * Package Initialization and Bootstrapping
 ** Package Initialization and Extra Sources
@@ -309,7 +312,7 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
                         (projects . 5)
                         (agenda . 5))))
 
-
+(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
      #+END_SRC
 **** Unfill
      For toggling fill and unfill.
@@ -687,51 +690,51 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
 (add-hook 'org-mode-hook 'org-super-agenda-mode)
 
 ;(setq org-agenda-span 5)
-(setq org-super-agenda-fontify-whole-header-line t)
+(setq org-super-agenda-fontify-whole-header-line t))
 ;(setq org-super-agenda-header-separator (concat "\n" (make-string (window-width) 9472) "\n" ))
 
-(setq org-super-agenda-groups 
-'((:name "Today"
-   :discard (:todo "DONE:")
-   :date today
-   :scheduled today
-   :and (:date today :time-grid t))
-
-                         
-
-   
-   (:name "Projects"
-    :category "PROJECT"
-    :order 5)
-    
-    (:name "Someday"
-     :todo "SOMEDAY:"
-     :order 5)
-
-    (:name "Overdue"
-      :deadline past
-      :scheduled past
-      :face '(:foreground "red")
-      :order 3)
-
-    (:name "Personal"
-    :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
-    :order 4)
-
-    (:name "Classwork"
-     :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445"))
-
-
-   (:name "Coming Up Soon"
-    :scheduled future
-    :deadline future
-    :date t))))
-;(setq org-agenda-prefix 
-;'((agenda . " %i %-12:c%?-12t% s")
-; (todo . " %i %-12:c%s")
-; (tags . " %i %-12:c")
-; (search . " %i %-12:c")))
-;'((:auto-category t)))) - for automatically by category
+;(setq org-super-agenda-groups 
+;'((:name "Today"
+;   :discard (:todo "DONE:")
+;   :date today
+;   :scheduled today
+;   :and (:date today :time-grid t))
+;
+;                         
+;
+;   
+;   (:name "Projects"
+;    :category "PROJECT"
+;    :order 5)
+;    
+;    (:name "Someday"
+;     :todo "SOMEDAY:"
+;     :order 5)
+;
+;    (:name "Overdue"
+;      :deadline past
+;      :scheduled past
+;      :face '(:foreground "red")
+;      :order 3)
+;
+;    (:name "Personal"
+;    :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
+;    :order 4)
+;
+;    (:name "Classwork"
+;     :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445"))
+;
+;
+;   (:name "Coming Up Soon"
+;    :scheduled future
+;    :deadline future
+;    :date t))))
+;;(setq org-agenda-prefix 
+;;'((agenda . " %i %-12:c%?-12t% s")
+;; (todo . " %i %-12:c%s")
+;; (tags . " %i %-12:c")
+;; (search . " %i %-12:c")))
+;;'((:auto-category t)))) - for automatically by category
     #+END_SRC
 *** Org Export Backends
 **** Org Mediawiki
@@ -1014,11 +1017,13 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
    (setq inhibit-splash-screen t)
    #+end_src
 ** Open Planner
-   #+begin_src emacs-lisp
+  #+begin_src emacs-lisp
    (defun open-agenda ()
     (interactive)
     (org-agenda nil "p"))
-
+#+end_src
+** Open Weekly Planner
+#+begin_src emacs-lisp
     (defun open-weekly-agenda ()
     (interactive)
     (org-agenda nil "a"))
@@ -1199,7 +1204,7 @@ I don't want spit windows when I load emacs.
 
    "f" '(:ignore t :which-key "Files")
    "fe" '(:ignore t :which-key "Edit file")
-   "feD" 'edit-dotfile
+   "fed" 'edit-dotfile
    "ff"  'counsel-find-file
    "fs"  '(save-buffer :which-key "Save file")
    "f" '(:ignore t :which-key "Files")
@@ -1608,6 +1613,10 @@ I don't want spit windows when I load emacs.
 ;(load-theme 'gruvbox-dark-medium t)
 
     #+END_SRC
+*** Line Spacing
+    #+begin_src emacs-lisp 
+    (setq line-spacing 0.1)
+    #+end_src
 *** Fonts
     I often switch between DejaVu Sans Pro, Fira Code, Monaco, and Source
     Code Pro for my fonts. Here I have created a list of fonts and I can
@@ -1618,7 +1627,8 @@ I don't want spit windows when I load emacs.
 
      #+BEGIN_SRC emacs-lisp
      (set-frame-font "Iosevka Nerd Font-12" nil t)
-;    (set-frame-font "Roboto Mono-12" nil t)
+    ; (set-frame-font "Roboto Mono-12" nil t)
+;    (set-frame-font "Cousine-Regular-12" nil t)
      #+END_SRC
  
      #+BEGIN_SRC emacs-lisp
@@ -1863,10 +1873,4 @@ I don't want spit windows when I load emacs.
 
 
   #+END_SRC
-
-  #+BEGIN_SRC emacs-lisp
-(org-ql-search (org-agenda-files)
-  '(ts :from 1 :to 7)
-  :title "Coming Up Soon"
-  :sort '(date priority todo))
-  #+END_SRC
+  
