@@ -151,11 +151,11 @@
 (setq-default custom-file "~/.emacs.d/custom.el")
 (load custom-file) 
 
-(setq org-agenda-include-diary t)
+;(setq org-agenda-include-diary t)
 
-(setq holiday-bahai-holidays nil)
-(setq holiday-hebrew-holidays nil)
-(setq holiday-islamic-holidays nil)
+;(setq holiday-bahai-holidays nil)
+;(setq holiday-hebrew-holidays nil)
+;(setq holiday-islamic-holidays nil)
    #+END_SRC
 
 ** Use Python 3 Interpreter 
@@ -811,14 +811,15 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
 ** News Packages
 *** Elfeed
     Elfeed is a feed reader. EMMS is a music player for podcasts.
-    #+BEGIN_SRC emacs-lisp
-(use-package elfeed-org
+	#+begin_src emacs-lisp
+
+(global-set-key (kbd "C-c e") 'evil-mode)
+	(use-package elfeed-org
   :ensure t
   :config
   (elfeed-org)
 (setq elfeed-db-directory "~/Dropbox/elfeed")
-(setq rmh-elfeed-org-files (list "~/Dropbox/elfeed/elfeed.org")))
-
+(setq rmh-elfeed-org-files (list "~/Dropbox/elfeed/elfeed.org"))
 ;(defun bjm/elfeed-show-all ()
 ;  (interactive)
 ;  (bookmark-maybe-load-default-file)
@@ -831,7 +832,7 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
 ;  (interactive)
 ;  (bookmark-maybe-load-default-file)
 ;  (bookmark-jump "elfeed-daily"))
-
+(setq-default elfeed-search-filter "@1-week-ago +unread ")
 ;;functions to support syncing .elfeed between machines
 ;;makes sure elfeed reads index from disk before launching
 (defun bjm/elfeed-load-db-and-open ()
@@ -851,16 +852,16 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
 (defun elfeed-mark-all-as-read ()
       (interactive)
       (mark-whole-buffer)
-      (elfeed-search-untag-all-unread))
+      (elfeed-search-untag-all-unread)))
 
 (use-package elfeed
   :ensure t
-  :bind (:map elfeed-search-mode-map
-               ("C-g" . bookmark-jump)
-              ("a" . bjm/elfeed-show-all)
-              ("A" . elfeed-mark-all-as-read)
+ :bind (:map elfeed-search-mode-map
+              ("C-g" . bookmark-jump)
+;             ("a" . elfeed-mark-all-as-read)
+             ("A" . elfeed-mark-all-as-read)
 ;              ("D" . bjm/elfeed-show-daily)
-              ("q" . bjm/elfeed-save-db-and-bury)))
+             ("q" . bjm/elfeed-save-db-and-bury)))
 
 (defun ime-elfeed-podcast-tagger (entry)
   (when (elfeed-entry-enclosures entry)
@@ -868,7 +869,21 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
 
 (add-hook 'elfeed-new-entry-hook #'ime-elfeed-podcast-tagger)
 
-    #+END_SRC
+(use-package elfeed-goodies
+:after elfeed
+:ensure t
+:config
+(elfeed-goodies/setup)
+(setq elfeed-goodies/tag-column-width 0)
+(setq elfeed-goodies/feed-source-column-width 30))
+
+(setq elfeed-show-mode-hook
+      (lambda ()
+	(set-face-attribute 'variable-pitch (selected-frame) :font (font-spec :family "Iosevka Nerd Font" :size 16))))
+
+
+
+	#+end_src
 * Miscellaneous Formats
 ** Title Format
    #+BEGIN_SRC emacs-lisp
@@ -1564,8 +1579,8 @@ I don't want spit windows when I load emacs.
    :states '(normal visual insert emacs) 
    :prefix "SPC"
    :non-normal-prefix "C-SPC"
-  
-   "n" 'elfeed)
+   "n" '(:ignore t :which-key "News")
+   "nn" 'elfeed)
 (define-key elfeed-search-mode-map (kbd "A") 'elfeed-mark-all-as-read)
 
    #+END_SRC
