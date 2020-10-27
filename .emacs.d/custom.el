@@ -42,6 +42,7 @@
  '(objed-cursor-color "#dc322f")
  '(org-agenda-files
    '("~/Dropbox/org/agenda.org" "~/Dropbox/notes/fall2020/notes.org"))
+ '(org-agenda-time-leading-zero t)
  '(org-agenda-window-frame-fractions '(0.3 . 0.75))
  '(org-export-backends '(ascii html icalendar latex mediawiki odt))
  '(org-journal-dir "~/Dropbox/org/journal/")

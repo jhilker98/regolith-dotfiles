@@ -67,7 +67,7 @@
     #+END_SRC
     This is one more way I am attempting to hide tags in the agenda view.
     #+BEGIN_SRC emacs-lisp
-;(setq org-agenda-hide-tags-regexp ".*")
+(setq org-agenda-hide-tags-regexp ".*")
     #+END_SRC
     Finally, I want to have the agenda be smaller.
 *** TO-DO Keywords
@@ -150,6 +150,12 @@
    #+BEGIN_SRC emacs-lisp
 (setq-default custom-file "~/.emacs.d/custom.el")
 (load custom-file) 
+
+(setq org-agenda-include-diary t)
+
+(setq holiday-bahai-holidays nil)
+(setq holiday-hebrew-holidays nil)
+(setq holiday-islamic-holidays nil)
    #+END_SRC
 
 ** Use Python 3 Interpreter 
