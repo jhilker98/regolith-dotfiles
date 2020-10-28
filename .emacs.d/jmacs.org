@@ -703,7 +703,7 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
 :config
 (add-hook 'org-mode-hook 'org-super-agenda-mode)
 
-;(setq org-agenda-span 3)
+(setq org-agenda-span 3)
 (setq org-super-agenda-fontify-whole-header-line t))
 ;(setq org-super-agenda-header-separator (concat "\n" (make-string (window-width) 9472) "\n" ))
 
@@ -1056,8 +1056,7 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
 #+begin_src emacs-lisp
     (defun open-weekly-agenda ()
     (interactive)
-    (org-agenda nil "a")
-    (org-agenda-toggle-time-grid))
+    (org-agenda nil "a"))
    #+end_src
 * Hooks and General (Non-UI) Config
 ** Delete Other Windows on Load
