@@ -43,7 +43,6 @@
  '(org-agenda-files
    '("~/Dropbox/org/agenda.org" "~/Dropbox/notes/fall2020/notes.org"))
  '(org-agenda-time-leading-zero t)
- '(org-agenda-window-frame-fractions '(0.3 . 0.75))
  '(org-export-backends '(ascii html icalendar latex mediawiki odt))
  '(org-journal-dir "~/Dropbox/org/journal/")
  '(org-journal-file-type 'monthly)
@@ -57,6 +56,7 @@
  '(rustic-ansi-faces
    ["#002b36" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#839496"])
  '(solarized-underline nil)
+ '(spotify-use-system-bus-p t)
  '(tab-width 4)
  '(temporary-file-directory "/tmp/")
  '(vc-annotate-background nil)
@@ -91,4 +91,5 @@
  '(org-agenda-date-today ((t (:foreground "#83a598" :slant normal :weight bold))))
  '(org-agenda-date-weekend ((t (:foreground "#fabd2f" :underline nil :slant italic :weight semi-bold))))
  '(org-agenda-property-face ((t nil)))
- '(org-agenda-structure ((t (:foreground "#ebdbb2" :underline t :weight ultra-bold)))))
+ '(org-agenda-structure ((t (:foreground "#ebdbb2" :weight ultra-bold))))
+ '(org-super-agenda-header ((t (:inherit org-agenda-structure :underline t)))))

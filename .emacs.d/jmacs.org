@@ -23,7 +23,7 @@
      #+BEGIN_SRC emacs-lisp
 (setq org-agenda-files (list "~/Dropbox/org/agenda.org" "~/Dropbox/notes/fall2020/notes.org" ))
      #+END_SRC
-
+     
 **** During The Summer
      #+BEGIN_SRC emacs-lisp
 
@@ -31,18 +31,19 @@
      #+END_SRC
 *** Agenda Views
     I am setting up my basic agenda view here before any custom commands. I will set up the way the groups look when I install =org-super-agenda=.
-    #+BEGIN_SRC emacs-lisp
-   (setq org-agenda-time-grid '((daily today weekly require-timed)()() "----------------------" nil)
-      org-agenda-show-all-dates nil
-      org-agenda-use-time-grid nil
-      org-agenda-skip-scheduled-if-done t
-      org-agenda-skip-deadline-if-done t
-      org-agenda-include-deadlines t
-      org-agenda-include-diary nil
-      org-agenda-block-separator nil
-      org-agenda-compact-blocks t
-      org-agenda-start-with-log-mode t)
-    #+END_SRC
+    #+begin_src emacs-lisp
+(setq org-agenda-time-grid '((daily today weekly require-timed)()() "----------------------" nil)
+   org-agenda-show-all-dates nil
+   org-agenda-use-time-grid t
+   org-agenda-skip-scheduled-if-done t
+   org-agenda-skip-deadline-if-done t
+   org-agenda-include-deadlines t
+   org-agenda-include-diary nil
+   org-agenda-overriding-header ""
+   org-agenda-block-separator (make-string (window-width) 9472)
+;   org-agenda-compact-blocks t
+   org-agenda-start-with-log-mode t)   
+    #+end_src
     I want to sort in each category by the earliest timestamp.
     #+BEGIN_SRC emacs-lisp
 (setq org-agenda-sorting-strategy
@@ -93,23 +94,26 @@
     #+END_SRC
 *** Custom Agenda Commands
     #+BEGIN_SRC emacs-lisp
-(setq org-agenda-custom-commands
+    (setq org-agenda-custom-commands
       '(("p" "Planner"
-         ((agenda "" ((org-agenda-span 'day)
+         ((agenda "" ((org-agenda-span 3)
                       (org-agenda-use-time-grid t)
+                      (org-agenda-show-all-dates t)
+                      (org-agenda-compact-blocks nil)
+                      (org-agenda-overriding-header "")
                       (org-super-agenda-groups
-                       '((:name "Today"                       
+                       '((:name none
                                 :discard (:todo "DONE:")
                                 :time-grid t
                                 :date today
                                 :scheduled today
                                 :order 1)))))
                           
-          (alltodo "" ((org-agenda-overriding-header "")
+          (alltodo "" ((org-agenda-overriding-header "To Do")
                        (org-agenda-max-todos 10)
+                       
                        (org-super-agenda-groups
-   
-                      '(
+                         '(
                       (:name "Projects"
                       :category "PROJECT"
                       :order 5)
@@ -139,7 +143,9 @@
     :scheduled future
     :deadline future
     :date t)))))))))
-    #+END_SRC
+
+   
+#+END_SRC
 *** Export Process
     This is how I'm setting up my export process. From [[https://www.fbxiang.com/blog/2017/11/01/write_papers_with_org_mode_and_spacemacs.html#title_9][here]].
     #+BEGIN_SRC emacs-lisp
@@ -317,8 +323,8 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
 (setq dashboard-items '((recents  . 5)
                         (projects . 5)
                         (agenda . 5))))
-
-(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+;
+;(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
      #+END_SRC
 **** Unfill
      For toggling fill and unfill.
@@ -695,7 +701,7 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
 :config
 (add-hook 'org-mode-hook 'org-super-agenda-mode)
 
-;(setq org-agenda-span 5)
+;(setq org-agenda-span 3)
 (setq org-super-agenda-fontify-whole-header-line t))
 ;(setq org-super-agenda-header-separator (concat "\n" (make-string (window-width) 9472) "\n" ))
 
@@ -704,7 +710,7 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
 ;   :discard (:todo "DONE:")
 ;   :date today
 ;   :scheduled today
-;   :and (:date today :time-grid t))
+;   :and (:date today :time-grid t)))))
 ;
 ;                         
 ;
@@ -833,6 +839,7 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
 ;  (bookmark-maybe-load-default-file)
 ;  (bookmark-jump "elfeed-daily"))
 (setq-default elfeed-search-filter "@1-week-ago +unread ")
+
 ;;functions to support syncing .elfeed between machines
 ;;makes sure elfeed reads index from disk before launching
 (defun bjm/elfeed-load-db-and-open ()
@@ -874,7 +881,7 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
 :ensure t
 :config
 (elfeed-goodies/setup)
-(setq elfeed-goodies/tag-column-width 0)
+;(setq elfeed-goodies/tag-column-width 0)
 (setq elfeed-goodies/feed-source-column-width 30))
 
 (setq elfeed-show-mode-hook
@@ -1288,7 +1295,7 @@ I don't want spit windows when I load emacs.
    "ojn" 'org-journal-new-entry
    "o/" 'org-ql-search)
 
-
+(global-set-key (kbd "C-c a") 'org-agenda)
    #+END_SRC
 ** More Org-Mode
    #+BEGIN_SRC emacs-lisp
