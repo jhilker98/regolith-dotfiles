@@ -32,7 +32,7 @@
 *** Agenda Views
     I am setting up my basic agenda view here before any custom commands. I will set up the way the groups look when I install =org-super-agenda=.
     #+begin_src emacs-lisp
-(setq org-agenda-time-grid '((daily today weekly require-timed)(800 1200 1600 2000)() "" nil)
+(setq org-agenda-time-grid '((daily today require-timed) "----------------------" nil)
    org-agenda-show-all-dates nil
    org-agenda-use-time-grid t
    org-agenda-skip-scheduled-if-done t
@@ -49,9 +49,8 @@
     I want to sort in each category by the earliest timestamp.
     #+BEGIN_SRC emacs-lisp
 (setq org-agenda-sorting-strategy
- '((agenda time-up habit-down ts-up   priority-down category-keep)
- 
-  (todo timestamp-up todo-state-up priority-down category-keep)
+ '((agenda time-up habit-down ts-up priority-down category-keep)
+  (todo timestamp-up todo-state-down priority-down category-keep) 
   (tags priority-down category-keep)
   (search category-keep)))
 
@@ -95,20 +94,22 @@
 
     #+END_SRC
 *** Custom Agenda Commands
-    #+BEGIN_SRC emacs-lisp
-    (setq org-agenda-custom-commands
+    #+begin_src emacs-lisp
+     (setq org-agenda-custom-commands
       '(("p" "Planner"
          ((agenda "" ((org-agenda-span 'day)
                       (org-agenda-use-time-grid t)
+                      (org-agenda-time-grid '((daily today weekly require-timed)(800 1200 1600 2000)() "" nil))
                       (org-agenda-show-all-dates t)
                       (org-agenda-compact-blocks nil)
                       (org-agenda-overriding-header "")
                       (org-super-agenda-groups
-                       '((:name none
-                                :discard (:todo "DONE:")
+                       '(
+                                (:name none
                                 :time-grid t
                                 :date today
                                 :scheduled today
+                                :discard (:todo "DONE")
                                 :order 1)))))
                           
           (alltodo "" ((org-agenda-overriding-header "To Do")
@@ -145,9 +146,7 @@
     :scheduled future
     :deadline future
     :date t)))))))))
-
-   
-#+END_SRC
+    #+end_src
 *** Export Process
     This is how I'm setting up my export process. From [[https://www.fbxiang.com/blog/2017/11/01/write_papers_with_org_mode_and_spacemacs.html#title_9][here]].
     #+BEGIN_SRC emacs-lisp
