@@ -90,7 +90,7 @@
  '(italic ((t (:underline nil :slant italic))))
  '(org-agenda-date ((t (:foreground "#d3869b" :underline nil :weight normal))))
  '(org-agenda-date-today ((t (:foreground "#83a598" :slant normal :weight bold))))
- '(org-agenda-date-weekend ((t (:foreground "#fabd2f" :underline nil :slant italic :weight semi-bold))))
+ '(org-agenda-date-weekend ((t (:foreground "#fabd2f" :underline nil :slant italic :weight light))))
  '(org-agenda-property-face ((t nil)))
  '(org-agenda-structure ((t (:foreground "#ebdbb2" :weight ultra-bold))))
  '(org-super-agenda-header ((t (:inherit org-agenda-structure :underline t)))))

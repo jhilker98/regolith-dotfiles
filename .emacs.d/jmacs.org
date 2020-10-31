@@ -1,9 +1,9 @@
 #+title: JMACS
 #+author: Jacob Hilker
 * *Introduction to JMACS*
-  Welcome to JMacs! This is a my personal configuration of emacs, for
-  solo RPG campaigns like [[https://www.ironswornrpg.com/][Ironsworn]], writing (both prose and code), and
-  for general use. I have organized this file into different sections,
+Welcome to JMacs! This is a my personal configuration of emacs, for
+solo RPG campaigns like [[https://www.ironswornrpg.com/][Ironsworn]], writing (both prose and code), and
+for general use. I have organized this file into different sections,
   such as the functions I use, the UI settings, etc.
 ** Personal Info
    #+BEGIN_SRC emacs-lisp
@@ -34,7 +34,7 @@
     #+begin_src emacs-lisp
 (setq org-agenda-time-grid '((daily today weekly require-timed)()() "----------------------" nil)
    org-agenda-show-all-dates nil
-   org-agenda-use-time-grid t
+   org-agenda-use-time-grid nil
    org-agenda-skip-scheduled-if-done t
    org-agenda-skip-deadline-if-done t
    org-agenda-include-deadlines t
@@ -50,7 +50,7 @@
     #+BEGIN_SRC emacs-lisp
 (setq org-agenda-sorting-strategy
  '((agenda time-up habit-down ts-up priority-down category-keep)
-  (todo todo-state-up timestamp-up category-up priority-down category-keep) 
+  (todo timestamp-up todo-state-up category-up priority-down category-keep) 
   (tags priority-down category-keep)
   (search category-keep)))
 
@@ -76,7 +76,7 @@
     Org-mode scheduling is probably the feature I use the most in org-mode. I want to set up my keywords here, so I don't need to do it in every file. I'm also setting up the colors, and reducing the warning days to 0 days so I can see exactly when an assignment is due.
     #+BEGIN_SRC emacs-lisp
 (setq org-todo-keywords '(
-      (sequence "TODO(t)" "INPROGRESS(i)" "NEXT(n)" "SOMEDAY(s)"  "|" "DONE(d)" "CANCELED(c)")))
+      (sequence "TODO(t)" "INPROGRESS(i)" "NEXT(n)" "MEETING(m)" "SOMEDAY(s)"  "|" "DONE(d)" "CANCELED(c)")))
       ;(sequence "WAITING" "|")
 
 (setq org-todo-keyword-faces
@@ -84,6 +84,7 @@
  
    ("INPROGRESS" . (:foreground "#fe8019" :weight bold))
     ("NEXT" . (:foreground "#fabd2f" :weight black))
+    ("MEETING" . (:foreground "#b8bb26" :weight bold))
    ("SOMEDAY" . (:foreground "#d3869b" :slant italic))
    ("DONE" . (:foreground "#83a598" :strike-through t))
    ("CANCELED" . (:foreground "cc241d" :strike-through t))))
@@ -98,7 +99,8 @@ This daily planner is what I want for my default agenda view.
     #+begin_src emacs-lisp
      (setq org-agenda-custom-commands
       '(("p" "Planner"
-         ((agenda "" ((org-agenda-span 'day)
+         (
+                      (agenda "" ((org-agenda-span 'day)
                       (org-agenda-use-time-grid t)
                       (org-agenda-time-grid '((daily today weekly require-timed)(800 1200 1600 2000)() "" nil))
                       (org-agenda-show-all-dates t)
@@ -113,8 +115,12 @@ This daily planner is what I want for my default agenda view.
                                 :scheduled today
                                 :order 1)))))
                           
-          (alltodo "" ((org-agenda-overriding-header "To Do")
-                       
+          (agenda "" ((org-agenda-overriding-header "Coming Up Soon")
+	                
+                       (org-agenda-use-time-grid nil) 
+                       (org-agenda-time-grid '((daily today weekly require-timed)()() "----------------------" nil))
+		               (org-agenda-start-day "+1d")
+                       (org-agenda-span 'day)
                        (org-super-agenda-groups
                          '(
                       (:name "Projects"
@@ -139,19 +145,20 @@ This daily planner is what I want for my default agenda view.
       :order 3)
 ;
 ;
-    (:name "Classwork"
-     :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445")
+    (:name "Classwork and Meetings"
+     :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING")
      :order 1)
 ;
 ;
    (:name "Coming Up Soon"
     :scheduled future
     :deadline future
-    :date t)))
-    
-    ;(org-agenda-max-todos 11)
-;    (org-agenda-sorting-strategy '(ts-up category-up todo-state-up))
-    ))))))
+    :date t))))
+
+;    
+;    ;(org-agenda-max-todos 11)
+;    ;(org-agenda-sorting-strategy '( ts-up category-up todo-state-up))  
+)))))    
     #+end_src
 *** Export Process
     This is how I'm setting up my export process. From [[https://www.fbxiang.com/blog/2017/11/01/write_papers_with_org_mode_and_spacemacs.html#title_9][here]].
@@ -585,29 +592,37 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
 :ensure t)
     #+END_SRC
 ** Completion Packages
-*** Ivy
-    #+BEGIN_SRC emacs-lisp
-(use-package ivy
-:ensure t
-:config
-(ivy-mode 1))
-    #+END_SRC
+*** Ivy Suite
+**** Ivy
+     #+BEGIN_SRC emacs-lisp
+ (use-package ivy
+ :ensure t
+ :config
+ (ivy-mode 1))
+     #+END_SRC
 
-*** Counsel
-    Counsel allows us to utilize ivy by replacing many built-in and common
-    functions with richer versions. Let’s install it!
+**** Counsel
+     Counsel allows us to utilize ivy by replacing many built-in and common
+     functions with richer versions. Let’s install it!
 
-    #+BEGIN_SRC emacs-lisp
-;(use-package counsel-projectile)
-(use-package counsel
+     #+BEGIN_SRC emacs-lisp
+ (use-package counsel-projectile
+   :ensure t)
+ (use-package counsel
+ :ensure t)
+     #+END_SRC
+
+**** Swiper
+     #+BEGIN_SRC emacs-lisp
+ (use-package swiper
+   :commands (swiper swiper-all))
+     #+END_SRC
+*** Helm
+Helm is another completion package I want to try.
+#+begin_src emacs-lisp
+(use-package helm
 :ensure t)
-    #+END_SRC
-
-*** Swiper
-    #+BEGIN_SRC emacs-lisp
-(use-package swiper
-  :commands (swiper swiper-all))
-    #+END_SRC
+#+end_src
 *** Company Mode
     #+BEGIN_SRC emacs-lisp
     (use-package company
@@ -711,11 +726,20 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
 :config
 (add-hook 'org-mode-hook 'org-super-agenda-mode)
 
-(setq org-agenda-span 3)
+;(setq org-agenda-span 3)
 (setq org-super-agenda-fontify-whole-header-line t))
 ;(setq org-super-agenda-header-separator (concat "\n" (make-string (window-width) 9472) "\n" ))
 
 ;(setq org-super-agenda-groups 
+;'((:name none
+;                       
+;                                :discard (:todo "DONE")
+;                                :time-grid t
+;                                :date today
+;                                :scheduled today
+;                                :order 1))))
+                        
+
 ;'((:name "Today"
 ;   :discard (:todo "DONE:")
 ;   :date today
@@ -1054,18 +1078,19 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
    #+begin_src emacs-lisp
    (setq inhibit-splash-screen t)
    #+end_src
-** Open Planner
-  #+begin_src emacs-lisp
-;   (defun open-agenda ()
-;    (interactive)
-;    (org-agenda nil "p"))
-#+end_src
-** Open Weekly Planner
-#+begin_src emacs-lisp
-    (defun open-weekly-agenda ()
-    (interactive)
-    (org-agenda nil "a"))
-   #+end_src
+** Agenda Functions
+*** Open Planner
+   #+begin_src emacs-lisp
+    (defun open-agenda ()
+     (interactive)
+     (org-agenda nil "p"))
+ #+end_src
+*** Open Weekly Planner
+ #+begin_src emacs-lisp
+     (defun open-weekly-agenda ()
+     (interactive)
+     (org-agenda nil "a"))
+    #+end_src
 * Hooks and General (Non-UI) Config
 ** Delete Other Windows on Load
 I don't want spit windows when I load emacs.
@@ -1243,7 +1268,8 @@ I don't want spit windows when I load emacs.
    "f" '(:ignore t :which-key "Files")
    "fe" '(:ignore t :which-key "Edit file")
    "fed" 'edit-dotfile
-   "ff"  'counsel-find-file
+   ;"ff"  'counsel-find-file
+   "ff"  'helm-find-files
    "fs"  '(save-buffer :which-key "Save file")
    "f" '(:ignore t :which-key "Files")
    "fe" '(:ignore t :which-key "Edit file")
@@ -1251,7 +1277,6 @@ I don't want spit windows when I load emacs.
    "fEr" 'eval-region
    "fEb" 'eval-buffer
    "fEd" 'eval-defun
-   "ff"  'counsel-find-file
    "fs"  'save-buffer
    "fn" 'find-notes
    "fa" 'find-agenda
@@ -1283,8 +1308,8 @@ I don't want spit windows when I load emacs.
    "o" '(:ignore t :which-key "Org Menu")
    "os" 'org-schedule
    "oS" 'org-save-all-org-buffers
-   "oa" 'org-agenda 
-   ;"oA" 'org-agenda
+   "oa" 'open-agenda 
+   "oA" 'org-agenda
    "od" 'org-deadline
    "oc" 'org-capture-at-point
    "oC" '(:ignore t :which-key "cycle")
