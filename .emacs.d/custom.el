@@ -48,6 +48,7 @@
  '(org-journal-file-type 'monthly)
  '(org-journal-time-format "%a, %d %b %Y")
  '(org-journal-timestamp-format "%a, %d %b %Y" t)
+ '(org-log-into-drawer t)
  '(org-modules
    '(ol-bbdb ol-bibtex ol-docview ol-eww ol-gnus org-habit ol-info ol-irc ol-mhe ol-rmail org-tempo ol-w3m))
  '(package-selected-packages
