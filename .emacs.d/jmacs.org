@@ -8,7 +8,8 @@ for general use. I have organized this file into different sections,
 ** Personal Info
    #+BEGIN_SRC emacs-lisp
 (setq user-full-name "Jacob Hilker"
-      user-mail-address "jacob.hilker2@gmail.com")
+      user-mail-address "jacob.hilker2@gmail.com"
+      visible-bell t)
    #+END_SRC
 
 ** Org Mode Config
@@ -115,12 +116,16 @@ This daily planner is what I want for my default agenda view.
                                 :scheduled today
                                 :order 1)))))
                           
-          (agenda "" ((org-agenda-overriding-header "Coming Up Soon")
-	                
-                       (org-agenda-use-time-grid nil) 
-                       (org-agenda-time-grid '((daily today weekly require-timed)()() "----------------------" nil))
-		               (org-agenda-start-day "+1d")
-                       (org-agenda-span 'day)
+          (alltodo "" ((org-agenda-overriding-header "Coming Up Soon")
+                       ;(org-agenda-prefix-format '((todo . " %i %-22:c %t %22(org-entry-get nil \"TIMESTAMP\")")))
+                       (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottimestamp))
+	                ; 
+                      ; (org-agenda-use-time-grid nil) 
+                      ; (org-agenda-time-grid '((daily today weekly require-timed)()() "----------------------" nil))
+		              ; (org-agenda-start-day "+2d")
+     ;                   (org-agenda-todo-ignore-with-date t)
+                      ; (org-agenda-span 'week)
+     ;                  (org-agenda-format-date "%d %b")
                        (org-super-agenda-groups
                          '(
                       (:name "Projects"
@@ -129,7 +134,7 @@ This daily planner is what I want for my default agenda view.
                       
                      
     (:name "Personal"
-    :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO")
+    :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
     :order 4)
     
 
@@ -147,16 +152,16 @@ This daily planner is what I want for my default agenda view.
 ;
     (:name "Classwork and Meetings"
      :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING")
-     :order 1)
+     :order 1))))
 ;
 ;
-   (:name "Coming Up Soon"
-    :scheduled future
-    :deadline future
-    :date t))))
+ ;  (:name "Coming Up Soon"
+ ;   :scheduled future
+ ;   :deadline future
+ ;   :date t))))
 
 ;    
-;    ;(org-agenda-max-todos 11)
+    (org-agenda-max-todos 11)
 ;    ;(org-agenda-sorting-strategy '( ts-up category-up todo-state-up))  
 )))))    
     #+end_src
@@ -945,7 +950,7 @@ Helm is another completion package I want to try.
 (setq org-agenda-format-date (concat "\n"
                                                     (make-string (window-width) 9472)
                                                     "\n"
-                                                    "%a, %d %b."
+                                                    "%d %b"
                                                     "\n"
                                                    (make-string (window-width) 9472)
 ))
@@ -1878,7 +1883,8 @@ I don't want spit windows when I load emacs.
 
 
      #+END_SRC
-*** Centaur Tabs**** Use-Package
+*** Centaur Tabs
+**** Use-Package
     #+BEGIN_SRC emacs-lisp :tangle no
 (use-package centaur-tabs
 :ensure t
