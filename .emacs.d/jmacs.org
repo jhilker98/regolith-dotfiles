@@ -349,7 +349,7 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
   (setq dashboard-banner-logo-title "Man your own jackhammer!")
 ;  (setq dashboard-center-content t)
 (setq dashboard-items '((recents  . 5)
-                        (projects . 5)
+                        (projects . 4)
                         (agenda . 5)))
 
 (setq dashboard-show-shortcuts nil)
