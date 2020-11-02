@@ -13,7 +13,10 @@ for general use. I have organized this file into different sections,
    #+END_SRC
 
 ** Org Mode Config
-   This is where I am keeping most of my org mode config.
+   This is where I am keeping most of my org mode config. I do want to startup with everything folded.
+   #+begin_src emacs-lisp
+   (setq org-startup-folded t)
+   #+end_src
 *** Agenda File & Synchronization Setup
     Here I am setting up the agenda files. During the school year, I want to have my notes as part of the agenda, but not in summer time, which is why I have both. I'm also setting it up so that the UID is stored, and that the daemon can restore frames. 
     #+BEGIN_SRC emacs-lisp
@@ -40,11 +43,12 @@ for general use. I have organized this file into different sections,
    org-agenda-skip-deadline-if-done t
    org-agenda-include-deadlines t
    org-agenda-include-diary nil
+   ;org-agenda-start-day "+1d"
    org-agenda-overriding-header ""
    org-agenda-block-separator (concat (make-string (window-width) 9472) "\n")
 ;   org-agenda-compact-blocks t
-   org-agenda-start-with-log-mode t)   
-
+   ;org-agenda-start-with-log-mode t)   
+   org-agenda-start-with-log-mode nil)   
 
     #+end_src
     I want to sort in each category by the earliest timestamp.
@@ -96,7 +100,8 @@ for general use. I have organized this file into different sections,
 
     #+END_SRC
 *** Custom Agenda Commands
-This daily planner is what I want for my default agenda view.
+**** Daily Planner
+    This daily planner is what I want for my default agenda view.
     #+begin_src emacs-lisp
      (setq org-agenda-custom-commands
       '(("p" "Planner"
@@ -107,6 +112,7 @@ This daily planner is what I want for my default agenda view.
                       (org-agenda-show-all-dates t)
                       (org-agenda-compact-blocks nil)
                       (org-agenda-overriding-header "")
+                      (org-agenda-start-day "+0d")
                       (org-super-agenda-groups
                        '((:name none
                        
