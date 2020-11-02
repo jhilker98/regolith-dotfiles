@@ -347,12 +347,16 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
   (dashboard-setup-startup-hook)
   (setq dashboard-startup-banner "~/.emacs.d/banner.png")
   (setq dashboard-banner-logo-title "Man your own jackhammer!")
-  (setq dashboard-center-content t)
+;  (setq dashboard-center-content t)
 (setq dashboard-items '((recents  . 5)
                         (projects . 5)
-                        (agenda . 5))))
-;
-;(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+                        (agenda . 5)))
+
+(setq dashboard-show-shortcuts nil)
+;(setq dashboard-set-navigator t)
+(setq dashboard-set-heading-icons t)
+(setq dashboard-set-file-icons t)
+(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
      #+END_SRC
 **** Unfill
      For toggling fill and unfill.
