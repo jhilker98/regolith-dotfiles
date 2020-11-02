@@ -853,6 +853,14 @@ Helm is another completion package I want to try.
 (use-package org-agenda-property
 :ensure t)
     #+END_SRC
+*** Idle Org Agenda    
+   #+begin_src emacs-lisp
+     (use-package idle-org-agenda
+     :after org-agenda
+     :ensure t
+     :config (idle-org-agenda-mode))
+    #+end_src
+**** TODO Configure Time Length for idle org agenda
 ** News Packages
 *** Elfeed
     Elfeed is a feed reader. EMMS is a music player for podcasts.
@@ -1273,8 +1281,8 @@ I don't want spit windows when I load emacs.
    "f" '(:ignore t :which-key "Files")
    "fe" '(:ignore t :which-key "Edit file")
    "fed" 'edit-dotfile
-   ;"ff"  'counsel-find-file
-   "ff"  'helm-find-files
+   "ff"  'counsel-find-file
+;   "ff"  'helm-find-files
    "fs"  '(save-buffer :which-key "Save file")
    "f" '(:ignore t :which-key "Files")
    "fe" '(:ignore t :which-key "Edit file")
