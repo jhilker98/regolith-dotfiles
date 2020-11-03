@@ -14,10 +14,10 @@
 ** RPGs
  - path :: ~/Documents/rpgs
 ** Broken Thrones
- - path :: ~/Documents/broken-thrones
-** Byrne
- - path :: ~/Documents/Byrne-World
-** Aurea
- - path :: ~/Documents/Aurea
+ - path :: ~/Documents/brokenThrones
 ** Shattered Skies
- - path :: ~/Documents/shattered-skies
+ - path :: ~/Documents/shatteredSkies
+** Byrne
+ - path :: ~/Documents/byrne
+** Aurea
+ - path :: ~/Documents/aurea

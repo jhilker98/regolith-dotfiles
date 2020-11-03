@@ -613,7 +613,15 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
  (use-package ivy
  :ensure t
  :config
+ (setq ivy-count-format "(%d/%d) ")
  (ivy-mode 1))
+
+(use-package ivy-posframe
+:after ivy
+:ensure t
+:config
+(setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center)))
+(ivy-posframe-mode 1))
      #+END_SRC
 
 **** Counsel
@@ -623,8 +631,14 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
      #+BEGIN_SRC emacs-lisp
  (use-package counsel-projectile
    :ensure t)
- (use-package counsel
- :ensure t)
+
+(use-package counsel-package
+:ensure t)
+
+(use-package counsel
+ :ensure t
+ :config
+(counsel-mode))
      #+END_SRC
 
 **** Swiper
@@ -1316,7 +1330,7 @@ I don't want spit windows when I load emacs.
    "p" '(:ignore t :which-key "Packages")
    "pl" 'package-list-packages
    "pr" 'package-refresh-contents
-   "pi" 'package-install
+   "pi" 'counsel-package
    "pI" 'package-initialize
    "pd" 'package-delete)
    #+END_SRC
@@ -1331,14 +1345,14 @@ I don't want spit windows when I load emacs.
    "o" '(:ignore t :which-key "Org Menu")
    "os" 'org-schedule
    "oS" 'org-save-all-org-buffers
-   "oa" 'open-agenda 
-   "oA" 'org-agenda
+   "oa" 'org-agenda 
+;   "oA" 'org-agenda
    "od" 'org-deadline
    "oc" 'org-capture-at-point
    "oC" '(:ignore t :which-key "cycle")
    "oCa" 'org-cycle-agenda-files
-   "oT" '(:ignore t :which-key "toggle")
-   "oTi" 'org-toggle-inline-images 
+   ;"oT" '(:ignore t :which-key "toggle")
+   ;"oTi" 'org-toggle-inline-images 
 ;   "ot" 'counsel-org-tag
    "ot" 'org-time-stamp
    "oi" '(:ignore t :which-key "insert")
@@ -1715,6 +1729,9 @@ I don't want spit windows when I load emacs.
      (set-frame-font "Iosevka Nerd Font-12" nil t)
     ; (set-frame-font "Roboto Mono-12" nil t)
 ;    (set-frame-font "Cousine-Regular-12" nil t)
+
+;     (set-frame-font "Monaco-12" nil t)
+  ;   (set-frame-font "Hack-12" nil t)
      #+END_SRC
  
      #+BEGIN_SRC emacs-lisp
