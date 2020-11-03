@@ -102,7 +102,7 @@ for general use. I have organized this file into different sections,
     #+END_SRC
 *** Custom Agenda Commands
 **** Daily Planner
-    This daily planner is what I want for my default agenda view.
+     This daily planner is what I want for my default agenda view.
     #+begin_src emacs-lisp
      (setq org-agenda-custom-commands
       '(("p" "Planner"
@@ -123,21 +123,24 @@ for general use. I have organized this file into different sections,
                                 :scheduled today
                                 :order 1)))))
                           
-          (alltodo "" ((org-agenda-overriding-header "Coming Up Soon")
+          (agenda "" ((org-agenda-overriding-header "Coming Up Soon") 
                        ;(org-agenda-prefix-format '((todo . " %i %-22:c %t %22(org-entry-get nil \"TIMESTAMP\")")))
-                       (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottimestamp))
+;                       (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottimestamp))
 	                ; 
                       ; (org-agenda-use-time-grid nil) 
                       ; (org-agenda-time-grid '((daily today weekly require-timed)()() "----------------------" nil))
-		              ; (org-agenda-start-day "+2d")
+		               (org-agenda-start-day "+1d")
      ;                   (org-agenda-todo-ignore-with-date t)
-                      ; (org-agenda-span 'week)
-     ;                  (org-agenda-format-date "%d %b")
+                       (org-agenda-format-date "%d %b (%a.)\n")
+			;		   (concat (make-string (window-width) 9472) "\n")
+             ;         (org-agenda-compact-blocks t)
+                       (org-agenda-span 3)
+                      ;(org-agenda-format-date "%d %b")
                        (org-super-agenda-groups
                          '(
-                      (:name "Projects"
-                      :category "PROJECT"
-                      :order 5)
+     ;                 (:name "Projects"
+     ;                 :category "PROJECT"
+     ;                 :order 5)
                       
                      
     (:name "Personal"
@@ -146,9 +149,9 @@ for general use. I have organized this file into different sections,
     
 
 ;    
-    (:name "Someday"
-     :and (:not (:category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO")) :todo "SOMEDAY")
-     :order 5)
+;    (:name "Someday"
+;     :and (:not (:category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO")) :todo "SOMEDAY")
+;     :order 5)
 
     (:name "Overdue"
       :deadline past
@@ -159,7 +162,12 @@ for general use. I have organized this file into different sections,
 ;
     (:name "Classwork and Meetings"
      :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING")
-     :order 1))))
+     :order 1)))))
+
+     (alltodo "" ((org-agenda-overriding-header "To Do")
+                  (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+
+))))))
 ;
 ;
  ;  (:name "Coming Up Soon"
@@ -168,10 +176,24 @@ for general use. I have organized this file into different sections,
  ;   :date t))))
 
 ;    
-    (org-agenda-max-todos 11)
+;    (org-agenda-max-todos 11)
 ;    ;(org-agenda-sorting-strategy '( ts-up category-up todo-state-up))  
-)))))    
     #+end_src
+**** Week Ahead
+     This is a way I can view the upcoming week.
+     #+begin_src emacs-lisp
+     (add-to-list 'org-agenda-custom-commands
+     '("w" "Week Ahead" agenda ""
+     (
+     (org-agenda-format-date "\n%A %d %b\n")
+     
+      (org-agenda-overriding-header "")
+      (org-agenda-start-day "+1d")
+     (org-agenda-super-groups
+     '(:auto-ts t)))))
+
+
+     #+end_src
 *** Export Process
     This is how I'm setting up my export process. From [[https://www.fbxiang.com/blog/2017/11/01/write_papers_with_org_mode_and_spacemacs.html#title_9][here]].
     #+BEGIN_SRC emacs-lisp
