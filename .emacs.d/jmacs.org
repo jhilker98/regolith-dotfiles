@@ -131,7 +131,9 @@ for general use. I have organized this file into different sections,
                       ; (org-agenda-time-grid '((daily today weekly require-timed)()() "----------------------" nil))
 		               (org-agenda-start-day "+1d")
      ;                   (org-agenda-todo-ignore-with-date t)
-                       (org-agenda-format-date "%d %b (%a.)\n")
+                      ; (org-agenda-format-date "\n%d %b (%a.)\n")
+                      
+                       (org-agenda-format-date "\n%d %b (%a.)")
 			;		   (concat (make-string (window-width) 9472) "\n")
              ;         (org-agenda-compact-blocks t)
                        (org-agenda-span 3)
@@ -166,6 +168,8 @@ for general use. I have organized this file into different sections,
 
      (alltodo "" ((org-agenda-overriding-header "To Do")
                   (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+                  (org-agenda-sorting-strategy '(category-up ts-up  todo-state-up))
+
 
 ))))))
 ;
@@ -183,15 +187,13 @@ for general use. I have organized this file into different sections,
      This is a way I can view the upcoming week.
      #+begin_src emacs-lisp
      (add-to-list 'org-agenda-custom-commands
-     '("w" "Week Ahead" agenda ""
-     (
-     (org-agenda-format-date "\n%A %d %b\n")
-     
-      (org-agenda-overriding-header "")
-      (org-agenda-start-day "+1d")
-     (org-agenda-super-groups
-     '(:auto-ts t)))))
+     '("w" "Week Ahead" (
+          (org-ql-block '(and (ts :from 1)
+                          (ts :to 7))
+                      ((org-super-agenda-groups '((:auto-ts t)))
+                       (org-ql-block-header "The Week Ahead"))))))
 
+ 
 
      #+end_src
 *** Export Process
@@ -218,7 +220,7 @@ for general use. I have organized this file into different sections,
    #+END_SRC
 ** Setting Notes File
    #+BEGIN_SRC emacs-lisp
-(setq org-default-notes-file "~/Dropbox/notes/fall2020/notes.org")
+;(setq org-default-notes-file "~/Dropbox/notes/fall2020/notes.org")
    #+END_SRC
 ** Quieting Package CL 
 I am working on upgrading to emacs 27. I kept getting a warning about cl being deprecated, so I'm quieting it with this.
@@ -908,6 +910,12 @@ Helm is another completion package I want to try.
      :config (idle-org-agenda-mode))
     #+end_src
 **** TODO Configure Time Length for idle org agenda
+*** CDLatex
+    #+begin_src emacs-lisp
+    (use-package cdlatex
+    :defer 0.1
+    :ensure t)
+    #+end_src
 ** News Packages
 *** Elfeed
     Elfeed is a feed reader. EMMS is a music player for podcasts.
@@ -1138,8 +1146,7 @@ Helm is another completion package I want to try.
    #+begin_src emacs-lisp
    (setq inhibit-splash-screen t)
    #+end_src
-** Agenda Functions
-*** Open Planner
+** Agenda Functions*** Open Planner
    #+begin_src emacs-lisp
     (defun open-agenda ()
      (interactive)
@@ -1149,8 +1156,22 @@ Helm is another completion package I want to try.
  #+begin_src emacs-lisp
      (defun open-weekly-agenda ()
      (interactive)
-     (org-agenda nil "a"))
+     (org-agenda nil "w"))
     #+end_src
+** Render $$LaTeX$$ in buffer
+   #+begin_src emacs-lisp
+   (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
+   (defun krofna-hack ()
+  (when (looking-back (rx "$ "))
+    (save-excursion
+      (backward-char 1)
+      (org-toggle-latex-fragment))))
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (org-cdlatex-mode)
+            (add-hook 'post-self-insert-hook #'krofna-hack 'append 'local)))
+   #+end_src
 * Hooks and General (Non-UI) Config
 ** Delete Other Windows on Load
 I don't want spit windows when I load emacs.
@@ -1368,21 +1389,23 @@ I don't want spit windows when I load emacs.
    "o" '(:ignore t :which-key "Org Menu")
    "os" 'org-schedule
    "oS" 'org-save-all-org-buffers
-   "oa" 'org-agenda 
-;   "oA" 'org-agenda
+   "oa" 'open-agenda 
+   "oA" 'org-agenda
    "od" 'org-deadline
    "oc" 'org-capture-at-point
-   "oC" '(:ignore t :which-key "cycle")
-   "oCa" 'org-cycle-agenda-files
+   ;"oC" '(:ignore t :which-key "cycle")
+   ;"oCa" 'org-cycle-agenda-files
    ;"oT" '(:ignore t :which-key "toggle")
    ;"oTi" 'org-toggle-inline-images 
 ;   "ot" 'counsel-org-tag
    "ot" 'org-time-stamp
-   "oi" '(:ignore t :which-key "insert")
-   "oiT" 'toc-org-insert-toc
+   "oT" 'toc-org-insert-toc
+;   "oi" '(:ignore t :which-key "insert")
+;   "oit" 'toc-org-insert-toc
 ;   "oit" 'org-time-stamp
    "oe" 'org-export-dispatch
    "ow" 'open-weekly-agenda
+   "oL" 'org-latex-preview
 ;   "oP" '(:ignore t :which-key "Pomodoro")
 ;   "oPs" '(tomatinho :which-key "Start Pomodoro")
 ;   "oPk" '(tomatinho-interactive-quit :which-key "Kill Timer")
@@ -1751,36 +1774,14 @@ I don't want spit windows when I load emacs.
 
 
      #+BEGIN_SRC emacs-lisp
-     (set-frame-font "Iosevka Nerd Font-12" nil t)
-    ; (set-frame-font "Roboto Mono-12" nil t)
-;    (set-frame-font "Cousine-Regular-12" nil t)
-
-;     (set-frame-font "Monaco-12" nil t)
-  ;   (set-frame-font "Hack-12" nil t)
+;   (set-frame-font "Iosevka Nerd Font-12" nil t)
+;   (set-frame-font "Roboto Mono-12" nil t)
+;   (set-frame-font "Cousine-12" nil t)
+;   (set-frame-font "Monaco-12" nil t)
+;   (set-frame-font "Hack-12" nil t)
+;    (set-frame-font "SourceSansPro-12" nil t)
      #+END_SRC
- 
-     #+BEGIN_SRC emacs-lisp
-;(defun xah-cycle-font-2 (*n)
-;  "Change font in current window between 2 fonts.
-;URL `http://ergoemacs.org/emacs/emacs_switching_fonts.html'
-;Version 2015-09-21"
-;  (interactive "p")
-;  ;; this function sets a property “state”. It is a integer. Possible values are 0 to length of ξfontList
-;  (let (
-;        (-fontList '("Iosevka Nerd Font-12" "ETBembo-12"))
-;        -fontToUse
-;        -stateBefore
-;        -stateAfter)
-;
-;    (setq -stateBefore (if (get 'xah-cycle-font-2 'state) (get 'xah-cycle-font-2 'state) 0))
-;    (setq -stateAfter (% (+ -stateBefore (length -fontList) *n) (length -fontList)))
-;    (put 'xah-cycle-font-2 'state -stateAfter)
-;
-;    (setq -fontToUse (nth -stateAfter -fontList))
-;    (set-frame-parameter nil 'font -fontToUse)
-;    (message "Font set to: %s" -fontToUse)))
 
-     #+END_SRC
 *** Solarized-Theme Config
     #+BEGIN_SRC emacs-lisp
 
@@ -1867,7 +1868,7 @@ I don't want spit windows when I load emacs.
 (add-hook 'prog-mode-hook 'set-prog-modeline)
 (add-hook 'text-mode-hook 'set-prog-modeline)
     #+END_SRC
-* \(LaTeX\) Classes 
+* $$LaTeX$$ Classes 
 ** Novel
    #+BEGIN_SRC emacs-lisp
 (add-to-list 'org-latex-classes
@@ -2003,3 +2004,4 @@ I don't want spit windows when I load emacs.
 
   #+END_SRC
   
+
