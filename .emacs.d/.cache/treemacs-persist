@@ -5,7 +5,7 @@
  - path :: ~/Documents/dotfiles
 ** Scripts
  - path :: ~/.bin
-** Configs
+** .config
  - path :: ~/.config
 ** Notes
  - path :: ~/Dropbox/notes

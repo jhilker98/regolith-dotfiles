@@ -9,6 +9,7 @@ for general use. I have organized this file into different sections,
    #+BEGIN_SRC emacs-lisp
 (setq user-full-name "Jacob Hilker"
       user-mail-address "jacob.hilker2@gmail.com")
+      (setq gc-cons-threshold 100000000)
       ;visible-bell t)
    #+END_SRC
 
@@ -121,6 +122,7 @@ for general use. I have organized this file into different sections,
                                 :time-grid t
                                 :date today
                                 :scheduled today
+                                :deadline today
                                 :order 1)))))
                           
           (agenda "" ((org-agenda-overriding-header "Coming Up Soon") 
@@ -368,17 +370,22 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
      #+BEGIN_SRC emacs-lisp
 (use-package dashboard
   :ensure t
-  :config
+;  :defer nil
+;  :init
+;  (add-hook 'after-init-hook 'dashboard-setup-startup-hook)
+ :config
   (dashboard-setup-startup-hook)
-  (setq dashboard-startup-banner "~/.emacs.d/banner.png")
+;  (setq dashboard-startup-banner "~/.emacs.d/banner.txt")
+   (setq dashboard-startup-banner 'logo)
+   ;(setq dashboard-setup-banner "/home/jhilker/.emacs.d/banner.png")  
   (setq dashboard-banner-logo-title "Man your own jackhammer!")
-;  (setq dashboard-center-content t)
+;;  (setq dashboard-center-content t)
 (setq dashboard-items '((recents  . 5)
                         (projects . 4)
                         (agenda . 5)))
-
+;;
 (setq dashboard-show-shortcuts nil)
-;(setq dashboard-set-navigator t)
+;;(setq dashboard-set-navigator t)
 (setq dashboard-set-heading-icons t)
 (setq dashboard-set-file-icons t)
 (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
@@ -490,7 +497,7 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
 
     #+BEGIN_SRC emacs-lisp 
    (use-package doom-modeline
-   :ensure t
+   :demand t
    :config
    (setq doom-modeline-height 32))
     #+END_SRC
@@ -1184,6 +1191,7 @@ I don't want spit windows when I load emacs.
     #+BEGIN_SRC emacs-lisp
     (setq-default initial-major-mode 'org-mode)
     (setq initial-scratch-message nil)
+    ;(setq initial-buffer-choice (lambda () (get-buffer "*scratch*")))
     #+END_SRC
 *** File Types
 **** Org Mode File Types

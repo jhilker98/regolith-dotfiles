@@ -142,8 +142,30 @@ label-urgent-foreground = ${colors.fg}
 label-urgent-background = ${colors.red}
 label-urgent-padding = 1
 
+[module/title]
+type = internal/xwindow
+format = <label>
+format-padding = 1
+format-background = ${colors.bg-bright}
+format-foreground = ${colors.fg}
+;; Available tokens:
+;;   %title%
+;; Default: %title%
+;label = %title%
+label = %title:0:30:...%
+label-maxlen = 30
+
+; Used instead of label when there is no window title
+; Available tokens:
+;   None
+label-empty = 
+;label-empty-foreground = #707880
 
 
+;[module/title]
+;type = custom/script
+;exec = "$HOME/.config/polybar/scripts/window.sh"
+;interval = 1
 
 [module/clock]
 type = internal/date
@@ -301,6 +323,12 @@ format-prefix = ""
 format-prefix-background = ${colors.blue}
 format-prefix-padding =1
 format-prefix-margin = 1
+
+[module/keyboard]
+type = internal/xkeyboard
+format = <label-layout>
+label-layout = %layout%
+
 [module/cal]
 type = internal/date
 date = %a, %d %b
@@ -319,7 +347,7 @@ format-foreground = ${colors.fg}
 ;format-margin = 1
 ;format-margin = 1
 
-[module/keyboard]
+[module/caps]
 type = internal/xkeyboard
 #format = <label-layout> <label-indicator>
 #label-layout = %layout%
@@ -585,7 +613,7 @@ fg = ${colors.fg}
 width = 100%
 height = 27
 ;radius = 4
-modules-left = i3 bspwm
+modules-left = i3 bspwm 
 modules-center = clock 
 modules-right = volume wifi battery backlight 
 ;padding = 1
@@ -616,15 +644,15 @@ fg = ${colors.fg}
 width = 100%
 height = 27
 ;radius = 4
-modules-left =  cal polypomo reddit keyboard
-#modules-center = spotify
+modules-left =  cal polypomo reddit caps
+;modules-center = spotify
 ; modules-center = appts
 
 #modules-center = previous playpause next progress 
-#modules-center = progress
-; when wttr.in isn't down and using rofication
+;modules-center = progress
+;modules-center = title 
 modules-right = bell notifs news weather 
-;when wttr.in is down and using rofication
+;when wttr.in is down 
 # modules-right = bell notifs news
 
 
