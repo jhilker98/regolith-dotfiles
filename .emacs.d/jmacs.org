@@ -83,20 +83,19 @@ for general use. I have organized this file into different sections,
     Org-mode scheduling is probably the feature I use the most in org-mode. I want to set up my keywords here, so I don't need to do it in every file. I'm also setting up the colors, and reducing the warning days to 0 days so I can see exactly when an assignment is due.
     #+BEGIN_SRC emacs-lisp
 (setq org-todo-keywords '(
-      (sequence "TODO(t)" "INPROGRESS(i)" "NEXT(n)" "MEETING(m)" "SOMEDAY(s)"  "|" "DONE(d)" "CANCELED(c)")
-      (type "PROJECT(p)")))
+      (sequence "TODO(t)" "INPR(i)" "NEXT(n)" "MEET(m)" "PROJ(p)"  "|" "SOMEDAY(s)"   "DONE(d)" "CANCELED(c)")))
       ;(sequence "WAITING" "|")
 
 (setq org-todo-keyword-faces
  '(("TODO" . (:foreground "#cc241d" :weight black :underline t))
  
-   ("INPROGRESS" . (:foreground "#fe8019" :weight bold))
+   ("INPR" . (:foreground "#fe8019" :weight bold))
     ("NEXT" . (:foreground "#fabd2f" :weight black))
-    ("MEETING" . (:foreground "#b8bb26" :weight bold))
+    ("MEET" . (:foreground "#b8bb26" :weight bold))
+   ("PROJ" . (:foreground "#458588" :slant italic :weight bold))
    ("SOMEDAY" . (:foreground "#d3869b" :slant italic))
    ("DONE" . (:foreground "#83a598" :strike-through t))
-   ("CANCELED" . (:foreground "cc241d" :strike-through t))
-   ("PROEJCT" . (:foreground "#458588" :slant italic :weight bold))))
+   ("CANCELED" . (:foreground "cc241d" :strike-through t))))
 ;   ("DONE" . "green")
 
 (setq org-deadline-warning-days 0)
@@ -118,8 +117,20 @@ for general use. I have organized this file into different sections,
                       (org-agenda-overriding-header "")
                       (org-agenda-start-day "+0d")
                       (org-super-agenda-groups
-                       '((:name none
-                       
+                       '(
+                           (:name "Habits"
+                            :habit t
+                            :category "HABIT"
+                            :order 2)
+                            
+                            (:name "Chores"
+                            :habit t
+                            :category "CHORE"
+                            :order 2)
+
+
+
+                               (:name none
                                 :discard (:todo "DONE")
                                 :time-grid t
                                 :date today
@@ -140,7 +151,7 @@ for general use. I have organized this file into different sections,
                        (org-agenda-format-date "\n%d %b (%a.)")
 			;		   (concat (make-string (window-width) 9472) "\n")
              ;         (org-agenda-compact-blocks t)
-                       (org-agenda-span 3)
+                       (org-agenda-span 2)
                       ;(org-agenda-format-date "%d %b")
                        (org-super-agenda-groups
                          '(
@@ -149,9 +160,10 @@ for general use. I have organized this file into different sections,
                          :habit t
                          :category "HABIT"
                          :order 6)
+                         
                          (:name "Chores"
                          :habit t
-                         :category "CHORES"
+                         :category "CHORE"
                          :order 6)
                          
 
@@ -183,10 +195,27 @@ for general use. I have organized this file into different sections,
      (alltodo "" ((org-agenda-overriding-header "To Do")
                   (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
                   (org-agenda-sorting-strategy '(ts-up  category-up todo-state-up))
+                  (org-super-agenda-groups '(
+                  (:name "Classwork and Meetings"
+                  :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING")
+                  :order 1)
+                 
+                  (:name "Personal"
+                  :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
+                  :order 2)
+                  
+                  (:name "Projects"
+                   :todo "PROJECT"
+                   :category "PROJECT"
+                   :order 3)
+                  
+
+                 (:discard (:category "HABIT"))
+                 (:discard (:category "CHORE"))
+
+))))))))
 
 
-))))))
-;
 ;
  ;  (:name "Coming Up Soon"
  ;   :scheduled future
