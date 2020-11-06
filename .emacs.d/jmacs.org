@@ -375,7 +375,7 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
 ;  (add-hook 'after-init-hook 'dashboard-setup-startup-hook)
  :config
   (dashboard-setup-startup-hook)
-;  (setq dashboard-startup-banner "~/.emacs.d/banner.txt")
+;  (setq dashboard-startup-banner "~/crusaderKings.png")
    (setq dashboard-startup-banner 'logo)
    ;(setq dashboard-setup-banner "/home/jhilker/.emacs.d/banner.png")  
   (setq dashboard-banner-logo-title "Man your own jackhammer!")
