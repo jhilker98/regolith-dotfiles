@@ -145,11 +145,16 @@ for general use. I have organized this file into different sections,
                        (org-super-agenda-groups
                          '(
                          
-                         (:name "Habits and Chores"
+                         (:name "Habits"
                          :habit t
                          :category "HABIT"
                          :order 6)
+                         (:name "Chores"
+                         :habit t
+                         :category "CHORES"
+                         :order 6)
                          
+
      ;                 (:name "Projects"
      ;                 :category "PROJECT"
      ;                 :order 5)
