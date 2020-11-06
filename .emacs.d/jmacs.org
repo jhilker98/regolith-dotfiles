@@ -48,8 +48,8 @@ for general use. I have organized this file into different sections,
    ;org-agenda-start-day "+1d"
    org-agenda-overriding-header ""
    org-agenda-block-separator (concat (make-string (window-width) 9472) "\n")
-;   org-agenda-compact-blocks t
-   ;org-agenda-start-with-log-mode t)   
+;;   org-agenda-compact-blocks t
+;   ;org-agenda-start-with-log-mode t)   
    org-agenda-start-with-log-mode nil)   
 
     #+end_src
@@ -83,7 +83,8 @@ for general use. I have organized this file into different sections,
     Org-mode scheduling is probably the feature I use the most in org-mode. I want to set up my keywords here, so I don't need to do it in every file. I'm also setting up the colors, and reducing the warning days to 0 days so I can see exactly when an assignment is due.
     #+BEGIN_SRC emacs-lisp
 (setq org-todo-keywords '(
-      (sequence "TODO(t)" "INPROGRESS(i)" "NEXT(n)" "MEETING(m)" "SOMEDAY(s)"  "|" "DONE(d)" "CANCELED(c)")))
+      (sequence "TODO(t)" "INPROGRESS(i)" "NEXT(n)" "MEETING(m)" "SOMEDAY(s)"  "|" "DONE(d)" "CANCELED(c)")
+      (type "PROJECT(p)")))
       ;(sequence "WAITING" "|")
 
 (setq org-todo-keyword-faces
@@ -94,7 +95,8 @@ for general use. I have organized this file into different sections,
     ("MEETING" . (:foreground "#b8bb26" :weight bold))
    ("SOMEDAY" . (:foreground "#d3869b" :slant italic))
    ("DONE" . (:foreground "#83a598" :strike-through t))
-   ("CANCELED" . (:foreground "cc241d" :strike-through t))))
+   ("CANCELED" . (:foreground "cc241d" :strike-through t))
+   ("PROEJCT" . (:foreground "#458588" :slant italic :weight bold))))
 ;   ("DONE" . "green")
 
 (setq org-deadline-warning-days 0)
@@ -102,15 +104,15 @@ for general use. I have organized this file into different sections,
 
     #+END_SRC
 *** Custom Agenda Commands
-**** Daily Planner
-     This daily planner is what I want for my default agenda view.
-    #+begin_src emacs-lisp
-     (setq org-agenda-custom-commands
+**** Planner
+     This planner is what I want for my default agenda view.
+     #+begin_src emacs-lisp
+      (setq org-agenda-custom-commands
       '(("p" "Planner"
          (
                       (agenda "" ((org-agenda-span 'day)
                       (org-agenda-use-time-grid t)
-                      (org-agenda-time-grid '((daily today weekly require-timed)(800 1200 1600 2000)() "" nil))
+                      (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
                       (org-agenda-show-all-dates t)
                       (org-agenda-compact-blocks nil)
                       (org-agenda-overriding-header "")
@@ -170,7 +172,7 @@ for general use. I have organized this file into different sections,
 
      (alltodo "" ((org-agenda-overriding-header "To Do")
                   (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
-                  (org-agenda-sorting-strategy '(category-up ts-up  todo-state-up))
+                  (org-agenda-sorting-strategy '(ts-up  category-up todo-state-up))
 
 
 ))))))
@@ -183,17 +185,17 @@ for general use. I have organized this file into different sections,
 
 ;    
 ;    (org-agenda-max-todos 11)
-;    ;(org-agenda-sorting-strategy '( ts-up category-up todo-state-up))  
-    #+end_src
+;    ;(org-agenda-sorting-strategy '( ts-up category-up todo-state-up))
+     #+end_src
 **** Week Ahead
      This is a way I can view the upcoming week.
      #+begin_src emacs-lisp
-     (add-to-list 'org-agenda-custom-commands
-     '("w" "Week Ahead" (
-          (org-ql-block '(and (ts :from 1)
-                          (ts :to 7))
-                      ((org-super-agenda-groups '((:auto-ts t)))
-                       (org-ql-block-header "The Week Ahead"))))))
+;     (add-to-list 'org-agenda-custom-commands
+;     '("w" "Week Ahead" (
+;          (org-ql-block '(and (ts :from 1)
+;                          (ts :to 7))
+;                      ((org-super-agenda-groups '((:auto-ts t)))
+;                       (org-ql-block-header "The Week Ahead"))))))
 
  
 
@@ -1016,14 +1018,14 @@ Helm is another completion package I want to try.
    I don't like the default date format for the agenda. I'm going to make it a bit smaller here. I also found the separator lines on [[https://www.reddit.com/r/orgmode/comments/e4stk2/adding_a_separator_line_between_days_in_emacs/][r/orgmode]].
 
    #+BEGIN_SRC emacs-lisp
-;(setq org-agenda-format-date "%a, %d %b.")
-(setq org-agenda-format-date (concat "\n"
-                                                    (make-string (window-width) 9472)
-                                                    "\n"
-                                                    "%d %b"
-                                                    "\n"
-                                                   (make-string (window-width) 9472)
-))
+(setq org-agenda-format-date "%d %b (%a)")
+;(setq org-agenda-format-date (concat "\n"
+;                                                    (make-string (window-width) 9472)
+;                                                    "\n"
+;                                                    "%d %b"
+;                                                    "\n"
+;                                                   (make-string (window-width) 9472)
+;))
    #+END_SRC
 * Specific Functions
 ** Sidebar 
@@ -1397,8 +1399,9 @@ I don't want spit windows when I load emacs.
    "o" '(:ignore t :which-key "Org Menu")
    "os" 'org-schedule
    "oS" 'org-save-all-org-buffers
-   "oa" 'open-agenda 
-   "oA" 'org-agenda
+   ;"oa" 'open-agenda 
+    "oa" 'org-agenda
+;   "oA" 'org-agenda
    "od" 'org-deadline
    "oc" 'org-capture-at-point
    ;"oC" '(:ignore t :which-key "cycle")
