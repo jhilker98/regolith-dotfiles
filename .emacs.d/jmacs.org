@@ -107,7 +107,7 @@ for general use. I have organized this file into different sections,
 **** Planner
      This planner is what I want for my default agenda view.
      #+begin_src emacs-lisp
-      (setq org-agenda-custom-commands
+       (setq org-agenda-custom-commands
       '(("p" "Planner"
          (
                       (agenda "" ((org-agenda-span 'day)
@@ -144,6 +144,12 @@ for general use. I have organized this file into different sections,
                       ;(org-agenda-format-date "%d %b")
                        (org-super-agenda-groups
                          '(
+                         
+                         (:name "Habits and Chores"
+                         :habit t
+                         :category "HABIT"
+                         :order 6)
+                         
      ;                 (:name "Projects"
      ;                 :category "PROJECT"
      ;                 :order 5)
@@ -153,7 +159,6 @@ for general use. I have organized this file into different sections,
     :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
     :order 4)
     
-
 ;    
 ;    (:name "Someday"
 ;     :and (:not (:category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO")) :todo "SOMEDAY")
@@ -186,20 +191,23 @@ for general use. I have organized this file into different sections,
 ;    
 ;    (org-agenda-max-todos 11)
 ;    ;(org-agenda-sorting-strategy '( ts-up category-up todo-state-up))
+
      #+end_src
 **** Week Ahead
-     This is a way I can view the upcoming week.
+     This is a way I can view the upcoming week. I have 2 implementations here - one with [[https://github.com/alphapapa/org-ql][Org-QL]], the other with the basic agenda and [[https://github.com/alphapapa/org-super-agenda][org-super-agenda.]]     
+***** Org-QL Implementation
      #+begin_src emacs-lisp
-;     (add-to-list 'org-agenda-custom-commands
-;     '("w" "Week Ahead" (
-;          (org-ql-block '(and (ts :from 1)
-;                          (ts :to 7))
-;                      ((org-super-agenda-groups '((:auto-ts t)))
-;                       (org-ql-block-header "The Week Ahead"))))))
+     (add-to-list 'org-agenda-custom-commands
+     '("w" "Week Ahead" (
+          (org-ql-block '(and (ts :from 1)
+                          (ts :to 7))
+                      ((org-super-agenda-groups '((:auto-ts t)))
+                       (org-ql-block-header "The Week Ahead"))))))
 
  
 
      #+end_src
+***** Org-Super-Agenda Implementation.
 *** Export Process
     This is how I'm setting up my export process. From [[https://www.fbxiang.com/blog/2017/11/01/write_papers_with_org_mode_and_spacemacs.html#title_9][here]].
     #+BEGIN_SRC emacs-lisp
@@ -1018,14 +1026,14 @@ Helm is another completion package I want to try.
    I don't like the default date format for the agenda. I'm going to make it a bit smaller here. I also found the separator lines on [[https://www.reddit.com/r/orgmode/comments/e4stk2/adding_a_separator_line_between_days_in_emacs/][r/orgmode]].
 
    #+BEGIN_SRC emacs-lisp
-(setq org-agenda-format-date "%d %b (%a)")
-;(setq org-agenda-format-date (concat "\n"
-;                                                    (make-string (window-width) 9472)
-;                                                    "\n"
-;                                                    "%d %b"
-;                                                    "\n"
-;                                                   (make-string (window-width) 9472)
-;))
+;(setq org-agenda-format-date "%d %b (%a)")
+(setq org-agenda-format-date (concat "\n"
+                                                    (make-string (window-width) 9472)
+                                                    "\n"
+                                                    "%d %b"
+                                                    "\n"
+                                                   (make-string (window-width) 9472)
+))
    #+END_SRC
 * Specific Functions
 ** Sidebar 
@@ -1400,8 +1408,8 @@ I don't want spit windows when I load emacs.
    "os" 'org-schedule
    "oS" 'org-save-all-org-buffers
    ;"oa" 'open-agenda 
-    "oa" 'org-agenda
-;   "oA" 'org-agenda
+   "oa" 'open-agenda
+   "oA" 'org-agenda
    "od" 'org-deadline
    "oc" 'org-capture-at-point
    ;"oC" '(:ignore t :which-key "cycle")
@@ -1410,9 +1418,10 @@ I don't want spit windows when I load emacs.
    ;"oTi" 'org-toggle-inline-images 
 ;   "ot" 'counsel-org-tag
    "ot" 'org-time-stamp
-   "oT" 'toc-org-insert-toc
-;   "oi" '(:ignore t :which-key "insert")
-;   "oit" 'toc-org-insert-toc
+   "oT" 'counsel-org-tag
+   ;"oT" 'toc-org-insert-toc
+   "oi" '(:ignore t :which-key "insert")
+   "oit" 'toc-org-insert-toc
 ;   "oit" 'org-time-stamp
    "oe" 'org-export-dispatch
    "ow" 'open-weekly-agenda
