@@ -777,6 +777,12 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
 (use-package decide
 :ensure t)
     #+END_SRC
+*** Org D20
+Something I saw on [[https://www.reddit.com/r/emacs/comments/aly9jh/minor_mode_for_dungeon_masters/][r/emacs]].
+#+begin_src emacs-lisp
+(use-package org-d20
+:ensure t)
+#+end_src
 ** Completion Packages
 *** Ivy Suite
 **** Ivy
@@ -1139,7 +1145,7 @@ Helm is another completion package I want to try.
 
 ;(run-with-timer 0 (* 10 60) 'elfeed-search-fetch)
 ;(run-with-timer 0 (* 30 60) 'recentf-save-list)
-(run-with-timer 0 (* 10 60) 'elfeed-search-fetch)
+;(run-with-timer 0 (* 10 60) 'elfeed-search-fetch)
 (evil-define-key 'normal elfeed-search-mode-map (kbd "A") 'elfeed-mark-all-as-read)
 	#+end_src
 * Miscellaneous Formats
@@ -2156,4 +2162,6 @@ I don't want spit windows when I load emacs.
 
   #+END_SRC
   
+
+
 
