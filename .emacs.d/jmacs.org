@@ -1,10 +1,97 @@
 #+title: JMACS
 #+author: Jacob Hilker
+* Table of Contents :toc:
+- [[#introduction-to-jmacs][*Introduction to JMACS*]]
+      - [[#personal-info][Personal Info]]
+      - [[#org-mode-config][Org Mode Config]]
+      - [[#setting-a-customize-file][Setting A Customize File]]
+      - [[#use-python-3-interpreter][Use Python 3 Interpreter]]
+      - [[#setting-notes-file][Setting Notes File]]
+      - [[#quieting-package-cl][Quieting Package CL]]
+- [[#package-initialization-and-bootstrapping][Package Initialization and Bootstrapping]]
+      - [[#package-initialization-and-extra-sources][Package Initialization and Extra Sources]]
+      - [[#bootstrapping][Bootstrapping]]
+- [[#packages][Packages]]
+      - [[#general-packages][General Packages]]
+      - [[#ui-packages][UI Packages]]
+      - [[#worldbuilding-packages][Worldbuilding Packages]]
+      - [[#writer-packages][Writer Packages]]
+      - [[#rpg-packages][RPG Packages]]
+      - [[#completion-packages][Completion Packages]]
+      - [[#programming-packages][Programming Packages]]
+      - [[#org-packages][Org Packages]]
+      - [[#news-packages][News Packages]]
+- [[#miscellaneous-formats][Miscellaneous Formats]]
+      - [[#title-format][Title Format]]
+      - [[#timestamp-formats][Timestamp Formats]]
+      - [[#agenda-date-format][Agenda Date Format]]
+- [[#specific-functions][Specific Functions]]
+      - [[#sidebar][Sidebar]]
+      - [[#hide-messages-and-ql-view][Hide Messages and QL View]]
+      - [[#find-files][Find Files]]
+      - [[#use-yn-or-yn-for-yesno][Use Y/N or y/n for yes/no]]
+      - [[#auto-save-fix][Auto-Save Fix]]
+      - [[#resize-images][Resize Images]]
+      - [[#no-tabs-only-spaces][No Tabs, Only Spaces]]
+      - [[#one-group-for-centaur-tabs][One Group for Centaur Tabs]]
+      - [[#set-journal-header][Set Journal Header]]
+      - [[#find-modeline-segments][Find Modeline Segments]]
+      - [[#capture-at-point][Capture at Point]]
+      - [[#use-scratch-buffer-as-default][Use Scratch Buffer as Default]]
+      - [[#agenda-functions-open-planner][Agenda Functions*** Open Planner]]
+      - [[#render-latex-in-buffer][Render $$LaTeX$$ in buffer]]
+- [[#hooks-and-general-non-ui-config][Hooks and General (Non-UI) Config]]
+      - [[#delete-other-windows-on-load][Delete Other Windows on Load]]
+      - [[#file-types-and-modes][File Types and Modes]]
+      - [[#elpy-for-python-and-bbc-mode-for-bbcode][ELPY for python and BBC-Mode for BBCode]]
+      - [[#markdown-and-toc-org-mode][Markdown and TOC-Org Mode]]
+      - [[#use-line-numbers-in-prog-mode][Use Line Numbers in Prog Mode]]
+      - [[#tabs][Tabs]]
+- [[#keybindings][Keybindings]]
+      - [[#general-keybindings][General Keybindings]]
+      - [[#auto-complete][Auto Complete]]
+      - [[#quit-commands][Quit Commands]]
+      - [[#buffer-commands][Buffer Commands]]
+      - [[#window-commands][Window Commands]]
+      - [[#better-window-navigation][Better Window Navigation]]
+      - [[#files][Files]]
+      - [[#packages-1][Packages]]
+      - [[#org-mode][Org-Mode]]
+      - [[#more-org-mode][More Org-Mode]]
+      - [[#magit][Magit]]
+      - [[#imenu-list-commands][Imenu-List Commands]]
+      - [[#writer-commands][Writer Commands]]
+      - [[#toggles][Toggles]]
+      - [[#general-mode-toggles][General Mode Toggles]]
+      - [[#yasnippet][YaSnippet]]
+      - [[#spell-check][Spell-check]]
+      - [[#lorem-ipsum][Lorem Ipsum]]
+      - [[#tab-for-evil-org][TAB for Evil-Org]]
+      - [[#ui-keybindings][UI Keybindings]]
+      - [[#treemacs-and-imenu-list][Treemacs and Imenu-List]]
+      - [[#python][Python]]
+      - [[#decide-mode][Decide Mode]]
+      - [[#windmove][Windmove]]
+      - [[#misc-keybindings][Misc Keybindings]]
+      - [[#start-server][Start Server]]
+      - [[#elfeed][Elfeed]]
+- [[#ui][UI]]
+      - [[#minimalistic-ui][Minimalistic UI]]
+      - [[#making-text-sexier][Making Text Sexier]]
+      - [[#org-ui][Org UI]]
+      - [[#fonts-and-themes][Fonts and Themes]]
+- [[#headerlines-and-modelines][Headerlines and Modelines]]
+      - [[#headerline][Headerline]]
+      - [[#doom-modeline-configs][Doom Modeline Configs]]
+- [[#latex-classes][$$LaTeX$$ Classes]]
+      - [[#novel][Novel]]
+- [[#capture-templates][Capture Templates]]
+- [[#notes-and-miscellaneous-things][Notes and Miscellaneous Things]]
+      - [[#notes][Notes]]
+      - [[#miscellaneous-things][Miscellaneous Things]]
+
 * *Introduction to JMACS*
-Welcome to JMacs! This is a my personal configuration of emacs, for
-solo RPG campaigns like [[https://www.ironswornrpg.com/][Ironsworn]], writing (both prose and code), and
-for general use. I have organized this file into different sections,
-  such as the functions I use, the UI settings, etc.
+Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG campaigns like [[https://www.ironswornrpg.com/][Ironsworn]], writing (both prose and code), and for general use. I have organized this file into different sections, such as the functions I use, the UI settings, etc.
 ** Personal Info
    #+BEGIN_SRC emacs-lisp
 (setq user-full-name "Jacob Hilker"
@@ -2061,7 +2148,7 @@ I don't want spit windows when I load emacs.
      
 **** By Class
       - CPSC419
-* Quick Test of Agenda Format
+* Quick Test of Agenda Format :noexport:
   #+BEGIN_SRC emacs-lisp
 ;(org-add-agenda-custom-command '("d" "Deadlines and scheduled work" alltodo "" ((org-agenda-skip-function '(org-agenda-skip-entry-if 'notdeadline)) (org-agenda-prefix-format '((todo . " %i %-22(org-entry-get nil \"DEADLINE\") %-12:c %s"))) (org-agenda-sorting-strategy '(deadline-up)))))
 
