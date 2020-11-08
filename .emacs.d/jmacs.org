@@ -281,7 +281,7 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
 
      (alltodo "" ((org-agenda-overriding-header "To Do")
                   (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
-                  (org-agenda-sorting-strategy '(ts-up  category-up todo-state-up))
+                  (org-agenda-sorting-strategy '(todo-state-up category-up ))
                   (org-super-agenda-groups '(
                   (:name "Classwork and Meetings"
                   :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING" "CLASSES")
@@ -519,6 +519,7 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
    ;(setq dashboard-setup-banner "/home/jhilker/.emacs.d/banner.png")  
   (setq dashboard-banner-logo-title "Man your own jackhammer!")
 ;;  (setq dashboard-center-content t)
+(setq dashboard-week-agenda nil)
 (setq dashboard-items '((recents  . 5)
                         (projects . 4)
                         (agenda . 5)))
