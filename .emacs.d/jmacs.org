@@ -231,17 +231,25 @@ for general use. I have organized this file into different sections,
      This is a way I can view the upcoming week. I have 2 implementations here - one with [[https://github.com/alphapapa/org-ql][Org-QL]], the other with the basic agenda and [[https://github.com/alphapapa/org-super-agenda][org-super-agenda.]]     
 ***** Org-QL Implementation
      #+begin_src emacs-lisp
-     (add-to-list 'org-agenda-custom-commands
-     '("w" "Week Ahead" (
-          (org-ql-block '(and (ts :from 1)
-                          (ts :to 7))
-                      ((org-super-agenda-groups '((:auto-ts t)))
-                       (org-ql-block-header "The Week Ahead"))))))
+     ;(add-to-list 'org-agenda-custom-commands
+     ;'("w" "Week Ahead" (
+     ;     (org-ql-block '(and (ts :from 1)
+     ;                     (ts :to 7))
+     ;                 ((org-super-agenda-groups '((:auto-ts t)))
+     ;                  (org-ql-block-header "The Week Ahead"))))))
 
  
 
      #+end_src
 ***** Org-Super-Agenda Implementation.
+      #+begin_src emacs-lisp
+      (add-to-list 'org-agenda-custom-commands
+     '("w" "Week Ahead" ( 
+                      (agenda "" ((org-agenda-span 'week)
+                                  (org-agenda-start-day "+1d")
+                                  (org-agenda-overriding-header "The Week Ahead"))))))
+                                   
+      #+end_src
 *** Export Process
     This is how I'm setting up my export process. From [[https://www.fbxiang.com/blog/2017/11/01/write_papers_with_org_mode_and_spacemacs.html#title_9][here]].
     #+BEGIN_SRC emacs-lisp
@@ -901,8 +909,9 @@ Helm is another completion package I want to try.
 **** Pandoc
      Pandoc is just too damn good to give up.
      #+BEGIN_SRC emacs-lisp
-(use-package ox-pandoc
-:ensure t)
+     (use-package ox-pandoc
+     :ensure t)
+
      #+END_SRC
 *** Org Journal
     #+BEGIN_SRC emacs-lisp
@@ -1064,7 +1073,7 @@ Helm is another completion package I want to try.
 (setq org-agenda-format-date (concat "\n"
                                                     (make-string (window-width) 9472)
                                                     "\n"
-                                                    "%d %b"
+                                                    "%d %b (%a)"
                                                     "\n"
                                                    (make-string (window-width) 9472)
 ))
