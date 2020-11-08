@@ -197,7 +197,7 @@ for general use. I have organized this file into different sections,
                   (org-agenda-sorting-strategy '(ts-up  category-up todo-state-up))
                   (org-super-agenda-groups '(
                   (:name "Classwork and Meetings"
-                  :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING")
+                  :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING" "CLASSES")
                   :order 1)
                  
                   (:name "Personal"
@@ -1050,8 +1050,9 @@ Helm is another completion package I want to try.
       (lambda ()
 	(set-face-attribute 'variable-pitch (selected-frame) :font (font-spec :family "Iosevka Nerd Font" :size 16))))
 
+(run-with-timer 0 (* 10 60) 'elfeed-search-fetch)
 
-
+(evil-define-key 'normal elfeed-search-mode-map (kbd "A") 'elfeed-mark-all-as-read)
 	#+end_src
 * Miscellaneous Formats
 ** Title Format
