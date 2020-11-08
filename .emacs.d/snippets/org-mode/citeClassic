@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: citeClassic
+# key: citeClassic
+# --
+[@$1{chap. $2, p.$3} $2.$3]

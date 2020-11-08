@@ -1,0 +1,82 @@
+#+TODO: TROUBLESOME DANGEROUS FORMIDABLE EXTREME EPIC | RESOLVED
+
+* The Character: 
+
+  Name: 
+
+
+** The Stats
++------+------+-------+------+--------+
+| Edge | Iron | Heart | Wits | Shadow |
++------+------+-------+------+--------+
+|      |      |       |      |        |
++------+------+-------+------+--------+
+
+** Debilities
+
+*** Conditions [0/4] 
+  
+   - [ ] Wounded
+   - [ ] Shaken
+   - [ ] Unprepared
+   - [ ] Encumbered
+
+*** Banes [0/2]
+
+   - [ ] Maimed
+   - [ ] Corrupted
+
+*** Burdens [0/2]
+
+   - [ ] Cursed
+   - [ ] Tormented
+
+** Tracks
+
+   Health: 5/5
+   Spirit: 5/5
+   Supply: 5/5
+
+** Experience
+
+  - Earned: 0/30
+  - Spent: 0
+
+*** Momentum: +2/10
+
+** Vows
+
+
+
+
+** Assets
+*** Horse 
+
+    Name: [1d7] -> = 6 Snowmane
+
+    You and your horse ride as one.
+
+    - [X] Swift: When you /Face Danger/ +edge using your horse\'s speed and grace, or when you /Undertake a Journey/, add +1.  
+
+*** Rider
+
+    If you are with your horse companion...
+
+    - [X] When you /Heal/ your horse companion, or when you /Face Danger/ to calm or encourage it, add +1 and take +1 momentum on a hit. 
+
+*** Skirmisher
+   
+    If you wield a spear...
+
+    - [X] When you /Face Danger/ by holding a foe at bay by using your spear's reach, roll +iron. If you score a hit, you may...
+
+********** Iron: /Strike/ (if you have initiative) or /Clash/ now, and add +1.
+********** Edge: Take +1 momentum.
+
+           
+* The World
+** People
+
+
+* The Story
+
