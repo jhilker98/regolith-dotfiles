@@ -1,0 +1,154 @@
+# -- feeds ---------------------------------------------------------------------
+auto-reload yes
+max-items 100
+
+
+
+# -- display ------------------------------------------------------------------
+
+show-read-feeds yes
+show-read-articles no
+text-width 80
+
+# -- navigation & browser ----------------------------------------------------
+
+goto-next-feed no
+external-url-viewer "urlview"
+
+# -- ui ----------------------------------------------------------------------
+feedlist-format "%?T?║%4i %4U %n (%T) %t &╠═════════════════════════════════════════════════════%t?"
+
+# Dj-Bauer's Format
+##feedlist-format "%?T?║%4i %n %8u (%T) %t &╠═════════════════════════════════════════════════════%t?"
+
+
+#feedlist-format "%?T?║%4i %n %8u (%T) %t &╠%=═0%t?"
+#feedlist-format "%?T?║%4i %n %8u (%T) %t &%==11first%=x16SECOND%=~13third?"
+articlelist-format "%3>%4i %2>%f %D %3>%t"
+# articlelist-format "%3>%4i %2>%f %D %3>%30t %10>%a"
+#articlelist-format "%3>%4i %2>%f %D %3<%39t %10>%a"
+datetime-format "%d %b"
+
+
+# -- keybindings  ---------------------------------------------------------------
+unbind-key j
+unbind-key k
+unbind-key J
+unbind-key K
+
+unbind-key C feedlist
+
+unbind-key a
+unbind-key A
+
+bind-key A mark-all-feeds-read
+bind-key a mark-feed-read
+
+bind-key j down feedlist
+bind-key k up feedlist
+bind-key l open
+bind-key j next articlelist
+bind-key k prev articlelist
+bind-key J next-feed articlelist
+bind-key K prev-feed articlelist
+bind-key j down article
+bind-key k up article
+bind-key h quit
+bind-key L toggle-show-read-feeds
+
+unbind-key g
+unbind-key G 
+bind-key g home
+bind-key G end
+bind-key b toggle-article-read
+
+# ONLY UNCOMMENT IF YOU WANT SPACE INSTEAD OF COMMA AS MACRO
+## unbind-key ,
+## unbind-key SPACE
+## bind-key SPACE macro-prefix
+
+bind-key N next
+bind-key P prev
+
+unbind-key o
+bind-key U show-urls
+bind-key o show-urls
+
+# -- bookmarks -----------------------------------------------------------------
+
+bookmark-cmd ~/.newsbeuter/bookmark.sh
+bookmark-interactive no
+bookmark-autopilot yes
+
+
+
+
+# -- colors ------------------------------------------------------------------
+
+
+color info color12 default 
+color listnormal default default
+color listfocus default default  underline 
+color listnormal_unread yellow default 
+color listfocus_unread default default underline
+color article default default
+
+
+
+
+# Uncomment these for only an underline for the current feed.
+## color listfocus white default  underline 
+## color listfocus_unread white default  underline
+
+
+highlight article "^Feed:.*" color13 default 
+highlight article "^Title:.*" yellow default 
+highlight article "^Author:.*" green default
+highlight article "^Date:.*" red default
+highlight article "^Link:.*" color12
+highlight article "^Flags:.*" color9 default
+highlight article "\\[[0-9][0-9]*\\]" color66 default 
+highlight article "\\[image [0-9][0-9]*\\]" color109 default 
+highlight article "\\[embedded flash: [0-9][0-9]*\\]" color66 default 
+
+#highlight feedlist "[╒╘╞]═.*═[╛╕╡]" yellow default 
+highlight feedlist "[║│]" yellow default  
+highlight feedlist "╠═.*" yellow default  
+
+# Highlights by Specific Tag
+
+# Coloring when No new articles
+highlight feedlist "\[0-9]*   \\(Classes\\) .*" cyan
+highlight feedlist "\[0-9]*   \\(Local\\) .*" color134
+highlight feedlist "\[0-9]*   \\(Campaign\\) .*" color12 
+highlight feedlist "\[0-9]*   \\(Reddit\\) .*" green
+highlight feedlist "\[0-9]*   \\(Podcast\\) .*" color13
+highlight feedlist "\[0-9]*   \\(Blog\\) .*" color166 
+highlight feedlist "\[0-9]*   \\(Youtube\\) .*" red
+highlight feedlist "\[0-9]*   \\(Serial\\) .*" cyan
+highlight feedlist "\[0-9]*   \\(Destiny\\) .*" color134
+highlight feedlist "\[0-9]*   \\(Satire\\) .*" color12 
+highlight feedlist "\[0-9]*   \\(Forum\\) .*" color13
+
+highlight feedlist "\\(Classes\\) .*" cyan
+highlight feedlist "\\(Local\\) .*" color134
+highlight feedlist "\\(Campaign\\) .*" color12 
+highlight feedlist "\\(Reddit\\) .*" green
+highlight feedlist "\\(Podcast\\) .*" color13
+highlight feedlist "\\(Blog\\) .*" color166 
+highlight feedlist "\\(Youtube\\) .*" red
+highlight feedlist "\\(Serial\\) .*" cyan
+highlight feedlist "\\(Destiny\\) .*" color134
+highlight feedlist "\\(Satire\\) .*" color12 
+highlight feedlist "[0-9]* N " yellow default 
+highlight feedlist "\\(Forum\\) .*" color13
+# -- sorts ----------------------------------------------------------------------
+article-sort-order date-asc
+
+# -- macros ---------------------------------------------------------------------  
+macro i set browser "feh %u"; open-in-browser ; set browser "elinks %u"
+
+macro m set browser "swallow mpv --force-window=immediate %u "; open-in-browser ; set browser "xdg-open %u"
+
+
+
