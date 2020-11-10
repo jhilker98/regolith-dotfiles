@@ -43,6 +43,11 @@ white = #a89984
 orange = #d65d0e
 darkorange = #af3a03
 
+
+;; Nord
+
+;bg = #2e3440
+;bg-bright = #CC3b4252
 ;-------;
 ; FONTS ;
 ;-------;
