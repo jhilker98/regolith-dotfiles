@@ -2,6 +2,7 @@
 #+author: Jacob Hilker
 * Table of Contents :toc:
 - [[#introduction-to-jmacs][*Introduction to JMACS*]]
+      - [[#disable-electric-indent-mode][Disable Electric Indent Mode]]
       - [[#personal-info][Personal Info]]
       - [[#org-mode-config][Org Mode Config]]
       - [[#setting-a-customize-file][Setting A Customize File]]
@@ -92,6 +93,10 @@
 
 * *Introduction to JMACS*
 Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG campaigns like [[https://www.ironswornrpg.com/][Ironsworn]], writing (both prose and code), and for general use. I have organized this file into different sections, such as the functions I use, the UI settings, etc.
+** Disable Electric Indent Mode
+   #+begin_src emacs-lisp
+   (when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
+   #+end_src
 ** Personal Info
    #+BEGIN_SRC emacs-lisp
 (setq user-full-name "Jacob Hilker"
@@ -169,24 +174,28 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
 *** TO-DO Keywords
     Org-mode scheduling is probably the feature I use the most in org-mode. I want to set up my keywords here, so I don't need to do it in every file. I'm also setting up the colors, and reducing the warning days to 0 days so I can see exactly when an assignment is due.
     #+BEGIN_SRC emacs-lisp
-(setq org-todo-keywords '(
-      (sequence "TODO(t)" "INPR(i)" "NEXT(n)" "MEET(m)" "PROJ(p)"  "|" "SOMEDAY(s)"   "DONE(d)" "CANCELED(c)")))
+      (setq org-todo-keywords '(
+            (sequence "TODO(t)" "INPR(i)" "NEXT(n)" "MEET(m)" "|" "SOMEDAY(s)"   "DONE(d)" "CANCELED(c)")
+            (type "PROJ(p)")
+            (type "BLOG(b)")))
+
       ;(sequence "WAITING" "|")
 
-(setq org-todo-keyword-faces
- '(("TODO" . (:foreground "#cc241d" :weight black :underline t))
- 
-   ("INPR" . (:foreground "#fe8019" :weight bold))
-    ("NEXT" . (:foreground "#fabd2f" :weight black))
-    ("MEET" . (:foreground "#b8bb26" :weight bold))
-   ("PROJ" . (:foreground "#458588" :slant italic :weight bold))
-   ("SOMEDAY" . (:foreground "#d3869b" :slant italic))
-   ("DONE" . (:foreground "#83a598" :strike-through t))
-   ("CANCELED" . (:foreground "cc241d" :strike-through t))))
-;   ("DONE" . "green")
+      (setq org-todo-keyword-faces
+       '(("TODO" . (:foreground "#cc241d" :weight black :underline t))
 
-(setq org-deadline-warning-days 0)
-;(setq org-agenda-weekend-days nil)
+         ("INPR" . (:foreground "#fe8019" :weight bold))
+          ("NEXT" . (:foreground "#fabd2f" :weight black))
+          ("MEET" . (:foreground "#b8bb26" :weight bold))
+         ("PROJ" . (:foreground "#458588" :slant italic :weight bold))
+         ("BLOG" . (:foreground "#83a598"))
+         ("SOMEDAY" . (:foreground "#d3869b" :slant italic))
+         ("DONE" . (:foreground "#83a598" :strike-through t))
+         ("CANCELED" . (:foreground "cc241d" :strike-through t))))
+      ;   ("DONE" . "green")
+
+      (setq org-deadline-warning-days 0)
+      ;(setq org-agenda-weekend-days nil)
 
     #+END_SRC
 *** Custom Agenda Commands
@@ -515,14 +524,14 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
  :config
   (dashboard-setup-startup-hook)
 ;  (setq dashboard-startup-banner "~/crusaderKings.png")
-   (setq dashboard-startup-banner 'logo)
+;   (setq dashboard-startup-banner 'logo)
    ;(setq dashboard-setup-banner "/home/jhilker/.emacs.d/banner.png")  
   (setq dashboard-banner-logo-title "Man your own jackhammer!")
 ;;  (setq dashboard-center-content t)
 (setq dashboard-week-agenda nil)
 (setq dashboard-items '((recents  . 5)
-                        (projects . 4)
-                        (agenda . 5)))
+                        (projects . 7)))
+     ;                   (agenda . 5)))
 ;;
 (setq dashboard-show-shortcuts nil)
 ;;(setq dashboard-set-navigator t)
@@ -1070,84 +1079,101 @@ Helm is another completion package I want to try.
     :defer 0.1
     :ensure t)
     #+end_src
+*** Ox-Hugo
+    #+begin_src emacs-lisp
+      (use-package ox-hugo
+      :ensure t)
+    #+end_src
+*** Ox-Nikola
+    #+begin_src emacs-lisp
+          (use-package ox-nikola
+           :ensure t)
+    #+end_src
+*** easy-hugo
+    #+begin_src emacs-lisp
+      (use-package easy-hugo
+       :ensure t
+       :config
+       (setq easy-hugo-basedir "~/Projects/jhilker.gitlab.io"))
+    #+end_src
 ** News Packages
 *** Elfeed
     Elfeed is a feed reader. EMMS is a music player for podcasts.
 	#+begin_src emacs-lisp
 
-;(global-set-key (kbd "C-c e") 'evil-mode)
-	(use-package elfeed-org
-  :ensure t
-  :config
-  (elfeed-org)
-(setq elfeed-db-directory "~/Dropbox/elfeed")
-(setq rmh-elfeed-org-files (list "~/Dropbox/elfeed/elfeed.org"))
-;(defun bjm/elfeed-show-all ()
-;  (interactive)
-;  (bookmark-maybe-load-default-file)
-;  (bookmark-jump "elfeed-all"))
-;(defun bjm/elfeed-show-emacs ()
-;  (interactive)
-;  (bookmark-maybe-load-default-file)
-;  (bookmark-jump "elfeed-emacs"))
-;(defun bjm/elfeed-show-daily ()
-;  (interactive)
-;  (bookmark-maybe-load-default-file)
-;  (bookmark-jump "elfeed-daily"))
-(setq-default elfeed-search-filter "@1-week-ago +unread ")
+          ;(global-set-key (kbd "C-c e") 'evil-mode)
+              (use-package elfeed-org
+            :ensure t
+            :config
+            (elfeed-org)
+          (setq elfeed-db-directory "~/.elfeed/")
+          (setq rmh-elfeed-org-files (list "~/Dropbox/elfeed/elfeed.org"))
+          ;(defun bjm/elfeed-show-all ()
+          ;  (interactive)
+          ;  (bookmark-maybe-load-default-file)
+          ;  (bookmark-jump "elfeed-all"))
+          ;(defun bjm/elfeed-show-emacs ()
+          ;  (interactive)
+          ;  (bookmark-maybe-load-default-file)
+          ;  (bookmark-jump "elfeed-emacs"))
+          ;(defun bjm/elfeed-show-daily ()
+          ;  (interactive)
+          ;  (bookmark-maybe-load-default-file)
+          ;  (bookmark-jump "elfeed-daily"))
+          (setq-default elfeed-search-filter "@1-week-ago +unread ")
 
-;;functions to support syncing .elfeed between machines
-;;makes sure elfeed reads index from disk before launching
-(defun bjm/elfeed-load-db-and-open ()
-  "Wrapper to load the elfeed db from disk before opening"
-  (interactive)
-  (elfeed-db-load)
-  (elfeed)
-  (elfeed-search-update--force))
+          ;;functions to support syncing .elfeed between machines
+          ;;makes sure elfeed reads index from disk before launching
+          (defun bjm/elfeed-load-db-and-open ()
+            "Wrapper to load the elfeed db from disk before opening"
+            (interactive)
+            (elfeed-db-load)
+            (elfeed)
+            (elfeed-search-update--force))
 
-;;write to disk when quiting
-(defun bjm/elfeed-save-db-and-bury ()
-  "Wrapper to save the elfeed db to disk before burying buffer"
-  (interactive)
-  (elfeed-db-save)
-  (quit-window))
+          ;;write to disk when quiting
+          (defun bjm/elfeed-save-db-and-bury ()
+            "Wrapper to save the elfeed db to disk before burying buffer"
+            (interactive)
+            (elfeed-db-save)
+            (quit-window))
 
-(defun elfeed-mark-all-as-read ()
-      (interactive)
-      (mark-whole-buffer)
-      (elfeed-search-untag-all-unread)))
+          (defun elfeed-mark-all-as-read ()
+                (interactive)
+                (mark-whole-buffer)
+                (elfeed-search-untag-all-unread)))
 
-(use-package elfeed
-  :ensure t
- :bind (:map elfeed-search-mode-map
-              ("C-g" . bookmark-jump)
-;             ("a" . elfeed-mark-all-as-read)
-             ("A" . elfeed-mark-all-as-read)
-;              ("D" . bjm/elfeed-show-daily)
-             ("q" . bjm/elfeed-save-db-and-bury)))
+          (use-package elfeed
+            :ensure t
+           :bind (:map elfeed-search-mode-map
+                        ("C-g" . bookmark-jump)
+          ;             ("a" . elfeed-mark-all-as-read)
+                       ("A" . elfeed-mark-all-as-read)
+          ;              ("D" . bjm/elfeed-show-daily)
+                       ("q" . bjm/elfeed-save-db-and-bury)))
 
-(defun ime-elfeed-podcast-tagger (entry)
-  (when (elfeed-entry-enclosures entry)
-    (elfeed-tag entry 'podcasts)))
+          (defun ime-elfeed-podcast-tagger (entry)
+            (when (elfeed-entry-enclosures entry)
+              (elfeed-tag entry 'podcasts)))
 
-(add-hook 'elfeed-new-entry-hook #'ime-elfeed-podcast-tagger)
+          (add-hook 'elfeed-new-entry-hook #'ime-elfeed-podcast-tagger)
 
-(use-package elfeed-goodies
-:after elfeed
-:ensure t
-:config
-(elfeed-goodies/setup)
-;(setq elfeed-goodies/tag-column-width 0)
-(setq elfeed-goodies/feed-source-column-width 30))
+          (use-package elfeed-goodies
+          :after elfeed
+          :ensure t
+          :config
+          (elfeed-goodies/setup)
+     ;     (setq elfeed-goodies/tag-column-width 0)
+          (setq elfeed-goodies/feed-source-column-width 30))
 
-(setq elfeed-show-mode-hook
-      (lambda ()
-	(set-face-attribute 'variable-pitch (selected-frame) :font (font-spec :family "Iosevka Nerd Font" :size 16))))
+          (setq elfeed-show-mode-hook
+                (lambda ()
+              (set-face-attribute 'variable-pitch (selected-frame) :font (font-spec :family "Iosevka Nerd Font" :size 16))))
 
-;(run-with-timer 0 (* 10 60) 'elfeed-search-fetch)
-;(run-with-timer 0 (* 30 60) 'recentf-save-list)
-;(run-with-timer 0 (* 10 60) 'elfeed-search-fetch)
-(evil-define-key 'normal elfeed-search-mode-map (kbd "A") 'elfeed-mark-all-as-read)
+          ;(run-with-timer 0 (* 10 60) 'elfeed-search-fetch)
+          ;(run-with-timer 0 (* 30 60) 'recentf-save-list)
+          ;(run-with-timer 0 (* 10 60) 'elfeed-search-fetch)
+          (evil-define-key 'normal elfeed-search-mode-map (kbd "A") 'elfeed-mark-all-as-read)
 	#+end_src
 * Miscellaneous Formats
 ** Title Format
@@ -1710,8 +1736,13 @@ I don't want spit windows when I load emacs.
 
    #+BEGIN_SRC emacs-lisp
   (general-define-key
-  :states 'normal 
-  "TAB" 'evil-toggle-fold)
+    :states 'normal 
+    "TAB" 'evil-toggle-fold)
+(define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
+
+;     (general-define-key
+;      :states 'insert
+;      "TAB" 'tab-to-tab-stop)
    #+END_SRC 
 
 ** UI Keybindings
@@ -2163,6 +2194,7 @@ I don't want spit windows when I load emacs.
 
   #+END_SRC
   
+
 
 
 
