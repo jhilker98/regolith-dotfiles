@@ -99,9 +99,9 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
    #+end_src
 ** Personal Info
    #+BEGIN_SRC emacs-lisp
-(setq user-full-name "Jacob Hilker"
-      user-mail-address "jacob.hilker2@gmail.com")
-      (setq gc-cons-threshold 100000000)
+   (setq user-full-name "Jacob Hilker"
+    user-mail-address "jacob.hilker2@gmail.com")
+    (setq gc-cons-threshold 100000000)
       ;visible-bell t)
    #+END_SRC
 
@@ -2194,7 +2194,6 @@ I don't want spit windows when I load emacs.
 
   #+END_SRC
   
-
 
 
 

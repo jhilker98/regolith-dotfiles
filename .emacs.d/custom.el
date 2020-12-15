@@ -18,6 +18,7 @@
 " "/usr/lib/x86_64-linux-gnu/emacs/26.3/x86_64-linux-gnu" "/home/jhilker/anaconda3/bin/"))
  '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
  '(frame-background-mode 'dark)
+ '(helm-minibuffer-history-key "M-p")
  '(imenu-list-position 'right)
  '(inhibit-startup-screen t)
  '(ivy-mode t)
@@ -32,7 +33,8 @@
  '(org-agenda-files
    '("~/Dropbox/org/agenda.org" "~/Dropbox/notes/fall2020/notes.org"))
  '(org-agenda-time-leading-zero t)
- '(org-export-backends '(ascii html icalendar latex mediawiki odt))
+ '(org-export-backends '(ascii html icalendar latex md odt rss))
+ '(org-html-head-include-default-style nil)
  '(org-journal-dir "~/Dropbox/org/journal/")
  '(org-journal-file-type 'monthly)
  '(org-journal-time-format "%a, %d %b %Y")
@@ -40,8 +42,23 @@
  '(org-log-into-drawer t)
  '(org-modules
    '(ol-bbdb ol-bibtex ol-docview ol-eww ol-gnus org-habit ol-info ol-irc ol-mhe ol-rmail org-tempo ol-w3m))
+ '(org-static-blog-drafts-directory "~/Projects/jhilker.gitlab.io/drafts/")
+ '(org-static-blog-posts-directory "~/Projects/jhilker.gitlab.io/posts/")
+ '(org-structure-template-alist
+   '(("a" . "export ascii")
+     ("c" . "center")
+     ("C" . "comment")
+     ("e" . "example")
+     ("E" . "export")
+     ("h" . "export html")
+     ("l" . "export latex")
+     ("q" . "quote")
+     ("s" . "src")
+     ("v" . "verse")
+     ("w" . "wrapper")
+     ("d" . "date")))
  '(package-selected-packages
-   '(idle-org-agenda bm emms org-sidebar helm-org org-chef tomatinho org-journal ox-rst ox-mediawiki yaml-mode tagedit web-mode lorem-ipsum flycheck xref-js2 js2-refactor js2-mode company mediawiki golden-ratio atom-one-dark-theme color-theme-sanityinc-solarized linum-relative treemacs-magit treemacs-projectile treemacs-evil treemacs evil-smartparens smartparens csv-mode yasnippet-snippets xresources-theme xresurces-theme zenburn-theme gruber-darker-theme gruvbox-theme ewal org-ql vimrc-mode wordgen smart-mode-line csv org-make-toc nav neotree slack toc-org org-super-agenda org-bullets bbcode-mode elpy auto-complete counsel ivy decide wordsmith-mode writeroom-mode writegood-mode wc-mode doom-modeline solarized-theme color-theme-solarized restart-emacs yasnippet unfill general dashboard projectile all-the-icons magit which-key imenu-list evil-collection evil undo-tree use-package))
+   '(mu4e-overview idle-org-agenda bm emms org-sidebar helm-org org-chef tomatinho org-journal ox-rst ox-mediawiki yaml-mode tagedit web-mode lorem-ipsum flycheck xref-js2 js2-refactor js2-mode company mediawiki golden-ratio atom-one-dark-theme color-theme-sanityinc-solarized linum-relative treemacs-magit treemacs-projectile treemacs-evil treemacs evil-smartparens smartparens csv-mode yasnippet-snippets xresources-theme xresurces-theme zenburn-theme gruber-darker-theme gruvbox-theme ewal org-ql vimrc-mode wordgen smart-mode-line csv org-make-toc nav neotree slack toc-org org-super-agenda org-bullets bbcode-mode elpy auto-complete counsel ivy decide wordsmith-mode writeroom-mode writegood-mode wc-mode doom-modeline solarized-theme color-theme-solarized restart-emacs yasnippet unfill general dashboard projectile all-the-icons magit which-key imenu-list evil-collection evil undo-tree use-package))
  '(pdf-view-midnight-colors (cons "#839496" "#002b36"))
  '(rustic-ansi-faces
    ["#002b36" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#839496"])
