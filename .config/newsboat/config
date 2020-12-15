@@ -24,11 +24,10 @@ feedlist-format "%?T?║%4i %4U %n (%T) %t &╠═══════════
 
 #feedlist-format "%?T?║%4i %n %8u (%T) %t &╠%=═0%t?"
 #feedlist-format "%?T?║%4i %n %8u (%T) %t &%==11first%=x16SECOND%=~13third?"
-#articlelist-format "%3>%4i %2>%f %D %3>%t"
+articlelist-format "%3>%4i %2>%f %D %3>%t"
 # articlelist-format "%3>%4i %2>%f %D %3>%30t %10>%a"
 #articlelist-format "%3>%4i %2>%f %D %3<%39t %10>%a"
-
-articlelist-format "%3>%4i %2>%f %D %3>%39t %3>%a"
+#articlelist-format "%3>%4i %2>%f %D %3>%39t %3>%a"
 datetime-format "%d %b."
 
 
