@@ -10,10 +10,10 @@ News
 #"query:US News:tags # \"US\"" US
 
 Campaigns
-"query:The Adventures of the Knights of Salisbury:tags # \"kos\"" Campaign 
-"query:Adventures in Middle-Earth - The Fellowship of Five: tags # \"fo5\""   Campaign
-"query:The One Ring - Fellowship of the 1PG: tags # \"fot1pg\"" Campaign
-
+"query:The Adventures of the Knights of Salisbury:tags # \"kos\" and author != \"WaitingCynicism\"" Campaign 
+"query:AIME - The Fellowship of Five: tags # \"fo5\" and author != \"WaitingCynicism\""   Campaign
+"query:The One Ring - Fellowship of the 1PG: tags # \"fot1pg\" and author !=\"WaitingCynicism\"" Campaign
+http://rpol.net/feeds.cgi?q=2CEMCCmJ9dwpwGwAsehU "Campaign" "~RPOL.net"
 
 Reddit
 "query:Gaming Subreddits:tags # \"Reddit\" and tags # \"gaming\"" reddit
@@ -23,6 +23,8 @@ Reddit
 Podcasts
 "query:Gaming Podcasts:tags # \"Podcast\" and tags # \"gaming\"" Podcast
 "query:History Podcasts:tags # \"Podcast\" and tags # \"history\"" Podcast
+"query:Political Podcasts:tags # \"Podcast\" and tags # \"politics\"" Podcast
+"query:RPG Podcasts:tags # \"Podcast\" and tags # \"campaign\"" Podcast
 
 Blogs
 "query:History Blogs:tags # \"Blog\" and tags # \"history\"" blog
@@ -36,29 +38,33 @@ YouTube
 "query:Sports Youtube:tags # \"Youtube\" and tags # \"sports\"" Youtube
 "query:BreadTube:tags # \"Youtube\" and tags # \"BreadTube\"" Youtube
 
-
+"" 
 
 http://www.dailyprogress.com/search/?mode=article&q=&t=article&l=10&d=&d1=1+year+ago&d2=&s=&sd=desc&c[]=news/local*&f=atom&fulltext=dpmobile&altf=mrss "Local" cville "!The Daily Progress"
 https://fredericksburgva.gov/RSSFeed.aspx?ModID=1&CID=Fredericksburg-News-1 "Local" "!Fredericksburg News" fburg
 #http://rss.cnn.com/rss/cnn_topstories.rss "!CNN Top Stories" US
 
-https://rpggeek.com/rss/thread/1724354  "Campaign" "!Knights of Salisbury" ooc pendragon rpgs kos
-https://rpggeek.com/rss/thread/2344531 "Campaign" "!Knights of Salisbury" ic pendragon  rpgs kos
-https://rpggeek.com/rss/thread/2388799 "Campaign" "!Knights of Salisbury" ic pendragon  rpgs kos
-https://rpggeek.com/rss/thread/2431371 "Campaign" "!Knights of Salisbury" ic pendragon  rpgs kos
-https://rpggeek.com/rss/thread/2464953 "Campaign" "!Knights of Salisbury" ic pendragon rpgs kos
-https://rpggeek.com/rss/thread/2507102 "Campaign" "!Knights of Salisbury" ic pendragon rpgs kos
+https://rpggeek.com/rss/thread/1724354  "Campaign" "!Knights of Sarum: OOC" ooc pendragon rpgs kos
+https://rpggeek.com/rss/thread/2507102 Campaign "!Knights of Sarum: 496" ic pendragon rpgs kos
+https://rpggeek.com/rss/thread/2464953 Campaign "!Knights of Sarum: 495" ic pendragon rpgs kos
+https://rpggeek.com/rss/thread/2431371 Campaign "!Knights of Sarum: 494" ic pendragon rpgs kos
+https://rpggeek.com/rss/thread/2388799 Campaign "!Knights of Sarum: 493" ic pendragon rpgs kos
 
-https://rpggeek.com/rss/thread/2371283 "Campaign" "!AIME: The Fellowship of Five" ooc aime rpgs fo5
-https://rpggeek.com/rss/thread/2382018 "Campaign" "!AIME: The Fellowship of Five" ic aime rpgs fo5
+https://rpggeek.com/rss/thread/2371283 "Campaign" "!AIME: OOC Thread" ooc aime rpgs fo5
+https://rpggeek.com/rss/thread/2382018 "Campaign" "!The Eaves of Mirkwood" ic aime rpgs fo5
 
-https://rpggeek.com/rss/thread/2410450 "Campaign" "!The One Ring: Fellowship of the 1PG (OOC)" ooc tor rpgs fot1pg
-https://rpggeek.com/rss/thread/2420789 "Campaign" "!The One Ring: Across the Great Forest" ic tor rpgs fot1pg
-https://rpggeek.com/rss/thread/2416498 "Campaign" "!The One Ring: A Few Meetings (IC)" ic tor rpgs  fot1pg
+https://rpggeek.com/rss/thread/2410450 "Campaign" "!TOR: OOC Thread" ooc tor rpgs fot1pg
+https://rpggeek.com/rss/thread/2420789 "Campaign" "!Across the Great Forest" ic tor rpgs fot1pg
+https://rpggeek.com/rss/thread/2416498 "Campaign" "!A Few Meetings" ic tor rpgs  fot1pg
 
 https://normancenturies.com/rss.xml Podcast history "!Norman Centuries" brokenthrones norman medieval
 https://anchor.fm/s/182b418/podcast/rss Podcast gaming "!The Broman Podcast"
 https://DestinyCommunityPodcast.podbean.com/feed.xml "!Destiny Community Podcast" Podcast gaming 
+#https://feed.podbean.com/hopwag/feed.xml Podcast history "!History of Philosophy Without Any Gaps"
+https://www.themedievalworld.com/feed.xml Podcast history "!The Medieval World"
+https://feeds.feedburner.com/dancarlin/history?format=xml Podcast history "!Dan Carlin's Hardcore History"
+https://feeds.megaphone.fm/behindthebastards Podcast "politics" "!Behind the Bastards"
+https://anchor.fm/s/91c7948/podcast/rss Podcast campaign "!Critical Role"
 
 https://old.reddit.com/r/DestinyLore.rss Reddit "!Destiny Lore" "reddit" "destiny" "destinylore" "gaming"
 https://old.reddit.com/r/CrusaderKings/search.rss?q=self%3Ayes&restrict_sr=on&include_over_18=on&sort=new&t=all Reddit "!Crusader Kings" "gaming"

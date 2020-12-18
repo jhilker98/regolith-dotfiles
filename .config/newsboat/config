@@ -1,6 +1,6 @@
 # -- feeds ---------------------------------------------------------------------
 auto-reload yes
-max-items 100
+max-items 120
 
 
 
@@ -30,9 +30,8 @@ feedlist-format "%?T?║%4i %4U %n     %t &╠═══════════�
 # articlelist-format "%3>%4i %2>%f %D %3>%30t %10>%a"
 #articlelist-format "%3>%4i %2>%f %D %3<%39t %10>%a"
 #articlelist-format "%3>%4i %2>%f %D %3>%39t %3>%a"
-datetime-format "%d %b."
-articlelist-format "%3>%4i %2>%f %D %3>%T  %3>%t"
-
+datetime-format "%d %b. %Y"
+articlelist-format  "%4i %f %D   %?T?%-25T  ?%2>%t"
 # -- keybindings  ---------------------------------------------------------------
 unbind-key j
 unbind-key k
@@ -74,7 +73,7 @@ bind-key N next
 bind-key P prev
 
 unbind-key o
-bind-key U show-urls
+#bind-key U show-urls
 bind-key o show-urls
 
 # -- bookmarks -----------------------------------------------------------------
@@ -116,8 +115,9 @@ highlight feedlist "\[0-9]* .* CLAS .*" cyan
 highlight feedlist "\[0-9]* .* CPSC .*" cyan
 highlight feedlist "\[0-9]* .* News" color134
 highlight feedlist "\[0-9]* .* The Adventures of the Knights of Salisbury" color12
-highlight feedlist "\[0-9]* .* Adventures in Middle-Earth - The Fellowship of Five" color12
+highlight feedlist "\[0-9]* .* AIME - The Fellowship of Five" color12
 highlight feedlist "\[0-9]*   .* The One Ring - Fellowship of the 1PG" color12
+highlight feedlist "\[0-9]* .* RPOL.net" color12
 highlight feedlist "\[0-9]* .* Subreddits" green
 highlight feedlist "\[0-9]* .* Podcasts" color13
 highlight feedlist "\[0-9]* .* Blogs" color166
@@ -127,8 +127,9 @@ highlight feedlist "\[0-9]* .* BreadTube" red
 # Highlight with New Articles
 highlight feedlist "\[a-z]* News" color134
 highlight feedlist "The Adventures of the Knights of Salisbury" color12
-highlight feedlist "Adventures in Middle-Earth - The Fellowship of Five" color12
+highlight feedlist "AIME - The Fellowship of Five" color12
 highlight feedlist "The One Ring - Fellowship of the 1PG" color12
+highlight feedlist "\[a-z]* RPOL.net" color12
 highlight feedlist "\[a-z]* Subreddits" green
 highlight feedlist "\[a-z]* Podcasts" color13
 highlight feedlist "\[a-z]* Blogs" color166
