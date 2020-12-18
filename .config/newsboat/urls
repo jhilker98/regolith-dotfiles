@@ -1,0 +1,94 @@
+Classes
+https://canvas.umw.edu/feeds/announcements/enrollment_Qp6idzM3cAn2WNZAd47sUavmnHea3OFOJFzxDO5e.atom Classes "~CLAS 204: Epic Traditions"
+https://canvas.umw.edu/feeds/announcements/enrollment_PG6SUNeI0kQ9WJbzDyQtBfI7bNmH3b3IxQ8YowkQ.atom Classes "~CPSC 405: Operating Systems and Programming"
+https://canvas.umw.edu/feeds/announcements/enrollment_Vzf2xCUBrPRMHT4ix9972j4cXUq71lVD2sxQQYVr.atom Classes "~CPSC 419: Data Mining"
+https://canvas.umw.edu/feeds/announcements/enrollment_dGSM7sDL4nSrqXRFGpLyctPoGjkeGh3aya20rH8k.atom Classes "~CPSC 445: Software Security"
+
+News
+"query:Charlottesville News:tags # \"cville\"" Local
+"query:Fredericksburg News:tags # \"fburg\"" Local
+#"query:US News:tags # \"US\"" US
+
+Campaigns
+"query:The Adventures of the Knights of Salisbury:tags # \"kos\"" Campaign 
+"query:Adventures in Middle-Earth - The Fellowship of Five: tags # \"fo5\""   Campaign
+"query:The One Ring - Fellowship of the 1PG: tags # \"fot1pg\"" Campaign
+
+
+Reddit
+"query:Gaming Subreddits:tags # \"Reddit\" and tags # \"gaming\"" reddit
+"query:History Subreddits:tags # \"Reddit\" and tags # \"history\"" reddit
+"query:Creative Subreddits:tags # \"Reddit\" and tags # \"creative\"" reddit
+
+Podcasts
+"query:Gaming Podcasts:tags # \"Podcast\" and tags # \"gaming\"" Podcast
+"query:History Podcasts:tags # \"Podcast\" and tags # \"history\"" Podcast
+
+Blogs
+"query:History Blogs:tags # \"Blog\" and tags # \"history\"" blog
+"query:Gaming Blogs:tags # \"Blog\" and tags # \"gaming\"" blog
+"query:Creative Blogs:tags # \"Blog\" and tags # \"creative\"" blog
+
+YouTube
+"query:Gaming Youtube:tags # \"Youtube\" and tags # \"gaming\"" Youtube
+"query:Science Youtube:tags # \"Youtube\" and tags # \"science\"" Youtube
+"query:Tech Youtube:tags # \"Youtube\" and tags # \"tech\"" Youtube
+"query:Sports Youtube:tags # \"Youtube\" and tags # \"sports\"" Youtube
+"query:BreadTube:tags # \"Youtube\" and tags # \"BreadTube\"" Youtube
+
+
+
+http://www.dailyprogress.com/search/?mode=article&q=&t=article&l=10&d=&d1=1+year+ago&d2=&s=&sd=desc&c[]=news/local*&f=atom&fulltext=dpmobile&altf=mrss "Local" cville "!The Daily Progress"
+https://fredericksburgva.gov/RSSFeed.aspx?ModID=1&CID=Fredericksburg-News-1 "Local" "!Fredericksburg News" fburg
+#http://rss.cnn.com/rss/cnn_topstories.rss "!CNN Top Stories" US
+
+https://rpggeek.com/rss/thread/1724354  "Campaign" "!Knights of Salisbury" ooc pendragon rpgs kos
+https://rpggeek.com/rss/thread/2344531 "Campaign" "!Knights of Salisbury" ic pendragon  rpgs kos
+https://rpggeek.com/rss/thread/2388799 "Campaign" "!Knights of Salisbury" ic pendragon  rpgs kos
+https://rpggeek.com/rss/thread/2431371 "Campaign" "!Knights of Salisbury" ic pendragon  rpgs kos
+https://rpggeek.com/rss/thread/2464953 "Campaign" "!Knights of Salisbury" ic pendragon rpgs kos
+https://rpggeek.com/rss/thread/2507102 "Campaign" "!Knights of Salisbury" ic pendragon rpgs kos
+
+https://rpggeek.com/rss/thread/2371283 "Campaign" "!AIME: The Fellowship of Five" ooc aime rpgs fo5
+https://rpggeek.com/rss/thread/2382018 "Campaign" "!AIME: The Fellowship of Five" ic aime rpgs fo5
+
+https://rpggeek.com/rss/thread/2410450 "Campaign" "!The One Ring: Fellowship of the 1PG (OOC)" ooc tor rpgs fot1pg
+https://rpggeek.com/rss/thread/2420789 "Campaign" "!The One Ring: Across the Great Forest" ic tor rpgs fot1pg
+https://rpggeek.com/rss/thread/2416498 "Campaign" "!The One Ring: A Few Meetings (IC)" ic tor rpgs  fot1pg
+
+https://normancenturies.com/rss.xml Podcast history "!Norman Centuries" brokenthrones norman medieval
+https://anchor.fm/s/182b418/podcast/rss Podcast gaming "!The Broman Podcast"
+https://DestinyCommunityPodcast.podbean.com/feed.xml "!Destiny Community Podcast" Podcast gaming 
+
+https://old.reddit.com/r/DestinyLore.rss Reddit "!Destiny Lore" "reddit" "destiny" "destinylore" "gaming"
+https://old.reddit.com/r/CrusaderKings/search.rss?q=self%3Ayes&restrict_sr=on&include_over_18=on&sort=new&t=all Reddit "!Crusader Kings" "gaming"
+https://old.reddit.com/r/sca/search.rss?q=self%3Ayes&restrict_sr=on&sort=relevance&t=all Reddit sca "!Reddit SCA" medieval history
+https://old.reddit.com/r/MedievalHistory/new.rss Reddit sca history medieval "!Medieval History" MedievalHistory
+https://old.reddit.com/r/badhistory/search.rss?q=self%3Ayes&restrict_sr=on&include_over_18=on&sort=new&t=all Reddit "!BadHistory" history
+https://old.reddit.com/r/worldbuilding/search.rss?q=flair%3APrompt&restrict_sr=on&include_over_18=on&sort=new&t=all Reddit "!Worldbuilding" creative
+https://old.reddit.com/r/AskHistorians/new.rss Reddit "!AskHistorians" history
+
+http://drcallumwatson.blogspot.com/feeds/posts/default Blog history "!Knight of the Two Ls"
+https://readingmedievalbooks.wordpress.com/feed Blog "!Reading Medieval Books" history
+https://rollingboxcars.com/feed Blog rpgs "!Rolling Boxcars" gaming
+https://nownovel.com/blog/feed Blog writing creative "!Now Novel"
+
+https://www.youtube.com/feeds/videos.xml?channel_id=UClbllR4Tx-lhYJyrpu1sA4A Youtube gaming "!Aztecross" 
+https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg  Youtube tech "!DistroTube"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCkmAjbIecTIjTQctolYeuDw Youtube gaming "!Datto"
+https://www.youtube.com/feeds/videos.xml?channel_id=UC2PA-AKmVpU6NKCGtZq_rKQ Youtube politics BreadTube "!Philosophy Tube"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCNvsIonJdJ5E4EXMa65VYpA Youtube politics BreadTube "!ContraPoints"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCBa659QWEk1AI4Tg--mrJ2A Youtube tech linguistics "!Tom Scott"
+https://www.youtube.com/feeds/videos.xml?channel_id=UC9-y-6csu5WGm29I7JiwpnA Youtube tech linguistics "!Computerphile"
+https://youtube.com/feeds/videos.xml?channel_id=UCYJdpnjuSWVOLgGT9fIzL0g Youtube sports "!Jelle's Marble Runs"
+#https://youtube.com/feeds/videos.xml?channel_id=UCYJdpnjuSWVOLgGT9fIzL0g Youtube sports 
+https://www.youtube.com/feeds/videos.xml?channel_id=UCQZFAQPTQtrFrTu6Hb4vwsw  Youtube gaming "!My Name Is Byf"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCAsrdlefrZyvnELIXLMZkNg Youtube gaming "!Th3Jez"
+https://www.youtube.com/feeds/videos.xml?channel_id=UC8ENHE5xdFSwx71u3fDH5Xw Youtube tech "!ThePrimeagen"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCyabCqc2M3J9HItEroLOTvA Youtube music "!Kmac2021"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCxzC4EngIsMrPmbm6Nxvb-A Youtube science astrophysics "!Scott Manley"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCMlqYSFcNTrxDQO_T9GCsjg Youtube gaming "!Fallout Plays"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCLM1eE8w_DZ89n4yIxVbffA Youtube gaming "!Rick Kackis"
+https://www.youtube.com/feeds/videos.xml?channel_id=UC86zNGwCUt5gBnizRSWSLuA Youtube gaming "!The Ashen Hollow"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCe0DNp0mKMqrYVaTundyr9w Youtube gaming "!VaatiVidya"
+https://www.youtube.com/feeds/videos.xml?channel_id=UC6nSFpj9HTCZ5t-N3Rm3-HA Youtube science "!Vsauce"

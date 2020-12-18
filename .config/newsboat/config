@@ -15,8 +15,10 @@ text-width 80
 goto-next-feed no
 external-url-viewer "urlview"
 
+
 # -- ui ----------------------------------------------------------------------
-feedlist-format "%?T?║%4i %4U %n (%T) %t &╠═════════════════════════════════════════════════════%t?"
+#feedlist-format "%?T?║%4i %4U %n (%T) %t &╠═════════════════════════════════════════════════════%t?"
+feedlist-format "%?T?║%4i %4U %n     %t &╠═════════════════════════════════════════════════════%t?"
 
 # Dj-Bauer's Format
 ##feedlist-format "%?T?║%4i %n %8u (%T) %t &╠═════════════════════════════════════════════════════%t?"
@@ -24,12 +26,12 @@ feedlist-format "%?T?║%4i %4U %n (%T) %t &╠═══════════
 
 #feedlist-format "%?T?║%4i %n %8u (%T) %t &╠%=═0%t?"
 #feedlist-format "%?T?║%4i %n %8u (%T) %t &%==11first%=x16SECOND%=~13third?"
-articlelist-format "%3>%4i %2>%f %D %3>%t"
+#articlelist-format "%3>%4i %2>%f %D %3>%t"
 # articlelist-format "%3>%4i %2>%f %D %3>%30t %10>%a"
 #articlelist-format "%3>%4i %2>%f %D %3<%39t %10>%a"
 #articlelist-format "%3>%4i %2>%f %D %3>%39t %3>%a"
 datetime-format "%d %b."
-
+articlelist-format "%3>%4i %2>%f %D %3>%T  %3>%t"
 
 # -- keybindings  ---------------------------------------------------------------
 unbind-key j
@@ -81,21 +83,13 @@ bookmark-cmd ~/.newsbeuter/bookmark.sh
 bookmark-interactive no
 bookmark-autopilot yes
 
-
-
-
 # -- colors ------------------------------------------------------------------
-
-
 color info color12 default 
 color listnormal default default
 color listfocus default default  underline 
 color listnormal_unread yellow default 
 color listfocus_unread default default underline
 color article default default
-
-
-
 
 # Uncomment these for only an underline for the current feed.
 ## color listfocus white default  underline 
@@ -116,33 +110,33 @@ highlight article "\\[embedded flash: [0-9][0-9]*\\]" color66 default
 highlight feedlist "[║│]" yellow default  
 highlight feedlist "╠═.*" yellow default  
 
-# Highlights by Specific Tag
 
-# Coloring when No new articles
-highlight feedlist "\[0-9]*   \\(Classes\\) .*" cyan
-highlight feedlist "\[0-9]*   \\(Local\\) .*" color134
-highlight feedlist "\[0-9]*   \\(Campaign\\) .*" color12 
-highlight feedlist "\[0-9]*   \\(Reddit\\) .*" green
-highlight feedlist "\[0-9]*   \\(Podcast\\) .*" color13
-highlight feedlist "\[0-9]*   \\(Blog\\) .*" color166 
-highlight feedlist "\[0-9]*   \\(Youtube\\) .*" red
-highlight feedlist "\[0-9]*   \\(Serial\\) .*" cyan
-highlight feedlist "\[0-9]*   \\(Destiny\\) .*" color134
-highlight feedlist "\[0-9]*   \\(Satire\\) .*" color12 
-highlight feedlist "\[0-9]*   \\(Forum\\) .*" color13
+# Highlight when No new articles
+highlight feedlist "\[0-9]* .* CLAS .*" cyan
+highlight feedlist "\[0-9]* .* CPSC .*" cyan
+highlight feedlist "\[0-9]* .* News" color134
+highlight feedlist "\[0-9]* .* The Adventures of the Knights of Salisbury" color12
+highlight feedlist "\[0-9]* .* Adventures in Middle-Earth - The Fellowship of Five" color12
+highlight feedlist "\[0-9]*   .* The One Ring - Fellowship of the 1PG" color12
+highlight feedlist "\[0-9]* .* Subreddits" green
+highlight feedlist "\[0-9]* .* Podcasts" color13
+highlight feedlist "\[0-9]* .* Blogs" color166
+highlight feedlist "\[0-9]* .* Youtube" red
+highlight feedlist "\[0-9]* .* BreadTube" red
 
-highlight feedlist "\\(Classes\\) .*" cyan
-highlight feedlist "\\(Local\\) .*" color134
-highlight feedlist "\\(Campaign\\) .*" color12 
-highlight feedlist "\\(Reddit\\) .*" green
-highlight feedlist "\\(Podcast\\) .*" color13
-highlight feedlist "\\(Blog\\) .*" color166 
-highlight feedlist "\\(Youtube\\) .*" red
-highlight feedlist "\\(Serial\\) .*" cyan
-highlight feedlist "\\(Destiny\\) .*" color134
-highlight feedlist "\\(Satire\\) .*" color12 
-highlight feedlist "[0-9]* N " yellow default 
-highlight feedlist "\\(Forum\\) .*" color13
+# Highlight with New Articles
+highlight feedlist "\[a-z]* News" color134
+highlight feedlist "The Adventures of the Knights of Salisbury" color12
+highlight feedlist "Adventures in Middle-Earth - The Fellowship of Five" color12
+highlight feedlist "The One Ring - Fellowship of the 1PG" color12
+highlight feedlist "\[a-z]* Subreddits" green
+highlight feedlist "\[a-z]* Podcasts" color13
+highlight feedlist "\[a-z]* Blogs" color166
+highlight feedlist "\[a-z]* Youtube" red
+highlight feedlist "\[a-z]* BreadTube" red
+
+highlight feedlist " \[0-9]* N " yellow
+
 # -- sorts ----------------------------------------------------------------------
 article-sort-order date-asc
 
@@ -150,6 +144,4 @@ article-sort-order date-asc
 macro i set browser "feh %u"; open-in-browser ; set browser "elinks %u"
 
 macro m set browser "swallow mpv --force-window=immediate %u "; open-in-browser ; set browser "xdg-open %u"
-
-
 
