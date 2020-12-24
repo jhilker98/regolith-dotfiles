@@ -4,19 +4,19 @@ max-items 120
 
 
 
-# -- display ------------------------------------------------------------------
+# -- display --------------------------------------------------------------------
 
 show-read-feeds yes
 show-read-articles no
 text-width 80
 
-# -- navigation & browser ----------------------------------------------------
+# -- navigation & browser -------------------------------------------------------
 
 goto-next-feed no
 external-url-viewer "urlview"
 
 
-# -- ui ----------------------------------------------------------------------
+# -- ui -------------------------------------------------------------------------
 #feedlist-format "%?T?║%4i %4U %n (%T) %t &╠═════════════════════════════════════════════════════%t?"
 feedlist-format "%?T?║%4i %4U %n     %t &╠═════════════════════════════════════════════════════%t?"
 
@@ -30,8 +30,10 @@ feedlist-format "%?T?║%4i %4U %n     %t &╠═══════════�
 # articlelist-format "%3>%4i %2>%f %D %3>%30t %10>%a"
 #articlelist-format "%3>%4i %2>%f %D %3<%39t %10>%a"
 #articlelist-format "%3>%4i %2>%f %D %3>%39t %3>%a"
-datetime-format "%d %b. %Y"
-articlelist-format  "%4i %f %D   %?T?%-25T  ?%2>%t"
+datetime-format "%d %b. %Y %H:%M"
+#articlelist-format  "%4i %f %?T? %-25T ?%t"
+articlelist-format  "%4i %f %?T?%-25T ?%2>%t"
+
 # -- keybindings  ---------------------------------------------------------------
 unbind-key j
 unbind-key k
@@ -118,6 +120,7 @@ highlight feedlist "\[0-9]* .* The Adventures of the Knights of Salisbury" color
 highlight feedlist "\[0-9]* .* AIME - The Fellowship of Five" color12
 highlight feedlist "\[0-9]*   .* The One Ring - Fellowship of the 1PG" color12
 highlight feedlist "\[0-9]* .* RPOL.net" color12
+highlight feedlist "\[0-9]* .* Multireddits" green
 highlight feedlist "\[0-9]* .* Subreddits" green
 highlight feedlist "\[0-9]* .* Podcasts" color13
 highlight feedlist "\[0-9]* .* Blogs" color166
@@ -131,18 +134,32 @@ highlight feedlist "AIME - The Fellowship of Five" color12
 highlight feedlist "The One Ring - Fellowship of the 1PG" color12
 highlight feedlist "\[a-z]* RPOL.net" color12
 highlight feedlist "\[a-z]* Subreddits" green
+highlight feedlist "\[a-z]* Multireddits" green
 highlight feedlist "\[a-z]* Podcasts" color13
 highlight feedlist "\[a-z]* Blogs" color166
 highlight feedlist "\[a-z]* Youtube" red
 highlight feedlist "\[a-z]* BreadTube" red
 
 highlight feedlist " \[0-9]* N " yellow
+#highlight feedlist "  News" yellow
 
 # -- sorts ----------------------------------------------------------------------
 article-sort-order date-asc
 
-# -- macros ---------------------------------------------------------------------  
+# -- macros ---------------------------------------------------------------------
 macro i set browser "feh %u"; open-in-browser ; set browser "elinks %u"
 
 macro m set browser "swallow mpv --force-window=immediate %u "; open-in-browser ; set browser "xdg-open %u"
 
+# -- notifications --------------------------------------------------------------
+#notify-format "-a newsalert 'New Articles' '%d new articles'"
+#notify-program "/usr/bin/notify-send"
+#notify-always yes
+
+# -- filters --------------------------------------------------------------------
+#define-filter "r/CrusaderKings" "tags # \"crusaderkings\""
+#define-filter "New r/CrusaderKings" "tags # \"crusaderkings\" and unread = \"yes\""
+#define-filter "DestinyLore" "tags # \"destinylore\""
+#define-filter "New DestinyLore" "tags # \"destinylore\" and unread = \"yes\""
+define-filter "CrusaderKings Multi" "tags # \"crusaderkings\""
+define-filter "DestinyTheGame Multi" "tags # \"destinythegame\""

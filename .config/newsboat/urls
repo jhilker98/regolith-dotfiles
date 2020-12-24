@@ -1,3 +1,4 @@
+# -- feeds ----------------------------------------------------------------------
 #Classes
 #https://canvas.umw.edu/feeds/announcements/enrollment_Qp6idzM3cAn2WNZAd47sUavmnHea3OFOJFzxDO5e.atom Classes "~CLAS 204: Epic Traditions"
 #https://canvas.umw.edu/feeds/announcements/enrollment_PG6SUNeI0kQ9WJbzDyQtBfI7bNmH3b3IxQ8YowkQ.atom Classes "~CPSC 405: Operating Systems and Programming"
@@ -15,10 +16,14 @@ Campaigns
 "query:The One Ring - Fellowship of the 1PG: tags # \"fot1pg\" and author !=\"WaitingCynicism\"" Campaign
 http://rpol.net/feeds.cgi?q=2CEMCCmJ9dwpwGwAsehU "Campaign" "~RPOL.net"
 
-Subreddits
-"query:Gaming Subreddits:tags # \"Subreddits\" and tags # \"gaming\"" reddit
-"query:History Subreddits:tags # \"Subreddits\" and tags # \"history\"" reddit
-"query:Creative Subreddits:tags # \"Subreddits\" and tags # \"creative\"" reddit
+#Subreddits
+#"query:Gaming Subreddits:tags # \"Subreddits\" and tags # \"gaming\"" reddit
+#"query:History Subreddits:tags # \"Subreddits\" and tags # \"history\"" reddit
+#"query:Creative Subreddits:tags # \"Subreddits\" and tags # \"creative\"" reddit
+
+Multireddits
+"query:Gaming Multireddits:tags # \"Multireddit\" and tags # \"gaming\"" reddit
+#"query:All Subreddits:tags # \"Subreddits\"" reddit
 
 Podcasts
 "query:Gaming Podcasts:tags # \"Podcast\" and tags # \"gaming\"" Podcast
@@ -38,10 +43,7 @@ YouTube
 "query:Sports Youtube:tags # \"Youtube\" and tags # \"sports\"" Youtube
 "query:BreadTube:tags # \"Youtube\" and tags # \"BreadTube\"" Youtube
 
-Multireddits
-"query:Gaming Multireddits:tags # \"Multireddit\" and tags # \"gaming\"" reddit
-
-
+# -- sources ---------------------------------------------------------------------------
 http://www.dailyprogress.com/search/?mode=article&q=&t=article&l=10&d=&d1=1+year+ago&d2=&s=&sd=desc&c[]=news/local*&f=atom&fulltext=dpmobile&altf=mrss "Local" cville "!The Daily Progress"
 https://fredericksburgva.gov/RSSFeed.aspx?ModID=1&CID=Fredericksburg-News-1 "Local" "!Fredericksburg News" fburg
 #http://rss.cnn.com/rss/cnn_topstories.rss "!CNN Top Stories" US
@@ -69,15 +71,15 @@ https://feeds.megaphone.fm/behindthebastards Podcast "politics" "!Behind the Bas
 https://anchor.fm/s/91c7948/podcast/rss Podcast campaign "!Critical Role"
 
 https://old.reddit.com/r/DestinyLore.rss Subreddits "!Destiny Lore" "reddit" "destiny" "destinylore" "gaming"
-https://old.reddit.com/r/CrusaderKings/search.rss?q=self%3Ayes&restrict_sr=on&include_over_18=on&sort=new&t=all Subreddits "!Crusader Kings" "gaming"
-https://old.reddit.com/r/CrusaderCharacters/new.rss Subreddits gaming "!Crusader Characters"
-https://old.reddit.com/r/CKTinder/new.rss Subreddits gaming "!CKTinder"
-https://old.reddit.com/r/CK3_DNAs/new.rss Subreddits gaming "!CK3 DNAs"
-https://old.reddit.com/r/sca/search.rss?q=self%3Ayes&restrict_sr=on&sort=relevance&t=all Subreddits sca "!Reddit SCA" medieval history
-https://old.reddit.com/r/MedievalHistory/new.rss Subreddits sca history medieval "!Medieval History" MedievalHistory
-https://old.reddit.com/r/badhistory/search.rss?q=self%3Ayes&restrict_sr=on&include_over_18=on&sort=new&t=all Subreddits "!BadHistory" history
-https://old.reddit.com/r/worldbuilding/search.rss?q=flair%3APrompt&restrict_sr=on&include_over_18=on&sort=new&t=all Subreddits "!Worldbuilding" creative
-https://old.reddit.com/r/AskHistorians.rss Subreddits "!AskHistorians" history
+https://old.reddit.com/r/CrusaderKings/search.rss?q=self%3Ayes&restrict_sr=on&include_over_18=on&sort=new&t=all Subreddits "!Crusader Kings" "gaming" crusaderkings
+https://old.reddit.com/r/CrusaderCharacters/new.rss Subreddits gaming "!Crusader Characters" crusadercharacters
+https://old.reddit.com/r/CKTinder/new.rss Subreddits gaming "!CKTinder" cktinder
+https://old.reddit.com/r/CK3_DNAs/new.rss Subreddits gaming "!CK3 DNAs" ck3dnas
+https://old.reddit.com/r/sca/search.rss?q=self%3Ayes&restrict_sr=on&sort=relevance&t=all Subreddits sca "!Reddit SCA" medieval history redditsca
+https://old.reddit.com/r/MedievalHistory/new.rss Subreddits sca history medieval "!Medieval History" medievalhistory
+https://old.reddit.com/r/badhistory/search.rss?q=self%3Ayes&restrict_sr=on&include_over_18=on&sort=new&t=all Subreddits "!BadHistory" history badhistory
+https://old.reddit.com/r/worldbuilding/search.rss?q=flair%3APrompt&restrict_sr=on&include_over_18=on&sort=new&t=all Subreddits "!Worldbuilding" creative worldbuilding
+https://old.reddit.com/r/AskHistorians.rss Subreddits "!AskHistorians" history askhistorians
 
 http://drcallumwatson.blogspot.com/feeds/posts/default Blog history "!Knight of the Two Ls"
 https://readingmedievalbooks.wordpress.com/feed Blog "!Reading Medieval Books" history
@@ -104,5 +106,5 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UC86zNGwCUt5gBnizRSWSLuA You
 https://www.youtube.com/feeds/videos.xml?channel_id=UCe0DNp0mKMqrYVaTundyr9w Youtube gaming "!VaatiVidya"
 https://www.youtube.com/feeds/videos.xml?channel_id=UC6nSFpj9HTCZ5t-N3Rm3-HA Youtube science "!Vsauce"
 
-https://old.reddit.com/user/jacobhilker1/m/crusaderkings.rss Multireddit "!Crusader Kings Multi" gaming
-https://old.reddit.com/user/jacobhilker1/m/destinythemulti.rss Multireddit "!Destiny The Multi" gaming
+https://old.reddit.com/user/jacobhilker1/m/crusaderkings.rss Multireddit "!Crusader Kings Multi" gaming crusaderkings
+https://old.reddit.com/user/jacobhilker1/m/destinythemulti.rss Multireddit "!Destiny The Multi" gaming destinythegame
