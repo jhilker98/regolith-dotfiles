@@ -75,7 +75,7 @@ bind-key P prev
 unbind-key o
 #bind-key U show-urls
 bind-key o show-urls
-
+bind-key O open-in-browser
 # -- bookmarks -----------------------------------------------------------------
 
 bookmark-cmd ~/.newsbeuter/bookmark.sh
