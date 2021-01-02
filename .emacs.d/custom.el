@@ -42,6 +42,7 @@
  '(org-log-into-drawer t)
  '(org-modules
    '(ol-bbdb ol-bibtex ol-docview ol-eww ol-gnus org-habit ol-info ol-irc ol-mhe ol-rmail org-tempo ol-w3m))
+ '(org-src-tab-acts-natively nil)
  '(org-static-blog-drafts-directory "~/Projects/jhilker.gitlab.io/drafts/")
  '(org-static-blog-posts-directory "~/Projects/jhilker.gitlab.io/posts/")
  '(org-structure-template-alist
@@ -58,7 +59,7 @@
      ("w" . "wrapper")
      ("d" . "date")))
  '(package-selected-packages
-   '(mu4e-overview idle-org-agenda bm emms org-sidebar helm-org org-chef tomatinho org-journal ox-rst ox-mediawiki yaml-mode tagedit web-mode lorem-ipsum flycheck xref-js2 js2-refactor js2-mode company mediawiki golden-ratio atom-one-dark-theme color-theme-sanityinc-solarized linum-relative treemacs-magit treemacs-projectile treemacs-evil treemacs evil-smartparens smartparens csv-mode yasnippet-snippets xresources-theme xresurces-theme zenburn-theme gruber-darker-theme gruvbox-theme ewal org-ql vimrc-mode wordgen smart-mode-line csv org-make-toc nav neotree slack toc-org org-super-agenda org-bullets bbcode-mode elpy auto-complete counsel ivy decide wordsmith-mode writeroom-mode writegood-mode wc-mode doom-modeline solarized-theme color-theme-solarized restart-emacs yasnippet unfill general dashboard projectile all-the-icons magit which-key imenu-list evil-collection evil undo-tree use-package))
+   '(auctex mu4e-overview idle-org-agenda bm emms org-sidebar helm-org org-chef tomatinho org-journal ox-rst ox-mediawiki yaml-mode tagedit web-mode lorem-ipsum flycheck xref-js2 js2-refactor js2-mode company mediawiki golden-ratio atom-one-dark-theme color-theme-sanityinc-solarized linum-relative treemacs-magit treemacs-projectile treemacs-evil treemacs evil-smartparens smartparens csv-mode yasnippet-snippets xresources-theme xresurces-theme zenburn-theme gruber-darker-theme gruvbox-theme ewal org-ql vimrc-mode wordgen smart-mode-line csv org-make-toc nav neotree slack toc-org org-super-agenda org-bullets bbcode-mode elpy auto-complete counsel ivy decide wordsmith-mode writeroom-mode writegood-mode wc-mode doom-modeline solarized-theme color-theme-solarized restart-emacs yasnippet unfill general dashboard projectile all-the-icons magit which-key imenu-list evil-collection evil undo-tree use-package))
  '(pdf-view-midnight-colors (cons "#839496" "#002b36"))
  '(rustic-ansi-faces
    ["#002b36" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#839496"])
@@ -92,6 +93,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(font-lock-comment-face ((t (:foreground "#928374" :slant italic))))
  '(italic ((t (:underline nil :slant italic))))
  '(org-agenda-date ((t (:foreground "#d3869b" :underline nil :weight normal))))
  '(org-agenda-date-today ((t (:foreground "#83a598" :slant normal :weight bold))))

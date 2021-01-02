@@ -22,6 +22,7 @@
       - [[#programming-packages][Programming Packages]]
       - [[#org-packages][Org Packages]]
       - [[#news-packages][News Packages]]
+      - [[#misc-packages][Misc. Packages]]
 - [[#miscellaneous-formats][Miscellaneous Formats]]
       - [[#title-format][Title Format]]
       - [[#timestamp-formats][Timestamp Formats]]
@@ -530,7 +531,7 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
 ;;  (setq dashboard-center-content t)
 (setq dashboard-week-agenda nil)
 (setq dashboard-items '((recents  . 5)
-                        (projects . 7)))
+                        (projects . 10)))
      ;                   (agenda . 5)))
 ;;
 (setq dashboard-show-shortcuts nil)
@@ -1096,6 +1097,11 @@ Helm is another completion package I want to try.
        :config
        (setq easy-hugo-basedir "~/Projects/jhilker.gitlab.io"))
     #+end_src
+*** Org-plus-contrib
+    #+begin_src emacs-lisp
+    (use-package org-plus-contrib
+    :ensure t)
+    #+end_src
 ** News Packages
 *** Elfeed
     Elfeed is a feed reader. EMMS is a music player for podcasts.
@@ -1175,6 +1181,12 @@ Helm is another completion package I want to try.
           ;(run-with-timer 0 (* 10 60) 'elfeed-search-fetch)
           (evil-define-key 'normal elfeed-search-mode-map (kbd "A") 'elfeed-mark-all-as-read)
 	#+end_src
+** Misc. Packages
+*** 0x0
+    #+begin_src emacs-lisp
+    (use-package 0x0
+    :ensure t)
+    #+end_src
 * Miscellaneous Formats
 ** Title Format
    #+BEGIN_SRC emacs-lisp
@@ -2194,6 +2206,10 @@ I don't want spit windows when I load emacs.
 
   #+END_SRC
   
+
+
+
+
 
 
 
