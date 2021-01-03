@@ -165,11 +165,11 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
     #+END_SRC
     And now I want to try and hide the colons in the agenda view.
     #+BEGIN_SRC emacs-lisp
-; (setq org-agenda-hide-tags-regxp ":")
+ (setq org-agenda-hide-tags-regexp ":")
     #+END_SRC
     This is one more way I am attempting to hide tags in the agenda view.
     #+BEGIN_SRC emacs-lisp
-(setq org-agenda-hide-tags-regexp ".*")
+;(setq org-agenda-hide-tags-regexp ".*")
     #+END_SRC
     Finally, I want to have the agenda be smaller.
 *** TO-DO Keywords
