@@ -34,6 +34,7 @@
    '("~/Dropbox/org/agenda.org" "~/Dropbox/notes/fall2020/notes.org"))
  '(org-agenda-time-leading-zero t)
  '(org-export-backends '(ascii html icalendar latex md odt rss))
+ '(org-habit-graph-column 50)
  '(org-html-head-include-default-style nil)
  '(org-journal-dir "~/Dropbox/org/journal/")
  '(org-journal-file-type 'monthly)

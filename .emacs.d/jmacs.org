@@ -1174,7 +1174,7 @@ Helm is another completion package I want to try.
 
           (setq elfeed-show-mode-hook
                 (lambda ()
-              (set-face-attribute 'variable-pitch (selected-frame) :font (font-spec :family "Iosevka Nerd Font" :size 16))))
+              (set-face-attribute 'variable-pitch (selected-frame) :font (font-spec :family "Roboto Mono" :size 16))))
 
           ;(run-with-timer 0 (* 10 60) 'elfeed-search-fetch)
           ;(run-with-timer 0 (* 30 60) 'recentf-save-list)
@@ -1976,8 +1976,10 @@ I don't want spit windows when I load emacs.
 
 
      #+BEGIN_SRC emacs-lisp
-;   (set-frame-font "Iosevka Nerd Font-12" nil t)
-;   (set-frame-font "Roboto Mono-12" nil t)
+   (set-frame-font "Iosevka Nerd Font-12" nil t)
+
+;   (set-frame-font "InconsolataLGC Nerd Font-12" nil t)
+   ;(set-frame-font "Roboto Mono-12" nil t)
 ;   (set-frame-font "Cousine-12" nil t)
 ;   (set-frame-font "Monaco-12" nil t)
 ;   (set-frame-font "Hack-12" nil t)
@@ -2206,6 +2208,9 @@ I don't want spit windows when I load emacs.
 
   #+END_SRC
   
+
+
+
 
 
 
