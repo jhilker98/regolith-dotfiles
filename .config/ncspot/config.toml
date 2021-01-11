@@ -1,4 +1,3 @@
-notify=true
 use_nerdfont = true
 [saved_state]
 volume = 75
@@ -24,5 +23,7 @@ cmdline_bg = "black"
 "=" = "volup"
 "gg" = "move top"
 "Shift+g" = "move bottom"
-"q" = "back"
+"q" = "queue"
 "Shift+q" = "quit"
+"1" = "focus queue"
+"3" = "focus library"
