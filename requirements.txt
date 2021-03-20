@@ -135,7 +135,7 @@ itsdangerous==1.1.0
 jdcal==1.4.1
 jedi==0.17.2
 jeepney==0.4.3
-Jinja2==2.11.2
+Jinja2==2.11.3
 jmespath==0.10.0
 joblib @ file:///tmp/build/80754af9/joblib_1607970656719/work
 jrnl==2.4.3
