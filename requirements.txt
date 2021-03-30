@@ -242,7 +242,7 @@ pydocstyle @ file:///tmp/build/80754af9/pydocstyle_1598885001695/work
 pyerfa @ file:///tmp/build/80754af9/pyerfa_1606860180519/work
 pyflakes==2.2.0
 PyGetWindow==0.0.9
-Pygments==2.6.1
+Pygments==2.7.4
 PyHamcrest==2.0.2
 pyinotify==0.9.6
 PyInquirer==1.0.3
