@@ -18,36 +18,44 @@
 ;; soft contrast
 ;; bg = #CC32302f 
 ;; bg-bright = #CC3c3836
-bg = #CC282828
-bg-bright = #CC32302f
-fg = #EBDBB2
-fg-alt = #d5c4a1
-mf = #d5c4a1
-ac = #d65d0e
-
-bn = #308634
-bm = #E57C46
-bd = #E24C49
-text = #282828
-border = "#00000000"
-;; Colors
-
-red = #cc241d
-green = #98971a
-yellow = #d79921
-blue = #458588
-darkblue = #076678
-purple = #b16286
-cyan = #689d6a
-white = #a89984
-orange = #d65d0e
-darkorange = #af3a03
+;bg = #CC282828
+;bg-bright = #CC32302f
+;fg = #EBDBB2
+;
+;bn = #308634
+;bm = #E57C46
+;bd = #E24C49
+;text = #282828
+;border = "#00000000"
+;;; Colors
+;
+;red = #cc241d
+;green = #98971a
+;yellow = #d79921
+;blue = #458588
+;darkblue = #076678
+;purple = #b16286
+;cyan = #689d6a
+;white = #a89984
+;orange = #d65d0e
+;darkorange = #af3a03
 
 
 ;; Nord
 
-;bg = #2e3440
-;bg-bright = #CC3b4252
+bg = #2e3440
+bg-bright = #CC3b4252
+fg = #D8DEE9
+;
+red = #BF616A
+green = #A3BE8C
+yellow = #EBCB8B
+; yellow =
+blue = #81a1c1
+darkblue = #5e81ac
+purple = #B48EAD
+cyan = #8fbcbb
+orange = #d08770
 ;-------;
 ; FONTS ;
 ;-------;
@@ -153,18 +161,10 @@ format = <label>
 format-padding = 1
 format-background = ${colors.bg-bright}
 format-foreground = ${colors.fg}
-;; Available tokens:
-;;   %title%
-;; Default: %title%
-;label = %title%
 label = %title:0:30:...%
 label-maxlen = 30
 
-; Used instead of label when there is no window title
-; Available tokens:
-;   None
 label-empty = 
-;label-empty-foreground = #707880
 
 
 ;[module/title]
@@ -320,6 +320,12 @@ ramp-background = ${colors.purple}
 ramp-padding = 1
 format-foreground = ${colors.fg}
 
+[module/packages]
+type = custom/script
+exec = "apt list --upgradeable 2>/dev/null | awk 'NR>1' |wc -l"
+interval = 3
+#format-prefix = ""
+
 [module/redshift]
 type = custom/script
 exec = "$HOME/.config/polybar/scripts/red.sh"
@@ -449,7 +455,7 @@ tail=true
 format-prefix = 󰋋
 format-margin =1
 label-padding =1
-format-prefix-background = ${colors.yellow}
+format-prefix-background = ${colors.darkblue}
 format-prefix-padding = 1
 format-background = ${colors.bg-bright}
 format-foreground = ${colors.fg}
@@ -506,7 +512,7 @@ content-foreground = ${colors.fg}
 
 
 
-[module/spotify]
+[module/music]
 type = custom/script
 exec = "~/.config/polybar/scripts/spotify/music.sh"
 exec-if = "playerctl -l"
@@ -611,6 +617,7 @@ font-1 = ${fonts.icons-1}
 font-2 = ${fonts.weather} 
 font-3 = ${fonts.icons-2} 
 font-4 = ${fonts.icons-3} 
+font-5 = ${fonts.icons-4}
 background = ${colors.bg}
 #border-color = ${colors.border}
 #border-bottom-size = 5 
@@ -653,11 +660,14 @@ modules-left =  cal polypomo reddit caps
 ;modules-center = spotify
 ; modules-center = appts
 
-#modules-center = previous playpause next progress 
-;modules-center = progress
-;modules-center = title 
-modules-right = bell notifs news weather 
-;when wttr.in is down 
-# modules-right = bell notifs news
+;modules-center = previous playpause next progress 
+;modules-center = music
+#modules-center = title 
+#modules-center = packages
+
+modules-right = dunst news weather
+#modules-right = bell notifs news weather 
+#modules-right = bell notifs news
+
 
 
