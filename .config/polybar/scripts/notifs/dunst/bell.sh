@@ -1,6 +1,7 @@
 #!/bin/sh
 
-notifs=$(~/.config/polybar/scripts/notifs/rofi/rofication-status.py)
+notifs=$(dunstctl count | sed -n 3p | xargs | cut -d' ' -f2)
+
 if [ $notifs -eq 0 ]; then
  echo ""
 else
