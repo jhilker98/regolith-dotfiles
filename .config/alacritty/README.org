@@ -1,0 +1,92 @@
+#+title: Alacritty Config
+#+author: Jacob Hilker
+#+property: header-args :tangle test.yml
+
+Alacritty has become my favorite terminal emulator.
+* Fonts
+I personally love Iosevka.
+#+begin_src yaml
+font:
+#+end_src
+** Normal Font
+#+begin_src yaml
+  normal:
+    family: Iosevka Nerd Font
+    size: 12.0
+    style: Regular
+#+end_src
+** Italic Font
+   #+begin_src yaml
+  italic:
+    family: Iosevka Nerd Font
+    size: 12.0
+    style: Italic
+   #+end_src
+** Bold Font
+#+begin_src yaml
+  bold:
+    family: Iosevka Nerd Font
+    size: 12.0
+    style: Bold
+#+end_src
+** Bold Italic Font
+   #+begin_src yaml
+  bold_italic:
+    family: Iosevka Nerd Font
+    size: 12.0
+    style: Bold Italic
+  #+end_src
+
+* UI Tweaks
+** Opacity
+I tend to use a little bit of opacity.
+#+begin_src yaml
+background_opacity: 0.75
+#+end_src
+
+* Colors
+I tend to swap between gruvbox and nord for my primary color schemes. However, I mostly use gruvbox.
+#+begin_src yaml
+colors:
+  # Default colors
+  primary:
+    # hard contrast: background = '#1d2021'
+    background: '#282828'
+    # soft contrast: background = '#32302f'
+    foreground: '#ebdbb2'
+
+  # Normal colors
+  normal:
+    black: '#282828'
+    red: '#cc241d'
+    green: '#98971a'
+    yellow: '#d79921'
+    blue: '#458588'
+    magenta: '#b16286'
+    cyan: '#689d6a'
+    white: '#a89984'
+
+  # Bright colors
+  bright:
+    black: '#928374'
+    red: '#fb4934'
+    green: '#b8bb26'
+    yellow: '#fabd2f'
+    blue: '#83a598'
+    magenta: '#d3869b'
+    cyan: '#8ec07c'
+    white: '#ebdbb2'
+#+end_src
+* Misc. Tweaks
+** Window Class
+#+begin_src yaml
+class:
+  instance: Alacritty
+  general: Alacritty
+#+end_src
+
+* Keybindings
+#+begin_src yaml
+key_bindings:
+#+end_src
+** Normal Mode Keybindings
