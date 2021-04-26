@@ -1,1 +1,0 @@
-("~/" "~/Documents/brokenThrones/" "~/Documents/shatteredSkies/" "~/Documents/byrne/" "~/Documents/aurea/")
