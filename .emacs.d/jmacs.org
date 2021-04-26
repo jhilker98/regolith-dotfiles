@@ -1,0 +1,2220 @@
+#+title: JMACS
+#+author: Jacob Hilker
+* Table of Contents :toc:
+- [[#introduction-to-jmacs][*Introduction to JMACS*]]
+      - [[#disable-electric-indent-mode][Disable Electric Indent Mode]]
+      - [[#personal-info][Personal Info]]
+      - [[#org-mode-config][Org Mode Config]]
+      - [[#setting-a-customize-file][Setting A Customize File]]
+      - [[#use-python-3-interpreter][Use Python 3 Interpreter]]
+      - [[#setting-notes-file][Setting Notes File]]
+      - [[#quieting-package-cl][Quieting Package CL]]
+- [[#package-initialization-and-bootstrapping][Package Initialization and Bootstrapping]]
+      - [[#package-initialization-and-extra-sources][Package Initialization and Extra Sources]]
+      - [[#bootstrapping][Bootstrapping]]
+- [[#packages][Packages]]
+      - [[#general-packages][General Packages]]
+      - [[#ui-packages][UI Packages]]
+      - [[#worldbuilding-packages][Worldbuilding Packages]]
+      - [[#writer-packages][Writer Packages]]
+      - [[#rpg-packages][RPG Packages]]
+      - [[#completion-packages][Completion Packages]]
+      - [[#programming-packages][Programming Packages]]
+      - [[#org-packages][Org Packages]]
+      - [[#news-packages][News Packages]]
+      - [[#misc-packages][Misc. Packages]]
+- [[#miscellaneous-formats][Miscellaneous Formats]]
+      - [[#title-format][Title Format]]
+      - [[#timestamp-formats][Timestamp Formats]]
+      - [[#agenda-date-format][Agenda Date Format]]
+- [[#specific-functions][Specific Functions]]
+      - [[#sidebar][Sidebar]]
+      - [[#hide-messages-and-ql-view][Hide Messages and QL View]]
+      - [[#find-files][Find Files]]
+      - [[#use-yn-or-yn-for-yesno][Use Y/N or y/n for yes/no]]
+      - [[#auto-save-fix][Auto-Save Fix]]
+      - [[#resize-images][Resize Images]]
+      - [[#no-tabs-only-spaces][No Tabs, Only Spaces]]
+      - [[#one-group-for-centaur-tabs][One Group for Centaur Tabs]]
+      - [[#set-journal-header][Set Journal Header]]
+      - [[#find-modeline-segments][Find Modeline Segments]]
+      - [[#capture-at-point][Capture at Point]]
+      - [[#use-scratch-buffer-as-default][Use Scratch Buffer as Default]]
+      - [[#agenda-functions-open-planner][Agenda Functions*** Open Planner]]
+      - [[#render-latex-in-buffer][Render $$LaTeX$$ in buffer]]
+- [[#hooks-and-general-non-ui-config][Hooks and General (Non-UI) Config]]
+      - [[#delete-other-windows-on-load][Delete Other Windows on Load]]
+      - [[#file-types-and-modes][File Types and Modes]]
+      - [[#elpy-for-python-and-bbc-mode-for-bbcode][ELPY for python and BBC-Mode for BBCode]]
+      - [[#markdown-and-toc-org-mode][Markdown and TOC-Org Mode]]
+      - [[#use-line-numbers-in-prog-mode][Use Line Numbers in Prog Mode]]
+      - [[#tabs][Tabs]]
+- [[#keybindings][Keybindings]]
+      - [[#general-keybindings][General Keybindings]]
+      - [[#auto-complete][Auto Complete]]
+      - [[#quit-commands][Quit Commands]]
+      - [[#buffer-commands][Buffer Commands]]
+      - [[#window-commands][Window Commands]]
+      - [[#better-window-navigation][Better Window Navigation]]
+      - [[#files][Files]]
+      - [[#packages-1][Packages]]
+      - [[#org-mode][Org-Mode]]
+      - [[#more-org-mode][More Org-Mode]]
+      - [[#magit][Magit]]
+      - [[#imenu-list-commands][Imenu-List Commands]]
+      - [[#writer-commands][Writer Commands]]
+      - [[#toggles][Toggles]]
+      - [[#general-mode-toggles][General Mode Toggles]]
+      - [[#yasnippet][YaSnippet]]
+      - [[#spell-check][Spell-check]]
+      - [[#lorem-ipsum][Lorem Ipsum]]
+      - [[#tab-for-evil-org][TAB for Evil-Org]]
+      - [[#ui-keybindings][UI Keybindings]]
+      - [[#treemacs-and-imenu-list][Treemacs and Imenu-List]]
+      - [[#python][Python]]
+      - [[#decide-mode][Decide Mode]]
+      - [[#windmove][Windmove]]
+      - [[#misc-keybindings][Misc Keybindings]]
+      - [[#start-server][Start Server]]
+      - [[#elfeed][Elfeed]]
+- [[#ui][UI]]
+      - [[#minimalistic-ui][Minimalistic UI]]
+      - [[#making-text-sexier][Making Text Sexier]]
+      - [[#org-ui][Org UI]]
+      - [[#fonts-and-themes][Fonts and Themes]]
+- [[#headerlines-and-modelines][Headerlines and Modelines]]
+      - [[#headerline][Headerline]]
+      - [[#doom-modeline-configs][Doom Modeline Configs]]
+- [[#latex-classes][$$LaTeX$$ Classes]]
+      - [[#novel][Novel]]
+- [[#capture-templates][Capture Templates]]
+- [[#notes-and-miscellaneous-things][Notes and Miscellaneous Things]]
+      - [[#notes][Notes]]
+      - [[#miscellaneous-things][Miscellaneous Things]]
+
+* *Introduction to JMACS*
+Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG campaigns like [[https://www.ironswornrpg.com/][Ironsworn]], writing (both prose and code), and for general use. I have organized this file into different sections, such as the functions I use, the UI settings, etc.
+** Disable Electric Indent Mode
+   #+begin_src emacs-lisp
+   (when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
+   #+end_src
+** Personal Info
+   #+BEGIN_SRC emacs-lisp
+   (setq user-full-name "Jacob Hilker"
+    user-mail-address "jacob.hilker2@gmail.com")
+    (setq gc-cons-threshold 100000000)
+      ;visible-bell t)
+   #+END_SRC
+
+** Org Mode Config
+   This is where I am keeping most of my org mode config. I do want to startup with everything folded, as well as logging when I work on tasks.
+   #+begin_src emacs-lisp
+   (setq org-startup-folded t)
+   (setq org-log-note-clock-out t)
+   #+end_src
+*** Agenda File & Synchronization Setup
+    Here I am setting up the agenda files. During the school year, I want to have my notes as part of the agenda, but not in summer time, which is why I have both. I'm also setting it up so that the UID is stored, and that the daemon can restore frames. 
+    #+BEGIN_SRC emacs-lisp
+(setq org-icalendar-store-UID t)
+;(setq restart-emacs-restore-frames t)
+    #+END_SRC
+**** During the School Year
+     #+BEGIN_SRC emacs-lisp
+(setq org-agenda-files (list "~/Dropbox/org/agenda.org" "~/Dropbox/notes/fall2020/notes.org" ))
+     #+END_SRC
+     
+**** During The Summer
+     #+BEGIN_SRC emacs-lisp
+
+;(setq-default org-agenda-files (list "~/Dropbox/org/agenda.org"))
+     #+END_SRC
+*** Agenda Views
+    I am setting up my basic agenda view here before any custom commands. I will set up the way the groups look when I install =org-super-agenda=.
+    #+begin_src emacs-lisp
+(setq org-agenda-time-grid '((daily today weekly require-timed)()() "----------------------" nil)
+   org-agenda-show-all-dates nil
+   org-agenda-use-time-grid nil
+   org-agenda-skip-scheduled-if-done t
+   org-agenda-skip-deadline-if-done t
+   org-agenda-include-deadlines t
+   org-agenda-include-diary nil
+   ;org-agenda-start-day "+1d"
+   org-agenda-overriding-header ""
+   org-agenda-block-separator (concat (make-string (window-width) 9472) "\n")
+;;   org-agenda-compact-blocks t
+;   ;org-agenda-start-with-log-mode t)   
+   org-agenda-start-with-log-mode nil)   
+
+    #+end_src
+    I want to sort in each category by the earliest timestamp.
+    #+BEGIN_SRC emacs-lisp
+(setq org-agenda-sorting-strategy
+ '((agenda time-up habit-down ts-up priority-down category-keep)
+  (todo timestamp-up todo-state-up category-up priority-down category-keep) 
+  (tags priority-down category-keep)
+  (search category-keep)))
+
+(setq org-agenda-start-on-weekday nil)
+    #+END_SRC
+    Now, I want to hide the colons in tags. From StackOverflow.
+    #+BEGIN_SRC emacs-lisp
+; (font-lock-add-keywords 'org-mode
+;   '(("^\\*+ "
+;      ":" nil nil
+;      (0 (put-text-property (match-beginning 0) (match-end 0) 'display " ")))))
+    #+END_SRC
+    And now I want to try and hide the colons in the agenda view.
+    #+BEGIN_SRC emacs-lisp
+ (setq org-agenda-hide-tags-regexp ":")
+    #+END_SRC
+    This is one more way I am attempting to hide tags in the agenda view.
+    #+BEGIN_SRC emacs-lisp
+;(setq org-agenda-hide-tags-regexp ".*")
+    #+END_SRC
+    Finally, I want to have the agenda be smaller.
+*** TO-DO Keywords
+    Org-mode scheduling is probably the feature I use the most in org-mode. I want to set up my keywords here, so I don't need to do it in every file. I'm also setting up the colors, and reducing the warning days to 0 days so I can see exactly when an assignment is due.
+    #+BEGIN_SRC emacs-lisp
+      (setq org-todo-keywords '(
+            (sequence "TODO(t)" "INPR(i)" "NEXT(n)" "MEET(m)" "|" "SOMEDAY(s)"   "DONE(d)" "CANCELED(c)")
+            (type "PROJ(p)")
+            (type "BLOG(b)")))
+
+      ;(sequence "WAITING" "|")
+
+      (setq org-todo-keyword-faces
+       '(("TODO" . (:foreground "#cc241d" :weight black :underline t))
+
+         ("INPR" . (:foreground "#fe8019" :weight bold))
+          ("NEXT" . (:foreground "#fabd2f" :weight black))
+          ("MEET" . (:foreground "#b8bb26" :weight bold))
+         ("PROJ" . (:foreground "#458588" :slant italic :weight bold))
+         ("BLOG" . (:foreground "#83a598"))
+         ("SOMEDAY" . (:foreground "#d3869b" :slant italic))
+         ("DONE" . (:foreground "#83a598" :strike-through t))
+         ("CANCELED" . (:foreground "cc241d" :strike-through t))))
+      ;   ("DONE" . "green")
+
+      (setq org-deadline-warning-days 0)
+      ;(setq org-agenda-weekend-days nil)
+
+    #+END_SRC
+*** Custom Agenda Commands
+**** Planner
+     This planner is what I want for my default agenda view.
+     #+begin_src emacs-lisp
+       (setq org-agenda-custom-commands
+      '(("p" "Planner"
+         (
+                      (agenda "" ((org-agenda-span 'day)
+                      (org-agenda-use-time-grid t)
+                      (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
+                      (org-agenda-show-all-dates t)
+                      (org-agenda-compact-blocks nil)
+                      (org-agenda-overriding-header "")
+                      (org-agenda-start-day "+0d")
+                      (org-super-agenda-groups
+                       '(
+                           (:name "Habits"
+                            :habit t
+                            :category "HABIT"
+                            :order 2)
+                            
+                            (:name "Chores"
+                            :habit t
+                            :category "CHORE"
+                            :order 2)
+
+
+
+                               (:name none
+                                :discard (:todo "DONE")
+                                :time-grid t
+                                :date today
+                                :scheduled today
+                                :deadline today
+                                :order 1)))))
+                          
+          (agenda "" ((org-agenda-overriding-header "Coming Up Soon") 
+                       ;(org-agenda-prefix-format '((todo . " %i %-22:c %t %22(org-entry-get nil \"TIMESTAMP\")")))
+;                       (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottimestamp))
+	                ; 
+                      ; (org-agenda-use-time-grid nil) 
+                      ; (org-agenda-time-grid '((daily today weekly require-timed)()() "----------------------" nil))
+		               (org-agenda-start-day "+1d")
+     ;                   (org-agenda-todo-ignore-with-date t)
+                      ; (org-agenda-format-date "\n%d %b (%a.)\n")
+                      
+                       (org-agenda-format-date "\n%d %b (%a.)")
+			;		   (concat (make-string (window-width) 9472) "\n")
+             ;         (org-agenda-compact-blocks t)
+                       (org-agenda-span 2)
+                      ;(org-agenda-format-date "%d %b")
+                       (org-super-agenda-groups
+                         '(
+                         
+                         (:name "Habits"
+                         :habit t
+                         :category "HABIT"
+                         :order 6)
+                         
+                         (:name "Chores"
+                         :habit t
+                         :category "CHORE"
+                         :order 6)
+                         
+
+     ;                 (:name "Projects"
+     ;                 :category "PROJECT"
+     ;                 :order 5)
+                      
+                     
+    (:name "Personal"
+    :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
+    :order 4)
+    
+;    
+;    (:name "Someday"
+;     :and (:not (:category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO")) :todo "SOMEDAY")
+;     :order 5)
+
+    (:name "Overdue"
+      :deadline past
+      :scheduled past
+      :face '(:foreground "red")
+      :order 3)
+;
+;
+    (:name "Classwork and Meetings"
+     :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING")
+     :order 1)))))
+
+     (alltodo "" ((org-agenda-overriding-header "To Do")
+                  (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+                  (org-agenda-sorting-strategy '(todo-state-up category-up ))
+                  (org-super-agenda-groups '(
+                  (:name "Classwork and Meetings"
+                  :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING" "CLASSES")
+                  :order 1)
+                 
+                  (:name "Personal"
+                  :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
+                  :order 2)
+                  
+                  (:name "Projects"
+                   :todo "PROJECT"
+                   :category "PROJECT"
+                   :order 3)
+                  
+
+                 (:discard (:category "HABIT"))
+                 (:discard (:category "CHORE"))
+
+))))))))
+
+
+;
+ ;  (:name "Coming Up Soon"
+ ;   :scheduled future
+ ;   :deadline future
+ ;   :date t))))
+
+;    
+;    (org-agenda-max-todos 11)
+;    ;(org-agenda-sorting-strategy '( ts-up category-up todo-state-up))
+
+     #+end_src
+**** Week Ahead
+     This is a way I can view the upcoming week. I have 2 implementations here - one with [[https://github.com/alphapapa/org-ql][Org-QL]], the other with the basic agenda and [[https://github.com/alphapapa/org-super-agenda][org-super-agenda.]]     
+***** Org-QL Implementation
+     #+begin_src emacs-lisp
+     ;(add-to-list 'org-agenda-custom-commands
+     ;'("w" "Week Ahead" (
+     ;     (org-ql-block '(and (ts :from 1)
+     ;                     (ts :to 7))
+     ;                 ((org-super-agenda-groups '((:auto-ts t)))
+     ;                  (org-ql-block-header "The Week Ahead"))))))
+
+ 
+
+     #+end_src
+***** Org-Super-Agenda Implementation.
+      #+begin_src emacs-lisp
+      (add-to-list 'org-agenda-custom-commands
+     '("w" "Week Ahead" ( 
+                      (agenda "" ((org-agenda-span 'week)
+                                  (org-agenda-start-day "+1d")
+                                  (org-agenda-overriding-header "The Week Ahead"))))))
+                                   
+      #+end_src
+*** Export Process
+    This is how I'm setting up my export process. From [[https://www.fbxiang.com/blog/2017/11/01/write_papers_with_org_mode_and_spacemacs.html#title_9][here]].
+    #+BEGIN_SRC emacs-lisp
+(setq org-latex-pdf-process 
+     '("latexmk -pdflatex='xelatex -interaction nonstopmode' -pdf -bibtex -f %f"))
+    #+END_SRC
+** Setting A Customize File
+   #+BEGIN_SRC emacs-lisp
+(setq-default custom-file "~/.emacs.d/custom.el")
+(load custom-file) 
+
+;(setq org-agenda-include-diary t)
+
+;(setq holiday-bahai-holidays nil)
+;(setq holiday-hebrew-holidays nil)
+;(setq holiday-islamic-holidays nil)
+   #+END_SRC
+
+** Use Python 3 Interpreter 
+   #+BEGIN_SRC emacs-lisp
+(setq python-shell-interpreter "python3")
+   #+END_SRC
+** Setting Notes File
+   #+BEGIN_SRC emacs-lisp
+;(setq org-default-notes-file "~/Dropbox/notes/fall2020/notes.org")
+   #+END_SRC
+** Quieting Package CL 
+I am working on upgrading to emacs 27. I kept getting a warning about cl being deprecated, so I'm quieting it with this.
+#+BEGIN_SRC emacs-lisp
+(setq byte-compile-warnings '(cl-functions))
+#+END_SRC
+* Package Initialization and Bootstrapping
+** Package Initialization and Extra Sources
+   I am adding extra sources to my package archives here.
+
+   #+BEGIN_SRC emacs-lisp
+(require 'package)
+(setq package-enable-at-startup nil)
+(setq package-archives '(("org"   . "http://orgmode.org/elpa/")
+                         ("gnu"   . "http://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")))
+(package-initialize)
+   #+END_SRC
+** Bootstrapping
+   Here is where I am using the bootstrapping with use-package.
+
+   #+BEGIN_SRC emacs-lisp
+;; Bootstrap `use-package`
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(require 'use-package)
+   #+END_SRC
+* Packages
+  Here is where I install all the packages I use in this configuration.
+** General Packages
+   These are all packages for general use.
+**** EVIL and EVIL-ORG
+     I am installing evil and evil-collection for vim keybindings in emacs.
+     #+BEGIN_SRC emacs-lisp
+     (use-package undo-tree
+     :ensure t
+     :config
+     (global-undo-tree-mode))
+
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1)
+  :preface
+  (defun ian/save-and-kill-this-buffer ()
+    (interactive)
+    (save-buffer)
+    (kill-this-buffer))
+  :config
+  (with-eval-after-load 'evil-maps ; avoid conflict with company tooltip selection
+    (define-key evil-insert-state-map (kbd "C-n") nil)
+    (define-key evil-insert-state-map (kbd "C-p") nil))
+  (evil-ex-define-cmd "q" #'kill-this-buffer)
+  (evil-ex-define-cmd "wq" #'ian/save-and-kill-this-buffer))
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
+
+(use-package evil-org
+  :ensure t
+  :after org
+  :config
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'evil-org-mode-hook
+            (lambda ()
+              (evil-org-set-key-theme)))
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+
+(use-package evil-surround
+  :ensure t
+  :config
+  (global-evil-surround-mode 1))
+     #+END_SRC
+**** Imenu-List
+     Imenu-list allows me to get an overview of my code or outline for an
+     AAR/novel. Here I enable it and install it.
+
+     #+BEGIN_SRC emacs-lisp
+(use-package imenu-list
+:ensure t
+:config
+(setq-default imenu-list-position "left"))
+
+;(imenu-list-minor-mode t)
+     #+END_SRC
+
+**** Which-Key
+     Which-key enables me to see what keys I can use.
+     #+BEGIN_SRC emacs-lisp
+(use-package which-key
+:ensure t
+:config
+(which-key-mode 1))
+     #+END_SRC
+
+**** Magit
+     Magit enables me to use git while in emacs. I enable it and install it here.
+     #+BEGIN_SRC emacs-lisp
+(use-package magit
+:ensure t)
+
+(use-package evil-magit
+:ensure t)
+
+(use-package magit-todos
+:ensure t)
+     #+END_SRC
+
+**** All-The-Icons
+     Here I enable all-the-icons.
+     #+BEGIN_SRC emacs-lisp
+(use-package all-the-icons
+:ensure t)
+     #+END_SRC
+
+**** Projectile
+     Projectile is a way of using projects in emacs.
+     #+BEGIN_SRC emacs-lisp
+(use-package projectile
+:ensure t
+:config
+(projectile-mode)
+(setq projectile-project-search-path '("~/Projects/" "~/Documents/aurea" "~/Documents/brokenThrones" "~/Documents/byrne" "~/Documents/shatteredSkies"))
+
+
+)
+     #+END_SRC
+
+**** General.el
+
+     #+BEGIN_SRC emacs-lisp
+(use-package general
+:ensure t)
+     #+END_SRC
+
+**** Dashboard
+     #+BEGIN_SRC emacs-lisp
+(use-package dashboard
+  :ensure t
+;  :defer nil
+;  :init
+;  (add-hook 'after-init-hook 'dashboard-setup-startup-hook)
+ :config
+  (dashboard-setup-startup-hook)
+;  (setq dashboard-startup-banner "~/crusaderKings.png")
+;   (setq dashboard-startup-banner 'logo)
+   ;(setq dashboard-setup-banner "/home/jhilker/.emacs.d/banner.png")  
+  (setq dashboard-banner-logo-title "Man your own jackhammer!")
+;;  (setq dashboard-center-content t)
+(setq dashboard-week-agenda nil)
+(setq dashboard-items '((recents  . 5)
+                        (projects . 10)))
+     ;                   (agenda . 5)))
+;;
+(setq dashboard-show-shortcuts nil)
+;;(setq dashboard-set-navigator t)
+(setq dashboard-set-heading-icons t)
+(setq dashboard-set-file-icons t)
+(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
+     #+END_SRC
+**** Unfill
+     For toggling fill and unfill.
+
+     #+BEGIN_SRC emacs-lisp
+(use-package unfill
+:ensure t)
+     #+END_SRC
+**** YASnippet
+     #+BEGIN_SRC emacs-lisp
+(use-package yasnippet
+:ensure t
+:config
+(yas-global-mode t))
+
+(use-package yasnippet-snippets
+:ensure t)
+     #+END_SRC
+
+**** Restart Emacs
+     #+BEGIN_SRC emacs-lisp
+     (use-package restart-emacs
+     :ensure t)
+     #+END_SRC
+**** CSV
+     If I am using csv files I want a csv package.
+     #+BEGIN_SRC emacs-lisp
+(use-package csv-mode
+:ensure t)
+(add-to-list 'auto-mode-alist '("\\.csv\\'" . csv-mode))
+     #+END_SRC
+
+**** Smartparens and Evil-Smartparens
+     #+BEGIN_SRC emacs-lisp
+(use-package smartparens
+:ensure t
+:config
+(smartparens-global-mode t))
+(use-package evil-smartparens
+:ensure t
+:after (smartparens evil evil-collection))
+     #+END_SRC
+**** Treemacs
+     #+BEGIN_SRC emacs-lisp
+(use-package treemacs
+:ensure t
+:config
+(setq-default treemacs-width 20))
+
+(use-package treemacs-evil
+:after evil treemacs
+:ensure t)
+
+(use-package treemacs-projectile
+:after projectile treemacs
+:ensure t)
+
+(use-package treemacs-magit
+:after magit treemacs
+:ensure t)
+     #+END_SRC
+**** Linum-relative 
+     #+BEGIN_SRC emacs-lisp
+(use-package linum-relative
+:ensure t
+:config
+(setq linum-relative-current-symbol "")
+)
+     #+END_SRC
+**** Elcord
+     Allows me to set my discord status in emacs.
+     #+BEGIN_SRC emacs-lisp
+(use-package elcord
+:ensure t)
+     #+END_SRC
+**** BM
+     #+BEGIN_SRC emacs-lisp
+(use-package bm
+:ensure t)
+     #+END_SRC
+** UI Packages
+*** Themes
+**** Solarized
+     Here is a package for using solarized.
+     #+BEGIN_SRC emacs-lisp
+(use-package color-theme-sanityinc-solarized
+:ensure t)
+     #+END_SRC
+
+**** Atom One
+     #+BEGIN_SRC emacs-lisp
+(use-package atom-one-dark-theme
+:ensure t)
+     #+END_SRC
+**** Gruvbox
+     #+BEGIN_SRC emacs-lisp
+(use-package gruvbox-theme
+:ensure t)
+     #+END_SRC
+**** Doom Themes
+     #+BEGIN_SRC emacs-lisp
+(use-package doom-themes
+:ensure t)
+     #+END_SRC
+*** Doom Modeline
+
+    #+BEGIN_SRC emacs-lisp 
+   (use-package doom-modeline
+   :demand t
+   :config
+   (setq doom-modeline-height 32))
+    #+END_SRC
+*** Ace Window
+    #+BEGIN_SRC emacs-lisp
+(use-package ace-window :ensure t)
+    #+END_SRC
+*** Golden Ratio
+    #+BEGIN_SRC emacs-lisp
+(use-package golden-ratio
+:ensure t
+:config
+(golden-ratio-mode t)
+(setq golden-ratio-auto-scale t))
+    #+END_SRC
+*** Ewal
+    #+BEGIN_SRC emacs-lisp
+;(use-package ewal 
+;:ensure t
+;:init (setq ewal-use-built-in-always-p nil
+;              ewal-use-built-in-on-failure-p t
+;              ewal-built-in-palette "sexy-material"
+;              ewal-json-file "~/.cache/wal/colors.json"))
+    #+END_SRC
+
+*** Centaur Tabs
+    #+BEGIN_SRC emacs-lisp 
+ (use-package centaur-tabs
+ :ensure t
+ :config
+ (centaur-tabs-mode t)
+ 
+    (setq centaur-tabs-set-modified-marker t)
+    (setq centaur-tabs-modified-marker "•")
+    (setq centaur-tabs-set-bar 'left) 
+    (setq centaur-tabs-set-icons t)
+    (setq centaur-tabs-set-close-button t)
+    (setq centaur-tabs-close-button "x")
+    (setq centaur-tabs-style "bar")
+    (setq centaur-tabs-height 32)
+    (define-key evil-normal-state-map (kbd "g t") 'centaur-tabs-forward)
+    (define-key evil-normal-state-map (kbd "g T") 'centaur-tabs-backward)
+    (setq centaur-tabs-cycle-scope 'tabs))
+ 
+ 
+ (defun centaur-tabs-buffer-groups ()
+  "Use as few groups as possible."
+ (list (cond ((string-equal "*" (substring (buffer-name) 0 1))
+                    "Tools")
+                    (cond ((string-equal "eglot" (downcase (substring (buffer-name) 1 6)))
+                           "Eglot")
+                          (t
+                           "Tools")))))
+(defun centaur-tabs-hide-tab (x)
+  "Do no to show buffer X in tabs."
+  (let ((name (format "%s" x)))
+    (or
+     ;; Current window is not dedicated window.
+     (window-dedicated-p (selected-window))
+
+     ;; Buffer name not match below blacklist.
+     (string-prefix-p "*epc" name)
+     (string-prefix-p "*helm" name)
+     (string-prefix-p "*Helm" name)
+     (string-prefix-p "*Compile-Log*" name)
+     (string-prefix-p "*lsp" name)
+     (string-prefix-p "*company" name)
+     (string-prefix-p "*Flycheck" name)
+     (string-prefix-p "*tramp" name)
+     (string-prefix-p " *Mini" name)
+     (string-prefix-p "*help" name)
+     (string-prefix-p "*straight" name)
+     (string-prefix-p " *temp" name)
+     (string-prefix-p "*Help" name)
+     (string-prefix-p "*mybuf" name)
+     (string-prefix-p "*Org Agenda*" name)
+     (string-prefix-p "*Ilist*" name)
+
+     (string-prefix-p "*Agenda Commands*" name)
+     ;; Is not magit buffer.
+     (and (string-prefix-p "magit" name)
+      (not (file-name-extension name)))
+     )))
+(add-hook 'server-after-make-frame-hook 'centaur-tabs-mode)
+
+   #+end_src
+    #+END_SRC
+*** Solaire Mode
+    #+BEGIN_SRC emacs-lisp
+;(use-package solaire-mode
+;  :hook (after-init . solaire-global-mode))
+    #+END_SRC
+*** Pretty Mode
+    #+BEGIN_SRC emacs-lisp
+(use-package pretty-mode
+:ensure t)
+    #+END_SRC
+** Worldbuilding Packages
+*** Wordgen Mode
+    #+BEGIN_SRC emacs-lisp
+(use-package wordgen
+:ensure t)
+    #+END_SRC
+*** Mediawiki
+    This package lets me use wikipedia syntax highlighting.
+    #+BEGIN_SRC emacs-lisp
+(use-package mediawiki
+:ensure t)
+    #+END_SRC
+** Writer Packages
+*** Writegood-Mode
+    #+BEGIN_SRC emacs-lisp
+(use-package writegood-mode
+:ensure t)
+    #+END_SRC
+*** Writeroom-Mode
+    Writeroom-Mode is a minor mode for distraction-free writing.
+    #+BEGIN_SRC emacs-lisp
+(use-package writeroom-mode
+:ensure t)
+    #+END_SRC
+*** Wordsmith Mode
+
+    #+BEGIN_SRC emacs-lisp
+    (use-package wordsmith-mode
+    :ensure t)
+    #+END_SRC
+*** Markdown Mode
+    This allows me to use markdown mode.
+    #+BEGIN_SRC emacs-lisp
+(use-package markdown-mode
+:ensure t)
+    #+END_SRC 
+** RPG Packages
+*** Decide-Mode
+    This is useful for rolling dice.
+    #+BEGIN_SRC emacs-lisp
+(use-package decide
+:ensure t)
+    #+END_SRC
+*** Org D20
+Something I saw on [[https://www.reddit.com/r/emacs/comments/aly9jh/minor_mode_for_dungeon_masters/][r/emacs]].
+#+begin_src emacs-lisp
+(use-package org-d20
+:ensure t)
+#+end_src
+** Completion Packages
+*** Ivy Suite
+**** Ivy
+     #+BEGIN_SRC emacs-lisp
+ (use-package ivy
+ :ensure t
+ :config
+ (setq ivy-count-format "(%d/%d) ")
+ (ivy-mode 1))
+
+;(use-package ivy-posframe
+;:after ivy
+;:ensure t
+;:config
+;(setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center)))
+;(ivy-posframe-mode 1))
+     #+END_SRC
+
+**** Counsel
+     Counsel allows us to utilize ivy by replacing many built-in and common
+     functions with richer versions. Let’s install it!
+
+     #+BEGIN_SRC emacs-lisp
+ (use-package counsel-projectile
+   :ensure t)
+
+;(use-package counsel-package
+;:ensure t)
+
+(use-package counsel
+ :ensure t
+ :config
+(counsel-mode))
+     #+END_SRC
+
+**** Swiper
+     #+BEGIN_SRC emacs-lisp
+ (use-package swiper
+   :commands (swiper swiper-all))
+     #+END_SRC
+*** Helm
+Helm is another completion package I want to try.
+#+begin_src emacs-lisp
+(use-package helm
+:ensure t)
+#+end_src
+*** Company Mode
+    #+BEGIN_SRC emacs-lisp
+    (use-package company
+    :ensure t
+    :config
+    (add-hook 'after-init-hook 'global-company-mode))
+    #+END_SRC
+** Programming Packages
+*** Python Programming
+    #+BEGIN_SRC emacs-lisp
+  (use-package elpy
+  :ensure t)
+    #+END_SRC
+*** BBCode Formatting
+    #+BEGIN_SRC emacs-lisp
+    (use-package bbcode-mode
+    :ensure t)
+    #+END_SRC
+*** Javascript
+    #+BEGIN_SRC emacs-lisp
+    (use-package js2-mode
+    :ensure t)
+    (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+    ;; Better imenu
+    (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+    (use-package js2-refactor
+    :ensure t)
+    (use-package xref-js2
+    :ensure t)
+
+(add-hook 'js2-mode-hook #'js2-refactor-mode)
+(js2r-add-keybindings-with-prefix "C-c C-r")
+(define-key js2-mode-map (kbd "C-k") #'js2r-kill)
+
+;; js-mode (which js2 is based on) binds "M-." which conflicts with xref, so
+;; unbind it.
+(define-key js-mode-map (kbd "M-.") nil)
+
+(add-hook 'js2-mode-hook (lambda ()
+  (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
+
+    #+END_SRC
+*** Flush 
+    #+BEGIN_SRC emacs-lisp
+(use-package flycheck
+:ensure t
+:config
+(add-hook 'prog-mode-hook 'flycheck-mode))
+    #+END_SRC
+*** Lorem Ipsum
+    #+BEGIN_SRC emacs-lisp
+(use-package lorem-ipsum
+:ensure t)
+    #+END_SRC
+*** .vimrc Mode
+    #+BEGIN_SRC emacs-lisp
+(use-package vimrc-mode
+:ensure t
+:config 
+(add-to-list 'auto-mode-alist '("\\.vimrc\\'" . vimrc-mode)))
+
+    #+END_SRC
+
+*** Web Mode 
+    #+BEGIN_SRC emacs-lisp
+(use-package web-mode
+:ensure t)
+    #+END_SRC
+*** Tagedit
+    #+BEGIN_SRC emacs-lisp
+(use-package tagedit
+:ensure t
+:config
+(tagedit-add-experimental-features))
+    #+END_SRC
+*** YAML Mode
+    #+BEGIN_SRC emacs-lisp
+(use-package yaml-mode
+:ensure t)
+    #+END_SRC 
+** Org Packages
+*** Org Bullets
+    This allows for better org-mode bullets.
+    #+BEGIN_SRC emacs-lisp
+(use-package org-bullets
+:after org
+:ensure t)
+    #+END_SRC
+*** Org-TOC
+    Allows for a TOC to be generated in an org file.
+    #+BEGIN_SRC emacs-lisp
+(use-package toc-org
+  :after org
+  :init (add-hook 'org-mode-hook #'toc-org-enable))
+    #+END_SRC
+*** Org Super Agenda
+    I'm setting up my agenda with a few groups. I want things for today to show up first, followed by things coming up soon, overdue items, personal items, and things to do someday last.
+    #+BEGIN_SRC emacs-lisp
+(use-package org-super-agenda
+:ensure t
+:config
+(add-hook 'org-mode-hook 'org-super-agenda-mode)
+
+;(setq org-agenda-span 3)
+(setq org-super-agenda-fontify-whole-header-line t))
+;(setq org-super-agenda-header-separator (concat "\n" (make-string (window-width) 9472) "\n" ))
+
+;(setq org-super-agenda-groups 
+;'((:name none
+;                       
+;                                :discard (:todo "DONE")
+;                                :time-grid t
+;                                :date today
+;                                :scheduled today
+;                                :order 1))))
+                        
+
+;'((:name "Today"
+;   :discard (:todo "DONE:")
+;   :date today
+;   :scheduled today
+;   :and (:date today :time-grid t)))))
+;
+;                         
+;
+;   
+;   (:name "Projects"
+;    :category "PROJECT"
+;    :order 5)
+;    
+;    (:name "Someday"
+;     :todo "SOMEDAY:"
+;     :order 5)
+;
+;    (:name "Overdue"
+;      :deadline past
+;      :scheduled past
+;      :face '(:foreground "red")
+;      :order 3)
+;
+;    (:name "Personal"
+;    :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
+;    :order 4)
+;
+;    (:name "Classwork"
+;     :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445"))
+;
+;
+;   (:name "Coming Up Soon"
+;    :scheduled future
+;    :deadline future
+;    :date t))))
+;;(setq org-agenda-prefix 
+;;'((agenda . " %i %-12:c%?-12t% s")
+;; (todo . " %i %-12:c%s")
+;; (tags . " %i %-12:c")
+;; (search . " %i %-12:c")))
+;;'((:auto-category t)))) - for automatically by category
+    #+END_SRC
+*** Org Export Backends
+**** Org Mediawiki
+     #+BEGIN_SRC emacs-lisp
+    (use-package ox-mediawiki
+    :ensure t)
+     #+END_SRC
+**** Org RST
+     #+BEGIN_SRC emacs-lisp
+(use-package ox-rst
+:ensure t)
+     #+END_SRC
+**** Pandoc
+     Pandoc is just too damn good to give up.
+     #+BEGIN_SRC emacs-lisp
+     (use-package ox-pandoc
+     :ensure t)
+
+     #+END_SRC
+*** Org Journal
+    #+BEGIN_SRC emacs-lisp
+(use-package org-journal
+:ensure t
+:config
+(setq org-agenda-enable-journal-integration nil)
+:custom
+(org-journal-dir "~/Dropbox/org/bullet/")
+(org-journal-time-format "%a, %d %b %Y")
+(org-journal-file-type 'monthly))
+    #+END_SRC
+*** Pomodoro
+    #+BEGIN_SRC emacs-lisp
+(use-package tomatinho
+:ensure t)
+    #+END_SRC
+*** Org Chef
+    If I find a recipe I want to try I want to save it easily.
+    #+BEGIN_SRC emacs-lisp
+(use-package org-chef
+:ensure t)
+    #+END_SRC
+*** Org QL
+    #+BEGIN_SRC emacs-lisp
+(use-package org-ql
+:ensure t)
+    #+END_SRC
+
+    #+END_SRC
+*** Org-Ref
+    Org-ref allows me to do citations easily.
+    #+BEGIN_SRC emacs-lisp
+(use-package ivy-bibtex
+:ensure t)
+
+(use-package org-ref
+:ensure t
+:config
+(setq org-ref-completion-library 'org-ref-ivy-bibtex))
+
+
+(setq org-ref-default-bibliography '("~/Dropbox/bibliography/biblatex.bib"))
+    #+END_SRC
+*** Org Agenda Property
+    This allows me to show other properties in the agenda view.
+    #+BEGIN_SRC emacs-lisp
+(use-package org-agenda-property
+:ensure t)
+    #+END_SRC
+*** Idle Org Agenda    
+   #+begin_src emacs-lisp
+     (use-package idle-org-agenda
+     :after org-agenda
+     :ensure t
+     :config (idle-org-agenda-mode))
+    #+end_src
+**** TODO Configure Time Length for idle org agenda
+*** CDLatex
+    #+begin_src emacs-lisp
+    (use-package cdlatex
+    :defer 0.1
+    :ensure t)
+    #+end_src
+*** Ox-Hugo
+    #+begin_src emacs-lisp
+      (use-package ox-hugo
+      :ensure t)
+    #+end_src
+*** Ox-Nikola
+    #+begin_src emacs-lisp
+          (use-package ox-nikola
+           :ensure t)
+    #+end_src
+*** easy-hugo
+    #+begin_src emacs-lisp
+      (use-package easy-hugo
+       :ensure t
+       :config
+       (setq easy-hugo-basedir "~/Projects/jhilker.gitlab.io"))
+    #+end_src
+*** Org-plus-contrib
+    #+begin_src emacs-lisp
+    (use-package org-plus-contrib
+    :ensure t)
+    #+end_src
+** News Packages
+*** Elfeed
+    Elfeed is a feed reader. EMMS is a music player for podcasts.
+	#+begin_src emacs-lisp
+
+          ;(global-set-key (kbd "C-c e") 'evil-mode)
+              (use-package elfeed-org
+            :ensure t
+            :config
+            (elfeed-org)
+          (setq elfeed-db-directory "~/.elfeed/")
+          (setq rmh-elfeed-org-files (list "~/Dropbox/elfeed/elfeed.org"))
+          ;(defun bjm/elfeed-show-all ()
+          ;  (interactive)
+          ;  (bookmark-maybe-load-default-file)
+          ;  (bookmark-jump "elfeed-all"))
+          ;(defun bjm/elfeed-show-emacs ()
+          ;  (interactive)
+          ;  (bookmark-maybe-load-default-file)
+          ;  (bookmark-jump "elfeed-emacs"))
+          ;(defun bjm/elfeed-show-daily ()
+          ;  (interactive)
+          ;  (bookmark-maybe-load-default-file)
+          ;  (bookmark-jump "elfeed-daily"))
+          (setq-default elfeed-search-filter "@1-week-ago +unread ")
+
+          ;;functions to support syncing .elfeed between machines
+          ;;makes sure elfeed reads index from disk before launching
+          (defun bjm/elfeed-load-db-and-open ()
+            "Wrapper to load the elfeed db from disk before opening"
+            (interactive)
+            (elfeed-db-load)
+            (elfeed)
+            (elfeed-search-update--force))
+
+          ;;write to disk when quiting
+          (defun bjm/elfeed-save-db-and-bury ()
+            "Wrapper to save the elfeed db to disk before burying buffer"
+            (interactive)
+            (elfeed-db-save)
+            (quit-window))
+
+          (defun elfeed-mark-all-as-read ()
+                (interactive)
+                (mark-whole-buffer)
+                (elfeed-search-untag-all-unread)))
+
+          (use-package elfeed
+            :ensure t
+           :bind (:map elfeed-search-mode-map
+                        ("C-g" . bookmark-jump)
+          ;             ("a" . elfeed-mark-all-as-read)
+                       ("A" . elfeed-mark-all-as-read)
+          ;              ("D" . bjm/elfeed-show-daily)
+                       ("q" . bjm/elfeed-save-db-and-bury)))
+
+          (defun ime-elfeed-podcast-tagger (entry)
+            (when (elfeed-entry-enclosures entry)
+              (elfeed-tag entry 'podcasts)))
+
+          (add-hook 'elfeed-new-entry-hook #'ime-elfeed-podcast-tagger)
+
+          (use-package elfeed-goodies
+          :after elfeed
+          :ensure t
+          :config
+          (elfeed-goodies/setup)
+     ;     (setq elfeed-goodies/tag-column-width 0)
+          (setq elfeed-goodies/feed-source-column-width 30))
+
+          (setq elfeed-show-mode-hook
+                (lambda ()
+              (set-face-attribute 'variable-pitch (selected-frame) :font (font-spec :family "Roboto Mono" :size 16))))
+
+          ;(run-with-timer 0 (* 10 60) 'elfeed-search-fetch)
+          ;(run-with-timer 0 (* 30 60) 'recentf-save-list)
+          ;(run-with-timer 0 (* 10 60) 'elfeed-search-fetch)
+          (evil-define-key 'normal elfeed-search-mode-map (kbd "A") 'elfeed-mark-all-as-read)
+	#+end_src
+** Misc. Packages
+*** 0x0
+    #+begin_src emacs-lisp
+    (use-package 0x0
+    :ensure t)
+    #+end_src
+* Miscellaneous Formats
+** Title Format
+   #+BEGIN_SRC emacs-lisp
+(setq-default frame-title-format '("" user-login-name " - " "%b"))
+   #+END_SRC
+
+** Timestamp Formats
+   #+BEGIN_SRC emacs-lisp
+;(setq-default org-display-custom-times t)
+;(setq org-time-stamp-custom-formats '("<%a, %d %h>" . "<%a, %d %h %H:%M>"))
+;(setq org-agenda-format-date "%d %h")
+   #+END_SRC  
+** Agenda Date Format
+   I don't like the default date format for the agenda. I'm going to make it a bit smaller here. I also found the separator lines on [[https://www.reddit.com/r/orgmode/comments/e4stk2/adding_a_separator_line_between_days_in_emacs/][r/orgmode]].
+
+   #+BEGIN_SRC emacs-lisp
+;(setq org-agenda-format-date "%d %b (%a)")
+(setq org-agenda-format-date (concat "\n"
+                                                    (make-string (window-width) 9472)
+                                                    "\n"
+                                                    "%d %b (%a)"
+                                                    "\n"
+                                                   (make-string (window-width) 9472)
+))
+   #+END_SRC
+* Specific Functions
+** Sidebar 
+   I'm testing this.
+** Hide Messages and QL View
+   #+begin_src emacs-lisp 
+(setq-default message-log-max nil)
+(kill-buffer "*Messages*")
+;(kill-buffer "*Org QL View: Coming Up Soon*")
+;(setq split-width-threshold 40)
+;(setq split-height-threshold nil)
+   #+end_src
+** Find Files
+*** Find Config File
+    This file lets me edit my configuration file.
+
+    #+BEGIN_SRC emacs-lisp
+(defun edit-dotfile ()
+  (interactive)
+  (find-file "~/.emacs.d/jmacs.org"))
+    #+END_SRC
+
+*** Find Journal Location
+    #+BEGIN_SRC emacs-lisp
+(defun org-journal-find-location ()
+  ;; Open today's journal, but specify a non-nil prefix argument in order to
+  ;; inhibit inserting the heading; org-capture will insert the heading.
+  (org-journal-new-entry t)
+  ;; Position point on the journal's top-level heading so that org-capture
+  ;; will add the new entry as a child entry.
+  (goto-char (point-min)))
+    #+END_SRC
+*** Find Notes 
+    This function will find my notes for the current semester.
+    #+BEGIN_SRC emacs-lisp
+(defun find-notes ()
+(interactive)
+(find-file "~/Dropbox/notes/fall2020/notes.org"))
+    #+END_SRC
+
+*** Find Agenda 
+    This function will find my notes for the current semester.
+    #+BEGIN_SRC emacs-lisp
+(defun find-agenda ()
+(interactive)
+(find-file "~/Dropbox/org/agenda.org"))
+    #+END_SRC
+
+** Use Y/N or y/n for yes/no
+   Here is a way I can use "y" or "n" to answer yes or no.
+   #+BEGIN_SRC emacs-lisp
+(defalias 'yes-or-no-p 'y-or-n-p)
+   #+END_SRC
+** Auto-Save Fix
+   #+BEGIN_SRC emacs-lisp
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+
+   #+END_SRC
+** Resize Images
+   #+BEGIN_SRC emacs-lisp
+(setq org-image-actual-width (/ (display-pixel-width) 4))
+   #+END_SRC
+** No Tabs, Only Spaces
+   #+BEGIN_SRC emacs-lisp
+(setq-default indent-tabs-mode nil)
+   #+END_SRC
+** One Group for Centaur Tabs
+   #+BEGIN_SRC emacs-lisp
+(defun centaur-tabs-buffer-groups ()
+     "`centaur-tabs-buffer-groups' control buffers' group rules.
+
+   Group centaur-tabs with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
+   All buffer name start with * will group to \"Emacs\".
+   Other buffer group by `centaur-tabs-get-group-name' with project name."
+     (list
+    (cond
+     ((or (string-equal "*" (substring (buffer-name) 0 1))
+          (memq major-mode '(magit-process-mode
+                 magit-status-mode
+                 magit-diff-mode
+                 magit-log-mode
+                 magit-file-mode
+                 magit-blob-mode
+                 magit-blame-mode
+                 )))
+      "Emacs")
+     ((derived-mode-p 'prog-mode)
+      "Editing")
+     ((memq major-mode '(helpful-mode
+                 help-mode))
+      "Help")
+    
+     (t
+      (centaur-tabs-get-group-name (current-buffer))))))
+   #+END_SRC
+** Set Journal Header
+   #+BEGIN_SRC emacs-lisp
+(defun org-journal-file-header-func ()
+  "Custom function to create journal header."
+  (concat
+    (pcase org-journal-file-type
+      (`daily "#+TITLE: Daily Journal\n#+STARTUP: folded")
+      (`weekly "#+TITLE: Weekly Journal\n#+STARTUP: folded")
+      (`monthly "#+TITLE: Monthly Journal\n#+STARTUP: folded")
+      (`yearly "#+TITLE: Yearly Journal\n#+STARTUP: folded"))))
+
+(setq org-journal-file-header 'org-journal-file-header-func)
+   #+END_SRC
+** Find Modeline Segments
+   #+BEGIN_SRC emacs-lisp
+(defun find-modeline ()
+(interactive)
+(find-file "~/.emacs.d/elpa/doom-modeline-20200211.1352/doom-modeline-segments.el")
+)
+   #+END_SRC
+** Capture at Point
+   #+BEGIN_SRC emacs-lisp
+(defun org-capture-at-point ()
+  "Insert an org capture template at point."
+  (interactive)
+  (org-capture 0))
+   #+END_SRC
+** Use Scratch Buffer as Default
+   #+begin_src emacs-lisp
+   (setq inhibit-splash-screen t)
+   #+end_src
+** Agenda Functions*** Open Planner
+   #+begin_src emacs-lisp
+    (defun open-agenda ()
+     (interactive)
+     (org-agenda nil "p"))
+ #+end_src
+*** Open Weekly Planner
+ #+begin_src emacs-lisp
+     (defun open-weekly-agenda ()
+     (interactive)
+     (org-agenda nil "w"))
+    #+end_src
+** Render $$LaTeX$$ in buffer
+   #+begin_src emacs-lisp
+   (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
+   (defun krofna-hack ()
+  (when (looking-back (rx "$ "))
+    (save-excursion
+      (backward-char 1)
+      (org-toggle-latex-fragment))))
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (org-cdlatex-mode)
+            (add-hook 'post-self-insert-hook #'krofna-hack 'append 'local)))
+   #+end_src
+* Hooks and General (Non-UI) Config
+** Delete Other Windows on Load
+I don't want spit windows when I load emacs.
+#+begin_src emacs-lisp
+(add-hook 'emacs-startup-hook
+          (lambda () (delete-other-windows)) t)
+#+end_src
+** File Types and Modes
+*** Default Scratch Buffer is Org Mode
+    #+BEGIN_SRC emacs-lisp
+    (setq-default initial-major-mode 'org-mode)
+    (setq initial-scratch-message nil)
+    ;(setq initial-buffer-choice (lambda () (get-buffer "*scratch*")))
+    #+END_SRC
+*** File Types
+**** Org Mode File Types
+     I want to load novel (.nvl), novel characters (.chrs), character sheet
+     (.chr), campaign (.cmp), AAR (.aar), novel outline (.nvo), worldbuilding lore (.lre), and Kerbal Space Program (.kpr) files as org-mode files.
+
+     #+BEGIN_SRC emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+  (add-to-list 'auto-mode-alist '("\\.nvl\\'" . org-mode))
+  (add-to-list 'auto-mode-alist '("\\.chrs\\'" . org-mode))
+  (add-to-list 'auto-mode-alist '("\\.cmp\\'" . org-mode))
+  (add-to-list 'auto-mode-alist '("\\.chr\\'" . org-mode))
+  (add-to-list 'auto-mode-alist '("\\.aar\\'" . org-mode))
+  (add-to-list 'auto-mode-alist '("\\.nvo\\'" . org-mode))
+  (add-to-list 'auto-mode-alist '("\\.lre\\'" . org-mode))
+  (add-to-list 'auto-mode-alist '("\\.kpr\\'" . org-mode))
+     #+END_SRC
+
+**** Visual Line Mode 
+     #+BEGIN_SRC emacs-lisp
+     (add-hook 'org-mode-hook 'visual-line-mode)
+     #+END_SRC
+*** Modes
+**** Org-Bullet and Super Agenda Mode
+     #+BEGIN_SRC emacs-lisp
+(setq-default org-bullets-mode 1)
+(add-hook 'org-mode-hook 'org-bullets-mode)
+(add-hook 'org-mode-hook 'org-super-agenda-mode)
+(add-hook 'org-mode-hook 'flyspell-mode)
+(add-hook 'org-mode-hook 'toc-org-mode)
+(setq-default org-list-allow-alphabetical t)
+     #+END_SRC
+**** WC-Mode, Writer-Room Mode, and Decide Mode
+     I want to use wc-mode and decide-mode for when I am in org mode.
+
+     #+BEGIN_SRC emacs-lisp
+;(add-hook 'org-mode-hook 'wc-mode)
+;(add-hook 'org-mode-hook 'decide-mode)
+     #+END_SRC
+**** Global Auto-Complete and Snippet Mode
+     Here I always want to use auto-complete mode in programming, as well as in the current buffer.
+     #+BEGIN_SRC emacs-lisp
+(add-hook 'prog-mode-hook 'company-mode)
+(setq-default yas-minor-mode 1)
+     #+END_SRC
+
+**** Doom Mode Line
+     #+BEGIN_SRC emacs-lisp
+     (setq-default doom-modeline-mode t)
+     #+END_SRC
+**** Display Battery Mode
+     I want to display battery in the modeline.
+     #+BEGIN_SRC emacs-lisp
+(display-battery-mode t)
+     #+END_SRC
+**** Smartparens Mode
+     #+BEGIN_SRC emacs-lisp
+     (smartparens-mode t)
+     #+END_SRC
+** ELPY for python and BBC-Mode for BBCode 
+   #+BEGIN_SRC emacs-lisp
+   (add-hook 'python-mode 'elpy-mode)
+   (add-to-list 'auto-mode-alist '("\\.bbc\\'" . bbcode-mode)) 
+   #+END_SRC
+** Markdown and TOC-Org Mode
+** Use Line Numbers in Prog Mode
+   #+BEGIN_SRC emacs-lisp
+(add-hook 'prog-mode-hook 'linum-relative-mode)
+   #+END_SRC
+** Tabs
+* Keybindings
+  Here is a list of all keybindings in JMacs.
+** General Keybindings
+   Here is a list of general purpose keybindings using General.el.
+*** Emacs Command Keybindings
+    #+BEGIN_SRC emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+    "SPC" (general-simulate-key "M-x")
+    "c"   (general-simulate-key "C-c")
+    "h"   (general-simulate-key "C-h")
+    "u"   (general-simulate-key "C-u")
+    "x"   (general-simulate-key "C-x"))
+
+(general-define-key
+   :states '(normal visual insert emacs)
+               "C-g"  'bookmark-jump)
+    #+END_SRC
+** Auto Complete
+   #+BEGIN_SRC emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+   "TAB" 'company-complete)
+   #+END_SRC
+    
+** Quit Commands 
+
+   #+BEGIN_SRC emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+   "q" '(:ignore t :which-key "quit emacs")
+   "qq"  'kill-emacs
+   "qz"  'delete-frame
+   "qr"  'restart-emacs)
+   #+END_SRC
+   
+** Buffer Commands 
+   #+BEGIN_SRC emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+
+    "b"   '(:ignore t :which-key "buffers")
+    "bb"  'mode-line-other-buffer
+    "bd"  'kill-this-buffer
+    "bn"  'next-buffer
+    "bp"  'previous-buffer
+    "bq"  'kill-buffer-and-window
+    "bR"  'rename-file-and-buffer
+    "br"  'revert-buffer
+    "bs" 'switch-to-buffer)
+   #+END_SRC
+** Window Commands
+*** Split and Delete Windows
+    #+BEGIN_SRC emacs-lisp 
+   (general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+
+   "w"  '(:ignore t :which-key "Windows")
+   "wh" '(split-window-right :which-key "Horizontal Split")
+   "wv" '(split-window-below :which-key "Vertical Split")
+   "wd"  'delete-window
+   "wD"  'delete-other-windows
+   "wm" 'maximize-window)
+    #+END_SRC
+** Better Window Navigation
+   #+BEGIN_SRC emacs-lisp
+
+   #+END_SRC
+
+** Files
+   #+BEGIN_SRC emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+
+   "f" '(:ignore t :which-key "Files")
+   "fe" '(:ignore t :which-key "Edit file")
+   "fed" 'edit-dotfile
+   "ff"  'counsel-find-file
+;   "ff"  'helm-find-files
+   "fs"  '(save-buffer :which-key "Save file")
+   "f" '(:ignore t :which-key "Files")
+   "fe" '(:ignore t :which-key "Edit file")
+   "fE" '(:ignore t :which-key "Eval file")
+   "fEr" 'eval-region
+   "fEb" 'eval-buffer
+   "fEd" 'eval-defun
+   "fs"  'save-buffer
+   "fn" 'find-notes
+   "fa" 'find-agenda
+   "fc" 'byte-compile-file)
+   #+END_SRC
+** Packages
+   #+BEGIN_SRC emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+
+   "p" '(:ignore t :which-key "Packages")
+   "pl" 'package-list-packages
+   "pr" 'package-refresh-contents
+   "pi" 'counsel-package
+   "pI" 'package-initialize
+   "pd" 'package-delete)
+   #+END_SRC
+** Org-Mode
+   #+BEGIN_SRC emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+
+   "o" '(:ignore t :which-key "Org Menu")
+   "os" 'org-schedule
+   "oS" 'org-save-all-org-buffers
+   ;"oa" 'open-agenda 
+   "oa" 'open-agenda
+   "oA" 'org-agenda
+   "od" 'org-deadline
+   "oc" 'org-capture-at-point
+   ;"oC" '(:ignore t :which-key "cycle")
+   ;"oCa" 'org-cycle-agenda-files
+   ;"oT" '(:ignore t :which-key "toggle")
+   ;"oTi" 'org-toggle-inline-images 
+;   "ot" 'counsel-org-tag
+   "ot" 'org-time-stamp
+   "oT" 'counsel-org-tag
+   ;"oT" 'toc-org-insert-toc
+   "oi" '(:ignore t :which-key "insert")
+   "oit" 'toc-org-insert-toc
+;   "oit" 'org-time-stamp
+   "oe" 'org-export-dispatch
+   "ow" 'open-weekly-agenda
+   "oL" 'org-latex-preview
+;   "oP" '(:ignore t :which-key "Pomodoro")
+;   "oPs" '(tomatinho :which-key "Start Pomodoro")
+;   "oPk" '(tomatinho-interactive-quit :which-key "Kill Timer")
+   "oj" '(:ignore t :which-key "Org Journal")
+   "ojn" 'org-journal-new-entry
+   "o/" 'org-ql-search)
+
+(global-set-key (kbd "C-c a") 'org-agenda)
+   #+END_SRC
+** More Org-Mode
+   #+BEGIN_SRC emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+   "O" '(:ignore t :which-key "Org Menu")
+   "Ot" 'org-todo) 
+   #+END_SRC
+** Magit
+   #+BEGIN_SRC emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+
+   "g" '(:ignore t :which-key "Magit")
+   "gs" 'magit-status
+   "gS" 'magit-stage-file
+   "gc" 'magit-commit
+   "gp" 'magit-pull
+   "gP" 'magit-push
+   "gb" 'magit-branch
+   "gB" 'magit-blame
+   "gd" 'magit-diff) 
+   #+END_SRC
+** Imenu-List Commands
+   #+BEGIN_SRC emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+
+   "i" '(:ignore t :which-key "Imenu-list") 
+   "ie" 'imenu-list-goto-entry)
+   #+END_src
+** Writer Commands
+   #+BEGIN_SRC emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+
+   "r"  '(:ignore t :which-key "Writer Modes")
+   "rr" 'writeroom-mode
+   "rm" 'writeroom-toggle-mode-line
+   "rw" 'wordsmith-mode)
+   #+END_SRC
+** Toggles
+   #+Begin_SRC emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+
+   "t" '(:ignore t :which-key "Toggle")
+   "tw" 'toggle-word-wrap
+   "tf" 'unfill-toggle
+;   "tf" '(xah-cycle-font-2 :which-key "toggle font")
+   "tn" 'linum-relative-toggle
+   "tN" 'display-line-numbers-mode)
+   #+END_src
+** General Mode Toggles
+   #+BEGIN_SRC emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+  
+ "m" '(:ignore t :which-key "Mode Toggles")
+   "ma" 'auto-complete-mode
+   "mi" 'org-indent-mode
+   "md" 'decide-mode
+   "my" 'yas-minor-mode 
+   "mw" 'writegood-mode
+   "ms" 'flyspell-mode
+   "mf" 'fringe-mode
+   "mF" 'flycheck-mode
+   "mc" 'company-mode
+   "md" 'decide-mode
+   "mt" 'toc-org-mode
+   "mS" 'smartparens-mode)
+   #+END_SRc
+** YaSnippet 
+   #+BEGIN_SRC emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+
+"y" '(:ignore t :which-key "Yasnippet")
+"yn" 'yas-new-snippet
+"yi" 'yas-insert-snippet
+"yy" 'yas-minor-mode)
+   #+END_SRC
+** Spell-check
+   #+BEGIN_SRC emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+
+"s" '(:ignore t :which-key "Spell Check")
+"sn" 'flyspell-goto-next-error
+"sb" 'ispell-buffer
+"sf" 'flyspell-mode
+"sc" 'flyspell-correct-word-before-point)
+   #+END_SRC
+** Lorem Ipsum
+   #+BEGIN_SRC emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+
+"l" '(:ignore t :which-key "Lorem Ipsum")
+"ll" 'lorem-ipsum-insert-list
+"ls" 'lorem-ipsum-insert-sentences
+"lp" 'lorem-ipsum-insert-paragraphs)
+
+   #+END_SRC
+
+** TAB for Evil-Org 
+   This keybinding lets you use the Tab key to toggle folding headers,
+   like in regular org mode.
+
+   #+BEGIN_SRC emacs-lisp
+  (general-define-key
+    :states 'normal 
+    "TAB" 'evil-toggle-fold)
+(define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
+
+;     (general-define-key
+;      :states 'insert
+;      "TAB" 'tab-to-tab-stop)
+   #+END_SRC 
+
+** UI Keybindings
+   #+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-=") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+   #+END_SRC
+** Treemacs and Imenu-List 
+*** Toggle Treemacs and Imenu-List
+    #+BEGIN_SRC emacs-lisp
+   (general-define-key
+   :states '(normal visual insert emacs) 
+   "<f6>" 'imenu-list-smart-toggle
+   "<f5>" 'treemacs)
+   (general-define-key
+   :states '(treemacs)
+   "<f6>" 'imenu-list-smart-toggle'
+   "<f5>" 'treemacs-quit)
+    #+END_SRC
+*** Treemacs Keybindings
+**** Help
+     #+BEGIN_SRC emacs-lisp
+   (general-define-key
+   :states '(treemacs)
+   :prefix "SPC"
+   :normal-prefix "C-SPC"
+   
+   "h" 'treemacs-helpful-hydra)
+     #+END_SRC
+**** Workspaces
+     #+BEGIN_SRC emacs-lisp
+   (general-define-key
+   :states '(treemacs)
+   :prefix "SPC"
+   :normal-prefix "C-SPC"
+
+   "w" '(:ignore t :which-key "Workspaces")
+   "ws" 'treemacs-switch-workspace
+   "wr" 'treemacs-remove-workspace
+   "wc" 'treemacs-create-workspace)
+     #+END_SRC
+**** Projects
+     #+BEGIN_SRC emacs-lisp
+   (general-define-key
+   :states '(treemacs)
+   :prefix "SPC"
+   :normal-prefix "C-SPC"
+
+   "p" '(:ignore t :which-key "Projects")
+   "pc" 'treemacs-add-project-to-workspace
+   "pd" 'treemacs-remove-project-from-workspace
+   "pr" 'treemacs-rename-project
+   "pp" 'treemacs-projectile)
+   (general-define-key
+   :states '(treemacs)
+   "cw" 'treemacs-rename-project)
+     #+END_SRC
+** Python
+   #+BEGIN_SRC emacs-lisp
+   (general-define-key
+   :states '(normal visual insert emacs) 
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+   
+   "P" '(:ignore t :which-key "Python")
+   "Pr" 'run-python
+   "Pb" 'elpy-shell-send-buffer)
+   #+END_SRC
+** Decide Mode
+   #+BEGIN_SRC emacs-lisp
+   (general-define-key
+   :states '(normal visual insert emacs) 
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+   
+   "d" '(:ignore t :which-key "Decide")
+   "dd" 'decide-roll-dice
+   "d+" 'decide-for-me-likely
+   "d-" 'decide-for-me-unlikely
+   "d1" '(:ignore t :which-key "1 die")
+   "d10" 'decide-roll-1d10
+   "d12" 'decide-roll-1d12 
+   "d2" '(:ignore t :which-key "2 dice")
+   "d26" 'decide-roll-2d6
+   "d2a" 'decide-roll-2dA
+   "d3" 'decide-roll-1d3
+   "d4" 'decide-roll-1d4
+   "d5" 'decide-roll-1d5
+   "d6" 'decide-roll-1d6
+   "d7" 'decide-roll-1d7
+   "d8" 'decide-roll-1d8
+   "d9" 'decide-roll-1d9
+   "df" 'decide-roll-fate
+   "d%" 'decide-roll-1d100 
+   "d?" 'decide-dwim-insert
+   "dr" '(:ignore t :which-key "Relative Locations")
+   "dr2" 'decide-whereto-relative-2
+   "dr3" 'decide-whereto-relative-3
+   "dr4" 'decide-whereto-relative-4
+   "dr6" 'decide-whereto-relative-6
+   "dw" '(:ignore t :which-key "Where")
+   "dw4" 'decide-whereto-compass-4
+   "dw6" 'decide-whereto-compass-6
+   "dw8" 'decide-whereto-compass-8
+   "dw0" 'decide-whereto-compass-10
+)
+
+   #+END_SRC
+** Windmove
+   #+BEGIN_SRC emacs-lisp
+(windmove-default-keybindings 'ctrl)
+(add-hook 'org-shiftup-final-hook 'windmove-up)
+(add-hook 'org-shiftleft-final-hook 'windmove-left)
+(add-hook 'org-shiftdown-final-hook 'windmove-down)
+(add-hook 'org-shiftright-final-hook 'windmove-right) 
+  (setq windmove-wrap-around t)
+   #+END_SRC
+
+*** Vim Keybindings
+    #+BEGIN_SRC emacs-lisp
+    (global-set-key (kbd "C-c h")  'windmove-left)
+    (global-set-key (kbd "C-c l") 'windmove-right)
+    (global-set-key (kbd "C-c k")    'windmove-up)
+    (global-set-key (kbd "C-c j")  'windmove-down)
+
+    #+END_SRC
+** Misc Keybindings
+   #+BEGIN_SRC emacs-lisp
+   (general-define-key
+   :states '(normal visual insert emacs) 
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+   
+   "T" '(ansi-term :which-key "Terminal")
+   "D" '(:ignore t :which-key "Describe")
+   "Df" 'describe-font
+   "DF" 'counsel-describe-face
+   "Dt" 'describe-theme) 
+   
+   #+END_SRC
+** Start Server
+   #+BEGIN_SRC emacs-lisp
+; (global-set-key (kbd "C-x s")  'start-server)
+   #+END_SRC
+** Elfeed
+
+   #+BEGIN_SRC emacs-lisp
+   (general-define-key
+   :states '(normal visual insert emacs) 
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+   "n" '(:ignore t :which-key "News")
+   "nn" 'elfeed)
+(define-key elfeed-search-mode-map (kbd "A") 'elfeed-mark-all-as-read)
+
+   #+END_SRC
+* UI
+** Minimalistic UI
+   Here is where I make my UI as minimalistic as possible. I am disabling
+   my toolbars, tooltip-mode, menu-bar, and scroll-bar modes here.
+
+   #+BEGIN_SRC emacs-lisp
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(tooltip-mode -1)
+(menu-bar-mode -1)
+   #+END_SRC
+
+** Making Text Sexier
+   Here we're making text look good.
+*** Prettify-Symbols Mode
+    #+BEGIN_SRC emacs-lisp
+(setq global-prettify-symbols-mode t)
+    #+END_SRC
+** Org UI
+   Here is where I disable the leading headers in org-bullets-mode.
+   #+BEGIN_SRC emacs-lisp 
+(setq-default org-hide-leading-stars t)
+(setq-default org-ellipsis "⤵")
+(setq org-src-fontify-natively t)  
+(setq org-hide-emphasis-markers t)
+(font-lock-add-keywords 'org-mode
+                        '(("^ +\\([-*]\\) "
+                           (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
+
+(setq-default org-bullets-bullet-list 
+'("⚫" "○")) 
+
+(setq-default tab-width 4)
+(setq-default org-list-indent-offset 4)
+(setq-default org-pretty-entities t)
+(setq-default org-pretty-entities-include-sub-superscripts t)
+   #+END_SRC
+** Fonts and Themes
+*** Theme
+    I am doing something extremely similar to the function above, but with themes. By default I want to use doom-gruvbox.
+    #+BEGIN_SRC emacs-lisp
+;(load-theme 'nord t)
+
+;(load-theme 'doom-nord t)
+;(load-theme 'doom-solarized-dark t)
+(load-theme 'doom-gruvbox t)
+(setq doom-themes-enable-italic t)
+(setq doom-themes-enable-bold t)
+;(load-theme 'gruvbox-dark-medium t)
+
+    #+END_SRC
+*** Line Spacing
+    #+begin_src emacs-lisp 
+    (setq line-spacing 0.1)
+    #+end_src
+*** Fonts
+    I often switch between DejaVu Sans Pro, Fira Code, Monaco, and Source
+    Code Pro for my fonts. Here I have created a list of fonts and I can
+    switch between it by commenting out the other fonts. 
+
+**** figure out font switching, and if using regular modeline enable the solarized section below.
+
+
+     #+BEGIN_SRC emacs-lisp
+   (set-frame-font "Iosevka Nerd Font-12" nil t)
+
+;   (set-frame-font "InconsolataLGC Nerd Font-12" nil t)
+   ;(set-frame-font "Roboto Mono-12" nil t)
+;   (set-frame-font "Cousine-12" nil t)
+;   (set-frame-font "Monaco-12" nil t)
+;   (set-frame-font "Hack-12" nil t)
+;    (set-frame-font "SourceSansPro-12" nil t)
+     #+END_SRC
+
+*** Solarized-Theme Config
+    #+BEGIN_SRC emacs-lisp
+
+  ;(setq solarized-termcolors 256)
+;   (setq solarized-use-variable-pitch nil)
+
+ ;      (setq solarized-scale-org-headlines nil)
+
+  ;     (setq solarized-height-minus-1 1)
+   ;    (setq solarized-height-plus-1 1)
+    ;   (setq solarized-height-plus-2 1)
+     ;  (setq solarized-height-plus-3 1)
+      ; (setq solarized-height-plus-4 1)
+       ;(setq x-underline-at-descent-line t)
+       
+;   (load-theme 'solarized-dark t)
+
+    #+END_SRC 
+* Headerlines and Modelines
+  Here is my modeline configuration. I need to add to it to figure out
+  what the best configuration is, but I think two different
+  configurations would be best - one for writing and one for
+  programming.
+** Headerline
+   #+BEGIN_SRC emacs-lisp
+;(setq-default header-line-format
+;'(:eval (propertize (format-time-string " %d %b %I:%M %p ")
+ ;                                  'face 'font-lock-builtin-face))
+;)
+   #+END_SRC 
+** Doom Modeline Configs 
+*** Sections
+**** Evil-State Section
+
+     #+BEGIN_SRC emacs-lisp
+(doom-modeline-def-segment evil-state
+  "The current evil state.  Requires `evil-mode' to be enabled."
+  (when (bound-and-true-p evil-local-mode)
+    (s-trim-right (evil-state-property evil-state :tag t))))
+     #+END_SRC
+**** Clock Section
+     #+BEGIN_SRC emacs-lisp
+(doom-modeline-def-segment clock
+'(:eval (propertize (format-time-string " %H:%M ")
+)))
+     #+END_SRC
+**** Date 
+     #+BEGIN_SRC emacs-lisp
+(doom-modeline-def-segment date
+'(:eval (propertize (format-time-string " %a, %d %h "))))
+     #+END_SRC
+*** Prose Configuration   
+
+    
+    Here is my prose configuration for doom modeline.
+    #+BEGIN_SRC emacs-lisp
+   (use-package all-the-icons
+   :ensure t)
+   (defvar doom-modeline-icon (display-graphic-p) )
+   (setq doom-modeline-enable-word-count t)
+   (setq doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode))
+   (setq doom-modeline-icon t) 
+   (doom-modeline-def-modeline 'prose-modeline
+   '(bar word-count buffer-info-simple evil-state)
+   '(date clock major-mode battery))
+
+   (defun set-prose-modeline ()
+     (doom-modeline-set-modeline 'prose-modeline))
+   (add-hook 'org-mode-hook 'set-prose-modeline)
+   (add-hook 'markdown-mode-hook 'set-prose-modeline)
+    #+END_SRC
+*** Programming Configuration
+    Here is my programming configuration for doom modeline.
+    #+BEGIN_SRC emacs-lisp
+(defvar doom-modeline-icon (display-graphic-p) )
+(setq doom-modeline-icon t)
+
+(doom-modeline-def-modeline 'prog-modeline
+'(bar buffer-info buffer-position evil-state)
+'(date clock major-mode battery checker))
+
+(defun set-prog-modeline ()
+    (doom-modeline-set-modeline 'prog-modeline))
+(add-hook 'prog-mode-hook 'set-prog-modeline)
+(add-hook 'text-mode-hook 'set-prog-modeline)
+    #+END_SRC
+* $$LaTeX$$ Classes 
+** Novel
+   #+BEGIN_SRC emacs-lisp
+(add-to-list 'org-latex-classes
+           '("novel"
+              "\\documentclass{book}"
+              ("\\chapter*{%s}" . "\\chapter*{%s}")
+              ("\\chapter{%s}" . "\\chapter{%s}")
+              ("\\section{%s}" . "\\section*{%s}")
+              ("\\subsection{%s}" . "\\subsection*{%s}")
+              ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+              ("\\paragraph{%s}" . "\\paragraph*{%s}")
+              ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+   #+END_SRC
+* Capture Templates
+  Here are my org capture templates.
+  #+BEGIN_SRC emacs-lisp
+(setq org-capture-templates
+'(("R" "Recipe Category" entry (file "")
+   "* %^{Time||Breakfast|Lunch/Dinner|Sweets|Snacks}")
+("r" "Recipe" entry (file "")
+         "** %^{Recipe title: }\n  :PROPERTIES:\n  :source-url:\n  :servings:\n  :prep-time:\n  :cook-time:\n  :ready-in:\n  :END:\n*** Ingredients\n   %?\n*** Directions\n\n")
+         
+         ("j" "Journal Entry" entry (function org-journal-find-location)
+         "* %(format-time-string org-journal-time-format)%^{Title}\n%i%?")
+         
+         ("m" "Meeting" entry (file "")
+         "*** TODO Meet with %^{Person meeting with} for %^{Reason meeting} :%^g:MTG:\n SCHEDULED: %^t\n")
+
+         ("a" "Appointment" entry (file "")
+         "*** TODO %^{Name} to %^{Doctor}\n SCHEDULED: %^t\n"
+)
+         ("t" "Task" entry (file "")
+         "*** TODO %^{Task}     :%^{tag}:\n DEADLINE: %^t\n")
+
+         ("s" "Scheduled Task" entry (file "")
+         "*** TODO %^{Task}     %^g\n SCHEDULED: %^t\n DEADLINE: %^t\n")
+
+         ("c" "Call" entry (file "")
+         "** TODO Call %^{Person calling} \n SCHEDULED: %^t\n")))
+
+         
+  #+END_SRC
+* Notes and Miscellaneous Things
+** Notes
+   1. There is an error where =toc-org= is not installing properly and I need to fix that.
+** Miscellaneous Things
+*** Super Agenda Config
+**** Classes     
+     #+BEGIN_SRC emacs-lisp :tangle no
+(setq org-agenda-span 'day)
+(setq org-super-agenda-groups
+'((:name "Applications of Databases"
+   :category "CPSC350"
+   :not (:todo "DONE")
+   :deadline future)
+
+(:name "Public Speaking"
+ :category "COMM205"
+ :not (:todo "DONE")
+ :deadline future)
+
+   
+(:name "Foundations of Data Science"
+ :category "DATA219"
+ :not (:todo "DONE")
+ :deadline future)
+
+(:name "Artificial Neural Networks"
+   :category "CPSC370DD"
+   :not (:todo "DONE")
+   :deadline future))))
+
+
+
+     #+END_SRC
+*** Centaur Tabs
+**** Use-Package
+    #+BEGIN_SRC emacs-lisp :tangle no
+(use-package centaur-tabs
+:ensure t
+:config
+(centaur-tabs-mode t)
+
+   (setq centaur-tabs-set-modified-marker t)
+   (setq centaur-tabs-modified-marker "•")
+   (setq centaur-tabs-set-bar 'left) 
+   (setq centaur-tabs-set-icons t)
+   (setq centaur-tabs-set-close-button t)
+   (setq centaur-tabs-close-button "x")
+   (setq centaur-tabs-style "rounded")
+   (setq centaur-tabs-height 32)
+   (define-key evil-normal-state-map (kbd "g t") 'centaur-tabs-forward)
+   (define-key evil-normal-state-map (kbd "g T") 'centaur-tabs-backward)
+   (setq centaur-tabs-cycle-scope 'tabs))
+    #+END_SRC
+ 
+**** One Group 
+     #+BEGIN_SRC emacs-lisp :tangle nil
+ (defun centaur-tabs-buffer-groups ()
+ "Use as few groups as possible."
+(list (cond ((string-equal "*" (substring (buffer-name) 0 1))
+                   "Tools")
+                   (cond ((string-equal "eglot" (downcase (substring (buffer-name) 1 6)))
+                          "Eglot")
+                         (t
+                          "Tools")))))
+
+
+
+
+     #+END_SRC
+ 
+
+
+
+
+
+     /text/
+*** Org Mode Icons
+**** Personal Agenda
+     *  - writing
+     *  - writing
+**** School Agenda
+**** General for School
+     
+**** By Class
+      - CPSC419
+* Quick Test of Agenda Format :noexport:
+  #+BEGIN_SRC emacs-lisp
+;(org-add-agenda-custom-command '("d" "Deadlines and scheduled work" alltodo "" ((org-agenda-skip-function '(org-agenda-skip-entry-if 'notdeadline)) (org-agenda-prefix-format '((todo . " %i %-22(org-entry-get nil \"DEADLINE\") %-12:c %s"))) (org-agenda-sorting-strategy '(deadline-up)))))
+
+
+
+  #+END_SRC
+  
+
+
+
+
+
+
+
+
+
+
