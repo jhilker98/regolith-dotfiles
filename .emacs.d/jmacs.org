@@ -9,6 +9,7 @@
       - [[#use-python-3-interpreter][Use Python 3 Interpreter]]
       - [[#setting-notes-file][Setting Notes File]]
       - [[#quieting-package-cl][Quieting Package CL]]
+      - [[#enabling-babel-indentation-support][Enabling Babel Indentation Support]]
 - [[#package-initialization-and-bootstrapping][Package Initialization and Bootstrapping]]
       - [[#package-initialization-and-extra-sources][Package Initialization and Extra Sources]]
       - [[#bootstrapping][Bootstrapping]]
@@ -40,7 +41,7 @@
       - [[#find-modeline-segments][Find Modeline Segments]]
       - [[#capture-at-point][Capture at Point]]
       - [[#use-scratch-buffer-as-default][Use Scratch Buffer as Default]]
-      - [[#agenda-functions-open-planner][Agenda Functions*** Open Planner]]
+      - [[#agenda-functions][Agenda Functions]]
       - [[#render-latex-in-buffer][Render $$LaTeX$$ in buffer]]
 - [[#hooks-and-general-non-ui-config][Hooks and General (Non-UI) Config]]
       - [[#delete-other-windows-on-load][Delete Other Windows on Load]]
@@ -120,7 +121,7 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
     #+END_SRC
 **** During the School Year
      #+BEGIN_SRC emacs-lisp
-(setq org-agenda-files (list "~/Dropbox/org/agenda.org" "~/Dropbox/notes/fall2020/notes.org" ))
+(setq org-agenda-files (list "~/Dropbox/org/agenda.org" "~/Dropbox/notes/spring2021.org" ))
      #+END_SRC
      
 **** During The Summer
@@ -286,7 +287,7 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
 ;
 ;
     (:name "Classwork and Meetings"
-     :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING")
+     :category ("CPSC430" "DGST101" "CPSC414" "CPSC444" "MEETING")
      :order 1)))))
 
      (alltodo "" ((org-agenda-overriding-header "To Do")
@@ -378,6 +379,10 @@ I am working on upgrading to emacs 27. I kept getting a warning about cl being d
 #+BEGIN_SRC emacs-lisp
 (setq byte-compile-warnings '(cl-functions))
 #+END_SRC
+** Enabling Babel Indentation Support
+   #+begin_src emacs-lisp
+   (setq org-src-preserve-indentation t)
+   #+end_src
 * Package Initialization and Bootstrapping
 ** Package Initialization and Extra Sources
    I am adding extra sources to my package archives here.
@@ -1099,8 +1104,8 @@ Helm is another completion package I want to try.
     #+end_src
 *** Org-plus-contrib
     #+begin_src emacs-lisp
-    (use-package org-plus-contrib
-    :ensure t)
+    ;(use-package org-plus-contrib
+    ;:ensure t)
     #+end_src
 ** News Packages
 *** Elfeed
@@ -1174,7 +1179,7 @@ Helm is another completion package I want to try.
 
           (setq elfeed-show-mode-hook
                 (lambda ()
-              (set-face-attribute 'variable-pitch (selected-frame) :font (font-spec :family "Roboto Mono" :size 16))))
+              (set-face-attribute 'variable-pitch (selected-frame) :font (font-spec :family "Iosevka" :size 16))))
 
           ;(run-with-timer 0 (* 10 60) 'elfeed-search-fetch)
           ;(run-with-timer 0 (* 30 60) 'recentf-save-list)
@@ -1340,7 +1345,8 @@ Helm is another completion package I want to try.
    #+begin_src emacs-lisp
    (setq inhibit-splash-screen t)
    #+end_src
-** Agenda Functions*** Open Planner
+** Agenda Functions
+*** Open Planner
    #+begin_src emacs-lisp
     (defun open-agenda ()
      (interactive)
