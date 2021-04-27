@@ -20,14 +20,30 @@ I like a little arrow instead of a regular ellipsis.
 #+end_src
 
 * Org Mode Config
-** Org Directory
-I like to keep my org-mode stuff in Dropbox.
+I like to keep my org-mode stuff in Dropbox. In addition, I like to use my notes file and my regular genda as my agenda files. I also have other todo keywords and faces for those keywords.
 #+begin_src emacs-lisp
-(setq org-directory "~/Dropbox/org/")
-#+end_src
-** Agenda Files
-#+begin_src emacs-lisp
-(setq org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/notes/spring2021.org"))
+(after! org
+(setq
+ org-directory "~/Dropbox/org/"
+ org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/notes/spring2021.org")
+ org-deadline-warning-days 0
+ org-todo-keywords '(
+      (sequence "TODO(t)" "INPR(i)" "NEXT(n)" "MEET(m)" "|" "SOMEDAY(s)"   "DONE(d)" "CANCELED(c)")
+      (type "PROJ(p)")
+      (type "BLOG(b)"))
+ org-todo-keyword-faces
+    '(("TODO" . (:foreground "#cc241d" :weight black :underline t))
+
+   ("INPR" . (:foreground "#fe8019" :weight bold))
+    ("NEXT" . (:foreground "#fabd2f" :weight black))
+    ("MEET" . (:foreground "#b8bb26" :weight bold))
+   ("PROJ" . (:foreground "#458588" :slant italic :weight bold))
+   ("BLOG" . (:foreground "#83a598"))
+   ("SOMEDAY" . (:foreground "#d3869b" :slant italic))
+   ("DONE" . (:foreground "#83a598" :strike-through t))
+   ("CANCELED" . (:foreground "cc241d" :strike-through t)))
+ )
+)
 
 #+end_src
 * Misc. Tweaks
@@ -164,6 +180,13 @@ I like to keep my org-mode stuff in Dropbox.
 ;    ;(org-agenda-sorting-strategy '( ts-up category-up todo-state-up))
 #+end_src
 **** Week Ahead
+#+begin_src emacs-lisp
+(add-to-list 'org-agenda-custom-commands
+'("w" "Week Ahead" (
+                 (agenda "" ((org-agenda-span 'week)
+                             (org-agenda-start-day "+1d")
+                             (org-agenda-overriding-header "The Week Ahead"))))))
+#+end_src
 **** Default
 #+begin_src emacs-lisp
 (add-to-list 'org-agenda-custom-commands
@@ -171,6 +194,17 @@ I like to keep my org-mode stuff in Dropbox.
   (
    (agenda "")
    (alltodo "")
-                )
-    ))
+    )
+))
+#+end_src
+** Elfeed
+#+begin_src emacs-lisp
+(after! elfeed-org)
+(elfeed-org)
+(setq elfeed-db-directory "~/.elfeed/")
+(setq rmh-elfeed-org-files (list "~/Dropbox/elfeed/elfeed.org"))
+(use-package! elfeed-goodies)
+(elfeed-goodies/setup)
+(setq
+ elfeed-goodies/feed-source-column-width 30)
 #+end_src
