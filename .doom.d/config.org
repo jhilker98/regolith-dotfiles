@@ -13,6 +13,11 @@
 #+begin_src elisp
 (setq doom-theme 'doom-gruvbox)
 #+end_src
+** Ellipsis
+I like a little arrow instead of a regular ellipsis.
+#+begin_src emacs-lisp
+(setq org-ellipsis "⤵")
+#+end_src
 
 * Org Mode Config
 ** Org Directory
@@ -36,8 +41,12 @@ I like to keep my org-mode stuff in Dropbox.
 #+begin_src emacs-lisp
 (after! org-super-agenda
 (org-super-agenda-mode))
- (add-to-list 'org-agenda-custom-commands
-              '("p" "Planner"
+#+end_src
+*** Custom Agenda Commands
+**** Planner
+#+begin_src emacs-lisp
+ (setq org-agenda-custom-commands
+              '(("p" "Planner"
                     (
                       (agenda "" ((org-agenda-span 'day)
                       (org-agenda-use-time-grid t)
@@ -153,4 +162,15 @@ I like to keep my org-mode stuff in Dropbox.
 ;
 ;    (org-agenda-max-todos 11)
 ;    ;(org-agenda-sorting-strategy '( ts-up category-up todo-state-up))
+#+end_src
+**** Week Ahead
+**** Default
+#+begin_src emacs-lisp
+(add-to-list 'org-agenda-custom-commands
+'("n" "All Agendas and TODOs"
+  (
+   (agenda "")
+   (alltodo "")
+                )
+    ))
 #+end_src
