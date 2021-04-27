@@ -201,10 +201,81 @@ I like to keep my org-mode stuff in Dropbox. In addition, I like to use my notes
 #+begin_src emacs-lisp
 (after! elfeed-org)
 (elfeed-org)
-(setq elfeed-db-directory "~/.elfeed/")
-(setq rmh-elfeed-org-files (list "~/Dropbox/elfeed/elfeed.org"))
-(use-package! elfeed-goodies)
-(elfeed-goodies/setup)
 (setq
- elfeed-goodies/feed-source-column-width 30)
+ elfeed-db-directory "~/.elfeed/"
+ rmh-elfeed-org-files (list "~/Dropbox/elfeed/elfeed.org")
+ elfeed-search-title-min-width 80
+ ;elfeed-search-print-entry-function '+jh/elfeed-search-print-entry
+ elfeed-search-filter "@1-week-ago +unread")
+ ;elfeed-show-mode-hook
+ ;(lambda ()
+ ;           (set-face-attribute 'variable-pitch (selected-frame) :font (font-spec :family "Iosevka" :size 16))))
+ (use-package! elfeed-goodies)
+;(elfeed-goodies/setup)
+;(setq
+; elfeed-goodies/tag-column-width 0
+; elfeed-goodies/feed-source-column-width 30)
+#+end_src
+*** Usability Enhancements
+**** Mark All As Read
+#+begin_src emacs-lisp
+(defun elfeed-mark-all-as-read ()
+           (interactive)
+           (mark-whole-buffer)
+           (elfeed-search-untag-all-unread))
+#+end_src
+*** UI Enhancements
+**** Faces
+#+begin_src emacs-lisp
+
+#+end_src
+**** Elfeed Search Layout
+#+begin_src emacs-lisp
+(defun +jh/elfeed-search-print-entry (entry)
+    "Print ENTRY to the buffer."
+ (let* ((elfeed-goodies/tag-column-width 40)
+           (elfeed-goodies/feed-source-column-width 30)
+           (title (or (elfeed-meta entry :title) (elfeed-entry-title entry) ""))
+           (title-faces (elfeed-search--faces (elfeed-entry-tags entry)))
+           (feed (elfeed-entry-feed entry))
+           (feed-title
+            (when feed
+              (or (elfeed-meta feed :title) (elfeed-feed-title feed))))
+           (tags (mapcar #'symbol-name (elfeed-entry-tags entry)))
+           (tags-str (concat (mapconcat 'identity tags ",")))
+
+           (title-width (- (window-width) 10 elfeed-search-trailing-width))
+           (title-column (elfeed-format-column
+                        title (elfeed-clamp
+                               elfeed-search-title-min-width
+                               title-width
+                               elfeed-search-title-max-width)
+                        :left))
+
+           (tag-column (elfeed-format-column
+                        tags-str (elfeed-clamp (length tags-str)
+                                               elfeed-goodies/tag-column-width
+                                               elfeed-goodies/tag-column-width)
+                        :left))
+
+           (feed-column (elfeed-format-column
+                         feed-title (elfeed-clamp elfeed-goodies/feed-source-column-width
+                                                  elfeed-goodies/feed-source-column-width
+                                                  elfeed-goodies/feed-source-column-width)
+                         :left)))
+
+
+        (insert (propertize title-column 'face title-faces 'kbd-help title) " ")
+        (insert (propertize feed-column 'face 'elfeed-search-feed-face) " ")
+        (insert (propertize tag-column 'face 'elfeed-search-tag-face) " ")
+      (setq-local line-spacing 0.2)))
+
+#+end_src
+
+
+*** Keybindings
+#+begin_src emacs-lisp
+(map! :map elfeed-search-mode-map
+      :after elfeed-search
+      :n "A" #'elfeed-mark-all-as-read)
 #+end_src
