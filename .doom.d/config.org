@@ -1,0 +1,156 @@
+#+TITLE: Jacob's Doom Emacs Config
+#+author: Jacob Hilker
+#+description: Jacob's Doom Emacs config.
+#+property: header-args :tangle config.el
+
+* Personal Info
+#+begin_src emacs-lisp
+(setq user-full-name "Jacob Hilker"
+      user-mail-address "jacob.hilker2@gmail.com")
+#+end_src
+* UI Tweaks
+** Theme
+#+begin_src elisp
+(setq doom-theme 'doom-gruvbox)
+#+end_src
+
+* Org Mode Config
+** Org Directory
+I like to keep my org-mode stuff in Dropbox.
+#+begin_src emacs-lisp
+(setq org-directory "~/Dropbox/org/")
+#+end_src
+** Agenda Files
+#+begin_src emacs-lisp
+(setq org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/notes/spring2021.org"))
+
+#+end_src
+* Misc. Tweaks
+** Line Numbers
+#+begin_src emacs-lisp
+(setq display-line-numbers-type 'relative)
+#+end_src
+
+* Package Configs
+** Org-Super-Agenda
+#+begin_src emacs-lisp
+(after! org-super-agenda
+(org-super-agenda-mode))
+ (add-to-list 'org-agenda-custom-commands
+              '("p" "Planner"
+                    (
+                      (agenda "" ((org-agenda-span 'day)
+                      (org-agenda-use-time-grid t)
+                      (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
+                      (org-agenda-show-all-dates t)
+                      (org-agenda-compact-blocks nil)
+                      (org-agenda-overriding-header "")
+                      (org-agenda-start-day "+0d")
+                      (org-super-agenda-groups
+                       '(
+                           (:name "Habits"
+                            :habit t
+                            :category "HABIT"
+                            :order 2)
+
+                            (:name "Chores"
+                            :habit t
+                            :category "CHORE"
+                            :order 2)
+
+
+
+                               (:name none
+                                :discard (:todo "DONE")
+                                :time-grid t
+                                :date today
+                                :scheduled today
+                                :deadline today
+                                :order 1)))))
+
+          (agenda "" ((org-agenda-overriding-header "Coming Up Soon")
+	                ;
+                      ; (org-agenda-use-time-grid nil)
+                      (org-agenda-time-grid '((daily today weekly require-timed)()() "----------------------" nil))
+		               (org-agenda-start-day "+1d")
+     ;                   (org-agenda-todo-ignore-with-date t)
+                      ; (org-agenda-format-date "\n%d %b (%a.)\n")
+
+                       (org-agenda-format-date "\n%d %b (%a.)")
+			;		   (concat (make-string (window-width) 9472) "\n")
+             ;         (org-agenda-compact-blocks t)
+                       (org-agenda-span 2)
+                      ;(org-agenda-format-date "%d %b")
+                       (org-super-agenda-groups
+                         '(
+
+                         (:name "Habits"
+                         :habit t
+                         :category "HABIT"
+                         :order 6)
+
+                         (:name "Chores"
+                         :habit t
+                         :category "CHORE"
+                         :order 6)
+
+
+     ;                 (:name "Projects"
+     ;                 :category "PROJECT"
+     ;                 :order 5)
+
+
+    (:name "Personal"
+    :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
+    :order 4)
+
+;
+;    (:name "Someday"
+;     :and (:not (:category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO")) :todo "SOMEDAY")
+;     :order 5)
+
+    (:name "Overdue"
+      :deadline past
+      :scheduled past
+      :face '(:foreground "red")
+      :order 3)
+;
+;
+    (:name "Classwork and Meetings"
+     :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING")
+     :order 1)))))
+
+     (alltodo "" ((org-agenda-overriding-header "To Do")
+                  (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+                  (org-agenda-sorting-strategy '(todo-state-up category-up ))
+                  (org-super-agenda-groups '(
+                  (:name "Classwork and Meetings"
+                  :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING" "CLASSES")
+                  :order 1)
+
+                  (:name "Personal"
+                  :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
+                  :order 2)
+
+                  (:name "Projects"
+                   :todo "PROJECT"
+                   :category "PROJECT"
+                   :order 3)
+
+
+                 (:discard (:category "HABIT"))
+                 (:discard (:category "CHORE"))
+
+))))))))
+
+
+;
+ ;  (:name "Coming Up Soon"
+ ;   :scheduled future
+ ;   :deadline future
+ ;   :date t))))
+
+;
+;    (org-agenda-max-todos 11)
+;    ;(org-agenda-sorting-strategy '( ts-up category-up todo-state-up))
+#+end_src
