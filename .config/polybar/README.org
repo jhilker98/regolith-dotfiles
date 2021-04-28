@@ -2,62 +2,72 @@
 #+author: Jacob Hilker
 #+property: header-args :tangle config
 
+* Table of Contents :toc:
+- [[#colors][Colors]]
+  - [[#gruvbox][Gruvbox]]
+  - [[#nord][Nord]]
+- [[#fonts][Fonts]]
+- [[#modules][Modules]]
+  - [[#primary-modules][Primary Modules]]
+- [[#bars][Bars]]
+  - [[#top-bar][Top Bar]]
+  - [[#bottom-bar][Bottom Bar]]
+
 * Colors
-I have a few colorschemes I like to try.
+I have a few colorschemes I like to play around with.
 #+begin_src ini
 [colors]
 #+end_src
-** Gruvbox Colors
+** Gruvbox
 Gruvbox has become one of my favorite colorschemes (even if the documentation is non-existent), especially with the multiple contrast options. The CC in the numbers here is for opacity of the bars. I am using the dark theme here.
 *** Background Colors
-**** Soft Contrast
-     #+begin_src ini
-     ;; Soft Contrast
-     ;bg = #CC32302f 
-     ;bg-bright = #CC3c3836
-     #+end_src
+#+begin_example
+;; Gruvbox Soft Contrast
+;bg = #CC32302f
+;bg-bright = #CC3c3836
+#+end_example
 **** Medium Contrast
-    #+begin_src ini
-    ;; Medium Contrast
-    bg = #CC282828
-    bg-bright = #CC32302f
-    #+end_src
+#+begin_src ini
+;; Gruvbox Medium Contrast
+bg = #CC282828
+bg-bright = #CC32302f
+#+end_src
 **** Hard Contrast
-     #+begin_src ini
-     ;; Hard Contrast
-     ;bg = #CC1d2021
-     ;bg-bright = #CC282828
-     #+end_src
+#+begin_example
+;; Hard Contrast
+;bg = #CC1d2021
+;bg-bright = #CC282828
+#+end_example
+
 *** Foreground and Accent Colors
-    #+begin_src ini
-    fg = #EBDBB2
-    red = #cc241d
-    green = #98971a
-    yellow = #d79921
-    blue = #458588
-    darkblue = #076678
-    purple = #b16286
-    cyan = #689d6a
-    white = #a89984
-    orange = #d65d0e
-    darkorange = #af3a03
-    #+end_src
+#+begin_src ini
+fg = #EBDBB2
+red = #cc241d
+green = #98971a
+yellow = #d79921
+blue = #458588
+darkblue = #076678
+purple = #b16286
+cyan = #689d6a
+white = #a89984
+orange = #d65d0e
+darkorange = #af3a03
+#+end_src
 ** Nord
 Nord has quickly become one of my favorite color schemes. It also helps that it has some of the best documentation (in my opinion).
-    #+begin_src ini
-    ;bg = #2e3440
-    ;bg-bright = #CC3b4252
-    ;fg = #D8DEE9
-    ;red = #BF616A
-    ;green = #A3BE8C
-    ;yellow = #EBCB8B
-    ;blue = #81a1c1
-    ;darkblue = #5e81ac
-    ;purple = #B48EAD
-    ;cyan = #8fbcbb
-    ;orange = #d08770
-    #+end_src
-
+#+begin_example
+;bg = #2e3440
+;bg-bright = #CC3b4252
+;fg = #D8DEE9
+;red = #BF616A
+;green = #A3BE8C
+;yellow = #EBCB8B
+;blue = #81a1c1
+;darkblue = #5e81ac
+;purple = #B48EAD
+;cyan = #8fbcbb
+;orange = #d08770
+#+end_example
 * Fonts
 This section defines the fonts I use.
 #+begin_src ini
@@ -80,453 +90,455 @@ This section contains the various modules I use in my config.
 *** Top Bar
 **** Window Managers
 ***** i3wm
-    This is a module for the i3 window manager.
-    #+begin_src ini
-    [module/i3]
-    type = internal/i3
-    ;; For Bullet Points
-    ;; FOR ICONS
-    ; index-sort = true
-    ; wrapping-scroll = false
-    ; format-padding = 1
-    ; format-foreground = ${colors.fg}
-    ; format-background = ${colors.bg}
-    ; format = "<label-state> <label-mode>"
-    ; label-focused = "●"
-    ; label-focused-foreground = ${colors.fg}
-    ; label-focused-padding = 1
-    ; ;label-unfocused = "%index%"
-    ; label-unfocused = "○"
-    ; label-unfocused-foreground = ${colors.fg}
-    ; label-unfocused-padding = 1
-    ; label-urgent = ${self.label-focused}
-    ; label-urgent-padding = 1
-    ; label-urgent-foreground = ${colors.red}
-    
-    ;; FOR WORKSPACE NAMES
-    format = <label-state> <label-mode>
-    index-sort = true
-    wrapping-scroll = false
-    
-    ;; Only show workspaces on the same output as the bar
-    pin-workspaces = false
-    
-    label-mode-padding = 1.75
-    label-mode-fg = ${colors.fg}
-    label-mode-background = ${colors.red}
-    
-    ; focused = Active workspace on focused monitor
-    label-focused = %index%
-    label-focused-background = ${colors.bg-bright}
-    label-focused-padding = 1.75
-    label-focused-foreground = ${colors.fg}
-    label-focused-underline = ${colors.blue}
-    ; unfocused = Inactive workspace on any monitor
-    label-unfocused = %index%
-    label-unfocused-padding = 1.75
-    label-unfocused-background = ${colors.bg-bright}
-    label-unfocused-foreground = ${colors.fg}
-    ; visible = Active workspace on unfocused monitor
-    label-visible = %index%
-    label-visible-background = ${self.label-focused-background}
-    label-visible-padding = ${self.label-focused-padding}
-    label-visible-foreground = ${self.label-focused-foreground}
-    ;; urgent = Workspace with urgency hint set
-    label-urgent = %index%
-    label-urgent-underline = ${colors.red}
-    label-urgent-foreground = ${colors.fg}
-    label-urgent-background = ${colors.bg-bright}
-    label-urgent-padding = 1.75
-    #+end_src
+This is a module for the i3 window manager.
+#+begin_src ini
+[module/i3]
+type = internal/i3
+;; For Bullet Points
+;; FOR ICONS
+; index-sort = true
+; wrapping-scroll = false
+; format-padding = 1
+; format-foreground = ${colors.fg}
+; format-background = ${colors.bg}
+; format = "<label-state> <label-mode>"
+; label-focused = "●"
+; label-focused-foreground = ${colors.fg}
+; label-focused-padding = 1
+; ;label-unfocused = "%index%"
+; label-unfocused = "○"
+; label-unfocused-foreground = ${colors.fg}
+; label-unfocused-padding = 1
+; label-urgent = ${self.label-focused}
+; label-urgent-padding = 1
+; label-urgent-foreground = ${colors.red}
 
+;; FOR WORKSPACE NAMES
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+;; Only show workspaces on the same output as the bar
+pin-workspaces = false
+
+label-mode-padding = 1.75
+label-mode-fg = ${colors.fg}
+label-mode-background = ${colors.red}
+
+; focused = Active workspace on focused monitor
+label-focused = %index%
+label-focused-background = ${colors.bg-bright}
+label-focused-padding = 1.75
+label-focused-foreground = ${colors.fg}
+label-focused-underline = ${colors.blue}
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-padding = 1.75
+label-unfocused-background = ${colors.bg-bright}
+label-unfocused-foreground = ${colors.fg}
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-background = ${self.label-focused-background}
+label-visible-padding = ${self.label-focused-padding}
+label-visible-foreground = ${self.label-focused-foreground}
+;; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-underline = ${colors.red}
+label-urgent-foreground = ${colors.fg}
+label-urgent-background = ${colors.bg-bright}
+label-urgent-padding = 1.75
+#+end_src
 ***** BSPWM
-    This is the module for BSPWM.
-    #+begin_src ini
-    [module/bspwm]
-    type = internal/bspwm
-    pin-workspaces = true
-    label-focused = %index%
-    label-focused-foreground = ${colors.fg}
-    label-focused-background = ${colors.bg-bright}
-    label-focused-underline = ${colors.blue}
-    label-focused-padding = 1
-    
-    label-occupied = %index%
-    label-occupied-foreground = ${colors.fg}
-    ;label-occupied-background = ${colors.bg-bright}
-    label-occupied-padding = 1
-    
-    # Hide empty
-    label-empty = %index%
-    label-empty-padding = 1
-    label-empty-foreground = ${colors.fg}
-    
-    label-urgent = %index%!
-    label-urgent-foreground = ${colors.fg}
-    label-urgent-background = ${colors.red}
-    label-urgent-padding = 1
-    #+end_src
+This is the module for BSPWM.
+#+begin_src ini
+[module/bspwm]
+type = internal/bspwm
+pin-workspaces = true
+label-focused = %index%
+label-focused-foreground = ${colors.fg}
+label-focused-background = ${colors.bg-bright}
+label-focused-underline = ${colors.blue}
+label-focused-padding = 1
+
+label-occupied = %index%
+label-occupied-foreground = ${colors.fg}
+;label-occupied-background = ${colors.bg-bright}
+label-occupied-padding = 1
+
+# Hide empty
+label-empty = %index%
+label-empty-padding = 1
+label-empty-foreground = ${colors.fg}
+
+label-urgent = %index%!
+label-urgent-foreground = ${colors.fg}
+label-urgent-background = ${colors.red}
+label-urgent-padding = 1
+#+end_src
 **** Clock
-    #+begin_src ini
-    [module/clock]
-    type = internal/date
-    
-    ;; 24-Hour Time
-    time = %H:%M
-    
-    ;;12-Hour Time with AM/PM in caps
-    time-alt = %I:%M %p 
-   
-    label = %time%
-    label-font = 1
-    label-padding = 1
-    ;label-background = ${colors.fg}
-    ;label-foreground = ${colors.text}
-    label-background = ${colors.bg-bright}
-    label-foreground = ${colors.fg}
-    ;label-underline = ${colors.orange}
-    format-prefix = ""
-    format-prefix-background = ${colors.orange}
-    format-prefix-foreground = ${colors.fg}
-    format-prefix-padding = 1
-    #+end_src
+It's a clock. Not sure what else you'd need to know for it. Click on it to toggle between 24 hour and 12 hour time.
+#+begin_src ini
+[module/clock]
+type = internal/date
+
+;; 24-Hour Time
+time = %H:%M
+
+;;12-Hour Time with AM/PM in caps
+time-alt = %I:%M %p
+
+label = %time%
+label-font = 1
+label-padding = 1
+;label-background = ${colors.fg}
+;label-foreground = ${colors.text}
+label-background = ${colors.bg-bright}
+label-foreground = ${colors.fg}
+;label-underline = ${colors.orange}
+format-prefix = ""
+format-prefix-background = ${colors.orange}
+format-prefix-foreground = ${colors.fg}
+format-prefix-padding = 1
+#+end_src
 **** Volume
-    Shows the current volume of my computer.
-    #+begin_src ini
-    [module/volume]
-    type =internal/alsa
-    interval = 10
-    
-    format-volume = <ramp-volume><label-volume>
-    ramp-volume-0 = 
-    ramp-volume-1 =   
-    ramp-volume-2 =   
-    ramp-volume-3 = 
-    ramp-volume-4 = 
-    ramp-volume-5 =  
-    ramp-volume-6 =  
-    label-volume = %percentage%%
-    label-volume-padding = 1
-    ramp-volume-padding = 1
-    ramp-volume-background = ${colors.green}
-    label-volume-background = ${colors.bg-bright}
-    label-volume-foreground = ${colors.fg}
-    ramp-volume-foreground = ${colors.fg}
-    
-    format-muted = <label-muted>
-    label-muted = %percentage%%
-    format-muted-prefix =   
-    format-muted-prefix-background = ${colors.red}
-    label-muted-background = ${colors.bg-bright}
-    label-muted-padding = 1
-    format-muted-prefix-padding = 1
-    
-    format-muted-prefix-foreground = ${colors.fg}
-    label-muted-foreground = ${colors.fg}
-    #+end_src
+Shows the current volume of my computer. Red if muted, green if not.
+#+begin_src ini
+[module/volume]
+type =internal/alsa
+interval = 10
+
+format-volume = <ramp-volume><label-volume>
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+ramp-volume-4 = 
+ramp-volume-5 = 
+ramp-volume-6 = 
+label-volume = %percentage%%
+label-volume-padding = 1
+ramp-volume-padding = 1
+ramp-volume-background = ${colors.green}
+label-volume-background = ${colors.bg-bright}
+label-volume-foreground = ${colors.fg}
+ramp-volume-foreground = ${colors.fg}
+
+format-muted = <label-muted>
+label-muted = %percentage%%
+format-muted-prefix = 
+format-muted-prefix-background = ${colors.red}
+label-muted-background = ${colors.bg-bright}
+label-muted-padding = 1
+format-muted-prefix-padding = 1
+
+format-muted-prefix-foreground = ${colors.fg}
+label-muted-foreground = ${colors.fg}
+#+end_src
 **** Wifi
-     Shows the current wifi network if connected, or "Not Connected" if not connected.
-     #+begin_src ini
-     [module/wifi]
-     type = internal/network
-     interface = wlp1s0
-     interval = 3.0
-     
-     format-connected = <label-connected>
-     label-connected = %essid%
-     format-connected-prefix =  
-     format-connected-prefix-padding = 1
-     label-connected-padding = 1
-     ;format-connected-prefix-margin = 1
-     format-connected-prefix-background = ${colors.blue}
-     label-connected-background = ${colors.bg-bright}
-     format-connected-foreground = ${colors.fg}
-     format-connected-prefix-foreground = ${colors.fg}
-     
-     format-disconnected =  " Not Connected "
-     format-disconnected-prefix = 
-     format-disconnected-prefix-padding = 1
-     format-disconnected-prefix-background = ${colors.red}
-     format-disconnected-background = ${colors.bg-bright}
-     format-disconnected-foreground = ${colors.fg}
-     format-disconnected-prefix-foreground = ${colors.fg}
-     format-connected-margin = 1
-     format-disconnected-margin = 1
+Shows the current wifi network if connected, or “Not Connected” if not connected. Blue if connected, red if not.
+#+begin_src ini
+[module/wifi]
+type = internal/network
+interface = wlp1s0
+interval = 3.0
 
-     #+end_src
+format-connected = <label-connected>
+label-connected = %essid%
+format-connected-prefix = 
+format-connected-prefix-padding = 1
+label-connected-padding = 1
+;format-connected-prefix-margin = 1
+format-connected-prefix-background = ${colors.blue}
+label-connected-background = ${colors.bg-bright}
+format-connected-foreground = ${colors.fg}
+format-connected-prefix-foreground = ${colors.fg}
+
+format-disconnected =  " Not Connected "
+format-disconnected-prefix = 
+format-disconnected-prefix-padding = 1
+format-disconnected-prefix-background = ${colors.red}
+format-disconnected-background = ${colors.bg-bright}
+format-disconnected-foreground = ${colors.fg}
+format-disconnected-prefix-foreground = ${colors.fg}
+format-connected-margin = 1
+format-disconnected-margin = 1
+#+end_src
 **** Battery
-     Shows the current battery position.
-     #+begin_src ini
-     [module/battery]
-     type = internal/battery
-     full-at = 99
-     time-format = %H:%M
-     battery = BAT0
-     adapter = ADP0
-     #+end_src
+Shows the current battery charge if I am on a laptop. Green if full, orange if medium, red if low.
+#+begin_src ini
+[module/battery]
+type = internal/battery
+full-at = 99
+time-format = %H:%M
+battery = BAT0
+adapter = ADP0
+#+end_src
 ***** Discharging Battery Format and Colors
-      #+begin_src ini
-      format-discharging = <ramp-capacity><label-discharging>
-      ramp-capacity-0 = 
-      ramp-capacity-1 = 
-      ramp-capacity-2 = 
-      ramp-capacity-3 = 
-      ramp-capacity-4 = 
-      
-      ramp-capacity-0-background = ${colors.red}
-      ramp-capacity-1-background = ${colors.red}
-      ramp-capacity-2-background = ${colors.orange}
-      ramp-capacity-3-background = ${colors.orange}
-      ramp-capacity-4-background = ${colors.green}
-      ramp-capacity-padding = 1
-      label-discharging-padding = 1
-      label-discharging-background = ${colors.bg-bright}
-      ramp-capacity-foreground = ${colors.fg}
-      label-discharging-foreground = ${colors.fg}
-      #+end_src
+#+begin_src ini
+format-discharging = <ramp-capacity><label-discharging>
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+ramp-capacity-0-background = ${colors.red}
+ramp-capacity-1-background = ${colors.red}
+ramp-capacity-2-background = ${colors.orange}
+ramp-capacity-3-background = ${colors.orange}
+ramp-capacity-4-background = ${colors.green}
+ramp-capacity-padding = 1
+label-discharging-padding = 1
+label-discharging-background = ${colors.bg-bright}
+ramp-capacity-foreground = ${colors.fg}
+label-discharging-foreground = ${colors.fg}
+#+end_src
+
 ***** Charging Battery Format and Colors
-      #+begin_src ini
-      format-charging = <animation-charging><label-charging>
-      label-charging = %percentage%%
-      animation-charging-0 = ""
-      animation-charging-1 = ""
-      animation-charging-2 = ""
-      animation-charging-3 = ""
-      animation-charging-4 = ""
-      animation-charging-framerate = 750
-      animation-charging-padding = 1
-      animation-charging-background = ${colors.blue}
-      label-charging-padding = 1
-      label-charging-background = ${colors.bg-bright}
-      format-animation-charging-foreground = ${colors.fg}
-      format-label-charging-foreground = ${colors.fg}
+#+begin_src ini
+format-charging = <animation-charging><label-charging>
+label-charging = %percentage%%
+animation-charging-0 = ""
+animation-charging-1 = ""
+animation-charging-2 = ""
+animation-charging-3 = ""
+animation-charging-4 = ""
+animation-charging-framerate = 750
+animation-charging-padding = 1
+animation-charging-background = ${colors.blue}
+label-charging-padding = 1
+label-charging-background = ${colors.bg-bright}
+format-animation-charging-foreground = ${colors.fg}
+format-label-charging-foreground = ${colors.fg}
+#+end_src
 
-      #+end_src
 ***** Full Battery Formatting and Colors
-      #+begin_src ini
-      format-full = <label-full>
-      label-full = %percentage%%
-      label-full-padding = 1
-      label-full-background = ${colors.bg-bright}
-      format-full-prefix = 
-      format-full-prefix-padding = 1
-      format-full-prefix-background = ${colors.green}
-      format-full-prefix-foreground = ${colors.fg}
-      label-full-foreground = ${colors.fg}
-      #+end_src
-
+#+begin_src ini
+format-full = <label-full>
+label-full = %percentage%%
+label-full-padding = 1
+label-full-background = ${colors.bg-bright}
+format-full-prefix = 
+format-full-prefix-padding = 1
+format-full-prefix-background = ${colors.green}
+format-full-prefix-foreground = ${colors.fg}
+label-full-foreground = ${colors.fg}
+#+end_src
 **** Backlight
-     This module shows the current brightness of my laptop.
-     #+begin_src ini
-     [module/backlight]
-     type = internal/backlight
-     card = intel_backlight
-     enable-scroll = true
-     format = <ramp> <label>
-     label = %percentage%%
-     ramp-0 = 
-     ramp-1 = 
-     ramp-2 = 
-     ramp-3 = 
-     ramp-4 = 
-     format-margin = 1
-     format-background = ${colors.bg-bright}
-     ramp-background = ${colors.purple}
-     ramp-padding = 1
-     format-foreground = ${colors.fg}
-     #+end_src
+This module shows the current brightness of my laptop.
+#+begin_src ini
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+enable-scroll = true
+format = <ramp> <label>
+label = %percentage%%
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+format-margin = 1
+format-background = ${colors.bg-bright}
+ramp-background = ${colors.purple}
+ramp-padding = 1
+format-foreground = ${colors.fg}
+#+end_src
+
 *** Bottom Bar
-    My bottom bar modules are mostly clickable applications, though I do have a few useful things down there.
+My bottom bar modules are mostly clickable applications, though I do have a few useful things down there.
 **** Calendar
-     This module is mostly just a calendar.
-     #+begin_src ini
-     [module/cal]
-     type = internal/date
-     date = %a, %d %b
-     label = %date%
-     label-font = 1
-     label-padding = 1
-     label-background = ${colors.bg-bright}
-     format-prefix =  
-     format-prefix-background = ${colors.blue}     
-     format-prefix-padding = 1
-     prefix-foreground = ${colors.fg}
-     format-foreground = ${colors.fg}
-     #+end_src
+This module is just a calendar.
+#+begin_src ini
+[module/cal]
+type = internal/date
+date = %a, %d %b
+label = %date%
+label-font = 1
+label-padding = 1
+label-background = ${colors.bg-bright}
+format-prefix = 
+format-prefix-background = ${colors.blue}
+format-prefix-padding = 1
+prefix-foreground = ${colors.fg}
+format-foreground = ${colors.fg}
+#+end_src
 **** Pomodoro Timer
-     I found the [[https://github.com/unode/polypomo][polypomo]] script incredibly useful to use as a student.
-     #+begin_src ini
-     [module/polypomo]
-     type = custom/script
-     exec = /home/$USER/.config/polybar/scripts/polypomo
-     tail = true
-     enable-scroll = true
-     label = %output%
-     click-left = /home/$USER/.config/polybar/scripts/polypomo toggle
-     click-middle =/home/$USER/.config/polybar/scripts/polypomo lock
-     click-right =  /home/$USER/.config/polybar/scripts/polypomo end
-     scroll-up = home/$USER/.config/polybar/scripts/polypomo time +60
-     scroll-down = home/$USER/.config/polybar/scripts/polypomo time -60
-     format-prefix = ""
-     format-prefix-background = ${colors.darkblue}
-     format-background = ${colors.bg-bright}
-     format-foreground = ${colors.fg}
-     format-prefix-padding = 1
-     label-padding-right = 1
-     format-margin = 1
-     #+end_src
+I found the [[https://github.com/unode/polypomo][polypomo]] script incredibly useful to use as a student.
+#+begin_src ini
+[module/polypomo]
+type = custom/script
+exec = /home/$USER/.config/polybar/scripts/polypomo
+tail = true
+enable-scroll = true
+label = %output%
+click-left = /home/$USER/.config/polybar/scripts/polypomo toggle
+click-middle =/home/$USER/.config/polybar/scripts/polypomo lock
+click-right =  /home/$USER/.config/polybar/scripts/polypomo end
+scroll-up = home/$USER/.config/polybar/scripts/polypomo time +60
+scroll-down = home/$USER/.config/polybar/scripts/polypomo time -60
+format-prefix = ""
+format-prefix-background = ${colors.darkblue}
+format-background = ${colors.bg-bright}
+format-foreground = ${colors.fg}
+format-prefix-padding = 1
+label-padding-right = 1
+format-margin = 1
+#+end_src
 **** Reddit Client
-     I know, I know. I found [[https://gitlab.com/ajak/tuir][tuir]] and really liked it. This is just a shortcut to launch tuir.
-     #+begin_src ini
-     [module/reddit]
-     type = custom/text
-     content = " Reddit "
-     content-background = ${colors.bg-bright}
-     content-prefix = 󰑍
-     content-prefix-padding = 1
-     content-prefix-background = ${colors.purple}
-     ;content-padding = 1
-     content-margin = 0
-     click-left = alacritty -e $HOME/anaconda3/bin/tuir &
-     content-foreground = ${colors.fg}
-     #+end_src
+I know, I know. I found [[https://gitlab.com/ajak/tuir][tuir]] and really liked it. This is just a shortcut to launch tuir.
+#+begin_src ini
+[module/reddit]
+type = custom/text
+content = " Reddit "
+content-background = ${colors.bg-bright}
+content-prefix = 󰑍
+content-prefix-padding = 1
+content-prefix-background = ${colors.purple}
+;content-padding = 1
+content-margin = 0
+click-left = alacritty -e $HOME/anaconda3/bin/tuir &
+content-foreground = ${colors.fg}
+#+end_src
 **** Caps Lock Alert
-     Since I have fat fingers and tiny keys on my laptop keyboard, I figured a caps lock alert would be very helpful.
-     #+begin_src ini
-     [module/caps]
-     type = internal/xkeyboard
-     format = <label-indicator>
-     label-layout-padding = 1
-     format-prefix = 󰳡
-     format-background = ${colors.bg-bright}
-     format-prefix-background = ${colors.red}
-     format-prefix-padding = 1 
-     indicator-icon-0 = caps lock;-CL;+CL
-     indicator-icon-1 = scroll lock;;+SL
-     indicator-icon-2 = num lock;-NL;+NL
-     format-label-padding = 2
-     label-indicator-on-capslock = " %name% "
-     label-indicator-on-numlock = " %name% "
-     label-indicator-on-scrolllock = " %name% "
-     label-indicator-off-capslock =
-     label-indicator-off-numlock = 
-     label-indicator-off-scrolllock =
-     format-prefix-foreground = ${colors.fg}
-     format-label-foreground = ${colors.fg}
-     format-foreground = ${colors.fg}
-     format-margin = 1
-     #+end_src
-**** Notification Bell
-     A dynamic notification bell with a very simple script.
-     #+begin_src ini
-     [module/bell]
-     type=custom/script
-     interval=3
-     label-padding = 1
-     format-background = ${colors.purple}
-     format-foreground = ${colors.fg}
-     #+end_src
-***** Dunst Executable 
-      #+begin_src ini
-      ;exec = "~/.config/polybar/scripts/notifs/dunst/bell.sh"
-      #+end_src
-***** Rofication Executable
-      #+begin_src ini
-      exec = "$HOME/.config/polybar/scripts/notifs/rofi/bell.sh"
-      #+end_src
+Since I have fat fingers and tiny keys on my laptop keyboard, I figured a caps lock alert would be very helpful.
+#+begin_src ini
+[module/caps]
+type = internal/xkeyboard
+format = <label-indicator>
+label-layout-padding = 1
+format-prefix = 󰳡
+format-background = ${colors.bg-bright}
+format-prefix-background = ${colors.red}
+format-prefix-padding = 1
+indicator-icon-0 = caps lock;-CL;+CL
+indicator-icon-1 = scroll lock;;+SL
+indicator-icon-2 = num lock;-NL;+NL
+format-label-padding = 2
+label-indicator-on-capslock = " %name% "
+label-indicator-on-numlock = " %name% "
+label-indicator-on-scrolllock = " %name% "
+label-indicator-off-capslock =
+label-indicator-off-numlock =
+label-indicator-off-scrolllock =
+format-prefix-foreground = ${colors.fg}
+format-label-foreground = ${colors.fg}
+format-foreground = ${colors.fg}
+format-margin = 1
+#+end_src
 **** Notifications
-     This section contains all the formatting for notification modules.
-     #+begin_src ini
-     [module/notifs]
-     type = custom/script
-     interval = 3
-     label-padding = 1
-     format-background = ${colors.bg-bright}
-     format-foreground = ${colors.fg}
-     #+end_src
-***** Dunst Executable
-      #+begin_src ini
-      ;exec = "dunstctl count | sed -n 1p | xargs | cut -d' ' -f2"
-      #+end_src
-***** Rofication Executable
-      #+begin_src ini
-      exec = "~/.config/polybar/scripts/notifs/rofi/rofication-status.py"
-      #+end_src
+***** Bell
+A dynamic notification bell with a very simple script.
+#+begin_src ini
+[module/bell]
+type=custom/script
+interval=3
+label-padding = 1
+format-background = ${colors.purple}
+format-foreground = ${colors.fg}
+#+end_src
+****** Dunst Executable
+#+begin_src ini
+exec = "~/.config/polybar/scripts/notifs/dunst/bell.sh"
+#+end_src
+****** Rofication Executable
+#+begin_src ini
+;exec = "$HOME/.config/polybar/scripts/notifs/rofi/bell.sh"
+#+end_src
+***** Count
+A simple script to print the notification count.
+#+begin_src ini
+[module/notifs]
+type = custom/script
+interval = 3
+label-padding = 1
+format-background = ${colors.bg-bright}
+format-foreground = ${colors.fg}
+#+end_src
+****** Dunst Executable
+#+begin_src ini
+exec = "dunstctl count | sed -n 1p | xargs | cut -d' ' -f2"
+#+end_src
+****** Rofication Executable
+#+begin_src ini
+;exec = "~/.config/polybar/scripts/notifs/rofi/rofication-status.py"
+#+end_src
 **** News
-    A simple news widget for newsboat and polybar.
-    #+begin_src ini
-    [module/news]
-    type = custom/text
-    content = " News "
-    content-background = ${colors.bg-bright}
-    content-prefix = 󰎕
-    content-prefix-padding = 1
-    content-prefix-background = ${colors.red}
-    ;content-padding = 1
-    ;content-margin = 1
-    click-left = alacritty -e newsboat -r &
-    content-foreground = ${colors.fg}
-    content-margin = 1
-    #+end_src
+A simple news widget for newsboat and polybar.
+#+begin_src ini
+[module/news]
+type = custom/text
+content = " News "
+content-background = ${colors.bg-bright}
+content-prefix = 󰎕
+content-prefix-padding = 1
+content-prefix-background = ${colors.red}
+;content-padding = 1
+;content-margin = 1
+click-left = alacritty -e newsboat -r &
+content-foreground = ${colors.fg}
+content-margin = 1
+#+end_src
 **** Weather
-     A simple weather script.
-     #+begin_src ini
-     [module/weather]
-     type = custom/script
-     interval = 3
-     
-     format-prefix = ""
-     format-prefix-font = 3
-     format-prefix-padding = 1
-     format-prefix-background = ${colors.orange} 
-     format-prefix-foreground = ${colors.fg}
-     click-left = alacritty -e /home/$USER/.config/polybar/scripts/weather/wtr.sh &
-     exec = ~/.config/polybar/scripts/weather/wtr-bar.sh
-     label-background = ${colors.bg-bright}
-     label-padding = 1
-     format-foreground = ${colors.fg}
-     #+end_src
+A simple weather script.
+#+begin_src ini
+[module/weather]
+type = custom/script
+interval = 3
+
+format-prefix = ""
+format-prefix-font = 3
+format-prefix-padding = 1
+format-prefix-background = ${colors.orange}
+format-prefix-foreground = ${colors.fg}
+click-left = alacritty -e /home/$USER/.config/polybar/scripts/weather/wtr.sh &
+exec = ~/.config/polybar/scripts/weather/wtr-bar.sh
+label-background = ${colors.bg-bright}
+label-padding = 1
+format-foreground = ${colors.fg}
+#+end_src
+
 * Bars
 This defines the bars I use.
 ** Top Bar
-   My top bar is mostly for information I need at a glance.
-   #+begin_src ini
-   [bar/top]
-   line-size = 2.75
-   font-0 = ${fonts.text}
-   font-1 = ${fonts.icons-1} 
-   font-2 = ${fonts.weather} 
-   font-3 = ${fonts.icons-2} 
-   font-4 = ${fonts.icons-3} 
-   font-5 = ${fonts.icons-4}
-   background = ${colors.bg}
-   fg = ${colors.fg}
-   width = 100%
-   height = 27
-   modules-left = i3 bspwm
-   modules-center = clock
-   modules-right = volume wifi battery backlight
-   #+end_src
-
+My top bar is mostly for information I need at a glance.
+#+begin_src ini
+[bar/top]
+line-size = 2.75
+font-0 = ${fonts.text}
+font-1 = ${fonts.icons-1}
+font-2 = ${fonts.weather}
+font-3 = ${fonts.icons-2}
+font-4 = ${fonts.icons-3}
+font-5 = ${fonts.icons-4}
+background = ${colors.bg}
+fg = ${colors.fg}
+width = 100%
+height = 27
+modules-left = i3 bspwm
+modules-center = clock
+modules-right = volume wifi battery backlight
+#+end_src
 ** Bottom Bar
-   My bottom bar is mostly clickable applications, though I do have a few useful things down there - namely, a weather script, and a choice of notification modules (between dunst and rofication-daemon, which is what Regolith Linux uses).
-   #+begin_src ini
-   [bar/btm]
-   bottom = true
-   font-0 = ${fonts.text} 
-   font-1 = ${fonts.icons-1} 
-   font-2 = ${fonts.weather} 
-   font-3 = ${fonts.icons-2} 
-   font-4 = ${fonts.icons-3}
-   font-5 = ${fonts.icons-4}
-   
-   line-size = 2.75
-   enable-ipc = true
-   
-   background = ${colors.bg}
-   fg = ${colors.fg}
-   width = 100%
-   height = 27
-   modules-left =  cal polypomo reddit caps
-   modules-right = bell notifs news weather
-   #+end_src
+My bottom bar is mostly clickable applications, though I do have a few useful things down there - namely, a weather script, and a choice of notification modules (between dunst and rofication-daemon, which is what Regolith Linux uses).
+#+begin_src ini
+[bar/btm]
+bottom = true
+font-0 = ${fonts.text}
+font-1 = ${fonts.icons-1}
+font-2 = ${fonts.weather}
+font-3 = ${fonts.icons-2}
+font-4 = ${fonts.icons-3}
+font-5 = ${fonts.icons-4}
+
+line-size = 2.75
+enable-ipc = true
+
+background = ${colors.bg}
+fg = ${colors.fg}
+width = 100%
+height = 27
+
+modules-left = cal polypomo reddit caps
+modules-right = bell notifs news weather
+#+end_src
