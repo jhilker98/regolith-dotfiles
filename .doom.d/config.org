@@ -11,7 +11,7 @@
 * UI Tweaks
 ** Theme
 #+begin_src elisp
-(setq doom-theme 'doom-gruvbox)
+  (setq doom-theme 'gruvbox-dark-medium)
 #+end_src
 ** Ellipsis
 I like a little arrow instead of a regular ellipsis.
@@ -205,7 +205,7 @@ I like to keep my org-mode stuff in Dropbox. In addition, I like to use my notes
  elfeed-db-directory "~/.elfeed/"
  rmh-elfeed-org-files (list "~/Dropbox/elfeed/elfeed.org")
  elfeed-search-title-min-width 80
- ;elfeed-search-print-entry-function '+jh/elfeed-search-print-entry
+ elfeed-search-print-entry-function '+jh/elfeed-search-print-entry
  elfeed-search-filter "@1-week-ago +unread")
  ;elfeed-show-mode-hook
  ;(lambda ()
@@ -278,4 +278,12 @@ I like to keep my org-mode stuff in Dropbox. In addition, I like to use my notes
 (map! :map elfeed-search-mode-map
       :after elfeed-search
       :n "A" #'elfeed-mark-all-as-read)
+
+(map! :leader
+      (:prefix-map ("n" . "newsreader")
+        :desc "Check news" "n" #'elfeed ))
+#+end_src
+** Ox-Pandoc
+#+begin_src emacs-lisp
+
 #+end_src
