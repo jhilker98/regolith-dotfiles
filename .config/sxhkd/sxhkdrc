@@ -55,10 +55,10 @@ super + g
 
 # set the window state
 super + f
-  bspc node -t fullscreen
+  bspc node -t {fullscreen,tiled}
 
 super + shift + f 
-  bspc node -t floating
+  bspc node -t {floating,tiled}
 
 super + t 
   bspc node -t tiled
@@ -66,6 +66,8 @@ super + t
 super + shift + t
   bspc node -t pseudo_tiled
 
+super + shift + m
+  bspc desktop -l monocle
 # set the node flags
 super + ctrl + {m,x,y,z}
 	bspc node -g {marked,locked,sticky,private}
@@ -188,6 +190,7 @@ super + shift + n
 
 super + shift + z
   zoom
+
 alt + t
   ~/.config/conky/scripts/todotoggle.sh
 
@@ -200,3 +203,6 @@ ctrl + shift + m
 
 super + ctrl + r
   alacritty -e ~/anaconda3/bin/tuir
+
+control + Print
+    scrot $HOME/'Pictures/Screenshots/%Y-%m-%d_%H%M%S-$wx$h_scrot.png'
