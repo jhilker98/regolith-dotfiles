@@ -11,7 +11,7 @@
 * UI Tweaks
 ** Theme
 #+begin_src elisp
-  (setq doom-theme 'gruvbox-dark-medium)
+  (setq doom-theme 'doom-gruvbox)
 #+end_src
 ** Ellipsis
 I like a little arrow instead of a regular ellipsis.
@@ -197,6 +197,14 @@ I like to keep my org-mode stuff in Dropbox. In addition, I like to use my notes
     )
 ))
 #+end_src
+**** Helper Commands
+***** Open Planner
+#+begin_src emacs-lisp
+(defun jh/open-agenda ()
+(interactive)
+ (org-agenda nil "p")
+)
+#+end_src
 ** Elfeed
 #+begin_src emacs-lisp
 (after! elfeed-org)
@@ -224,9 +232,27 @@ I like to keep my org-mode stuff in Dropbox. In addition, I like to use my notes
            (mark-whole-buffer)
            (elfeed-search-untag-all-unread))
 #+end_src
+
 *** UI Enhancements
 **** Faces
+All the faces for here are based on my newsboat configuration.
+***** Reddit Face
 #+begin_src emacs-lisp
+;(defface jh/reddit-elfeed-face
+;'((t :foreground "#98971a"))
+;  "Marks an Elfeed entry from reddit.")
+;
+;(push '(reddit jh/reddit-elfeed-face)
+;      elfeed-search-face-alist)
+#+end_src
+***** Campaign Face
+#+begin_src emacs-lisp
+;(defface jh/campaign-elfeed-face
+;'((t :foreground "#458588"))
+;  "Marks an Elfeed entry from a campaign I'm in.")
+;
+;(push '(campaigns jh/campaign-elfeed-face)
+;      elfeed-search-face-alist)
 
 #+end_src
 **** Elfeed Search Layout
@@ -271,8 +297,6 @@ I like to keep my org-mode stuff in Dropbox. In addition, I like to use my notes
       (setq-local line-spacing 0.2)))
 
 #+end_src
-
-
 *** Keybindings
 #+begin_src emacs-lisp
 (map! :map elfeed-search-mode-map
@@ -287,3 +311,17 @@ I like to keep my org-mode stuff in Dropbox. In addition, I like to use my notes
 #+begin_src emacs-lisp
 
 #+end_src
+* Keybinds
+** General Keybinds
+#+begin_src emacs-lisp
+(map! :leader
+      :desc "Open like spacemacs" "SPC" #'counsel-M-x)
+#+end_src
+** Org-Mode
+#+begin_src elisp
+(map! :leader
+      (:prefix-map ("o" . "Org Mode")
+       :desc "Open agenda (Planner View)" "a" #'jh/open-agenda
+       :desc "Open agenda" "A" #'org-agenda))
+#+end_src
+** Magit
