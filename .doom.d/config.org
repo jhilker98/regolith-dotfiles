@@ -13,6 +13,21 @@
 #+begin_src elisp
   (setq doom-theme 'doom-gruvbox)
 #+end_src
+*** Better Faces
+I like having different colors for each face of a heading.
+#+begin_src emacs-lisp
+(after! org
+  (custom-set-faces!
+    '(org-level-1  :inherit outline-1 :foreground "#83a598")
+    '(org-level-2  :inherit outline-2 :foreground "#fabd2f")
+    '(org-level-3  :inherit outline-3 :foreground "#d3869b")
+    '(org-level-4  :inherit outline-4 :foreground "#fb4934")
+    '(org-level-5  :inherit outline-5 :foreground "#b8bb26")
+    '(org-level-6  :inherit outline-6 :foreground "#8ec07c")
+    '(org-level-7  :inherit outline-7 :foreground "#458588")
+    '(org-level-8  :inherit outline-8 :foreground "#fe8019")))
+
+#+end_src
 ** Ellipsis
 I like a little arrow instead of a regular ellipsis.
 #+begin_src emacs-lisp
@@ -297,16 +312,6 @@ All the faces for here are based on my newsboat configuration.
       (setq-local line-spacing 0.2)))
 
 #+end_src
-*** Keybindings
-#+begin_src emacs-lisp
-(map! :map elfeed-search-mode-map
-      :after elfeed-search
-      :n "A" #'elfeed-mark-all-as-read)
-
-(map! :leader
-      (:prefix-map ("n" . "newsreader")
-        :desc "Check news" "n" #'elfeed ))
-#+end_src
 ** Ox-Pandoc
 #+begin_src emacs-lisp
 
@@ -319,9 +324,20 @@ All the faces for here are based on my newsboat configuration.
 #+end_src
 ** Org-Mode
 #+begin_src elisp
-(map! :leader
-      (:prefix-map ("o" . "Org Mode")
-       :desc "Open agenda (Planner View)" "a" #'jh/open-agenda
-       :desc "Open agenda" "A" #'org-agenda))
+ (map! :leader
+       (:prefix-map ("a" . "Org Agenda")
+        :desc "Open agenda (Planner View)" "p" #'jh/open-agenda
+        :desc "Open agenda" "w" #'org-agenda))
 #+end_src
+** Elfeed
+#+begin_src emacs-lisp
+(map! :map elfeed-search-mode-map
+      :after elfeed-search
+      :n "A" #'elfeed-mark-all-as-read)
+
+(map! :leader
+      (:prefix-map ("n" . "newsreader")
+        :desc "Check news" "n" #'elfeed ))
+#+end_src
+
 ** Magit
