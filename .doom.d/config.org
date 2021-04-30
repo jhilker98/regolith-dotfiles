@@ -238,16 +238,18 @@ I want to have ox-hugo as a backend.
  elfeed-db-directory "~/.elfeed/"
  rmh-elfeed-org-files (list "~/Dropbox/elfeed/elfeed.org")
  elfeed-search-title-min-width 80
- elfeed-search-print-entry-function '+jh/elfeed-search-print-entry
+ elfeed-search-print-entry-function 'jh/elfeed-search-print-entry
+ elfeed-search-header-function 'jh/elfeed-entry-header
  elfeed-search-filter "@1-week-ago +unread")
- ;elfeed-show-mode-hook
- ;(lambda ()
- ;           (set-face-attribute 'variable-pitch (selected-frame) :font (font-spec :family "Iosevka" :size 16))))
- (use-package! elfeed-goodies)
-;(elfeed-goodies/setup)
-;(setq
-; elfeed-goodies/tag-column-width 0
-; elfeed-goodies/feed-source-column-width 30)
+                                        ;elfeed-show-mode-hook
+                                        ;(lambda ()
+                                        ;           (set-face-attribute 'variable-pitch (selected-frame) :font (font-spec :family "Iosevka" :size 16))))
+(use-package! elfeed-goodies)
+                                        ;(elfeed-goodies/setup)
+                                        ;(setq
+                                        ; elfeed-search-header-function 'jh/elfeed-entry-header
+                                        ; elfeed-goodies/tag-column-width 0
+                                        ; elfeed-goodies/feed-source-column-width 30)
 #+end_src
 *** Usability Enhancements
 **** Mark All As Read
@@ -280,47 +282,71 @@ All the faces for here are based on my newsboat configuration.
 ;      elfeed-search-face-alist)
 
 #+end_src
-**** Elfeed Search Layout
+**** Layouts
+***** Header Layout
 #+begin_src emacs-lisp
-(defun +jh/elfeed-search-print-entry (entry)
-    "Print ENTRY to the buffer."
- (let* ((elfeed-goodies/tag-column-width 40)
-           (elfeed-goodies/feed-source-column-width 30)
-           (title (or (elfeed-meta entry :title) (elfeed-entry-title entry) ""))
-           (title-faces (elfeed-search--faces (elfeed-entry-tags entry)))
-           (feed (elfeed-entry-feed entry))
-           (feed-title
-            (when feed
-              (or (elfeed-meta feed :title) (elfeed-feed-title feed))))
-           (tags (mapcar #'symbol-name (elfeed-entry-tags entry)))
-           (tags-str (concat (mapconcat 'identity tags ",")))
+(defun jh/elfeed-entry-header ()
+  (cond
+   ((zerop (elfeed-db-last-update))
+    (elfeed-search--intro-header))
+   ((> (elfeed-queue-count-total) 0)
+    (let ((total (elfeed-queue-count-total))
+          (in-process (elfeed-queue-count-active)))
+      (format "%d jobs pending, %d active..."
+              (- total in-process) in-process)))
+   ((let* ((db-time (seconds-to-time (elfeed-db-last-update)))
+           (update (format-time-string "%d %b. %Y %H:%M" db-time))
+           (unread (elfeed-search--count-unread)))
+      (format "%3s" "Title"
+                                        ;(propertize update 'face 'elfeed-search-last-update-face)
+                                        ;(propertize unread 'face 'elfeed-search-unread-count-face)
+              (cond
+               (elfeed-search-filter-active "")
+               ((string-match-p "[^ ]" elfeed-search-filter)
+                (concat ", " (propertize elfeed-search-filter
+                                         'face 'elfeed-search-filter-face)))
+               ("")))))))
+#+end_src
+***** Entry Layout
+#+begin_src emacs-lisp
+(defun jh/elfeed-search-print-entry (entry)
+  "Print ENTRY to the buffer."
+  (let* ((elfeed-goodies/tag-column-width 40)
+         (elfeed-goodies/feed-source-column-width 30)
+         (title (or (elfeed-meta entry :title) (elfeed-entry-title entry) ""))
+         (title-faces (elfeed-search--faces (elfeed-entry-tags entry)))
+         (feed (elfeed-entry-feed entry))
+         (feed-title
+          (when feed
+            (or (elfeed-meta feed :title) (elfeed-feed-title feed))))
+         (tags (mapcar #'symbol-name (elfeed-entry-tags entry)))
+         (tags-str (concat (mapconcat 'identity tags ",")))
 
-           (title-width (- (window-width) 10 elfeed-search-trailing-width))
-           (title-column (elfeed-format-column
+         (title-width (- (window-width) 10 elfeed-search-trailing-width))
+         (title-column (elfeed-format-column
                         title (elfeed-clamp
                                elfeed-search-title-min-width
                                title-width
                                elfeed-search-title-max-width)
                         :left))
 
-           (tag-column (elfeed-format-column
-                        tags-str (elfeed-clamp (length tags-str)
-                                               elfeed-goodies/tag-column-width
-                                               elfeed-goodies/tag-column-width)
-                        :left))
+         (tag-column (elfeed-format-column
+                      tags-str (elfeed-clamp (length tags-str)
+                                             elfeed-goodies/tag-column-width
+                                             elfeed-goodies/tag-column-width)
+                      :left))
 
-           (feed-column (elfeed-format-column
-                         feed-title (elfeed-clamp elfeed-goodies/feed-source-column-width
-                                                  elfeed-goodies/feed-source-column-width
-                                                  elfeed-goodies/feed-source-column-width)
-                         :left)))
+         (feed-column (elfeed-format-column
+                       feed-title (elfeed-clamp elfeed-goodies/feed-source-column-width
+                                                elfeed-goodies/feed-source-column-width
+                                                elfeed-goodies/feed-source-column-width)
+                       :left)))
 
 
-        (insert (propertize title-column 'face title-faces 'kbd-help title) " ")
-        (insert (propertize feed-column 'face 'elfeed-search-feed-face) " ")
-        (insert (propertize tag-column 'face 'elfeed-search-tag-face) " ")
-      (setq-local line-spacing 0.2)))
-
+    (insert (propertize title-column 'face title-faces 'kbd-help title) " ")
+    (insert (propertize feed-column 'face 'elfeed-search-feed-face) " ")
+    (insert (propertize tag-column 'face 'elfeed-search-tag-face) " ")
+    (setq-local line-spacing 0.2)))
 #+end_src
 ** Ox-Pandoc
 #+begin_src emacs-lisp
@@ -349,6 +375,13 @@ I want to try mu4e.
 #+begin_src emacs-lisp
 (map! :leader
       :desc "Open like spacemacs" "SPC" #'counsel-M-x)
+#+end_src
+*** Agenda Keybindings
+#+begin_src emacs-lisp
+(map! :leader
+      (:prefix ("o" . "open")
+       :desc "Open agenda" "a" #'jh/open-planner
+       :desc "Open week ahead" "w" #'jh/open-week-agenda))
 #+end_src
 ** Org-Mode
 #+begin_src elisp
