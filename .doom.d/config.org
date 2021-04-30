@@ -2,6 +2,30 @@
 #+author: Jacob Hilker
 #+description: Jacob's Doom Emacs config.
 #+property: header-args :tangle config.el
+#+startup: overview
+
+* Table of Contents :toc:
+- [[#personal-info][Personal Info]]
+- [[#ui-tweaks][UI Tweaks]]
+  - [[#hiding-formatting-characters][Hiding Formatting Characters]]
+  - [[#theme][Theme]]
+  - [[#ellipsis][Ellipsis]]
+  - [[#fonts][Fonts]]
+- [[#org-mode-config][Org Mode Config]]
+- [[#misc-tweaks][Misc. Tweaks]]
+  - [[#line-numbers][Line Numbers]]
+- [[#package-configs][Package Configs]]
+  - [[#org-super-agenda][Org-Super-Agenda]]
+  - [[#elfeed][Elfeed]]
+  - [[#ox-pandoc][Ox-Pandoc]]
+- [[#keybinds][Keybinds]]
+  - [[#general-keybinds][General Keybinds]]
+  - [[#org-mode][Org-Mode]]
+  - [[#elfeed-1][Elfeed]]
+  - [[#zoom-in-and-out][Zoom In and Out]]
+  - [[#magit][Magit]]
+- [[#mu4e][Mu4e]]
+  - [[#account-setup][Account Setup]]
 
 * Personal Info
 #+begin_src emacs-lisp
@@ -9,37 +33,30 @@
       user-mail-address "jacob.hilker2@gmail.com")
 #+end_src
 * UI Tweaks
+** Hiding Formatting Characters
+#+begin_src emacs-lisp
+(setq org-hide-emphasis-markers t)
+#+end_src
 ** Theme
+I really like gruvbox.
 #+begin_src elisp
   (setq doom-theme 'doom-gruvbox)
-#+end_src
-*** INPR Font Colors
-This is the section where I define my colors for the faces.
-#+begin_src emacs-lisp
-
-
 #+end_src
 *** Better Faces
 **** Org Mode
 I like having different colors for each face of a heading.
 #+begin_src emacs-lisp
-;(after! org
-;  (custom-set-faces!
-;    '(org-level-1  :inherit outline-1 :foreground "#83a598")
-;    '(org-level-2  :inherit outline-2 :foreground "#fabd2f")
-;    '(org-level-3  :inherit outline-3 :foreground "#d3869b")
-;    '(org-level-4  :inherit outline-4 :foreground "#fb4934")
-;    '(org-level-5  :inherit outline-5 :foreground "#b8bb26" :weight regular)
-;    '(org-level-6  :inherit outline-6 :foreground "#8ec07c" :weight regular)
-;    '(org-level-7  :inherit outline-7 :foreground "#458588" :weight regular)
-;    '(org-level-8  :inherit outline-8 :foreground "#fe8019" :weight regular)))
-
-#+end_src
-**** Treemacs
-I want to use Iosevka for Treemacs.
-#+begin_src emacs-lisp
-
-#+end_src
+(after! org
+  (custom-set-faces!
+    '(org-level-1  :inherit outline-1 :foreground "#83a598")
+    '(org-level-2  :inherit outline-3 :foreground "#d3869b")
+    '(org-level-3  :inherit outline-2 :foreground "#fabd2f")
+    '(org-level-4  :inherit outline-4 :foreground "#fb4934")
+    '(org-level-5  :inherit outline-5 :foreground "#83a598" :weight regular)
+    '(org-level-6  :inherit outline-6 :foreground "#d3869b" :weight regular)
+    '(org-level-7  :inherit outline-7 :foreground "#fabd2f" :weight regular)
+    '(org-level-8  :inherit outline-8 :foreground "#fb4934" :weight regular)))
+    #+end_src
 *** Dashboard
 ** Ellipsis
 I like a little arrow instead of a regular ellipsis.
@@ -48,9 +65,15 @@ I like a little arrow instead of a regular ellipsis.
 #+end_src
 ** Fonts
 #+begin_src emacs-lisp
-(setq doom-font (font-spec :family "Iosevka Nerd Font" :size 14))
-#+end_src
+(setq doom-font (font-spec :family "Iosevka Nerd Font" :size 14)
+      doom-variable-pitch-font (font-spec :family "Roboto" :size 14)
+)
 
+(after! doom-themes
+  (setq
+        doom-themes-enable-bold t
+        doom-themes-enable-italic t))
+#+end_src
 * Org Mode Config
 I like to keep my org-mode stuff in Dropbox. In addition, I like to use my notes file and my regular genda as my agenda files. I also have other todo keywords and faces for those keywords.
 #+begin_src emacs-lisp
@@ -237,6 +260,13 @@ I like to keep my org-mode stuff in Dropbox. In addition, I like to use my notes
  (org-agenda nil "p")
 )
 #+end_src
+***** Open Weekly Agenda
+#+begin_src emacs-lisp
+(defun jh/open-week-agenda ()
+ (interactive)
+ (org-agenda nil "w")
+)
+#+end_src
 ** Elfeed
 #+begin_src emacs-lisp
 (after! elfeed-org)
@@ -343,8 +373,14 @@ All the faces for here are based on my newsboat configuration.
 #+begin_src elisp
  (map! :leader
        (:prefix-map ("a" . "Org Agenda")
-        :desc "Open agenda (Planner View)" "p" #'jh/open-agenda
-        :desc "Open agenda" "w" #'org-agenda))
+        :desc "Open planner" "p" #'jh/open-agenda
+        :desc "Open weekly agenda" "w" #'jh/open-week-agenda))
+#+end_src
+*** Babel
+For extracting source code.
+#+begin_src emacs-lisp
+                                        ;(map! :leader
+                                        ;      :desc "Org babel tangle" "m B" #'org-babel-tangle)
 #+end_src
 ** Elfeed
 #+begin_src emacs-lisp
@@ -356,8 +392,26 @@ All the faces for here are based on my newsboat configuration.
       (:prefix-map ("n" . "newsreader")
         :desc "Check news" "n" #'elfeed ))
 #+end_src
-** Zoom In and Out
+** TODO Zoom In and Out
 #+begin_src emacs-lisp
 
 #+end_src
-** Magit
+** TODO Magit
+* Mu4e
+I want to try mu4e.
+#+begin_src emacs-lisp
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
+;; I have my mbsyncrc in a different folder on my system, to keep it separate from the
+;; mbsyncrc available publicly in my dotfiles. You MUST edit the following line.
+;; Be sure that the following command is: "mbsync -c ~/.config/mu4e/mbsyncrc -a"
+(setq mu4e-maildir "~/.local/share/mail"
+      mu4e-get-mail-command "mbsync -a"
+      mu4e-update-interval  300
+      mu4e-main-buffer-hide-personal-addresses t
+      message-send-mail-function 'smtpmail-send-it
+      starttls-use-gnutls t)
+#+end_src
+** Account Setup
+#+begin_src emacs-lisp
+
+#+end_src
