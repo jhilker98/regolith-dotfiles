@@ -4,29 +4,6 @@
 #+property: header-args :tangle config.el
 #+startup: overview
 
-* Table of Contents :toc:
-- [[#personal-info][Personal Info]]
-- [[#ui-tweaks][UI Tweaks]]
-  - [[#hiding-formatting-characters][Hiding Formatting Characters]]
-  - [[#theme][Theme]]
-  - [[#ellipsis][Ellipsis]]
-  - [[#fonts][Fonts]]
-- [[#org-mode-config][Org Mode Config]]
-- [[#misc-tweaks][Misc. Tweaks]]
-  - [[#line-numbers][Line Numbers]]
-- [[#package-configs][Package Configs]]
-  - [[#org-super-agenda][Org-Super-Agenda]]
-  - [[#elfeed][Elfeed]]
-  - [[#ox-pandoc][Ox-Pandoc]]
-- [[#keybinds][Keybinds]]
-  - [[#general-keybinds][General Keybinds]]
-  - [[#org-mode][Org-Mode]]
-  - [[#elfeed-1][Elfeed]]
-  - [[#zoom-in-and-out][Zoom In and Out]]
-  - [[#magit][Magit]]
-- [[#mu4e][Mu4e]]
-  - [[#account-setup][Account Setup]]
-
 * Personal Info
 #+begin_src emacs-lisp
 (setq user-full-name "Jacob Hilker"
@@ -43,7 +20,7 @@ I really like gruvbox.
   (setq doom-theme 'doom-gruvbox)
 #+end_src
 *** Better Faces
-**** Org Mode
+**** Org-Mode
 I like having different colors for each face of a heading.
 #+begin_src emacs-lisp
 (after! org
@@ -56,7 +33,7 @@ I like having different colors for each face of a heading.
     '(org-level-6  :inherit outline-6 :foreground "#d3869b" :weight regular)
     '(org-level-7  :inherit outline-7 :foreground "#fabd2f" :weight regular)
     '(org-level-8  :inherit outline-8 :foreground "#fb4934" :weight regular)))
-    #+end_src
+#+end_src
 *** Dashboard
 ** Ellipsis
 I like a little arrow instead of a regular ellipsis.
@@ -65,14 +42,13 @@ I like a little arrow instead of a regular ellipsis.
 #+end_src
 ** Fonts
 #+begin_src emacs-lisp
-(setq doom-font (font-spec :family "Iosevka Nerd Font" :size 14)
-      doom-variable-pitch-font (font-spec :family "Roboto" :size 14)
-)
+(setq doom-font (font-spec :family "Iosevka Nerd Font" :size 14))
+                                        ;doom-variable-pitch-font (font-spec :family "Roboto" :size 14))
 
 (after! doom-themes
   (setq
-        doom-themes-enable-bold t
-        doom-themes-enable-italic t))
+   doom-themes-enable-bold t
+   doom-themes-enable-italic t))
 #+end_src
 * Org Mode Config
 I like to keep my org-mode stuff in Dropbox. In addition, I like to use my notes file and my regular genda as my agenda files. I also have other todo keywords and faces for those keywords.
@@ -117,122 +93,106 @@ I like to keep my org-mode stuff in Dropbox. In addition, I like to use my notes
 **** Planner
 #+begin_src emacs-lisp
  (setq org-agenda-custom-commands
-              '(("p" "Planner"
-                    (
-                      (agenda "" ((org-agenda-span 'day)
-                      (org-agenda-use-time-grid t)
-                      (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
-                      (org-agenda-show-all-dates t)
-                      (org-agenda-compact-blocks nil)
-                      (org-agenda-overriding-header "")
-                      (org-agenda-start-day "+0d")
-                      (org-super-agenda-groups
-                       '(
-                           (:name "Habits"
-                            :habit t
-                            :category "HABIT"
-                            :order 2)
+       '(("p" "Planner"
+          (
+           (agenda "" ((org-agenda-span 'day)
+                       (org-agenda-use-time-grid t)
+                       (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
+                       (org-agenda-show-all-dates t)
+                       (org-agenda-compact-blocks nil)
+                       (org-agenda-overriding-header "")
+                       (org-agenda-start-day "+0d")
+                       (org-super-agenda-groups
+                        '(
+                          (:name "Habits"
+                           :habit t
+                           :category "HABIT"
+                           :order 2)
 
-                            (:name "Chores"
-                            :habit t
-                            :category "CHORE"
-                            :order 2)
+                          (:name "Chores"
+                           :habit t
+                           :category "CHORE"
+                           :order 2)
 
 
 
-                               (:name none
-                                :discard (:todo "DONE")
-                                :time-grid t
-                                :date today
-                                :scheduled today
-                                :deadline today
-                                :order 1)))))
+                          (:name none
+                           :discard (:todo "DONE")
+                           :time-grid t
+                           :date today
+                           :scheduled today
+                           :deadline today
+                           :order 1)))))
 
-          (agenda "" ((org-agenda-overriding-header "Coming Up Soon")
-	                ;
-                      ; (org-agenda-use-time-grid nil)
-                      (org-agenda-time-grid '((daily today weekly require-timed)()() "----------------------" nil))
-		               (org-agenda-start-day "+1d")
-     ;                   (org-agenda-todo-ignore-with-date t)
-                      ; (org-agenda-format-date "\n%d %b (%a.)\n")
+           (agenda "" ((org-agenda-overriding-header "Coming Up Soon")
+                                         ;
+                                         ; (org-agenda-use-time-grid nil)
+                       (org-agenda-time-grid '((daily today weekly require-timed)()() "----------------------" nil))
+                       (org-agenda-start-day "+1d")
+                                         ;                   (org-agenda-todo-ignore-with-date t)
+                                         ; (org-agenda-format-date "\n%d %b (%a.)\n")
 
                        (org-agenda-format-date "\n%d %b (%a.)")
-			;		   (concat (make-string (window-width) 9472) "\n")
-             ;         (org-agenda-compact-blocks t)
+                                         ;		   (concat (make-string (window-width) 9472) "\n")
+                                         ;         (org-agenda-compact-blocks t)
                        (org-agenda-span 2)
-                      ;(org-agenda-format-date "%d %b")
+                                         ;(org-agenda-format-date "%d %b")
                        (org-super-agenda-groups
-                         '(
+                        '(
 
-                         (:name "Habits"
-                         :habit t
-                         :category "HABIT"
-                         :order 6)
+                          (:name "Habits"
+                           :habit t
+                           :category "HABIT"
+                           :order 6)
 
-                         (:name "Chores"
-                         :habit t
-                         :category "CHORE"
-                         :order 6)
-
-
-     ;                 (:name "Projects"
-     ;                 :category "PROJECT"
-     ;                 :order 5)
+                          (:name "Chores"
+                           :habit t
+                           :category "CHORE"
+                           :order 6)
 
 
-    (:name "Personal"
-    :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
-    :order 4)
+                          (:name "Personal"
+                           :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
+                           :order 4)
 
-;
-;    (:name "Someday"
-;     :and (:not (:category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO")) :todo "SOMEDAY")
-;     :order 5)
+                                         ;
+                                         ;    (:name "Someday"
+                                         ;     :and (:not (:category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO")) :todo "SOMEDAY")
+                                         ;     :order 5)
 
-    (:name "Overdue"
-      :deadline past
-      :scheduled past
-      :face '(:foreground "red")
-      :order 3)
-;
-;
-    (:name "Classwork and Meetings"
-     :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING")
-     :order 1)))))
+                          (:name "Overdue"
+                           :deadline past
+                           :scheduled past
+                           :face '(:foreground "red")
+                           :order 3)
+                                         ;
+                                         ;
+                          (:name "Classwork and Meetings"
+                           :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING")
+                           :order 1)))))
 
-     (alltodo "" ((org-agenda-overriding-header "To Do")
-                  (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
-                  (org-agenda-sorting-strategy '(todo-state-up category-up ))
-                  (org-super-agenda-groups '(
-                  (:name "Classwork and Meetings"
-                  :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING" "CLASSES")
-                  :order 1)
+           (alltodo "" ((org-agenda-overriding-header "To Do")
+                        (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+                        (org-agenda-sorting-strategy '(todo-state-up category-up ))
+                        (org-super-agenda-groups '(
+                                                   (:name "Classwork and Meetings"
+                                                    :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING" "CLASSES")
+                                                    :order 1)
 
-                  (:name "Personal"
-                  :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
-                  :order 2)
+                                                   (:name "Personal"
+                                                    :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
+                                                    :order 2)
 
-                  (:name "Projects"
-                   :todo "PROJECT"
-                   :category "PROJECT"
-                   :order 3)
-
-
-                 (:discard (:category "HABIT"))
-                 (:discard (:category "CHORE"))
-
-))))))))
+                                                   (:name "Projects"
+                                                    :todo "PROJECT"
+                                                    :category "PROJECT"
+                                                    :order 3)
 
 
-;
- ;  (:name "Coming Up Soon"
- ;   :scheduled future
- ;   :deadline future
- ;   :date t))))
+                                                   (:discard (:category "HABIT"))
+                                                   (:discard (:category "CHORE"))
 
-;
-;    (org-agenda-max-todos 11)
-;    ;(org-agenda-sorting-strategy '( ts-up category-up todo-state-up))
+                                                   ))))))))
 #+end_src
 **** Week Ahead
 #+begin_src emacs-lisp
@@ -255,10 +215,10 @@ I like to keep my org-mode stuff in Dropbox. In addition, I like to use my notes
 **** Helper Commands
 ***** Open Planner
 #+begin_src emacs-lisp
-(defun jh/open-agenda ()
-(interactive)
- (org-agenda nil "p")
-)
+(defun jh/open-planner ()
+  (interactive)
+  (org-agenda nil "p")
+  )
 #+end_src
 ***** Open Weekly Agenda
 #+begin_src emacs-lisp
@@ -363,6 +323,24 @@ All the faces for here are based on my newsboat configuration.
 #+begin_src emacs-lisp
 
 #+end_src
+** Mu4e
+I want to try mu4e.
+#+begin_src emacs-lisp
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
+;; I have my mbsyncrc in a different folder on my system, to keep it separate from the
+;; mbsyncrc available publicly in my dotfiles. You MUST edit the following line.
+;; Be sure that the following command is: "mbsync -c ~/.config/mu4e/mbsyncrc -a"
+(setq mu4e-maildir "~/.local/share/mail"
+      mu4e-get-mail-command "mbsync -a"
+      mu4e-update-interval  300
+      mu4e-main-buffer-hide-personal-addresses t
+      message-send-mail-function 'smtpmail-send-it
+      starttls-use-gnutls t)
+#+end_src
+*** Account Setup
+#+begin_src emacs-lisp
+
+#+end_src
 * Keybinds
 ** General Keybinds
 #+begin_src emacs-lisp
@@ -371,10 +349,9 @@ All the faces for here are based on my newsboat configuration.
 #+end_src
 ** Org-Mode
 #+begin_src elisp
- (map! :leader
-       (:prefix-map ("a" . "Org Agenda")
-        :desc "Open planner" "p" #'jh/open-agenda
-        :desc "Open weekly agenda" "w" #'jh/open-week-agenda))
+(map! :leader
+      (:prefix ("O" . "org-mode")
+       :desc "Export org" "e" #'org-export-dispatch))
 #+end_src
 *** Babel
 For extracting source code.
@@ -392,26 +369,13 @@ For extracting source code.
       (:prefix-map ("n" . "newsreader")
         :desc "Check news" "n" #'elfeed ))
 #+end_src
-** TODO Zoom In and Out
-#+begin_src emacs-lisp
-
-#+end_src
 ** TODO Magit
-* Mu4e
-I want to try mu4e.
 #+begin_src emacs-lisp
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
-;; I have my mbsyncrc in a different folder on my system, to keep it separate from the
-;; mbsyncrc available publicly in my dotfiles. You MUST edit the following line.
-;; Be sure that the following command is: "mbsync -c ~/.config/mu4e/mbsyncrc -a"
-(setq mu4e-maildir "~/.local/share/mail"
-      mu4e-get-mail-command "mbsync -a"
-      mu4e-update-interval  300
-      mu4e-main-buffer-hide-personal-addresses t
-      message-send-mail-function 'smtpmail-send-it
-      starttls-use-gnutls t)
+(map! :leader
+      (:prefix ("o" . "open")
+       :desc "Open planner" "a" #'jh/open-planner))
 #+end_src
-** Account Setup
+** TODO Zoom In and Out
 #+begin_src emacs-lisp
 
 #+end_src
