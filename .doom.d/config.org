@@ -77,6 +77,9 @@ I like to keep my org-mode stuff in Dropbox. In addition, I like to use my notes
 )
 
 #+end_src
+** Export Backends
+*** Hugo
+I want to have ox-hugo as a backend.
 * Misc. Tweaks
 ** Line Numbers
 #+begin_src emacs-lisp
@@ -372,8 +375,10 @@ For extracting source code.
 ** TODO Magit
 #+begin_src emacs-lisp
 (map! :leader
-      (:prefix ("o" . "open")
-       :desc "Open planner" "a" #'jh/open-planner))
+      (:prefix ("g" . "git")
+       :desc "Stage hunk" "h" #'git-gutter:stage-hunk
+       :desc "Stage file" "H" #'magit-stage-file
+       :desc "Magit status" "s" #'magit-status))
 #+end_src
 ** TODO Zoom In and Out
 #+begin_src emacs-lisp
