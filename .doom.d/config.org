@@ -236,16 +236,16 @@ I want to have ox-hugo as a backend.
 (elfeed-org)
 (setq
  elfeed-db-directory "~/.elfeed/"
- rmh-elfeed-org-files (list "~/Dropbox/elfeed/elfeed.org")
+ rmh-elfeed-org-files (list "~/Dropbox/org/elfeed.org")
  elfeed-search-title-min-width 80
- elfeed-search-print-entry-function 'jh/elfeed-search-print-entry
- elfeed-search-header-function 'jh/elfeed-entry-header
+ ;elfeed-search-print-entry-function 'jh/elfeed-search-print-entry
+ ;elfeed-search-header-function 'jh/elfeed-entry-header
  elfeed-search-filter "@1-week-ago +unread")
                                         ;elfeed-show-mode-hook
                                         ;(lambda ()
                                         ;           (set-face-attribute 'variable-pitch (selected-frame) :font (font-spec :family "Iosevka" :size 16))))
 (use-package! elfeed-goodies)
-                                        ;(elfeed-goodies/setup)
+                                        (elfeed-goodies/setup)
                                         ;(setq
                                         ; elfeed-search-header-function 'jh/elfeed-entry-header
                                         ; elfeed-goodies/tag-column-width 0
@@ -392,8 +392,8 @@ I want to try mu4e.
 *** Babel
 For extracting source code.
 #+begin_src emacs-lisp
-                                        ;(map! :leader
-                                        ;      :desc "Org babel tangle" "m B" #'org-babel-tangle)
+                                        (map! :leader
+                                              :desc "Org babel tangle" "m B" #'org-babel-tangle)
 #+end_src
 ** Elfeed
 #+begin_src emacs-lisp

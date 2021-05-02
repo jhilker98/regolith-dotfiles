@@ -52,107 +52,107 @@
 (after! org-super-agenda
 (org-super-agenda-mode))
 
- (setq org-agenda-custom-commands
-       '(("p" "Planner"
-          (
-           (agenda "" ((org-agenda-span 'day)
-                       (org-agenda-use-time-grid t)
-                       (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
-                       (org-agenda-show-all-dates t)
-                       (org-agenda-compact-blocks nil)
-                       (org-agenda-overriding-header "")
-                       (org-agenda-start-day "+0d")
-                       (org-super-agenda-groups
-                        '(
-                          (:name "Habits"
-                           :habit t
-                           :category "HABIT"
-                           :order 2)
+(setq org-agenda-custom-commands
+      '(("p" "Planner"
+         (
+          (agenda "" ((org-agenda-span 'day)
+                      (org-agenda-use-time-grid t)
+                      (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
+                      (org-agenda-show-all-dates t)
+                      (org-agenda-compact-blocks nil)
+                      (org-agenda-overriding-header "")
+                      (org-agenda-start-day "+0d")
+                      (org-super-agenda-groups
+                       '(
+                         (:name "Habits"
+                          :habit t
+                          :category "HABIT"
+                          :order 2)
 
-                          (:name "Chores"
-                           :habit t
-                           :category "CHORE"
-                           :order 2)
-
-
-
-                          (:name none
-                           :discard (:todo "DONE")
-                           :time-grid t
-                           :date today
-                           :scheduled today
-                           :deadline today
-                           :order 1)))))
-
-           (agenda "" ((org-agenda-overriding-header "Coming Up Soon")
-                                         ;
-                                         ; (org-agenda-use-time-grid nil)
-                       (org-agenda-time-grid '((daily today weekly require-timed)()() "----------------------" nil))
-                       (org-agenda-start-day "+1d")
-                                         ;                   (org-agenda-todo-ignore-with-date t)
-                                         ; (org-agenda-format-date "\n%d %b (%a.)\n")
-
-                       (org-agenda-format-date "\n%d %b (%a.)")
-                                         ;		   (concat (make-string (window-width) 9472) "\n")
-                                         ;         (org-agenda-compact-blocks t)
-                       (org-agenda-span 2)
-                                         ;(org-agenda-format-date "%d %b")
-                       (org-super-agenda-groups
-                        '(
-
-                          (:name "Habits"
-                           :habit t
-                           :category "HABIT"
-                           :order 6)
-
-                          (:name "Chores"
-                           :habit t
-                           :category "CHORE"
-                           :order 6)
+                         (:name "Chores"
+                          :habit t
+                          :category "CHORE"
+                          :order 2)
 
 
-                          (:name "Personal"
-                           :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
-                           :order 4)
 
-                                         ;
-                                         ;    (:name "Someday"
-                                         ;     :and (:not (:category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO")) :todo "SOMEDAY")
-                                         ;     :order 5)
+                         (:name none
+                          :discard (:todo "DONE")
+                          :time-grid t
+                          :date today
+                          :scheduled today
+                          :deadline today
+                          :order 1)))))
 
-                          (:name "Overdue"
-                           :deadline past
-                           :scheduled past
-                           :face '(:foreground "red")
-                           :order 3)
-                                         ;
-                                         ;
-                          (:name "Classwork and Meetings"
-                           :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING")
-                           :order 1)))))
+          (agenda "" ((org-agenda-overriding-header "Coming Up Soon")
+                                        ;
+                                        ; (org-agenda-use-time-grid nil)
+                      (org-agenda-time-grid '((daily today weekly require-timed)()() "----------------------" nil))
+                      (org-agenda-start-day "+1d")
+                                        ;                   (org-agenda-todo-ignore-with-date t)
+                                        ; (org-agenda-format-date "\n%d %b (%a.)\n")
 
-           (alltodo "" ((org-agenda-overriding-header "To Do")
-                        (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
-                        (org-agenda-sorting-strategy '(todo-state-up category-up ))
-                        (org-super-agenda-groups '(
-                                                   (:name "Classwork and Meetings"
-                                                    :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING" "CLASSES")
-                                                    :order 1)
+                      (org-agenda-format-date "\n%d %b (%a.)")
+                                        ;		   (concat (make-string (window-width) 9472) "\n")
+                                        ;         (org-agenda-compact-blocks t)
+                      (org-agenda-span 2)
+                                        ;(org-agenda-format-date "%d %b")
+                      (org-super-agenda-groups
+                       '(
 
-                                                   (:name "Personal"
-                                                    :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
-                                                    :order 2)
+                         (:name "Habits"
+                          :habit t
+                          :category "HABIT"
+                          :order 6)
 
-                                                   (:name "Projects"
-                                                    :todo "PROJECT"
-                                                    :category "PROJECT"
-                                                    :order 3)
+                         (:name "Chores"
+                          :habit t
+                          :category "CHORE"
+                          :order 6)
 
 
-                                                   (:discard (:category "HABIT"))
-                                                   (:discard (:category "CHORE"))
+                         (:name "Personal"
+                          :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
+                          :order 4)
 
-                                                   ))))))))
+                                        ;
+                                        ;    (:name "Someday"
+                                        ;     :and (:not (:category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO")) :todo "SOMEDAY")
+                                        ;     :order 5)
+
+                         (:name "Overdue"
+                          :deadline past
+                          :scheduled past
+                          :face '(:foreground "red")
+                          :order 3)
+                                        ;
+                                        ;
+                         (:name "Classwork and Meetings"
+                          :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING")
+                          :order 1)))))
+
+          (alltodo "" ((org-agenda-overriding-header "To Do")
+                       (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+                       (org-agenda-sorting-strategy '(todo-state-up category-up ))
+                       (org-super-agenda-groups '(
+                                                  (:name "Classwork and Meetings"
+                                                   :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING" "CLASSES")
+                                                   :order 1)
+
+                                                  (:name "Personal"
+                                                   :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
+                                                   :order 2)
+
+                                                  (:name "Projects"
+                                                   :todo "PROJECT"
+                                                   :category "PROJECT"
+                                                   :order 3)
+
+
+                                                  (:discard (:category "HABIT"))
+                                                  (:discard (:category "CHORE"))
+
+                                                  ))))))))
 
 (add-to-list 'org-agenda-custom-commands
 '("w" "Week Ahead" (
@@ -182,18 +182,20 @@
 (elfeed-org)
 (setq
  elfeed-db-directory "~/.elfeed/"
- rmh-elfeed-org-files (list "~/Dropbox/elfeed/elfeed.org")
+ rmh-elfeed-org-files (list "~/Dropbox/org/elfeed.org")
  elfeed-search-title-min-width 80
- elfeed-search-print-entry-function '+jh/elfeed-search-print-entry
+ ;elfeed-search-print-entry-function 'jh/elfeed-search-print-entry
+ ;elfeed-search-header-function 'jh/elfeed-entry-header
  elfeed-search-filter "@1-week-ago +unread")
- ;elfeed-show-mode-hook
- ;(lambda ()
- ;           (set-face-attribute 'variable-pitch (selected-frame) :font (font-spec :family "Iosevka" :size 16))))
- (use-package! elfeed-goodies)
-;(elfeed-goodies/setup)
-;(setq
-; elfeed-goodies/tag-column-width 0
-; elfeed-goodies/feed-source-column-width 30)
+                                        ;elfeed-show-mode-hook
+                                        ;(lambda ()
+                                        ;           (set-face-attribute 'variable-pitch (selected-frame) :font (font-spec :family "Iosevka" :size 16))))
+(use-package! elfeed-goodies)
+                                        (elfeed-goodies/setup)
+                                        ;(setq
+                                        ; elfeed-search-header-function 'jh/elfeed-entry-header
+                                        ; elfeed-goodies/tag-column-width 0
+                                        ; elfeed-goodies/feed-source-column-width 30)
 
 (defun elfeed-mark-all-as-read ()
            (interactive)
@@ -214,44 +216,66 @@
 ;(push '(campaigns jh/campaign-elfeed-face)
 ;      elfeed-search-face-alist)
 
-(defun +jh/elfeed-search-print-entry (entry)
-    "Print ENTRY to the buffer."
- (let* ((elfeed-goodies/tag-column-width 40)
-           (elfeed-goodies/feed-source-column-width 30)
-           (title (or (elfeed-meta entry :title) (elfeed-entry-title entry) ""))
-           (title-faces (elfeed-search--faces (elfeed-entry-tags entry)))
-           (feed (elfeed-entry-feed entry))
-           (feed-title
-            (when feed
-              (or (elfeed-meta feed :title) (elfeed-feed-title feed))))
-           (tags (mapcar #'symbol-name (elfeed-entry-tags entry)))
-           (tags-str (concat (mapconcat 'identity tags ",")))
+(defun jh/elfeed-entry-header ()
+  (cond
+   ((zerop (elfeed-db-last-update))
+    (elfeed-search--intro-header))
+   ((> (elfeed-queue-count-total) 0)
+    (let ((total (elfeed-queue-count-total))
+          (in-process (elfeed-queue-count-active)))
+      (format "%d jobs pending, %d active..."
+              (- total in-process) in-process)))
+   ((let* ((db-time (seconds-to-time (elfeed-db-last-update)))
+           (update (format-time-string "%d %b. %Y %H:%M" db-time))
+           (unread (elfeed-search--count-unread)))
+      (format "%3s" "Title"
+                                        ;(propertize update 'face 'elfeed-search-last-update-face)
+                                        ;(propertize unread 'face 'elfeed-search-unread-count-face)
+              (cond
+               (elfeed-search-filter-active "")
+               ((string-match-p "[^ ]" elfeed-search-filter)
+                (concat ", " (propertize elfeed-search-filter
+                                         'face 'elfeed-search-filter-face)))
+               ("")))))))
 
-           (title-width (- (window-width) 10 elfeed-search-trailing-width))
-           (title-column (elfeed-format-column
+(defun jh/elfeed-search-print-entry (entry)
+  "Print ENTRY to the buffer."
+  (let* ((elfeed-goodies/tag-column-width 40)
+         (elfeed-goodies/feed-source-column-width 30)
+         (title (or (elfeed-meta entry :title) (elfeed-entry-title entry) ""))
+         (title-faces (elfeed-search--faces (elfeed-entry-tags entry)))
+         (feed (elfeed-entry-feed entry))
+         (feed-title
+          (when feed
+            (or (elfeed-meta feed :title) (elfeed-feed-title feed))))
+         (tags (mapcar #'symbol-name (elfeed-entry-tags entry)))
+         (tags-str (concat (mapconcat 'identity tags ",")))
+
+         (title-width (- (window-width) 10 elfeed-search-trailing-width))
+         (title-column (elfeed-format-column
                         title (elfeed-clamp
                                elfeed-search-title-min-width
                                title-width
                                elfeed-search-title-max-width)
                         :left))
 
-           (tag-column (elfeed-format-column
-                        tags-str (elfeed-clamp (length tags-str)
-                                               elfeed-goodies/tag-column-width
-                                               elfeed-goodies/tag-column-width)
-                        :left))
+         (tag-column (elfeed-format-column
+                      tags-str (elfeed-clamp (length tags-str)
+                                             elfeed-goodies/tag-column-width
+                                             elfeed-goodies/tag-column-width)
+                      :left))
 
-           (feed-column (elfeed-format-column
-                         feed-title (elfeed-clamp elfeed-goodies/feed-source-column-width
-                                                  elfeed-goodies/feed-source-column-width
-                                                  elfeed-goodies/feed-source-column-width)
-                         :left)))
+         (feed-column (elfeed-format-column
+                       feed-title (elfeed-clamp elfeed-goodies/feed-source-column-width
+                                                elfeed-goodies/feed-source-column-width
+                                                elfeed-goodies/feed-source-column-width)
+                       :left)))
 
 
-        (insert (propertize title-column 'face title-faces 'kbd-help title) " ")
-        (insert (propertize feed-column 'face 'elfeed-search-feed-face) " ")
-        (insert (propertize tag-column 'face 'elfeed-search-tag-face) " ")
-      (setq-local line-spacing 0.2)))
+    (insert (propertize title-column 'face title-faces 'kbd-help title) " ")
+    (insert (propertize feed-column 'face 'elfeed-search-feed-face) " ")
+    (insert (propertize tag-column 'face 'elfeed-search-tag-face) " ")
+    (setq-local line-spacing 0.2)))
 
 
 
@@ -271,8 +295,13 @@
 (map! :leader
       :desc "Open like spacemacs" "SPC" #'counsel-M-x)
 
-                                        ;(map! :leader
-                                        ;      :desc "Org babel tangle" "m B" #'org-babel-tangle)
+(map! :leader
+      (:prefix ("o" . "open")
+       :desc "Open agenda" "a" #'jh/open-planner
+       :desc "Open week ahead" "w" #'jh/open-week-agenda))
+
+(map! :leader
+      :desc "Org babel tangle" "m B" #'org-babel-tangle)
 
 (map! :map elfeed-search-mode-map
       :after elfeed-search
@@ -283,12 +312,14 @@
         :desc "Check news" "n" #'elfeed ))
 
 (map! :leader
-      (:prefix ("o" . "open")
-       :desc "Open planner" "a" #'jh/open-planner))
+      (:prefix ("g" . "git")
+       :desc "Stage hunk" "h" #'git-gutter:stage-hunk
+       :desc "Stage file" "H" #'magit-stage-file
+       :desc "Magit status" "s" #'magit-status))
 
 
 
-  (setq doom-theme 'doom-gruvbox)
+(setq doom-theme 'doom-gruvbox)
 
 (map! :leader
       (:prefix ("O" . "org-mode")
