@@ -1,5 +1,6 @@
 #+title: Jmacs (Jacob's Literate Emacs Config)
 #+author: Jacob Hilker
+#+startup: folded
 
 * Table of Contents :toc:
 - [[#introduction-to-jmacs][*Introduction to JMACS*]]
@@ -17,6 +18,7 @@
   - [[#keywords][Keywords]]
   - [[#faces][Faces]]
   - [[#source-code-formatting][Source Code Formatting]]
+  - [[#custom-agenda-commands][Custom Agenda Commands]]
 - [[#ui-tweaks][UI Tweaks]]
   - [[#minimalist-ui][Minimalist UI]]
   - [[#fonts][Fonts]]
@@ -24,11 +26,13 @@
   - [[#custom-faces][Custom Faces]]
 - [[#keybindings][Keybindings]]
   - [[#general-keybindings][General Keybindings]]
+  - [[#file-keybindings][File Keybindings]]
+  - [[#misc-keybindings][Misc. Keybindings]]
 - [[#minor-tweaks][Minor Tweaks]]
   - [[#disable-indent-on-newlines][Disable Indent on Newlines]]
 
 * *Introduction to JMACS*
-  Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG campaigns like [[https://www.ironswornrpg.com/][Ironsworn]], writing (both prose and code), and for general use. I have organized this file into different sections, such as the functions I use, the UI settings, etc.
+Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG campaigns like [[https://www.ironswornrpg.com/][Ironsworn]], writing (both prose and code), and for general use. I have organized this file into different sections, such as the functions I use, the UI settings, etc.
 ** Personal Info
    #+BEGIN_SRC emacs-lisp
 (setq user-full-name "Jacob Hilker"
@@ -61,15 +65,26 @@ These are the most important functions I practically need to function in Emacs.
 (require 'use-package)
 (setq use-package-always-ensure t)
     #+end_src
+*** Undo Tree
+    Lets me use more of evil-modes undo functionality.
+    #+begin_src emacs-lisp
+    (use-package undo-tree
+    :config
+     (global-undo-tree-mode))
+    #+end_src
 *** Evil Mode
     Evil mode lets me use the (superior) Vim bindings to the Emacs ones. In addition, I don't want =:q= to kill emacs, but rather the current buffer I am in (similar to Vim).
     #+begin_src emacs-lisp
 (use-package evil
   :ensure t
   :init
+  (setq evil-undo-system 'undo-tree)
+
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
   (setq evil-want-keybinding nil)
   :config
+  ;(evil-set-undo-system 'undo-tree)
+  ;(setq evil-undo-system 'undo-tree)
   (evil-mode 1)
   :preface
   (defun ian/save-and-kill-this-buffer ()
@@ -104,7 +119,7 @@ These are the most important functions I practically need to function in Emacs.
 (use-package org
   :ensure org-plus-contrib)
     #+end_src
-**** <Key support
+**** Old Structure Shortcuts
      #+begin_src emacs-lisp
 (require 'org-tempo)
      #+end_src
@@ -121,7 +136,10 @@ Which-Key allows me to see the keybindings I have available at a glance.
 *** Projectile
     Projectile allows me to manage projects in emacs.
     #+begin_src emacs-lisp
-
+(use-package projectile
+:config
+(projectile-mode)
+(setq projectile-project-search-path '("~/Projects/" "~/Documents/aurea" "~/Documents/brokenThrones" "~/Documents/byrne" "~/Documents/shatteredSkies")))
     #+end_src
 *** Completion Packages
 **** Ivy
@@ -133,6 +151,7 @@ Which-Key allows me to see the keybindings I have available at a glance.
 #+end_src
 **** Swiper
 **** Counsel
+**** Company
 *** Formatting Packages
     
 ** UI Packages
@@ -176,6 +195,12 @@ Which-Key allows me to see the keybindings I have available at a glance.
     #+begin_src emacs-lisp
 (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
     #+end_src
+*** Centaur Tabs
+    #+begin_src emacs-lisp
+    (use-package centaur-tabs
+    :config
+    (centaur-tabs-mode t))
+    #+end_src
 ** Org Mode Packages
 *** Org Super Agenda
     Org Super agenda is such a nice package that I love to use. It essentially allows me to reorganize my agenda much more easily than in regular Elisp.
@@ -191,6 +216,14 @@ Which-Key allows me to see the keybindings I have available at a glance.
 :config
 (toc-org-mode 1))
     #+end_src
+*** Org-Bullets
+This package makes my bullets look nicer.
+#+begin_src emacs-lisp
+(use-package org-bullets
+:after org)
+(add-hook 'org-mode-hook 'org-bullets-mode)
+#+end_src
+*** Org-Mode Export Backends
 * Org Mode Config
 ** Agenda Files
 I personally only use my class notes file and my personal agenda file as my agenda. I'm setting those up here.
@@ -230,10 +263,16 @@ This forces org-babel to save my indentation.
 (setq org-src-preserve-indentation t)
 #+end_src
 *** Recognizing the Tab Key
-I want my tab key to indent source code.
+    I want my tab key to indent source code.
 #+begin_src emacs-lisp
 (setq org-src-tab-acts-natively t)
 #+end_src
+** Custom Agenda Commands
+*** Planner
+    I personally love this block agenda.
+    #+begin_src emacs-lisp
+
+    #+end_src
 * UI Tweaks
   This section contains the general UI settings - not for any specific program.
 ** Minimalist UI
@@ -268,10 +307,36 @@ I want my tab key to indent source code.
     #+end_src
 *** Line Numbers and Truncated Lines
     #+begin_src emacs-lisp
-(global-display-line-numbers-mode 1)
-(global-visual-line-mode t)
+;(global-display-line-numbers-mode 1)
+;(global-visual-line-mode t)
+
     #+end_src
 ** Org Mode UI
+*** Bullets 
+    #+begin_src emacs-lisp
+(setq org-bullets-bullet-list '("⚫" "○")) 
+    #+end_src
+**** Use a Bullet as the Heading 
+     #+begin_src emacs-lisp
+(font-lock-add-keywords 'org-mode
+                        '(("^ +\\([-*]\\) "
+                           (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+     #+end_src
+*** Formatting Characters
+I don't want to see any formatting characters.
+#+begin_src emacs-lisp
+(setq org-hide-emphasis-markers t)
+#+end_src
+*** Ellipsis
+I want an arrow for the ellipsis instead of the three dots.
+#+begin_src emacs-lisp
+(setq org-ellipsis "⤵")
+#+end_src
+*** Italics and Bold
+    #+begin_src emacs-lisp
+(set-face-attribute 'font-lock-comment-face nil
+  :slant 'italic)
+    #+end_src
 ** Custom Faces
 *** Gruvbox Theme
 I want the first four levels of headings to be bold.
@@ -309,7 +374,31 @@ I like having different colors for each face of a heading.
     "x"   (general-simulate-key "C-x"))
 
      #+end_src
+** File Keybindings
+   #+begin_src emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
 
+
+   "f" '(:ignore t :which-key "Files")
+   "ff" '(find-file :which-key "Find file")
+   "fs" '(save-buffer :which-key "Save file")
+   "fl" '(load-file :which-key "Load file"))
+   #+end_src
+** Misc. Keybindings
+*** Zoom In And Out
+I want to use =C-=== and =C--= to zoom text in and out.
+   #+begin_src emacs-lisp
+(global-set-key (kbd "C-=") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+
+   #+end_src
+*** Tab Indents
+   #+begin_src emacs-lisp
+;(define-key org-mode-map (kbd "<tab>") 'org-cycle)
+   #+end_src
 * Minor Tweaks
 ** Disable Indent on Newlines
    If I really wanted to indent newlines, I'd do it myself.
