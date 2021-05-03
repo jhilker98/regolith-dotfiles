@@ -2,42 +2,6 @@
 #+author: Jacob Hilker
 #+startup: fold
 
-* Table of Contents :toc:
-- [[#introduction-to-jmacs][*Introduction to JMACS*]]
-  - [[#personal-info][Personal Info]]
-  - [[#disabling-bell-mode][Disabling Bell Mode]]
-- [[#package-setup][Package Setup]]
-  - [[#using-melpa][Using Melpa]]
-  - [[#using-org][Using Org]]
-  - [[#most-important-packages][Most Important Packages]]
-- [[#packages][Packages]]
-  - [[#code-packages][Code Packages]]
-  - [[#ui-packages][UI Packages]]
-  - [[#org-mode-packages][Org Mode Packages]]
-  - [[#elfeed][Elfeed]]
-- [[#misc-functions][Misc. Functions]]
-  - [[#edit-dotfile][Edit Dotfile]]
-- [[#org-mode-config][Org Mode Config]]
-  - [[#agenda-files][Agenda Files]]
-  - [[#keywords][Keywords]]
-  - [[#faces][Faces]]
-  - [[#source-code-formatting][Source Code Formatting]]
-  - [[#custom-agenda-commands][Custom Agenda Commands]]
-- [[#ui-tweaks][UI Tweaks]]
-  - [[#minimalist-ui][Minimalist UI]]
-  - [[#fonts][Fonts]]
-  - [[#org-mode-ui][Org Mode UI]]
-  - [[#custom-faces][Custom Faces]]
-- [[#keybindings][Keybindings]]
-  - [[#general-keybindings][General Keybindings]]
-  - [[#file-keybindings][File Keybindings]]
-  - [[#org-mode-keybindings][Org-Mode Keybindings]]
-  - [[#elfeed-keybindings][Elfeed Keybindings]]
-  - [[#misc-keybindings][Misc. Keybindings]]
-  - [[#tab-indents][Tab Indents]]
-- [[#minor-tweaks][Minor Tweaks]]
-  - [[#disable-indent-on-newlines][Disable Indent on Newlines]]
-
 * *Introduction to JMACS*
 Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG campaigns like [[https://www.ironswornrpg.com/][Ironsworn]], writing (both prose and code), and for general use. I have organized this file into different sections, such as the functions I use, the UI settings, etc.
 ** Personal Info
@@ -146,10 +110,7 @@ Which-Key allows me to see the keybindings I have available at a glance.
 		#+begin_src emacs-lisp
     (use-package hydra)
 		#+end_src
-*** Restart Emacs
-		#+begin_src emacs-lisp
-    (use-package restart-emacs)
-		#+end_src
+
 * Packages
 ** Code Packages
    This section contains all the packages I use for code and for projects.
@@ -165,17 +126,34 @@ Which-Key allows me to see the keybindings I have available at a glance.
 **** Ivy
      #+begin_src emacs-lisp
 (use-package ivy
+	 :defer 0.1
+  :diminish
  :config
  (setq ivy-count-format "(%d/%d) ")
  (ivy-mode 1))
 #+end_src
 **** Swiper
+		 #+begin_src emacs-lisp
+		 (use-package swiper
+			 :after ivy)
+     #+end_src
 **** Counsel
+		 #+begin_src emacs-lisp
+     (use-package counsel
+			 :after ivy
+			 :config
+			 (counsel-mode))
+		 #+end_src
 **** Company
+		 #+begin_src emacs-lisp
+
+		 #+end_src
 *** Formatting Packages
 **** Smartparens 
 		 #+begin_src emacs-lisp
-     (use-package smartparens)
+     (use-package smartparens
+			 :config
+			 (smartparens-mode))
 		 #+end_src
 *** Git
 Magit is probably tthe second killer feature of emacs, behind org-mode.
@@ -274,6 +252,7 @@ Pandoc is my go-to program when I need a different format.
 (use-package ox-pandoc
 	:after ox)
 #+end_src 
+*** Org-ref
 ** Elfeed 
 Elfeed is an RSS reader for emacs.
 #+begin_src emacs-lisp
@@ -368,6 +347,11 @@ Elfeed is an RSS reader for emacs.
 			 ("b" (elfeed-search-set-filter "@1-week-ago +blog +unread") "Blogs") 
 			 ("q" nil "quit" :color blue))
      #+end_src
+** Mu4e
+Mu4e is an email client with emacs.
+#+begin_src emacs-lisp
+
+#+end_src
 * Misc. Functions
 ** Edit Dotfile
 A quick shortcut to let me edit my dotfile.
@@ -720,4 +704,3 @@ I want to use =C-=== and =C--= to zoom text in and out.
    #+begin_src emacs-lisp
 (setq electric-indent-mode nil)
    #+end_src
-   
