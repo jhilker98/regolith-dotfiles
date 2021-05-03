@@ -5,6 +5,7 @@
 * Table of Contents :toc:
 - [[#introduction-to-jmacs][*Introduction to JMACS*]]
   - [[#personal-info][Personal Info]]
+  - [[#disabling-bell-mode][Disabling Bell Mode]]
 - [[#package-setup][Package Setup]]
   - [[#using-melpa][Using Melpa]]
   - [[#using-org][Using Org]]
@@ -44,6 +45,11 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
 (setq user-full-name "Jacob Hilker"
       user-mail-address "jacob.hilker2@gmail.com")
    #+END_SRC
+** Disabling Bell Mode
+	 The audio bell is quite annoying to deal with, in my opinion.
+	 #+begin_src emacs-lisp
+   (setq visible-bell t)
+	 #+end_src
 
 * Package Setup
 ** Using Melpa
@@ -135,6 +141,11 @@ Which-Key allows me to see the keybindings I have available at a glance.
 :config
 (which-key-mode 1))
 #+end_src
+*** Hydra
+		I want to use hydraas for certain things.
+		#+begin_src emacs-lisp
+    (use-package hydra)
+		#+end_src
 * Packages
 ** Code Packages
    This section contains all the packages I use for code and for projects.
@@ -268,15 +279,15 @@ Elfeed is an RSS reader for emacs.
   (elfeed-search-untag-all-unread))
 
 (use-package elfeed
+	:bind (:map elfeed-search-mode-map
+							("r" . 'jh/elfeed-reddit/body))
 	:config
 	(setq elfeed-db-directory "~/.elfeed/"
 				 elfeed-search-filter "@1-week-ago +unread "	
 				 elfeed-show-mode-hook
            (lambda ()
-						 (set-face-attribute 'variable-pitch (selected-frame) :font (font-spec :family "Iosevka" :size 16))))
+						 (set-face-attribute 'variable-pitch (selected-frame) :font (font-spec :family "Iosevka" :size 16)))))
 
-	:bind (:map elfeed-search-mode-map
-	  ("A" . elfeed-mark-all-as-read)))
 
 (use-package elfeed-org
 	:after elfeed
@@ -288,7 +299,8 @@ Elfeed is an RSS reader for emacs.
 	:after elfeed
 	:config
 	(elfeed-goodies/setup)
-	 (setq elfeed-goodies/feed-source-column-width 30))
+	 (setq elfeed-goodies/feed-source-column-width 30
+	       elfeed-goodies/entry-pane-size 0.5))
 #+end_src
 *** UI Tweaks 
 **** Custom Print Function
@@ -333,6 +345,18 @@ Elfeed is an RSS reader for emacs.
     (setq-local line-spacing 0.2)))
 
 		 #+end_src
+**** 
+*** Hydras
+		I want to set up hydras for the elfeed filters I want to use.
+		 #+begin_src emacs-lisp
+     (defhydra jh/elfeed-hydra ()
+			 "Elfeed filters"
+			 ("r" (elfeed-search-set-filter "@1-week-ago +unread +reddit") "Reddit")
+			 ("p" (elfeed-search-set-filter "@1-week-ago +podcast") "Podcasts") 
+			 ("d" (elfeed-search-set-filter "@1-week-ago +unread") "Default")
+)
+     #+end_src
+
 * Misc. Functions
 ** Edit Dotfile
 A quick shortcut to let me edit my dotfile.
@@ -639,7 +663,8 @@ These are all my org-mode bindings.
 	 "oa" '(jh/open-planner :which-key "Open agenda")
 	 "oA" '(org-agenda :which-key "Open agenda dispatch")
 	 "oe" '(org-export-dispatch :which-key "Export org file")
-	 "ob" '(org-babel-tangle :which-key "Babel tangle"))
+	 "ob" '(org-babel-tangle :which-key "Babel tangle")
+	 "ot" '(org-time-stamp :which-key "Org Timestamp"))
 #+end_src
 ** Elfeed Keybindings
 	 This is a shortcut for me to get to elfeed. In addition, it has shortcuts for me to get to different filters.
@@ -650,7 +675,12 @@ These are all my org-mode bindings.
    :non-normal-prefix "C-SPC"
 	  "n" '(:ignore t :which-key "News")
 		"nn" '(elfeed :which-key "Read news"))
+
 (evil-define-key 'normal elfeed-search-mode-map (kbd "A") 'elfeed-mark-all-as-read)
+
+(evil-define-key 'normal elfeed-search-mode-map (kbd "/") 'elfeed-search-live-filter)
+
+(evil-define-key 'normal elfeed-search-mode-map (kbd "f") 'jh/elfeed-hydra/body)
 	 #+end_src
 ** Misc. Keybindings
 *** Zoom In And Out
