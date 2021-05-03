@@ -13,6 +13,9 @@
   - [[#code-packages][Code Packages]]
   - [[#ui-packages][UI Packages]]
   - [[#org-mode-packages][Org Mode Packages]]
+  - [[#elfeed][Elfeed]]
+- [[#misc-functions][Misc. Functions]]
+  - [[#edit-dotfile][Edit Dotfile]]
 - [[#org-mode-config][Org Mode Config]]
   - [[#agenda-files][Agenda Files]]
   - [[#keywords][Keywords]]
@@ -27,6 +30,8 @@
 - [[#keybindings][Keybindings]]
   - [[#general-keybindings][General Keybindings]]
   - [[#file-keybindings][File Keybindings]]
+  - [[#org-mode-keybindings][Org-Mode Keybindings]]
+  - [[#elfeed-keybindings][Elfeed Keybindings]]
   - [[#misc-keybindings][Misc. Keybindings]]
   - [[#tab-indents][Tab Indents]]
 - [[#minor-tweaks][Minor Tweaks]]
@@ -198,7 +203,17 @@ Which-Key allows me to see the keybindings I have available at a glance.
     #+begin_src emacs-lisp
     (use-package centaur-tabs
     :config
-    (centaur-tabs-mode t))
+    (centaur-tabs-mode t)
+		(setq centaur-tabs-set-modified-marker t
+					centaur-tabs-modified-marker "•"
+					centaur-tabs-set-bar 'left
+					centaur-tabs-set-icons t
+					centaur-tabs-set-close-button t
+					centaur-tabs-close-button "x"
+					centaur-tabs-style "bar"
+					centaur-tabs-cycle-scope 'tabs)
+		(define-key evil-normal-state-map (kbd "g t") 'centaur-tabs-forward)
+    (define-key evil-normal-state-map (kbd "g T") 'centaur-tabs-backward))
     #+end_src
 ** Org Mode Packages
 *** Org Super Agenda
@@ -235,6 +250,36 @@ Pandoc is my go-to program when I need a different format.
 (use-package ox-pandoc
 	:after ox)
 #+end_src 
+** Elfeed 
+Elfeed is an RSS reader for emacs.
+#+begin_src emacs-lisp
+(defun elfeed-mark-all-as-read ()
+	(interactive)
+  (mark-whole-buffer)
+  (elfeed-search-untag-all-unread))
+
+(use-package elfeed
+	:config
+	(setq elfeed-db-directory "~/.elfeed/"
+				 elfeed-search-filter "@1-week-ago +unread ")
+
+	:bind (:map elfeed-search-mode-map
+	  ("A" . elfeed-mark-all-as-read)))
+
+(use-package elfeed-org
+	:after elfeed
+	:config
+	(elfeed-org)
+	(setq rmh-elfeed-org-files (list "~/Dropbox/org/elfeed.org")))
+#+end_src
+* Misc. Functions
+** Edit Dotfile
+A quick shortcut to let me edit my dotfile.
+#+begin_src emacs-lisp
+(defun edit-dotfile () 
+(interactive)
+(find-file "~/.emacs.d/jmacs.org"))
+#+end_src
 * Org Mode Config
 ** Agenda Files
 I personally only use my class notes file and my personal agenda file as my agenda. I'm setting those up here.
@@ -330,15 +375,16 @@ I want to see exactly when something is due, rather than a warning period.
      ;                   (org-agenda-todo-ignore-with-date t)
                       ; (org-agenda-format-date "\n%d %b (%a.)\n")
                       
-                       (org-agenda-format-date "\n%d %b (%a.)")
+									 (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
+                   (org-agenda-format-date "\n%d %b (%a.)")
 			;		   (concat (make-string (window-width) 9472) "\n")
              ;         (org-agenda-compact-blocks t)
-                       (org-agenda-span 2)
-                      ;(org-agenda-format-date "%d %b")
-                       (org-super-agenda-groups
-                         '(
-                         
-                         (:name "Habits"
+                   (org-agenda-span 2)
+																				;(org-agenda-format-date "%d %b")
+                   (org-super-agenda-groups
+                    '(
+                      
+                      (:name "Habits"
                          :habit t
                          :category "HABIT"
                          :order 6)
@@ -372,9 +418,38 @@ I want to see exactly when something is due, rather than a warning period.
 ;
     (:name "Classwork and Meetings"
      :category ("CPSC430" "DGST101" "CPSC414" "CPSC444" "MEETING")
-     :order 1))))))))
+     :order 1)))))
+
+				 (alltodo "" ((org-agenda-overriding-header "To Do")
+                  (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+                  (org-agenda-sorting-strategy '(todo-state-up category-up ))
+                  (org-super-agenda-groups '(
+                  (:name "Classwork and Meetings"
+                  :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING" "CLASSES")
+                  :order 1)
+                 
+                  (:name "Personal"
+                  :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
+                  :order 2)
+                  
+                  (:name "Projects"
+                   :todo "PROJECT"
+                   :category "PROJECT"
+                   :order 3)
+                  
+
+                 (:discard (:category "HABIT"))
+                 (:discard (:category "CHORE")))))))))
+
 
 		    #+end_src
+**** Helper Function 
+		 This is a helper function for quickly opening my preferred agenda view.
+		 #+begin_src emacs-lisp
+(defun jh/open-planner ()
+(interactive)
+(org-agenda nil "p"))
+		 #+end_src
 *** 
 * UI Tweaks
   This section contains the general UI settings - not for any specific program.
@@ -463,7 +538,7 @@ I like having different colors for each face of a heading.
 #+end_src
 * Keybindings
 ** General Keybindings
-     I want to use =Spc spc= for running =M-x=, etc. Similar to spacemacs.
+   I want to use =Spc spc= for running =M-x=, etc. Similar to spacemacs.
      #+begin_src emacs-lisp
 (general-define-key
    :states '(normal visual insert emacs)
@@ -486,10 +561,34 @@ I like having different colors for each face of a heading.
 
 
    "f" '(:ignore t :which-key "Files")
+	 "fed" '(edit-dotfile :which-key "Edit Config")
    "ff" '(find-file :which-key "Find file")
    "fs" '(save-buffer :which-key "Save file")
    "fl" '(load-file :which-key "Load file"))
    #+end_src
+** Org-Mode Keybindings
+These are all my org-mode bindings.
+#+begin_src emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+	 "o" '(:ignore t :which-key "Org-mode")
+	 "oa" '(jh/open-planner :which-key "Open agenda")
+	 "oA" '(org-agenda :which-key "Open agenda dispatch"))
+#+end_src
+** Elfeed Keybindings
+	 This is a shortcut for me to get to elfeed. In addition, it has shortcuts for me to get to different filters.
+	 #+begin_src emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+	  "n" '(:ignore t :which-key "News")
+		"nn" '(elfeed :which-key "Read news"))
+
+	 #+end_src
 ** Misc. Keybindings
 *** Zoom In And Out
 I want to use =C-=== and =C--= to zoom text in and out.
@@ -499,7 +598,7 @@ I want to use =C-=== and =C--= to zoom text in and out.
 
    #+end_src
 ** Tab Indents
-Since I can't seem to get the tab key to indent properly this is where it goes until I fix it.
+	 Since I can't seem to get the tab key to indent properly this is where it goes until I fix it.
    #+begin_src emacs-lisp
 ;(setq indent-tabs-mode nil)
 (setq-default tab-width 2)
