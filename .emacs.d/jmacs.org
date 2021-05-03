@@ -158,7 +158,16 @@ Which-Key allows me to see the keybindings I have available at a glance.
 **** Counsel
 **** Company
 *** Formatting Packages
-    
+**** Smartparens 
+		 #+begin_src emacs-lisp
+     (use-package smartparens)
+		 #+end_src
+*** Git
+Magit is probably tthe second killer feature of emacs, behind org-mode.
+#+begin_src emacs-lisp
+(use-package magit)
+(use-package magit-todos)
+#+end_src
 ** UI Packages
 *** Themes
 **** Gruvbox Theme
@@ -261,7 +270,10 @@ Elfeed is an RSS reader for emacs.
 (use-package elfeed
 	:config
 	(setq elfeed-db-directory "~/.elfeed/"
-				 elfeed-search-filter "@1-week-ago +unread ")
+				 elfeed-search-filter "@1-week-ago +unread "	
+				 elfeed-show-mode-hook
+           (lambda ()
+						 (set-face-attribute 'variable-pitch (selected-frame) :font (font-spec :family "Iosevka" :size 16))))
 
 	:bind (:map elfeed-search-mode-map
 	  ("A" . elfeed-mark-all-as-read)))
@@ -271,7 +283,56 @@ Elfeed is an RSS reader for emacs.
 	:config
 	(elfeed-org)
 	(setq rmh-elfeed-org-files (list "~/Dropbox/org/elfeed.org")))
+
+(use-package elfeed-goodies 
+	:after elfeed
+	:config
+	(elfeed-goodies/setup)
+	 (setq elfeed-goodies/feed-source-column-width 30))
 #+end_src
+*** UI Tweaks 
+**** Custom Print Function
+		 #+begin_src emacs-lisp
+     (defun jh/elfeed-search-print-entry (entry)
+  "Print ENTRY to the buffer."
+  (let* ((elfeed-goodies/tag-column-width 40)
+         (elfeed-goodies/feed-source-column-width 30)
+         (title (or (elfeed-meta entry :title) (elfeed-entry-title entry) ""))
+         (title-faces (elfeed-search--faces (elfeed-entry-tags entry)))
+         (feed (elfeed-entry-feed entry))
+         (feed-title
+          (when feed
+            (or (elfeed-meta feed :title) (elfeed-feed-title feed))))
+         (tags (mapcar #'symbol-name (elfeed-entry-tags entry)))
+         (tags-str (concat (mapconcat 'identity tags ",")))
+
+         (title-width (- (window-width) 10 elfeed-search-trailing-width))
+         (title-column (elfeed-format-column
+                        title (elfeed-clamp
+                               elfeed-search-title-min-width
+                               title-width
+                               elfeed-search-title-max-width)
+                        :left))
+
+         (tag-column (elfeed-format-column
+                      tags-str (elfeed-clamp (length tags-str)
+                                             elfeed-goodies/tag-column-width
+                                             elfeed-goodies/tag-column-width)
+                      :left))
+
+         (feed-column (elfeed-format-column
+                       feed-title (elfeed-clamp elfeed-goodies/feed-source-column-width
+                                                elfeed-goodies/feed-source-column-width
+                                                elfeed-goodies/feed-source-column-width)
+                       :left)))
+
+
+    (insert (propertize title-column 'face title-faces 'kbd-help title) " ")
+    (insert (propertize feed-column 'face 'elfeed-search-feed-face) " ")
+    (insert (propertize tag-column 'face 'elfeed-search-tag-face) " ")
+    (setq-local line-spacing 0.2)))
+
+		 #+end_src
 * Misc. Functions
 ** Edit Dotfile
 A quick shortcut to let me edit my dotfile.
@@ -576,7 +637,9 @@ These are all my org-mode bindings.
 
 	 "o" '(:ignore t :which-key "Org-mode")
 	 "oa" '(jh/open-planner :which-key "Open agenda")
-	 "oA" '(org-agenda :which-key "Open agenda dispatch"))
+	 "oA" '(org-agenda :which-key "Open agenda dispatch")
+	 "oe" '(org-export-dispatch :which-key "Export org file")
+	 "ob" '(org-babel-tangle :which-key "Babel tangle"))
 #+end_src
 ** Elfeed Keybindings
 	 This is a shortcut for me to get to elfeed. In addition, it has shortcuts for me to get to different filters.
@@ -587,7 +650,7 @@ These are all my org-mode bindings.
    :non-normal-prefix "C-SPC"
 	  "n" '(:ignore t :which-key "News")
 		"nn" '(elfeed :which-key "Read news"))
-
+(evil-define-key 'normal elfeed-search-mode-map (kbd "A") 'elfeed-mark-all-as-read)
 	 #+end_src
 ** Misc. Keybindings
 *** Zoom In And Out
