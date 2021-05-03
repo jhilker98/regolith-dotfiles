@@ -142,9 +142,13 @@ Which-Key allows me to see the keybindings I have available at a glance.
 (which-key-mode 1))
 #+end_src
 *** Hydra
-		I want to use hydraas for certain things.
+		I want to use hydraas for certain things - namely, elfeed filters.
 		#+begin_src emacs-lisp
     (use-package hydra)
+		#+end_src
+*** Restart Emacs
+		#+begin_src emacs-lisp
+    (use-package restart-emacs)
 		#+end_src
 * Packages
 ** Code Packages
@@ -280,13 +284,16 @@ Elfeed is an RSS reader for emacs.
 
 (use-package elfeed
 	:bind (:map elfeed-search-mode-map
-							("r" . 'jh/elfeed-reddit/body))
+                  ("A" . elfeed-mark-all-as-read)
+									("f" . jh/elfeed-hydra)
+                  ("/" . elfeed-search-live-filter))
+
 	:config
 	(setq elfeed-db-directory "~/.elfeed/"
-				 elfeed-search-filter "@1-week-ago +unread "	
-				 elfeed-show-mode-hook
-           (lambda ()
-						 (set-face-attribute 'variable-pitch (selected-frame) :font (font-spec :family "Iosevka" :size 16)))))
+				elfeed-search-filter "@1-week-ago +unread "	
+				elfeed-show-mode-hook
+        (lambda ()
+					(set-face-attribute 'variable-pitch (selected-frame) :font (font-spec :family "Iosevka" :size 16)))))
 
 
 (use-package elfeed-org
@@ -348,15 +355,19 @@ Elfeed is an RSS reader for emacs.
 **** 
 *** Hydras
 		I want to set up hydras for the elfeed filters I want to use.
+**** Category Hydra
+		 This hydra filters by category.
 		 #+begin_src emacs-lisp
      (defhydra jh/elfeed-hydra ()
-			 "Elfeed filters"
+			 "Elfeed category filters"
 			 ("r" (elfeed-search-set-filter "@1-week-ago +unread +reddit") "Reddit")
 			 ("p" (elfeed-search-set-filter "@1-week-ago +podcast") "Podcasts") 
-			 ("d" (elfeed-search-set-filter "@1-week-ago +unread") "Default")
-)
+			 ("c" (elfeed-search-set-filter "@1-week-ago +campaigns +unread") "Campaigns")  
+			 ("d" (elfeed-search-set-filter "@1-week-ago +unread") "Default") 
+			 ("f" (elfeed-search-set-filter "@1-week-ago +forum +unread") "Forums") 
+			 ("b" (elfeed-search-set-filter "@1-week-ago +blog +unread") "Blogs") 
+			 ("q" nil "quit" :color blue))
      #+end_src
-
 * Misc. Functions
 ** Edit Dotfile
 A quick shortcut to let me edit my dotfile.
@@ -677,7 +688,7 @@ These are all my org-mode bindings.
 		"nn" '(elfeed :which-key "Read news"))
 
 (evil-define-key 'normal elfeed-search-mode-map (kbd "A") 'elfeed-mark-all-as-read)
-
+;
 (evil-define-key 'normal elfeed-search-mode-map (kbd "/") 'elfeed-search-live-filter)
 
 (evil-define-key 'normal elfeed-search-mode-map (kbd "f") 'jh/elfeed-hydra/body)
