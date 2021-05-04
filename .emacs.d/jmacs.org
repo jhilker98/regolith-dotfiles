@@ -26,6 +26,7 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
 (package-refresh-contents)
 (package-initialize)
    #+END_src
+
 ** Using Org
    I want to add the org-mode repositories to my package list as well.
    #+begin_src emacs-lisp
@@ -146,8 +147,11 @@ Which-Key allows me to see the keybindings I have available at a glance.
 		 #+end_src
 **** Company
 		 #+begin_src emacs-lisp
-
+     (use-package company
+			:config
+			(add-hook 'after-init-hook 'global-company-mode)) 
 		 #+end_src
+
 *** Formatting Packages
 **** Smartparens 
 		 #+begin_src emacs-lisp
@@ -155,6 +159,7 @@ Which-Key allows me to see the keybindings I have available at a glance.
 			 :config
 			 (smartparens-mode))
 		 #+end_src
+
 *** Git
 Magit is probably tthe second killer feature of emacs, behind org-mode.
 #+begin_src emacs-lisp
@@ -191,15 +196,14 @@ Magit is probably tthe second killer feature of emacs, behind org-mode.
 (use-package all-the-icons)
     #+end_src
 *** Dashboard
-    Dashboard allows me to have a simple dashboard as a startup buffer.
+    Dashboard allows me to have a simple dashboard as a startup buffer. This also contains my UI tweaks for it, and what I want to show - namely my 5 last files and my projects.
     #+begin_src emacs-lisp
 (use-package dashboard
   :config
-  (dashboard-setup-startup-hook)) 
-    #+end_src
-    In addition to that, I'd like to use it as the default buffer when I start up emacsclient.
-    #+begin_src emacs-lisp
-(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+  (dashboard-setup-startup-hook)
+(setq dashboard-week-agenda nil)
+(setq dashboard-items '((recents  . 5)
+                        (projects . 10))))
     #+end_src
 *** Centaur Tabs
     #+begin_src emacs-lisp
@@ -217,6 +221,17 @@ Magit is probably tthe second killer feature of emacs, behind org-mode.
 		(define-key evil-normal-state-map (kbd "g t") 'centaur-tabs-forward)
     (define-key evil-normal-state-map (kbd "g T") 'centaur-tabs-backward))
     #+end_src
+*** Ace Window
+		#+begin_src emacs-lisp
+    (use-package ace-window)
+		#+end_src
+*** Golden Ratio
+		#+begin_src emacs-lisp
+    (use-package golden-ratio
+			:config
+			(golden-ratio-mode t)
+			(setq golden-ratio-auto-scale t))
+		#+end_src
 ** Org Mode Packages
 *** Org Super Agenda
     Org Super agenda is such a nice package that I love to use. It essentially allows me to reorganize my agenda much more easily than in regular Elisp.
@@ -350,18 +365,21 @@ Elfeed is an RSS reader for emacs.
 ** Mu4e
 Mu4e is an email client with emacs.
 #+begin_src emacs-lisp
-  (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
-  (require 'mu4e)
-(setq mu4e-maildir "~/.local/share/mail")
+  (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e") ;; On Ubuntu
+  (require 'mu4e);; on Ubuntu
+
+  (require 'org-mu4e) ;; On Ubuntu
+(setq mu4e-maildir "~/.local/share/mail"
+mu4e-update-func "mbsync -a")
 (setq mu4e-contexts
 	(list
 	 ;; Primary personal account
 	 (make-mu4e-context
-	  :name "jhilkers"
+	  :name "jhilker2"
 	  :match-func
 	    (lambda (msg)
 	      (when msg
-		(string-prefix-p "/Gmail" (mu4e-message-field msg :maildir))))
+		(string-prefix-p "/jacob.hilker2" (mu4e-message-field msg :maildir))))
 	  :vars '((user-mail-address . "jacob.hilker2@gmail.com")
 		  (user-full-name    . "Jacob Hilker")
 		  (smtpmail-smtp-server  . "smtp.gmail.com")
@@ -370,17 +388,54 @@ Mu4e is an email client with emacs.
 		  (mu4e-drafts-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Drafts")
 		  (mu4e-sent-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Sent Mail")
 		  (mu4e-refile-folder  . "/jacob.hilker2@gmail.com/[Gmail]/All Mail")
-		  (mu4e-trash-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Trash")))))
+		  (mu4e-trash-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Trash")))
+
+(make-mu4e-context
+	  ; Secondary personal account
+	  :name "chilk"
+	  :match-func
+	    (lambda (msg)
+	      (when msg
+		(string-prefix-p "/jacob.hilker2" (mu4e-message-field msg :maildir))))
+	  :vars '((user-mail-address . "camohilk@gmail.com")
+		  (user-full-name    . "Jacob Hilker")
+		  (smtpmail-smtp-server  . "smtp.gmail.com")
+		  (smtpmail-smtp-service . 465)
+		  (smtpmail-stream-type  . ssl)
+			(mu4e-update-func "mbsync jacob.hilker2@gmail.com")
+		  (mu4e-drafts-folder  . "/camohilk@gmail.com/[Gmail]/Drafts")
+		  (mu4e-sent-folder  . "/camohilk@gmail.com/[Gmail]/Sent Mail")
+		  (mu4e-refile-folder  . "/camohilk@gmail.com/[Gmail]/All Mail")
+		  (mu4e-trash-folder  . "/camohilk@gmail.com/[Gmail]/Trash")))
+
+
+
+
+))
 
 #+end_src
+*** UI Tweaks 
+**** Headers
+		 I want to have a different view of each date.
+		 #+begin_src emacs-lisp
+
+		 #+end_src
+** Writing Packages
+*** Writeroom Mode
+** Misc Packages
+*** Restart Emacs
+		#+begin_src emacs-lisp
+    (use-package restart-emacs)
+		#+end_src
 * Misc. Functions
 ** Edit Dotfile
-A quick shortcut to let me edit my dotfile.
+	 A quick shortcut to let me edit my dotfile.
 #+begin_src emacs-lisp
 (defun edit-dotfile () 
-(interactive)
-(find-file "~/.emacs.d/jmacs.org"))
+	(interactive)
+	(find-file "~/.emacs.d/jmacs.org"))
 #+end_src
+
 * Org Mode Config
 ** Agenda Files
 I personally only use my class notes file and my personal agenda file as my agenda. I'm setting those up here.
@@ -455,8 +510,7 @@ I want to see exactly when something is due, rather than a warning period.
 				      :habit t
 				      :category "CHORE"
 				      :order 2)
-
-
+						 
 
 			       (:name none
 				      :discard (:todo "DONE")
@@ -552,6 +606,16 @@ I want to see exactly when something is due, rather than a warning period.
 (org-agenda nil "p"))
 		 #+end_src
 *** 
+** Capture Templates
+*** Email Workflow
+**** Follow Up
+		 This is what I want to use when I want to find an email to follow-up.
+		 #+begin_src emacs-lisp
+    (setq org-capture-templates
+  '(("m" "Mail")
+		("mf" "Follow Up" entry (file+olp "~/org/Mail.org" "Follow Up")
+          "* TODO Follow up with %:fromname on %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i" :immediate-finish t)))
+		 #+end_src
 * UI Tweaks
   This section contains the general UI settings - not for any specific program.
 ** Minimalist UI
@@ -698,6 +762,17 @@ These are all my org-mode bindings.
 
 (evil-define-key 'normal elfeed-search-mode-map (kbd "f") 'jh/elfeed-hydra/body)
 	 #+end_src
+** Email Keybindings
+	 #+begin_src emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+	  "m" '(:ignore t :which-key "Mail")
+		"mm" '(mu4e :which-key "Read email"))
+
+
+	 #+end_src	 
 ** Misc. Keybindings
 *** Zoom In And Out
 I want to use =C-=== and =C--= to zoom text in and out.
@@ -706,6 +781,40 @@ I want to use =C-=== and =C--= to zoom text in and out.
 (global-set-key (kbd "C--") 'text-scale-decrease)
 
    #+end_src
+** Window Keybindings
+	 #+begin_src emacs-lisp
+   (general-define-key
+:states '(normal visual insert emacs)
+:prefix "SPC"
+:non-normal-prefix "C-SPC"
+
+
+"w"  '(:ignore t :which-key "Windows")
+"wh" '(split-window-right :which-key "Horizontal Split")
+"wv" '(split-window-below :which-key "Vertical Split")
+"wd"  'delete-window
+"wD"  'delete-other-windows
+"wm" 'maximize-window)
+
+	 #+end_src
+** Buffer Keybindings
+	 #+begin_src emacs-lisp
+   (general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+
+    "b"   '(:ignore t :which-key "buffers")
+    "bb"  'mode-line-other-buffer
+    "bd"  'kill-this-buffer
+    "bn"  'next-buffer
+    "bp"  'previous-buffer
+    "bq"  'kill-buffer-and-window
+    "bR"  'rename-file-and-buffer
+    "br"  'revert-buffer
+    "bs" 'switch-to-buffer)
+	 #+end_src
 ** Tab Indents
 	 Since I can't seem to get the tab key to indent properly this is where it goes until I fix it.
    #+begin_src emacs-lisp
