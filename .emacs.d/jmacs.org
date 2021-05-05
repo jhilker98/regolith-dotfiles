@@ -89,10 +89,12 @@ These are the most important functions I practically need to function in Emacs.
 (use-package general)
     #+end_src
 *** Org Plus Contrib
-    The updated version of org-mode.
+    The updated version of org-mode. However, whenever I load this, it gives
+    me an error. I need to fix that - specifically the error of
+    org-priority-highest being void.
     #+begin_src emacs-lisp
-(use-package org
-  :ensure org-plus-contrib)
+;(use-package org
+;  :ensure org-plus-contrib)
     #+end_src
 **** Old Structure Shortcuts
      #+begin_src emacs-lisp
