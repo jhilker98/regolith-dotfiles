@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: d20-party
-# key: d20-party
-# --
-# -*- mode: org; mode: org-d20; org-d20-party: (($0 . 0)) -*-
