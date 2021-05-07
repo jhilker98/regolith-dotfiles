@@ -43,6 +43,7 @@ And finally, I always want it to use straight.el.
 (setq straight-use-package-by-default t)
 #+end_src
 * Org Mode
+I want to use the newest version of org-mode instead of the one built in to emacs.
 #+begin_src emacs-lisp
   (straight-use-package '(org-plus-contrib :includes org))
 #+end_src
@@ -190,20 +191,21 @@ This section contains extra evil-mode functions.
 ** Evil Surround
 #+begin_src emacs-lisp
 (use-package evil-surround
-:after evil)
+:after evil
+:config
+(evil-surround-mode)
+)
 #+end_src
 ** Evil Org
 #+begin_src emacs-lisp
 (use-package evil-org
-:after '(evil org))
+:after '(evil org)
+:config
+(evil-org-mode)
+)
 #+end_src
 
-* Org Mode
-I want to use the newest version of org-mode instead of the one built in to emacs.
-#+begin_src emacs-lisp
-  (straight-use-package '(org-plus-contrib :includes org))
-#+end_src
-
+* Org Mode Configuration
 ** Initial Configuration
 #+begin_src emacs-lisp
 (setq org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/notes/spring2021.org")
@@ -393,6 +395,78 @@ I want a different color for each lvel of a heading.
 #+begin_src emacs-lisp
 
 #+end_src
+* Mu4e
+#+begin_src emacs-lisp
+ (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e") ;; On Ubuntu
+  (require 'mu4e);; on Ubuntu
+
+  (require 'org-mu4e) ;; On Ubuntu
+(setq mu4e-maildir "~/.local/share/mail")
+(setq mu4e-get-mail-command "mbsync -a")
+(setq mail-user-agent 'mu4e-user-agent)
+(setq send-mail-function 'smtpmail-send-it)
+(setq mu4e-contexts
+	(list
+	 ;; Primary personal account
+	 (make-mu4e-context
+	  :name "jhilker2"
+	  :match-func
+	    (lambda (msg)
+	      (when msg
+		(string-prefix-p "/jacob.hilker2" (mu4e-message-field msg :maildir))))
+	  :vars '((user-mail-address . "jacob.hilker2@gmail.com")
+		  (user-full-name    . "Jacob Hilker")
+
+		  (smtpmail-smtp-server  . "smtp.gmail.com")
+		  (smtpmail-smtp-service . 465)
+		  (smtpmail-stream-type  . ssl)
+		  (mu4e-drafts-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Drafts")
+		  (mu4e-sent-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Sent Mail")
+		  (mu4e-refile-folder  . "/jacob.hilker2@gmail.com/[Gmail]/All Mail")
+		  (mu4e-trash-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Trash")))
+
+(make-mu4e-context
+	  ; Secondary personal account
+	  :name "chilk"
+	  :match-func
+	    (lambda (msg)
+	      (when msg
+		(string-prefix-p "/jacob.hilker2" (mu4e-message-field msg :maildir))))
+	  :vars '((user-mail-address . "camohilk@gmail.com")
+		  (user-full-name    . "Jacob Hilker")
+		  (smtpmail-smtp-server  . "smtp.gmail.com")
+		  (smtpmail-smtp-service . 465)
+		  (smtpmail-stream-type  . ssl)
+		  (mu4e-drafts-folder  . "/camohilk@gmail.com/[Gmail]/Drafts")
+		  (mu4e-sent-folder  . "/camohilk@gmail.com/[Gmail]/Sent Mail")
+		  (mu4e-refile-folder  . "/camohilk@gmail.com/[Gmail]/All Mail")
+		  (mu4e-trash-folder  . "/camohilk@gmail.com/[Gmail]/Trash")))))
+#+end_src
+
+** Org Msg
+Org-msg will let me use org-mode syntax for emails.
+#+begin_src emacs-lisp
+(use-package org-msg
+:after '(org mu4e))
+ (setq org-msg-options "html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t"
+	org-msg-startup "hidestars indent inlineimages"
+	org-msg-greeting-fmt "\nHi *%s*,\n\n"
+	org-msg-recipient-names '(("jacob.hilker2@gmail.com" . "Jacob")("hilker09@gmail.com" . "Dad"))
+	org-msg-greeting-name-limit 3
+	org-msg-default-alternatives '((new		. (text html))
+				       (reply-to-html	. (text html))
+				       (reply-to-text	. (text)))
+	org-msg-convert-citation t
+	org-msg-signature "
+
+
+ #+begin_signature
+ --
+ Thanks,\nJacob Hilker
+ #+end_signature")
+ (org-msg-mode)
+#+end_src
+
 * UI Adjustments
 ** Minimalist UI
 #+begin_src emacs-lisp
