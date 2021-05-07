@@ -42,6 +42,10 @@ And finally, I always want it to use straight.el.
 #+begin_src emacs-lisp
 (setq straight-use-package-by-default t)
 #+end_src
+* Org Mode
+#+begin_src emacs-lisp
+  (straight-use-package '(org-plus-contrib :includes org))
+#+end_src
 
 * Core Functionality
 ** Undo Tree
@@ -91,6 +95,7 @@ This provides a collection of modules for using evil mode in other emacs program
 #+begin_src emacs-lisp
 (use-package general)
 #+end_src
+
 ** Which-Key
 Which-key lets me see what keybindings I can use.
 #+begin_src emacs-lisp
@@ -104,6 +109,7 @@ I want to use hydras for certain things - namely, elfeed filters.
 #+begin_src emacs-lisp
 (use-package hydra)
 #+end_src
+
 * IDE Configuration
 ** Packages
 *** Completion Packages
@@ -169,6 +175,29 @@ I want to use hydras for certain things - namely, elfeed filters.
 (use-package magit-todos)
 #+end_src
 
+*** Smartparens
+#+begin_src emacs-lisp
+(use-package smartparens
+:config
+(smartparens-global-mode))
+
+(use-package evil-smartparens
+:after org)
+#+end_src
+
+* Evil Mode
+This section contains extra evil-mode functions.
+** Evil Surround
+#+begin_src emacs-lisp
+(use-package evil-surround
+:after evil)
+#+end_src
+** Evil Org
+#+begin_src emacs-lisp
+(use-package evil-org
+:after '(evil org))
+#+end_src
+
 * Org Mode
 I want to use the newest version of org-mode instead of the one built in to emacs.
 #+begin_src emacs-lisp
@@ -177,25 +206,26 @@ I want to use the newest version of org-mode instead of the one built in to emac
 
 ** Initial Configuration
 #+begin_src emacs-lisp
-  (setq org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/notes/spring2021.org")
+(setq org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/notes/spring2021.org")
         org-todo-keywords '(
             (sequence "TODO(t)" "INPR(i)" "NEXT(n)" "MEET(m)" "|" "SOMEDAY(s)"   "DONE(d)" "CANCELED(c)")
             (type "PROJ(p)")
             (type "BLOG(b)"))
 
-             org-todo-keyword-faces
- '(
-   ("TODO" . (:foreground "#cc241d" :weight black :underline t))
-   ("INPR" . (:foreground "#fe8019" :weight bold))
-   ("NEXT" . (:foreground "#fabd2f" :weight black))
-   ("MEET" . (:foreground "#b8bb26" :weight bold))
-   ("PROJ" . (:foreground "#458588" :slant italic :weight bold))
-   ("BLOG" . (:foreground "#83a598"))
-   ("SOMEDAY" . (:foreground "#d3869b" :slant italic))
-   ("DONE" . (:foreground "#83a598" :strike-through t))
-   ("CANCELED" . (:foreground "cc241d" :strike-through t))))
+            org-todo-keyword-faces
+'(
+("TODO" . (:foreground "#cc241d" :weight black :underline t))
+("INPR" . (:foreground "#fe8019" :weight bold))
+("NEXT" . (:foreground "#fabd2f" :weight black))
+("MEET" . (:foreground "#b8bb26" :weight bold))
+("PROJ" . (:foreground "#458588" :slant italic :weight bold))
+("BLOG" . (:foreground "#83a598"))
+("SOMEDAY" . (:foreground "#d3869b" :slant italic))
+("DONE" . (:foreground "#83a598" :strike-through t))
+("CANCELED" . (:foreground "cc241d" :strike-through t))))
 ;   ("DONE" . "green"))
 #+end_src
+
 ** Packages
 *** Org Tempo
 This lets me use =<key <tab> to insert a shortcode.
@@ -433,6 +463,21 @@ And finally, where I enable it for code blocks.
       :height 120))
 #+end_src
 
+* Minor Functions
+** Edit Dotfile
+This function lets me edit my dotfile.
+#+begin_src emacs-lisp
+(defun edit-dotfile ()
+(interactive)
+(find-file "~/.emacs.d/jmacs.org"))
+#+end_src
+
+* Hooks
+** Org-Mode Hooks
+*** Indent Mode
+#+begin_src emacs-lisp
+;(add-hook 'org-mode-hook 'org-indent-mode)
+#+end_src
 
 * Keybindings
 ** General Keybindings
@@ -484,6 +529,25 @@ And finally, where I enable it for code blocks.
    "fl" '(load-file :which-key "Load file"))
 #+end_src
 
+** Magit Keybindings
+   #+begin_src emacs-lisp
+  (general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+
+   "g" '(:ignore t :which-key "Magit")
+   "gs" 'magit-status
+   "gS" 'magit-stage-file
+   "gc" 'magit-commit
+   "gp" 'magit-pull
+   "gP" 'magit-push
+   "gb" 'magit-branch
+   "gB" 'magit-blame
+   "gd" 'magit-diff) 
+
+   #+end_src
 ** Org-Mode Keybindings
    These are my org-mode keybindings.
     #+begin_src emacs-lisp
