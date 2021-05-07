@@ -393,7 +393,6 @@ I want a different color for each lvel of a heading.
 #+begin_src emacs-lisp
 
 #+end_src
-
 * UI Adjustments
 ** Minimalist UI
 #+begin_src emacs-lisp
