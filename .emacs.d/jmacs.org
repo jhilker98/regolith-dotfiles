@@ -186,6 +186,18 @@ I want to use hydras for certain things - namely, elfeed filters.
 :after org)
 #+end_src
 
+*** Rainbow Delimiters
+#+begin_src emacs-lisp
+(use-package rainbow-delimiters
+ :config
+(rainbow-delimiters-mode))
+#+end_src
+
+*** Projectile
+#+begin_src emacs-lisp
+(use-package projectile)
+#+end_src
+
 * Evil Mode
 This section contains extra evil-mode functions.
 ** Evil Surround
@@ -510,6 +522,16 @@ This lets me set up a clean modeline.
 					centaur-tabs-cycle-scope 'tabs)
 		(define-key evil-normal-state-map (kbd "g t") 'centaur-tabs-forward)
   (define-key evil-normal-state-map (kbd "g T") 'centaur-tabs-backward))
+#+end_src
+
+*** Dashboard
+#+begin_src emacs-lisp
+(use-package dashboard
+  :config
+  (dashboard-setup-startup-hook)
+(setq dashboard-week-agenda nil)
+(setq dashboard-items '((recents  . 5)
+                        (projects . 10))))
 #+end_src
 
 ** Fonts
