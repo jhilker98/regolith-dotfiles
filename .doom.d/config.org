@@ -1,10 +1,9 @@
-+TITLE: Jacob's Doom Emacs Config
+#+title: Jacob's Doom Emacs Config
 #+author: Jacob Hilker
 #+description: Jacob's Doom Emacs config.
-#+property: header-args :tangle config.el
-#+startup: fold
-
+#+startup: overview
 * Personal Info
+Here is where I setup personal info.
 #+begin_src emacs-lisp
 (setq user-full-name "Jacob Hilker"
       user-mail-address "jacob.hilker2@gmail.com")
@@ -27,30 +26,37 @@ I personally like Iosevka as a monospace font. In addition, I need to find a goo
   (setq
    doom-themes-enable-bold t
    doom-themes-enable-italic t))
+
 #+end_src
 
 *** Italics for Comments
 #+begin_src emacs-lisp
-(set-face-attribute 'font-lock-comment-face nil
-  :slant 'italic)
+(custom-set-faces!
+  '(font-lock-comment-face :slant italic))
 #+end_src
 
-* Minor Tweaks
-** Relative Line Numbers
+** Org Mode Faces
 #+begin_src emacs-lisp
-(setq display-line-numbers-type 'relative)
+(after! org
+  (set-face-attribute 'org-level-1 nil :foreground "#83a598")
+  (set-face-attribute 'org-level-2 nil :foreground "#d3869b")
+  (set-face-attribute 'org-level-3 nil :foreground "#fabd2f")
+  (set-face-attribute 'org-level-4 nil :foreground "#fb4934")
+  (set-face-attribute 'org-level-5 nil :foreground "#83a598")
+  (set-face-attribute 'org-level-6 nil :foreground "#d3869b")
+  (set-face-attribute 'org-level-7 nil :foreground "#fabd2f")
+  (set-face-attribute 'org-level-8 nil :foreground "#fb4934"))
 #+end_src
 
-* Org-Mode
-** General Config
+* Org Mode Config
 #+begin_src emacs-lisp
 (after! org
 (setq
  org-directory "~/Dropbox/org/"
- org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/notes/spring2021.org")
+ org-agenda-files '("~/Dropbox/org/agenda.org")
  org-deadline-warning-days 0
  org-todo-keywords '(
-      (sequence "TODO(t)" "INPR(i)" "NEXT(n)" "MEET(m)" "|" "SOMEDAY(s)"   "DONE(d)" "CANCELED(c)")
+      (sequence "TODO(t)" "INPR(i)" "NEXT(n)" "MEET(m)" "|" "DONE(d)" "CANCELED(c)")
       (type "PROJ(p)")
       (type "BLOG(b)"))
  org-todo-keyword-faces
@@ -68,278 +74,105 @@ I personally like Iosevka as a monospace font. In addition, I need to find a goo
 )
 #+end_src
 
-*** Custom Agenda Commands
+** Enabling Org-Super-Agenda
+Here is where I am setting up org-super agenda, which lets me make much more complex agenda views than I could with the regular org-mode agenda language.
+
+#+begin_src emacs-lisp
+(use-package! org-super-agenda
+  :after org-agenda
+  :init
+  (require 'evil-org-agenda)
+  :config
+  (org-super-agenda-mode))
+#+end_src
+
+** Custom Agenda Commands
+This is the section where I create custom agendas.
+*** Planner
+A basic planner that shows today at the top, then 2 days from tomorrow, and finally a todo list.
 #+begin_src emacs-lisp
 (after! org-super-agenda
-(org-super-agenda-mode))
-#+end_src
-**** Planner
-#+begin_src emacs-lisp
-(add-to-list 'org-agenda-custom-commands
-	     '("p" "Planner"
-	       (
-		(agenda "" ((org-agenda-span 'day)
-			    (org-agenda-use-time-grid t)
-			    (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
-			    (org-agenda-show-all-dates t)
-			    (org-agenda-compact-blocks nil)
-			    (org-agenda-overriding-header "")
-			    (org-agenda-start-day "+0d")
-			    (org-super-agenda-groups
-			     '(
-			       (:name "Habits"
-				      :habit t
-				      :category "HABIT"
-				      :order 2)
+  (add-to-list 'org-agenda-custom-commands
+    '("p" "Planner"
+      (
+        (agenda "" ((org-agenda-span 'day)
+                    (org-agenda-use-time-grid t)
+                    (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
+		              (org-agenda-show-all-dates t)
+			          (org-agenda-compact-blocks nil)
+			          (org-agenda-overriding-header "")
+			          (org-agenda-start-day nil)
+                    (org-super-agenda-groups
+                    '((:name "Habits"
+                       :habit t
+                       :category "HABIT"
+                       :order 1)
 
-			       (:name "Chores"
-				      :habit t
-				      :category "CHORE"
-				      :order 2)
+                      (:name "Chores"
+                       :habit t
+                       :category "CHORE"
+                       :order 2)
 
+                      (:name none
+                       :discard (:todo "DONE")
+		                 :time-grid t
+				         :date today
+				         :scheduled today
+				         :deadline today
+				         :order 1)))))
+                    (agenda "" ((org-agenda-overriding-header "Coming Up Soon")
+                                (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
+                                (org-agenda-format-date "\n%d %b (%a.)")
+                                (org-agenda-start-day "+1d")
+                                (org-agenda-span 2)
+                                (org-super-agenda-groups
+                                 '((:name "Classwork and Meetings"
+                                    :category ("CPSC430" "DGST101" "CPSC414" "CPSC444" "MEETING")
+                                    :order 1)
 
-			       (:name none
-				      :discard (:todo "DONE")
-				      :time-grid t
-				      :date today
-				      :scheduled today
-				      :deadline today
-				      :order 1)))))
+                                   (:name "Personal"
+                                    :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
+                                    :order 2)
 
-                   (agenda "" ((org-agenda-overriding-header "Coming Up Soon")
-                       ;(org-agenda-prefix-format '((todo . " %i %-22:c %t %22(org-entry-get nil \"TIMESTAMP\")")))
-;                       (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottimestamp))
-	                ;
-                      ; (org-agenda-use-time-grid nil)
-                      ; (org-agenda-time-grid '((daily today weekly require-timed)()() "----------------------" nil))
-		               (org-agenda-start-day "+1d")
-     ;                   (org-agenda-todo-ignore-with-date t)
-                      ; (org-agenda-format-date "\n%d %b (%a.)\n")
+                                   (:name "Overdue"
+                                    :deadline past
+                                    :scheduled past
+                                    :face '(:foreground "red")
+                                    :order 3)
 
-									 (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
-                   (org-agenda-format-date "\n%d %b (%a.)")
-			;		   (concat (make-string (window-width) 9472) "\n")
-             ;         (org-agenda-compact-blocks t)
-                   (org-agenda-span 2)
-																				;(org-agenda-format-date "%d %b")
-                   (org-super-agenda-groups
-                    '(
+                                   (:name "Projects"
+                                    :todo "PROJECT"
+                                    :category "PROJECT"
+                                    :order 4)))))
 
-                      (:name "Habits"
-                         :habit t
-                         :category "HABIT"
-                         :order 6)
+                                (alltodo "" ((org-agenda-overriding-header "To Do")
+                                             (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+                                             (org-agenda-sorting-strategy '(todo-state-up category-up ))
+                                             (org-super-agenda-groups
+                                              '(
+                                                (:name "Classwork and Meetings"
+                                                 :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING" "CLASSES")
+                                                 :order 1)
 
-                         (:name "Chores"
-                         :habit t
-                         :category "CHORE"
-                         :order 6)
+                                                (:name "Personal"
+                                                 :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
+                                                 :order 2)
 
-
-     ;                 (:name "Projects"
-     ;                 :category "PROJECT"
-     ;                 :order 5)
-
-
-    (:name "Personal"
-    :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
-    :order 4)
-
-;
-;    (:name "Someday"
-;     :and (:not (:category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO")) :todo "SOMEDAY")
-;     :order 5)
-
-    (:name "Overdue"
-      :deadline past
-      :scheduled past
-      :face '(:foreground "red")
-      :order 3)
-;
-;
-    (:name "Classwork and Meetings"
-     :category ("CPSC430" "DGST101" "CPSC414" "CPSC444" "MEETING")
-     :order 1)))))
-
-				 (alltodo "" ((org-agenda-overriding-header "To Do")
-                  (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
-                  (org-agenda-sorting-strategy '(todo-state-up category-up ))
-                  (org-super-agenda-groups '(
-                  (:name "Classwork and Meetings"
-                  :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING" "CLASSES")
-                  :order 1)
-
-                  (:name "Personal"
-                  :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
-                  :order 2)
-
-                  (:name "Projects"
-                   :todo "PROJECT"
-                   :category "PROJECT"
-                   :order 3)
+                                                (:name "Projects"
+                                                 :category "PROJECT"
+                                                 :order 3)
 
 
-                 (:discard (:category "HABIT"))
-                 (:discard (:category "CHORE")))))))))(add-to-list 'org-agenda-custom-commands
-	     '("p" "Planner"
-	       (
-		(agenda "" ((org-agenda-span 'day)
-			    (org-agenda-use-time-grid t)
-			    (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
-			    (org-agenda-show-all-dates t)
-			    (org-agenda-compact-blocks nil)
-			    (org-agenda-overriding-header "")
-			    (org-agenda-start-day "+0d")
-			    (org-super-agenda-groups
-			     '(
-			       (:name "Habits"
-				      :habit t
-				      :category "HABIT"
-				      :order 2)
-
-			       (:name "Chores"
-				      :habit t
-				      :category "CHORE"
-				      :order 2)
+                                                (:discard (:category "HABIT"))
+                                                (:discard (:category "CHORE"))))))))))
 
 
-			       (:name none
-				      :discard (:todo "DONE")
-				      :time-grid t
-				      :date today
-				      :scheduled today
-				      :deadline today
-				      :order 1)))))
-
-                   (agenda "" ((org-agenda-overriding-header "Coming Up Soon")
-                       ;(org-agenda-prefix-format '((todo . " %i %-22:c %t %22(org-entry-get nil \"TIMESTAMP\")")))
-;                       (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottimestamp))
-	                ;
-                      ; (org-agenda-use-time-grid nil)
-                      ; (org-agenda-time-grid '((daily today weekly require-timed)()() "----------------------" nil))
-		               (org-agenda-start-day "+1d")
-     ;                   (org-agenda-todo-ignore-with-date t)
-                      ; (org-agenda-format-date "\n%d %b (%a.)\n")
-
-									 (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
-                   (org-agenda-format-date "\n%d %b (%a.)")
-			;		   (concat (make-string (window-width) 9472) "\n")
-             ;         (org-agenda-compact-blocks t)
-                   (org-agenda-span 2)
-																				;(org-agenda-format-date "%d %b")
-                   (org-super-agenda-groups
-                    '(
-
-                      (:name "Habits"
-                         :habit t
-                         :category "HABIT"
-                         :order 6)
-
-                         (:name "Chores"
-                         :habit t
-                         :category "CHORE"
-                         :order 6)
 
 
-     ;                 (:name "Projects"
-     ;                 :category "PROJECT"
-     ;                 :order 5)
-
-
-    (:name "Personal"
-    :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
-    :order 4)
-
-;
-;    (:name "Someday"
-;     :and (:not (:category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO")) :todo "SOMEDAY")
-;     :order 5)
-
-    (:name "Overdue"
-      :deadline past
-      :scheduled past
-      :face '(:foreground "red")
-      :order 3)
-;
-;
-    (:name "Classwork and Meetings"
-     :category ("CPSC430" "DGST101" "CPSC414" "CPSC444" "MEETING")
-     :order 1)))))
-
-				 (alltodo "" ((org-agenda-overriding-header "To Do")
-                  (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
-                  (org-agenda-sorting-strategy '(todo-state-up category-up ))
-                  (org-super-agenda-groups '(
-                  (:name "Classwork and Meetings"
-                  :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING" "CLASSES")
-                  :order 1)
-
-                  (:name "Personal"
-                  :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
-                  :order 2)
-
-                  (:name "Projects"
-                   :todo "PROJECT"
-                   :category "PROJECT"
-                   :order 3)
-
-
-                 (:discard (:category "HABIT"))
-                 (:discard (:category "CHORE")))))))))
-#+end_src
-***** Helper Functions
-#+begin_src emacs-lisp
-(defun jh/open-planner ()
- (interactive)
- (org-agenda nil "p"))
-#+end_src
-
-** Keybindings
-*** Babel
-#+begin_src emacs-lisp
-(map! :leader
-      :desc "Org babel tangle" "m B" #'org-babel-tangle)
-#+end_src
-*** Open Planner
-#+begin_src emacs-lisp
-(map! :leader
-      (:prefix ("o" . "open")
-       :desc "Open agenda" "a" #'jh/open-planner))
-#+end_src
-
-** Prettifying Org-Mode
-*** Better Faces
-#+begin_src emacs-lisp
-(after! org
-  (custom-set-faces!
-    '(org-level-1  :inherit outline-1 :foreground "#83a598")
-    '(org-level-2  :inherit outline-3 :foreground "#d3869b")
-    '(org-level-3  :inherit outline-2 :foreground "#fabd2f")
-    '(org-level-4  :inherit outline-4 :foreground "#fb4934")
-    '(org-level-5  :inherit outline-5 :foreground "#83a598")
-    '(org-level-6  :inherit outline-6 :foreground "#d3869b")
-    '(org-level-7  :inherit outline-7 :foreground "#fabd2f")
-    '(org-level-8  :inherit outline-8 :foreground "#fb4934")))
-#+end_src
-
-*** Better Ellipsis
-I want to see an arrrow instead of an ellipsis.
-#+begin_src emacs-lisp
-(after! org
-(setq org-ellipsis " ▼ "))
-#+end_src
-
-* Magit
-** Keybindings
-#+begin_src emacs-lisp
-(map! :leader
-      (:prefix ("g" . "git")
-       :desc "Stage hunk" "h" #'git-gutter:stage-hunk
-       :desc "Stage file" "H" #'magit-stage-file
-       :desc "Magit status" "s" #'magit-status))
-#+end_src
-
-* Mu4e
+                       #+end_src
+* Applications
+** Mu4e
+Mu4e is an excellent email program. I'm setting p my account here.
 #+begin_src emacs-lisp
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e") ;; On Ubuntu
   (require 'mu4e);; on Ubuntu
@@ -365,11 +198,18 @@ I want to see an arrrow instead of an ellipsis.
 		  (mu4e-sent-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Sent Mail")
 		  (mu4e-refile-folder  . "/jacob.hilker2@gmail.com/[Gmail]/All Mail")
 		  (mu4e-trash-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Trash")))))
-
 #+end_src
 
-* General Keybindings
+* Minor Tweaks
+** Relative Line Numbers
+#+begin_src emacs-lisp
+(setq display-line-numbers-type 'relative)
+#+end_src
+
+* Keybindings
+** Org-Babel
 #+begin_src emacs-lisp
 (map! :leader
-      :desc "Open like spacemacs" "SPC" #'counsel-M-x)
+      :desc "Org babel tangle" "m B" #'org-babel-tangle)
 #+end_src
+** Open Programs
