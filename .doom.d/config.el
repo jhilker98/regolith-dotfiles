@@ -26,8 +26,10 @@
 
 (after! org
 (setq
+
  org-directory "~/Dropbox/org/"
  org-agenda-files '("~/Dropbox/org/agenda.org")
+ org-ellipsis " ▼ "
  org-deadline-warning-days 0
  org-todo-keywords '(
       (sequence "TODO(t)" "INPR(i)" "NEXT(n)" "MEET(m)" "|" "DONE(d)" "CANCELED(c)")
@@ -44,7 +46,10 @@
    ("SOMEDAY" . (:foreground "#d3869b" :slant italic))
    ("DONE" . (:foreground "#83a598" :strike-through t))
    ("CANCELED" . (:foreground "cc241d" :strike-through t)))
+
  )
+
+
 )
 
 (use-package! org-super-agenda
@@ -129,6 +134,10 @@
                                                 (:discard (:category "HABIT"))
                                                 (:discard (:category "CHORE"))))))))))
 
+(defun jh/open-planner ()
+  (interactive)
+  (org-agenda nil "p"))
+
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e") ;; On Ubuntu
   (require 'mu4e);; on Ubuntu
 
@@ -154,7 +163,19 @@
 		  (mu4e-refile-folder  . "/jacob.hilker2@gmail.com/[Gmail]/All Mail")
 		  (mu4e-trash-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Trash")))))
 
+(after! elfeed
+(elfeed-goodies/setup)
+(setq elfeed-search-filter "@1-week-ago +unread"
+      elfeed-goodies/feed-source-column-width 30
+      elfeed-goodies/tag-column-width 16)
+)
+
 (setq display-line-numbers-type 'relative)
 
 (map! :leader
       :desc "Org babel tangle" "m B" #'org-babel-tangle)
+
+(map! :leader
+      (:prefix ("o" . "open")
+       :desc "org agenda" "a" #'jh/open-planner
+       :desc "News reader" "n" #'elfeed))

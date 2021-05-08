@@ -52,8 +52,10 @@ I personally like Iosevka as a monospace font. In addition, I need to find a goo
 #+begin_src emacs-lisp
 (after! org
 (setq
+
  org-directory "~/Dropbox/org/"
  org-agenda-files '("~/Dropbox/org/agenda.org")
+ org-ellipsis " ▼ "
  org-deadline-warning-days 0
  org-todo-keywords '(
       (sequence "TODO(t)" "INPR(i)" "NEXT(n)" "MEET(m)" "|" "DONE(d)" "CANCELED(c)")
@@ -70,7 +72,10 @@ I personally like Iosevka as a monospace font. In addition, I need to find a goo
    ("SOMEDAY" . (:foreground "#d3869b" :slant italic))
    ("DONE" . (:foreground "#83a598" :strike-through t))
    ("CANCELED" . (:foreground "cc241d" :strike-through t)))
+
  )
+
+
 )
 #+end_src
 
@@ -165,11 +170,14 @@ A basic planner that shows today at the top, then 2 days from tomorrow, and fina
 
                                                 (:discard (:category "HABIT"))
                                                 (:discard (:category "CHORE"))))))))))
+#+end_src
 
-
-
-
-                       #+end_src
+**** Helper Function
+#+begin_src emacs-lisp
+(defun jh/open-planner ()
+  (interactive)
+  (org-agenda nil "p"))
+#+end_src
 * Applications
 ** Mu4e
 Mu4e is an excellent email program. I'm setting p my account here.
@@ -199,7 +207,16 @@ Mu4e is an excellent email program. I'm setting p my account here.
 		  (mu4e-refile-folder  . "/jacob.hilker2@gmail.com/[Gmail]/All Mail")
 		  (mu4e-trash-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Trash")))))
 #+end_src
-
+** Elfeed
+Elfeed is a rss reader for emacs.
+#+begin_src emacs-lisp
+(after! elfeed
+(elfeed-goodies/setup)
+(setq elfeed-search-filter "@1-week-ago +unread"
+      elfeed-goodies/feed-source-column-width 30
+      elfeed-goodies/tag-column-width 16)
+)
+#+end_src
 * Minor Tweaks
 ** Relative Line Numbers
 #+begin_src emacs-lisp
@@ -212,4 +229,14 @@ Mu4e is an excellent email program. I'm setting p my account here.
 (map! :leader
       :desc "Org babel tangle" "m B" #'org-babel-tangle)
 #+end_src
+
 ** Open Programs
+These are the keybindings I want to use for opening both agenda custom commands and for various programs.
+#+begin_src emacs-lisp
+
+(map! :leader
+      (:prefix ("o" . "open")
+       :desc "org agenda" "a" #'jh/open-planner
+       :desc "News reader" "n" #'elfeed))
+
+#+end_src
