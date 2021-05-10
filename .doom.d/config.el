@@ -1,10 +1,10 @@
 (setq user-full-name "Jacob Hilker"
       user-mail-address "jacob.hilker2@gmail.com")
 
-(setq doom-theme 'doom-gruvbox)
+  (setq doom-theme 'doom-gruvbox)
 
 (setq doom-font (font-spec :family "Iosevka Nerd Font" :size 14)
-      doom-variable-pitch-font (font-spec :family "Alegreya" :size 14))
+      doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 14))
 
 (after! doom-themes
   (setq
@@ -49,7 +49,7 @@
 
  )
 
-
+(add-hook 'org-mode-hook 'mixed-pitch-mode)
 )
 
 (use-package! org-super-agenda
@@ -171,6 +171,9 @@
 )
 
 (setq display-line-numbers-type 'relative)
+
+(map! :leader
+      :desc "Open like spacemacs" "SPC" #'counsel-M-x)
 
 (map! :leader
       :desc "Org babel tangle" "m B" #'org-babel-tangle)

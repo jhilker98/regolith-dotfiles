@@ -20,7 +20,7 @@ I really like gruvbox.
 I personally like Iosevka as a monospace font. In addition, I need to find a good font for variable widths.
 #+begin_src emacs-lisp
 (setq doom-font (font-spec :family "Iosevka Nerd Font" :size 14)
-      doom-variable-pitch-font (font-spec :family "Alegreya" :size 14))
+      doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 14))
 
 (after! doom-themes
   (setq
@@ -49,6 +49,7 @@ I personally like Iosevka as a monospace font. In addition, I need to find a goo
 #+end_src
 
 * Org Mode Config
+
 #+begin_src emacs-lisp
 (after! org
 (setq
@@ -75,7 +76,7 @@ I personally like Iosevka as a monospace font. In addition, I need to find a goo
 
  )
 
-
+(add-hook 'org-mode-hook 'mixed-pitch-mode)
 )
 #+end_src
 
@@ -206,7 +207,9 @@ Mu4e is an excellent email program. I'm setting p my account here.
 		  (mu4e-sent-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Sent Mail")
 		  (mu4e-refile-folder  . "/jacob.hilker2@gmail.com/[Gmail]/All Mail")
 		  (mu4e-trash-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Trash")))))
+
 #+end_src
+
 ** Elfeed
 Elfeed is a rss reader for emacs.
 #+begin_src emacs-lisp
@@ -217,6 +220,7 @@ Elfeed is a rss reader for emacs.
       elfeed-goodies/tag-column-width 16)
 )
 #+end_src
+
 * Minor Tweaks
 ** Relative Line Numbers
 #+begin_src emacs-lisp
@@ -224,6 +228,12 @@ Elfeed is a rss reader for emacs.
 #+end_src
 
 * Keybindings
+** Spacemacs =M-x=
+#+begin_src emacs-lisp
+(map! :leader
+      :desc "Open like spacemacs" "SPC" #'counsel-M-x)
+#+end_src
+
 ** Org-Babel
 #+begin_src emacs-lisp
 (map! :leader
