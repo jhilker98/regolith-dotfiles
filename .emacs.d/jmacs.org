@@ -153,6 +153,7 @@ Helpful allows me to have a better view of a help buffer.
   :config
   (counsel-mode 1))
 #+end_src
+
 *** Ivy
 #+begin_src emacs-lisp
 (use-package ivy
@@ -162,6 +163,7 @@ Helpful allows me to have a better view of a help buffer.
  (setq ivy-count-format "(%d/%d) ")
  (ivy-mode 1))
 #+end_src
+
 **** Ivy Posframe
 Ivy Posframe makes it much easier to edit the ivy ui.
 **** Ivy Rich
@@ -171,11 +173,13 @@ Ivy Rich will allow me to see more about each command
     :init
     (ivy-rich-mode 1))
 #+end_src
+
 *** Swiper
 #+begin_src emacs-lisp
  (use-package swiper
 :after ivy)
 #+end_src
+
 * Org Mode
 ** General Customization
 
@@ -199,8 +203,12 @@ Ivy Rich will allow me to see more about each command
           ("CANCELED" . (:foreground "cc241d" :strike-through t))))
 ;   ("DONE" . "green"))
 #+end_src
-
-
+** UI Tweaks
+I want to hide formatting characters and leading stars.
+#+begin_src emacs-lisp
+(setq org-hide-emphasis-markers t
+      org-hide-leading-stars t)
+#+end_src
 ** Clearer Faces
 I like having different colors for faces.
 #+begin_src emacs-lisp
@@ -233,7 +241,8 @@ Org Superstar lets me use nicer bullets for my headers and formatting.
 #+begin_src emacs-lisp
 (use-package org-superstar
   :config
-  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
+  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+  (setq org-superstar-headline-bullets-list '("⚫" "○")))
 #+end_src
 
 * Mu4e
