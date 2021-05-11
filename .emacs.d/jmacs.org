@@ -1,7 +1,7 @@
 #+title: Jmacs (Jacob's Literate Emacs Config)
 #+author: Jacob Hilker
 #+startup: fold
-#+property: header-args :tangle init.el
+#+property: header-args :tangle jmacs.el
 
 Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG campaigns like [[https://www.ironswornrpg.com/][Ironsworn]], writing (both prose and code), and for general use. I have organized this file into different sections, such as the functions I use, the UI settings, etc.
 
@@ -14,22 +14,26 @@ By default, I want to use straight.el as my package manager.
 #+begin_src emacs-lisp
 (setq package-enable-at-startup nil)
 #+end_src
+
 * General Initialization
+:properties:
+:header-args: :tangle init.el
+:end:
 ** Setting Up Straight.el
 I am using straight.el for my packages.
 #+begin_src emacs-lisp
 (defvar bootstrap-version)
 (let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
+    (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+    (bootstrap-version 5))
+(unless (file-exists-p bootstrap-file)
     (with-current-buffer
         (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
+        "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+        'silent 'inhibit-cookies)
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
+(load bootstrap-file nil 'nomessage))
 #+end_src
 
 ** Setting Up Use-Package with Straight.el
@@ -42,10 +46,31 @@ And finally, I always want it to use straight.el.
 #+begin_src emacs-lisp
 (setq straight-use-package-by-default t)
 #+end_src
-* Org Mode
+** Org Mode
 I want to use the newest version of org-mode instead of the one built in to emacs.
 #+begin_src emacs-lisp
-  (straight-use-package '(org-plus-contrib :includes org))
+(straight-use-package '(org-plus-contrib :includes org))
+#+end_src
+And finally, I want to load the literate config.
+#+begin_src emacs-lisp
+(org-babel-load-file "~/.emacs.d/jmacs.org")
+#+end_src
+
+
+
+
+
+* Initial Setup
+This is where I setup my initial personal information, as well as a minimal UI and enabling the visual bell.
+#+begin_src emacs-lisp
+(setq visible-bell t)
+#+end_src
+
+Now I want to disable automatic indentation with electric-indent-mode, and disable tabs.
+#+begin_src emacs-lisp
+(electric-indent-mode -1)
+(setq-default indent-tabs-mode nil)
+(setq tab-always-indent 'complete)
 #+end_src
 
 * Core Functionality
@@ -65,7 +90,7 @@ This is the core of evil mode.
 (use-package evil
   :init
   (setq evil-undo-system 'undo-tree)
-
+  (setq evil-want-C-i-jump nil) 
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
   (setq evil-want-keybinding nil)
   :config
@@ -111,10 +136,24 @@ I want to use hydras for certain things - namely, elfeed filters.
 (use-package hydra)
 #+end_src
 
+** Helpful
+Helpful allows me to have a better view of a help buffer.
+#+begin_src emacs-lisp
+(use-package helpful
+    :config
+    (setq counsel-describe-function-function #'helpful-callable)
+    (setq counsel-describe-variable-function #'helpful-variable))
+#+end_src
+
 * IDE Configuration
-** Packages
-*** Completion Packages
-**** Ivy
+** Completion Frameworks
+*** Counsel
+#+begin_src emacs-lisp
+(use-package counsel
+  :config
+  (counsel-mode 1))
+#+end_src
+*** Ivy
 #+begin_src emacs-lisp
 (use-package ivy
   :defer 0.1
@@ -123,102 +162,23 @@ I want to use hydras for certain things - namely, elfeed filters.
  (setq ivy-count-format "(%d/%d) ")
  (ivy-mode 1))
 #+end_src
-
-***** Ivy Posframe
+**** Ivy Posframe
+Ivy Posframe makes it much easier to edit the ivy ui.
+**** Ivy Rich
+Ivy Rich will allow me to see more about each command
 #+begin_src emacs-lisp
-  (use-package ivy-posframe
+  (use-package ivy-rich
     :init
-    (setq ivy-posframe-display-functions-alist
-      '((swiper                     . ivy-posframe-display-at-point)
-	(complete-symbol            . ivy-posframe-display-at-point)
-	(counsel-M-x                . ivy-display-function-fallback)
-	(counsel-esh-history        . ivy-posframe-display-at-window-center)
-	(counsel-describe-function  . ivy-display-function-fallback)
-	(counsel-describe-variable  . ivy-display-function-fallback)
-	(counsel-find-file          . ivy-display-function-fallback)
-	(counsel-recentf            . ivy-display-function-fallback)
-	(counsel-register           . ivy-posframe-display-at-frame-bottom-window-center)
-	(dmenu                      . ivy-posframe-display-at-frame-top-center)
-	(nil                        . ivy-posframe-display))
-      ivy-posframe-height-alist
-      '((swiper . 20)
-	(dmenu . 20)
-        (counsel . 15)
-	(t . 10)))
-    :config
-    (ivy-posframe-mode 1)) ; 1 enables posframe-mode, 0 disables it.
+    (ivy-rich-mode 1))
 #+end_src
-
-**** Swiper
+*** Swiper
 #+begin_src emacs-lisp
-   (use-package swiper
-  :after ivy)
+ (use-package swiper
+:after ivy)
 #+end_src
+* Org Mode
+** General Customization
 
-**** Counsel
-#+begin_src emacs-lisp
-(use-package counsel
-			 :after ivy
-			 :config
-			 (counsel-mode))
-#+end_src
-
-**** Company
-#+begin_src emacs-lisp
-(use-package company
-			:config
-			(add-hook 'after-init-hook 'global-company-mode)) 
-#+end_src
-
-*** Magit
-#+begin_src emacs-lisp
-(use-package magit)
-(use-package magit-todos)
-#+end_src
-
-*** Smartparens
-#+begin_src emacs-lisp
-(use-package smartparens
-:config
-(smartparens-global-mode))
-
-(use-package evil-smartparens
-:after org)
-#+end_src
-
-*** Rainbow Delimiters
-#+begin_src emacs-lisp
-(use-package rainbow-delimiters
- :config
-(rainbow-delimiters-mode))
-#+end_src
-
-*** Projectile
-#+begin_src emacs-lisp
-(use-package projectile)
-#+end_src
-
-* Evil Mode
-This section contains extra evil-mode functions.
-** Evil Surround
-#+begin_src emacs-lisp
-(use-package evil-surround
-:after evil
-:config
-(evil-surround-mode)
-)
-#+end_src
-** Evil Org
-#+begin_src emacs-lisp
-(use-package evil-org
-:after '(evil org)
-:config
-(evil-org-mode)
-)
-#+end_src
-
-* Org Mode Configuration
-** Initial Configuration
 #+begin_src emacs-lisp
 (setq org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/notes/spring2021.org")
         org-todo-keywords '(
@@ -226,53 +186,23 @@ This section contains extra evil-mode functions.
             (type "PROJ(p)")
             (type "BLOG(b)"))
 
-            org-todo-keyword-faces
-'(
-("TODO" . (:foreground "#cc241d" :weight black :underline t))
-("INPR" . (:foreground "#fe8019" :weight bold))
-("NEXT" . (:foreground "#fabd2f" :weight black))
-("MEET" . (:foreground "#b8bb26" :weight bold))
-("PROJ" . (:foreground "#458588" :slant italic :weight bold))
-("BLOG" . (:foreground "#83a598"))
-("SOMEDAY" . (:foreground "#d3869b" :slant italic))
-("DONE" . (:foreground "#83a598" :strike-through t))
-("CANCELED" . (:foreground "cc241d" :strike-through t))))
+        org-todo-keyword-faces
+        '(
+          ("TODO" . (:foreground "#cc241d" :weight black :underline t))
+          ("INPR" . (:foreground "#fe8019" :weight bold))
+          ("NEXT" . (:foreground "#fabd2f" :weight black))
+          ("MEET" . (:foreground "#b8bb26" :weight bold))
+          ("PROJ" . (:foreground "#458588" :slant italic :weight bold))
+          ("BLOG" . (:foreground "#83a598"))
+          ("SOMEDAY" . (:foreground "#d3869b" :slant italic))
+          ("DONE" . (:foreground "#83a598" :strike-through t))
+          ("CANCELED" . (:foreground "cc241d" :strike-through t))))
 ;   ("DONE" . "green"))
 #+end_src
 
-** Packages
-*** Org Tempo
-This lets me use =<key <tab> to insert a shortcode.
-#+begin_src emacs-lisp
-  (use-package org-tempo
-  :straight nil
-  :ensure nil)
-#+end_src
 
-*** Org Superstar
-#+begin_src emacs-lisp
-    (use-package org-superstar
-  :config
-(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
-#+end_src
-
-*** Org Super Agenda
-#+begin_src emacs-lisp
-(use-package org-super-agenda
-:config
-(add-hook 'org-mode-hook 'org-super-agenda-mode))
-#+end_src
-
-** UI Tweaks
-*** Hiding Certain Characters
-I don't want to see formatting characters, and I don't want to see leading stars.
-#+begin_src emacs-lisp
-  (setq org-hide-leading-stars t
-        org-hide-emphasis-characters t)
-#+end_src
-
-*** Custom Faces
-I want a different color for each lvel of a heading.
+** Clearer Faces
+I like having different colors for faces.
 #+begin_src emacs-lisp
 (set-face-attribute 'org-level-1 nil :foreground "#83a598")
 (set-face-attribute 'org-level-2 nil :foreground "#d3869b")
@@ -284,204 +214,33 @@ I want a different color for each lvel of a heading.
 (set-face-attribute 'org-level-8 nil :foreground "#fb4934")
 #+end_src
 
-** Custom Agenda Commands
-*** Planner
+** Org Tempo
+Org Tempo lets me use <s(tab) to insert blocks into an org-mode document.
+
 #+begin_src emacs-lisp
-(add-to-list 'org-agenda-custom-commands
-	     '("p" "Planner"
-	       (
-		(agenda "" ((org-agenda-span 'day)
-			    (org-agenda-use-time-grid t)
-			    (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
-			    (org-agenda-show-all-dates t)
-			    (org-agenda-compact-blocks nil)
-			    (org-agenda-overriding-header "")
-			    (org-agenda-start-day "+0d")
-			    (org-super-agenda-groups
-			     '(
-			       (:name "Habits"
-				      :habit t
-				      :category "HABIT"
-				      :order 2)
-			       
-			       (:name "Chores"
-				      :habit t
-				      :category "CHORE"
-				      :order 2)
-						 
-
-			       (:name none
-				      :discard (:todo "DONE")
-				      :time-grid t
-				      :date today
-				      :scheduled today
-				      :deadline today
-				      :order 1)))))
-
-                   (agenda "" ((org-agenda-overriding-header "Coming Up Soon") 
-                       ;(org-agenda-prefix-format '((todo . " %i %-22:c %t %22(org-entry-get nil \"TIMESTAMP\")")))
-;                       (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottimestamp))
-	                ; 
-                      ; (org-agenda-use-time-grid nil) 
-                      ; (org-agenda-time-grid '((daily today weekly require-timed)()() "----------------------" nil))
-		               (org-agenda-start-day "+1d")
-     ;                   (org-agenda-todo-ignore-with-date t)
-                      ; (org-agenda-format-date "\n%d %b (%a.)\n")
-                      
-									 (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
-                   (org-agenda-format-date "\n%d %b (%a.)")
-			;		   (concat (make-string (window-width) 9472) "\n")
-             ;         (org-agenda-compact-blocks t)
-                   (org-agenda-span 2)
-																				;(org-agenda-format-date "%d %b")
-                   (org-super-agenda-groups
-                    '(
-                      
-                      (:name "Habits"
-                         :habit t
-                         :category "HABIT"
-                         :order 6)
-                         
-                         (:name "Chores"
-                         :habit t
-                         :category "CHORE"
-                         :order 6)
-                         
-
-     ;                 (:name "Projects"
-     ;                 :category "PROJECT"
-     ;                 :order 5)
-                      
-                     
-    (:name "Personal"
-    :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
-    :order 4)
-    
-;    
-;    (:name "Someday"
-;     :and (:not (:category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO")) :todo "SOMEDAY")
-;     :order 5)
-
-    (:name "Overdue"
-      :deadline past
-      :scheduled past
-      :face '(:foreground "red")
-      :order 3)
-;
-;
-    (:name "Classwork and Meetings"
-     :category ("CPSC430" "DGST101" "CPSC414" "CPSC444" "MEETING")
-     :order 1)))))
-
-				 (alltodo "" ((org-agenda-overriding-header "To Do")
-                  (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
-                  (org-agenda-sorting-strategy '(todo-state-up category-up ))
-                  (org-super-agenda-groups '(
-                  (:name "Classwork and Meetings"
-                  :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING" "CLASSES")
-                  :order 1)
-                 
-                  (:name "Personal"
-                  :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
-                  :order 2)
-                  
-                  (:name "Projects"
-                   :todo "PROJECT"
-                   :category "PROJECT"
-                   :order 3)
-                  
-
-                 (:discard (:category "HABIT"))
-                 (:discard (:category "CHORE")))))))))
+(use-package org-tempo
+    :straight nil
+    :ensure nil)
 #+end_src
-
-**** Helper Function
-    #+begin_src emacs-lisp
-      (defun jh/open-planner ()
-       (interactive)
-       (org-agenda nil "p"))
-    #+end_src
-
-*** Week Ahead
-**** Helper Function
+*** Custom Keywords
+This is where I want to add custom keywords for shortcut completion.
 #+begin_src emacs-lisp
 
 #+end_src
+
+** Org Superstar
+Org Superstar lets me use nicer bullets for my headers and formatting.
+#+begin_src emacs-lisp
+(use-package org-superstar
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
+#+end_src
+
 * Mu4e
-Mu4e is an excellent email client for emacs.
-#+begin_src emacs-lisp
- (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e") ;; On Ubuntu
-  (require 'mu4e);; on Ubuntu
-
-  (require 'org-mu4e) ;; On Ubuntu
-(setq mu4e-maildir "~/.local/share/mail")
-(setq mu4e-get-mail-command "mbsync -a")
-(setq mail-user-agent 'mu4e-user-agent)
-(setq send-mail-function 'smtpmail-send-it)
-(setq mu4e-contexts
-	(list
-	 ;; Primary personal account
-	 (make-mu4e-context
-	  :name "jhilker2"
-	  :match-func
-	    (lambda (msg)
-	      (when msg
-		(string-prefix-p "/jacob.hilker2" (mu4e-message-field msg :maildir))))
-	  :vars '((user-mail-address . "jacob.hilker2@gmail.com")
-		  (user-full-name    . "Jacob Hilker")
-
-		  (smtpmail-smtp-server  . "smtp.gmail.com")
-		  (smtpmail-smtp-service . 465)
-		  (smtpmail-stream-type  . ssl)
-		  (mu4e-drafts-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Drafts")
-		  (mu4e-sent-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Sent Mail")
-		  (mu4e-refile-folder  . "/jacob.hilker2@gmail.com/[Gmail]/All Mail")
-		  (mu4e-trash-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Trash")))
-
-(make-mu4e-context
-	  ; Secondary personal account
-	  :name "chilk"
-	  :match-func
-	    (lambda (msg)
-	      (when msg
-		(string-prefix-p "/jacob.hilker2" (mu4e-message-field msg :maildir))))
-	  :vars '((user-mail-address . "camohilk@gmail.com")
-		  (user-full-name    . "Jacob Hilker")
-		  (smtpmail-smtp-server  . "smtp.gmail.com")
-		  (smtpmail-smtp-service . 465)
-		  (smtpmail-stream-type  . ssl)
-		  (mu4e-drafts-folder  . "/camohilk@gmail.com/[Gmail]/Drafts")
-		  (mu4e-sent-folder  . "/camohilk@gmail.com/[Gmail]/Sent Mail")
-		  (mu4e-refile-folder  . "/camohilk@gmail.com/[Gmail]/All Mail")
-		  (mu4e-trash-folder  . "/camohilk@gmail.com/[Gmail]/Trash")))))
-#+end_src
-
-** Org Msg
-Org-msg will let me use org-mode syntax for emails.
-#+begin_src emacs-lisp
-(use-package org-msg
-:after '(org mu4e))
- (setq org-msg-options "html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t"
-	org-msg-startup "hidestars indent inlineimages"
-	org-msg-greeting-fmt "\nHi *%s*,\n\n"
-	org-msg-recipient-names '(("jacob.hilker2@gmail.com" . "Jacob")("hilker09@gmail.com" . "Dad"))
-	org-msg-greeting-name-limit 3
-	org-msg-default-alternatives '((new		. (text html))
-				       (reply-to-html	. (text html))
-				       (reply-to-text	. (text)))
-	org-msg-convert-citation t
-	org-msg-signature "
-
-
- #+begin_signature
- --
- Thanks,\nJacob Hilker
- #+end_signature")
- (org-msg-mode)
-#+end_src
-
-* UI Adjustments
-** Minimalist UI
+* Elfeed
+* UI Tweaks
+** Minimalistic UI
+I really hate seeing the menu bar, scrollbar, etc.
 #+begin_src emacs-lisp
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
@@ -489,186 +248,43 @@ Org-msg will let me use org-mode syntax for emails.
 (menu-bar-mode -1)
 #+end_src
 
-** Packages 
-*** Themes
-**** Doom Themes
-I love the themes the doom emacs guys have.
-#+begin_src emacs-lisp
-    (use-package doom-themes)
-  (load-theme 'doom-gruvbox t)
-#+end_src
-
-*** Doom Modeline
-This lets me set up a clean modeline.
-#+begin_src emacs-lisp
-  (use-package doom-modeline
-    :config
-    (setq doom-modeline-height 32))
-  (doom-modeline-mode 1)
-#+end_src
-
-*** Centaur Tabs
-#+begin_src emacs-lisp
- (use-package centaur-tabs
-  :config
-  (centaur-tabs-mode t)
-		(setq centaur-tabs-set-modified-marker t
-					centaur-tabs-modified-marker "•"
-					centaur-tabs-set-bar 'left
-					centaur-tabs-set-icons t
-					centaur-tabs-set-close-button t
-					centaur-tabs-close-button "x"
-					centaur-tabs-style "bar"
-					centaur-tabs-cycle-scope 'tabs)
-		(define-key evil-normal-state-map (kbd "g t") 'centaur-tabs-forward)
-  (define-key evil-normal-state-map (kbd "g T") 'centaur-tabs-backward))
-#+end_src
-
-*** Dashboard
-#+begin_src emacs-lisp
-(use-package dashboard
-  :config
-  (dashboard-setup-startup-hook)
-(setq dashboard-week-agenda nil)
-(setq dashboard-items '((recents  . 5)
-                        (projects . 10))))
-#+end_src
-
 ** Fonts
-*** Iosevka
-I personally love Iosevka as a font. This is where I edit the default font to be Iosevka.
+I love Iosevka as a font. All the different variants help as well.
 #+begin_src emacs-lisp
-(eval-after-load "org-faces"
-  '(set-face-attribute 'default nil
-    :font "Iosevka Nerd Font"
-    :height 120))
-#+end_src
-Here is where I enable it for metadata blocks.
-#+begin_src emacs-lisp
-  (eval-after-load "org-faces"
-    '(set-face-attribute 'org-meta-line nil
-      :font "Iosevka Nerd Font"
-      :height 120))
-
-#+end_src
-And finally, where I enable it for code blocks.
-#+begin_src emacs-lisp
-(eval-after-load "org-faces"
-    '(set-face-attribute 'org-block nil
-      :font "Iosevka Nerd Font"
-      :height 120))
+  (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 120)
+  (set-face-attribute 'org-meta-line nil :inherit 'default)
 #+end_src
 
-* Minor Functions
-** Edit Dotfile
-This function lets me edit my dotfile.
+*** Variable Width
+I like Iosevka Aile as a variable width font for content.
 #+begin_src emacs-lisp
-(defun edit-dotfile ()
-(interactive)
-(find-file "~/.emacs.d/jmacs.org"))
+(set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height 120)
 #+end_src
 
-* Hooks
-** Org-Mode Hooks
-*** Indent Mode
+** Themes
+The doom-themes collection has a lot of nice themes - I do overwrite some of the faces, though.
 #+begin_src emacs-lisp
-;(add-hook 'org-mode-hook 'org-indent-mode)
+(use-package doom-themes)
+(load-theme 'doom-gruvbox t)
 #+end_src
 
-* Keybindings
-** General Keybindings
-#+begin_src emacs-lisp
-      (general-define-key
-	 :states '(normal visual insert emacs)
-	 :prefix "SPC"
-	 :non-normal-prefix "C-SPC"
+** Modeline
+Doom modeline allows me to have a cleaner modeline.
 
-	  "SPC" '(counsel-M-x :which-key "M-x")
-          "c"   (general-simulate-key "C-c")
-	  "h" (general-simulate-key "C-h" :which-key "Help")
-          "u"   (general-simulate-key "C-u")
-          "x"   (general-simulate-key "C-x")
-    )
+#+begin_src emacs-lisp
+(use-package doom-modeline
+  :config
+  (setq doom-modeline-height 32))
+(doom-modeline-mode 1)
 #+end_src
 
-** Buffer Keybindings
+* Minor Tweaks
+** Tab in Insert Mode Indents
+I want to insert indents myself.
 #+begin_src emacs-lisp
-(general-define-key
-:states '(normal visual insert emacs)
-:prefix "SPC"
-:non-normal-prefix "C-SPC"
+(setq org-src-preserve-indentation t
+      org-src-fontify-natively t
+      org-src-tab-acts-natively t
+      tab-width 4)
 
-
- "b"   '(:ignore t :which-key "buffers")
- "bb"  'mode-line-other-buffer
- "bd"  'kill-this-buffer
- "bn"  'next-buffer
- "bp"  'previous-buffer
- "bq"  'kill-buffer-and-window
- "bR"  'rename-file-and-buffer
- "br"  'revert-buffer
- "bs" 'switch-to-buffer)
 #+end_src
-
-** File Keybindings
-#+begin_src emacs-lisp
-(general-define-key
-   :states '(normal visual insert emacs)
-   :prefix "SPC"
-   :non-normal-prefix "C-SPC"
-
-
-   "f" '(:ignore t :which-key "Files")
-	 "fed" '(edit-dotfile :which-key "Edit Config")
-   "ff" '(find-file :which-key "Find file")
-   "fs" '(save-buffer :which-key "Save file")
-   "fl" '(load-file :which-key "Load file"))
-#+end_src
-
-** Magit Keybindings
-   #+begin_src emacs-lisp
-  (general-define-key
-   :states '(normal visual insert emacs)
-   :prefix "SPC"
-   :non-normal-prefix "C-SPC"
-
-
-   "g" '(:ignore t :which-key "Magit")
-   "gs" 'magit-status
-   "gS" 'magit-stage-file
-   "gc" 'magit-commit
-   "gp" 'magit-pull
-   "gP" 'magit-push
-   "gb" 'magit-branch
-   "gB" 'magit-blame
-   "gd" 'magit-diff) 
-
-   #+end_src
-** Org-Mode Keybindings
-   These are my org-mode keybindings.
-    #+begin_src emacs-lisp
-    (general-define-key
-   :states '(normal visual insert emacs)
-   :prefix "SPC"
-   :non-normal-prefix "C-SPC"
-
-	 "o" '(:ignore t :which-key "Org-mode")
-	 "oa" '(jh/open-planner :which-key "Open agenda")
-	 "oA" '(org-agenda :which-key "Open agenda dispatch")
-	 "oe" '(org-export-dispatch :which-key "Export org file")
-	 "ob" '(org-babel-tangle :which-key "Babel tangle")
-	 "ot" '(org-time-stamp :which-key "Org Timestamp"))
-    #+end_src
-
-** Misc. Keybindings
-*** Tab Indents
-#+begin_src emacs-lisp
-  (setq org-src-tab-acts-natively t
-			  org-edit-src-content-indentation 0)
-
-(setq electric-indent-mode nil)
-    (general-define-key
-     :states '(insert visual emacs)
-	"TAB" 'indent-for-tab-command)
-#+end_src
-
