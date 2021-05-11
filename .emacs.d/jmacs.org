@@ -145,6 +145,13 @@ Helpful allows me to have a better view of a help buffer.
     (setq counsel-describe-variable-function #'helpful-variable))
 #+end_src
 
+** Treemacs
+Treemacs allows me to set up a sidebar with project information.
+#+begin_src emacs-lisp
+(use-package treemacs
+  :config
+  (setq treemacs-persist-file "~/.emacs.d/.local/cache/treemacs.org"))
+#+end_src
 * IDE Configuration
 ** Completion Frameworks
 *** Counsel
@@ -178,6 +185,17 @@ Ivy Rich will allow me to see more about each command
 #+begin_src emacs-lisp
  (use-package swiper
 :after ivy)
+#+end_src
+
+*** Company
+
+** Projectile
+** Magit
+** Smartparens
+#+begin_src emacs-lisp
+(use-package smartparens
+  :config
+  (smartparens-mode))
 #+end_src
 
 * Org Mode
@@ -253,6 +271,7 @@ Elfeed is an excellent package for reading RSS feeds in Emacs.
 #+begin_src emacs-lisp
 (use-package elfeed)
 #+end_src
+
 ** Elfeed Org
 Elfeed org lets me use an org-mode file to keep track of my feeds.
 #+begin_src emacs-lisp
@@ -262,6 +281,7 @@ Elfeed org lets me use an org-mode file to keep track of my feeds.
 (elfeed-org)
 (setq rmh-elfeed-org-files '("~/Dropbox/org/elfeed.org")))
 #+end_src
+
 * UI Tweaks
 ** Minimalistic UI
 I really hate seeing the menu bar, scrollbar, etc.
@@ -283,6 +303,11 @@ I love Iosevka as a font. All the different variants help as well.
 I like Iosevka Aile as a variable width font for content.
 #+begin_src emacs-lisp
 (set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height 120)
+#+end_src
+
+*** Italics for Comments
+#+begin_src emacs-lisp
+
 #+end_src
 
 ** Themes
