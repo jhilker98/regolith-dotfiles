@@ -152,6 +152,7 @@ Treemacs allows me to set up a sidebar with project information.
   :config
   (setq treemacs-persist-file "~/.emacs.d/.local/cache/treemacs.org"))
 #+end_src
+
 * IDE Configuration
 ** Completion Frameworks
 *** Counsel
@@ -191,11 +192,17 @@ Ivy Rich will allow me to see more about each command
 
 ** Projectile
 ** Magit
+Magit is an incredible git client for emacs.
+
+#+begin_src emacs-lisp
+
+#+end_src
+
 ** Smartparens
 #+begin_src emacs-lisp
 (use-package smartparens
   :config
-  (smartparens-mode))
+  (smartparens-global-mode))
 #+end_src
 
 * Org Mode
@@ -265,7 +272,81 @@ Org Superstar lets me use nicer bullets for my headers and formatting.
   (setq org-superstar-headline-bullets-list '("⚫" "○")))
 #+end_src
 
+** Org Super Agenda
+*** Custom Agenda Commands
+** Org TOC
+
 * Mu4e
+Mu4e is an excellent email client for emacs.
+** Initial Setup
+I am setting my maildir and my update function here.
+#+begin_src emacs-lisp
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e") ;; On Ubuntu
+(require 'mu4e);; on Ubuntu
+
+(require 'org-mu4e) ;; On Ubuntu
+(setq mu4e-maildir "~/.local/share/mail" 
+      mu4e-get-mail-command "mbsync -aq"
+      mail-user-agent 'mu4e-user-agent)
+#+end_src
+
+** Account Setup
+Here is where I add my account information. This first section is for my personal accounts.
+#+begin_src emacs-lisp
+(setq mu4e-contexts
+	(list
+	 ;; Primary personal account
+	 (make-mu4e-context
+	  :name "jhilker2"
+	  :match-func
+	    (lambda (msg)
+	      (when msg
+		(string-prefix-p "/jacob.hilker2" (mu4e-message-field msg :maildir))))
+	  :vars '((user-mail-address . "jacob.hilker2@gmail.com")
+		  (user-full-name    . "Jacob Hilker")
+		  (smtpmail-smtp-server  . "smtp.gmail.com")
+		  (smtpmail-smtp-service . 465)
+		  (smtpmail-stream-type  . ssl)
+          (smtpmail-smtp-user . "jacob.hilker2@gmail.com")
+		  (mu4e-drafts-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Drafts")
+		  (mu4e-sent-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Sent Mail")
+		  (mu4e-refile-folder  . "/jacob.hilker2@gmail.com/[Gmail]/All Mail")
+		  (mu4e-trash-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Trash")))
+
+         (make-mu4e-context
+	  ; Secondary personal account
+	  :name "chilk"
+	  :match-func
+	    (lambda (msg)
+	      (when msg
+		(string-prefix-p "/jacob.hilker2" (mu4e-message-field msg :maildir))))
+	  :vars '((user-mail-address . "camohilk@gmail.com")
+		  (user-full-name    . "Jacob Hilker")
+		  (smtpmail-smtp-server  . "smtp.gmail.com")
+		  (smtpmail-smtp-service . 465)
+		  (smtpmail-stream-type  . ssl)
+          (smtpmail-smtp-user . "camohilk@gmail.com")
+		  (mu4e-drafts-folder  . "/camohilk@gmail.com/[Gmail]/Drafts")
+		  (mu4e-sent-folder  . "/camohilk@gmail.com/[Gmail]/Sent Mail")
+		  (mu4e-refile-folder  . "/camohilk@gmail.com/[Gmail]/All Mail")
+		  (mu4e-trash-folder  . "/camohilk@gmail.com/[Gmail]/Trash")))))
+#+end_src
+** Org-Msg
+Org-msg lets me use org-mode syntax for formatting emails.
+#+begin_src emacs-lisp
+(use-package org-msg
+  :config
+  (setq org-msg-options "html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t"
+	org-msg-startup "hidestars indent inlineimages"
+	org-msg-greeting-name-limit 3
+	org-msg-default-alternatives '((new		. (text html))
+				       (reply-to-html	. (text html))
+				       (reply-to-text	. (text)))
+	org-msg-convert-citation t)
+(org-msg-mode))
+
+#+end_src
+
 * Elfeed
 Elfeed is an excellent package for reading RSS feeds in Emacs.
 #+begin_src emacs-lisp
@@ -282,6 +363,8 @@ Elfeed org lets me use an org-mode file to keep track of my feeds.
 (setq rmh-elfeed-org-files '("~/Dropbox/org/elfeed.org")))
 #+end_src
 
+** Elfeed Dashboard
+Elfeed dashboard lets me create a custom dashboard for running queries on articles.
 * UI Tweaks
 ** Minimalistic UI
 I really hate seeing the menu bar, scrollbar, etc.
@@ -327,6 +410,26 @@ Doom modeline allows me to have a cleaner modeline.
 (doom-modeline-mode 1)
 #+end_src
 
+** Tabs
+I really like centaur-tabs for my config.
+#+begin_src emacs-lisp
+(use-package centaur-tabs
+  :config
+  (centaur-tabs-mode t)
+  (setq centaur-tabs-set-modified-marker t
+	centaur-tabs-modified-marker "•"
+	centaur-tabs-set-bar 'left
+	centaur-tabs-set-icons t
+	centaur-tabs-set-close-button t
+	centaur-tabs-close-button "x"
+	centaur-tabs-style "bar"
+	centaur-tabs-cycle-scope 'tabs)
+  :bind
+  (:map evil-normal-state-map
+	("g t" . centaur-tabs-forward)
+	("g T" . centaur-tabs-backward)))
+#+end_src
+
 * Keybindings
 This section serves to describe the keybindings of Jmacs.
 ** General Keybindings
@@ -352,5 +455,4 @@ I want to insert indents myself.
       org-src-fontify-natively t
       org-src-tab-acts-natively t
       tab-width 4)
-
 #+end_src
