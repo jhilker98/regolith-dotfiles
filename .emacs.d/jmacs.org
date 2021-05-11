@@ -189,7 +189,7 @@ Ivy Rich will allow me to see more about each command
             (sequence "TODO(t)" "INPR(i)" "NEXT(n)" "MEET(m)" "|" "SOMEDAY(s)"   "DONE(d)" "CANCELED(c)")
             (type "PROJ(p)")
             (type "BLOG(b)"))
-
+        org-ellipsis " ▼ "
         org-todo-keyword-faces
         '(
           ("TODO" . (:foreground "#cc241d" :weight black :underline t))
@@ -203,13 +203,15 @@ Ivy Rich will allow me to see more about each command
           ("CANCELED" . (:foreground "cc241d" :strike-through t))))
 ;   ("DONE" . "green"))
 #+end_src
+
 ** UI Tweaks
 I want to hide formatting characters and leading stars.
 #+begin_src emacs-lisp
 (setq org-hide-emphasis-markers t
       org-hide-leading-stars t)
 #+end_src
-** Clearer Faces
+
+*** Clearer Faces
 I like having different colors for faces.
 #+begin_src emacs-lisp
 (set-face-attribute 'org-level-1 nil :foreground "#83a598")
@@ -247,6 +249,19 @@ Org Superstar lets me use nicer bullets for my headers and formatting.
 
 * Mu4e
 * Elfeed
+Elfeed is an excellent package for reading RSS feeds in Emacs.
+#+begin_src emacs-lisp
+(use-package elfeed)
+#+end_src
+** Elfeed Org
+Elfeed org lets me use an org-mode file to keep track of my feeds.
+#+begin_src emacs-lisp
+(use-package elfeed-org
+:after elfeed
+:config
+(elfeed-org)
+(setq rmh-elfeed-org-files '("~/Dropbox/org/elfeed.org")))
+#+end_src
 * UI Tweaks
 ** Minimalistic UI
 I really hate seeing the menu bar, scrollbar, etc.
@@ -285,6 +300,23 @@ Doom modeline allows me to have a cleaner modeline.
   :config
   (setq doom-modeline-height 32))
 (doom-modeline-mode 1)
+#+end_src
+
+* Keybindings
+This section serves to describe the keybindings of Jmacs.
+** General Keybindings
+These are the core keybindings for functionality in jmacs.
+#+begin_src emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+    "SPC" '(counsel-M-x :which-key "M-x")
+    "c"   (general-simulate-key "C-c")
+    "h"   (general-simulate-key "C-h")
+    "u"   (general-simulate-key "C-u")
+    "x"   (general-simulate-key "C-x"))
 #+end_src
 
 * Minor Tweaks

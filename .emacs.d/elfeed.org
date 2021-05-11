@@ -1,0 +1,49 @@
+* Feeds                                                              :elfeed:
+** News                                                                :news:
+*** [[http://www.dailyprogress.com/search/?mode=article&q=&t=article&l=10&d=&d1=1+year+ago&d2=&s=&sd=desc&c\[\]=news/local*&f=atom&fulltext=dpmobile&altf=mrss][The Daily Progress]]                                                :local:
+*** [[https://fredericksburgva.gov/RSSFeed.aspx?ModID=1&CID=Fredericksburg-News-1][Fredericksburg News]]                                               :local:
+** Campaigns :campaigns:
+*** Adventures of the Knights of Salisbury                             :kos:
+**** [[https://rpggeek.com/rss/thread/1724354][Knights of Salisbury: OOC Thread]]
+**** [[https://rpggeek.com/rss/thread/2344531][Knights of Salisbury: 492 AD]]
+**** [[https://rpggeek.com/rss/thread/2388799][Knights of Salisbury: 493 AD]]
+**** [[https://rpggeek.com/rss/thread/2431371][Knights of Salisbury: 494 AD]]
+**** [[https://rpggeek.com/rss/thread/2464953][Knights of Salisbury: 495 AD]]
+**** [[https://rpggeek.com/rss/thread/2507102][Knights of Salisbury: 496 AD]]
+**** [[https://rpggeek.com/rss/thread/2586726][Knights of Salisbury: 497 AD]]
+*** Adventures in Middle-Earth: The Fellowship of Five :fo5:
+**** [[https://rpggeek.com/rss/thread/2371283][Fellowship of Five: OOC Thread]]
+**** [[https://rpggeek.com/rss/thread/2382018][Chapter 1: The Eaves of Mirkwood]]
+**** [[https://rpggeek.com/rss/thread/2638055][Chapter 2: The Dragon's Waistcoat]]
+*** The One Ring: Fellowship of the 1PG                             :fot1pg:
+**** [[https://rpggeek.com/rss/thread/2410450][Fellowship of the 1PG: OOC Thread]]
+**** [[https://rpggeek.com/rss/thread/2420789][Fellowship of the 1PG: Across The Great Forest]]
+**** [[https://rpggeek.com/rss/thread/2416498][Fellowship of the 1PG: A Few Meetings]]
+*** [[https://boardgamegeek.com/rss/thread/2508384][Crusader Kings PBF]] :ckpbf:
+*** [[https://rpol.net/feeds.cgi?q=2CEMCCmJ9dwpwGwAsehU][RPOL.net]]
+** Podcasts                                                        :podcast:
+*** [[https://NormanCenturies.com/rss.xml]]                            :norman:
+*** [[https://feeds.simplecast.com/uEJ9fA2K][The Broman Podcast]] :broman:
+*** [[https://DestinyCommunityPodcast.podbean.com/feed.xml][Destiny Community Podcast]] :dcp:
+** Reddit :reddit:
+*** [[https://old.reddit.com/r/DestinyLore.rss][r/DestinyLore]] :destinyLore:
+*** [[https://old.reddit.com/r/CrusaderKings/search.rss?q=self%3Ayes&restrict_sr=on&include_over_18=on&sort=new&t=all][CrusaderKings]]                                            :crusaderKings:
+*** [[https://old.reddit.com/r/sca/search.rss?q=self%3Ayes&restrict_sr=on&sort=relevance&t=all][Reddit SCA]] :sca:
+*** [[https://old.reddit.com/r/badhistory/search.rss?q=self%3Ayes&restrict_sr=on&include_over_18=on&sort=new&t=all][BadHistory]] :badhistory:
+*** [[https://old.reddit.com/r/MedievalHistory/new.rss][MedievalHistory]]                                        :medievalhistory:
+*** [[https://www.reddit.com/r/medieval/new.rss][Medieval]]                                                      :medieval:
+*** [[https://www.reddit.com/r/armsandarmor/new.rss][Arms and Armor]]                                                :armsArmor:
+*** [[https://old.reddit.com/r/AskHistorians/new.rss][Ask Historians]] :askHistorians:
+** Blogs                                                              :blogs:
+*** https://rollingboxcars.com/feed :rpgs:
+*** http://drcallumwatson.blogspot.com/feeds/posts/default :medieval:
+*** https://readingmedievalbooks.wordpress.com/feed :medievalBooks:
+*** https://nownovel.com/blog/feed :novel:
+*** [[https://jhilker.com/blog/feed.xml][Jacob's Blog]] :tech:foss:
+** Comics                                                            :comics:
+*** https://xkcd.com/atom.xml
+** Forums :forum:
+*** https://forum.paradoxplaza.com/forum/forums/-/index.rss :paradox:
+** YouTube                                                          :youtube:
+*** [[https://www.youtube.com/feeds/videos.xml?channel_id=UClbllR4Tx-lhYJyrpu1sA4A][Aztecross]]                                                        :gaming:
+*** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg][DistroTube]]                                                    :foss:tech:
