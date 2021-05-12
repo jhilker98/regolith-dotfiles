@@ -482,7 +482,41 @@ I like Iosevka Aile as a variable width font for content.
 (set-face-attribute 'font-lock-comment-face nil :slant 'italic)
 #+end_src
 
+** Themes
+The doom-themes collection has a lot of nice themes - I do overwrite some of the faces, though.
+#+begin_src emacs-lisp
+(use-package doom-themes)
+(load-theme 'doom-gruvbox t)
+#+end_src
 
+** Modeline
+Doom modeline allows me to have a cleaner modeline.
+#+begin_src emacs-lisp
+(use-package doom-modeline
+  :config
+  (setq doom-modeline-height 32))
+(doom-modeline-mode 1)
+#+end_src
+
+** Tabs
+I really like centaur-tabs for my config.
+#+begin_src emacs-lisp
+(use-package centaur-tabs
+  :config
+  (centaur-tabs-mode t)
+  (setq centaur-tabs-set-modified-marker t
+	centaur-tabs-modified-marker "•"
+	centaur-tabs-set-bar 'left
+	centaur-tabs-set-icons t
+	centaur-tabs-set-close-button t
+	centaur-tabs-close-button "x"
+	centaur-tabs-style "bar"
+	centaur-tabs-cycle-scope 'tabs)
+  :bind
+  (:map evil-normal-state-map
+	("g t" . centaur-tabs-forward)
+	("g T" . centaur-tabs-backward)))
+#+end_src
 
 * Keybindings
 This section serves to describe the keybindings of Jmacs.
