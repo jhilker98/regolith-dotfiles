@@ -346,17 +346,45 @@ Org Superstar lets me use nicer bullets for my headers and formatting.
   :config
   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
   (setq org-superstar-headline-bullets-list '("⚫" "○")))
+
+(org-superstar-mode 1)
 #+end_src
 
 ** Org Super Agenda
+#+begin_src emacs-lisp
+(use-package org-super-agenda
+:config 
+(org-super-agenda-mode 1))
+#+end_src
+
+
 *** Custom Agenda Commands
+**** Planner 
+This planner lets me get a quick overview of my day ahead.
 ** Org TOC
 
 This lets me insert a table of contents.
 #+begin_src emacs-lisp
 (use-package toc-org
-  :hook org-mode)
+  :config
+(toc-org-mode 1))
 #+end_src
+
+** Export Backends
+*** Hugo
+I use hugo for my website, and having it in org-mode is great.
+#+begin_src emacs-lisp
+(use-package ox-hugo
+:after ox)
+#+end_src
+
+*** Pandoc
+Seems fairly straightforward.
+#+begin_src emacs-lisp
+(use-package ox-pandoc
+:after ox)
+#+end_src
+
 * Mu4e
 Mu4e is an excellent email client for emacs.
 ** Initial Setup
