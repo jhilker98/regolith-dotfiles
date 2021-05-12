@@ -5,6 +5,7 @@
 
 Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG campaigns like [[https://www.ironswornrpg.com/][Ironsworn]], writing (both prose and code), and for general use. I have organized this file into different sections, such as the functions I use, the UI settings, etc.
 
+
 * Table of Contents :toc:
 - [[#initialization][Initialization]]
   - [[#early-initialization][Early Initialization]]
@@ -19,6 +20,7 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#helpful][Helpful]]
   - [[#treemacs][Treemacs]]
   - [[#imenu-list][Imenu-List]]
+  - [[#restart-emacs][Restart Emacs]]
 - [[#ide-configuration][IDE Configuration]]
   - [[#completion-frameworks][Completion Frameworks]]
   - [[#projectile][Projectile]]
@@ -48,8 +50,8 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
 - [[#writing-configuration][Writing Configuration]]
 - [[#ui-tweaks-2][UI Tweaks]]
   - [[#minimalistic-ui][Minimalistic UI]]
-  - [[#fonts][Fonts]]
   - [[#themes][Themes]]
+  - [[#fonts][Fonts]]
   - [[#modeline][Modeline]]
   - [[#tabs][Tabs]]
 - [[#functions-and-hooks][Functions and Hooks]]
@@ -60,7 +62,10 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#application-bindings][Application Bindings]]
   - [[#buffer-keybindings][Buffer Keybindings]]
   - [[#file-keybindings][File Keybindings]]
+  - [[#toggle-keybindings][Toggle Keybindings]]
+  - [[#org-mode-keybindings][Org-Mode Keybindings]]
   - [[#window-keybindings][Window Keybindings]]
+  - [[#quit-keybindings][Quit Keybindings]]
 - [[#minor-tweaks][Minor Tweaks]]
   - [[#tab-in-insert-mode-indents][Tab in Insert Mode Indents]]
 
@@ -84,15 +89,15 @@ I am using straight.el for my packages.
 #+begin_src emacs-lisp
 (defvar bootstrap-version)
 (let ((bootstrap-file
-    (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-    (bootstrap-version 5))
+(expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+(bootstrap-version 5))
 (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-        "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-        'silent 'inhibit-cookies)
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
+(with-current-buffer
+    (url-retrieve-synchronously
+    "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+    'silent 'inhibit-cookies)
+(goto-char (point-max))
+(eval-print-last-sexp)))
 (load bootstrap-file nil 'nomessage))
 #+end_src
 
@@ -138,7 +143,7 @@ Undo Tree lets me use more of Evil mode's redo functionality.
 #+begin_src emacs-lisp
 (use-package undo-tree
 :config
- (global-undo-tree-mode))
+(global-undo-tree-mode))
 #+end_src
 
 ** Evil Mode
@@ -179,15 +184,17 @@ This provides a collection of modules for using evil mode in other emacs program
 #+end_src
 
 *** Evil Org-Mode
-Evil and org-mode together.
 #+begin_src emacs-lisp
 (use-package evil-org
-:after org
-:hook (org-mode . (lambda () evil-org-mode))
-:config
-(require 'evil-org-agenda)
-(evil-org-agenda-set-keys))
+  :after org
+  :hook (org-mode . (lambda () evil-org-mode))
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+
+(add-hook 'org-mode-hook 'evil-org-mode)
 #+end_src
+
 ** General
 #+begin_src emacs-lisp
 (use-package general)
@@ -228,6 +235,11 @@ Treemacs allows me to set up a sidebar with project information.
 Imenu-list lets me look at the file as a list.
 #+begin_src emacs-lisp
 (use-package imenu-list)
+#+end_src
+
+** Restart Emacs
+#+begin_src emacs-lisp
+(use-package restart-emacs)
 #+end_src
 
 * IDE Configuration
@@ -339,7 +351,7 @@ I like having different colors for faces.
 
 *** Italic Comments
 #+begin_src emacs-lisp
-
+(set-face-attribute 'font-lock-comment-face nil :slant 'italic)
 #+end_src
 
 ** Org Tempo
@@ -378,7 +390,25 @@ Org Superstar lets me use nicer bullets for my headers and formatting.
 **** Planner 
 This planner lets me get a quick overview of my day ahead.
 #+begin_src emacs-lisp
+(add-to-list 'org-agenda-custom-commands
+    '("p" "Planner"
+      (
+       (agenda "" ((org-agenda-span 'day)
+                   (org-agenda-use-time-grid t)
+		           (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
+                   (org-agenda-show-all-dates t)
+                   (org-agenda-compact-blocks t)
+                   (org-agenda-overriding-header "")
+                   (org-agenda-start-day "+0d"))))))
+                   
+#+end_src
 
+***** Helper Function
+#+begin_src emacs-lisp
+(defun jh/open-planner ()
+    "Opens a planner."
+(interactive)
+(org-agenda nil "p"))
 #+end_src
 
 ** Org TOC
@@ -388,6 +418,8 @@ This lets me insert a table of contents.
 (use-package toc-org
   :config
 (toc-org-mode 1))
+
+(add-hook 'org-mode-hook 'toc-org-mode)
 #+end_src
 
 ** Export Backends
@@ -634,6 +666,13 @@ I really hate seeing the menu bar, scrollbar, etc.
 (menu-bar-mode -1)
 #+end_src
 
+** Themes
+The doom-themes collection has a lot of nice themes - I do overwrite some of the faces, though.
+#+begin_src emacs-lisp
+(use-package doom-themes)
+(load-theme 'doom-gruvbox t)
+#+end_src
+
 ** Fonts
 I love Iosevka as a font. All the different variants help as well.
 #+begin_src emacs-lisp
@@ -650,13 +689,6 @@ I like Iosevka Aile as a variable width font for content.
 *** Italics for Comments
 #+begin_src emacs-lisp
 (set-face-attribute 'font-lock-comment-face nil :slant 'italic)
-#+end_src
-
-** Themes
-The doom-themes collection has a lot of nice themes - I do overwrite some of the faces, though.
-#+begin_src emacs-lisp
-(use-package doom-themes)
-(load-theme 'doom-gruvbox t)
 #+end_src
 
 ** Modeline
@@ -708,6 +740,7 @@ Originally from the emacs subreddit, I want to update elfeed every 10 minutes.
 #+begin_src emacs-lisp
 (add-hook 'emacs-startup-hook (lambda () (run-at-time 5 600 'elfeed-update)))
 #+end_src
+
 * Keybindings
 This section serves to describe the keybindings of Jmacs.
 ** General Keybindings
@@ -775,6 +808,29 @@ These are my keybindings for files.
 
 #+end_src
 
+** Toggle Keybindings
+#+begin_src emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+
+   "t" '(:ignore t :which-key "Toggle")
+   "ts" '(treemacs :which-key "Toggle Treemacs"))
+#+end_src
+** Org-Mode Keybindings
+#+begin_src emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+
+   "o" '(:ignore t :which-key "Org-mode")
+   "oa" '(jh/open-planner :which-key "Org agenda (planner view)"))
+
+#+end_src
 ** Window Keybindings
 #+begin_src emacs-lisp
 (general-define-key
@@ -793,12 +849,23 @@ These are my keybindings for files.
  "wl" '(evil-window-right :which-key "Move focus right"))
 #+end_src
 
+** Quit Keybindings
+#+begin_src emacs-lisp
+(general-define-key
+ :states '(normal visual insert emacs)
+ :prefix "SPC"
+ :non-normal-prefix "C-SPC"
+ "q"  '(:ignore t :which-key "Quit")
+ "qq" '(kill-emacs :which-key "Quit emacs")
+ "qr" '(restart-emacs :which-key "Restart emacs"))
+#+end_src
+
 * Minor Tweaks
 ** Tab in Insert Mode Indents
 I want to insert indents myself.
 #+begin_src emacs-lisp
 (setq org-src-preserve-indentation t
-      org-src-fontify-natively t
-      org-src-tab-acts-natively t
-      tab-width 4)
+    org-src-fontify-natively t
+    org-src-tab-acts-natively t
+    tab-width 4)
 #+end_src
