@@ -46,6 +46,7 @@ And finally, I always want it to use straight.el.
 #+begin_src emacs-lisp
 (setq straight-use-package-by-default t)
 #+end_src
+
 ** Org Mode
 I want to use the newest version of org-mode instead of the one built in to emacs.
 #+begin_src emacs-lisp
@@ -55,8 +56,6 @@ And finally, I want to load the literate config.
 #+begin_src emacs-lisp
 (org-babel-load-file "~/.emacs.d/jmacs.org")
 #+end_src
-
-
 
 
 
@@ -153,6 +152,12 @@ Treemacs allows me to set up a sidebar with project information.
   (setq treemacs-persist-file "~/.emacs.d/.local/cache/treemacs.org"))
 #+end_src
 
+** Imenu-List
+Imenu-list lets me look at the file as a list.
+#+begin_src emacs-lisp
+(use-package imenu-list)
+#+end_src
+
 * IDE Configuration
 ** Completion Frameworks
 *** Counsel
@@ -207,7 +212,7 @@ Magit is an incredible git client for emacs.
 
 * Org Mode
 ** General Customization
-
+I keep my agenda files in Dropbox so that I can access them on any computer. In addition, I want a different ellipsis instead of the three periods.
 #+begin_src emacs-lisp
 (setq org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/notes/spring2021.org")
         org-todo-keywords '(
@@ -226,7 +231,17 @@ Magit is an incredible git client for emacs.
           ("SOMEDAY" . (:foreground "#d3869b" :slant italic))
           ("DONE" . (:foreground "#83a598" :strike-through t))
           ("CANCELED" . (:foreground "cc241d" :strike-through t))))
+
 ;   ("DONE" . "green"))
+#+end_src
+
+*** Line Wrapping and Indentation
+I want stuff to indent with the heading, and I want the lines to wrap.
+#+begin_src emacs-lisp
+(add-hook 'org-mode-hook 
+          (lambda () 
+            (visual-line-mode 1)
+            (org-indent-mode 1)))
 #+end_src
 
 ** UI Tweaks
@@ -247,6 +262,11 @@ I like having different colors for faces.
 (set-face-attribute 'org-level-6 nil :foreground "#d3869b")
 (set-face-attribute 'org-level-7 nil :foreground "#fabd2f")
 (set-face-attribute 'org-level-8 nil :foreground "#fb4934")
+#+end_src
+
+*** Italic Comments
+#+begin_src emacs-lisp
+
 #+end_src
 
 ** Org Tempo
@@ -349,8 +369,47 @@ Org-msg lets me use org-mode syntax for formatting emails.
 
 * Elfeed
 Elfeed is an excellent package for reading RSS feeds in Emacs.
+** Package Setup
+This is the initial setup for my elfeed config.
 #+begin_src emacs-lisp
-(use-package elfeed)
+(use-package elfeed
+  :config
+  (setq elfeed-db-directory "~/.elfeed/"
+	elfeed-search-filter "@1-week-ago +unread "))
+  
+#+end_src
+
+*** Bindings
+These are the keybindings I have for my configuration.
+#+begin_src emacs-lisp
+(evil-define-key 'normal elfeed-search-mode-map (kbd "A") 'elfeed-mark-all-as-read)
+(evil-define-key 'normal elfeed-search-mode-map (kbd "/") 'elfeed-search-live-filter)
+(evil-define-key 'normal elfeed-search-mode-map (kbd "f") 'jh/elfeed-search-hydra/body)
+#+end_src
+
+** Helpers
+*** Hydra
+I want to define a hydra for searching by various categories.
+#+begin_src emacs-lisp
+(defhydra jh/elfeed-search-hydra ()
+  "Filter feeds" 
+      ("d" (elfeed-search-set-filter "@1-week-ago +unread") "Default") 
+      ("n" (elfeed-search-set-filter "@1-week-ago +unread +news") "News") 
+      ("c" (elfeed-search-set-filter "@1-week-ago +unread +campaign") "Campaigns")  
+      ("p" (elfeed-search-set-filter "+podcast") "Podcasts")  
+      ("r" (elfeed-search-set-filter "@1-week-ago +unread +reddit") "Reddit")  
+      ("b" (elfeed-search-set-filter "@1-week-ago +unread +blog") "Reddit")  
+      
+      ("q" nil "quit" :color red))
+#+end_src
+
+*** Mark All As Read
+This is a function that just marks all the articles as read.
+#+begin_src emacs-lisp
+(defun elfeed-mark-all-as-read ()
+	(interactive)
+  (mark-whole-buffer)
+  (elfeed-search-untag-all-unread))
 #+end_src
 
 ** Elfeed Org
@@ -360,11 +419,41 @@ Elfeed org lets me use an org-mode file to keep track of my feeds.
 :after elfeed
 :config
 (elfeed-org)
-(setq rmh-elfeed-org-files '("~/Dropbox/org/elfeed.org")))
+(setq rmh-elfeed-org-files '("~/Dropbox/org/elfeed/feeds.org")))
 #+end_src
 
 ** Elfeed Dashboard
 Elfeed dashboard lets me create a custom dashboard for running queries on articles.
+#+begin_src emacs-lisp
+(use-package elfeed-dashboard
+  :straight (:host github :repo "Manoj321/elfeed-dashboard")
+  :config
+  (setq elfeed-dashboard-file "~/Dropbox/org/elfeed/dashboard.org"))
+
+(evil-define-key 'normal elfeed-dashboard-mode-map
+     "q" 'kill-current-buffer
+    ;; "s" 'elfeed
+     "U" 'elfeed-dashboard-update
+     "u" (lambda () (interactive) (elfeed-dashboard-query "+unread")))
+#+end_src
+
+** Elfeed Goodies
+Elfeed Goodies lets me have a nicer heading and layout for elfeed.
+#+begin_src emacs-lisp
+(use-package elfeed-goodies
+  :config
+  (elfeed-goodies/setup)
+  (setq elfeed-goodies/entry-pane-size 0.5))
+#+end_src
+** Bindings
+#+begin_src emacs-lisp
+(evil-define-key 'normal elfeed-show-mode-map
+  (kbd "J") 'elfeed-goodies/split-show-next
+  (kbd "K") 'elfeed-goodies/split-show-prev)
+(evil-define-key 'normal elfeed-search-mode-map
+  (kbd "J") 'elfeed-goodies/split-show-next
+  (kbd "K") 'elfeed-goodies/split-show-prev)
+#+end_src
 * UI Tweaks
 ** Minimalistic UI
 I really hate seeing the menu bar, scrollbar, etc.
@@ -390,45 +479,10 @@ I like Iosevka Aile as a variable width font for content.
 
 *** Italics for Comments
 #+begin_src emacs-lisp
-
+(set-face-attribute 'font-lock-comment-face nil :slant 'italic)
 #+end_src
 
-** Themes
-The doom-themes collection has a lot of nice themes - I do overwrite some of the faces, though.
-#+begin_src emacs-lisp
-(use-package doom-themes)
-(load-theme 'doom-gruvbox t)
-#+end_src
 
-** Modeline
-Doom modeline allows me to have a cleaner modeline.
-
-#+begin_src emacs-lisp
-(use-package doom-modeline
-  :config
-  (setq doom-modeline-height 32))
-(doom-modeline-mode 1)
-#+end_src
-
-** Tabs
-I really like centaur-tabs for my config.
-#+begin_src emacs-lisp
-(use-package centaur-tabs
-  :config
-  (centaur-tabs-mode t)
-  (setq centaur-tabs-set-modified-marker t
-	centaur-tabs-modified-marker "•"
-	centaur-tabs-set-bar 'left
-	centaur-tabs-set-icons t
-	centaur-tabs-set-close-button t
-	centaur-tabs-close-button "x"
-	centaur-tabs-style "bar"
-	centaur-tabs-cycle-scope 'tabs)
-  :bind
-  (:map evil-normal-state-map
-	("g t" . centaur-tabs-forward)
-	("g T" . centaur-tabs-backward)))
-#+end_src
 
 * Keybindings
 This section serves to describe the keybindings of Jmacs.
@@ -445,6 +499,74 @@ These are the core keybindings for functionality in jmacs.
     "h"   (general-simulate-key "C-h")
     "u"   (general-simulate-key "C-u")
     "x"   (general-simulate-key "C-x"))
+#+end_src
+
+** Application Bindings
+This opens applications.
+#+begin_src emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+   "a" '(:ignore t :which-key "Applications")
+   
+   "an" '(elfeed :which-key "Open News Reader"))
+
+#+end_src
+
+** Buffer Keybindings
+These keybindings are for switching buffers.
+#+begin_src emacs-lisp
+(general-define-key
+:states '(normal visual insert emacs)
+:prefix "SPC"
+:non-normal-prefix "C-SPC"
+
+
+ "b"   '(:ignore t :which-key "Buffers")
+ "bb"  'mode-line-other-buffer
+ "bd"  'kill-this-buffer
+ "bn"  'next-buffer
+ "bp"  'previous-buffer
+ "bq"  'kill-buffer-and-window
+ "bR"  'rename-file-and-buffer
+ "br"  'revert-buffer
+ "bs" 'counsel-switch-buffer)
+#+end_src
+
+** File Keybindings
+These are my keybindings for files.
+#+begin_src emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+
+   "f" '(:ignore t :which-key "Files")
+   ; "fed" '(edit-dotfile :which-key "Edit Config")
+   "ff" '(find-file :which-key "Find file")
+   "fs" '(save-buffer :which-key "Save file")
+   "fl" '(load-file :which-key "Load file"))
+
+#+end_src
+
+** Window Keybindings
+#+begin_src emacs-lisp
+(general-define-key
+ :states '(normal visual insert emacs)
+ :prefix "SPC"
+ :non-normal-prefix "C-SPC"
+ "w"  '(:ignore t :which-key "Windows")
+ "w\\" '(split-window-right :which-key "Horizontal split")
+ "w-" '(split-window-below :which-key "Vertical split")
+ "wd"  '(delete-window :which-key "Delete window")
+ "wD"  '(delete-other-windows :which-key "Delete other windows")
+ "wm" '(maximize-window :which-key "Maximize window")
+ "wh" '(evil-window-left :which-key "Move focus left")
+ "wj" '(evil-window-down :which-key "Move focus down")
+ "wk" '(evil-window-up :which-key "Move focus up")
+ "wl" '(evil-window-right :which-key "Move focus right"))
 #+end_src
 
 * Minor Tweaks
