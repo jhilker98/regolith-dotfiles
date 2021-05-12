@@ -5,6 +5,62 @@
 
 Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG campaigns like [[https://www.ironswornrpg.com/][Ironsworn]], writing (both prose and code), and for general use. I have organized this file into different sections, such as the functions I use, the UI settings, etc.
 
+* Table of Contents :toc:
+- [[#early-initialization][Early Initialization]]
+  - [[#disabling-packageel][Disabling Package.el]]
+- [[#general-initialization][General Initialization]]
+  - [[#setting-up-straightel][Setting Up Straight.el]]
+  - [[#setting-up-use-package-with-straightel][Setting Up Use-Package with Straight.el]]
+  - [[#org-mode][Org Mode]]
+- [[#initial-setup][Initial Setup]]
+- [[#core-functionality][Core Functionality]]
+  - [[#undo-tree][Undo Tree]]
+  - [[#evil-mode][Evil Mode]]
+  - [[#general][General]]
+  - [[#which-key][Which-Key]]
+  - [[#hydra][Hydra]]
+  - [[#helpful][Helpful]]
+  - [[#treemacs][Treemacs]]
+  - [[#imenu-list][Imenu-List]]
+- [[#ide-configuration][IDE Configuration]]
+  - [[#completion-frameworks][Completion Frameworks]]
+  - [[#projectile][Projectile]]
+  - [[#magit][Magit]]
+  - [[#smartparens][Smartparens]]
+- [[#org-mode-1][Org Mode]]
+  - [[#general-customization][General Customization]]
+  - [[#ui-tweaks][UI Tweaks]]
+  - [[#org-tempo][Org Tempo]]
+  - [[#org-superstar][Org Superstar]]
+  - [[#org-super-agenda][Org Super Agenda]]
+  - [[#org-toc][Org TOC]]
+- [[#mu4e][Mu4e]]
+  - [[#initial-setup-1][Initial Setup]]
+  - [[#account-setup][Account Setup]]
+  - [[#org-msg][Org-Msg]]
+  - [[#mu4e-dashboard][Mu4e Dashboard]]
+- [[#elfeed][Elfeed]]
+  - [[#package-setup][Package Setup]]
+  - [[#helpers][Helpers]]
+  - [[#elfeed-org][Elfeed Org]]
+  - [[#elfeed-dashboard][Elfeed Dashboard]]
+  - [[#elfeed-goodies][Elfeed Goodies]]
+  - [[#bindings][Bindings]]
+- [[#ui-tweaks-1][UI Tweaks]]
+  - [[#minimalistic-ui][Minimalistic UI]]
+  - [[#fonts][Fonts]]
+  - [[#themes][Themes]]
+  - [[#modeline][Modeline]]
+  - [[#tabs][Tabs]]
+- [[#keybindings][Keybindings]]
+  - [[#general-keybindings][General Keybindings]]
+  - [[#application-bindings][Application Bindings]]
+  - [[#buffer-keybindings][Buffer Keybindings]]
+  - [[#file-keybindings][File Keybindings]]
+  - [[#window-keybindings][Window Keybindings]]
+- [[#minor-tweaks][Minor Tweaks]]
+  - [[#tab-in-insert-mode-indents][Tab in Insert Mode Indents]]
+
 * Early Initialization
 :properties:
 :header-args: :tangle early-init.el 
@@ -296,6 +352,11 @@ Org Superstar lets me use nicer bullets for my headers and formatting.
 *** Custom Agenda Commands
 ** Org TOC
 
+This lets me insert a table of contents.
+#+begin_src emacs-lisp
+(use-package toc-org
+  :hook org-mode)
+#+end_src
 * Mu4e
 Mu4e is an excellent email client for emacs.
 ** Initial Setup
@@ -351,6 +412,7 @@ Here is where I add my account information. This first section is for my persona
 		  (mu4e-refile-folder  . "/camohilk@gmail.com/[Gmail]/All Mail")
 		  (mu4e-trash-folder  . "/camohilk@gmail.com/[Gmail]/Trash")))))
 #+end_src
+
 ** Org-Msg
 Org-msg lets me use org-mode syntax for formatting emails.
 #+begin_src emacs-lisp
@@ -364,8 +426,15 @@ Org-msg lets me use org-mode syntax for formatting emails.
 				       (reply-to-text	. (text)))
 	org-msg-convert-citation t)
 (org-msg-mode))
-
 #+end_src
+
+** TODO Mu4e Dashboard
+#+begin_src emacs-lisp
+(use-package mu4e-dashboard
+  :straight (:host github :repo "rougier/mu4e-dashboard"))
+#+end_src
+
+*** TODO Sidebar
 
 * Elfeed
 Elfeed is an excellent package for reading RSS feeds in Emacs.
@@ -422,13 +491,13 @@ Elfeed org lets me use an org-mode file to keep track of my feeds.
 (setq rmh-elfeed-org-files '("~/Dropbox/org/elfeed/feeds.org")))
 #+end_src
 
-** Elfeed Dashboard
+** TODO Elfeed Dashboard
 Elfeed dashboard lets me create a custom dashboard for running queries on articles.
 #+begin_src emacs-lisp
 (use-package elfeed-dashboard
   :straight (:host github :repo "Manoj321/elfeed-dashboard")
   :config
-  (setq elfeed-dashboard-file "~/Dropbox/org/elfeed/dashboard.org"))
+  (setq elfeed-dashboard-file "~/Dropbox/org/dashboard/elfeed.org"))
 
 (evil-define-key 'normal elfeed-dashboard-mode-map
      "q" 'kill-current-buffer
@@ -445,6 +514,7 @@ Elfeed Goodies lets me have a nicer heading and layout for elfeed.
   (elfeed-goodies/setup)
   (setq elfeed-goodies/entry-pane-size 0.5))
 #+end_src
+
 ** Bindings
 #+begin_src emacs-lisp
 (evil-define-key 'normal elfeed-show-mode-map
@@ -454,6 +524,7 @@ Elfeed Goodies lets me have a nicer heading and layout for elfeed.
   (kbd "J") 'elfeed-goodies/split-show-next
   (kbd "K") 'elfeed-goodies/split-show-prev)
 #+end_src
+
 * UI Tweaks
 ** Minimalistic UI
 I really hate seeing the menu bar, scrollbar, etc.
@@ -502,8 +573,9 @@ Doom modeline allows me to have a cleaner modeline.
 I really like centaur-tabs for my config.
 #+begin_src emacs-lisp
 (use-package centaur-tabs
-  :config
+  :init
   (centaur-tabs-mode t)
+  :config
   (setq centaur-tabs-set-modified-marker t
 	centaur-tabs-modified-marker "•"
 	centaur-tabs-set-bar 'left
@@ -543,7 +615,7 @@ This opens applications.
    :prefix "SPC"
    :non-normal-prefix "C-SPC"
    "a" '(:ignore t :which-key "Applications")
-   
+   "am" '(mu4e :which-key "Open Email")
    "an" '(elfeed :which-key "Open News Reader"))
 
 #+end_src
