@@ -70,6 +70,7 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#org-mode-keybindings][Org-Mode Keybindings]]
   - [[#window-keybindings][Window Keybindings]]
   - [[#quit-keybindings][Quit Keybindings]]
+  - [[#zoom-in-and-out][Zoom In And Out]]
 - [[#minor-tweaks][Minor Tweaks]]
   - [[#tab-in-insert-mode-indents][Tab in Insert Mode Indents]]
 
@@ -140,6 +141,7 @@ Now I want to disable automatic indentation with electric-indent-mode, and disab
 (setq-default indent-tabs-mode nil)
 (setq tab-always-indent 'complete)
 #+end_src
+
 I also only want horizontal splits - none of this vertical split business unless I say so.
 #+begin_src emacs-lisp
 
@@ -150,6 +152,7 @@ I also want to use y/n for answering yes or no.
 #+begin_src emacs-lisp
 (defalias 'yes-or-no-p 'y-or-n-p)
 #+end_src
+
 * Core Functionality
 ** Undo Tree
 Undo Tree lets me use more of Evil mode's redo functionality.
@@ -310,7 +313,7 @@ Magit is an incredible git client for emacs.
 
 
 ** Language Configuration
-*** BibTex/LaTex
+*** BibTex/LaTeX
 * Org Mode
 ** General Customization
 I keep my agenda files in Dropbox so that I can access them on any computer. In addition, I want a different ellipsis instead of the three periods.
@@ -443,6 +446,7 @@ For managing bibliographies. I usually just have one main bibliography.
 #+begin_src emacs-lisp
 
 #+end_src
+
 ** Org Chef
 Org Chef lets me create recipes quickly.
 #+begin_src emacs-lisp
@@ -701,21 +705,18 @@ The doom-themes collection has a lot of nice themes - I do overwrite some of the
 #+end_src
 
 ** Fonts
-I love Iosevka as a font. All the different variants help as well.
+I love Iosevka as a monospace font. All the different variants help as well. I'm still looking around for a good font for variable width.
 #+begin_src emacs-lisp
-  (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 120)
-  (set-face-attribute 'org-meta-line nil :inherit 'default)
+(set-face-attribute 'default nil :font (font-spec :family "Iosevka Nerd Font" :height 20 :size 16)) 
+(set-face-attribute 'org-meta-line nil :inherit 'default)
+
+;  (set-face-attribute 'variable-pitch nil :font (font-spec :family "Alegreya" :size 14))
 #+end_src
 
 *** Variable Width
 I like Iosevka Aile as a variable width font for content.
 #+begin_src emacs-lisp
-(set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height 120)
-#+end_src
-
-*** Italics for Comments
-#+begin_src emacs-lisp
-(set-face-attribute 'font-lock-comment-face nil :slant 'italic)
+(set-face-attribute 'variable-pitch nil :font "Cantarell" :height 120)
 #+end_src
 
 ** Modeline
@@ -851,6 +852,7 @@ These are my keybindings for files.
    "t" '(:ignore t :which-key "Toggle")
    "ts" '(treemacs :which-key "Toggle Treemacs"))
 #+end_src
+
 ** Org-Mode Keybindings
 #+begin_src emacs-lisp
 (general-define-key
@@ -863,6 +865,7 @@ These are my keybindings for files.
    "oa" '(jh/open-planner :which-key "Org agenda (planner view)"))
 
 #+end_src
+
 ** Window Keybindings
 #+begin_src emacs-lisp
 (general-define-key
@@ -882,6 +885,7 @@ These are my keybindings for files.
 #+end_src
 
 ** Quit Keybindings
+
 #+begin_src emacs-lisp
 (general-define-key
  :states '(normal visual insert emacs)
@@ -890,6 +894,13 @@ These are my keybindings for files.
  "q"  '(:ignore t :which-key "Quit")
  "qq" '(kill-emacs :which-key "Quit emacs")
  "qr" '(restart-emacs :which-key "Restart emacs"))
+#+end_src
+
+** Zoom In And Out
+You can use Control plus = and Control plus - to zoom in and out like everywhere else.
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-=") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
 #+end_src
 
 * Minor Tweaks
