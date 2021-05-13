@@ -318,7 +318,7 @@ Magit is an incredible git client for emacs.
 ** General Customization
 I keep my agenda files in Dropbox so that I can access them on any computer. In addition, I want a different ellipsis instead of the three periods.
 #+begin_src emacs-lisp
-(setq org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/notes/spring2021.org")
+(setq org-agenda-files '("~/Dropbox/org/agenda.org")
         org-todo-keywords '(
             (sequence "TODO(t)" "INPR(i)" "NEXT(n)" "MEET(m)" "|" "SOMEDAY(s)"   "DONE(d)" "CANCELED(c)")
             (type "PROJ(p)")
