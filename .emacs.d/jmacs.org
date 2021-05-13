@@ -23,11 +23,11 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#imenu-list][Imenu-List]]
   - [[#restart-emacs][Restart Emacs]]
 - [[#general-ide-configuration][General IDE Configuration]]
+  - [[#lsp-mode][LSP Mode]]
   - [[#completion-frameworks][Completion Frameworks]]
   - [[#projectile][Projectile]]
   - [[#magit][Magit]]
   - [[#smartparens][Smartparens]]
-  - [[#lsp-mode][LSP Mode]]
   - [[#language-configuration][Language Configuration]]
 - [[#org-mode][Org Mode]]
   - [[#general-customization][General Customization]]
@@ -39,6 +39,7 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#org-ref][Org-Ref]]
   - [[#org-chef][Org Chef]]
   - [[#export-backends][Export Backends]]
+  - [[#campaign-manager][Campaign Manager]]
 - [[#mu4e][Mu4e]]
   - [[#initial-setup-1][Initial Setup]]
   - [[#account-setup][Account Setup]]
@@ -52,6 +53,7 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#elfeed-dashboard][Elfeed Dashboard]]
   - [[#elfeed-goodies][Elfeed Goodies]]
   - [[#bindings][Bindings]]
+  - [[#hooks][Hooks]]
 - [[#writing-configuration][Writing Configuration]]
 - [[#ui-tweaks-2][UI Tweaks]]
   - [[#minimalistic-ui][Minimalistic UI]]
@@ -59,9 +61,9 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#fonts][Fonts]]
   - [[#modeline][Modeline]]
   - [[#tabs][Tabs]]
-- [[#functions-and-hooks][Functions and Hooks]]
-  - [[#functions][Functions]]
-  - [[#hooks][Hooks]]
+- [[#functions][Functions]]
+  - [[#config-functions][Config Functions]]
+  - [[#startup-functions][Startup Functions]]
 - [[#keybindings][Keybindings]]
   - [[#general-keybindings][General Keybindings]]
   - [[#application-bindings][Application Bindings]]
@@ -69,7 +71,7 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#file-keybindings][File Keybindings]]
   - [[#org-mode-keybindings][Org-Mode Keybindings]]
   - [[#toggle-keybindings][Toggle Keybindings]]
-  - [[#misc-keybindings][Misc Keybindings]]
+  - [[#reload-keybindings][Reload Keybindings]]
   - [[#window-keybindings][Window Keybindings]]
   - [[#quit-keybindings][Quit Keybindings]]
   - [[#zoom-in-and-out][Zoom In And Out]]
@@ -247,6 +249,18 @@ Treemacs allows me to set up a sidebar with project information.
 (use-package treemacs
   :config
   (setq treemacs-persist-file "~/.emacs.d/.local/cache/treemacs.org"))
+
+(use-package treemacs-evil
+:after evil treemacs
+:ensure t)
+
+(use-package treemacs-projectile
+:after projectile treemacs
+:ensure t)
+
+(use-package treemacs-magit
+:after magit treemacs
+:ensure t)
 #+end_src
 
 ** Imenu-List
@@ -261,6 +275,9 @@ Imenu-list lets me look at the file as a list.
 #+end_src
 
 * General IDE Configuration
+** LSP Mode
+LSP Mode lets me get completion for functions and such in code.
+
 ** Completion Frameworks
 *** Counsel
 #+begin_src emacs-lisp
@@ -296,6 +313,12 @@ Ivy Rich will allow me to see more about each command
 #+end_src
 
 *** Company
+Company is a code completion framework.
+#+begin_src emacs-lisp
+(use-package company
+:config
+(add-hook 'after-init-hook 'global-company-mode))
+#+end_src
 
 ** Projectile
 Projectile is a tool for managing projects inside of emacs.
@@ -313,15 +336,18 @@ Magit is an incredible git client for emacs.
   (smartparens-global-mode))
 #+end_src
 
-** LSP Mode
-LSP Mode lets me get completion for functions and such in code.
-#+begin_src emacs-lisp
-
-#+end_src
-
 ** Language Configuration
 *** BibTex/LaTeX
+This is for working with my bibliography.
+**** Company Backends
+#+begin_src emacs-lisp
+(use-package company-bibtex
+  :config
+  (add-to-list 'company-backends '(company-bibtex)))
+#+end_src
+
 *** Python 
+Python is my primary language of choice.
 #+begin_src emacs-lisp
 
 #+end_src
@@ -350,13 +376,13 @@ I keep my agenda files in Dropbox so that I can access them on any computer. In 
 
 ;   ("DONE" . "green"))
 #+end_src
-
 *** Line Wrapping and Indentation
 I want stuff to indent with the heading, and I want the lines to wrap.
 #+begin_src emacs-lisp
 (add-hook 'org-mode-hook 
           (lambda () 
             (visual-line-mode 1)
+            (variable-pitch-mode 1)
             (org-indent-mode 1)))
 #+end_src
 
@@ -478,6 +504,12 @@ Seems fairly straightforward.
 #+begin_src emacs-lisp
 (use-package ox-pandoc
 :after ox)
+#+end_src
+
+** Campaign Manager
+I also want to use emacs as an RPG Campaign manager.
+#+begin_src emacs-lisp
+
 #+end_src
 
 * Mu4e
@@ -697,8 +729,15 @@ Elfeed Goodies lets me have a nicer heading and layout for elfeed.
   (kbd "K") 'elfeed-goodies/split-show-prev)
 #+end_src
 
-* Writing Configuration
+** Hooks
+This is for custom hooks I want to use for Elfeed..
+*** Update Elfeed
+Originally from the emacs subreddit, I want to update elfeed every 10 minutes.
+#+begin_src emacs-lisp
+(add-hook 'emacs-startup-hook (lambda () (run-at-time 5 600 'elfeed-update)))
+#+end_src
 
+* Writing Configuration
 * UI Tweaks
 ** Minimalistic UI
 I really hate seeing the menu bar, scrollbar, etc.
@@ -730,7 +769,7 @@ I love Iosevka as a font. All the different variants help as well. I am also usi
 (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
 (set-face-attribute 'org-table nil   :inherit '(shadow fixed-pitch))
 (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-;(set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face ))
+;(set-face-attribute 'org-document-info-keyword nil :inherit 'fixed-pitch)
 (set-face-attribute 'org-meta-line nil :inherit 'fixed-pitch)
 (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
 #+end_src
@@ -770,9 +809,9 @@ I really like centaur-tabs for my config.
 	("g T" . centaur-tabs-backward)))
 #+end_src
 
-* Functions and Hooks
-** Functions
-This section contains functions and hooks I have created that don't really fit in any other section.
+* Functions
+This section contains functions I have created that don't really fit in any other section.
+** Config Functions
 *** Edit Dotfile
 This function lets me load my config so that I can edit it.
 #+begin_src emacs-lisp
@@ -790,12 +829,11 @@ This function lets me load my config so that I can edit it.
 (org-babel-load-file "~/.emacs.d/jmacs.org"))
 #+end_src
 
-** Hooks
-This is for custom hooks I want to use.
-*** Update Elfeed
-Originally from the emacs subreddit, I want to update elfeed every 10 minutes.
+** Startup Functions
+*** Languages 
+**** Org-mode
 #+begin_src emacs-lisp
-(add-hook 'emacs-startup-hook (lambda () (run-at-time 5 600 'elfeed-update)))
+
 #+end_src
 
 * Keybindings
@@ -887,10 +925,11 @@ These are my keybindings for files.
 
 
    "t" '(:ignore t :which-key "Toggle")
-   "ts" '(treemacs :which-key "Toggle Treemacs"))
+   "ts" '(treemacs :which-key "Toggle Treemacs")
+   "to" '(imenu-list :which-key "Toggle Outline"))
 #+end_src
 
-** Misc Keybindings
+** Reload Keybindings
 #+begin_src emacs-lisp
 (general-define-key
    :states '(normal visual insert emacs)
@@ -900,8 +939,8 @@ These are my keybindings for files.
 
    "r" '(:ignore t :which-key "Reload")
    "rr" '(reload-jmacs :which-key "Reload Jmacs"))
-
 #+end_src
+
 ** Window Keybindings
 #+begin_src emacs-lisp
 (general-define-key
