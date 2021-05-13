@@ -11,6 +11,7 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#early-initialization][Early Initialization]]
   - [[#general-initialization][General Initialization]]
 - [[#initial-setup][Initial Setup]]
+  - [[#yn-for-yesno][Y/N for Yes/No]]
 - [[#core-functionality][Core Functionality]]
   - [[#undo-tree][Undo Tree]]
   - [[#evil-mode][Evil Mode]]
@@ -21,11 +22,12 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#treemacs][Treemacs]]
   - [[#imenu-list][Imenu-List]]
   - [[#restart-emacs][Restart Emacs]]
-- [[#ide-configuration][IDE Configuration]]
+- [[#general-ide-configuration][General IDE Configuration]]
   - [[#completion-frameworks][Completion Frameworks]]
   - [[#projectile][Projectile]]
   - [[#magit][Magit]]
   - [[#smartparens][Smartparens]]
+  - [[#language-configuration][Language Configuration]]
 - [[#org-mode][Org Mode]]
   - [[#general-customization][General Customization]]
   - [[#ui-tweaks][UI Tweaks]]
@@ -33,6 +35,8 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#org-superstar][Org Superstar]]
   - [[#org-super-agenda][Org Super Agenda]]
   - [[#org-toc][Org TOC]]
+  - [[#org-ref][Org-Ref]]
+  - [[#org-chef][Org Chef]]
   - [[#export-backends][Export Backends]]
 - [[#mu4e][Mu4e]]
   - [[#initial-setup-1][Initial Setup]]
@@ -136,7 +140,16 @@ Now I want to disable automatic indentation with electric-indent-mode, and disab
 (setq-default indent-tabs-mode nil)
 (setq tab-always-indent 'complete)
 #+end_src
+I also only want horizontal splits - none of this vertical split business unless I say so.
+#+begin_src emacs-lisp
 
+#+end_src
+
+** Y/N for Yes/No
+I also want to use y/n for answering yes or no.
+#+begin_src emacs-lisp
+(defalias 'yes-or-no-p 'y-or-n-p)
+#+end_src
 * Core Functionality
 ** Undo Tree
 Undo Tree lets me use more of Evil mode's redo functionality.
@@ -242,7 +255,7 @@ Imenu-list lets me look at the file as a list.
 (use-package restart-emacs)
 #+end_src
 
-* IDE Configuration
+* General IDE Configuration
 ** Completion Frameworks
 *** Counsel
 #+begin_src emacs-lisp
@@ -295,6 +308,9 @@ Magit is an incredible git client for emacs.
   (smartparens-global-mode))
 #+end_src
 
+
+** Language Configuration
+*** BibTex/LaTex
 * Org Mode
 ** General Customization
 I keep my agenda files in Dropbox so that I can access them on any computer. In addition, I want a different ellipsis instead of the three periods.
@@ -420,6 +436,17 @@ This lets me insert a table of contents.
 (toc-org-mode 1))
 
 (add-hook 'org-mode-hook 'toc-org-mode)
+#+end_src
+
+** Org-Ref
+For managing bibliographies. I usually just have one main bibliography.
+#+begin_src emacs-lisp
+
+#+end_src
+** Org Chef
+Org Chef lets me create recipes quickly.
+#+begin_src emacs-lisp
+
 #+end_src
 
 ** Export Backends
@@ -715,6 +742,11 @@ I really like centaur-tabs for my config.
 	centaur-tabs-close-button "x"
 	centaur-tabs-style "bar"
 	centaur-tabs-cycle-scope 'tabs)
+  :hook
+  (mu4e-main-mode . centaur-tabs-local-mode)
+  (mu4e-headers-mode . centaur-tabs-local-mode) 
+  (mu4e-view-mode . centaur-tabs-local-mode)
+  (elfeed-search-mode . centaur-tabs-local-mode)
   :bind
   (:map evil-normal-state-map
 	("g t" . centaur-tabs-forward)
