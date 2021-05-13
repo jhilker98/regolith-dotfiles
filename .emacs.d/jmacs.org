@@ -27,6 +27,7 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#projectile][Projectile]]
   - [[#magit][Magit]]
   - [[#smartparens][Smartparens]]
+  - [[#lsp-mode][LSP Mode]]
   - [[#language-configuration][Language Configuration]]
 - [[#org-mode][Org Mode]]
   - [[#general-customization][General Customization]]
@@ -66,8 +67,9 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#application-bindings][Application Bindings]]
   - [[#buffer-keybindings][Buffer Keybindings]]
   - [[#file-keybindings][File Keybindings]]
-  - [[#toggle-keybindings][Toggle Keybindings]]
   - [[#org-mode-keybindings][Org-Mode Keybindings]]
+  - [[#toggle-keybindings][Toggle Keybindings]]
+  - [[#misc-keybindings][Misc Keybindings]]
   - [[#window-keybindings][Window Keybindings]]
   - [[#quit-keybindings][Quit Keybindings]]
   - [[#zoom-in-and-out][Zoom In And Out]]
@@ -311,9 +313,19 @@ Magit is an incredible git client for emacs.
   (smartparens-global-mode))
 #+end_src
 
+** LSP Mode
+LSP Mode lets me get completion for functions and such in code.
+#+begin_src emacs-lisp
+
+#+end_src
 
 ** Language Configuration
 *** BibTex/LaTeX
+*** Python 
+#+begin_src emacs-lisp
+
+#+end_src
+
 * Org Mode
 ** General Customization
 I keep my agenda files in Dropbox so that I can access them on any computer. In addition, I want a different ellipsis instead of the three periods.
@@ -356,7 +368,7 @@ I want to hide formatting characters and leading stars.
 #+end_src
 
 *** Clearer Faces
-I like having different colors for faces.
+I like having different colors for faces. In addition, I want to set the font and height of the font. The loop is from the 5th video in the emacs-for-scratch youtube series.
 #+begin_src emacs-lisp
 (set-face-attribute 'org-level-1 nil :foreground "#83a598")
 (set-face-attribute 'org-level-2 nil :foreground "#d3869b")
@@ -542,7 +554,7 @@ Taken from the doom emacs mu4e config.
 (setq mu4e-headers-fields
         '((:account . 15)
           (:human-date . 12)
-          (:flags . 4)
+          (:flags . 8)
           (:from . 25)
           (:subject)))
 #+end_src
@@ -705,18 +717,22 @@ The doom-themes collection has a lot of nice themes - I do overwrite some of the
 #+end_src
 
 ** Fonts
-I love Iosevka as a monospace font. All the different variants help as well. I'm still looking around for a good font for variable width.
-#+begin_src emacs-lisp
-(set-face-attribute 'default nil :font (font-spec :family "Iosevka Nerd Font" :height 20 :size 16)) 
-(set-face-attribute 'org-meta-line nil :inherit 'default)
+I love Iosevka as a font. All the different variants help as well. I am also using Iosevka Aile for a variable-width font.
 
-;  (set-face-attribute 'variable-pitch nil :font (font-spec :family "Alegreya" :size 14))
-#+end_src
-
-*** Variable Width
-I like Iosevka Aile as a variable width font for content.
 #+begin_src emacs-lisp
-(set-face-attribute 'variable-pitch nil :font "Cantarell" :height 120)
+(set-face-attribute 'default nil :font (font-spec :family "Iosevka Nerd Font" :size 16)) 
+
+(set-face-attribute 'fixed-pitch nil :font (font-spec :family "Iosevka Nerd Font" :size 16)) 
+(set-face-attribute 'variable-pitch nil :font (font-spec :family "Iosevka Aile" :size 15))
+(set-face-attribute 'font-lock-comment-face nil :slant 'italic)
+
+(set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+(set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
+(set-face-attribute 'org-table nil   :inherit '(shadow fixed-pitch))
+(set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+;(set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face ))
+(set-face-attribute 'org-meta-line nil :inherit 'fixed-pitch)
+(set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
 #+end_src
 
 ** Modeline
@@ -764,6 +780,14 @@ This function lets me load my config so that I can edit it.
 "Loads the Jmacs config file to be edited."
 (interactive)
 (find-file "~/.emacs.d/jmacs.org"))
+#+end_src
+
+*** Reload Jmacs
+#+begin_src emacs-lisp
+(defun reload-jmacs ()
+"Reloads the config."
+(interactive)
+(org-babel-load-file "~/.emacs.d/jmacs.org"))
 #+end_src
 
 ** Hooks
@@ -841,18 +865,6 @@ These are my keybindings for files.
 
 #+end_src
 
-** Toggle Keybindings
-#+begin_src emacs-lisp
-(general-define-key
-   :states '(normal visual insert emacs)
-   :prefix "SPC"
-   :non-normal-prefix "C-SPC"
-
-
-   "t" '(:ignore t :which-key "Toggle")
-   "ts" '(treemacs :which-key "Toggle Treemacs"))
-#+end_src
-
 ** Org-Mode Keybindings
 #+begin_src emacs-lisp
 (general-define-key
@@ -866,6 +878,30 @@ These are my keybindings for files.
 
 #+end_src
 
+** Toggle Keybindings
+#+begin_src emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+
+   "t" '(:ignore t :which-key "Toggle")
+   "ts" '(treemacs :which-key "Toggle Treemacs"))
+#+end_src
+
+** Misc Keybindings
+#+begin_src emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+
+   "r" '(:ignore t :which-key "Reload")
+   "rr" '(reload-jmacs :which-key "Reload Jmacs"))
+
+#+end_src
 ** Window Keybindings
 #+begin_src emacs-lisp
 (general-define-key
@@ -908,7 +944,7 @@ You can use Control plus = and Control plus - to zoom in and out like everywhere
 I want to insert indents myself.
 #+begin_src emacs-lisp
 (setq org-src-preserve-indentation t
-    org-src-fontify-natively t
-    org-src-tab-acts-natively t
-    tab-width 4)
+      org-src-fontify-natively t
+      org-src-tab-acts-natively t
+      tab-width 4)
 #+end_src
