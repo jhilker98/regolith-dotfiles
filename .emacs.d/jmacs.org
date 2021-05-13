@@ -276,8 +276,7 @@ Imenu-list lets me look at the file as a list.
 
 * General IDE Configuration
 ** LSP Mode
-LSP Mode lets me get completion for functions and such in code.
-
+LSP Mode lets me get completion for functions and such in code. From the emacs-for-scratch youtube series.
 ** Completion Frameworks
 *** Counsel
 #+begin_src emacs-lisp
@@ -315,9 +314,9 @@ Ivy Rich will allow me to see more about each command
 *** Company
 Company is a code completion framework.
 #+begin_src emacs-lisp
-(use-package company
-:config
-(add-hook 'after-init-hook 'global-company-mode))
+;(use-package company
+;:config
+;(add-hook 'after-init-hook 'global-company-mode))
 #+end_src
 
 ** Projectile
@@ -351,7 +350,6 @@ Python is my primary language of choice.
 #+begin_src emacs-lisp
 
 #+end_src
-
 * Org Mode
 ** General Customization
 I keep my agenda files in Dropbox so that I can access them on any computer. In addition, I want a different ellipsis instead of the three periods.
