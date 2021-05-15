@@ -549,9 +549,15 @@ Here is where I add my account information. This first section is for my persona
 		  (smtpmail-smtp-server  . "smtp.gmail.com")
 		  (smtpmail-smtp-service . 465)
 		  (smtpmail-stream-type  . ssl)
-          (mu4e-sent-messages-behavior . delete)
-          (mu4e-index-cleanup . nil)
-          (mu4e-index-lazy-check . t)
+             (mu4e-sent-messages-behavior . delete)
+             (mu4e-index-cleanup . nil)
+             (mu4e-index-lazy-check . t)
+             (mu4e-bookmarks . (("flag:unread AND NOT flag:trashed AND to:jacob.hilker2@gmail.com" "Unread messages" 117)
+                                ("date:today..now AND to:jacob.hilker2@gmail.com" "Today's messages" 116)
+                                ("date:7d..now AND to:jacob.hilker2@gmail.com" "Last 7 days" 119)
+                                ("mime:image/* AND to:jacob.hilker2@gmail.com" "Messages with images" 112)))
+
+
 		  (mu4e-drafts-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Drafts")
 		  (mu4e-sent-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Sent Mail")
 		  (mu4e-refile-folder  . "/jacob.hilker2@gmail.com/[Gmail]/All Mail")
