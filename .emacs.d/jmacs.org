@@ -28,6 +28,7 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#projectile][Projectile]]
   - [[#magit][Magit]]
   - [[#smartparens][Smartparens]]
+  - [[#rainbow-delimiters][Rainbow Delimiters]]
   - [[#language-configuration][Language Configuration]]
 - [[#org-mode][Org Mode]]
   - [[#general-customization][General Customization]]
@@ -333,12 +334,37 @@ Magit is an incredible git client for emacs.
 #+end_src
 
 ** Smartparens
-#+begin_src emacs-lisp
+   Smartparens inserts a matching delimiter if I insert 1 (like a second parenthesis if I insert a left one).
+   #+begin_src emacs-lisp
 (use-package smartparens
-  :config
+  :init
   (smartparens-global-mode))
 #+end_src
 
+** Rainbow Delimiters
+Rainbow Delimiters makes it so that parenthesis and other characters have their own colors - making it easier to follow the parenthesis, especially in something like lisp where there are so many parenthesis.
+#+begin_src emacs-lisp
+(use-package rainbow-delimiters
+  :hook ((prog-mode org-mode text-mode) . rainbow-delimiters-mode))
+#+end_src
+*** Color Tweaks
+Although I am not using this now, I wanted to include this so that parenthesis matched the org-level headings.
+#+begin_src emacs-lisp :tangle no
+(use-package rainbow-delimiters
+  :hook ((prog-mode org-mode text-mode) . rainbow-delimiters-mode)
+  :config
+ (dolist (face '(
+                 (rainbow-delimiters-depth-1-face . "#83a598")
+                 (rainbow-delimiters-depth-2-face . "#d3869b")
+                 (rainbow-delimiters-depth-3-face . "#fabd2f")
+                 (rainbow-delimiters-depth-4-face . "#fb4934")
+                 (rainbow-delimiters-depth-5-face . "#83a598")
+                 (rainbow-delimiters-depth-6-face . "#d3869b")
+                 (rainbow-delimiters-depth-7-face . "#fabd2f")
+                 (rainbow-delimiters-depth-8-face . "#fb4934")))
+    (set-face-attribute (car face) nil  :foreground(cdr face))))
+
+#+end_src
 ** Language Configuration
 *** BibTex/LaTeX
 This is for working with my bibliography.
@@ -354,16 +380,16 @@ Python is my primary language of choice.
 #+begin_src emacs-lisp
 
 #+end_src
+
 * Org Mode
 ** General Customization
-I keep my agenda files in Dropbox so that I can access them on any computer. In addition, I want a different ellipsis instead of the three periods.
+I keep my agenda files in Dropbox so that I can access them on any computer. In addition, I want a different ellipsis instead of the three periods. Most of my todo keywords are fairly straightforward.
 #+begin_src emacs-lisp
 (setq org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/org/projects.org" "~/Dropbox/org/work.org") 
         org-ellipsis " ▼ "
         org-todo-keywords '(
-                            (sequence "TODO(t)" "NEXT(n)" "HOLD(h)" "|" "DONE(d!)" "CANCELLED(c!)")
-                            (type "DRAFT(D)" "MEET(m)" "CALL(C)")
-                            )
+                            (sequence "TODO(t)" "NEXT(n)" "HOLD(h)" "MEETING(m)" "|" "DONE(d!)" "CANCELLED(c!)")
+                            (type "DRAFT(D)" "PROJ(p)"))
         org-todo-keyword-faces '(
                           ("TODO" . (:foreground "#cc241d" :weight black :underline t))
                           ("NEXT" . (:foreground "#fe8019" :weight black))
@@ -371,17 +397,19 @@ I keep my agenda files in Dropbox so that I can access them on any computer. In 
                           ("DONE" . (:foreground "#83a598" :strike-through t))
                           ("CANCELLED" . (:foreground "cc241d" :strike-through t))
                           ("DRAFT" . (:foreground "#83a598" :weight bold))
-                          ("MEET" . (:foreground "#b8bb26" :weight bold))))
-        ;   ("DONE" . "green"))
+                          ("MEET" . (:foreground "#b8bb26" :weight bold))
+                          ("PROJ" . (:foreground "#458588" :slant italic :weight bold))))
+        ;   ("DONE" . "green")
 #+end_src
 
 *** Line Wrapping and Indentation
-I want stuff to indent with the heading, and I want the lines to wrap.
+I want stuff to indent with the heading, and I want the lines to wrap. In addition, I want any child text of a headline to match with the text of the headline.
 #+begin_src emacs-lisp
 (add-hook 'org-mode-hook 
           (lambda () 
             (visual-line-mode 1)
             (variable-pitch-mode 1)
+            
             (org-indent-mode 1)))
 #+end_src
 
@@ -395,13 +423,25 @@ I want stuff to indent with the heading, and I want the lines to wrap.
 I want to have a capture template for immediately being able to add an appointment to my agenda.
 #+begin_src emacs-lisp
 (setq org-capture-templates
-'(doct '(("Appointment"
+(doct '(("Appointment"
          :keys "a"
          :file "~/Dropbox/org/agenda.org"
          :headline "Appointments" 
          :template ("* TODO %^{Description}"
                     "SCHEDULED: %^T")
 ))))
+#+end_src
+
+*** TODO Mail
+I want to be able to add stuff to the mail section of my agenda.
+#+begin_src emacs-lisp
+
+
+#+end_src
+
+*** Task
+This is for a general task.
+#+begin_src emacs-lisp
 #+end_src
 
 ** UI Tweaks
@@ -459,37 +499,11 @@ Org Superstar lets me use nicer bullets for my headers and formatting.
 (use-package org-super-agenda
 :config 
 (org-super-agenda-mode 1))
+
 #+end_src
 
 *** Custom Agenda Commands
-**** Planner 
-This planner lets me get a quick overview of my day ahead.
-#+begin_src emacs-lisp
-(add-to-list 'org-agenda-custom-commands
-    '("p" "Planner"
-      (
-       (agenda "" ((org-agenda-span 'day)
-                   (org-agenda-use-time-grid t)
-		              (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
-                   (org-agenda-show-all-dates t)
-                   (org-agenda-compact-blocks t)
-                   (org-agenda-overriding-header "")
-                   (org-agenda-format-date "\n%d %b (%a.)")
-                   (org-agenda-start-day "+0d")))
-       (agenda "" ((org-agenda-overriding-header "Coming Up Soon") 
-                   (org-agenda-start-day "+1d")
-                   (org-agenda-span 2)
-                   (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
-                   (org-agenda-format-date "\n%d %b (%a.)"))))))
-#+end_src
-
-***** Helper Function
-#+begin_src emacs-lisp
-(defun jh/open-planner ()
-    "Opens a planner."
-(interactive)
-(org-agenda nil "p"))
-#+end_src
+   This is where I define my custom agenda commands. Personally these are the views I mostly use.
 
 ** Org TOC
 
@@ -611,6 +625,11 @@ Here is where I add my account information. This first section is for my persona
 
 ** UI Tweaks
 *** Better Date Format 
+Day/Month/Year and 24-hour time is the way to go, in my opinion. I'm ust setting that up here.
+#+begin_src emacs-lisp
+(setq mu4e-headers-date-format "%d %b %Y"
+      mu4e-headers-time-format "%H:%M")
+#+end_src
 
 *** Better Headers
 Taken from the doom emacs mu4e config.
@@ -709,7 +728,6 @@ Org-msg allows me to write my emails in Org-mode. However, I get a lambda error 
 #+end_src
 
 *** TODO Sidebar
-
 
 * Elfeed
 Elfeed is an excellent package for reading RSS feeds in Emacs.
@@ -846,6 +864,8 @@ I love Iosevka as a font. All the different variants help as well. I am also usi
 ;(set-face-attribute 'org-document-info-keyword nil :inherit 'fixed-pitch)
 (set-face-attribute 'org-meta-line nil :inherit 'fixed-pitch)
 (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
+
+(set-face-attribute 'org-hide nil :inherit 'fixed-pitch)
 #+end_src
 
 ** Modeline
@@ -913,8 +933,10 @@ This function lets me load my config so that I can edit it.
 * Keybindings
 This section serves to describe the keybindings of Jmacs.
 ** General Keybindings
-These are the core keybindings for functionality in jmacs.
+These are the core keybindings for functionality in jmacs. In addition, I want to use =SPC h F= for describing a face.
 #+begin_src emacs-lisp
+(global-set-key (kbd "C-h F") 'counsel-describe-face)
+
 (general-define-key
    :states '(normal visual insert emacs)
    :prefix "SPC"
