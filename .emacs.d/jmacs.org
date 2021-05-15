@@ -357,25 +357,21 @@ Python is my primary language of choice.
 ** General Customization
 I keep my agenda files in Dropbox so that I can access them on any computer. In addition, I want a different ellipsis instead of the three periods.
 #+begin_src emacs-lisp
-(setq org-agenda-files '("~/Dropbox/org/agenda.org")
-        org-todo-keywords '(
-            (sequence "TODO(t)" "INPR(i)" "NEXT(n)" "MEET(m)" "|" "SOMEDAY(s)"   "DONE(d)" "CANCELED(c)")
-            (type "PROJ(p)")
-            (type "BLOG(b)"))
+(setq org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/org/projects.org" "~/Dropbox/org/work.org") 
         org-ellipsis " ▼ "
-        org-todo-keyword-faces
-        '(
-          ("TODO" . (:foreground "#cc241d" :weight black :underline t))
-          ("INPR" . (:foreground "#fe8019" :weight bold))
-          ("NEXT" . (:foreground "#fabd2f" :weight black))
-          ("MEET" . (:foreground "#b8bb26" :weight bold))
-          ("PROJ" . (:foreground "#458588" :slant italic :weight bold))
-          ("BLOG" . (:foreground "#83a598"))
-          ("SOMEDAY" . (:foreground "#d3869b" :slant italic))
-          ("DONE" . (:foreground "#83a598" :strike-through t))
-          ("CANCELED" . (:foreground "cc241d" :strike-through t))))
-
-;   ("DONE" . "green"))
+        org-todo-keywords '(
+                            (sequence "TODO(t)" "NEXT(n)" "HOLD(h)" "|" "DONE(d!)" "CANCELLED(c!)")
+                            (type "DRAFT(D)" "MEET(m)" "CALL(C)")
+                            )
+        org-todo-keyword-faces '(
+                          ("TODO" . (:foreground "#cc241d" :weight black :underline t))
+                          ("NEXT" . (:foreground "#fe8019" :weight black))
+                          ("HOLD" . (:foreground "#fabd2f" :weight bold :slant italic))
+                          ("DONE" . (:foreground "#83a598" :strike-through t))
+                          ("CANCELLED" . (:foreground "cc241d" :strike-through t))
+                          ("DRAFT" . (:foreground "#83a598" :weight bold))
+                          ("MEET" . (:foreground "#b8bb26" :weight bold))))
+        ;   ("DONE" . "green"))
 #+end_src
 *** Line Wrapping and Indentation
 I want stuff to indent with the heading, and I want the lines to wrap.
@@ -453,12 +449,17 @@ This planner lets me get a quick overview of my day ahead.
       (
        (agenda "" ((org-agenda-span 'day)
                    (org-agenda-use-time-grid t)
-		           (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
+		              (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
                    (org-agenda-show-all-dates t)
                    (org-agenda-compact-blocks t)
                    (org-agenda-overriding-header "")
-                   (org-agenda-start-day "+0d"))))))
-                   
+                   (org-agenda-format-date "\n%d %b (%a.)")
+                   (org-agenda-start-day "+0d")))
+       (agenda "" ((org-agenda-overriding-header "Coming Up Soon") 
+                   (org-agenda-start-day "+1d")
+                   (org-agenda-span 2)
+                   (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
+                   (org-agenda-format-date "\n%d %b (%a.)"))))))
 #+end_src
 
 ***** Helper Function
@@ -582,6 +583,8 @@ Here is where I add my account information. This first section is for my persona
 #+end_src
 
 ** UI Tweaks
+*** Better Date Format 
+
 *** Better Headers
 Taken from the doom emacs mu4e config.
 #+begin_src emacs-lisp
@@ -679,6 +682,7 @@ Org-msg allows me to write my emails in Org-mode. However, I get a lambda error 
 #+end_src
 
 *** TODO Sidebar
+
 
 * Elfeed
 Elfeed is an excellent package for reading RSS feeds in Emacs.
