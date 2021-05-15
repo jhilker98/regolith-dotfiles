@@ -31,6 +31,7 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#language-configuration][Language Configuration]]
 - [[#org-mode][Org Mode]]
   - [[#general-customization][General Customization]]
+  - [[#capture-templates][Capture Templates]]
   - [[#ui-tweaks][UI Tweaks]]
   - [[#org-tempo][Org Tempo]]
   - [[#org-superstar][Org Superstar]]
@@ -373,6 +374,7 @@ I keep my agenda files in Dropbox so that I can access them on any computer. In 
                           ("MEET" . (:foreground "#b8bb26" :weight bold))))
         ;   ("DONE" . "green"))
 #+end_src
+
 *** Line Wrapping and Indentation
 I want stuff to indent with the heading, and I want the lines to wrap.
 #+begin_src emacs-lisp
@@ -381,6 +383,25 @@ I want stuff to indent with the heading, and I want the lines to wrap.
             (visual-line-mode 1)
             (variable-pitch-mode 1)
             (org-indent-mode 1)))
+#+end_src
+
+** Capture Templates
+#+begin_src emacs-lisp
+(use-package doct
+  :commands (doct))
+#+end_src
+
+*** Appointment
+I want to have a capture template for immediately being able to add an appointment to my agenda.
+#+begin_src emacs-lisp
+(setq org-capture-templates
+'(doct '(("Appointment"
+         :keys "a"
+         :file "~/Dropbox/org/agenda.org"
+         :headline "Appointments" 
+         :template ("* TODO %^{Description}"
+                    "SCHEDULED: %^T")
+))))
 #+end_src
 
 ** UI Tweaks
