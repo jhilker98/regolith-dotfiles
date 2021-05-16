@@ -37,9 +37,11 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#org-tempo][Org Tempo]]
   - [[#org-superstar][Org Superstar]]
   - [[#org-super-agenda][Org Super Agenda]]
+  - [[#custom-agenda-commands][Custom Agenda Commands]]
   - [[#org-toc][Org TOC]]
   - [[#org-ref][Org-Ref]]
   - [[#org-chef][Org Chef]]
+  - [[#org-ql][Org QL]]
   - [[#export-backends][Export Backends]]
   - [[#campaign-manager][Campaign Manager]]
 - [[#mu4e][Mu4e]]
@@ -58,6 +60,7 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#bindings][Bindings]]
   - [[#hooks][Hooks]]
 - [[#writing-configuration][Writing Configuration]]
+  - [[#writeroom-mode][Writeroom Mode]]
 - [[#ui-tweaks-2][UI Tweaks]]
   - [[#minimalistic-ui][Minimalistic UI]]
   - [[#themes][Themes]]
@@ -80,6 +83,7 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#zoom-in-and-out][Zoom In And Out]]
 - [[#minor-tweaks][Minor Tweaks]]
   - [[#tab-in-insert-mode-indents][Tab in Insert Mode Indents]]
+  - [[#scratch-buffer-uses-org-mode][Scratch Buffer Uses Org Mode]]
 
 * Initialization
 ** Early Initialization
@@ -393,27 +397,25 @@ Python is my primary language of choice.
 
 * Org Mode
 ** General Customization
-I keep my agenda files in Dropbox so that I can access them on any computer. In addition, I want a different ellipsis instead of the three periods. Most of my todo keywords are fairly straightforward.
+I keep my agenda files in Dropbox so that I can access them on any computer. In addition, I want a different ellipsis instead of the three periods. Most of my todo keywords are fairly straightforward. The PROJECT todo keyword is for me to mark something as a project.
 #+begin_src emacs-lisp
-(setq org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/org/projects.org" "~/Dropbox/org/inbox.org") 
-        org-ellipsis " ▼ "
-        org-todo-keywords '(
-                            (sequence "TODO(t)" "NEXT(n)" "MEETING(m)" "HOLD(h)" "REVIEW(r)" "SOMEDAY(s)" "|" "DONE(d!)" "CANCELLED(c!)")
-                            (type "DRAFT(D)" "PROJECT(p)")
-                            )
+(setq org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/org/inbox.org") 
+      org-ellipsis " ▼ "
 
-        org-todo-keyword-faces '(
+      org-todo-keywords '(
+                            (sequence "TODO(t)" "NEXT(n)" "HOLD(h)" "REVIEW(r)" "|" "DONE(d!)" "CANCELLED(c!)")
+                            (type "PROJECT(p)"  "MEETING(m)"))
+
+      org-todo-keyword-faces '(
                                  ("TODO" . (:foreground "#cc241d" :weight bold :underline t))
                                  ("NEXT" . (:foreground "#fe8019" :weight bold))
                                  ("MEETING" . (:foreground "#b8bb26" :weight bold))
-                                 ("HOLD" . (:foreground "#fabd2f" :weight bold :slant italic))
                                  ("REVIEW" . (:foreground "#b16286" :weight bold))
-                                 ("SOMEDAY" . (:foreground "#b16286" :slant italic))
                                  ("DONE" . (:foreground "#83a598" :strike-through t))
                                  ("CANCELLED" . (:foreground "cc241d" :strike-through t))
-                                 ("DRAFT" . (:foreground "#83a598" :weight bold))
+                                 ("HOLD" . (:foreground "#fabd2f" :weight bold :slant italic))
                                  ("PROJECT" . (:foreground "#458588" :slant italic :weight bold))))
-        #+end_src
+#+end_src
 
 *** Line Wrapping and Indentation
 I want stuff to indent with the heading, and I want the lines to wrap. In addition, I want any child text of a headline to match with the text of the headline.
@@ -453,8 +455,20 @@ I want to be able to add stuff to the mail section of my agenda.
 #+end_src
 
 *** Task
-This is for a general task.
+This adds an item to the inbox file to be refiled later.
 #+begin_src emacs-lisp
+(setq org-capture-templates
+             (doct-add-to org-capture-templates
+                          '("Task" 
+                            :keys "t"
+                            :file "~/Dropbox/org/inbox.org"
+                            :template ("* TODO %^{Description}"
+                                       ":PROPERTIES:"
+                                       ":CREATED: %u"
+                                       ":END:"
+                                       )
+                            )
+'append))
 #+end_src
 
 ** UI Tweaks
@@ -475,6 +489,7 @@ I like having different colors for faces. In addition, I want to set the font an
 (set-face-attribute 'org-level-6 nil :foreground "#d3869b")
 (set-face-attribute 'org-level-7 nil :foreground "#fabd2f")
 (set-face-attribute 'org-level-8 nil :foreground "#fb4934")
+
 #+end_src
 
 *** Italic Comments
@@ -517,27 +532,91 @@ Org Superstar lets me use nicer bullets for my headers and formatting.
 
 #+end_src
 
-*** Custom Agenda Commands
+** Custom Agenda Commands
    This is where I define my custom agenda commands. Personally these are the views I mostly use. 
-***** Planner 
-This provides an overview of my day and the things I need to get done for the day, as well as anything coming up in the next 2 days.
+*** Dashboard
+This dashboard view allows me to get a view of my day, along with my todo items.
 #+begin_src emacs-lisp
 (setq org-agenda-custom-commands
-      '(
-        ("p" "Planner"
-         ((agenda ""((org-agenda-span 'day)
+      '(("d" "Dashboard"
+         ((agenda "" ((org-agenda-span 'day)
 			    (org-agenda-use-time-grid t)
-              (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
+			    (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
 			    (org-agenda-show-all-dates t)
 			    (org-agenda-compact-blocks nil)
-              (org-agenda-remove-tags t)
-              (org-agenda-category-icon-alist `(
-                                                ("INBOX" ,(list (all-the-icons-material "inbox")) nil nil :ascent center)
-                                                ))
-                                              
+			    (org-agenda-overriding-header "")
+			    (org-agenda-start-day "+0d")
+			    (org-super-agenda-groups
+			     '(
+			       (:name "Habits"
+				      :habit t
+				      :category "HABIT"
+				      :order 2)
+			       
+			       (:name "Chores"
+				      :habit t
+				      :category "CHORE"
+				      :order 2)
+						 
 
+			       (:name none
+				      :discard (:todo "DONE")
+				      :time-grid t
+				      :date today
+				      :scheduled today
+				      :deadline today
+				      :order 1)))))
 
-))))))
+                   (agenda "" ((org-agenda-overriding-header "Coming Up Soon") 
+		                         (org-agenda-start-day "+1d")
+									 (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
+                   (org-agenda-format-date "\n%d %b (%a.)")
+                   (org-agenda-span 2)
+                   (org-super-agenda-groups
+                    '(
+                      
+                        
+
+                      
+                     
+                         (:name "Personal"
+                          :category ("WRITING" "CAMPAIGN" "PERSONAL")
+                          :order 4)
+
+                         (:name "Habits"
+                         :habit t
+                         :category "HABIT"
+                         :order 6)
+                         
+                         (:name "Chores"
+                         :habit t
+                         :category "CHORE"
+                         :order 6)))))
+                       
+    
+    
+
+				 (alltodo "" ((org-agenda-overriding-header "To Do")
+                  (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
+                  (org-agenda-sorting-strategy '(todo-state-up category-up ))
+                  (org-super-agenda-groups '(
+                  (:name "Classwork and Meetings"
+                  :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING" "CLASSES")
+                  :order 1)
+                 
+                  (:name "Personal"
+                  :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
+                  :order 2)
+                  
+                  (:name "Projects"
+                   :todo "PROJECT"
+                   :category "PROJECT"
+                   :order 3)
+                  
+
+                 (:discard (:category "HABIT"))
+                 (:discard (:category "CHORE"))))))))))
+
 
 #+end_src
 
@@ -562,6 +641,12 @@ For managing bibliographies. I usually just have one main bibliography.
 Org Chef lets me create recipes quickly.
 #+begin_src emacs-lisp
 
+#+end_src
+
+** Org QL
+Org QL allows me to define queries for org-mode files.
+#+begin_src emacs-lisp
+(use-package org-ql)
 #+end_src
 
 ** Export Backends
@@ -796,7 +881,7 @@ I want to define a hydra for searching by various categories.
       ("c" (elfeed-search-set-filter "@1-week-ago +unread +campaign") "Campaigns")  
       ("p" (elfeed-search-set-filter "+podcast") "Podcasts")  
       ("r" (elfeed-search-set-filter "@1-week-ago +unread +reddit") "Reddit")  
-      ("b" (elfeed-search-set-filter "@1-week-ago +unread +blog") "Reddit")  
+      ("b" (elfeed-search-set-filter "@1-week-ago +unread +blog") "Blogs")  
       
       ("q" nil "quit" :color red))
 #+end_src
@@ -866,6 +951,7 @@ Originally from the emacs subreddit, I want to update elfeed every 10 minutes.
 #+end_src
 
 * Writing Configuration
+** Writeroom Mode
 * UI Tweaks
 ** Minimalistic UI
 I really hate seeing the menu bar, scrollbar, etc.
@@ -1044,7 +1130,9 @@ These are my keybindings for files.
 
 
    "o" '(:ignore t :which-key "Org-mode")
-   "oa" '(org-agenda :which-key "Org Agenda"))
+   "oa" '(org-agenda :which-key "Org Agenda")
+   "oc" '(org-capture)
+   "o/" '(org-ql-search :which-key "Search Org Files"))
 
 #+end_src
 
@@ -1119,5 +1207,12 @@ I want to insert indents myself.
       org-src-tab-acts-natively t
       tab-width 4)
 #+end_src
+
+** Scratch Buffer Uses Org Mode
+#+begin_src emacs-lisp
+(setq initial-major-mode 'org-mode
+      initial-scratch-message nil)
+#+end_src
+
 
 
