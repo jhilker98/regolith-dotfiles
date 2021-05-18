@@ -12,6 +12,10 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
 - [[#initial-setup][Initial Setup]]
   - [[#yn-for-yesno][Y/N for Yes/No]]
   - [[#emoji][Emoji]]
+- [[#minor-tweaks][Minor Tweaks]]
+  - [[#tab-in-insert-mode-indents][Tab in Insert Mode Indents]]
+  - [[#scratch-buffer-uses-org-mode][Scratch Buffer Uses Org Mode]]
+  - [[#keep-folders-clean][Keep Folders Clean]]
 - [[#core-functionality][Core Functionality]]
   - [[#undo-tree][Undo Tree]]
   - [[#evil-mode][Evil Mode]]
@@ -32,16 +36,17 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#language-configuration][Language Configuration]]
 - [[#org-mode][Org Mode]]
   - [[#general-customization][General Customization]]
+  - [[#categories-and-tags][Categories and Tags]]
   - [[#capture-templates][Capture Templates]]
   - [[#ui-tweaks][UI Tweaks]]
   - [[#org-tempo][Org Tempo]]
   - [[#org-superstar][Org Superstar]]
+  - [[#org-ql][Org QL]]
   - [[#org-super-agenda][Org Super Agenda]]
   - [[#custom-agenda-commands][Custom Agenda Commands]]
   - [[#org-toc][Org TOC]]
   - [[#org-ref][Org-Ref]]
   - [[#org-chef][Org Chef]]
-  - [[#org-ql][Org QL]]
   - [[#export-backends][Export Backends]]
   - [[#campaign-manager][Campaign Manager]]
 - [[#mu4e][Mu4e]]
@@ -49,16 +54,18 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#account-setup][Account Setup]]
   - [[#ui-tweaks-1][UI Tweaks]]
   - [[#org-mime][Org-Mime]]
+  - [[#helpers][Helpers]]
   - [[#org-msg][Org-Msg]]
   - [[#mu4e-dashboard][Mu4e Dashboard]]
 - [[#elfeed][Elfeed]]
   - [[#package-setup][Package Setup]]
-  - [[#helpers][Helpers]]
+  - [[#helpers-1][Helpers]]
   - [[#elfeed-org][Elfeed Org]]
   - [[#elfeed-dashboard][Elfeed Dashboard]]
   - [[#elfeed-goodies][Elfeed Goodies]]
   - [[#bindings][Bindings]]
   - [[#hooks][Hooks]]
+- [[#spotify][Spotify]]
 - [[#writing-configuration][Writing Configuration]]
   - [[#writeroom-mode][Writeroom Mode]]
 - [[#ui-tweaks-2][UI Tweaks]]
@@ -75,15 +82,14 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#application-bindings][Application Bindings]]
   - [[#buffer-keybindings][Buffer Keybindings]]
   - [[#file-keybindings][File Keybindings]]
+  - [[#git-keybindings][Git Keybindings]]
+  - [[#insert-keybindings][Insert Keybindings]]
   - [[#org-mode-keybindings][Org-Mode Keybindings]]
   - [[#toggle-keybindings][Toggle Keybindings]]
   - [[#reload-keybindings][Reload Keybindings]]
   - [[#window-keybindings][Window Keybindings]]
   - [[#quit-keybindings][Quit Keybindings]]
   - [[#zoom-in-and-out][Zoom In And Out]]
-- [[#minor-tweaks][Minor Tweaks]]
-  - [[#tab-in-insert-mode-indents][Tab in Insert Mode Indents]]
-  - [[#scratch-buffer-uses-org-mode][Scratch Buffer Uses Org Mode]]
 
 * Initialization
 ** Early Initialization
@@ -144,7 +150,8 @@ And finally, I want to load the literate config.
 This is where I setup my initial personal information, as well as a minimal UI and enabling the visual bell.
 #+begin_src emacs-lisp
 (setq user-full-name "Jacob Hilker"
-      user-mail-address "jacob.hilker2@gmail.com"
+      user-mail-address "camohilk@gmail.com"
+      user-emacs-directory "~/.emacs.d/"
       visible-bell t)
 #+end_src
 
@@ -173,6 +180,35 @@ I want to be able to use emoji and icons in some of my custom agenda commands.
   :hook (after-init . global-emojify-mode)
   :config
   (setq emojify-composed-text-p nil))
+#+end_src
+
+* Minor Tweaks
+** Tab in Insert Mode Indents
+I want to insert indents myself.
+#+begin_src emacs-lisp
+(setq org-src-preserve-indentation t
+      org-src-fontify-natively t
+      org-src-tab-acts-natively t
+      tab-width 4)
+#+end_src
+
+** Scratch Buffer Uses Org Mode
+#+begin_src emacs-lisp
+(setq initial-major-mode 'org-mode
+      initial-scratch-message nil)
+#+end_src
+
+
+** TODO Keep Folders Clean
+I don't mind having auto-save files, but not in the current directory. I also don't want any lockfiles.
+#+begin_src emacs-lisp
+(setq backup-directory-alist `(("." . ,(expand-file-name ".tmp/backups/" user-emacs-directory))))
+(setq create-lockfiles nil)
+;; auto-save-mode doesn't create the path automatically!
+(make-directory (expand-file-name ".tmp/auto-saves/" user-emacs-directory) t)
+
+(setq auto-save-list-file-prefix (expand-file-name ".tmp/auto-saves/sessions/" user-emacs-directory)
+      auto-save-file-name-transforms `((".*" ,(expand-file-name ".tmp/auto-saves/" user-emacs-directory) t)))
 #+end_src
 
 * Core Functionality
@@ -308,9 +344,23 @@ LSP Mode lets me get completion for functions and such in code. From the emacs-f
 (use-package ivy
   :defer 0.1
   :diminish
- :config
- (setq ivy-count-format "(%d/%d) ")
- (ivy-mode 1))
+  :bind (("C-s" . swiper)
+         :map ivy-minibuffer-map
+         ("TAB" . ivy-alt-done)
+         ("C-f" . ivy-alt-done)
+         ("C-l" . ivy-alt-done)
+         ("C-j" . ivy-next-line)
+         ("C-k" . ivy-previous-line)
+         :map ivy-switch-buffer-map
+         ("C-k" . ivy-previous-line)
+         ("C-l" . ivy-done)
+         ("C-d" . ivy-switch-buffer-kill)
+         :map ivy-reverse-i-search-map
+         ("C-k" . ivy-previous-line)
+         ("C-d" . ivy-reverse-i-search-kill))
+  :config
+  (setq ivy-count-format "(%d/%d) ")
+  (ivy-mode 1))
 #+end_src
 
 **** Ivy Posframe
@@ -396,27 +446,22 @@ Python is my primary language of choice.
 #+end_src
 
 * Org Mode
+Org-Mode is THE absolute best thing about Emacs, in my humble opinion. Being able to keep notes and an agenda in the same file is so much easier than something like Notion which is pretty resource-intensive and is much harder to organize (in my opinion, at least). I highly respect what they are doing, but I prefer org-mode. My workflow is very much still in progress - for now, it's sort of a mix of GTD and my own thing.
 ** General Customization
-I keep my agenda files in Dropbox so that I can access them on any computer. In addition, I want a different ellipsis instead of the three periods. Most of my todo keywords are fairly straightforward. The PROJECT todo keyword is for me to mark something as a project.
+I keep my agenda files in Dropbox so that I can access them on any computer. In addition, I want a triangle for my ellipsis instead of the three periods. Most of my todo keywords are fairly straightforward.
 #+begin_src emacs-lisp
-(setq org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/org/inbox.org") 
+(setq org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/org/projects.org" "~/Dropbox/org/contacts.org")
       org-ellipsis " ▼ "
-
-      org-todo-keywords '(
-                            (sequence "TODO(t)" "NEXT(n)" "HOLD(h)" "REVIEW(r)" "|" "DONE(d!)" "CANCELLED(c!)")
-                            (type "PROJECT(p)"  "MEETING(m)"))
-
+      org-todo-keywords '((sequence "TODO(t)"  "NEXT(n)" "WAIT(w@/!)" "HOLD(h)" "BLOCK(b@!)" "|" "DONE(d!)" "CANC(c!)"))
       org-todo-keyword-faces '(
-                                 ("TODO" . (:foreground "#cc241d" :weight bold :underline t))
-                                 ("NEXT" . (:foreground "#fe8019" :weight bold))
-                                 ("MEETING" . (:foreground "#b8bb26" :weight bold))
-                                 ("REVIEW" . (:foreground "#b16286" :weight bold))
-                                 ("DONE" . (:foreground "#83a598" :strike-through t))
-                                 ("CANCELLED" . (:foreground "cc241d" :strike-through t))
-                                 ("HOLD" . (:foreground "#fabd2f" :weight bold :slant italic))
-                                 ("PROJECT" . (:foreground "#458588" :slant italic :weight bold))))
-#+end_src
-
+                               ("TODO" . (:foreground "#cc241d" :weight bold )) ;; red, bold, underlined
+                               ("BLOCK" . (:foreground "#cc241d" :weight bold )) ;; red, bold
+                               ("NEXT" . (:foreground "#fe8019" :weight bold)) ;; orange, bold
+                               ("WAIT" . (:foreground "#b16286" :weight bold :slant italic)) ;; purple, bold, italic
+                               ("HOLD" . (:foreground "#b16286" :weight bold :underline t)) ;; purple, bold, underline
+                               ("DONE" . (:foreground "#83a598" :weight bold :strike-through t)) ;; blue, strikethrough
+                               ("CANC" . (:foreground "#83a598" :weight bold :strike-through t)))) ;; blue - strikethrough
+      #+end_src
 *** Line Wrapping and Indentation
 I want stuff to indent with the heading, and I want the lines to wrap. In addition, I want any child text of a headline to match with the text of the headline.
 #+begin_src emacs-lisp
@@ -428,14 +473,25 @@ I want stuff to indent with the heading, and I want the lines to wrap. In additi
             (org-indent-mode 1)))
 #+end_src
 
+** Categories and Tags
+I use these to help me organize my work. Categories are what I use more for a context (such as appointments, projects, etc) and a tag is something more narrow within that project. This is where I define my global tags - such as a personal context, or something for work, or for family.
+#+begin_src emacs-lisp
+(setq org-tag-persistent-alist '(
+                      (:startgroup)
+                      ("@personal" . ?p)
+                      ("@work" . ?w)
+                      (:endgroup)
+                      ("meeting" . ?m)
+                      ))
+#+end_src
+
 ** Capture Templates
 #+begin_src emacs-lisp
 (use-package doct
   :commands (doct))
 #+end_src
-
-*** Appointment
-I want to have a capture template for immediately being able to add an appointment to my agenda.
+*** Appointments
+I want to be able to set up an appointment quickly.
 #+begin_src emacs-lisp
 (setq org-capture-templates
 (doct '(("Appointment"
@@ -447,24 +503,23 @@ I want to have a capture template for immediately being able to add an appointme
 ))))
 #+end_src
 
-*** TODO Mail
-I want to be able to add stuff to the mail section of my agenda.
+*** TODO Email 
+I want to be able to add to my email TODO list quickly.
 #+begin_src emacs-lisp
-
 
 #+end_src
 
 *** Task
-This adds an item to the inbox file to be refiled later.
+This is for adding an item to my inbox to be refiled later.
 #+begin_src emacs-lisp
 (setq org-capture-templates
-             (doct-add-to org-capture-templates
-                          '("Task" 
+      (doct-add-to org-capture-templates
+                   '("Task" 
                             :keys "t"
                             :file "~/Dropbox/org/inbox.org"
                             :template ("* TODO %^{Description}"
                                        ":PROPERTIES:"
-                                       ":CREATED: %u"
+                                       ":CREATED: %t"
                                        ":END:"
                                        )
                             )
@@ -524,99 +579,24 @@ Org Superstar lets me use nicer bullets for my headers and formatting.
   (org-superstar-mode 1))
 #+end_src
 
+** Org QL
+Org QL allows me to define queries for org-mode files.
+#+begin_src emacs-lisp
+(use-package org-ql)
+#+end_src
+
 ** Org Super Agenda
 #+begin_src emacs-lisp
 (use-package org-super-agenda
 :config 
 (org-super-agenda-mode 1))
-
 #+end_src
 
 ** Custom Agenda Commands
-   This is where I define my custom agenda commands. Personally these are the views I mostly use. 
+This is where I define my custom agenda commands. Personally these are the views I mostly use. 
 *** Dashboard
 This dashboard view allows me to get a view of my day, along with my todo items.
 #+begin_src emacs-lisp
-(setq org-agenda-custom-commands
-      '(("d" "Dashboard"
-         ((agenda "" ((org-agenda-span 'day)
-			    (org-agenda-use-time-grid t)
-			    (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
-			    (org-agenda-show-all-dates t)
-			    (org-agenda-compact-blocks nil)
-			    (org-agenda-overriding-header "")
-			    (org-agenda-start-day "+0d")
-			    (org-super-agenda-groups
-			     '(
-			       (:name "Habits"
-				      :habit t
-				      :category "HABIT"
-				      :order 2)
-			       
-			       (:name "Chores"
-				      :habit t
-				      :category "CHORE"
-				      :order 2)
-						 
-
-			       (:name none
-				      :discard (:todo "DONE")
-				      :time-grid t
-				      :date today
-				      :scheduled today
-				      :deadline today
-				      :order 1)))))
-
-                   (agenda "" ((org-agenda-overriding-header "Coming Up Soon") 
-		                         (org-agenda-start-day "+1d")
-									 (org-agenda-time-grid '((daily today weekly require-timed)()() "" nil))
-                   (org-agenda-format-date "\n%d %b (%a.)")
-                   (org-agenda-span 2)
-                   (org-super-agenda-groups
-                    '(
-                      
-                        
-
-                      
-                     
-                         (:name "Personal"
-                          :category ("WRITING" "CAMPAIGN" "PERSONAL")
-                          :order 4)
-
-                         (:name "Habits"
-                         :habit t
-                         :category "HABIT"
-                         :order 6)
-                         
-                         (:name "Chores"
-                         :habit t
-                         :category "CHORE"
-                         :order 6)))))
-                       
-    
-    
-
-				 (alltodo "" ((org-agenda-overriding-header "To Do")
-                  (org-agenda-skip-function '(org-agenda-skip-entry-if 'timestamp))
-                  (org-agenda-sorting-strategy '(todo-state-up category-up ))
-                  (org-super-agenda-groups '(
-                  (:name "Classwork and Meetings"
-                  :category ("CLAS204" "CPSC405" "CPSC419" "CPSC445" "MEETING" "CLASSES")
-                  :order 1)
-                 
-                  (:name "Personal"
-                  :category ("WRITING" "CAMPAIGN" "PERSONAL" "NANO" "UMWCLUB")
-                  :order 2)
-                  
-                  (:name "Projects"
-                   :todo "PROJECT"
-                   :category "PROJECT"
-                   :order 3)
-                  
-
-                 (:discard (:category "HABIT"))
-                 (:discard (:category "CHORE"))))))))))
-
 
 #+end_src
 
@@ -641,12 +621,6 @@ For managing bibliographies. I usually just have one main bibliography.
 Org Chef lets me create recipes quickly.
 #+begin_src emacs-lisp
 
-#+end_src
-
-** Org QL
-Org QL allows me to define queries for org-mode files.
-#+begin_src emacs-lisp
-(use-package org-ql)
 #+end_src
 
 ** Export Backends
@@ -681,7 +655,8 @@ I am setting my maildir and my update function here. in addition, I am telling e
 (require 'org-mu4e) ;; On Ubuntu
 (setq mu4e-maildir "~/.local/share/mail"
       mu4e-get-mail-command "mbsync -aq"
-      mu4e-update-interval (* 10 60)
+      mu4e-update-interval (* 5 60)
+      mu4e-headers-skip-duplicates t
       message-send-mail-function 'smtpmail-send-it
       smtpmail-auth-credentials  (expand-file-name "~/.authinfo.gpg")
       mail-user-agent 'mu4e-user-agent)
@@ -724,7 +699,7 @@ Here is where I add my account information. This first section is for my persona
 #+begin_src emacs-lisp
 (add-to-list 'mu4e-contexts
 (make-mu4e-context
-	  :name "camohilk"
+	  :name "chilk"
 	  :match-func
 	    (lambda (msg)
 	      (when msg
@@ -737,6 +712,12 @@ Here is where I add my account information. This first section is for my persona
           (mu4e-sent-messages-behavior . delete)
           (mu4e-index-cleanup . nil)
           (mu4e-index-lazy-check . t)
+          (mu4e-bookmarks . (("flag:unread AND NOT flag:trashed AND to:camohilk@gmail.com" "Unread messages" 117)
+                                ("date:today..now AND to:camohilk@gmail.com" "Today's messages" 116)
+                                ("date:7d..now AND to:camohilk@gmail.com" "Last 7 days" 119)
+                                ("mime:image/* AND to:camohilk@gmail.com" "Messages with images" 112)))
+
+
 		  (mu4e-drafts-folder  . "/camohilk@gmail.com/[Gmail]/Drafts")
 		  (mu4e-sent-folder  . "/camohilk@gmail.com/[Gmail]/Sent Mail")
 		  (mu4e-refile-folder  . "/camohilk@gmail.com/[Gmail]/All Mail")
@@ -752,13 +733,30 @@ Day/Month/Year and 24-hour time is the way to go, in my opinion. I'm ust setting
       mu4e-headers-time-format "%H:%M")
 #+end_src
 
+*** Thread Folding
+I want to hide any duplicate messages that are in the same thread.
+#+begin_src emacs-lisp
+(use-package mu4e-thread-folding
+    :straight (:host github :repo "rougier/mu4e-thread-folding")
+    :config
+   (add-to-list 'mu4e-header-info-custom
+             '(:empty . (:name "Empty"
+                         :shortname ""
+                         :function (lambda (msg) "  "))))
+   
+   (setq mu4e-thread-folding-default-view 'folded))
+   
+#+end_src
+
 *** Better Headers
 Taken from the doom emacs mu4e config.
 #+begin_src emacs-lisp
 (setq mu4e-headers-fields
-        '(
+        '(          
+          (:empty . 3)
           (:human-date . 12)
           (:flags . 8)
+          (:mailing-list . 20)
           (:from . 25)
           (:subject)))
 #+end_src
@@ -821,6 +819,27 @@ I want to write my emails in org-mode and send them as HTML formatted emails.
 ; (add-hook 'message-send-hook 'org-mime-confirm-when-no-multipart) ;; prompts if no multipart.
 #+end_src
 
+** Helpers
+*** Mark All As Read
+I want to mark something as read. In addition, I want to bind it to "A" so all unread messages will be marked unread.
+#+begin_src emacs-lisp
+(defun mu4e-headers-mark-all-unread-read ()
+  "Put a ! \(read) mark on all visible unread messages"
+  (interactive)
+  (mu4e-headers-mark-for-each-if
+   (cons 'read nil)
+   (lambda (msg param)
+     (memq 'unread (mu4e-msg-field msg :flags)))))
+
+(defun mu4e-headers-flag-all-read ()
+  "Flag all visible messages as \"read\""
+  (interactive)
+  (mu4e-headers-mark-all-unread-read)
+  (mu4e-mark-execute-all t))
+
+(evil-define-key 'normal mu4e-headers-mode-map (kbd "A") 'mu4e-headers-mark-all-unread-read)
+#+end_src
+
 ** TODO Org-Msg
 Org-msg allows me to write my emails in Org-mode. However, I get a lambda error any time I try to send an email with this package.
 #+begin_src emacs-lisp :tangle no
@@ -858,16 +877,11 @@ This is the initial setup for my elfeed config.
 (use-package elfeed
   :config
   (setq elfeed-db-directory "~/.elfeed/"
-	elfeed-search-filter "@1-week-ago +unread "))
-  
-#+end_src
-
-*** Bindings
-These are the keybindings I have for my configuration.
-#+begin_src emacs-lisp
-(evil-define-key 'normal elfeed-search-mode-map (kbd "A") 'elfeed-mark-all-as-read)
-(evil-define-key 'normal elfeed-search-mode-map (kbd "/") 'elfeed-search-live-filter)
-(evil-define-key 'normal elfeed-search-mode-map (kbd "f") 'jh/elfeed-search-hydra/body)
+	elfeed-search-filter "@1-week-ago +unread ")
+  (evil-define-key 'normal elfeed-search-mode-map 
+    "A" 'elfeed-mark-all-as-read
+    "f" 'jh/elfeed-search-hydra/body
+    "/" 'elfeed-search-live-filter))
 #+end_src
 
 ** Helpers
@@ -894,6 +908,9 @@ This is a function that just marks all the articles as read.
   (mark-whole-buffer)
   (elfeed-search-untag-all-unread))
 #+end_src
+
+*** Update on Login
+I want elfeed to update when I open it, rather than me having to manually update it.
 
 ** Elfeed Org
 Elfeed org lets me use an org-mode file to keep track of my feeds.
@@ -943,13 +960,14 @@ Elfeed Goodies lets me have a nicer heading and layout for elfeed.
 #+end_src
 
 ** Hooks
-This is for custom hooks I want to use for Elfeed..
+This is for custom hooks I want to use for Elfeed.
 *** Update Elfeed
 Originally from the emacs subreddit, I want to update elfeed every 10 minutes.
 #+begin_src emacs-lisp
 (add-hook 'emacs-startup-hook (lambda () (run-at-time 5 600 'elfeed-update)))
 #+end_src
 
+* Spotify
 * Writing Configuration
 ** Writeroom Mode
 * UI Tweaks
@@ -1121,6 +1139,21 @@ These are my keybindings for files.
 
 #+end_src
 
+** Git Keybindings
+
+** Insert Keybindings
+#+begin_src emacs-lisp
+(general-define-key
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC"
+
+
+   "i" '(:ignore t :which-key "Insert special character")
+   "ii" '(all-the-icons-insert :which-key "Insert icon")
+   "ie" '(emojify-insert-emoji :which-key "Insert emoji"))
+#+end_src
+
 ** Org-Mode Keybindings
 #+begin_src emacs-lisp
 (general-define-key
@@ -1131,7 +1164,7 @@ These are my keybindings for files.
 
    "o" '(:ignore t :which-key "Org-mode")
    "oa" '(org-agenda :which-key "Org Agenda")
-   "oc" '(org-capture)
+   "oc" '(org-capture :which-key "Org Capture")
    "o/" '(org-ql-search :which-key "Search Org Files"))
 
 #+end_src
@@ -1196,22 +1229,6 @@ You can use Control plus = and Control plus - to zoom in and out like everywhere
 #+begin_src emacs-lisp
 (global-set-key (kbd "C-=") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
-#+end_src
-
-* Minor Tweaks
-** Tab in Insert Mode Indents
-I want to insert indents myself.
-#+begin_src emacs-lisp
-(setq org-src-preserve-indentation t
-      org-src-fontify-natively t
-      org-src-tab-acts-natively t
-      tab-width 4)
-#+end_src
-
-** Scratch Buffer Uses Org Mode
-#+begin_src emacs-lisp
-(setq initial-major-mode 'org-mode
-      initial-scratch-message nil)
 #+end_src
 
 
