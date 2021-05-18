@@ -446,22 +446,16 @@ Python is my primary language of choice.
 #+end_src
 
 * Org Mode
-Org-Mode is THE absolute best thing about Emacs, in my humble opinion. Being able to keep notes and an agenda in the same file is so much easier than something like Notion which is pretty resource-intensive and is much harder to organize (in my opinion, at least). I highly respect what they are doing, but I prefer org-mode. My workflow is very much still in progress - for now, it's sort of a mix of GTD and my own thing.
+Org-Mode is THE absolute best thing about Emacs, in my humble opinion. Being able to keep notes and an agenda in the same file is so much easier than something like Notion which is pretty resource-intensive and is much harder to organize (in my opinion, at least). I highly respect what they are doing, but I prefer org-mode. My workflow is very much still in progress - for now, it's sort of a mix of GTD and my own thing. I have some extra project planning keywords as well in case I decide to do more with project planning in Org-Mode.
 ** General Customization
 I keep my agenda files in Dropbox so that I can access them on any computer. In addition, I want a triangle for my ellipsis instead of the three periods. Most of my todo keywords are fairly straightforward.
 #+begin_src emacs-lisp
 (setq org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/org/projects.org" "~/Dropbox/org/contacts.org")
       org-ellipsis " ▼ "
-      org-todo-keywords '((sequence "TODO(t)"  "NEXT(n)" "WAIT(w@/!)" "HOLD(h)" "BLOCK(b@!)" "|" "DONE(d!)" "CANC(c!)"))
-      org-todo-keyword-faces '(
-                               ("TODO" . (:foreground "#cc241d" :weight bold )) ;; red, bold, underlined
-                               ("BLOCK" . (:foreground "#cc241d" :weight bold )) ;; red, bold
-                               ("NEXT" . (:foreground "#fe8019" :weight bold)) ;; orange, bold
-                               ("WAIT" . (:foreground "#b16286" :weight bold :slant italic)) ;; purple, bold, italic
-                               ("HOLD" . (:foreground "#b16286" :weight bold :underline t)) ;; purple, bold, underline
-                               ("DONE" . (:foreground "#83a598" :weight bold :strike-through t)) ;; blue, strikethrough
-                               ("CANC" . (:foreground "#83a598" :weight bold :strike-through t)))) ;; blue - strikethrough
-      #+end_src
+      org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "MEETING(m)" "|" "DONE(d!)" "CANCELLED(c!)"))
+                          ;(sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(C!)"))
+                          
+            #+end_src
 *** Line Wrapping and Indentation
 I want stuff to indent with the heading, and I want the lines to wrap. In addition, I want any child text of a headline to match with the text of the headline.
 #+begin_src emacs-lisp
