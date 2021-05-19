@@ -14,6 +14,7 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#emoji][Emoji]]
 - [[#minor-tweaks][Minor Tweaks]]
   - [[#tab-in-insert-mode-indents][Tab in Insert Mode Indents]]
+  - [[#smarttab][Smarttab]]
   - [[#scratch-buffer-uses-org-mode][Scratch Buffer Uses Org Mode]]
   - [[#keep-folders-clean][Keep Folders Clean]]
 - [[#core-functionality][Core Functionality]]
@@ -38,6 +39,7 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#general-customization][General Customization]]
   - [[#categories-and-tags][Categories and Tags]]
   - [[#capture-templates][Capture Templates]]
+  - [[#refiling][Refiling]]
   - [[#ui-tweaks][UI Tweaks]]
   - [[#org-tempo][Org Tempo]]
   - [[#org-superstar][Org Superstar]]
@@ -60,9 +62,8 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
 - [[#elfeed][Elfeed]]
   - [[#package-setup][Package Setup]]
   - [[#helpers-1][Helpers]]
-  - [[#elfeed-org][Elfeed Org]]
-  - [[#elfeed-dashboard][Elfeed Dashboard]]
-  - [[#elfeed-goodies][Elfeed Goodies]]
+  - [[#packages][Packages]]
+  - [[#custom-functions][Custom Functions]]
   - [[#bindings][Bindings]]
   - [[#hooks][Hooks]]
 - [[#spotify][Spotify]]
@@ -78,6 +79,7 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#config-functions][Config Functions]]
   - [[#startup-functions][Startup Functions]]
 - [[#keybindings][Keybindings]]
+  - [[#leader-keys][Leader Keys]]
   - [[#general-keybindings][General Keybindings]]
   - [[#application-bindings][Application Bindings]]
   - [[#buffer-keybindings][Buffer Keybindings]]
@@ -189,7 +191,15 @@ I want to insert indents myself.
 (setq org-src-preserve-indentation t
       org-src-fontify-natively t
       org-src-tab-acts-natively t
-      tab-width 4)
+      tab-width 2)
+#+end_src
+
+** Smarttab
+#+begin_src emacs-lisp
+(use-package smart-tab
+  :init
+  (smart-tab-mode 1))
+
 #+end_src
 
 ** Scratch Buffer Uses Org Mode
@@ -450,9 +460,9 @@ Org-Mode is THE absolute best thing about Emacs, in my humble opinion. Being abl
 ** General Customization
 I keep my agenda files in Dropbox so that I can access them on any computer. In addition, I want a triangle for my ellipsis instead of the three periods. Most of my todo keywords are fairly straightforward.
 #+begin_src emacs-lisp
-(setq org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/org/projects.org" "~/Dropbox/org/contacts.org")
+(setq org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/org/gtd.org" "~/Dropbox/org/contacts.org")
       org-ellipsis " ▼ "
-      org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "MEETING(m)" "|" "DONE(d!)" "CANCELLED(c!)"))
+      org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "MEETING(m)" "|" "DONE(d!)" "CANCELLED(c!)")))
                           ;(sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(C!)"))
                           
             #+end_src
@@ -520,7 +530,18 @@ This is for adding an item to my inbox to be refiled later.
 'append))
 #+end_src
 
+** Refiling
+I want to set up refiling here. As a main note, I want to archive everything under an "Archive" headline under the main context (such as Work, Personal, etc.)
+#+begin_src emacs-lisp
+#+end_src
+
+*** Save After Refiling
+#+begin_src emacs-lisp
+(advice-add 'org-refile :after 'org-save-all-org-buffers)
+#+end_src
+
 ** UI Tweaks
+*** Cleaning Up The View
 I want to hide formatting characters and leading stars.
 #+begin_src emacs-lisp
 (setq org-hide-emphasis-markers t
@@ -871,13 +892,12 @@ This is the initial setup for my elfeed config.
 (use-package elfeed
   :config
   (setq elfeed-db-directory "~/.elfeed/"
-	elfeed-search-filter "@1-week-ago +unread ")
-  (evil-define-key 'normal elfeed-search-mode-map 
+	      elfeed-search-filter "@1-week-ago +unread ")
+   (evil-define-key 'normal elfeed-search-mode-map 
     "A" 'elfeed-mark-all-as-read
     "f" 'jh/elfeed-search-hydra/body
     "/" 'elfeed-search-live-filter))
 #+end_src
-
 ** Helpers
 *** Hydra
 I want to define a hydra for searching by various categories.
@@ -906,7 +926,8 @@ This is a function that just marks all the articles as read.
 *** Update on Login
 I want elfeed to update when I open it, rather than me having to manually update it.
 
-** Elfeed Org
+** Packages
+*** Elfeed Org
 Elfeed org lets me use an org-mode file to keep track of my feeds.
 #+begin_src emacs-lisp
 (use-package elfeed-org
@@ -916,7 +937,7 @@ Elfeed org lets me use an org-mode file to keep track of my feeds.
 (setq rmh-elfeed-org-files '("~/Dropbox/org/elfeed/feeds.org")))
 #+end_src
 
-** TODO Elfeed Dashboard
+*** TODO Elfeed Dashboard
 Elfeed dashboard lets me create a custom dashboard for running queries on articles.
 #+begin_src emacs-lisp
 (use-package elfeed-dashboard
@@ -931,7 +952,7 @@ Elfeed dashboard lets me create a custom dashboard for running queries on articl
      "u" (lambda () (interactive) (elfeed-dashboard-query "+unread")))
 #+end_src
 
-** Elfeed Goodies
+*** Elfeed Goodies
 Elfeed Goodies lets me have a nicer heading and layout for elfeed.
 #+begin_src emacs-lisp
 (use-package elfeed-goodies
@@ -941,6 +962,54 @@ Elfeed Goodies lets me have a nicer heading and layout for elfeed.
         elfeed-goodies/feed-source-column-width 25
         elfeed-goodies/tag-column-width 20))
   
+#+end_src
+
+** Custom Functions
+*** TODO Custom Print Format
+#+begin_src emacs-lisp
+(defun jh/elfeed-search-print-entry (entry)
+    "Print ENTRY to the buffer."
+    (let* ((elfeed-goodies/tag-column-width 20)
+           (elfeed-goodies/feed-source-column-width 25)
+           (title (or (elfeed-meta entry :title) (elfeed-entry-title entry) ""))
+           (title-faces (elfeed-search--faces (elfeed-entry-tags entry)))
+           (feed (elfeed-entry-feed entry))
+           (feed-title
+            (when feed
+              (or (elfeed-meta feed :title) (elfeed-feed-title feed))))
+           (tags (mapcar #'symbol-name (elfeed-entry-tags entry)))
+           (tags-str (concat (mapconcat 'identity tags ",")))
+           (title-width (- (window-width) elfeed-goodies/feed-source-column-width
+                           elfeed-goodies/tag-column-width 4))
+
+                      (feed-column (elfeed-format-column
+                         feed-title (elfeed-clamp elfeed-goodies/feed-source-column-width
+                                                  elfeed-goodies/feed-source-column-width
+                                                  elfeed-goodies/feed-source-column-width)
+                         :left))
+
+                      (tag-column (elfeed-format-column
+                        tags-str (elfeed-clamp (length tags-str)
+                                               elfeed-goodies/tag-column-width
+                                               elfeed-goodies/tag-column-width)
+                        :left)))
+
+
+
+                        (insert (propertize tag-column 'face 'elfeed-search-tag-face) " ")
+      (insert (propertize feed-column 'face 'elfeed-search-feed-face) " ")
+
+            (insert (propertize title 'face title-faces 'kbd-help title))
+
+
+      (setq-local line-spacing 0.2)))
+#+end_src
+
+*** Custom Header Format
+
+**** WAITING Overwriting Elfeed Goodies
+#+begin_src emacs-lisp
+;(setq elfeed-search-print-entry-function 'jh/elfeed-search-print-entry)
 #+end_src
 
 ** Bindings
@@ -1066,16 +1135,21 @@ This function lets me load my config so that I can edit it.
 
 * Keybindings
 This section serves to describe the keybindings of Jmacs.
+** Leader Keys
+Since I am using evil-mode, and I don't want to repeat my keybindings, I'm defining my prefix here.
+#+begin_src emacs-lisp
+(general-create-definer jh/evil-leader
+   :states '(normal visual insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "C-SPC")
+#+end_src
+
 ** General Keybindings
 These are the core keybindings for functionality in jmacs. In addition, I want to use =SPC h F= for describing a face.
 #+begin_src emacs-lisp
 (global-set-key (kbd "C-h F") 'counsel-describe-face)
 
-(general-define-key
-   :states '(normal visual insert emacs)
-   :prefix "SPC"
-   :non-normal-prefix "C-SPC"
-
+(jh/evil-leader
     "SPC" '(counsel-M-x :which-key "M-x")
     "c"   (general-simulate-key "C-c")
     "h"   (general-simulate-key "C-h")
@@ -1086,10 +1160,7 @@ These are the core keybindings for functionality in jmacs. In addition, I want t
 ** Application Bindings
 This opens applications.
 #+begin_src emacs-lisp
-(general-define-key
-   :states '(normal visual insert emacs)
-   :prefix "SPC"
-   :non-normal-prefix "C-SPC"
+(jh/evil-leader
    "a" '(:ignore t :which-key "Applications")
    "am" '(mu4e :which-key "Open Email")
    "an" '(elfeed :which-key "Open News Reader"))
@@ -1099,12 +1170,7 @@ This opens applications.
 ** Buffer Keybindings
 These keybindings are for switching buffers.
 #+begin_src emacs-lisp
-(general-define-key
-:states '(normal visual insert emacs)
-:prefix "SPC"
-:non-normal-prefix "C-SPC"
-
-
+(jh/evil-leader
  "b"   '(:ignore t :which-key "Buffers")
  "bb"  'mode-line-other-buffer
  "bd"  'kill-this-buffer
@@ -1119,12 +1185,7 @@ These keybindings are for switching buffers.
 ** File Keybindings
 These are my keybindings for files.
 #+begin_src emacs-lisp
-(general-define-key
-   :states '(normal visual insert emacs)
-   :prefix "SPC"
-   :non-normal-prefix "C-SPC"
-
-
+(jh/evil-leader
    "f" '(:ignore t :which-key "Files")
    "fed" '(edit-dotfile :which-key "Edit Config")
    "ff" '(find-file :which-key "Find file")
@@ -1134,15 +1195,13 @@ These are my keybindings for files.
 #+end_src
 
 ** Git Keybindings
+#+begin_src emacs-lisp
+
+#+end_src
 
 ** Insert Keybindings
 #+begin_src emacs-lisp
-(general-define-key
-   :states '(normal visual insert emacs)
-   :prefix "SPC"
-   :non-normal-prefix "C-SPC"
-
-
+(jh/evil-leader
    "i" '(:ignore t :which-key "Insert special character")
    "ii" '(all-the-icons-insert :which-key "Insert icon")
    "ie" '(emojify-insert-emoji :which-key "Insert emoji"))
@@ -1150,12 +1209,7 @@ These are my keybindings for files.
 
 ** Org-Mode Keybindings
 #+begin_src emacs-lisp
-(general-define-key
-   :states '(normal visual insert emacs)
-   :prefix "SPC"
-   :non-normal-prefix "C-SPC"
-
-
+(jh/evil-leader
    "o" '(:ignore t :which-key "Org-mode")
    "oa" '(org-agenda :which-key "Org Agenda")
    "oc" '(org-capture :which-key "Org Capture")
@@ -1165,11 +1219,7 @@ These are my keybindings for files.
 
 ** Toggle Keybindings
 #+begin_src emacs-lisp
-(general-define-key
-   :states '(normal visual insert emacs)
-   :prefix "SPC"
-   :non-normal-prefix "C-SPC"
-
+(jh/evil-leader
 
    "t" '(:ignore t :which-key "Toggle")
    "ts" '(treemacs :which-key "Toggle Treemacs")
@@ -1178,11 +1228,7 @@ These are my keybindings for files.
 
 ** Reload Keybindings
 #+begin_src emacs-lisp
-(general-define-key
-   :states '(normal visual insert emacs)
-   :prefix "SPC"
-   :non-normal-prefix "C-SPC"
-
+(jh/evil-leader
 
    "r" '(:ignore t :which-key "Reload")
    "rr" '(reload-jmacs :which-key "Reload Jmacs"))
@@ -1190,10 +1236,7 @@ These are my keybindings for files.
 
 ** Window Keybindings
 #+begin_src emacs-lisp
-(general-define-key
- :states '(normal visual insert emacs)
- :prefix "SPC"
- :non-normal-prefix "C-SPC"
+(jh/evil-leader
  "w"  '(:ignore t :which-key "Windows")
  "w\\" '(split-window-right :which-key "Horizontal split")
  "w-" '(split-window-below :which-key "Vertical split")
@@ -1209,10 +1252,7 @@ These are my keybindings for files.
 ** Quit Keybindings
 
 #+begin_src emacs-lisp
-(general-define-key
- :states '(normal visual insert emacs)
- :prefix "SPC"
- :non-normal-prefix "C-SPC"
+(jh/evil-leader
  "q"  '(:ignore t :which-key "Quit")
  "qq" '(kill-emacs :which-key "Quit emacs")
  "qr" '(restart-emacs :which-key "Restart emacs"))
@@ -1224,6 +1264,4 @@ You can use Control plus = and Control plus - to zoom in and out like everywhere
 (global-set-key (kbd "C-=") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 #+end_src
-
-
 
