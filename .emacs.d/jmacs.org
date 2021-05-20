@@ -499,7 +499,7 @@ I use categories and tags to help me organize my work. Categories are what I use
                                  ("@work" . ?w)
                                  (:endgroup)
                                  ("meeting" . ?m)
-                                 ("refile" . ?r)))
+                                 ("inbox" . ?i)))
                       
 #+end_src
 
@@ -523,8 +523,8 @@ I want to be able to set up an appointment quickly and add it to my agenda.
 ))))
 #+end_src
 
-*** Blog Post
-Since my blog is written using org-mode
+*** TODO Blog Post
+Since my blog is written using org-mode, I'd like to be able to get the general category and add a draft post to it.
 *** TODO Email 
 I want to be able to add to my email TODO list quickly.
 #+begin_src emacs-lisp
@@ -532,7 +532,7 @@ I want to be able to add to my email TODO list quickly.
 #+end_src
 
 *** Task
-This is for adding an item to my inbox to be refiled later.
+This is for adding an item to my inbox to be refiled later. I want to have short tasks (such as take out the trash for a chore), and longer tasks for projects.
 #+begin_src emacs-lisp
 (setq org-capture-templates
       (doct-add-to org-capture-templates
@@ -637,10 +637,11 @@ This dashboard view allows me to get a view of my day, along with my todo items.
           (agenda "" ((org-agenda-span 'day)
                       (org-agenda-overriding-header "")
                       (org-agenda-format-date "Today")
-                      (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈ Now")
+                      (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ Now")
                       (org-agenda-use-time-grid t) 
-                      (org-agenda-time-grid '((today require-timed)(0900 2100)() "" "┈┈┈┈┈┈┈"))
-                      
+                      (org-agenda-time-grid '((today require-timed)(0900 2100)() "" "┈┈┈┈┈┈┈┈┈┈┈┈┈┈"))
+
+                                            
           )
 )))))
 #+end_src
