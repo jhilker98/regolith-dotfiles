@@ -53,6 +53,7 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
   - [[#campaign-manager][Campaign Manager]]
 - [[#mu4e][Mu4e]]
   - [[#initial-setup-1][Initial Setup]]
+  - [[#filters][Filters]]
   - [[#account-setup][Account Setup]]
   - [[#ui-tweaks-1][UI Tweaks]]
   - [[#org-mime][Org-Mime]]
@@ -62,8 +63,9 @@ Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG cam
 - [[#elfeed][Elfeed]]
   - [[#package-setup][Package Setup]]
   - [[#helpers-1][Helpers]]
-  - [[#packages][Packages]]
-  - [[#custom-functions][Custom Functions]]
+  - [[#elfeed-org][Elfeed Org]]
+  - [[#elfeed-dashboard][Elfeed Dashboard]]
+  - [[#elfeed-goodies][Elfeed Goodies]]
   - [[#bindings][Bindings]]
   - [[#hooks][Hooks]]
 - [[#spotify][Spotify]]
@@ -399,11 +401,18 @@ Company is a code completion framework.
 
 ** Projectile
 Projectile is a tool for managing projects inside of emacs.
+#+begin_src emacs-lisp
+
+#+end_src
+
 ** Magit
 Magit is an incredible git client for emacs.
 
 #+begin_src emacs-lisp
+(use-package magit)
 
+(use-package magit-todos
+  :after magit)
 #+end_src
 
 ** Smartparens
@@ -456,14 +465,18 @@ Python is my primary language of choice.
 #+end_src
 
 * Org Mode
-Org-Mode is THE absolute best thing about Emacs, in my humble opinion. Being able to keep notes and an agenda in the same file is so much easier than something like Notion which is pretty resource-intensive and is much harder to organize (in my opinion, at least). I highly respect what they are doing, but I prefer org-mode. My workflow is very much still in progress - for now, it's sort of a mix of GTD and my own thing. I have some extra project planning keywords as well in case I decide to do more with project planning in Org-Mode.
+Org-Mode is THE absolute best thing about Emacs, in my humble opinion. Being able to keep notes and an agenda in the same file is so much easier than something like Notion which is pretty resource-intensive and is much harder to organize (in my opinion, at least). I highly respect what they are doing, but I prefer org-mode. My workflow is very much still in progress - for now, it's sort of a mix of GTD and my own thing. 
 ** General Customization
 I keep my agenda files in Dropbox so that I can access them on any computer. In addition, I want a triangle for my ellipsis instead of the three periods. Most of my todo keywords are fairly straightforward.
 #+begin_src emacs-lisp
 (setq org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/org/gtd.org" "~/Dropbox/org/contacts.org")
       org-ellipsis " ▼ "
-      org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "MEETING(m)" "|" "DONE(d!)" "CANCELLED(c!)")))
-                          ;(sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(C!)"))
+      org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "MEETING(m)" "|" "DONE(d!)" "CANCELLED(c!)"))
+      org-todo-keyword-faces '(
+                               ("TODO" . (:foreground "#cc241d" :weight black :underline t))
+                               ("NEXT" . (:foreground "#fabd2f" :weight black))
+                               ))
+                          
                           
             #+end_src
 *** Line Wrapping and Indentation
@@ -478,24 +491,27 @@ I want stuff to indent with the heading, and I want the lines to wrap. In additi
 #+end_src
 
 ** Categories and Tags
-I use these to help me organize my work. Categories are what I use more for a context (such as appointments, projects, etc) and a tag is something more narrow within that project. This is where I define my global tags - such as a personal context, or something for work, or for family.
+I use categories and tags to help me organize my work. Categories are what I use more for a context (such as appointments, projects, etc) and a tag is something more narrow within that project. This is where I define my global tags - such as a personal context, or something for work, or for family. 
 #+begin_src emacs-lisp
 (setq org-tag-persistent-alist '(
-                      (:startgroup)
-                      ("@personal" . ?p)
-                      ("@work" . ?w)
-                      (:endgroup)
-                      ("meeting" . ?m)
-                      ))
+                                 (:startgroup)
+                                 ("@personal" . ?p)
+                                 ("@work" . ?w)
+                                 (:endgroup)
+                                 ("meeting" . ?m)
+                                 ("refile" . ?r)))
+                      
 #+end_src
 
 ** Capture Templates
+I use capture templates to quickly get idea or task saved.
 #+begin_src emacs-lisp
 (use-package doct
   :commands (doct))
 #+end_src
+
 *** Appointments
-I want to be able to set up an appointment quickly.
+I want to be able to set up an appointment quickly and add it to my agenda.
 #+begin_src emacs-lisp
 (setq org-capture-templates
 (doct '(("Appointment"
@@ -507,6 +523,8 @@ I want to be able to set up an appointment quickly.
 ))))
 #+end_src
 
+*** Blog Post
+Since my blog is written using org-mode
 *** TODO Email 
 I want to be able to add to my email TODO list quickly.
 #+begin_src emacs-lisp
@@ -530,7 +548,7 @@ This is for adding an item to my inbox to be refiled later.
 'append))
 #+end_src
 
-** Refiling
+** TODO Refiling
 I want to set up refiling here. As a main note, I want to archive everything under an "Archive" headline under the main context (such as Work, Personal, etc.)
 #+begin_src emacs-lisp
 #+end_src
@@ -612,7 +630,19 @@ This is where I define my custom agenda commands. Personally these are the views
 *** Dashboard
 This dashboard view allows me to get a view of my day, along with my todo items.
 #+begin_src emacs-lisp
-
+(setq org-agenda-custom-commands
+      '(
+        ("d" "Today's Dashboard"
+         (
+          (agenda "" ((org-agenda-span 'day)
+                      (org-agenda-overriding-header "")
+                      (org-agenda-format-date "Today")
+                      (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈ Now")
+                      (org-agenda-use-time-grid t) 
+                      (org-agenda-time-grid '((today require-timed)(0900 2100)() "" "┈┈┈┈┈┈┈"))
+                      
+          )
+)))))
 #+end_src
 
 ** Org TOC
@@ -669,13 +699,15 @@ I am setting my maildir and my update function here. in addition, I am telling e
 
 (require 'org-mu4e) ;; On Ubuntu
 (setq mu4e-maildir "~/.local/share/mail"
-      mu4e-get-mail-command "mbsync -aq"
+      mu4e-get-mail-command "~/.bin/mailsync"
       mu4e-update-interval (* 5 60)
       mu4e-headers-skip-duplicates t
       message-send-mail-function 'smtpmail-send-it
       smtpmail-auth-credentials  (expand-file-name "~/.authinfo.gpg")
       mail-user-agent 'mu4e-user-agent)
 #+end_src
+
+** Filters
 
 ** Account Setup
 Here is where I add my account information. This first section is for my personal accounts. I am using some of the gmail config settings from doom emacs to see if they work in my personal config.
@@ -695,18 +727,20 @@ Here is where I add my account information. This first section is for my persona
 		  (smtpmail-smtp-server  . "smtp.gmail.com")
 		  (smtpmail-smtp-service . 465)
 		  (smtpmail-stream-type  . ssl)
-             (mu4e-sent-messages-behavior . delete)
-             (mu4e-index-cleanup . nil)
-             (mu4e-index-lazy-check . t)
-             (mu4e-bookmarks . (("flag:unread AND NOT flag:trashed AND to:jacob.hilker2@gmail.com" "Unread messages" 117)
-                                ("date:today..now AND to:jacob.hilker2@gmail.com" "Today's messages" 116)
-                                ("date:7d..now AND to:jacob.hilker2@gmail.com" "Last 7 days" 119)
-                                ("mime:image/* AND to:jacob.hilker2@gmail.com" "Messages with images" 112)))
+            (mu4e-sent-messages-behavior . delete)
+            (mu4e-index-cleanup . nil)
+            (mu4e-index-lazy-check . t)
+            
+            (mu4e-bookmarks . (("flag:unread AND NOT flag:trashed AND to:jacob.hilker2@gmail.com" "Unread messages" 117)
+                               ("date:today..now AND to:jacob.hilker2@gmail.com" "Today's messages" 116)
+                               ("date:7d..now AND to:jacob.hilker2@gmail.com" "Last 7 days" 119)
+                               ("(from:BoardGameGeek AND Updated) or (from:gamersplane.comm) or (from:rpol) or (from:rpg.net AND new) or (from:obsidianportal)" "Campaigns" ?c)
+                               ("mime:image/* AND to:jacob.hilker2@gmail.com" "Messages with images" 112)))
 
 
-		  (mu4e-drafts-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Drafts")
-		  (mu4e-sent-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Sent Mail")
-		  (mu4e-refile-folder  . "/jacob.hilker2@gmail.com/[Gmail]/All Mail")
+	    (mu4e-drafts-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Drafts")
+	    (mu4e-sent-folder  . "/jacob.hilker2@gmail.com/[Gmail]/Sent Mail")
+	    (mu4e-refile-folder  . "/jacob.hilker2@gmail.com/[Gmail]/All Mail")
 		  (mu4e-trash-folder  . "/jacob.hilker2@gmail.com/Trash")))))
 #+end_src
 
@@ -751,15 +785,15 @@ Day/Month/Year and 24-hour time is the way to go, in my opinion. I'm ust setting
 *** Thread Folding
 I want to hide any duplicate messages that are in the same thread.
 #+begin_src emacs-lisp
-(use-package mu4e-thread-folding
-    :straight (:host github :repo "rougier/mu4e-thread-folding")
-    :config
-   (add-to-list 'mu4e-header-info-custom
-             '(:empty . (:name "Empty"
-                         :shortname ""
-                         :function (lambda (msg) "  "))))
-   
-   (setq mu4e-thread-folding-default-view 'folded))
+;(use-package mu4e-thread-folding
+;    :straight (:host github :repo "rougier/mu4e-thread-folding")
+;    :config
+;   (add-to-list 'mu4e-header-info-custom
+;             '(:empty . (:name "Empty"
+;                         :shortname ""
+;                         :function (lambda (msg) "  "))))
+;   
+;   (setq mu4e-thread-folding-default-view 'folded))
    
 #+end_src
 
@@ -768,7 +802,7 @@ Taken from the doom emacs mu4e config.
 #+begin_src emacs-lisp
 (setq mu4e-headers-fields
         '(          
-          (:empty . 3)
+          ;(:empty . 3)
           (:human-date . 12)
           (:flags . 8)
           (:mailing-list . 20)
@@ -778,44 +812,48 @@ Taken from the doom emacs mu4e config.
 
 **** Account Header
 #+begin_src emacs-lisp
-(add-to-list 'mu4e-header-info-custom
-               '(:account
-                 :name "Account"
-                 :shortname "Account"
-                 :help "Which account this email belongs to"
-                 :function
-                 (lambda (msg)
-                   (let ((maildir (mu4e-message-field msg :maildir)))
-                     (format "%s" (substring maildir 1 (string-match-p "/" maildir 1)))))))
+;(add-to-list 'mu4e-header-info-custom
+;               '(:account
+;                 :name "Account"
+;                 :shortname "Account"
+;                 :help "Which account this email belongs to"
+;                 :function
+;                 (lambda (msg)
+;                   (let ((maildir (mu4e-message-field msg :maildir)))
+;                     (format "%s" (substring maildir 1 (string-match-p "/" maildir 1)))))))
 #+end_src
 
 *** Fancy Icons
 #+begin_src emacs-lisp
- (setq mu4e-use-fancy-chars t
-        mu4e-headers-draft-mark '("D" . "")
-        mu4e-headers-flagged-mark '("F" . "")
-        mu4e-headers-new-mark '("N" . "")
-        mu4e-headers-passed-mark '("P" . "")
-        mu4e-headers-replied-mark '("R" . "")
-        mu4e-headers-seen-mark '("S" . "")
-        mu4e-headers-trashed-mark '("T" . "")
-        mu4e-headers-attach-mark '("a" . "")
-        mu4e-headers-encrypted-mark '("x" . "")
-        mu4e-headers-signed-mark '("s" . "")
-        mu4e-headers-unread-mark '("u" . ""))
+ ;(setq mu4e-use-fancy-chars t
+ ;       mu4e-headers-draft-mark '("D" . "")
+ ;       mu4e-headers-flagged-mark '("F" . "")
+ ;       mu4e-headers-new-mark '("N" . "")
+ ;       mu4e-headers-passed-mark '("P" . "")
+ ;       mu4e-headers-replied-mark '("R" . "")
+ ;       mu4e-headers-seen-mark '("S" . "")
+ ;       mu4e-headers-trashed-mark '("T" . "")
+ ;       mu4e-headers-attach-mark '("a" . "")
+ ;       mu4e-headers-encrypted-mark '("x" . "")
+ ;       mu4e-headers-signed-mark '("s" . "")
+ ;       mu4e-headers-unread-mark '("u" . ""))
 #+end_src
 
 ** Org-Mime
+:PROPERTIES:
+:header-args: :tangle no
+:END:
 Org-mime allows me to use org-mode to write emails in org-mode.
 #+begin_src emacs-lisp
 (use-package org-mime
   :config
   (setq org-mime-export-options '(:section-numbers nil
                                   :with-author nil
-                                  :with-toc nil)))
+                                  :with-toc nil))
+(evil-define-key 'normal mu4e-compose-mode-map (kbd "t o") 'org-mime-edit-mail-in-org-mode))
 #+end_src
 
-*** Hooks
+*** Hooks 
 **** Add Custom CSS
 I want my code to be on a dark background.
 #+begin_src emacs-lisp
@@ -829,9 +867,9 @@ I want my code to be on a dark background.
 **** Write In Org, Send HTML
 I want to write my emails in org-mode and send them as HTML formatted emails.
 #+begin_src emacs-lisp
-;(add-hook 'mu4e-compose-mode-hook 'org-mime-edit-mail-in-org-mode) ;; write in org-mode
-;(add-hook 'message-send-hook 'org-mime-htmlize) ;; automatically sends emails as HTML
-; (add-hook 'message-send-hook 'org-mime-confirm-when-no-multipart) ;; prompts if no multipart.
+(add-hook 'mu4e-compose-mode-hook 'org-mime-edit-mail-in-org-mode) ;; write in org-mode
+(add-hook 'message-send-hook 'org-mime-htmlize) ;; write email in org-mode
+(add-hook 'message-send-hook 'org-mime-confirm-when-no-multipart) ;; send message when htmlize hasn't been called
 #+end_src
 
 ** Helpers
@@ -898,6 +936,7 @@ This is the initial setup for my elfeed config.
     "f" 'jh/elfeed-search-hydra/body
     "/" 'elfeed-search-live-filter))
 #+end_src
+
 ** Helpers
 *** Hydra
 I want to define a hydra for searching by various categories.
@@ -907,6 +946,8 @@ I want to define a hydra for searching by various categories.
       ("d" (elfeed-search-set-filter "@1-week-ago +unread") "Default") 
       ("n" (elfeed-search-set-filter "@1-week-ago +unread +news") "News") 
       ("c" (elfeed-search-set-filter "@1-week-ago +unread +campaign") "Campaigns")  
+      ("f" (elfeed-search-set-filter "@1-week-ago +unread +forum") "Forums")  
+
       ("p" (elfeed-search-set-filter "+podcast") "Podcasts")  
       ("r" (elfeed-search-set-filter "@1-week-ago +unread +reddit") "Reddit")  
       ("b" (elfeed-search-set-filter "@1-week-ago +unread +blog") "Blogs")  
@@ -926,8 +967,7 @@ This is a function that just marks all the articles as read.
 *** Update on Login
 I want elfeed to update when I open it, rather than me having to manually update it.
 
-** Packages
-*** Elfeed Org
+** Elfeed Org
 Elfeed org lets me use an org-mode file to keep track of my feeds.
 #+begin_src emacs-lisp
 (use-package elfeed-org
@@ -937,7 +977,7 @@ Elfeed org lets me use an org-mode file to keep track of my feeds.
 (setq rmh-elfeed-org-files '("~/Dropbox/org/elfeed/feeds.org")))
 #+end_src
 
-*** TODO Elfeed Dashboard
+** TODO Elfeed Dashboard
 Elfeed dashboard lets me create a custom dashboard for running queries on articles.
 #+begin_src emacs-lisp
 (use-package elfeed-dashboard
@@ -952,7 +992,7 @@ Elfeed dashboard lets me create a custom dashboard for running queries on articl
      "u" (lambda () (interactive) (elfeed-dashboard-query "+unread")))
 #+end_src
 
-*** Elfeed Goodies
+** Elfeed Goodies
 Elfeed Goodies lets me have a nicer heading and layout for elfeed.
 #+begin_src emacs-lisp
 (use-package elfeed-goodies
@@ -962,54 +1002,6 @@ Elfeed Goodies lets me have a nicer heading and layout for elfeed.
         elfeed-goodies/feed-source-column-width 25
         elfeed-goodies/tag-column-width 20))
   
-#+end_src
-
-** Custom Functions
-*** TODO Custom Print Format
-#+begin_src emacs-lisp
-(defun jh/elfeed-search-print-entry (entry)
-    "Print ENTRY to the buffer."
-    (let* ((elfeed-goodies/tag-column-width 20)
-           (elfeed-goodies/feed-source-column-width 25)
-           (title (or (elfeed-meta entry :title) (elfeed-entry-title entry) ""))
-           (title-faces (elfeed-search--faces (elfeed-entry-tags entry)))
-           (feed (elfeed-entry-feed entry))
-           (feed-title
-            (when feed
-              (or (elfeed-meta feed :title) (elfeed-feed-title feed))))
-           (tags (mapcar #'symbol-name (elfeed-entry-tags entry)))
-           (tags-str (concat (mapconcat 'identity tags ",")))
-           (title-width (- (window-width) elfeed-goodies/feed-source-column-width
-                           elfeed-goodies/tag-column-width 4))
-
-                      (feed-column (elfeed-format-column
-                         feed-title (elfeed-clamp elfeed-goodies/feed-source-column-width
-                                                  elfeed-goodies/feed-source-column-width
-                                                  elfeed-goodies/feed-source-column-width)
-                         :left))
-
-                      (tag-column (elfeed-format-column
-                        tags-str (elfeed-clamp (length tags-str)
-                                               elfeed-goodies/tag-column-width
-                                               elfeed-goodies/tag-column-width)
-                        :left)))
-
-
-
-                        (insert (propertize tag-column 'face 'elfeed-search-tag-face) " ")
-      (insert (propertize feed-column 'face 'elfeed-search-feed-face) " ")
-
-            (insert (propertize title 'face title-faces 'kbd-help title))
-
-
-      (setq-local line-spacing 0.2)))
-#+end_src
-
-*** Custom Header Format
-
-**** WAITING Overwriting Elfeed Goodies
-#+begin_src emacs-lisp
-;(setq elfeed-search-print-entry-function 'jh/elfeed-search-print-entry)
 #+end_src
 
 ** Bindings
@@ -1196,7 +1188,16 @@ These are my keybindings for files.
 
 ** Git Keybindings
 #+begin_src emacs-lisp
-
+(jh/evil-leader
+"g" '(:ignore t :which-key "Magit")
+"gs" 'magit-status
+"gS" 'magit-stage-file
+"gc" 'magit-commit
+"gp" 'magit-pull
+"gP" 'magit-push
+"gb" 'magit-branch
+"gB" 'magit-blame
+"gd" 'magit-diff)
 #+end_src
 
 ** Insert Keybindings
