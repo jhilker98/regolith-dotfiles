@@ -657,13 +657,13 @@ This lets me insert a table of contents.
 (add-hook 'org-mode-hook 'toc-org-mode)
 #+end_src
 
-** Org-Ref
+** TODO Org-Ref
 For managing bibliographies. I usually just have one main bibliography.
 #+begin_src emacs-lisp
 
 #+end_src
 
-** Org Chef
+** TODO Org Chef
 Org Chef lets me create recipes quickly.
 #+begin_src emacs-lisp
 
@@ -1024,6 +1024,10 @@ Originally from the emacs subreddit, I want to update elfeed every 10 minutes.
 #+end_src
 
 * Spotify
+I want to be able to use spotify in emacs.
+#+begin_src emacs-lisp
+#+end_src
+
 * Writing Configuration
 ** Writeroom Mode
 * UI Tweaks
