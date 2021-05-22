@@ -89,6 +89,13 @@ I also want to use y/n for answering yes or no.
 (defalias 'yes-or-no-p 'y-or-n-p)
 #+end_src
 
+** Emoji
+Sometimes I want to add an emoji.
+#+begin_src emacs-lisp
+(use-package emojify
+:hook (after-init . global-emojify-mode))
+#+end_src
+
 * Minor Tweaks
 ** Tab in Insert Mode Indents
 I want to insert indents myself.
@@ -131,13 +138,15 @@ I want to display the battery if I am on a laptop. In addition, I want to displa
 #+begin_src emacs-lisp
 (defun jh/emacs-init ()
   "Function that sets up time display and battery display, if applicable."
-  (interactive)
   (display-battery-mode 1)
-  (display-time 1))
+  (display-time-mode 1))
 
+(add-hook 'after-init-hook 'jh/emacs-init)
 #+end_src
+
 * Core Functionality
-** Undo Tree
+** Packages
+*** Undo Tree
 Undo Tree lets me use more of Evil mode's redo functionality.
 #+begin_src emacs-lisp
 (use-package undo-tree
@@ -145,9 +154,9 @@ Undo Tree lets me use more of Evil mode's redo functionality.
 (global-undo-tree-mode))
 #+end_src
 
-** Evil Mode
+*** Evil Mode
 Evil mode lets me use the (superior) Vim bindings to the Emacs ones. In addition, I don’t want :q to kill emacs, but rather the current buffer I am in (similar to Vim).
-*** Evil-mode Core
+**** Evil-mode Core
 This is the core of evil mode.
 #+begin_src emacs-lisp
 (use-package evil
@@ -173,7 +182,7 @@ This is the core of evil mode.
   (evil-ex-define-cmd "wq" #'ian/save-and-kill-this-buffer))
 #+end_src
 
-*** Evil-mode Collection
+**** Evil-mode Collection
 This provides a collection of modules for using evil mode in other emacs programs.
 #+begin_src emacs-lisp
 (use-package evil-collection
@@ -182,7 +191,7 @@ This provides a collection of modules for using evil mode in other emacs program
   (evil-collection-init))
 #+end_src
 
-*** Evil Org-Mode
+**** Evil Org-Mode
 #+begin_src emacs-lisp
 (use-package evil-org
   :after org
@@ -194,12 +203,12 @@ This provides a collection of modules for using evil mode in other emacs program
 (add-hook 'org-mode-hook 'evil-org-mode)
 #+end_src
 
-** General
+*** General
 #+begin_src emacs-lisp
 (use-package general)
 #+end_src
 
-** Which-Key
+*** Which-Key
 Which-key lets me see what keybindings I can use.
 #+begin_src emacs-lisp
 (use-package which-key
@@ -207,13 +216,13 @@ Which-key lets me see what keybindings I can use.
 (which-key-mode 1))
 #+end_src
 
-** Hydra
+*** Hydra
 I want to use hydras for certain things - namely, elfeed filters.
 #+begin_src emacs-lisp
 (use-package hydra)
 #+end_src
 
-** Helpful
+*** Helpful
 Helpful allows me to have a better view of a help buffer.
 #+begin_src emacs-lisp
 (use-package helpful
@@ -222,7 +231,7 @@ Helpful allows me to have a better view of a help buffer.
     (setq counsel-describe-variable-function #'helpful-variable))
 #+end_src
 
-** Treemacs
+*** Treemacs
 Treemacs allows me to set up a sidebar with project information.
 #+begin_src emacs-lisp
 (use-package treemacs
@@ -242,29 +251,38 @@ Treemacs allows me to set up a sidebar with project information.
 :ensure t)
 #+end_src
 
-** Imenu-List
+*** Imenu-List
 Imenu-list lets me look at the file as a list.
 #+begin_src emacs-lisp
 (use-package imenu-list)
 #+end_src
 
-** Restart Emacs
+*** Restart Emacs
 #+begin_src emacs-lisp
 (use-package restart-emacs)
 #+end_src
 
+*** YASnippet
+YASnippet allows me to quickly insert snippets.
+#+begin_src emacs-lisp
+(use-package yasnippet
+  :hook (after-init . yas-minor-mode))
+
+#+end_src
+
 * General IDE Configuration
-** LSP Mode
+** Main Packages
+*** LSP Mode
 LSP Mode lets me get completion for functions and such in code. From the emacs-for-scratch youtube series.
-** Completion Frameworks
-*** Counsel
+*** Completion Frameworks
+**** Counsel
 #+begin_src emacs-lisp
 (use-package counsel
   :config
   (counsel-mode 1))
 #+end_src
 
-*** Ivy
+**** Ivy
 #+begin_src emacs-lisp
 (use-package ivy
   :defer 0.1
@@ -289,28 +307,28 @@ LSP Mode lets me get completion for functions and such in code. From the emacs-f
   (ivy-mode 1))
 #+end_src
 
-**** Ivy Posframe
+***** Ivy Posframe
 Ivy Posframe makes it much easier to edit the ivy ui.
-**** Ivy Rich
+***** Ivy Rich
 Ivy Rich will allow me to see more about each command
 #+begin_src emacs-lisp
   (use-package ivy-rich
     :init
     (ivy-rich-mode 1))
 #+end_src
-**** Smex
+***** Smex
 Smex is a package the makes =M-x= remember our history.  Now M-x will show our last used commands first. (description courtesy of DistroTube)
 #+begin_src emacs-lisp
 (use-package smex)
 (smex-initialize)
 #+end_src
-*** Swiper
+**** Swiper
 #+begin_src emacs-lisp
  (use-package swiper
 :after ivy)
 #+end_src
 
-*** Company
+**** Company
 Company is a code completion framework.
 #+begin_src emacs-lisp
 ;(use-package company
@@ -318,13 +336,13 @@ Company is a code completion framework.
 ;(add-hook 'after-init-hook 'global-company-mode))
 #+end_src
 
-** Projectile
+*** Projectile
 Projectile is a tool for managing projects inside of emacs.
 #+begin_src emacs-lisp
 
 #+end_src
 
-** Magit
+*** Magit
 Magit is an incredible git client for emacs.
 
 #+begin_src emacs-lisp
@@ -334,7 +352,7 @@ Magit is an incredible git client for emacs.
   :after magit)
 #+end_src
 
-** Smartparens
+*** Smartparens
    Smartparens inserts a matching delimiter if I insert 1 (like a second parenthesis if I insert a left one).
    #+begin_src emacs-lisp
 (use-package smartparens
@@ -342,14 +360,14 @@ Magit is an incredible git client for emacs.
   (smartparens-global-mode))
 #+end_src
 
-** Rainbow Delimiters
+*** Rainbow Delimiters
 Rainbow Delimiters makes it so that parenthesis and other characters have their own colors - making it easier to follow the parenthesis, especially in something like lisp where there are so many parenthesis.
 #+begin_src emacs-lisp
 (use-package rainbow-delimiters
   :hook ((prog-mode text-mode) . rainbow-delimiters-mode))
 #+end_src
 
-*** Color Tweaks
+**** Color Tweaks
 Although I am not using this now, I wanted to include this so that parenthesis matched the org-level headings.
 #+begin_src emacs-lisp :tangle no
 (use-package rainbow-delimiters
@@ -385,16 +403,15 @@ Python is my primary language of choice.
 
 * Org Mode
 Org-Mode is THE absolute best thing about Emacs, in my humble opinion. Being able to keep notes and an agenda in the same file is so much easier than something like Notion which is pretty resource-intensive and is much harder to organize (in my opinion, at least). I highly respect what they are doing, but I prefer org-mode. My workflow is very much still in progress - for now, it's sort of a mix of GTD and my own thing. It will probably be constantly changing until I find what works for me.
-
 ** Initial Setup
 This is a very basic function that sets up org-mode to use visual line mode, org-indent mode, and variable-pitch mode - just a few minor ui tweaks. It’s not really enough for me to put under the UI Tweaks section, though.
 #+begin_src emacs-lisp
 (defun jh/org-mode-setup ()
     "Makes a few minor ui adjustments for org-mode."
-    (interactive)
     (visual-line-mode 1)
     (variable-pitch-mode 1)
     (org-indent-mode 1))
+
 
 (add-hook 'org-mode-hook 'jh/org-mode-setup)
 #+end_src
@@ -428,6 +445,11 @@ I want to see an actual bullet point instead of a minus sign.
 (font-lock-add-keywords 'org-mode
                         '(("^ +\\([-*]\\) "
                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
+(font-lock-add-keywords 'org-mode
+                        '(("^ +\\([+*]\\) "
+                           (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
 #+end_src
 
 ** Packages
@@ -494,6 +516,19 @@ Org QL allows me to define queries for org-mode files.
 (use-package org-ql)
 #+end_src
 
+*** Org Roam
+Org Roam allows me to keep an roam-style braindump like in Notion.
+#+begin_src emacs-lisp
+(add-to-list 'load-path "~/anaconda3/bin") ;; since ubuntu is using the sqlite3 in anaconda - idk why but it is
+
+(use-package org-roam
+  :hook (org-mode . org-roam-mode)
+  :config
+  (setq org-roam-db-location "~/org/roam/org-roam.db"
+        org-roam-directory "~/org/roam"))
+
+#+end_src
+
 *** Org Super Agenda
 Org Super Agenda allows me to group items in the agenda much more easily than I can by default.
 #+begin_src emacs-lisp
@@ -521,10 +556,10 @@ Org-superstar lets me use nicer bullets for my headers and formatting.
 #+end_src
 
 ** General Configuration
-I keep my agenda files in Dropbox so that I can access them on any computer. In addition, I break my agenda files down into several smaller files - =gtd.org= for larger projects, =todo.org= for small scale tasks (stuff like "take out the trash, etc"), =contacts.org= for any birthdays, and =agenda.org= for any general calendar items like a meeting or a campaign. 
+I keep my agenda files in Dropbox so that I can access them on any computer. In addition, I break my agenda files down into several smaller files - =projects.org= for larger projects, =todo.org= for small scale tasks (stuff like "take out the trash, etc"), =contacts.org= for any birthdays, and =agenda.org= for any general calendar items like a meeting or a campaign. 
 #+begin_src emacs-lisp
 (setq org-directory "~/Dropbox/org"
-      org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/org/gtd.org" "~/Dropbox/org/contacts.org" "~/Dropbox/org/todo.org")
+      org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/org/projects.org" "~/Dropbox/org/contacts.org" "~/Dropbox/org/todo.org")
       org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d!)" "CANCELLED(c!)"))
       org-todo-keyword-faces '(
                                ("TODO" . (:foreground "#cc241d" :weight bold :underline t))
@@ -548,7 +583,7 @@ I use categories and tags to help me organize my work. Categories are what I use
 #+end_src
 
 ** Custom Agenda Commands
-I have a few agenda commands I like to use - primarily, a dashboard and a planner. 
+I have a few agenda commands I like to use - primarily, a dashboard and a planner, although I do have a project kanban board for any projects I am working on.
 *** Dashboard
 This dashboard view allows me to get a view of my day, along with my todo items. First is a daily schedule, and then any upcoming deadlines, and finally the inbox and then a general todo list. In addition, I don't want to see any done tasks - this mostly looks forward.
 #+begin_src emacs-lisp
@@ -577,7 +612,7 @@ This dashboard view allows me to get a view of my day, along with my todo items.
                         :and (:category "Mail" :not (:date today :deadline today :scheduled today))
                         :discard (:anything))))))
           (todo "" ((org-agenda-overriding-header "Projects")
-                    (org-agenda-files '("~/Dropbox/org/gtd.org"))
+                    (org-agenda-files '("~/Dropbox/org/projects.org"))
                     (org-super-agenda-groups
                      '(
                        (:name none
@@ -585,7 +620,13 @@ This dashboard view allows me to get a view of my day, along with my todo items.
                         :discard (:anything))))))))))
 #+end_src
 
+*** TODO Planner
+This planner gives me an overview of the next three days, as well as some todo items.
+#+begin_src emacs-lisp
 
+#+end_src
+
+*** TODO Project Kanban Boards.
 ** Capture Templates
 Capture Templates allow me to quickly get an idea down.
 *** Appointments
@@ -600,21 +641,16 @@ It's nice being able to quickly schedule an appointment.
                     "SCHEDULED: %^T")
 ))))
 #+end_src
+
 *** TODO Blog Post
 Since my blog is written using org-mode, I’d like to be able to get the general category and add a draft post to it.
-*** TODO Email
-I want to be able to add to my email TODO list quickly.
-#+begin_src emacs-lisp
-
-#+end_src
-
-*** Task
+*** Inbox
 This is for adding an item to my inbox to be refiled later. I want to have short tasks (such as take out the trash for a chore), and longer tasks for projects.
 #+begin_src emacs-lisp
 (setq org-capture-templates
       (doct-add-to org-capture-templates
-                   '("Task" 
-                            :keys "t"
+                   '("Inbox" 
+                            :keys "i"
                             :file "~/Dropbox/org/inbox.org"
                             :template ("* TODO %^{Description}"
                                        ":PROPERTIES:"
@@ -623,6 +659,17 @@ This is for adding an item to my inbox to be refiled later. I want to have short
                                        )
                             )
 'append))
+#+end_src
+
+*** TODO Email
+I want to be able to add to my email TODO list quickly.
+#+begin_src emacs-lisp
+#+end_src
+
+*** Notes
+This is for setting up notes.
+#+begin_src emacs-lisp
+
 #+end_src
 
 ** TODO Refiling
@@ -873,9 +920,9 @@ Org-msg allows me to write my emails in Org-mode. However, I get a lambda error 
 
 ** Mu4e-Alert
 #+begin_src emacs-lisp
-(use-package mu4e-alert
-  :config
-  (mu4e-alert-enable-mode-line-display))
+(use-package mu4e-alert)
+  ;:config
+  ;(mu4e-alert-enable-mode-line-display))
 #+end_src
 
 * Elfeed
@@ -978,7 +1025,7 @@ Originally from the emacs subreddit, I want to update elfeed every 10 minutes.
 (add-hook 'emacs-startup-hook (lambda () (run-at-time 5 600 'elfeed-update)))
 #+end_src
 
-* Spotify
+* TODO Spotify
 I want to be able to use spotify in emacs.
 #+begin_src emacs-lisp
 #+end_src
@@ -1030,17 +1077,19 @@ Doom modeline allows me to have a cleaner modeline.
   :hook (after-init . doom-modeline-mode)
   :config
   (setq doom-modeline-height 32
-        doom-modeline-mu4e t
+        ;doom-modeline-mu4e t
         doom-modeline-enable-word-count t
         doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode)
         doom-modeline--battery-status t))
 #+end_src
+
 *** Custom Modelines
-**** Prose Modeline
+**** TODO Prose Modeline
 I'd like to have a modeline for when I am doing general writing - such as a paper, or a novel or whatever.
 #+begin_src emacs-lisp
 
 #+end_src
+
 ** Tabs
 I really like centaur-tabs for my config.
 #+begin_src emacs-lisp
@@ -1088,6 +1137,7 @@ This function lets me load my config so that I can edit it.
 #+end_src
 
 ** Startup Functions
+*** Display Battery
 *** Languages 
 **** Org-mode
 #+begin_src emacs-lisp
