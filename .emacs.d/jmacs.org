@@ -5,95 +5,6 @@
 
 Welcome to JMacs! This is a my personal configuration of emacs, for solo RPG campaigns like [[https://www.ironswornrpg.com/][Ironsworn]], writing (both prose and code), and for general use. I have organized this file into different sections, such as the functions I use, the UI settings, etc.
 
-* Table of Contents                                                    :toc:
-- [[#initialization][Initialization]]
-  - [[#early-initialization][Early Initialization]]
-  - [[#general-initialization][General Initialization]]
-- [[#initial-setup][Initial Setup]]
-  - [[#yn-for-yesno][Y/N for Yes/No]]
-  - [[#emoji][Emoji]]
-- [[#minor-tweaks][Minor Tweaks]]
-  - [[#tab-in-insert-mode-indents][Tab in Insert Mode Indents]]
-  - [[#smarttab][Smarttab]]
-  - [[#scratch-buffer-uses-org-mode][Scratch Buffer Uses Org Mode]]
-  - [[#keep-folders-clean][Keep Folders Clean]]
-- [[#core-functionality][Core Functionality]]
-  - [[#undo-tree][Undo Tree]]
-  - [[#evil-mode][Evil Mode]]
-  - [[#general][General]]
-  - [[#which-key][Which-Key]]
-  - [[#hydra][Hydra]]
-  - [[#helpful][Helpful]]
-  - [[#treemacs][Treemacs]]
-  - [[#imenu-list][Imenu-List]]
-  - [[#restart-emacs][Restart Emacs]]
-- [[#general-ide-configuration][General IDE Configuration]]
-  - [[#lsp-mode][LSP Mode]]
-  - [[#completion-frameworks][Completion Frameworks]]
-  - [[#projectile][Projectile]]
-  - [[#magit][Magit]]
-  - [[#smartparens][Smartparens]]
-  - [[#rainbow-delimiters][Rainbow Delimiters]]
-  - [[#language-configuration][Language Configuration]]
-- [[#org-mode][Org Mode]]
-  - [[#general-customization][General Customization]]
-  - [[#categories-and-tags][Categories and Tags]]
-  - [[#capture-templates][Capture Templates]]
-  - [[#refiling][Refiling]]
-  - [[#ui-tweaks][UI Tweaks]]
-  - [[#org-tempo][Org Tempo]]
-  - [[#org-superstar][Org Superstar]]
-  - [[#org-ql][Org QL]]
-  - [[#org-super-agenda][Org Super Agenda]]
-  - [[#custom-agenda-commands][Custom Agenda Commands]]
-  - [[#org-toc][Org TOC]]
-  - [[#org-ref][Org-Ref]]
-  - [[#org-chef][Org Chef]]
-  - [[#export-backends][Export Backends]]
-  - [[#campaign-manager][Campaign Manager]]
-- [[#mu4e][Mu4e]]
-  - [[#initial-setup-1][Initial Setup]]
-  - [[#filters][Filters]]
-  - [[#account-setup][Account Setup]]
-  - [[#ui-tweaks-1][UI Tweaks]]
-  - [[#org-mime][Org-Mime]]
-  - [[#helpers][Helpers]]
-  - [[#org-msg][Org-Msg]]
-  - [[#mu4e-dashboard][Mu4e Dashboard]]
-- [[#elfeed][Elfeed]]
-  - [[#package-setup][Package Setup]]
-  - [[#helpers-1][Helpers]]
-  - [[#elfeed-org][Elfeed Org]]
-  - [[#elfeed-dashboard][Elfeed Dashboard]]
-  - [[#elfeed-goodies][Elfeed Goodies]]
-  - [[#bindings][Bindings]]
-  - [[#hooks][Hooks]]
-- [[#spotify][Spotify]]
-- [[#writing-configuration][Writing Configuration]]
-  - [[#writeroom-mode][Writeroom Mode]]
-- [[#ui-tweaks-2][UI Tweaks]]
-  - [[#minimalistic-ui][Minimalistic UI]]
-  - [[#themes][Themes]]
-  - [[#fonts][Fonts]]
-  - [[#modeline][Modeline]]
-  - [[#tabs][Tabs]]
-- [[#functions][Functions]]
-  - [[#config-functions][Config Functions]]
-  - [[#startup-functions][Startup Functions]]
-- [[#keybindings][Keybindings]]
-  - [[#leader-keys][Leader Keys]]
-  - [[#general-keybindings][General Keybindings]]
-  - [[#application-bindings][Application Bindings]]
-  - [[#buffer-keybindings][Buffer Keybindings]]
-  - [[#file-keybindings][File Keybindings]]
-  - [[#git-keybindings][Git Keybindings]]
-  - [[#insert-keybindings][Insert Keybindings]]
-  - [[#org-mode-keybindings][Org-Mode Keybindings]]
-  - [[#toggle-keybindings][Toggle Keybindings]]
-  - [[#reload-keybindings][Reload Keybindings]]
-  - [[#window-keybindings][Window Keybindings]]
-  - [[#quit-keybindings][Quit Keybindings]]
-  - [[#zoom-in-and-out][Zoom In And Out]]
 
 * Initialization
 ** Early Initialization
@@ -141,7 +52,7 @@ And finally, I always want it to use straight.el.
 *** Org Mode
 I want to use the newest version of org-mode instead of the one built in to emacs.
 #+begin_src emacs-lisp
-(straight-use-package '(org-plus-contrib :includes org))
+(straight-use-package '(org-contrib))
 #+end_src
 And finally, I want to load the literate config.
 #+begin_src emacs-lisp
@@ -154,9 +65,11 @@ And finally, I want to load the literate config.
 This is where I setup my initial personal information, as well as a minimal UI and enabling the visual bell.
 #+begin_src emacs-lisp
 (setq user-full-name "Jacob Hilker"
-      user-mail-address "camohilk@gmail.com"
+      user-mail-address "jacob.hilker2@gmail.com"
       user-emacs-directory "~/.emacs.d/"
+      custom-file "~/.emacs.d/custom.el"
       visible-bell t)
+
 #+end_src
 
 Now I want to disable automatic indentation with electric-indent-mode, and disable tabs.
@@ -170,20 +83,10 @@ I also only want horizontal splits - none of this vertical split business unless
 #+begin_src emacs-lisp
 
 #+end_src
-
 ** Y/N for Yes/No
 I also want to use y/n for answering yes or no.
 #+begin_src emacs-lisp
 (defalias 'yes-or-no-p 'y-or-n-p)
-#+end_src
-
-** Emoji
-I want to be able to use emoji and icons in some of my custom agenda commands.
-#+begin_src emacs-lisp
-(use-package emojify
-  :hook (after-init . global-emojify-mode)
-  :config
-  (setq emojify-composed-text-p nil))
 #+end_src
 
 * Minor Tweaks
@@ -223,6 +126,16 @@ I don't mind having auto-save files, but not in the current directory. I also do
       auto-save-file-name-transforms `((".*" ,(expand-file-name ".tmp/auto-saves/" user-emacs-directory) t)))
 #+end_src
 
+** Battery and Time
+I want to display the battery if I am on a laptop. In addition, I want to display the time.
+#+begin_src emacs-lisp
+(defun jh/emacs-init ()
+  "Function that sets up time display and battery display, if applicable."
+  (interactive)
+  (display-battery-mode 1)
+  (display-time 1))
+
+#+end_src
 * Core Functionality
 ** Undo Tree
 Undo Tree lets me use more of Evil mode's redo functionality.
@@ -371,7 +284,8 @@ LSP Mode lets me get completion for functions and such in code. From the emacs-f
          ("C-k" . ivy-previous-line)
          ("C-d" . ivy-reverse-i-search-kill))
   :config
-  (setq ivy-count-format "(%d/%d) ")
+  (setq ivy-count-format "(%d/%d) "
+        ivy-initial-inputs-alist nil)
   (ivy-mode 1))
 #+end_src
 
@@ -384,7 +298,12 @@ Ivy Rich will allow me to see more about each command
     :init
     (ivy-rich-mode 1))
 #+end_src
-
+**** Smex
+Smex is a package the makes =M-x= remember our history.  Now M-x will show our last used commands first. (description courtesy of DistroTube)
+#+begin_src emacs-lisp
+(use-package smex)
+(smex-initialize)
+#+end_src
 *** Swiper
 #+begin_src emacs-lisp
  (use-package swiper
@@ -427,7 +346,7 @@ Magit is an incredible git client for emacs.
 Rainbow Delimiters makes it so that parenthesis and other characters have their own colors - making it easier to follow the parenthesis, especially in something like lisp where there are so many parenthesis.
 #+begin_src emacs-lisp
 (use-package rainbow-delimiters
-  :hook ((prog-mode org-mode text-mode) . rainbow-delimiters-mode))
+  :hook ((prog-mode text-mode) . rainbow-delimiters-mode))
 #+end_src
 
 *** Color Tweaks
@@ -465,33 +384,159 @@ Python is my primary language of choice.
 #+end_src
 
 * Org Mode
-Org-Mode is THE absolute best thing about Emacs, in my humble opinion. Being able to keep notes and an agenda in the same file is so much easier than something like Notion which is pretty resource-intensive and is much harder to organize (in my opinion, at least). I highly respect what they are doing, but I prefer org-mode. My workflow is very much still in progress - for now, it's sort of a mix of GTD and my own thing. 
-** General Customization
-I keep my agenda files in Dropbox so that I can access them on any computer. In addition, I want a triangle for my ellipsis instead of the three periods. Most of my todo keywords are fairly straightforward.
+Org-Mode is THE absolute best thing about Emacs, in my humble opinion. Being able to keep notes and an agenda in the same file is so much easier than something like Notion which is pretty resource-intensive and is much harder to organize (in my opinion, at least). I highly respect what they are doing, but I prefer org-mode. My workflow is very much still in progress - for now, it's sort of a mix of GTD and my own thing. It will probably be constantly changing until I find what works for me.
+
+** Initial Setup
+This is a very basic function that sets up org-mode to use visual line mode, org-indent mode, and variable-pitch mode - just a few minor ui tweaks. It’s not really enough for me to put under the UI Tweaks section, though.
 #+begin_src emacs-lisp
-(setq org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/org/gtd.org" "~/Dropbox/org/contacts.org")
-      org-ellipsis " ▼ "
-      org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "MEETING(m)" "|" "DONE(d!)" "CANCELLED(c!)"))
+(defun jh/org-mode-setup ()
+    "Makes a few minor ui adjustments for org-mode."
+    (interactive)
+    (visual-line-mode 1)
+    (variable-pitch-mode 1)
+    (org-indent-mode 1))
+
+(add-hook 'org-mode-hook 'jh/org-mode-setup)
+#+end_src
+
+** UI Tweaks
+Org-mode has a very nice UI out of the box - however, there are a few things I would tweak about it just to get a better view for myself.
+*** Cleaner View
+I want to hide formatting characters (like forward-slashes for italics and asterisks for bold, as an example) and any leading stars for a nested heading (like a second-level header under a first-level heading). In addition, I want to use an arrow as my ellipsis, instead of the default three periods.
+#+begin_src emacs-lisp
+(setq org-hide-emphasis-markers t
+      org-hide-leading-stars t
+       org-ellipsis " ▼ ")
+#+end_src
+
+*** Clearer Faces
+I like having different colors for different level headings - by default, in the doom-gruvbox theme, both first and second-level headings are green, which is harder for me to follow even I have text indented.
+#+begin_src emacs-lisp
+(set-face-attribute 'org-level-1 nil :foreground "#83a598")
+(set-face-attribute 'org-level-2 nil :foreground "#d3869b")
+(set-face-attribute 'org-level-3 nil :foreground "#fabd2f")
+(set-face-attribute 'org-level-4 nil :foreground "#fb4934")
+(set-face-attribute 'org-level-5 nil :foreground "#83a598")
+(set-face-attribute 'org-level-6 nil :foreground "#d3869b")
+(set-face-attribute 'org-level-7 nil :foreground "#fabd2f")
+(set-face-attribute 'org-level-8 nil :foreground "#fb4934")
+#+end_src
+
+*** Nicer Bullets
+I want to see an actual bullet point instead of a minus sign.
+#+begin_src emacs-lisp
+(font-lock-add-keywords 'org-mode
+                        '(("^ +\\([-*]\\) "
+                           (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+#+end_src
+
+** Packages
+Org-mode has a ton of packages that can extend it.
+*** Built-In Packages
+This section sets up any packages that are include with org-mode out of the box.
+
+**** Org Tempo
+Org Tempo lets me use <key(tab) to insert blocks into an org-mode document. As an example, I could use <s(tab) to insert a source code block.
+#+begin_src emacs-lisp
+(use-package org-tempo
+    :straight nil
+    :ensure nil)
+#+end_src
+
+*** Decide Mode 
+Decide Mode allows me to quickly roll dice if I am in a campaign or need to choose something.
+#+begin_src emacs-lisp
+
+#+end_src
+
+*** DOCT
+Declarative Org Capture Templates (aka DOCT) allows me to more easily create capture templates.
+#+begin_src emacs-lisp
+(use-package doct
+  :commands (doct))
+#+end_src
+
+*** Export Backends
+**** Hugo
+I use hugo for my website, and having it in org-mode is great. In addition, being able to keep a blog pot in a subtree in one org-mode file makes it easier to find, in my opinion.
+#+begin_src emacs-lisp
+(use-package ox-hugo
+:after ox)
+#+end_src
+
+**** Pandoc
+Seems fairly straightforward - this allows me to export an org-mode file using pandoc.
+#+begin_src emacs-lisp
+(use-package ox-pandoc
+:after ox)
+#+end_src
+
+*** Org Appear
+This package makes it much easier to edit Org documents when org-hide-emphasis-markers is turned on. It temporarily shows the emphasis markers around certain markup elements when you place your cursor inside of them. No more fumbling around with = and * characters! (description credit to [[https://config.daviwil.com/emacs][David Wilson]] of the [[https://youtube.com/c/SystemCrafters][System Crafters]] youtube channel).
+#+begin_src emacs-lisp
+(use-package org-appear
+  :hook (org-mode . org-appear-mode)
+  :config
+  (setq org-appear-autolinks t
+        org-appear-autosubmarkers t
+        org-appear-autoentities t))
+#+end_src
+
+*** Org Super Agenda
+Org Super Agenda allows me to group items in an agenda much more easily than default.
+#+begin_src emacs-lisp
+
+#+end_src
+
+*** Org QL
+Org QL allows me to define queries for org-mode files.
+#+begin_src emacs-lisp
+(use-package org-ql)
+#+end_src
+
+*** Org Super Agenda
+Org Super Agenda allows me to group items in the agenda much more easily than I can by default.
+#+begin_src emacs-lisp
+(use-package org-super-agenda
+:config 
+(org-super-agenda-mode 1))
+#+end_src
+
+*** Org Superstar
+Org-superstar lets me use nicer bullets for my headers and formatting.
+#+begin_src emacs-lisp
+(use-package org-superstar
+  :hook (org-mode . org-superstar-mode)
+  :config
+  (setq org-superstar-headline-bullets-list '("●" "○")
+        org-superstar-special-todo-items t
+        org-superstar-todo-bullet-alist '(("TODO" . ?☐)
+                                         ("DONE" . ?))))
+#+end_src
+
+*** TOC-Org
+#+begin_src emacs-lisp
+(use-package toc-org
+  :hook (org-mode . toc-org-mode))
+#+end_src
+
+** General Configuration
+I keep my agenda files in Dropbox so that I can access them on any computer. In addition, I break my agenda files down into several smaller files - =gtd.org= for larger projects, =todo.org= for small scale tasks (stuff like "take out the trash, etc"), =contacts.org= for any birthdays, and =agenda.org= for any general calendar items like a meeting or a campaign. 
+#+begin_src emacs-lisp
+(setq org-directory "~/Dropbox/org"
+      org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/org/gtd.org" "~/Dropbox/org/contacts.org" "~/Dropbox/org/todo.org")
+      org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d!)" "CANCELLED(c!)"))
       org-todo-keyword-faces '(
-                               ("TODO" . (:foreground "#cc241d" :weight black :underline t))
-                               ("NEXT" . (:foreground "#fabd2f" :weight black))
-                               ))
-                          
-                          
-            #+end_src
-*** Line Wrapping and Indentation
-I want stuff to indent with the heading, and I want the lines to wrap. In addition, I want any child text of a headline to match with the text of the headline.
-#+begin_src emacs-lisp
-(add-hook 'org-mode-hook 
-          (lambda () 
-            (visual-line-mode 1)
-            (variable-pitch-mode 1)
-            
-            (org-indent-mode 1)))
+                               ("TODO" . (:foreground "#cc241d" :weight bold :underline t))
+                               ("NEXT" . (:foreground "#fe8019" :weight bold))
+                               ("WAITING" . (:foreground "#d3869b" :weight bold :slant 'italic))
+                               ("DONE" . (:foreground "#83a598" :weight bold :strike-through t))
+                               ("CANCELLED" . (:foreground "#83a598" :weight bold :strike-through t))
+                               ))      
 #+end_src
 
 ** Categories and Tags
-I use categories and tags to help me organize my work. Categories are what I use more for a context (such as appointments, projects, etc) and a tag is something more narrow within that project. This is where I define my global tags - such as a personal context, or something for work, or for family. 
+I use categories and tags to help me organize my work. Categories are what I use more for a context (such as appointments, projects, etc) and a tag is something more narrow within that project. This is where I define my global tags - such as a personal context, or something for work, or for family.
 #+begin_src emacs-lisp
 (setq org-tag-persistent-alist '(
                                  (:startgroup)
@@ -500,18 +545,51 @@ I use categories and tags to help me organize my work. Categories are what I use
                                  (:endgroup)
                                  ("meeting" . ?m)
                                  ("inbox" . ?i)))
-                      
 #+end_src
+
+** Custom Agenda Commands
+I have a few agenda commands I like to use - primarily, a dashboard and a planner. 
+*** Dashboard
+This dashboard view allows me to get a view of my day, along with my todo items. First is a daily schedule, and then any upcoming deadlines, and finally the inbox and then a general todo list. In addition, I don't want to see any done tasks - this mostly looks forward.
+#+begin_src emacs-lisp
+(setq org-agenda-custom-commands
+      '(
+        ("d" "Daily Dashboard"
+         (
+          (agenda "" ((org-agenda-span 'day)
+                      (org-agenda-overriding-header "Schedule")
+
+                      (org-agenda-format-date "%a, %d %b")
+                      (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ Now")
+                      (org-agenda-time-grid '((today require-timed remove-match)()() "" "┈┈┈┈┈┈┈┈┈┈┈┈┈┈"))
+                      (org-agenda-use-time-grid t)
+                      (org-deadline-warning-days 14)
+                      (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))))
+                    
+          (todo "" ((org-agenda-files '("~/Dropbox/org/inbox.org"))
+                    (org-agenda-overriding-header "To Refile")
+                    (org-agenda-show-inherited-tags nil)))
+
+          (todo "" ((org-agenda-overriding-header "Email")
+                    (org-super-agenda-groups 
+                     '(
+                       (:name none
+                        :and (:category "Mail" :not (:date today :deadline today :scheduled today))
+                        :discard (:anything))))))
+          (todo "" ((org-agenda-overriding-header "Projects")
+                    (org-agenda-files '("~/Dropbox/org/gtd.org"))
+                    (org-super-agenda-groups
+                     '(
+                       (:name none
+                        :auto-parent t
+                        :discard (:anything))))))))))
+#+end_src
+
 
 ** Capture Templates
-I use capture templates to quickly get idea or task saved.
-#+begin_src emacs-lisp
-(use-package doct
-  :commands (doct))
-#+end_src
-
+Capture Templates allow me to quickly get an idea down.
 *** Appointments
-I want to be able to set up an appointment quickly and add it to my agenda.
+It's nice being able to quickly schedule an appointment.
 #+begin_src emacs-lisp
 (setq org-capture-templates
 (doct '(("Appointment"
@@ -522,10 +600,9 @@ I want to be able to set up an appointment quickly and add it to my agenda.
                     "SCHEDULED: %^T")
 ))))
 #+end_src
-
 *** TODO Blog Post
-Since my blog is written using org-mode, I'd like to be able to get the general category and add a draft post to it.
-*** TODO Email 
+Since my blog is written using org-mode, I’d like to be able to get the general category and add a draft post to it.
+*** TODO Email
 I want to be able to add to my email TODO list quickly.
 #+begin_src emacs-lisp
 
@@ -549,8 +626,9 @@ This is for adding an item to my inbox to be refiled later. I want to have short
 #+end_src
 
 ** TODO Refiling
-I want to set up refiling here. As a main note, I want to archive everything under an "Archive" headline under the main context (such as Work, Personal, etc.)
+I want to set up refiling here. As a main note, I want to archive everything under an “Archive” headline under the main context (such as Work, Personal, etc.)
 #+begin_src emacs-lisp
+
 #+end_src
 
 *** Save After Refiling
@@ -558,137 +636,7 @@ I want to set up refiling here. As a main note, I want to archive everything und
 (advice-add 'org-refile :after 'org-save-all-org-buffers)
 #+end_src
 
-** UI Tweaks
-*** Cleaning Up The View
-I want to hide formatting characters and leading stars.
-#+begin_src emacs-lisp
-(setq org-hide-emphasis-markers t
-      org-hide-leading-stars t)
-#+end_src
-
-*** Clearer Faces
-I like having different colors for faces. In addition, I want to set the font and height of the font. The loop is from the 5th video in the emacs-for-scratch youtube series.
-#+begin_src emacs-lisp
-(set-face-attribute 'org-level-1 nil :foreground "#83a598")
-(set-face-attribute 'org-level-2 nil :foreground "#d3869b")
-(set-face-attribute 'org-level-3 nil :foreground "#fabd2f")
-(set-face-attribute 'org-level-4 nil :foreground "#fb4934")
-(set-face-attribute 'org-level-5 nil :foreground "#83a598")
-(set-face-attribute 'org-level-6 nil :foreground "#d3869b")
-(set-face-attribute 'org-level-7 nil :foreground "#fabd2f")
-(set-face-attribute 'org-level-8 nil :foreground "#fb4934")
-
-#+end_src
-
-*** Italic Comments
-#+begin_src emacs-lisp
-(set-face-attribute 'font-lock-comment-face nil :slant 'italic)
-#+end_src
-
-** Org Tempo
-Org Tempo lets me use <s(tab) to insert blocks into an org-mode document.
-
-#+begin_src emacs-lisp
-(use-package org-tempo
-    :straight nil
-    :ensure nil)
-#+end_src
-*** Custom Keywords
-This is where I want to add custom keywords for shortcut completion.
-#+begin_src emacs-lisp
-
-#+end_src
-
-** Org Superstar
-Org Superstar lets me use nicer bullets for my headers and formatting.
-#+begin_src emacs-lisp
-(use-package org-superstar
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
-  (setq org-superstar-headline-bullets-list '("⚫" "○")
-        org-superstar-special-todo-items t
-        org-superstar-todo-bullet-alist '(("TODO" . ?☐)
-                                         ("DONE" . 9745)))
-  (org-superstar-mode 1))
-#+end_src
-
-** Org QL
-Org QL allows me to define queries for org-mode files.
-#+begin_src emacs-lisp
-(use-package org-ql)
-#+end_src
-
-** Org Super Agenda
-#+begin_src emacs-lisp
-(use-package org-super-agenda
-:config 
-(org-super-agenda-mode 1))
-#+end_src
-
-** Custom Agenda Commands
-This is where I define my custom agenda commands. Personally these are the views I mostly use. 
-*** Dashboard
-This dashboard view allows me to get a view of my day, along with my todo items.
-#+begin_src emacs-lisp
-(setq org-agenda-custom-commands
-      '(
-        ("d" "Today's Dashboard"
-         (
-          (agenda "" ((org-agenda-span 'day)
-                      (org-agenda-overriding-header "")
-                      (org-agenda-format-date "Today")
-                      (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ Now")
-                      (org-agenda-use-time-grid t) 
-                      (org-agenda-time-grid '((today require-timed)(0900 2100)() "" "┈┈┈┈┈┈┈┈┈┈┈┈┈┈"))
-
-                                            
-          )
-)))))
-#+end_src
-
-** Org TOC
-
-This lets me insert a table of contents.
-#+begin_src emacs-lisp
-(use-package toc-org
-  :config
-(toc-org-mode 1))
-
-(add-hook 'org-mode-hook 'toc-org-mode)
-#+end_src
-
-** TODO Org-Ref
-For managing bibliographies. I usually just have one main bibliography.
-#+begin_src emacs-lisp
-
-#+end_src
-
-** TODO Org Chef
-Org Chef lets me create recipes quickly.
-#+begin_src emacs-lisp
-
-#+end_src
-
-** Export Backends
-*** Hugo
-I use hugo for my website, and having it in org-mode is great.
-#+begin_src emacs-lisp
-(use-package ox-hugo
-:after ox)
-#+end_src
-
-*** Pandoc
-Seems fairly straightforward.
-#+begin_src emacs-lisp
-(use-package ox-pandoc
-:after ox)
-#+end_src
-
-** Campaign Manager
-I also want to use emacs as an RPG Campaign manager.
-#+begin_src emacs-lisp
-
-#+end_src
+** TODO Archiving
 
 * Mu4e
 Mu4e is an excellent email client for emacs.
@@ -735,7 +683,7 @@ Here is where I add my account information. This first section is for my persona
             (mu4e-bookmarks . (("flag:unread AND NOT flag:trashed AND to:jacob.hilker2@gmail.com" "Unread messages" 117)
                                ("date:today..now AND to:jacob.hilker2@gmail.com" "Today's messages" 116)
                                ("date:7d..now AND to:jacob.hilker2@gmail.com" "Last 7 days" 119)
-                               ("(from:BoardGameGeek AND Updated) or (from:gamersplane.comm) or (from:rpol) or (from:rpg.net AND new) or (from:obsidianportal)" "Campaigns" ?c)
+                               ("(from:BoardGameGeek AND Updated) or (from:gamersplane.com) or (from:rpol) or (from:rpg.net AND new) or (from:obsidianportal)" "Campaigns" ?c)
                                ("mime:image/* AND to:jacob.hilker2@gmail.com" "Messages with images" 112)))
 
 
@@ -786,15 +734,15 @@ Day/Month/Year and 24-hour time is the way to go, in my opinion. I'm ust setting
 *** Thread Folding
 I want to hide any duplicate messages that are in the same thread.
 #+begin_src emacs-lisp
-;(use-package mu4e-thread-folding
-;    :straight (:host github :repo "rougier/mu4e-thread-folding")
-;    :config
-;   (add-to-list 'mu4e-header-info-custom
-;             '(:empty . (:name "Empty"
-;                         :shortname ""
-;                         :function (lambda (msg) "  "))))
-;   
-;   (setq mu4e-thread-folding-default-view 'folded))
+(use-package mu4e-thread-folding
+    :straight (:host github :repo "rougier/mu4e-thread-folding")
+    :config
+   (add-to-list 'mu4e-header-info-custom
+             '(:empty . (:name "Empty"
+                         :shortname ""
+                         :function (lambda (msg) "  "))))
+   
+   (setq mu4e-thread-folding-default-view 'folded))
    
 #+end_src
 
@@ -803,7 +751,7 @@ Taken from the doom emacs mu4e config.
 #+begin_src emacs-lisp
 (setq mu4e-headers-fields
         '(          
-          ;(:empty . 3)
+          (:empty . 3)
           (:human-date . 12)
           (:flags . 8)
           (:mailing-list . 20)
@@ -826,18 +774,18 @@ Taken from the doom emacs mu4e config.
 
 *** Fancy Icons
 #+begin_src emacs-lisp
- ;(setq mu4e-use-fancy-chars t
- ;       mu4e-headers-draft-mark '("D" . "")
- ;       mu4e-headers-flagged-mark '("F" . "")
- ;       mu4e-headers-new-mark '("N" . "")
- ;       mu4e-headers-passed-mark '("P" . "")
- ;       mu4e-headers-replied-mark '("R" . "")
- ;       mu4e-headers-seen-mark '("S" . "")
- ;       mu4e-headers-trashed-mark '("T" . "")
- ;       mu4e-headers-attach-mark '("a" . "")
- ;       mu4e-headers-encrypted-mark '("x" . "")
- ;       mu4e-headers-signed-mark '("s" . "")
- ;       mu4e-headers-unread-mark '("u" . ""))
+ (setq mu4e-use-fancy-chars t
+        mu4e-headers-draft-mark '("D" . "")
+        mu4e-headers-flagged-mark '("F" . "")
+        mu4e-headers-new-mark '("N" . "")
+        mu4e-headers-passed-mark '("P" . "")
+        mu4e-headers-replied-mark '("R" . "")
+        mu4e-headers-seen-mark '("S" . "")
+        mu4e-headers-trashed-mark '("T" . "")
+        mu4e-headers-attach-mark '("a" . "")
+        mu4e-headers-encrypted-mark '("x" . "")
+        mu4e-headers-signed-mark '("s" . "")
+        mu4e-headers-unread-mark '("u" . ""))
 #+end_src
 
 ** Org-Mime
@@ -922,6 +870,13 @@ Org-msg allows me to write my emails in Org-mode. However, I get a lambda error 
 #+end_src
 
 *** TODO Sidebar
+
+** Mu4e-Alert
+#+begin_src emacs-lisp
+(use-package mu4e-alert
+  :config
+  (mu4e-alert-enable-mode-line-display))
+#+end_src
 
 * Elfeed
 Elfeed is an excellent package for reading RSS feeds in Emacs.
@@ -1072,11 +1027,20 @@ I love Iosevka as a font. All the different variants help as well. I am also usi
 Doom modeline allows me to have a cleaner modeline.
 #+begin_src emacs-lisp
 (use-package doom-modeline
+  :hook (after-init . doom-modeline-mode)
   :config
-  (setq doom-modeline-height 32))
-(doom-modeline-mode 1)
+  (setq doom-modeline-height 32
+        doom-modeline-mu4e t
+        doom-modeline-enable-word-count t
+        doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode)
+        doom-modeline--battery-status t))
 #+end_src
+*** Custom Modelines
+**** Prose Modeline
+I'd like to have a modeline for when I am doing general writing - such as a paper, or a novel or whatever.
+#+begin_src emacs-lisp
 
+#+end_src
 ** Tabs
 I really like centaur-tabs for my config.
 #+begin_src emacs-lisp
@@ -1228,6 +1192,7 @@ These are my keybindings for files.
 (jh/evil-leader
 
    "t" '(:ignore t :which-key "Toggle")
+   ;"te" '(global-emojify-mode :which-key "Toggle emoji")
    "ts" '(treemacs :which-key "Toggle Treemacs")
    "to" '(imenu-list :which-key "Toggle Outline"))
 #+end_src
@@ -1270,4 +1235,3 @@ You can use Control plus = and Control plus - to zoom in and out like everywhere
 (global-set-key (kbd "C-=") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 #+end_src
-
