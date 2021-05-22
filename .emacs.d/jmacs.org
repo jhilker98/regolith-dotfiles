@@ -268,6 +268,8 @@ YASnippet allows me to quickly insert snippets.
 (use-package yasnippet
   :hook (after-init . yas-minor-mode))
 
+(use-package yasnippet-snippets
+:after yasnippet)
 #+end_src
 
 * General IDE Configuration
@@ -611,6 +613,13 @@ This dashboard view allows me to get a view of my day, along with my todo items.
                        (:name none
                         :and (:category "Mail" :not (:date today :deadline today :scheduled today))
                         :discard (:anything))))))
+          (todo "" ((org-agenda-overriding-header "Todo Items")
+                    (org-agenda-files '("~/Dropbox/org/todo.org"))
+                    (org-super-agenda-items '(
+                                              (:name none
+                                               :not (:category "Mail")
+                                               :discard (:anything)))
+                                              )))
           (todo "" ((org-agenda-overriding-header "Projects")
                     (org-agenda-files '("~/Dropbox/org/projects.org"))
                     (org-super-agenda-groups
@@ -664,12 +673,6 @@ This is for adding an item to my inbox to be refiled later. I want to have short
 *** TODO Email
 I want to be able to add to my email TODO list quickly.
 #+begin_src emacs-lisp
-#+end_src
-
-*** Notes
-This is for setting up notes.
-#+begin_src emacs-lisp
-
 #+end_src
 
 ** TODO Refiling
@@ -920,9 +923,9 @@ Org-msg allows me to write my emails in Org-mode. However, I get a lambda error 
 
 ** Mu4e-Alert
 #+begin_src emacs-lisp
-(use-package mu4e-alert)
-  ;:config
-  ;(mu4e-alert-enable-mode-line-display))
+(use-package mu4e-alert
+  :config
+  (mu4e-alert-enable-mode-line-display))
 #+end_src
 
 * Elfeed
@@ -1077,15 +1080,14 @@ Doom modeline allows me to have a cleaner modeline.
   :hook (after-init . doom-modeline-mode)
   :config
   (setq doom-modeline-height 32
-        ;doom-modeline-mu4e t
+        doom-modeline-mu4e t
         doom-modeline-enable-word-count t
         doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode)
         doom-modeline--battery-status t))
 #+end_src
 
-*** Custom Modelines
-**** TODO Prose Modeline
-I'd like to have a modeline for when I am doing general writing - such as a paper, or a novel or whatever.
+*** Custom Modeline
+I have a custom modeline I'd like to use.
 #+begin_src emacs-lisp
 
 #+end_src
@@ -1233,6 +1235,9 @@ These are my keybindings for files.
    "o" '(:ignore t :which-key "Org-mode")
    "oa" '(org-agenda :which-key "Org Agenda")
    "oc" '(org-capture :which-key "Org Capture")
+   
+   "or" '(:ignore t :which-key "Org Roam")
+   "orc" '(org-roam-capture :which-key "Capture Roam note")
    "o/" '(org-ql-search :which-key "Search Org Files"))
 
 #+end_src
