@@ -96,6 +96,14 @@ Sometimes I want to add an emoji.
 :hook (after-init . global-emojify-mode))
 #+end_src
 
+** Time And Date Modeline Format
+I want to show the time, but not the mail or system load.
+#+begin_src emacs-lisp
+(setq display-time-default-load-average nil
+      display-time-mail-string ""
+      display-time-format "%H:%M %a, %d %b")
+#+end_src
+
 * Minor Tweaks
 ** Tab in Insert Mode Indents
 I want to insert indents myself.
@@ -106,7 +114,7 @@ I want to insert indents myself.
       tab-width 2)
 #+end_src
 
-** Smarttab
+*** Smarttab
 #+begin_src emacs-lisp
 (use-package smart-tab
   :init
@@ -133,13 +141,12 @@ I don't mind having auto-save files, but not in the current directory. I also do
       auto-save-file-name-transforms `((".*" ,(expand-file-name ".tmp/auto-saves/" user-emacs-directory) t)))
 #+end_src
 
-** Battery and Time
+** Battery and Time In Modeline
 I want to display the battery if I am on a laptop. In addition, I want to display the time.
 #+begin_src emacs-lisp
 (defun jh/emacs-init ()
   "Function that sets up time display and battery display, if applicable."
-  (display-battery-mode 1)
-  (display-time-mode 1))
+  (display-battery-mode 1))
 
 (add-hook 'after-init-hook 'jh/emacs-init)
 #+end_src
@@ -195,12 +202,11 @@ This provides a collection of modules for using evil mode in other emacs program
 #+begin_src emacs-lisp
 (use-package evil-org
   :after org
-  :hook (org-mode . (lambda () evil-org-mode))
+  :hook (org-mode . evil-org-mode)
   :config
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
 
-(add-hook 'org-mode-hook 'evil-org-mode)
 #+end_src
 
 *** General
@@ -276,6 +282,11 @@ YASnippet allows me to quickly insert snippets.
 ** Main Packages
 *** LSP Mode
 LSP Mode lets me get completion for functions and such in code. From the emacs-for-scratch youtube series.
+#+begin_src emacs-lisp
+(use-package lsp-mode
+:hook ((prog-mode) . lsp-mode)
+)
+#+end_src
 *** Completion Frameworks
 **** Counsel
 #+begin_src emacs-lisp
@@ -366,25 +377,7 @@ Magit is an incredible git client for emacs.
 Rainbow Delimiters makes it so that parenthesis and other characters have their own colors - making it easier to follow the parenthesis, especially in something like lisp where there are so many parenthesis.
 #+begin_src emacs-lisp
 (use-package rainbow-delimiters
-  :hook ((prog-mode text-mode) . rainbow-delimiters-mode))
-#+end_src
-
-**** Color Tweaks
-Although I am not using this now, I wanted to include this so that parenthesis matched the org-level headings.
-#+begin_src emacs-lisp :tangle no
-(use-package rainbow-delimiters
-  :hook ((prog-mode org-mode text-mode) . rainbow-delimiters-mode)
-  :config
- (dolist (face '(
-                 (rainbow-delimiters-depth-1-face . "#83a598")
-                 (rainbow-delimiters-depth-2-face . "#d3869b")
-                 (rainbow-delimiters-depth-3-face . "#fabd2f")
-                 (rainbow-delimiters-depth-4-face . "#fb4934")
-                 (rainbow-delimiters-depth-5-face . "#83a598")
-                 (rainbow-delimiters-depth-6-face . "#d3869b")
-                 (rainbow-delimiters-depth-7-face . "#fabd2f")
-                 (rainbow-delimiters-depth-8-face . "#fb4934")))
-    (set-face-attribute (car face) nil  :foreground(cdr face))))
+  :hook ((prog-mode) . rainbow-delimiters-mode))
 #+end_src
 
 ** Language Configuration
@@ -473,6 +466,12 @@ Decide Mode allows me to quickly roll dice if I am in a campaign or need to choo
 
 #+end_src
 
+*** Deft
+Deft allows me to sort through my org-roam notes.
+#+begin_src emacs-lisp
+(use-package deft)
+#+end_src
+
 *** DOCT
 Declarative Org Capture Templates (aka DOCT) allows me to more easily create capture templates.
 #+begin_src emacs-lisp
@@ -518,8 +517,18 @@ Org QL allows me to define queries for org-mode files.
 (use-package org-ql)
 #+end_src
 
+*** Org-Ref
+Org-Ref allows me to add citations to my files.
+#+begin_src emacs-lisp
+(use-package org-ref
+  :straight (:files (:defaults (:exclude "*helm*")))
+  :init
+  (setq org-ref-completion-library 'org-ref-ivy-cite)
+  :after (org))
+#+end_src
+
 *** Org Roam
-Org Roam allows me to keep an roam-style braindump like in Notion.
+Org Roam allows-me to keep a roam-style braindump like in notion.
 #+begin_src emacs-lisp
 (add-to-list 'load-path "~/anaconda3/bin") ;; since ubuntu is using the sqlite3 in anaconda - idk why but it is
 
@@ -528,7 +537,6 @@ Org Roam allows me to keep an roam-style braindump like in Notion.
   :config
   (setq org-roam-db-location "~/org/roam/org-roam.db"
         org-roam-directory "~/org/roam"))
-
 #+end_src
 
 *** Org Super Agenda
@@ -562,23 +570,34 @@ I keep my agenda files in Dropbox so that I can access them on any computer. In 
 #+begin_src emacs-lisp
 (setq org-directory "~/Dropbox/org"
       org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/org/projects.org" "~/Dropbox/org/contacts.org" "~/Dropbox/org/todo.org")
-      org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d!)" "CANCELLED(c!)"))
+      org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+                          (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))
       org-todo-keyword-faces '(
                                ("TODO" . (:foreground "#cc241d" :weight bold :underline t))
                                ("NEXT" . (:foreground "#fe8019" :weight bold))
-                               ("WAITING" . (:foreground "#d3869b" :weight bold :slant 'italic))
                                ("DONE" . (:foreground "#83a598" :weight bold :strike-through t))
+                               ("WAITING" . (:foreground "#d3869b" :weight bold :slant italic))
                                ("CANCELLED" . (:foreground "#83a598" :weight bold :strike-through t))
                                ))      
 #+end_src
 
 ** Categories and Tags
-I use categories and tags to help me organize my work. Categories are what I use more for a context (such as appointments, projects, etc) and a tag is something more narrow within that project. This is where I define my global tags - such as a personal context, or something for work, or for family.
+I use categories and tags to help me organize my work. Categories are what I use more for a context (such as appointments, projects, etc) and a tag is something more narrow within that project. This is where I define my global tags - such as a personal context, or something for work, or for family. In addition, I also use tags to represent the status of a project, such as whether it's active, or on the backlog, etc.
 #+begin_src emacs-lisp
 (setq org-tag-persistent-alist '(
+                                 ;; Project Contexts
                                  (:startgroup)
                                  ("@personal" . ?p)
                                  ("@work" . ?w)
+                                 (:endgroup)
+                                 ;; Project Status
+                                 (:startgroup)
+                                 ("backlog" . ?b)
+                                 ("plan" . ?P)
+                                 ("ready" . ?r)
+                                 ("active" . ?a)
+                                 ("review" . ?v)
+                                 ("completed" . ?c)
                                  (:endgroup)
                                  ("meeting" . ?m)
                                  ("inbox" . ?i)))
@@ -587,7 +606,7 @@ I use categories and tags to help me organize my work. Categories are what I use
 ** Custom Agenda Commands
 I have a few agenda commands I like to use - primarily, a dashboard and a planner, although I do have a project kanban board for any projects I am working on.
 *** Dashboard
-This dashboard view allows me to get a view of my day, along with my todo items. First is a daily schedule, and then any upcoming deadlines, and finally the inbox and then a general todo list. In addition, I don't want to see any done tasks - this mostly looks forward.
+This dashboard view allows me to get a view of my day, along with my todo items. First is a daily schedule, and then any upcoming deadlines, and finally the inbox and then a general todo list. In addition, I don’t want to see any done tasks - this mostly looks forward.
 #+begin_src emacs-lisp
 (setq org-agenda-custom-commands
       '(
@@ -619,61 +638,11 @@ This dashboard view allows me to get a view of my day, along with my todo items.
                                               (:name none
                                                :not (:category "Mail")
                                                :discard (:anything)))
-                                              )))
-          (todo "" ((org-agenda-overriding-header "Projects")
-                    (org-agenda-files '("~/Dropbox/org/projects.org"))
-                    (org-super-agenda-groups
-                     '(
-                       (:name none
-                        :auto-parent t
-                        :discard (:anything))))))))))
-#+end_src
+                                              )))))))
+          #+end_src
 
-*** TODO Planner
-This planner gives me an overview of the next three days, as well as some todo items.
-#+begin_src emacs-lisp
-
-#+end_src
-
-*** TODO Project Kanban Boards.
 ** Capture Templates
 Capture Templates allow me to quickly get an idea down.
-*** Appointments
-It's nice being able to quickly schedule an appointment.
-#+begin_src emacs-lisp
-(setq org-capture-templates
-(doct '(("Appointment"
-         :keys "a"
-         :file "~/Dropbox/org/agenda.org"
-         :headline "Appointments" 
-         :template ("* TODO %^{Description}"
-                    "SCHEDULED: %^T")
-))))
-#+end_src
-
-*** TODO Blog Post
-Since my blog is written using org-mode, I’d like to be able to get the general category and add a draft post to it.
-*** Inbox
-This is for adding an item to my inbox to be refiled later. I want to have short tasks (such as take out the trash for a chore), and longer tasks for projects.
-#+begin_src emacs-lisp
-(setq org-capture-templates
-      (doct-add-to org-capture-templates
-                   '("Inbox" 
-                            :keys "i"
-                            :file "~/Dropbox/org/inbox.org"
-                            :template ("* TODO %^{Description}"
-                                       ":PROPERTIES:"
-                                       ":CREATED: %t"
-                                       ":END:"
-                                       )
-                            )
-'append))
-#+end_src
-
-*** TODO Email
-I want to be able to add to my email TODO list quickly.
-#+begin_src emacs-lisp
-#+end_src
 
 ** TODO Refiling
 I want to set up refiling here. As a main note, I want to archive everything under an “Archive” headline under the main context (such as Work, Personal, etc.)
@@ -687,6 +656,17 @@ I want to set up refiling here. As a main note, I want to archive everything und
 #+end_src
 
 ** TODO Archiving
+When I archive something, I want to have it go to the archive heading file.
+#+begin_src emacs-lisp
+
+#+end_src
+
+** Functions
+*** Calendar Export
+I want to be able to export my org-mode agenda files to Google Calendar quickly and easily.
+#+begin_src emacs-lisp
+
+#+end_src
 
 * Mu4e
 Mu4e is an excellent email client for emacs.
@@ -930,7 +910,7 @@ Org-msg allows me to write my emails in Org-mode. However, I get a lambda error 
 
 * Elfeed
 Elfeed is an excellent package for reading RSS feeds in Emacs.
-** Package Setup
+** Initial Setup
 This is the initial setup for my elfeed config.
 #+begin_src emacs-lisp
 (use-package elfeed
@@ -1025,7 +1005,7 @@ This is for custom hooks I want to use for Elfeed.
 *** Update Elfeed
 Originally from the emacs subreddit, I want to update elfeed every 10 minutes.
 #+begin_src emacs-lisp
-(add-hook 'emacs-startup-hook (lambda () (run-at-time 5 600 'elfeed-update)))
+(add-hook 'emacs-startup-hook (lambda () (run-at-time 5 300 'elfeed-update)))
 #+end_src
 
 * TODO Spotify
@@ -1035,6 +1015,11 @@ I want to be able to use spotify in emacs.
 
 * Writing Configuration
 ** Writeroom Mode
+Writeroom mode hides any distracting elements from the screen so that I can focus on writing.
+#+begin_src emacs-lisp
+(use-package writeroom-mode)
+#+end_src
+
 * UI Tweaks
 ** Minimalistic UI
 I really hate seeing the menu bar, scrollbar, etc.
@@ -1078,18 +1063,16 @@ Doom modeline allows me to have a cleaner modeline.
 #+begin_src emacs-lisp
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode)
+  :after mu4e-alert
   :config
   (setq doom-modeline-height 32
-        doom-modeline-mu4e t
         doom-modeline-enable-word-count t
+        doom-modeline-mu4e t
         doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode)
         doom-modeline--battery-status t))
 #+end_src
-
-*** Custom Modeline
-I have a custom modeline I'd like to use.
+*** TODO Custom Modeline
 #+begin_src emacs-lisp
-
 #+end_src
 
 ** Tabs
@@ -1163,8 +1146,8 @@ These are the core keybindings for functionality in jmacs. In addition, I want t
 (global-set-key (kbd "C-h F") 'counsel-describe-face)
 
 (jh/evil-leader
-    "SPC" '(counsel-M-x :which-key "M-x")
-    "c"   (general-simulate-key "C-c")
+    "SPC" '(counsel-M-x :which-key "Run Command")
+    "c"   (general-simulate-key "C-c" :which-key "Run C-c")
     "h"   (general-simulate-key "C-h")
     "u"   (general-simulate-key "C-u")
     "x"   (general-simulate-key "C-x"))
@@ -1229,17 +1212,23 @@ These are my keybindings for files.
    "ie" '(emojify-insert-emoji :which-key "Insert emoji"))
 #+end_src
 
+** Notes
+#+begin_src emacs-lisp
+
+#+end_src
+
 ** Org-Mode Keybindings
+These are my general org-mode keybindings. 
 #+begin_src emacs-lisp
 (jh/evil-leader
    "o" '(:ignore t :which-key "Org-mode")
    "oa" '(org-agenda :which-key "Org Agenda")
    "oc" '(org-capture :which-key "Org Capture")
-   
-   "or" '(:ignore t :which-key "Org Roam")
-   "orc" '(org-roam-capture :which-key "Capture Roam note")
-   "o/" '(org-ql-search :which-key "Search Org Files"))
-
+   "od" '(:ignore t :which-key "Set Date")
+   "odd" '(org-deadline :which-key "Set deadline")
+   "ods" '(org-schedule :which-key "Schedule date")
+   "odt" '(org-time-stamp :which-key "Set date")
+   "oq" '(counsel-org-tag :which-key "Set tags"))
 #+end_src
 
 ** Toggle Keybindings
