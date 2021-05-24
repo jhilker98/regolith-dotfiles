@@ -83,6 +83,7 @@ I also only want horizontal splits - none of this vertical split business unless
 #+begin_src emacs-lisp
 
 #+end_src
+
 ** Y/N for Yes/No
 I also want to use y/n for answering yes or no.
 #+begin_src emacs-lisp
@@ -284,8 +285,8 @@ YASnippet allows me to quickly insert snippets.
 LSP Mode lets me get completion for functions and such in code. From the emacs-for-scratch youtube series.
 #+begin_src emacs-lisp
 (use-package lsp-mode
-:hook ((prog-mode) . lsp-mode)
-)
+:hook ((prog-mode) . lsp-mode))
+
 #+end_src
 *** Completion Frameworks
 **** Counsel
@@ -329,12 +330,14 @@ Ivy Rich will allow me to see more about each command
     :init
     (ivy-rich-mode 1))
 #+end_src
+
 ***** Smex
 Smex is a package the makes =M-x= remember our history.  Now M-x will show our last used commands first. (description courtesy of DistroTube)
 #+begin_src emacs-lisp
 (use-package smex)
 (smex-initialize)
 #+end_src
+
 **** Swiper
 #+begin_src emacs-lisp
  (use-package swiper
@@ -344,15 +347,20 @@ Smex is a package the makes =M-x= remember our history.  Now M-x will show our l
 **** Company
 Company is a code completion framework.
 #+begin_src emacs-lisp
-;(use-package company
-;:config
-;(add-hook 'after-init-hook 'global-company-mode))
+(use-package company)
 #+end_src
 
 *** Projectile
 Projectile is a tool for managing projects inside of emacs.
 #+begin_src emacs-lisp
+(use-package projectile
+  :config
+  (projectile-mode))
 
+(use-package counsel-projectile
+ :after projectile
+ :config
+ (counsel-projectile-mode 1))
 #+end_src
 
 *** Magit
@@ -600,13 +608,14 @@ I use categories and tags to help me organize my work. Categories are what I use
                                  ("completed" . ?c)
                                  (:endgroup)
                                  ("meeting" . ?m)
+                                 ("email" . ?e)
                                  ("inbox" . ?i)))
 #+end_src
 
 ** Custom Agenda Commands
 I have a few agenda commands I like to use - primarily, a dashboard and a planner, although I do have a project kanban board for any projects I am working on.
 *** Dashboard
-This dashboard view allows me to get a view of my day, along with my todo items. First is a daily schedule, and then any upcoming deadlines, and finally the inbox and then a general todo list. In addition, I don’t want to see any done tasks - this mostly looks forward.
+This dashboard view allows me to get a view of my day, along with my todo items. First is a daily schedule, and then any upcoming deadlines, and finally the inbox and then a general todo list. In addition, I don’t want to see any done tasks - this mostly looks forward. I don't include any projects on it simply because I have a project kanban board.
 #+begin_src emacs-lisp
 (setq org-agenda-custom-commands
       '(
@@ -640,6 +649,9 @@ This dashboard view allows me to get a view of my day, along with my todo items.
                                                :discard (:anything)))
                                               )))))))
           #+end_src
+
+*** TODO Planner
+*** TODO Projct Kanban Boards
 
 ** Capture Templates
 Capture Templates allow me to quickly get an idea down.
@@ -1147,10 +1159,10 @@ These are the core keybindings for functionality in jmacs. In addition, I want t
 
 (jh/evil-leader
     "SPC" '(counsel-M-x :which-key "Run Command")
-    "c"   (general-simulate-key "C-c" :which-key "Run C-c")
-    "h"   (general-simulate-key "C-h")
-    "u"   (general-simulate-key "C-u")
-    "x"   (general-simulate-key "C-x"))
+    "c"   (general-simulate-key "C-c" :which-key "Run `C-c`")
+    "h"   (general-simulate-key "C-h" :which-key "Help")
+    "u"   (general-simulate-key "C-u" :which-key "Run `C-u`")
+    "x"   (general-simulate-key "C-x" :which-key "Run `C-x`"))
 #+end_src
 
 ** Application Bindings
@@ -1212,9 +1224,13 @@ These are my keybindings for files.
    "ie" '(emojify-insert-emoji :which-key "Insert emoji"))
 #+end_src
 
-** Notes
+** Note Keybindings
+These keybindings are for helping me get notes down quickly.
 #+begin_src emacs-lisp
+(jh/evil-leader
 
+
+)
 #+end_src
 
 ** Org-Mode Keybindings
@@ -1223,12 +1239,28 @@ These are my general org-mode keybindings.
 (jh/evil-leader
    "o" '(:ignore t :which-key "Org-mode")
    "oa" '(org-agenda :which-key "Org Agenda")
+   "ob" '(org-babel-tangle :which-key "tangle source code")
    "oc" '(org-capture :which-key "Org Capture")
    "od" '(:ignore t :which-key "Set Date")
    "odd" '(org-deadline :which-key "Set deadline")
    "ods" '(org-schedule :which-key "Schedule date")
    "odt" '(org-time-stamp :which-key "Set date")
+   "oe" '(org-export-dispatch :which-key "Export file")
    "oq" '(counsel-org-tag :which-key "Set tags"))
+#+end_src
+
+** Reload Keybindings
+#+begin_src emacs-lisp
+(jh/evil-leader
+
+   "r" '(:ignore t :which-key "Reload")
+   "rr" '(reload-jmacs :which-key "Reload Jmacs"))
+#+end_src
+
+** Search Keybindings
+These keybindings are for searching through various things.
+#+begin_src emacs-lisp
+
 #+end_src
 
 ** Toggle Keybindings
@@ -1238,15 +1270,8 @@ These are my general org-mode keybindings.
    "t" '(:ignore t :which-key "Toggle")
    ;"te" '(global-emojify-mode :which-key "Toggle emoji")
    "ts" '(treemacs :which-key "Toggle Treemacs")
-   "to" '(imenu-list :which-key "Toggle Outline"))
-#+end_src
-
-** Reload Keybindings
-#+begin_src emacs-lisp
-(jh/evil-leader
-
-   "r" '(:ignore t :which-key "Reload")
-   "rr" '(reload-jmacs :which-key "Reload Jmacs"))
+   "to" '(imenu-list :which-key "Toggle Outline")
+   "tz" '(writeroom-mode :which-key "Toggle Zen"))
 #+end_src
 
 ** Window Keybindings
