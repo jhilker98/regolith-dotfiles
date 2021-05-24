@@ -401,6 +401,9 @@ This is for working with my bibliography.
 *** Python 
 Python is my primary language of choice.
 #+begin_src emacs-lisp
+(use-package python
+:straight nil
+:ensure nil)
 
 #+end_src
 
@@ -1046,7 +1049,15 @@ I really hate seeing the menu bar, scrollbar, etc.
 #+begin_src emacs-lisp
 (use-package dashboard
   :config
-  (dashboard-setup-startup-hook))
+  (dashboard-setup-startup-hook)
+  (setq dashboard-week-agenda nil
+        dashboard-show-shortcuts nil
+        dashboard-set-navigator t
+        dashboard-set-heading-icons t
+        dashboard-set-file-icons t
+        dashboard-items '((recents  . 5)
+                          (projects . 10))))
+(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
 #+end_src
 
 ** Themes
@@ -1254,6 +1265,14 @@ These are my general org-mode keybindings.
    "odt" '(org-time-stamp :which-key "Set date")
    "oe" '(org-export-dispatch :which-key "Export file")
    "oq" '(counsel-org-tag :which-key "Set tags"))
+#+end_src
+
+** Project Keybindings
+#+begin_src emacs-lisp
+;(jh/evil-leader
+;
+;
+;)
 #+end_src
 
 ** Reload Keybindings
