@@ -1042,6 +1042,13 @@ I really hate seeing the menu bar, scrollbar, etc.
 (menu-bar-mode -1)
 #+end_src
 
+** Dashboard
+#+begin_src emacs-lisp
+(use-package dashboard
+  :config
+  (dashboard-setup-startup-hook))
+#+end_src
+
 ** Themes
 The doom-themes collection has a lot of nice themes - I do overwrite some of the faces, though.
 #+begin_src emacs-lisp
