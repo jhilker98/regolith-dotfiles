@@ -56,7 +56,7 @@ I want to use the newest version of org-mode instead of the one built in to emac
 #+end_src
 And finally, I want to load the literate config.
 #+begin_src emacs-lisp
-(org-babel-load-file "~/.emacs.d/jmacs.org")
+(org-babel-load-file "~/.jmacs/jmacs.org")
 #+end_src
 
 
@@ -66,8 +66,6 @@ This is where I setup my initial personal information, as well as a minimal UI a
 #+begin_src emacs-lisp
 (setq user-full-name "Jacob Hilker"
       user-mail-address "jacob.hilker2@gmail.com"
-      user-emacs-directory "~/.emacs.d/"
-      custom-file "~/.emacs.d/custom.el"
       visible-bell t)
 
 #+end_src
@@ -111,8 +109,9 @@ I want to insert indents myself.
 #+begin_src emacs-lisp
 (setq org-src-preserve-indentation t
       org-src-fontify-natively t
-      org-src-tab-acts-natively t
-      tab-width 2)
+      org-src-tab-acts-natively t)
+
+(setq-default tab-width 2)
 #+end_src
 
 *** Smarttab
@@ -137,7 +136,7 @@ I don't mind having auto-save files, but not in the current directory. I also do
 (setq create-lockfiles nil)
 ;; auto-save-mode doesn't create the path automatically!
 (make-directory (expand-file-name ".tmp/auto-saves/" user-emacs-directory) t)
-
+;
 (setq auto-save-list-file-prefix (expand-file-name ".tmp/auto-saves/sessions/" user-emacs-directory)
       auto-save-file-name-transforms `((".*" ,(expand-file-name ".tmp/auto-saves/" user-emacs-directory) t)))
 #+end_src
@@ -171,11 +170,10 @@ This is the core of evil mode.
   :init
   (setq evil-undo-system 'undo-tree)
   (setq evil-want-C-i-jump nil) 
+  (setq evil-want-C-u-scroll t)
   (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
   (setq evil-want-keybinding nil)
   :config
-  ;(evil-set-undo-system 'undo-tree)
-  ;(setq evil-undo-system 'undo-tree)
   (evil-mode 1)
   :preface
   (defun ian/save-and-kill-this-buffer ()
@@ -273,7 +271,7 @@ Imenu-list lets me look at the file as a list.
 YASnippet allows me to quickly insert snippets.
 #+begin_src emacs-lisp
 (use-package yasnippet
-  :hook (after-init . yas-minor-mode))
+  :hook (after-init . yas-global-mode))
 
 (use-package yasnippet-snippets
 :after yasnippet)
@@ -285,9 +283,9 @@ YASnippet allows me to quickly insert snippets.
 LSP Mode lets me get completion for functions and such in code. From the emacs-for-scratch youtube series.
 #+begin_src emacs-lisp
 (use-package lsp-mode
-:hook ((prog-mode) . lsp-mode))
-
+:hook (prog-mode . lsp-mode))
 #+end_src
+
 *** Completion Frameworks
 **** Counsel
 #+begin_src emacs-lisp
@@ -417,7 +415,10 @@ This is a very basic function that sets up org-mode to use visual line mode, org
     (visual-line-mode 1)
     (variable-pitch-mode 1)
     (org-indent-mode 1))
-
+    
+(defun jh/org-agenda-setup ()
+  "Cleans up the agenda view."
+  (setq org-agenda-start-day "-0d"))
 
 (add-hook 'org-mode-hook 'jh/org-mode-setup)
 #+end_src
@@ -516,11 +517,7 @@ This package makes it much easier to edit Org documents when org-hide-emphasis-m
         org-appear-autoentities t))
 #+end_src
 
-*** Org Super Agenda
-Org Super Agenda allows me to group items in an agenda much more easily than default.
-#+begin_src emacs-lisp
-
-#+end_src
+*** Org Protocol
 
 *** Org QL
 Org QL allows me to define queries for org-mode files.
@@ -616,48 +613,134 @@ I use categories and tags to help me organize my work. Categories are what I use
 #+end_src
 
 ** Custom Agenda Commands
-I have a few agenda commands I like to use - primarily, a dashboard and a planner, although I do have a project kanban board for any projects I am working on.
-*** Dashboard
-This dashboard view allows me to get a view of my day, along with my todo items. First is a daily schedule, and then any upcoming deadlines, and finally the inbox and then a general todo list. In addition, I don’t want to see any done tasks - this mostly looks forward. I don't include any projects on it simply because I have a project kanban board.
+I have a few agenda commands I like to use - primarily, a dashboard and a planner, although I do have a project kanban board for any projects I am working on. Right now, all my agenda commands are based around my personal schedule. But first, I just want to clear all of the built in agenda commands so that I can add them to my list.
 #+begin_src emacs-lisp
-(setq org-agenda-custom-commands
-      '(
-        ("d" "Daily Dashboard"
-         (
-          (agenda "" ((org-agenda-span 'day)
-                      (org-agenda-overriding-header "Schedule")
+(setq org-agenda-custom-commands nil)
+#+end_src
+*** TODO Mini-Calendar
+I really like the implementation of [[https://old.reddit.com/r/emacs/comments/nbaolx/interactive_miniagenda_using_a_minicalendar_in_a/][this calendar mini-agenda]] by [[https://old.reddit.com/user/Nicolas-Rougier][/u/Nicolas-Rougier]] on the emacs subreddit - I am going to try and implement my own version here.
+#+begin_src emacs-lisp
 
-                      (org-agenda-format-date "%a, %d %b")
-                      (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ Now")
-                      (org-agenda-time-grid '((today require-timed remove-match)()() "" "┈┈┈┈┈┈┈┈┈┈┈┈┈┈"))
-                      (org-agenda-use-time-grid t)
-                      (org-deadline-warning-days 14)
-                      (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))))
-                    
-          (todo "" ((org-agenda-files '("~/Dropbox/org/inbox.org"))
-                    (org-agenda-overriding-header "To Refile")
+#+end_src
+
+*** Dashboard
+This dashboard view allows me to get a view of my day and the next 2 days, along with my todo items. First is a daily schedule, and then any upcoming deadlines, and finally the inbox and then a general todo list. In addition, I don’t want to see any done tasks - this mostly looks forward. I don’t include any projects on it simply because I have a project kanban board.
+#+begin_src emacs-lisp
+(setq jh/org-agenda-dashboard-view
+      `("d" "Dashboard"
+        ((agenda ""
+                 ((org-agenda-span 'day)
+                  (org-agenda-overriding-header "Schedule")
+                  (org-agenda-show-inherited-tags nil)
+                  (org-agenda-format-date "%a, %d %b")
+                  (org-agenda-current-time-string "ᐊ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ Now")
+                  (org-agenda-time-grid '((today require-timed remove-match)()() "" "┈┈┈┈┈┈┈┈┈┈┈┈┈┈"))
+                  (org-agenda-use-time-grid t)
+                  (org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                  (org-deadline-warning-days 14)))
+
+         (todo "" ((org-agenda-files '("~/Dropbox/org/inbox.org"))
+                    (org-agenda-overriding-header "To Review")
                     (org-agenda-show-inherited-tags nil)))
 
-          (todo "" ((org-agenda-overriding-header "Email")
-                    (org-super-agenda-groups 
-                     '(
-                       (:name none
-                        :and (:category "Mail" :not (:date today :deadline today :scheduled today))
-                        :discard (:anything))))))
-          (todo "" ((org-agenda-overriding-header "Todo Items")
-                    (org-agenda-files '("~/Dropbox/org/todo.org"))
-                    (org-super-agenda-items '(
-                                              (:name none
-                                               :not (:category "Mail")
-                                               :discard (:anything)))
-                                              )))))))
-          #+end_src
+         (tags-todo "+email" ((org-agenda-overriding-header "Email")
+                              (org-agenda-show-inherited-tags nil)))
+         (tags-todo "-email" ((org-agenda-files '("~/Dropbox/org/todo.org"))
+                              (org-agenda-overriding-header "Todo Items")
+                              (org-agenda-max-todos 3))))))
+                                       
+
+
+(add-to-list 'org-agenda-custom-commands `,jh/org-agenda-dashboard-view)
+#+end_src
+
 
 *** TODO Planner
-*** TODO Projct Kanban Boards
+#+begin_src emacs-lisp
+;(setq jh/org-agenda-planner-view
+#+end_src
+
+*** TODO Project Kanban Boards
 
 ** Capture Templates
-Capture Templates allow me to quickly get an idea down.
+Capture Templates allow me to quickly get an idea down, as well as any tasks, and any ideas for writing projects, etc.
+*** Appointments
+#+begin_src emacs-lisp
+(setq org-capture-templates
+      (doct-add-to org-capture-templates '(("Appointment"
+               :keys "a"
+               :file "~/Dropbox/org/agenda.org"
+               :headline "Appointments" 
+               :template ("* TODO %^{Description}"
+                          "SCHEDULED: %^T")
+))))
+#+end_src
+
+*** TODO Campaigns
+If I join a tabletop campaign, I want to quickly add it to my agenda.
+#+begin_src emacs-lisp
+(setq org-capture-templates
+      (doct-add-to org-capture-templates
+                   '("Campaign" 
+                            :keys "c"
+                            :file "~/Dropbox/org/agenda.org"
+                            :headline "Campaigns"
+                            :template ("* TODO %^{Description}"
+                                       ":PROPERTIES:"
+                                       ":CREATED: %t"
+                                       ":END:"
+                                       )
+                            )
+'append))
+#+end_src
+
+*** TODO Email
+#+begin_src emacs-lisp
+
+#+end_src
+
+*** Novel Stuff
+**** Character
+Creates a novel character in the current buffer
+#+begin_src emacs-lisp
+(setq org-capture-templates
+      (doct-add-to org-capture-templates
+                   '("Novel" 
+                     :keys "n"
+                     :file ""
+                     :children(("Character" 
+                                :keys "c"
+                                :template ("* %^{Character Name}"
+                                           ":properties:"
+                                           ":age: "
+                                           ":gender: "
+                                           ":role: "
+                                           ":end:"
+                                           "** Appearance"
+                                           ""
+                                           "** Personality"
+                                           ""
+                                           "** Brief Background"
+                                           ""))))))
+                     
+#+end_src
+
+
+*** TODO Tasks
+#+begin_src emacs-lisp
+(setq org-capture-templates
+      (doct-add-to org-capture-templates
+                   '("Task" 
+                            :keys "t"
+                            :file "~/Dropbox/org/inbox.org"
+                            :template ("* TODO %^{Description}"
+                                       ":PROPERTIES:"
+                                       ":CREATED: %t"
+                                       ":END:"
+                                       )
+                            )
+'append))
+#+end_src
 
 ** TODO Refiling
 I want to set up refiling here. As a main note, I want to archive everything under an “Archive” headline under the main context (such as Work, Personal, etc.)
@@ -667,7 +750,7 @@ I want to set up refiling here. As a main note, I want to archive everything und
 
 *** Save After Refiling
 #+begin_src emacs-lisp
-(advice-add 'org-refile :after 'org-save-all-org-buffers)
+;(advice-add 'org-refile :after 'org-save-all-org-buffers)
 #+end_src
 
 ** TODO Archiving
@@ -694,6 +777,7 @@ I am setting my maildir and my update function here. in addition, I am telling e
 (require 'org-mu4e) ;; On Ubuntu
 (setq mu4e-maildir "~/.local/share/mail"
       mu4e-get-mail-command "~/.bin/mailsync"
+      mu4e-split-view 'vertical
       mu4e-update-interval (* 5 60)
       mu4e-headers-skip-duplicates t
       message-send-mail-function 'smtpmail-send-it
@@ -793,6 +877,20 @@ I want to hide any duplicate messages that are in the same thread.
 
 *** Better Headers
 Taken from the doom emacs mu4e config.
+
+**** Account Header
+#+begin_src emacs-lisp
+(add-to-list 'mu4e-header-info-custom
+               '(:account
+                 :name "Account"
+                 :shortname "Account"
+                 :help "Which account this email belongs to"
+                 :function
+                 (lambda (msg)
+                   (let ((maildir (mu4e-message-field msg :maildir)))
+                     (format "%s" (substring maildir 1 (string-match-p "/" maildir 1)))))))
+#+end_src
+
 #+begin_src emacs-lisp
 (setq mu4e-headers-fields
         '(          
@@ -804,33 +902,20 @@ Taken from the doom emacs mu4e config.
           (:subject)))
 #+end_src
 
-**** Account Header
-#+begin_src emacs-lisp
-;(add-to-list 'mu4e-header-info-custom
-;               '(:account
-;                 :name "Account"
-;                 :shortname "Account"
-;                 :help "Which account this email belongs to"
-;                 :function
-;                 (lambda (msg)
-;                   (let ((maildir (mu4e-message-field msg :maildir)))
-;                     (format "%s" (substring maildir 1 (string-match-p "/" maildir 1)))))))
-#+end_src
-
 *** Fancy Icons
 #+begin_src emacs-lisp
- (setq mu4e-use-fancy-chars t
-        mu4e-headers-draft-mark '("D" . "")
-        mu4e-headers-flagged-mark '("F" . "")
-        mu4e-headers-new-mark '("N" . "")
-        mu4e-headers-passed-mark '("P" . "")
-        mu4e-headers-replied-mark '("R" . "")
-        mu4e-headers-seen-mark '("S" . "")
-        mu4e-headers-trashed-mark '("T" . "")
-        mu4e-headers-attach-mark '("a" . "")
-        mu4e-headers-encrypted-mark '("x" . "")
-        mu4e-headers-signed-mark '("s" . "")
-        mu4e-headers-unread-mark '("u" . ""))
+;(setq mu4e-use-fancy-chars t
+;      mu4e-headers-draft-mark '("D" . "")
+;      mu4e-headers-flagged-mark '("F" . "")
+;      mu4e-headers-new-mark '("N" . "")
+;      mu4e-headers-passed-mark '("P" . "")
+;      mu4e-headers-replied-mark '("R" . "")
+;      mu4e-headers-seen-mark '("S" . "")
+;      mu4e-headers-trashed-mark '("T" . "")
+;      mu4e-headers-attach-mark '("a" . "")
+;      mu4e-headers-encrypted-mark '("x" . "")
+;      mu4e-headers-signed-mark '("s" . "")
+;      mu4e-headers-unread-mark '("u" . ""))
 #+end_src
 
 ** Org-Mime
@@ -864,27 +949,6 @@ I want to write my emails in org-mode and send them as HTML formatted emails.
 (add-hook 'mu4e-compose-mode-hook 'org-mime-edit-mail-in-org-mode) ;; write in org-mode
 (add-hook 'message-send-hook 'org-mime-htmlize) ;; write email in org-mode
 (add-hook 'message-send-hook 'org-mime-confirm-when-no-multipart) ;; send message when htmlize hasn't been called
-#+end_src
-
-** Helpers
-*** Mark All As Read
-I want to mark something as read. In addition, I want to bind it to "A" so all unread messages will be marked unread.
-#+begin_src emacs-lisp
-(defun mu4e-headers-mark-all-unread-read ()
-  "Put a ! \(read) mark on all visible unread messages"
-  (interactive)
-  (mu4e-headers-mark-for-each-if
-   (cons 'read nil)
-   (lambda (msg param)
-     (memq 'unread (mu4e-msg-field msg :flags)))))
-
-(defun mu4e-headers-flag-all-read ()
-  "Flag all visible messages as \"read\""
-  (interactive)
-  (mu4e-headers-mark-all-unread-read)
-  (mu4e-mark-execute-all t))
-
-(evil-define-key 'normal mu4e-headers-mode-map (kbd "A") 'mu4e-headers-mark-all-unread-read)
 #+end_src
 
 ** TODO Org-Msg
@@ -1140,7 +1204,7 @@ This function lets me load my config so that I can edit it.
 (defun edit-dotfile ()
 "Loads the Jmacs config file to be edited."
 (interactive)
-(find-file "~/.emacs.d/jmacs.org"))
+(find-file "~/.jmacs/jmacs.org"))
 #+end_src
 
 *** Reload Jmacs
@@ -1148,7 +1212,7 @@ This function lets me load my config so that I can edit it.
 (defun reload-jmacs ()
 "Reloads the config."
 (interactive)
-(org-babel-load-file "~/.emacs.d/jmacs.org"))
+(org-babel-load-file "~/.jmacs/jmacs.org"))
 #+end_src
 
 ** Startup Functions
@@ -1264,6 +1328,8 @@ These are my general org-mode keybindings.
    "ods" '(org-schedule :which-key "Schedule date")
    "odt" '(org-time-stamp :which-key "Set date")
    "oe" '(org-export-dispatch :which-key "Export file")
+   "oi" '(:ignore t :which-key "Insert")
+   "oil" '(org-insert-link :which-key "Insert link")
    "oq" '(counsel-org-tag :which-key "Set tags"))
 #+end_src
 
@@ -1322,6 +1388,14 @@ These keybindings are for searching through various things.
  "q"  '(:ignore t :which-key "Quit")
  "qq" '(kill-emacs :which-key "Quit emacs")
  "qr" '(restart-emacs :which-key "Restart emacs"))
+#+end_src
+
+** Capture Keybinding
+This is just a quick way for me to quickly capture something down.
+#+begin_src emacs-lisp
+(jh/evil-leader
+  "X" '(org-capture :which-key "Org Capture")
+)
 #+end_src
 
 ** Zoom In And Out
