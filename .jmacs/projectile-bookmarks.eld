@@ -1,0 +1,1 @@
+("~/Projects/chroniclerCK3/" "~/Projects/jhilker.gitlab.io/" "~/Projects/hugoThemes/all-for-one/" "~/Projects/jhilker.gitlab.io/themes/all-for-one/" "~/Documents/brokenThrones/" "~/Documents/shatteredSkies/" "~/Documents/byrne/" "~/Documents/aurea/")
