@@ -685,17 +685,50 @@ If I join a tabletop campaign, I want to quickly add it to my agenda.
                             :keys "c"
                             :file "~/Dropbox/org/agenda.org"
                             :headline "Campaigns"
-                            :template ("* TODO %^{Description}"
-                                       ":PROPERTIES:"
-                                       ":CREATED: %t"
-                                       ":END:"
+                            :template ("* %^{Description}"
+                                       ""
+                                       "%t"
                                        )
                             )
 'append))
 #+end_src
 
 *** TODO Email
+I want to be able to log emails quickly.
 #+begin_src emacs-lisp
+(setq org-capture-templates
+      (doct-add-to org-capture-templates
+                   '("Mail" 
+                     :keys "m"
+                     :file "~/Dropbox/org/todo.org"
+                     :headline "Mail"
+                     :children(("Follow Up" 
+                                :keys "f"
+                                :headline "Follow Up"
+                                :template ("* TODO Follow up with %:fromname on %a"
+                                           ""
+                                           "SCHEDULED: %t"
+                                           ""
+                                           "DEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))"
+                                           ""
+                                           ""
+                                           "%i"))
+                               
+                               ("Read Later"
+                                :keys "r"
+                                :headline "Read Later"
+                                :template ("* TODO Read %:subject"
+                                           ""
+                                           "SCHEDULED:%t"
+                                           ""
+                                           "DEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))"
+                                           ""
+                                           ""
+                                           "%a"
+                                           ""
+                                           ""
+                                           "%i"
+                                           ":immediate-finish t")))) 'append))
 
 #+end_src
 
@@ -716,12 +749,13 @@ Creates a novel character in the current buffer
                                            ":gender: "
                                            ":role: "
                                            ":end:"
+                                           ""
                                            "** Appearance"
                                            ""
                                            "** Personality"
                                            ""
                                            "** Brief Background"
-                                           ""))))))
+                                           "")))) 'append))
                      
 #+end_src
 
@@ -918,7 +952,8 @@ Taken from the doom emacs mu4e config.
 ;      mu4e-headers-unread-mark '("u" . ""))
 #+end_src
 
-** Org-Mime
+** Packages
+*** Org-Mime
 :PROPERTIES:
 :header-args: :tangle no
 :END:
@@ -932,8 +967,8 @@ Org-mime allows me to use org-mode to write emails in org-mode.
 (evil-define-key 'normal mu4e-compose-mode-map (kbd "t o") 'org-mime-edit-mail-in-org-mode))
 #+end_src
 
-*** Hooks 
-**** Add Custom CSS
+**** Hooks 
+***** Add Custom CSS
 I want my code to be on a dark background.
 #+begin_src emacs-lisp
 (add-hook 'org-mime-html-hook
@@ -943,7 +978,7 @@ I want my code to be on a dark background.
                           "#E6E1DC" "#232323"))))
 #+end_src
 
-**** Write In Org, Send HTML
+***** Write In Org, Send HTML
 I want to write my emails in org-mode and send them as HTML formatted emails.
 #+begin_src emacs-lisp
 (add-hook 'mu4e-compose-mode-hook 'org-mime-edit-mail-in-org-mode) ;; write in org-mode
@@ -951,7 +986,7 @@ I want to write my emails in org-mode and send them as HTML formatted emails.
 (add-hook 'message-send-hook 'org-mime-confirm-when-no-multipart) ;; send message when htmlize hasn't been called
 #+end_src
 
-** TODO Org-Msg
+*** TODO Org-Msg
 Org-msg allows me to write my emails in Org-mode. However, I get a lambda error any time I try to send an email with this package.
 #+begin_src emacs-lisp :tangle no
   (use-package org-msg
@@ -972,19 +1007,23 @@ Org-msg allows me to write my emails in Org-mode. However, I get a lambda error 
   (org-msg-mode))
 #+end_src
 
-** TODO Mu4e Dashboard
+*** TODO Mu4e Dashboard
 #+begin_src emacs-lisp
 (use-package mu4e-dashboard
   :straight (:host github :repo "rougier/mu4e-dashboard"))
 #+end_src
 
-*** TODO Sidebar
+**** TODO Sidebar
 
-** Mu4e-Alert
+*** Mu4e-Alert
 #+begin_src emacs-lisp
 (use-package mu4e-alert
   :config
   (mu4e-alert-enable-mode-line-display))
+#+end_src
+
+** TODO Capturing Emails
+#+begin_src emacs-lisp
 #+end_src
 
 * Elfeed
@@ -1394,7 +1433,7 @@ These keybindings are for searching through various things.
 This is just a quick way for me to quickly capture something down.
 #+begin_src emacs-lisp
 (jh/evil-leader
-  "X" '(org-capture :which-key "Org Capture")
+  "x" '(org-capture :which-key "Org Capture")
 )
 #+end_src
 
