@@ -408,7 +408,7 @@ Python is my primary language of choice.
 * Org Mode
 Org-Mode is THE absolute best thing about Emacs, in my humble opinion. Being able to keep notes and an agenda in the same file is so much easier than something like Notion which is pretty resource-intensive and is much harder to organize (in my opinion, at least). I highly respect what they are doing, but I prefer org-mode. My workflow is very much still in progress - for now, it's sort of a mix of GTD and my own thing. It will probably be constantly changing until I find what works for me.
 ** Initial Setup
-This is a very basic function that sets up org-mode to use visual line mode, org-indent mode, and variable-pitch mode - just a few minor ui tweaks. It’s not really enough for me to put under the UI Tweaks section, though.
+This is a very basic function that sets up org-mode to use visual line mode, org-indent mode, and variable-pitch mode - just a few minor ui tweaks. It’s not really enough for me to put under the UI Tweaks section, though. I'm also requiring org-capture because I was getting a weird error about capture-templates being void.
 #+begin_src emacs-lisp
 (defun jh/org-mode-setup ()
     "Makes a few minor ui adjustments for org-mode."
@@ -472,6 +472,14 @@ Org Tempo lets me use <key(tab) to insert blocks into an org-mode document. As a
     :ensure nil)
 #+end_src
 
+**** Org Capture
+So I can quickly capture ideas.
+#+begin_src emacs-lisp
+(use-package org-capture
+  :ensure nil
+  :straight nil)
+#+end_src
+
 *** Decide Mode 
 Decide Mode allows me to quickly roll dice if I am in a campaign or need to choose something.
 #+begin_src emacs-lisp
@@ -528,11 +536,7 @@ Org QL allows me to define queries for org-mode files.
 *** Org-Ref
 Org-Ref allows me to add citations to my files.
 #+begin_src emacs-lisp
-(use-package org-ref
-  :straight (:files (:defaults (:exclude "*helm*")))
-  :init
-  (setq org-ref-completion-library 'org-ref-ivy-cite)
-  :after (org))
+
 #+end_src
 
 *** Org Roam
@@ -663,7 +667,7 @@ This dashboard view allows me to get a view of my day and the next 2 days, along
 *** TODO Project Kanban Boards
 
 ** Capture Templates
-Capture Templates allow me to quickly get an idea down, as well as any tasks, and any ideas for writing projects, etc.
+Capture Templates allow me to quickly get an idea down, as well as any tasks, and any ideas for writing projects, etc. 
 *** Appointments
 #+begin_src emacs-lisp
 (setq org-capture-templates
@@ -712,7 +716,8 @@ I want to be able to log emails quickly.
                                            "DEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))"
                                            ""
                                            ""
-                                           "%i"))
+                                           "%i"
+                                           ":immediate-finish t"))
                                
                                ("Read Later"
                                 :keys "r"
@@ -760,7 +765,7 @@ Creates a novel character in the current buffer
 #+end_src
 
 
-*** TODO Tasks
+*** Tasks
 #+begin_src emacs-lisp
 (setq org-capture-templates
       (doct-add-to org-capture-templates
@@ -776,6 +781,7 @@ Creates a novel character in the current buffer
 'append))
 #+end_src
 
+
 ** TODO Refiling
 I want to set up refiling here. As a main note, I want to archive everything under an “Archive” headline under the main context (such as Work, Personal, etc.)
 #+begin_src emacs-lisp
@@ -789,13 +795,6 @@ I want to set up refiling here. As a main note, I want to archive everything und
 
 ** TODO Archiving
 When I archive something, I want to have it go to the archive heading file.
-#+begin_src emacs-lisp
-
-#+end_src
-
-** Functions
-*** Calendar Export
-I want to be able to export my org-mode agenda files to Google Calendar quickly and easily.
 #+begin_src emacs-lisp
 
 #+end_src
@@ -818,8 +817,6 @@ I am setting my maildir and my update function here. in addition, I am telling e
       smtpmail-auth-credentials  (expand-file-name "~/.authinfo.gpg")
       mail-user-agent 'mu4e-user-agent)
 #+end_src
-
-** Filters
 
 ** Account Setup
 Here is where I add my account information. This first section is for my personal accounts. I am using some of the gmail config settings from doom emacs to see if they work in my personal config.
@@ -884,6 +881,77 @@ Here is where I add my account information. This first section is for my persona
 		  (mu4e-refile-folder  . "/camohilk@gmail.com/[Gmail]/All Mail")
 		  (mu4e-trash-folder  . "/camohilk@gmail.com/[Gmail]/Trash")))
 'append)
+#+end_src
+
+** Packages
+*** Org-Mime
+:PROPERTIES:
+:header-args: :tangle no
+:END:
+Org-mime allows me to use org-mode to write emails in org-mode.
+#+begin_src emacs-lisp
+(use-package org-mime
+  :config
+  (setq org-mime-export-options '(:section-numbers nil
+                                  :with-author nil
+                                  :with-toc nil))
+(evil-define-key 'normal mu4e-compose-mode-map (kbd "t o") 'org-mime-edit-mail-in-org-mode))
+#+end_src
+
+**** Hooks 
+***** Add Custom CSS
+I want my code to be on a dark background.
+#+begin_src emacs-lisp
+(add-hook 'org-mime-html-hook
+          (lambda ()
+            (org-mime-change-element-style
+            "pre" (format "color: %s; background-color: %s; padding: 0.5em;"
+                          "#E6E1DC" "#232323"))))
+#+end_src
+
+***** Write In Org, Send HTML
+I want to write my emails in org-mode and send them as HTML formatted emails.
+#+begin_src emacs-lisp
+(add-hook 'mu4e-compose-mode-hook 'org-mime-edit-mail-in-org-mode) ;; write in org-mode
+(add-hook 'message-send-hook 'org-mime-htmlize) ;; write email in org-mode
+(add-hook 'message-send-hook 'org-mime-confirm-when-no-multipart) ;; send message when htmlize hasn't been called
+#+end_src
+
+*** TODO Org-Msg
+Org-msg allows me to write my emails in Org-mode. However, I get a lambda error any time I try to send an email with this package.
+#+begin_src emacs-lisp :tangle no
+  (use-package org-msg
+    :config
+    (setq org-msg-options "html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t"
+	  org-msg-startup "hidestars indent inlineimages"
+	  org-msg-greeting-name-limit 3
+	  org-msg-default-alternatives '((new		. (text html))
+					 (reply-to-html	. (text html))
+					 (reply-to-text	. (text)))
+	  org-msg-convert-citation t
+	  org-msg-signature "
+   ---
+   Thanks,
+   #+begin_signature
+   *Jacob Hilker*
+   #+end_signature")
+  (org-msg-mode))
+#+end_src
+
+*** TODO Mu4e Dashboard
+#+begin_src emacs-lisp
+(use-package mu4e-dashboard
+  :straight (:host github :repo "rougier/mu4e-dashboard"))
+#+end_src
+
+**** TODO Sidebar
+
+*** Mu4e-Alert
+I am using this to show my emails in my modeline.
+#+begin_src emacs-lisp
+(use-package mu4e-alert
+  :config
+  (mu4e-alert-enable-mode-line-display))
 #+end_src
 
 ** UI Tweaks
@@ -952,78 +1020,46 @@ Taken from the doom emacs mu4e config.
 ;      mu4e-headers-unread-mark '("u" . ""))
 #+end_src
 
-** Packages
-*** Org-Mime
-:PROPERTIES:
-:header-args: :tangle no
-:END:
-Org-mime allows me to use org-mode to write emails in org-mode.
+** Helpers
+*** Mark All As Read
+I want to mark all my messages as read.
 #+begin_src emacs-lisp
-(use-package org-mime
-  :config
-  (setq org-mime-export-options '(:section-numbers nil
-                                  :with-author nil
-                                  :with-toc nil))
-(evil-define-key 'normal mu4e-compose-mode-map (kbd "t o") 'org-mime-edit-mail-in-org-mode))
-#+end_src
+(defun mu4e-headers-mark-all-unread-read ()
+  "Put a ! \(read) mark on all visible unread messages"
+  (interactive)
+  (mu4e-headers-mark-for-each-if
+   (cons 'read nil)
+   (lambda (msg param)
+     (memq 'unread (mu4e-msg-field msg :flags)))))
 
-**** Hooks 
-***** Add Custom CSS
-I want my code to be on a dark background.
-#+begin_src emacs-lisp
-(add-hook 'org-mime-html-hook
-          (lambda ()
-            (org-mime-change-element-style
-            "pre" (format "color: %s; background-color: %s; padding: 0.5em;"
-                          "#E6E1DC" "#232323"))))
-#+end_src
+(defun mu4e-headers-flag-all-read ()
+  "Flag all visible messages as \"read\""
+  (interactive)
+  (mu4e-headers-mark-all-unread-read)
+  (mu4e-mark-execute-all t))
 
-***** Write In Org, Send HTML
-I want to write my emails in org-mode and send them as HTML formatted emails.
-#+begin_src emacs-lisp
-(add-hook 'mu4e-compose-mode-hook 'org-mime-edit-mail-in-org-mode) ;; write in org-mode
-(add-hook 'message-send-hook 'org-mime-htmlize) ;; write email in org-mode
-(add-hook 'message-send-hook 'org-mime-confirm-when-no-multipart) ;; send message when htmlize hasn't been called
-#+end_src
-
-*** TODO Org-Msg
-Org-msg allows me to write my emails in Org-mode. However, I get a lambda error any time I try to send an email with this package.
-#+begin_src emacs-lisp :tangle no
-  (use-package org-msg
-    :config
-    (setq org-msg-options "html-postamble:nil H:5 num:nil ^:{} toc:nil author:nil email:nil \\n:t"
-	  org-msg-startup "hidestars indent inlineimages"
-	  org-msg-greeting-name-limit 3
-	  org-msg-default-alternatives '((new		. (text html))
-					 (reply-to-html	. (text html))
-					 (reply-to-text	. (text)))
-	  org-msg-convert-citation t
-	  org-msg-signature "
-   ---
-   Thanks,
-   #+begin_signature
-   *Jacob Hilker*
-   #+end_signature")
-  (org-msg-mode))
-#+end_src
-
-*** TODO Mu4e Dashboard
-#+begin_src emacs-lisp
-(use-package mu4e-dashboard
-  :straight (:host github :repo "rougier/mu4e-dashboard"))
-#+end_src
-
-**** TODO Sidebar
-
-*** Mu4e-Alert
-#+begin_src emacs-lisp
-(use-package mu4e-alert
-  :config
-  (mu4e-alert-enable-mode-line-display))
+(evil-define-key 'normal mu4e-headers-mode-map (kbd "A") 'mu4e-headers-mark-all-unread-read)
 #+end_src
 
 ** TODO Capturing Emails
 #+begin_src emacs-lisp
+(defun jh/capture-mail-follow-up (msg)
+  (interactive)
+  (call-interactively 'org-store-link)
+  (org-capture nil "mf"))
+
+(add-to-list 'mu4e-headers-actions
+  '("follow up" . jh/capture-mail-follow-up) t)
+
+(add-to-list 'mu4e-view-actions
+  '("follow up" . jh/capture-mail-follow-up) t)
+
+(defun jh/capture-mail-read-later (msg)
+  (interactive)
+  (call-interactively 'org-store-link)
+  (org-capture nil "mr"))
+
+
 #+end_src
 
 * Elfeed
