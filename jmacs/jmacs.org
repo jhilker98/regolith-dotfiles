@@ -785,7 +785,10 @@ Creates a novel character in the current buffer
 ** TODO Refiling
 I want to set up refiling here. As a main note, I want to archive everything under an “Archive” headline under the main context (such as Work, Personal, etc.)
 #+begin_src emacs-lisp
-
+(setq org-refile-use-cache t
+      org-refile-use-outline-path file
+      org-outline-path-create-in-steps nil
+      org-refile-allow-creating-parent-nodes 'confirm)
 #+end_src
 
 *** Save After Refiling
@@ -796,7 +799,7 @@ I want to set up refiling here. As a main note, I want to archive everything und
 ** TODO Archiving
 When I archive something, I want to have it go to the archive heading file.
 #+begin_src emacs-lisp
-
+(setq org-archive-location "~/Dropbox/org/archive.org::datetree/* From %s")
 #+end_src
 
 * Mu4e
@@ -1069,7 +1072,7 @@ This is the initial setup for my elfeed config.
 #+begin_src emacs-lisp
 (use-package elfeed
   :config
-  (setq elfeed-db-directory "~/.elfeed/"
+  (setq elfeed-db-directory "~/Dropbox/.elfeed/"
 	      elfeed-search-filter "@1-week-ago +unread ")
    (evil-define-key 'normal elfeed-search-mode-map 
     "A" 'elfeed-mark-all-as-read
