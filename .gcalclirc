@@ -1,0 +1,2 @@
+--client-id=$(pass gcal/id) 
+--client-secret=$(pass gcal/secret)
