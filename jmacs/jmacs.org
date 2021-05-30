@@ -407,8 +407,26 @@ Python is my primary language of choice.
 
 * Org Mode
 Org-Mode is THE absolute best thing about Emacs, in my humble opinion. Being able to keep notes and an agenda in the same file is so much easier than something like Notion which is pretty resource-intensive and is much harder to organize (in my opinion, at least). I highly respect what they are doing, but I prefer org-mode. My workflow is very much still in progress - for now, it's sort of a mix of GTD and my own thing. It will probably be constantly changing until I find what works for me.
-** Initial Setup
-This is a very basic function that sets up org-mode to use visual line mode, org-indent mode, and variable-pitch mode - just a few minor ui tweaks. It’s not really enough for me to put under the UI Tweaks section, though. I'm also requiring org-capture because I was getting a weird error about capture-templates being void.
+** General Configuration
+I keep my agenda files in Dropbox so that I can access them on any computer. In addition, I break my agenda files down into several smaller files - =projects.org= for larger projects, =todo.org= for small scale tasks (stuff like "take out the trash, etc"), =contacts.org= for any birthdays, and =agenda.org= for any general calendar items like a meeting or a campaign. 
+#+begin_src emacs-lisp
+(setq org-directory "~/Dropbox/org"
+      org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/org/projects.org" "~/Dropbox/org/contacts.org" "~/Dropbox/org/todo.org")
+      org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+                          (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))
+      org-todo-keyword-faces '(
+                               ("TODO" . (:foreground "#cc241d" :weight bold :underline t))
+                               ("NEXT" . (:foreground "#fe8019" :weight bold))
+                               ("DONE" . (:foreground "#83a598" :weight bold :strike-through t))
+                               ("WAITING" . (:foreground "#d3869b" :weight bold :slant italic))
+                               ("CANCELLED" . (:foreground "#83a598" :weight bold :strike-through t))
+                               ))      
+#+end_src
+
+** UI Tweaks
+Org-mode has a very nice UI out of the box - however, there are a few things I would tweak about it just to get a better view for myself.
+*** Initial Setup
+This is a very basic function that sets up org-mode to use visual line mode, org-indent mode, and variable-pitch mode - just a few minor ui tweaks. 
 #+begin_src emacs-lisp
 (defun jh/org-mode-setup ()
     "Makes a few minor ui adjustments for org-mode."
@@ -418,13 +436,18 @@ This is a very basic function that sets up org-mode to use visual line mode, org
     
 (defun jh/org-agenda-setup ()
   "Cleans up the agenda view."
-  (setq org-agenda-start-day "-0d"))
+  (setq org-agenda-start-day "-0d"
+        org-agenda-block-separator 9472))
 
 (add-hook 'org-mode-hook 'jh/org-mode-setup)
+(add-hook 'org-mode-hook 'jh/org-agenda-setup)
+
+(defvar jh/agenda-block-separator
+  (concat (make-string (window-width) 9472) "\n")
+  "A nicer block separator for the agenda")
+
 #+end_src
 
-** UI Tweaks
-Org-mode has a very nice UI out of the box - however, there are a few things I would tweak about it just to get a better view for myself.
 *** Cleaner View
 I want to hide formatting characters (like forward-slashes for italics and asterisks for bold, as an example) and any leading stars for a nested heading (like a second-level header under a first-level heading). In addition, I want to use an arrow as my ellipsis, instead of the default three periods.
 #+begin_src emacs-lisp
@@ -577,22 +600,6 @@ Org-superstar lets me use nicer bullets for my headers and formatting.
   :hook (org-mode . toc-org-mode))
 #+end_src
 
-** General Configuration
-I keep my agenda files in Dropbox so that I can access them on any computer. In addition, I break my agenda files down into several smaller files - =projects.org= for larger projects, =todo.org= for small scale tasks (stuff like "take out the trash, etc"), =contacts.org= for any birthdays, and =agenda.org= for any general calendar items like a meeting or a campaign. 
-#+begin_src emacs-lisp
-(setq org-directory "~/Dropbox/org"
-      org-agenda-files '("~/Dropbox/org/agenda.org" "~/Dropbox/org/projects.org" "~/Dropbox/org/contacts.org" "~/Dropbox/org/todo.org")
-      org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
-                          (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)"))
-      org-todo-keyword-faces '(
-                               ("TODO" . (:foreground "#cc241d" :weight bold :underline t))
-                               ("NEXT" . (:foreground "#fe8019" :weight bold))
-                               ("DONE" . (:foreground "#83a598" :weight bold :strike-through t))
-                               ("WAITING" . (:foreground "#d3869b" :weight bold :slant italic))
-                               ("CANCELLED" . (:foreground "#83a598" :weight bold :strike-through t))
-                               ))      
-#+end_src
-
 ** Categories and Tags
 I use categories and tags to help me organize my work. Categories are what I use more for a context (such as appointments, projects, etc) and a tag is something more narrow within that project. This is where I define my global tags - such as a personal context, or something for work, or for family. In addition, I also use tags to represent the status of a project, such as whether it's active, or on the backlog, etc.
 #+begin_src emacs-lisp
@@ -673,7 +680,7 @@ Capture Templates allow me to quickly get an idea down, as well as any tasks, an
 (setq org-capture-templates
       (doct-add-to org-capture-templates '(("Appointment"
                :keys "a"
-               :file "~/Dropbox/org/agenda.org"
+               :file "c:/Users/camoh/Dropbox/org/agenda.org"
                :headline "Appointments" 
                :template ("* TODO %^{Description}"
                           "SCHEDULED: %^T")
@@ -687,7 +694,7 @@ If I join a tabletop campaign, I want to quickly add it to my agenda.
       (doct-add-to org-capture-templates
                    '("Campaign" 
                             :keys "c"
-                            :file "~/Dropbox/org/agenda.org"
+                            :file "c:/Users/camoh/Dropbox/org/agenda.org"
                             :headline "Campaigns"
                             :template ("* %^{Description}"
                                        ""
@@ -704,7 +711,7 @@ I want to be able to log emails quickly.
       (doct-add-to org-capture-templates
                    '("Mail" 
                      :keys "m"
-                     :file "~/Dropbox/org/todo.org"
+                     :file "c:/Users/camoh/Dropbox/org/todo.org"
                      :headline "Mail"
                      :children(("Follow Up" 
                                 :keys "f"
@@ -766,41 +773,54 @@ Creates a novel character in the current buffer
 
 
 *** Tasks
+I want to be able to quickly add tasks and calls to my inbox file.
 #+begin_src emacs-lisp
 (setq org-capture-templates
       (doct-add-to org-capture-templates
                    '("Task" 
-                            :keys "t"
-                            :file "~/Dropbox/org/inbox.org"
-                            :template ("* TODO %^{Description}"
-                                       ":PROPERTIES:"
-                                       ":CREATED: %t"
-                                       ":END:"
-                                       )
-                            )
-'append))
+                     :keys "t"
+                     :file "c:/Users/camoh/Dropbox/org/inbox.org"
+                     :children(("Task" 
+                                :keys "t"
+                                :template ("* TODO %^{Description}"
+                                           ":PROPERTIES:"
+                                           ":CREATED: %U"
+                                           ":END:"))
+                               ("Call"
+                                :keys "c"
+                                :template ( "* TODO Call %?"
+                                            ""
+                                            "%U")))) 'append))
 #+end_src
 
-
 ** TODO Refiling
-I want to set up refiling here. As a main note, I want to archive everything under an “Archive” headline under the main context (such as Work, Personal, etc.)
+I want to set up refiling here. As a main note, I want to archive everything under an “Archive” headline under the main context (such as Work, Personal, etc.) I want to also enable caching, since I will have a fair number of headlines. I am also using a hydra and a custom function (originally from [[https://mollermara.com/blog/Fast-refiling-in-org-mode-with-hydras/][this blog post]]) for handling my refiling for different files.
 #+begin_src emacs-lisp
 (setq org-refile-use-cache t
       org-refile-use-outline-path file
       org-outline-path-create-in-steps nil
       org-refile-allow-creating-parent-nodes 'confirm)
-#+end_src
 
-*** Save After Refiling
-#+begin_src emacs-lisp
-;(advice-add 'org-refile :after 'org-save-all-org-buffers)
+
+(defun jh/refile (file headline &optional arg)
+  (let ((pos (save-excursion
+               (find-file file)
+               (org-find-exact-headline-in-buffer headline))))
+    (org-refile arg nil (list headline file nil pos)))
+  (switch-to-buffer (current-buffer)))
+
+(defhydra jh/org-refile-hydra (:foreign-keys run) 
+  "Refile"
+  ("t" (jh/refile "~/Dropbox/org/todo.org" "Tasks") "Refile to Task List")
+  ("q" nil "Cancel"))
 #+end_src
 
 ** TODO Archiving
-When I archive something, I want to have it go to the archive heading file.
+When I archive something, I want to have it go to =archive.org= in my Dropbox, under the relevant headline.
 #+begin_src emacs-lisp
 (setq org-archive-location "~/Dropbox/org/archive.org::datetree/* From %s")
 #+end_src
+
 
 * Mu4e
 Mu4e is an excellent email client for emacs.
