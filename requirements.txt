@@ -297,7 +297,7 @@ ruamel.yaml.clib==0.2.2
 scikit-image==0.17.2
 scikit-learn @ file:///tmp/build/80754af9/scikit-learn_1598376899566/work
 scipy @ file:///tmp/build/80754af9/scipy_1597686649129/work
-Scrapy==2.4.1
+Scrapy==2.5.1
 scrapy-rss==0.2.1
 seaborn @ file:///tmp/build/80754af9/seaborn_1608578541026/work
 SecretStorage==3.1.2
