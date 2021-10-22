@@ -282,7 +282,7 @@ qtconsole @ file:///tmp/build/80754af9/qtconsole_1600870028330/work
 QtPy==1.9.0
 questionary==1.9.0
 queuelib==1.5.0
-qutebrowser==1.14.0
+qutebrowser==2.4.0
 reader==1.12
 recommonmark==0.7.1
 regex @ file:///tmp/build/80754af9/regex_1606772724491/work
