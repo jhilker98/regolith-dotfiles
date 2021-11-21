@@ -10,6 +10,9 @@ These are my personal configurations for various applications. I will keep this 
 - [[#notes][Notes]]
 - [[#bugs][Bugs]]
 
+* Archive Notice
+As of 21 November, 2021, I am not using regolith linux any more - I have decided to try Endeavour OS. This repo is no longer being updated, but feel free to try these config files out if you use Regolith Linux, or if you don't care about my WM configs, in your own setups. 
+
 * Installation :TOC: 
 For most of these programs, the installation is quite simple - copy the =.config= folder into your =~/.config= folder. For bash, I do have conda installed for my data science class, but don't feel like you have to use it - you are free to delete that section from the bashrc. You will need to install [[https://regolith-linux.org/][Regolith Linux]] for the window manager - I highly recommend it for someone new to tiling WMs.  
 
